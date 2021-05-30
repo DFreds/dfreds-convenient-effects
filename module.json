@@ -1,0 +1,35 @@
+{
+  "name": "dfreds-convenient-effects",
+  "title": "DFreds Convenient Effects",
+  "description": "Adds easy to use toggleable active effects for common use cases",
+  "author": "DFreds",
+  "authors": [
+    {
+      "name": "DFreds",
+      "url": "https://github.com/DFreds",
+      "discord": "DFreds#1238"
+    }
+  ],
+  "url": "https://github.com/DFreds/dfreds-convenient-effects",
+  "license": "https://github.com/DFreds/dfreds-convenient-effects/blob/main/LICENSE",
+  "readme": "https://github.com/DFreds/dfreds-convenient-effects/blob/main/README.md",
+  "bugs": "https://github.com/DFreds/dfreds-convenient-effects/issues",
+  "changelog": "https://github.com/DFreds/dfreds-convenient-effects/releases",
+  "flags": {},
+  "version": "2.0.1",
+  "minimumCoreVersion": "0.8.5",
+  "compatibleCoreVersion": "0.8.5",
+  "scripts": [],
+  "esmodules": [
+    "./scripts/main.js"
+  ],
+  "styles": [],
+  "languages": [],
+  "system": ["dnd5e"],
+  "dependencies": [],
+  "socket": false,
+  "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json",
+  "download": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/v2.0.1/dfreds-convenient-effects.zip",
+  "protected": false,
+  "coreTranslation": false
+}

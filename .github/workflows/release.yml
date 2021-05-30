@@ -1,0 +1,49 @@
+name: Release Creation
+
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    # get part of the tag after the `v`
+    - name: Extract tag version number
+      id: get_version
+      uses: battila7/get-version-action@v2
+
+    - name: Echo tag output
+      run: echo ${{ steps.get_version.outputs.version-without-v }}
+
+    # Substitute the Manifest and Download URLs in the module.json
+    - name: Substitute Manifest and Download Links For Versioned Ones
+      id: sub_manifest_link_version
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: 'module.json'
+      env:
+        version: ${{steps.get_version.outputs.version-without-v}}
+        manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
+        download: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/dfreds-convenient-effects.zip
+
+    # Create a zip file with all files required by the module to add to the release
+    - run: zip -r ./dfreds-convenient-effects.zip module.json scripts/ packs/
+
+    # Create a release for this specific version
+    - name: Update Release with Files
+      id: create_version_release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true # Set this to false if you want to prevent updating existing releases
+        name: ${{ github.event.release.name }}
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: './module.json, ./dfreds-convenient-effects.zip'
+        tag: ${{ github.event.release.tag_name }}
+        body: ${{ github.event.release.body }}
