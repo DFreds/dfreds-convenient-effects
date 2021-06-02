@@ -1,2 +1,13 @@
-<table>
-</table>
+<div>
+  <h1>Conditions</h1>
+  {{#each effects.conditions}}
+  <h2>{{name}}</h2>
+  <p>{{description}}</p>
+  {{/each}}
+
+  <h1>Spells</h1>
+  {{#each effects.spells}}
+  <h2>{{name}}</h2>
+  <p>{{description}}</p>
+  {{/each}}
+</div>

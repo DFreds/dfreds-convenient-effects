@@ -41,7 +41,6 @@ Hooks.on('getSceneControlButtons', (controls) => {
     icon: 'fas fa-trash',
     visible: game.user.isGM || settings.allowForPlayers,
     onClick: () => {
-      console.log('yay');
     }
   });
 });

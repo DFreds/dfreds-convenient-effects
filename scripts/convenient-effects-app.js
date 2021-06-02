@@ -14,7 +14,6 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   getData() {
-    console.log(new Effects().effects);
     return {
       effects: new Effects().effects
     };
@@ -25,14 +24,14 @@ export default class ConvenientEffectsApp extends Application {
 
   }
 
-  _handleTogglingEffect() {
+  async _handleTogglingEffect() {
     for (const actor of canvas.tokens.controlled.map(token => token.actor)) {
-      const effectToRemove = actor.data.effects.find(effect => effect.label == toggledEffect.name);
+      const effectToRemove = actor.data.effects.find(effect => effect.data.label == toggledEffect.name);
 
       if (effectToRemove) {
-        actor.deleteEmbeddedEntity('ActiveEffect', effectToRemove._id);
+        await actor.deleteEmbeddedDocuments('ActiveEffect', [effectToRemove.id]);
       } else {
-        actor.createEmbeddedEntity('ActiveEffect', toggledEffect);
+        await actor.createEmbeddedDocuments('ActiveEffect', [toggledEffect]);
       }
     }
   }
