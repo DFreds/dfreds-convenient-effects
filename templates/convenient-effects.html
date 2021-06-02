@@ -1,13 +1,37 @@
-<div>
-  <h1>Conditions</h1>
-  {{#each effects.conditions}}
-  <h2>{{name}}</h2>
-  <p>{{description}}</p>
-  {{/each}}
-
-  <h1>Spells</h1>
-  {{#each effects.spells}}
-  <h2>{{name}}</h2>
-  <p>{{description}}</p>
-  {{/each}}
-</div>
+<section class="sidebar-tab directory flexcol">
+  <ol class="directory-list">
+    {{#each folders as |folder folderId|}}
+    <li
+      class="directory-item folder flexcol collapsed"
+      data-folder-id="{{folderId}}"
+      draggable="false"
+    >
+      <header class="folder-header flexrow">
+        <h3>
+          <i class="fas fa-folder-open fa-fw"></i>
+          {{folder.label}}
+        </h3>
+      </header>
+      <ol class="subdirectory">
+        {{#each folder.effects as |effect effectId|}}
+        <li
+          class="directory-item entity convenient-effect flexrow"
+          data-entity-id="{{effectId}}"
+          draggable="true"
+          style="display: flex"
+        >
+          <img
+            class="profile convenient-effect-profile"
+            title="{{effect.name}}"
+            src="{{effect.icon}}"
+          />
+          <h4 class="entity-name">
+            <a title="{{effect.description}}">{{effect.name}}</a>
+          </h4>
+        </li>
+        {{/each}}
+      </ol>
+    </li>
+    {{/each}}
+  </ol>
+</section>

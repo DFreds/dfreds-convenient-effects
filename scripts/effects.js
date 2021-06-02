@@ -1,30 +1,44 @@
+import Effect from "./effect.js";
+
 export default class Effects {
-  get effects() {
-    return {
-      conditions: [
-        this._blinded,
-        this._charmed,
-        this._concentrating,
-        this._deafened,
-        this._exhaustion1,
-        this._exhaustion2,
-        this._exhaustion3,
-        this._exhaustion4,
-        this._exhaustion5,
-        this._frightened,
-        this._grappled,
-        this._incapacitated,
-        this._invisible,
-        this._paralyzed,
-        this._petrified,
-        this._poisoned,
-        this._prone,
-        this._restrained,
-        this._stunned,
-      ],
-      spells: [this._bane, this._bless],
-      other: [this._encumbered, this._heavilyEncumbered],
-    };
+  get all() {
+    return [
+      ...this.conditions,
+      ...this.spells,
+      ...this.other
+    ];
+  }
+
+  get conditions() {
+    return [
+      this._blinded,
+      this._charmed,
+      this._concentrating,
+      this._deafened,
+      this._exhaustion1,
+      this._exhaustion2,
+      this._exhaustion3,
+      this._exhaustion4,
+      this._exhaustion5,
+      this._frightened,
+      this._grappled,
+      this._incapacitated,
+      this._invisible,
+      this._paralyzed,
+      this._petrified,
+      this._poisoned,
+      this._prone,
+      this._restrained,
+      this._stunned,
+    ];
+  }
+
+  get spells() {
+    return [this._bane, this._bless];
+  }
+
+  get other() {
+    return [this._encumbered, this._heavilyEncumbered];
   }
 
   /* Condition Effects */
@@ -34,6 +48,7 @@ export default class Effects {
       description:
         'Forces disadvantage on attack rolls while granting advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
+      seconds: 99999999,
       effects: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -540,6 +555,8 @@ export default class Effects {
     });
   }
 
+  get _criticalHitThreshold19() {}
+
   get _encumbered() {
     return new Effect({
       name: 'Encumbered',
@@ -554,6 +571,10 @@ export default class Effects {
       ],
     });
   }
+
+  get _flanked() {}
+
+  get _flanking() {}
 
   get _heavilyEncumbered() {
     return new Effect({
@@ -590,6 +611,8 @@ export default class Effects {
       ],
     });
   }
+
+  get _rangedDisadvantage() {}
 
   /* Spell Effects */
   get _bane() {
@@ -685,18 +708,14 @@ export default class Effects {
   get _enlarge() {}
   get _faerieFire() {}
   get _fly() {}
-  get _fireShield() {
+
+  get _fireShieldColdResistance() {
     return new Effect({
-      name: 'Fire Shield',
-      description: 'Add damage resistance to fire or cold for 10 minutes',
+      name: 'Fire Shield (Cold Resistance)',
+      description: 'Add damage resistance to cold for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
       seconds: 600,
       effects: [
-        {
-          key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'fire',
-        },
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -705,6 +724,23 @@ export default class Effects {
       ],
     });
   }
+
+  get _fireShieldFireResistance() {
+    return new Effect({
+      name: 'Fire Shield (Fire Resistance)',
+      description: 'Add damage resistance to fire for 10 minutes',
+      icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
+      seconds: 600,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'fire',
+        },
+      ],
+    });
+  }
+
   get _guidance() {}
   get _haste() {}
   get _longstrider() {}
@@ -751,34 +787,4 @@ export default class Effects {
   }
 
   get _slow() {}
-}
-
-class Effect {
-  constructor({
-    name,
-    description,
-    icon,
-    seconds,
-    turns,
-    flags = {},
-    effects = [],
-  }) {
-    this.name = name;
-    this.description = description;
-    this.icon = icon;
-    this.seconds = seconds;
-    this.turns = turns;
-    this.flags = flags;
-    this.effects = effects;
-  }
-
-  getDurationData() {
-    return game.combat
-      ? {
-          startRound: game.combat.round,
-          rounds: this.turns > 0 ? 0 : this.seconds / 6,
-          turns: this.turns,
-        }
-      : { startTime: game.time.worldTime, seconds: this.seconds };
-  }
 }
