@@ -19,10 +19,6 @@ export default class ConvenientEffectsApp extends Application {
     return {
       folders: [
         {
-          label: 'Favorites',
-          effects: [], // TODO
-        },
-        {
           label: 'Conditions',
           effects: effects.conditions,
         },

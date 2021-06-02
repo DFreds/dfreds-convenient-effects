@@ -1,12 +1,8 @@
-import Effect from "./effect.js";
+import Effect from './effect.js';
 
-export default class Effects {
+export default class EffectDefinitions {
   get all() {
-    return [
-      ...this.conditions,
-      ...this.spells,
-      ...this.other
-    ];
+    return [...this.conditions, ...this.spells, ...this.other];
   }
 
   get conditions() {
@@ -34,11 +30,40 @@ export default class Effects {
   }
 
   get spells() {
-    return [this._bane, this._bless];
+    return [
+      this._aid,
+      this._bane,
+      this._barkskin,
+      this._bless,
+      this._darkvision,
+      this._enlarge,
+      this._faerieFire,
+      this._fly,
+      this._fireShieldColdResistance,
+      this._fireShieldFireResistance,
+      this._guidance,
+      this._haste,
+      this._longstrider,
+      this._mageArmor,
+      this._passWithoutTrace,
+      this._rage,
+      this._reduce,
+      this._shield,
+      this._shieldOfFaith,
+      this._slow,
+    ];
   }
 
   get other() {
-    return [this._encumbered, this._heavilyEncumbered];
+    return [
+      this._encumbered,
+      this._flanked,
+      this._flanking,
+      this._greatWeaponMaster,
+      this._heavilyEncumbered,
+      this._rangedDisadvantage,
+      this._sharpshooter,
+    ];
   }
 
   /* Condition Effects */
@@ -48,7 +73,6 @@ export default class Effects {
       description:
         'Forces disadvantage on attack rolls while granting advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
-      seconds: 99999999,
       effects: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -555,66 +579,10 @@ export default class Effects {
     });
   }
 
-  get _criticalHitThreshold19() {}
-
-  get _encumbered() {
-    return new Effect({
-      name: 'Encumbered',
-      description: 'Lowers movement by 10 ft.',
-      icon: 'icons/svg/down.svg', //todo double check you can get these, or copy them
-      effects: [
-        {
-          key: 'data.attributes.movement.walk',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '-10',
-        },
-      ],
-    });
-  }
-
-  get _flanked() {}
-
-  get _flanking() {}
-
-  get _heavilyEncumbered() {
-    return new Effect({
-      name: 'Heavily Encumbered',
-      description:
-        'Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves',
-      icon: 'icons/svg/downgrade.svg',
-      effects: [
-        {
-          key: 'data.attributes.movement.walk',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '-10',
-        },
-        {
-          key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.disadvantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.disadvantage.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.disadvantage.ability.save.con',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-      ],
-    });
-  }
-
-  get _rangedDisadvantage() {}
-
   /* Spell Effects */
+
+  get _aid() {}
+
   get _bane() {
     return new Effect({
       name: 'Bane',
@@ -704,10 +672,95 @@ export default class Effects {
     });
   }
 
-  get _darkvision() {}
-  get _enlarge() {}
-  get _faerieFire() {}
-  get _fly() {}
+  // return new Effect({
+  //   name: '',
+  //   description: '',
+  //   icon: '',
+  //   seconds: 0,
+  //   effects: [
+  //     {
+  //       key: '',
+  //       mode: CONST.ACTIVE_EFFECT_MODES, // todo
+  //       value: '',
+  //     },
+  //   ],
+  // });
+  get _darkvision() {
+    return new Effect({
+      name: 'Darkvision',
+      description: 'Upgrade darkvision to 60 ft.',
+      icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
+      seconds: 3600 * 8,
+      effects: [
+        {
+          key: 'data.attributes.senses.darkvision',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: '60',
+        },
+      ],
+    });
+  }
+
+  get _enlarge() {
+    return new Effect({
+      name: 'Enlarge',
+      description:
+        'Add 1d4 to damage and advantage on strength checks and strength saving throws',
+      icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      seconds: 60,
+      effects: [
+        // todo data.traits.size
+        {
+          key: 'data.bonuses.weapon.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d4',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _faerieFire() {
+    return new Effect({
+      name: 'Faerie Fire',
+      description: 'Grants advantage to all who attack',
+      icon: 'systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg',
+      seconds: 60,
+      effects: [
+        // todo dim light
+        {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _fly() {
+    return new Effect({
+      name: 'Fly',
+      description: 'Upgrade flying speed to 60 ft.',
+      icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
+      seconds: 600,
+      effects: [
+        {
+          key: 'data.attributes.movement.fly',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: '60',
+        },
+      ],
+    });
+  }
 
   get _fireShieldColdResistance() {
     return new Effect({
@@ -747,7 +800,9 @@ export default class Effects {
   get _mageArmor() {}
   get _passWithoutTrace() {}
   get _rage() {}
-  get _reduce() {}
+  get _reduce() {
+    // systems/dnd5e/icons/spells/link-blue-2.jpg
+  }
 
   get _shield() {
     return new Effect({
@@ -787,4 +842,156 @@ export default class Effects {
   }
 
   get _slow() {}
+
+  /* Other effects */
+  get _encumbered() {
+    return new Effect({
+      name: 'Encumbered',
+      description: 'Lowers movement by 10 ft.',
+      icon: 'icons/svg/down.svg',
+      effects: [
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-10',
+        },
+      ],
+    });
+  }
+
+  get _flanked() {
+    return new Effect({
+      name: 'Flanked',
+      description: 'Grants advantage to all who melee attack',
+      icon: 'modules/dfreds-convenient-effects/images/encirclement.svg',
+      effects: [
+        {
+          key: 'flags.midi-qol.grants.advantage.attack.mwak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.advantage.attack.msak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _flanking() {
+    return new Effect({
+      name: 'Flanking',
+      description: 'Grants advantage on melee attack rolls',
+      icon: 'icons/svg/sword.svg',
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.attack.mwak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.attack.msak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _greatWeaponMaster() {
+    return new Effect({
+      name: 'Great Weapon Master',
+      description: 'Subtracts 5 from melee attacks but adds 10 to melee damage',
+      icon: 'systems/dnd5e/icons/skills/red_05.jpg',
+      effects: [
+        {
+          key: 'data.bonuses.mwak.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-5',
+        },
+        {
+          key: 'data.bonuses.mwak.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+10',
+        },
+      ],
+    });
+  }
+
+  get _heavilyEncumbered() {
+    return new Effect({
+      name: 'Heavily Encumbered',
+      description:
+        'Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves',
+      icon: 'icons/svg/downgrade.svg',
+      effects: [
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-10',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.con',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _rangedDisadvantage() {
+    return new Effect({
+      name: 'Ranged Disadvantage',
+      description: 'Disadvantage on ranged attack rolls',
+      icon: 'modules/dfreds-convenient-effects/images/broken-arrow.svg',
+      effects: [
+        {
+          key: 'flags.midi-qol.disadvantage.attack.rwak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.attack.rsak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _sharpshooter() {
+    return new Effect({
+      name: 'Sharpshooter',
+      description: 'Subtracts 5 from ranged attacks but adds 10 to ranged damage',
+      icon: 'systems/dnd5e/icons/skills/green_01.jpg',
+      effects: [
+        {
+          key: 'data.bonuses.rwak.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-5',
+        },
+        {
+          key: 'data.bonuses.rwak.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+10',
+        },
+      ],
+    });
+  }
 }

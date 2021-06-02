@@ -28,7 +28,11 @@ export default class Effect {
       label: 'Convenient Effect: ' + this.name,
       icon: this.icon,
       duration: this._getDurationData(),
-      flags: this.flags,
+      flags: foundry.utils.mergeObject(this.flags, {
+        core: {
+          statusId: `convenient-effect-${this.name.toLowerCase()}`
+        }
+      }),
       changes: this.effects,
     };
   }
@@ -37,13 +41,13 @@ export default class Effect {
     if (game.combat) {
       return {
         startRound: game.combat.round,
-        rounds: this.turns > 0 ? 0 : this.seconds ? this.seconds / 6 : 0,
-        turns: this.turns ? this.turns : 0
+        rounds: this.turns > 0 ? undefined : this.seconds ? this.seconds / 6 : undefined,
+        turns: this.turns ? this.turns : undefined
       }
     } else {
       return {
         startTime: game.time.worldTime,
-        seconds: this.seconds ? this.seconds : 0,
+        seconds: this.seconds ? this.seconds : undefined,
       }
     }
   }
