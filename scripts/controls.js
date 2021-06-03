@@ -18,8 +18,8 @@ export default class Controls {
   get _convenientEffectsButton() {
     return {
       name: 'convenient-effects',
-      title: 'Convenient Effects',
-      icon: 'fas fa-hat-wizard',
+      title: 'Add Convenient Effects',
+      icon: 'fas fa-hand-sparkles',
       button: true,
       visible: game.user.isGM || this._settings.allowForPlayers,
       onClick: this._handleConvenientEffectsClick,
@@ -34,7 +34,7 @@ export default class Controls {
     return {
       name: 'remove-all-convenient-effects',
       title: 'Remove All Convenient Effects',
-      icon: 'fas fa-trash',
+      icon: 'fas fa-trash-alt',
       button: true,
       visible: game.user.isGM || this._settings.allowForPlayers,
       onClick: this._handleRemoveAllClick,
