@@ -47,8 +47,11 @@ export default class ConvenientEffectsApp extends Application {
     directory.on('click', '.folder-header', this._toggleFolder.bind(this));
 
     const effectListItem = html.find('.convenient-effect');
-    Array.from(effectListItem).forEach(listItem => {
-      listItem.addEventListener('click', this._handleClickingListItem.bind(this));
+    Array.from(effectListItem).forEach((listItem) => {
+      listItem.addEventListener(
+        'click',
+        this._handleClickingListItem.bind(this)
+      );
     });
   }
 
@@ -64,7 +67,11 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   async _handleClickingListItem(event) {
-    const toggledEffect = game.dfreds.effects.all.find(effect => effect.name == event.target.innerText);
+    const toggledEffect = game.dfreds.effects.all.find(
+      (effect) =>
+        effect.name == event.target.innerText ||
+        effect.name == event.target.title
+    );
     await this._handleTogglingEffect(toggledEffect);
   }
 
@@ -84,7 +91,8 @@ export default class ConvenientEffectsApp extends Application {
       const activeEffecData = toggledEffect.convertToActiveEffectData();
 
       const effectToRemove = actor.data.effects.find(
-        (effect) => effect.data.label == ('Convenient Effect: ' + activeEffecData.name)
+        (effect) =>
+          effect.data.label == 'Convenient Effect: ' + activeEffecData.name
       );
 
       if (effectToRemove) {
