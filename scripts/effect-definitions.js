@@ -2,7 +2,12 @@ import Effect from './effect.js';
 
 export default class EffectDefinitions {
   get all() {
-    return [...this.conditions, ...this.spells, ...this.other];
+    return [
+      ...this.conditions,
+      ...this.spells,
+      ...this.other,
+      // ...this.passiveEffects, things like unarmored defense?
+    ];
   }
 
   get conditions() {
@@ -42,15 +47,16 @@ export default class EffectDefinitions {
       this._fireShieldColdResistance,
       this._fireShieldFireResistance,
       this._guidance,
+      this._guidingBolt,
       this._haste,
       this._longstrider,
       this._mageArmor,
       this._passWithoutTrace,
-      this._rage,
       this._reduce,
       this._shield,
       this._shieldOfFaith,
       this._slow,
+      // this._trueStrike,
     ];
   }
 
@@ -61,6 +67,7 @@ export default class EffectDefinitions {
       this._flanking,
       this._greatWeaponMaster,
       this._heavilyEncumbered,
+      this._rage,
       this._rangedDisadvantage,
       this._sharpshooter,
     ];
@@ -137,6 +144,11 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
+        },
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
         },
         {
           key: 'data.attributes.movement.walk',
@@ -221,6 +233,11 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+        },
+        {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
@@ -270,6 +287,11 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
+        },
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
         },
         {
           key: 'data.attributes.movement.walk',
@@ -325,6 +347,11 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
       effects: [
         {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+        },
+        {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
@@ -354,6 +381,11 @@ export default class EffectDefinitions {
       description: 'No movement',
       icon: 'modules/dfreds-convenient-effects/images/incapacitated.svg',
       effects: [
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+        },
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -530,6 +562,11 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+        },
+        {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
@@ -581,7 +618,26 @@ export default class EffectDefinitions {
 
   /* Spell Effects */
 
-  get _aid() {}
+  get _aid() {
+    return new Effect({
+      name: 'Aid',
+      description: 'Add 5 to current and maximum hit points for 8 hours',
+      icon: 'systems/dnd5e/icons/spells/heal-sky-1.jpg',
+      seconds: 3600 * 8,
+      effects: [
+        {
+          key: 'data.attributes.hp.tempmax',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '5',
+        },
+        {
+          key: 'data.attributes.hp.temp',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '5',
+        },
+      ],
+    });
+  }
 
   get _bane() {
     return new Effect({
@@ -672,23 +728,10 @@ export default class EffectDefinitions {
     });
   }
 
-  // return new Effect({
-  //   name: '',
-  //   description: '',
-  //   icon: '',
-  //   seconds: 0,
-  //   effects: [
-  //     {
-  //       key: '',
-  //       mode: CONST.ACTIVE_EFFECT_MODES, // todo
-  //       value: '',
-  //     },
-  //   ],
-  // });
   get _darkvision() {
     return new Effect({
       name: 'Darkvision',
-      description: 'Upgrade darkvision to 60 ft.',
+      description: 'Upgrade darkvision to 60 ft. for 8 hours',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
       seconds: 3600 * 8,
       effects: [
@@ -705,7 +748,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Enlarge',
       description:
-        'Add 1d4 to damage and advantage on strength checks and strength saving throws',
+        'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
       seconds: 60,
       effects: [
@@ -732,7 +775,7 @@ export default class EffectDefinitions {
   get _faerieFire() {
     return new Effect({
       name: 'Faerie Fire',
-      description: 'Grants advantage to all who attack',
+      description: 'Grants advantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg',
       seconds: 60,
       effects: [
@@ -749,7 +792,7 @@ export default class EffectDefinitions {
   get _fly() {
     return new Effect({
       name: 'Fly',
-      description: 'Upgrade flying speed to 60 ft.',
+      description: 'Upgrade flying speed to 60 ft. for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
       seconds: 600,
       effects: [
@@ -794,14 +837,185 @@ export default class EffectDefinitions {
     });
   }
 
-  get _guidance() {}
-  get _haste() {}
-  get _longstrider() {}
-  get _mageArmor() {}
-  get _passWithoutTrace() {}
-  get _rage() {}
+  get _guidance() {
+    return new Effect({
+      name: 'Guidance',
+      description: 'Adds 1d4 to one ability or skill check for 60 seconds',
+      icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
+      seconds: 60,
+      flags: {
+        dae: {
+          specialDuration: ['isCheck', 'isSkill'],
+        },
+      },
+      effects: [
+        {
+          key: 'data.bonuses.abilities.check',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d4',
+        },
+      ],
+    });
+  }
+
+  get _guidingBolt() {
+    return new Effect({
+      name: 'Guiding Bolt',
+      description:
+        'Grants advantage to next attacker or until the end of next turn',
+      icon: 'systems/dnd5e/icons/spells/fireball-sky-2.jpg',
+      seconds: 6,
+      turns: 1,
+      flags: {
+        dae: {
+          specialDuration: ['isAttacked'],
+        },
+      },
+      effects: [
+        {
+          key: 'flags.midi-qol.grants.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _haste() {
+    return new Effect({
+      name: 'Haste',
+      description:
+        'Double speed, add 2 to AC, and advantage on dexterity saving throws',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      seconds: 60,
+      effects: [
+        {
+          key: 'data.attributes.ac.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '2',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'data.attributes.movement.burrow',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 2,
+        },
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 2,
+        },
+        {
+          key: 'data.attributes.movement.fly',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 2,
+        },
+        {
+          key: 'data.attributes.movement.swim',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 2,
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 2,
+        },
+      ],
+    });
+  }
+
+  get _longstrider() {
+    return new Effect({
+      name: 'Longstrider',
+      description: 'Increase all movement by 10 ft. for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/wind-sky-1.jpg',
+      seconds: 3600,
+      effects: [
+        {
+          key: 'data.attributes.movement.burrow',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '10',
+        },
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '10',
+        },
+        {
+          key: 'data.attributes.movement.fly',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '10',
+        },
+        {
+          key: 'data.attributes.movement.swim',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '10',
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '10',
+        },
+      ],
+    });
+  }
+
+  get _mageArmor() {
+    return new Effect({
+      name: 'Mage Armor',
+      description: 'Upgrades armor to 13 + dex modifier for 8 hours',
+      icon: 'systems/dnd5e/icons/spells/protect-blue-1.jpg',
+      seconds: 3600 * 8,
+      isDynamic: true,
+    });
+  }
+
+  get _passWithoutTrace() {
+    return new Effect({
+      name: 'Pass without Trace',
+      description: 'Add 10 to stealth checks for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/fog-air-1.jpg',
+      seconds: 3600,
+      effects: [
+        {
+          key: 'data.skills.ste.mod',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '10',
+        },
+      ],
+    });
+  }
+
   get _reduce() {
-    // systems/dnd5e/icons/spells/link-blue-2.jpg
+    return new Effect({
+      name: 'Reduce',
+      description:
+        'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      seconds: 60,
+      effects: [
+        // todo data.traits.size
+        {
+          key: 'data.bonuses.weapon.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-1d4',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
   }
 
   get _shield() {
@@ -841,7 +1055,52 @@ export default class EffectDefinitions {
     });
   }
 
-  get _slow() {}
+  get _slow() {
+    return new Effect({
+      name: 'Slow',
+      description:
+        'Halves speed and and subtract 2 from AC and dexterity saving throws',
+      icon: 'systems/dnd5e/icons/spells/fog-magenta-2.jpg',
+      seconds: 60,
+      effects: [
+        {
+          key: 'data.attributes.ac.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-2',
+        },
+        {
+          key: 'data.abilities.dex.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-2',
+        },
+        {
+          key: 'data.attributes.movement.burrow',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 0.5,
+        },
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 0.5,
+        },
+        {
+          key: 'data.attributes.movement.fly',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 0.5,
+        },
+        {
+          key: 'data.attributes.movement.swim',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 0.5,
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: 0.5,
+        },
+      ],
+    });
+  }
 
   /* Other effects */
   get _encumbered() {
@@ -955,6 +1214,44 @@ export default class EffectDefinitions {
     });
   }
 
+  get _rage() {
+    return new Effect({
+      name: 'Rage',
+      description:
+        'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage',
+      icon: 'systems/dnd5e/icons/skills/red_10.jpg',
+      seconds: 60,
+      isDynamic: true,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'slashing',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'piercing',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'bludgeoning',
+        },
+      ],
+    });
+  }
+
   get _rangedDisadvantage() {
     return new Effect({
       name: 'Ranged Disadvantage',
@@ -978,7 +1275,8 @@ export default class EffectDefinitions {
   get _sharpshooter() {
     return new Effect({
       name: 'Sharpshooter',
-      description: 'Subtracts 5 from ranged attacks but adds 10 to ranged damage',
+      description:
+        'Subtracts 5 from ranged attacks but adds 10 to ranged damage',
       icon: 'systems/dnd5e/icons/skills/green_01.jpg',
       effects: [
         {

@@ -1,3 +1,5 @@
+import DynamicEffectsAdder from './dynamic-effects-adder.js';
+
 export default class ConvenientEffectsApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -11,6 +13,11 @@ export default class ConvenientEffectsApp extends Application {
       template:
         'modules/dfreds-convenient-effects/templates/convenient-effects.html',
     });
+  }
+
+  constructor() {
+    super();
+    this._dynamicEffectsAdder = new DynamicEffectsAdder();
   }
 
   getData() {
@@ -58,7 +65,7 @@ export default class ConvenientEffectsApp extends Application {
 
   async _handleClickingListItem(event) {
     const toggledEffect = game.dfreds.effects.all.find(effect => effect.name == event.target.innerText);
-    await this._handleTogglingEffect(toggledEffect.convertToActiveEffectData());
+    await this._handleTogglingEffect(toggledEffect);
   }
 
   async _handleTogglingEffect(toggledEffect) {
@@ -70,8 +77,14 @@ export default class ConvenientEffectsApp extends Application {
     }
 
     for (const actor of controlledTokens.map((token) => token.actor)) {
+      if (toggledEffect.isDynamic) {
+        this._dynamicEffectsAdder.addDynamicEffects(toggledEffect, actor);
+      }
+
+      const activeEffecData = toggledEffect.convertToActiveEffectData();
+
       const effectToRemove = actor.data.effects.find(
-        (effect) => effect.data.label == ('Convenient Effect: ' + toggledEffect.name)
+        (effect) => effect.data.label == ('Convenient Effect: ' + activeEffecData.name)
       );
 
       if (effectToRemove) {
@@ -79,7 +92,7 @@ export default class ConvenientEffectsApp extends Application {
           effectToRemove.id,
         ]);
       } else {
-        await actor.createEmbeddedDocuments('ActiveEffect', [toggledEffect]);
+        await actor.createEmbeddedDocuments('ActiveEffect', [activeEffecData]);
       }
     }
   }

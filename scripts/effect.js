@@ -5,6 +5,7 @@ export default class Effect {
     icon,
     seconds,
     turns,
+    isDynamic = false,
     flags = {},
     effects = [],
   }) {
@@ -13,6 +14,7 @@ export default class Effect {
     this.icon = icon;
     this.seconds = seconds;
     this.turns = turns;
+    this.isDynamic = isDynamic;
     this.flags = flags;
     this.effects = effects;
   }
@@ -41,8 +43,8 @@ export default class Effect {
     if (game.combat) {
       return {
         startRound: game.combat.round,
-        rounds: this.turns > 0 ? undefined : this.seconds ? this.seconds / 6 : undefined,
-        turns: this.turns ? this.turns : undefined
+        rounds: this.seconds ? this.seconds / 6 : undefined,
+        turns: this.turns,
       }
     } else {
       return {
