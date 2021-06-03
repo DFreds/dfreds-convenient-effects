@@ -35,7 +35,9 @@ export default class EffectDefinitions {
       this._aid,
       this._bane,
       this._barkskin,
+      this._beaconOfHope,
       this._bless,
+      this._blur,
       this._darkvision,
       this._enlarge,
       this._faerieFire,
@@ -45,13 +47,22 @@ export default class EffectDefinitions {
       this._guidance,
       this._guidingBolt,
       this._haste,
+      this._huntersMark,
       this._longstrider,
       this._mageArmor,
+      this._mindBlank,
       this._passWithoutTrace,
+      this._protectionFromEnergyAcid,
+      this._protectionFromEnergyCold,
+      this._protectionFromEnergyFire,
+      this._protectionFromEnergyLightning,
+      this._protectionFromEnergyThunder,
+      this._protectionFromPoison,
       this._reduce,
       this._shield,
       this._shieldOfFaith,
       this._slow,
+      this._stoneskin,
       this._trueStrike,
     ];
   }
@@ -688,6 +699,28 @@ export default class EffectDefinitions {
     });
   }
 
+  get _beaconOfHope() {
+    return new Effect({
+      name: 'Beacon of Hope',
+      description:
+        'Adds advantage to wisdom saving throws and death saving throws for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/light-sky-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.save.wis',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.deathSave',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _bless() {
     return new Effect({
       name: 'Bless',
@@ -719,6 +752,22 @@ export default class EffectDefinitions {
           key: 'data.bonuses.rwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1d4',
+        },
+      ],
+    });
+  }
+
+  get _blur() {
+    return new Effect({
+      name: 'Blur',
+      description: 'Grants disadvantage to all who attack  for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/air-burst-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      effects: [
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
         },
       ],
     });
@@ -924,6 +973,14 @@ export default class EffectDefinitions {
     });
   }
 
+  get _huntersMark() {
+    return new Effect({
+      name: "Hunter's Mark",
+      description: 'No active effects',
+      icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
+    });
+  }
+
   get _longstrider() {
     return new Effect({
       name: 'Longstrider',
@@ -970,6 +1027,22 @@ export default class EffectDefinitions {
     });
   }
 
+  get _mindBlank() {
+    return new Effect({
+      name: 'Mind Blank',
+      description: 'Adds immunity to psychic damage for 24 hours',
+      icon: 'systems/dnd5e/icons/spells/air-burst-sky-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_DAY,
+      effects: [
+        {
+          key: 'data.traits.di.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'psychic',
+        },
+      ],
+    });
+  }
+
   get _passWithoutTrace() {
     return new Effect({
       name: 'Pass without Trace',
@@ -981,6 +1054,103 @@ export default class EffectDefinitions {
           key: 'data.skills.ste.mod',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '10',
+        },
+      ],
+    });
+  }
+
+  get _protectionFromEnergyAcid() {
+    return new Effect({
+      name: 'Protection from Energy (Acid)',
+      description: 'Adds damage resistance to acid for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'acid',
+        },
+      ],
+    });
+  }
+
+  get _protectionFromEnergyCold() {
+    return new Effect({
+      name: 'Protection from Energy (Cold)',
+      description: 'Adds damage resistance to cold for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'cold',
+        },
+      ],
+    });
+  }
+
+  get _protectionFromEnergyFire() {
+    return new Effect({
+      name: 'Protection from Energy (Fire)',
+      description: 'Adds damage resistance to fire for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'fire',
+        },
+      ],
+    });
+  }
+
+  get _protectionFromEnergyLightning() {
+    return new Effect({
+      name: 'Protection from Energy (Lightning)',
+      description: 'Adds damage resistance to lightning for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'lightning',
+        },
+      ],
+    });
+  }
+
+  get _protectionFromEnergyThunder() {
+    return new Effect({
+      name: 'Protection from Energy (Thunder)',
+      description: 'Adds damage resistance to thunder for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'thunder',
+        },
+      ],
+    });
+  }
+
+  get _protectionFromPoison() {
+    return new Effect({
+      name: 'Protection from Poison',
+      description:
+        'Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)',
+      icon: 'systems/dnd5e/icons/spells/protect-acid-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // todo
+          value: 'poison',
         },
       ],
     });
@@ -1093,6 +1263,22 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: 0.5,
+        },
+      ],
+    });
+  }
+
+  get _stoneskin() {
+    return new Effect({
+      name: 'Stoneskin',
+      description: 'Adds resistance to non-magical physical damage for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-orange-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // todo
+          value: 'physical',
         },
       ],
     });

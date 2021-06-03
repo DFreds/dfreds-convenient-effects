@@ -5,5 +5,6 @@ export default class Constants {
     IN_TEN_MINUTES: 600,
     IN_ONE_HOUR: 3600,
     IN_EIGHT_HOURS: 28800,
+    IN_ONE_DAY: 86400,
   }
 }
