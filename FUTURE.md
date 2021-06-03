@@ -2,9 +2,8 @@
 
 ## Release 1.0
 
-- Finish all effects
-- Get effect for actor to handle special cases like rage
-- Enums for seconds (8 hours, 1 hour, 1 minutes, 10 minutes, etc)
+- Fix clicking icon throwing error
+- Write README
 
 ## Release 1.1
 
@@ -12,6 +11,7 @@
 - Dragging effects onto tokens
 - Search bar
 - Displaying description somewhere else
+- Passive effects (like unarmored defense)
 
 ## Release 1.2
 

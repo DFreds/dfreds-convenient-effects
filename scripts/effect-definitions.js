@@ -2,12 +2,7 @@ import Effect from './effect.js';
 
 export default class EffectDefinitions {
   get all() {
-    return [
-      ...this.conditions,
-      ...this.spells,
-      ...this.other,
-      // ...this.passiveEffects, things like unarmored defense?
-    ];
+    return [...this.conditions, ...this.spells, ...this.other];
   }
 
   get conditions() {
@@ -56,7 +51,7 @@ export default class EffectDefinitions {
       this._shield,
       this._shieldOfFaith,
       this._slow,
-      // this._trueStrike,
+      this._trueStrike,
     ];
   }
 
@@ -1097,6 +1092,29 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: 0.5,
+        },
+      ],
+    });
+  }
+
+  get _trueStrike() {
+    return new Effect({
+      name: 'True Strike',
+      description:
+        'Grants advantage on next attack or until the end of next turn',
+      icon: 'systems/dnd5e/icons/spells/enchant-sky-1.jpg',
+      seconds: 6,
+      turns: 1,
+      flags: {
+        dae: {
+          specialDuration: ['1Attack'],
+        },
+      },
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
         },
       ],
     });
