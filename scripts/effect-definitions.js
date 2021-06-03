@@ -1,4 +1,5 @@
 import Effect from './effect.js';
+import Constants from './constants.js';
 
 export default class EffectDefinitions {
   get all() {
@@ -618,7 +619,7 @@ export default class EffectDefinitions {
       name: 'Aid',
       description: 'Add 5 to current and maximum hit points for 8 hours',
       icon: 'systems/dnd5e/icons/spells/heal-sky-1.jpg',
-      seconds: 3600 * 8,
+      seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       effects: [
         {
           key: 'data.attributes.hp.tempmax',
@@ -640,7 +641,7 @@ export default class EffectDefinitions {
       description:
         'Subtract 1d4 from all saving throws and attack rolls for 1 minute',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-2.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         {
           key: 'data.bonuses.abilities.save',
@@ -676,7 +677,7 @@ export default class EffectDefinitions {
       name: 'Barkskin',
       description: 'Upgrade AC to 16 for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-orange-2.jpg',
-      seconds: 3600,
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
       effects: [
         {
           key: 'data.attributes.ac.value',
@@ -692,7 +693,7 @@ export default class EffectDefinitions {
       name: 'Bless',
       description: 'Add 1d4 to all saving throws and attack rolls for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         {
           key: 'data.bonuses.abilities.save',
@@ -728,7 +729,7 @@ export default class EffectDefinitions {
       name: 'Darkvision',
       description: 'Upgrade darkvision to 60 ft. for 8 hours',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
-      seconds: 3600 * 8,
+      seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       effects: [
         {
           key: 'data.attributes.senses.darkvision',
@@ -745,7 +746,7 @@ export default class EffectDefinitions {
       description:
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         // todo data.traits.size
         {
@@ -772,7 +773,7 @@ export default class EffectDefinitions {
       name: 'Faerie Fire',
       description: 'Grants advantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         // todo dim light
         {
@@ -789,7 +790,7 @@ export default class EffectDefinitions {
       name: 'Fly',
       description: 'Upgrade flying speed to 60 ft. for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
-      seconds: 600,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
       effects: [
         {
           key: 'data.attributes.movement.fly',
@@ -805,7 +806,7 @@ export default class EffectDefinitions {
       name: 'Fire Shield (Cold Resistance)',
       description: 'Add damage resistance to cold for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
-      seconds: 600,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
       effects: [
         {
           key: 'data.traits.dr.value',
@@ -821,7 +822,7 @@ export default class EffectDefinitions {
       name: 'Fire Shield (Fire Resistance)',
       description: 'Add damage resistance to fire for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
-      seconds: 600,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
       effects: [
         {
           key: 'data.traits.dr.value',
@@ -835,9 +836,9 @@ export default class EffectDefinitions {
   get _guidance() {
     return new Effect({
       name: 'Guidance',
-      description: 'Adds 1d4 to one ability or skill check for 60 seconds',
+      description: 'Adds 1d4 to one ability or skill check for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       flags: {
         dae: {
           specialDuration: ['isCheck', 'isSkill'],
@@ -859,7 +860,7 @@ export default class EffectDefinitions {
       description:
         'Grants advantage to next attacker or until the end of next turn',
       icon: 'systems/dnd5e/icons/spells/fireball-sky-2.jpg',
-      seconds: 6,
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
       turns: 1,
       flags: {
         dae: {
@@ -880,9 +881,9 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Haste',
       description:
-        'Double speed, add 2 to AC, and advantage on dexterity saving throws',
+        'Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         {
           key: 'data.attributes.ac.value',
@@ -928,7 +929,7 @@ export default class EffectDefinitions {
       name: 'Longstrider',
       description: 'Increase all movement by 10 ft. for 1 hour',
       icon: 'systems/dnd5e/icons/spells/wind-sky-1.jpg',
-      seconds: 3600,
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
       effects: [
         {
           key: 'data.attributes.movement.burrow',
@@ -964,7 +965,7 @@ export default class EffectDefinitions {
       name: 'Mage Armor',
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
       icon: 'systems/dnd5e/icons/spells/protect-blue-1.jpg',
-      seconds: 3600 * 8,
+      seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       isDynamic: true,
     });
   }
@@ -974,7 +975,7 @@ export default class EffectDefinitions {
       name: 'Pass without Trace',
       description: 'Add 10 to stealth checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/fog-air-1.jpg',
-      seconds: 3600,
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
       effects: [
         {
           key: 'data.skills.ste.mod',
@@ -991,7 +992,7 @@ export default class EffectDefinitions {
       description:
         'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         // todo data.traits.size
         {
@@ -1018,7 +1019,7 @@ export default class EffectDefinitions {
       name: 'Shield',
       description: 'Add 5 to AC until next turn',
       icon: 'systems/dnd5e/icons/spells/protect-magenta-1.jpg',
-      seconds: 6,
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
       flags: {
         dae: {
           specialDuration: ['turnStart'],
@@ -1039,7 +1040,7 @@ export default class EffectDefinitions {
       name: 'Shield of Faith',
       description: 'Adds 2 to the AC for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-sky-2.jpg',
-      seconds: 600,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
       effects: [
         {
           key: 'data.attributes.ac.value',
@@ -1054,9 +1055,9 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Slow',
       description:
-        'Halves speed and and subtract 2 from AC and dexterity saving throws',
+        'Halves speed and and subtract 2 from AC and dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fog-magenta-2.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
         {
           key: 'data.attributes.ac.value',
@@ -1103,7 +1104,7 @@ export default class EffectDefinitions {
       description:
         'Grants advantage on next attack or until the end of next turn',
       icon: 'systems/dnd5e/icons/spells/enchant-sky-1.jpg',
-      seconds: 6,
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
       turns: 1,
       flags: {
         dae: {
@@ -1236,9 +1237,9 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Rage',
       description:
-        'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage',
+        'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.',
       icon: 'systems/dnd5e/icons/skills/red_10.jpg',
-      seconds: 60,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       isDynamic: true,
       effects: [
         {
