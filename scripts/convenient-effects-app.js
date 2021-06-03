@@ -12,7 +12,7 @@ export default class ConvenientEffectsApp extends Application {
       height: 600,
       resizable: true,
       template:
-        'modules/dfreds-convenient-effects/templates/convenient-effects.html',
+        'modules/dfreds-convenient-effects/templates/convenient-effects-app.html',
     });
   }
 
