@@ -1,11 +1,5 @@
 # Future
 
-## Release 1.0
-
-- Write README
-- Adding favorites (right click menu)
-- Removing favorites (right click menu)
-
 ## Release 1.1
 
 - Search bar
