@@ -1,19 +1,27 @@
 import DynamicEffectsAdder from '../dynamic-effects-adder.js';
 import Settings from '../settings.js';
 
+/**
+ * Controller class that handles events from the app and manipulating the underlying Foundry data
+ */
 export default class ConvenientEffectsController {
-  constructor() {
+  /**
+   * Initializes the controller and its dependencies
+   *
+   * @param {ConvenientEffectsApp} viewMvc - the app that the controller can interact with
+   */
+  constructor(viewMvc) {
+    this._viewMvc = viewMvc;
+
     this._settings = new Settings();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
   }
 
   /**
-   * @param {ConvenientEffectsApp} value - the view
+   * Configures and returns the data that the app will send to the template
+   *
+   * @returns the data to pass to the template
    */
-  set viewMvc(value) {
-    this._viewMvc = value;
-  }
-
   get dataForView() {
     const effects = game.dfreds.effects;
     const expandedFolders = this._settings.expandedFolders;
@@ -45,61 +53,25 @@ export default class ConvenientEffectsController {
   }
 
   _fetchFavorites() {
-    return this._settings.favoriteEffectNames.map((name) => {
-      return game.dfreds.effects.all.find((effect) => effect.name == name);
-    }).sort((a, b) => {
-      let nameA = a.name.toLowerCase();
-      let nameB = b.name.toLowerCase();
+    return this._settings.favoriteEffectNames
+      .map((name) => {
+        return game.dfreds.effects.all.find((effect) => effect.name == name);
+      })
+      .sort((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
 
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    });
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
   }
-  
+
   /**
-   * 
-   * @param {DragEvent} event 
+   * Handles clicks on folders by collapsing or expanding them
+   *
+   * @param {MouseEvent} event - event that corresponds to clicking on the folder
    */
-  onEffectDragStart(event) {
-    const effectName = event.target.dataset.effectName;
-    event.dataTransfer.setData('text/plain', effectName);
-  }
-
-  onFolderDragOver(event) {
-    if (!this._isEventTargetFavorites(event)) {
-      return;
-    }
-    event.preventDefault();
-    this._viewMvc.addDropTargetClassToFavorites();
-  }
-
-  onFolderDragLeave(event) {
-    if (!this._isEventTargetFavorites(event)) {
-      return;
-    }
-    event.preventDefault();
-    this._viewMvc.removeDropTargetClassFromFavorites();
-  }
-
-  onDropOntoFolder(event) {
-    if (!this._isEventTargetFavorites(event)) {
-      return;
-    }
-    this._viewMvc.removeDropTargetClassFromFavorites();
-
-    const effectName = event.dataTransfer.getData('text/plain');
-
-    // Don't add favorites twice
-    if (this._settings.favoriteEffectNames.includes(effectName)) return;
-
-    this._viewMvc.addEffectToFavoritesDirectory(effectName);
-    this._settings.addFavoriteEffect(effectName);
-
-    // Forces redraw and lose scroll position...
-    // this.render();
-  }
-
   onFolderClick(event) {
     let folderName = event.currentTarget.parentElement.dataset.folderLabel;
     this._viewMvc.toggleCollapsedClassOnFolder(folderName);
@@ -111,6 +83,11 @@ export default class ConvenientEffectsController {
     }
   }
 
+  /**
+   * Handles clicks on effect items by toggling them on or off on selected tokens
+   *
+   * @param {MouseEvent} event - event that corresponds to clicking an effect item
+   */
   async onEffectClick(event) {
     const toggledEffect = game.dfreds.effects.all.find(
       (effect) =>
@@ -148,6 +125,76 @@ export default class ConvenientEffectsController {
         await actor.createEmbeddedDocuments('ActiveEffect', [activeEffecData]);
       }
     }
+  }
+
+  /**
+   * Handle removing the effect from the favorites settings and from the favorites folder
+   *
+   * @param {jQuery} effectItem - jQuery element represented the effect list item
+   */
+  onRemoveFavorite(effectItem) {
+    const effectName = effectItem.data().effectName;
+
+    this._viewMvc.removeEffectFromFavoritesDirectory(effectName);
+    this._settings.removeFavoriteEffect(effectName);
+  }
+
+  /**
+   * Handles starting the drag for effect items
+   *
+   * @param {DragEvent} event - event that corresponds to the drag start
+   */
+  onEffectDragStart(event) {
+    const effectName = event.target.dataset.effectName;
+    event.dataTransfer.setData('text/plain', effectName);
+  }
+
+  /**
+   * Handles dragging an effect over a folder
+   *
+   * @param {DragEvent} event - event that corresponds to the drag over
+   */
+  onFolderDragOver(event) {
+    if (!this._isEventTargetFavorites(event)) {
+      return;
+    }
+    event.preventDefault();
+    this._viewMvc.addDropTargetClassToFavorites();
+  }
+
+  /**
+   * Handles dragging an effect off of a folder
+   *
+   * @param {DragEvent} event - event that corresponds to the drag leave
+   */
+  onFolderDragLeave(event) {
+    if (!this._isEventTargetFavorites(event)) {
+      return;
+    }
+    event.preventDefault();
+    this._viewMvc.removeDropTargetClassFromFavorites();
+  }
+
+  /**
+   * Handles dropping an effect onto a folder
+   *
+   * @param {DragEvent} event - event that corresponds to the drop
+   */
+  onDropOntoFolder(event) {
+    if (!this._isEventTargetFavorites(event)) {
+      return;
+    }
+    this._viewMvc.removeDropTargetClassFromFavorites();
+
+    const effectName = event.dataTransfer.getData('text/plain');
+
+    // Don't add favorites twice
+    if (this._settings.favoriteEffectNames.includes(effectName)) return;
+
+    this._settings.addFavoriteEffect(effectName);
+
+    this._viewMvc.addEffectToFavoritesDirectory(effectName);
+    this._viewMvc.sortFavoritesDirectory();
   }
 
   _isEventTargetFavorites(event) {
