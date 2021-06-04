@@ -1,4 +1,4 @@
-<section class="sidebar-tab directory flexcol">
+<section class="convenient-effects sidebar-tab directory flexcol">
   <ol class="directory-list">
     {{#each folders as |folder|}}
     {{#if folder.expanded}}
@@ -26,10 +26,9 @@
           id="{{effect.name}}"
           class="directory-item entity convenient-effect flexrow"
           draggable="true"
-          style="display: flex"
+          style="display: flex; position: relative;"
         >
           <img
-            class="profile convenient-effect-profile"
             title="{{effect.name}}"
             src="{{effect.icon}}"
           />
