@@ -1,18 +1,28 @@
-<section class="convenient-effects sidebar-tab directory flexcol">
+<section id="convenient-effects" class="convenient-effects sidebar-tab directory flexcol">
+  <!-- Directory Header -->
+  <!-- <header class="directory-header">
+    <div class="header-actions action-buttons flexrow">
+      <button class="create-entity"><i class="fas fa-user"></i> Create Actor</button>
+      <button class="create-folder"><i class="fas fa-folder"></i> Create Folder</button>
+    </div>
+    <div class="header-search flexrow">
+      <i class="fas fa-search"></i>
+      <input type="text" name="search" value="" placeholder="Search Effects" autocomplete="off">
+      <a class="header-control collapse-all" title="Collapse All Folders">
+        <i class="fas fa-sort-amount-up fa-fw"></i>
+      </a>
+    </div>
+  </header> -->
+
+  <!-- Directories List -->
   <ol class="directory-list">
     {{#each folders as |folder|}}
     {{#if folder.expanded}}
-    <li
-      class="directory-item folder flexcol"
-      data-folder-label="{{folder.label}}"
-      draggable="false"
-    >
+    <li class="directory-item folder flexcol" data-folder-label="{{folder.label}}"
+      draggable="false">
     {{else}}
-    <li
-      class="directory-item folder flexcol collapsed"
-      data-folder-label="{{folder.label}}"
-      draggable="false"
-    >
+    <li class="directory-item folder flexcol collapsed" data-folder-label="{{folder.label}}"
+      draggable="false">
     {{/if}}
       <header class="folder-header flexrow">
         <h3>
@@ -22,16 +32,9 @@
       </header>
       <ol class="subdirectory">
         {{#each folder.effects as |effect|}}
-        <li
-          id="{{effect.name}}"
-          class="directory-item entity convenient-effect flexrow"
-          draggable="true"
-          style="display: flex; position: relative;"
-        >
-          <img
-            title="{{effect.name}}"
-            src="{{effect.icon}}"
-          />
+        <li class="directory-item entity flexrow" data-effect-name="{{effect.name}}" draggable="true"
+          style="display: flex;">
+          <img title="{{effect.name}}" src="{{effect.icon}}" />
           <h4 class="entity-name">
             <a title="{{effect.description}}">{{effect.name}}</a>
           </h4>

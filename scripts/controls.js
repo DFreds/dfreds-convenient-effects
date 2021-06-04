@@ -1,4 +1,4 @@
-import ConvenientEffectsApp from './convenient-effects-app.js';
+import ConvenientEffectsApp from './app/convenient-effects-app.js';
 import Settings from './settings.js';
 
 export default class Controls {

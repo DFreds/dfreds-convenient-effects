@@ -5,11 +5,9 @@
 - Write README
 - Adding favorites (right click menu)
 - Removing favorites (right click menu)
-- Don't use effect names as IDs, use data-effect-id or something similar
 
 ## Release 1.1
 
-- Dragging effects onto tokens
 - Search bar
 - Displaying description somewhere else
 - Passive effects (like unarmored defense)
