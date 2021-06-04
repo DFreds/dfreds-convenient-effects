@@ -3,11 +3,12 @@
 ## Release 1.0
 
 - Write README
+- Adding favorites (right click menu)
+- Removing favorites (right click menu)
+- Don't use effect names as IDs, use data-effect-id or something similar
 
 ## Release 1.1
 
-- Adding favorites (click and drag, right click menu?)
-- Removing favorites (right click menu)
 - Dragging effects onto tokens
 - Search bar
 - Displaying description somewhere else
