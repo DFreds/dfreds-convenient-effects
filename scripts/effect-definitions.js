@@ -342,8 +342,20 @@ export default class EffectDefinitions {
   get _frightened() {
     return new Effect({
       name: 'Frightened',
-      description: 'No active effects',
+      description: 'Disadvantage on all attack rolls and ability checks',
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
+      effects: [
+        {
+          key: 'flags.midi-qol.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ]
     });
   }
 
@@ -760,7 +772,7 @@ export default class EffectDefinitions {
   get _blur() {
     return new Effect({
       name: 'Blur',
-      description: 'Grants disadvantage to all who attack  for 1 minute',
+      description: 'Grants disadvantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/air-burst-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
