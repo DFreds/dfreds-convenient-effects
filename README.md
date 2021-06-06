@@ -5,7 +5,7 @@
 ![Foundry Version](https://img.shields.io/badge/Foundry-v0.8.6-informational)
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https://forge-vtt.com/api/bazaar/package/dfreds-convenient-effects&colorB=4aa94a)
 ![Latest Release Download Count](https://img.shields.io/github/downloads/dfreds/dfreds-convenient-effects/latest/dfreds-convenient-effects.zip)
-![All Downloads](https://img.shields.io/github/downloads/dfreds/dfreds-convenient-effects-change/total)
+![All Downloads](https://img.shields.io/github/downloads/dfreds/dfreds-convenient-effects/total)
 
 __DFreds Convenient Effects__ is a FoundryVTT module that adds easy to use toggleable active effects for common use cases in the DND5e system.
 
