@@ -33,7 +33,7 @@ jobs:
         download: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/dfreds-convenient-effects.zip
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip -r ./dfreds-convenient-effects.zip module.json scripts/ templates/ styles/
+    - run: zip -r ./dfreds-convenient-effects.zip module.json scripts/ templates/ styles/ images/
 
     # Create a release for this specific version
     - name: Update Release with Files
