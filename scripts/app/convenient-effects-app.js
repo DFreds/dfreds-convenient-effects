@@ -68,9 +68,9 @@ export default class ConvenientEffectsApp extends Application {
    * @param {string} effectName - name of effect to add to the directory
    */
   addEffectToFavoritesDirectory(effectName) {
-    const draggable = this._rootView
-      .find(`.entity[data-effect-name="${effectName}"]`)
-      .clone(true);
+    const draggable = this._rootView.find(
+      `.entity[data-effect-name="${effectName}"]`
+    );
     this._favoritesSubdirectory.append(draggable);
   }
 

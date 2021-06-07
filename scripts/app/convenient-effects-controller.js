@@ -23,30 +23,23 @@ export default class ConvenientEffectsController {
    * @returns the data to pass to the template
    */
   get dataForView() {
-    const effects = game.dfreds.effects;
-    const expandedFolders = this._settings.expandedFolders;
-
     return {
       folders: [
         {
           label: 'Favorites',
-          expanded: expandedFolders.includes('Favorites'),
           effects: this._fetchFavorites(),
         },
         {
           label: 'Conditions',
-          expanded: expandedFolders.includes('Conditions'),
-          effects: effects.conditions,
+          effects: this._fetchUnfavoritedConditions(),
         },
         {
           label: 'Spells',
-          expanded: expandedFolders.includes('Spells'),
-          effects: effects.spells,
+          effects: this._fetchUnfavoritedSpells(),
         },
         {
           label: 'Other',
-          expanded: expandedFolders.includes('Other'),
-          effects: effects.other,
+          effects: this._fetchUnfavoritedOther(),
         },
       ],
     };
@@ -65,6 +58,27 @@ export default class ConvenientEffectsController {
         if (nameA > nameB) return 1;
         return 0;
       });
+  }
+
+  _fetchUnfavoritedConditions() {
+    const effects = game.dfreds.effects;
+    return effects.conditions.filter(
+      (effect) => !this._settings.favoriteEffectNames.includes(effect.name)
+    );
+  }
+
+  _fetchUnfavoritedSpells() {
+    const effects = game.dfreds.effects;
+    return effects.spells.filter(
+      (effect) => !this._settings.favoriteEffectNames.includes(effect.name)
+    );
+  }
+
+  _fetchUnfavoritedOther() {
+    const effects = game.dfreds.effects;
+    return effects.other.filter(
+      (effect) => !this._settings.favoriteEffectNames.includes(effect.name)
+    );
   }
 
   expandSavedFolders() {
@@ -146,6 +160,7 @@ export default class ConvenientEffectsController {
 
     this._viewMvc.removeEffectFromFavoritesDirectory(effectName);
     this._settings.removeFavoriteEffect(effectName);
+    this._viewMvc.render();
   }
 
   /**
