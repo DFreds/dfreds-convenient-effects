@@ -40,7 +40,7 @@ export default class ConvenientEffectsApp extends Application {
     this._rootView = html;
 
     this._initClickListeners();
-    this._initContextMenu();
+    this._initContextMenus();
     this._initDragDrop();
 
     this._controller.expandSavedFolders();
@@ -137,7 +137,15 @@ export default class ConvenientEffectsApp extends Application {
     );
   }
 
-  _initContextMenu() {
+  _initContextMenus() {
+    new ContextMenu(this._nonFavoritesDirectories, '.entity', [
+      {
+        name: 'Add Favorite',
+        icon: '<i class="fas fa-star fa-fw"></i>',
+        callback: this._controller.onAddFavorite.bind(this._controller),
+      },
+    ]);
+
     new ContextMenu(this._favoritesDirectory, '.entity', [
       {
         name: 'Remove Favorite',
@@ -165,23 +173,27 @@ export default class ConvenientEffectsApp extends Application {
     );
   }
 
-  get _favoritesDirectory() {
-    return this._rootView.find('.folder[data-folder-label="Favorites"]');
+  get _effectListItems() {
+    return this._rootView.find('.entity');
   }
 
-  get _favoritesSubdirectory() {
-    return this._favoritesDirectory.find('.subdirectory');
+  get _favoritesDirectory() {
+    return this._rootView.find('.folder[data-folder-label="Favorites"]');
   }
 
   get _favoritesItems() {
     return this._favoritesDirectory.find('.entity');
   }
 
+  get _favoritesSubdirectory() {
+    return this._favoritesDirectory.find('.subdirectory');
+  }
+
   get _folderHeaders() {
     return this._rootView.find('.directory-list .folder-header');
   }
 
-  get _effectListItems() {
-    return this._rootView.find('.entity');
+  get _nonFavoritesDirectories() {
+    return this._rootView.find('.folder').filter(':not([data-folder-label="Favorites"])');
   }
 }

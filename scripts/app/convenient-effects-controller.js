@@ -151,6 +151,21 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handle adding the effect to the favorites settings and to the favorites folder
+   *
+   * @param {jQuery} effectItem - jQuery element represented the effect list item
+   */
+  onAddFavorite(effectItem) {
+    const effectName = effectItem.data().effectName;
+
+    // Don't add favorites twice
+    if (this._settings.favoriteEffectNames.includes(effectName)) return;
+
+    this._settings.addFavoriteEffect(effectName);
+    this._viewMvc.render();
+  }
+
+  /**
    * Handle removing the effect from the favorites settings and from the favorites folder
    *
    * @param {jQuery} effectItem - jQuery element represented the effect list item
