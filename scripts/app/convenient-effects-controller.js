@@ -81,9 +81,12 @@ export default class ConvenientEffectsController {
     );
   }
 
+  /**
+   * Remove the collapsed class from all saved, expanded folders
+   */
   expandSavedFolders() {
     this._settings.expandedFolders.forEach((folderName) => {
-      this._viewMvc.toggleCollapsedClassOnFolder(folderName);
+      this._viewMvc.expandFolder(folderName);
     });
   }
 
@@ -94,7 +97,12 @@ export default class ConvenientEffectsController {
    */
   onFolderClick(event) {
     let folderName = event.currentTarget.parentElement.dataset.folderLabel;
-    this._viewMvc.toggleCollapsedClassOnFolder(folderName);
+
+    if (this._viewMvc.isFolderCollapsed(folderName)) {
+      this._viewMvc.expandFolder(folderName);
+    } else {
+      this._viewMvc.collapseFolder(folderName);
+    }
 
     if (this._settings.expandedFolders.includes(folderName)) {
       this._settings.removeExpandedFolder(folderName);

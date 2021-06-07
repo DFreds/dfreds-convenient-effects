@@ -63,20 +63,35 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   /**
-   * Either adds or removes the class 'collapsed' to the folder
-   *
-   * @param {string} folderName - the name of the folder to add or remove the collapsed class to or from
+   * Checks if the folder is collapsed
+   * 
+   * @param {string} folderName - the folder name to check 
+   * @returns {boolean} true if the folder is collapsed, false otherwise
    */
-  toggleCollapsedClassOnFolder(folderName) {
-    const folder = this._rootView.find(
-      `.folder[data-folder-label="${folderName}"]`
-    );
+  isFolderCollapsed(folderName) {
+    return this._getFolderByName(folderName).hasClass('collapsed');
+  }
 
-    if (folder.hasClass('collapsed')) {
-      folder.removeClass('collapsed');
-    } else {
-      folder.addClass('collapsed');
-    }
+  /**
+   * Collapses a folder by adding the 'collapsed' CSS class to it
+   * 
+   * @param {string} folderName - the folder name to collapse 
+   */
+  collapseFolder(folderName) {
+    this._getFolderByName(folderName).addClass('collapsed');
+  }
+
+  /**
+   * Expands a folder by removing the 'collapsed' CSS class from it
+   * 
+   * @param {string} folderName - the folder name to expand 
+   */
+  expandFolder(folderName) {
+    this._getFolderByName(folderName).removeClass('collapsed');
+  }
+
+  _getFolderByName(folderName) {
+    return this._rootView.find(`.folder[data-folder-label="${folderName}"]`);
   }
 
   /**
@@ -154,6 +169,8 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   get _nonFavoritesDirectories() {
-    return this._rootView.find('.folder').filter(':not([data-folder-label="Favorites"])');
+    return this._rootView
+      .find('.folder')
+      .filter(':not([data-folder-label="Favorites"])');
   }
 }
