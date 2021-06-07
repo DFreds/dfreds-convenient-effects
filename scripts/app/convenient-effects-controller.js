@@ -268,7 +268,6 @@ export default class ConvenientEffectsController {
       matchingItems = this._getMatchingItems(regex);
     }
 
-    // TODO move logic to view
     for (let el of html.querySelectorAll('.directory-item')) {
       let isEntity = el.classList.contains('entity');
       let isFolder = el.classList.contains('folder');
