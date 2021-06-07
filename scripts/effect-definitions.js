@@ -1528,7 +1528,7 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '-10',
+          value: '-20',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
