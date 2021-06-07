@@ -11,12 +11,14 @@ export default class ConvenientEffectsApp extends Application {
       title: 'Convenient Effects',
       popOut: true,
       width: 300,
-      height: 600,
+      height: "auto",
+      minimizable: true,
       resizable: true,
       top: 75,
       left: 125,
       template:
         'modules/dfreds-convenient-effects/templates/convenient-effects-app.html',
+      scrollY: ['ol.directory-list'],
     });
   }
 
