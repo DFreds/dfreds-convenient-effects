@@ -91,6 +91,16 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handles clicks on the collapse all button
+   *
+   * @param {MouseEvent} event
+   */
+  onCollapseAllClick(event) {
+    this._viewMvc.collapseAllFolders();
+    this._settings.clearExpandedFolders();
+  }
+
+  /**
    * Handles clicks on folders by collapsing or expanding them
    *
    * @param {MouseEvent} event - event that corresponds to clicking on the folder

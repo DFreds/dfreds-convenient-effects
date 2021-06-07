@@ -1,3 +1,6 @@
+/**
+ * Handle setting and fetching all settings in the module
+ */
 export default class Settings {
   static PACKAGE_NAME = 'dfreds-convenient-effects';
 
@@ -63,6 +66,11 @@ export default class Settings {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.FAVORITE_EFFECT_NAMES).split(';').filter(name => name.trim());
   }
 
+  /**
+   * Adds a given effect name to the saved favorite settings
+   * 
+   * @param {string} name - the name of the effect to add to favorites
+   */
   addFavoriteEffect(name) {
     let favoriteEffectsArray = this.favoriteEffectNames;
     favoriteEffectsArray.push(name);
@@ -72,15 +80,30 @@ export default class Settings {
     game.settings.set(Settings.PACKAGE_NAME, Settings.FAVORITE_EFFECT_NAMES, favoriteEffectsArray.join(';'));
   }
 
+  /**
+   * Removes a given effect name from the saved favorite settings
+   * 
+   * @param {string} name - the name of the effect to remove from favorites
+   */
   removeFavoriteEffect(name) {
     let favoriteEffectsArray = this.favoriteEffectNames.filter(favoriteEffect => favoriteEffect !== name);
     game.settings.set(Settings.PACKAGE_NAME, Settings.FAVORITE_EFFECT_NAMES, favoriteEffectsArray.join(';'));
   }
 
+  /**
+   * Returns the game setting for the saved expanded folder names
+   * 
+   * @returns {Array} the names of all of the saved expanded folders
+   */
   get expandedFolders() {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS).split(';').filter(name => name.trim());
   }
 
+  /**
+   * Adds a given folder name to the saved expanded folders 
+   * 
+   * @param {string} name - the name of the folder to add to the saved expanded folders
+   */
   addExpandedFolder(name) {
     let expandedFolderArray = this.expandedFolders;
     expandedFolderArray.push(name);
@@ -90,8 +113,20 @@ export default class Settings {
     game.settings.set(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, expandedFolderArray.join(';'));
   }
 
+  /**
+   * Removes a given folder name from the saved expanded folders 
+   * 
+   * @param {string} name - the name of the folder to remove from the saved expanded folders
+   */
   removeExpandedFolder(name) {
     let expandedFolderArray = this.expandedFolders.filter(expandedFolder => expandedFolder !== name);
     game.settings.set(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, expandedFolderArray.join(';'));
+  }
+
+  /**
+   * Removes all saved expanded folders
+   */
+  clearExpandedFolders() {
+    game.settings.set(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, '');
   }
 }

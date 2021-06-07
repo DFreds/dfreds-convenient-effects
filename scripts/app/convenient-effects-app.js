@@ -64,8 +64,8 @@ export default class ConvenientEffectsApp extends Application {
 
   /**
    * Checks if the folder is collapsed
-   * 
-   * @param {string} folderName - the folder name to check 
+   *
+   * @param {string} folderName - the folder name to check
    * @returns {boolean} true if the folder is collapsed, false otherwise
    */
   isFolderCollapsed(folderName) {
@@ -74,8 +74,8 @@ export default class ConvenientEffectsApp extends Application {
 
   /**
    * Collapses a folder by adding the 'collapsed' CSS class to it
-   * 
-   * @param {string} folderName - the folder name to collapse 
+   *
+   * @param {string} folderName - the folder name to collapse
    */
   collapseFolder(folderName) {
     this._getFolderByName(folderName).addClass('collapsed');
@@ -83,11 +83,18 @@ export default class ConvenientEffectsApp extends Application {
 
   /**
    * Expands a folder by removing the 'collapsed' CSS class from it
-   * 
-   * @param {string} folderName - the folder name to expand 
+   *
+   * @param {string} folderName - the folder name to expand
    */
   expandFolder(folderName) {
     this._getFolderByName(folderName).removeClass('collapsed');
+  }
+
+  /**
+   * Collapse all folders by adding the 'collapsed' CSS class to them
+   */
+  collapseAllFolders() {
+    this._allDirectories.addClass('collapsed');
   }
 
   _getFolderByName(folderName) {
@@ -102,6 +109,10 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initClickListeners() {
+    this._collapseAllButton.on(
+      'click',
+      this._controller.onCollapseAllClick.bind(this._controller)
+    );
     this._folderHeaders.on(
       'click',
       this._controller.onFolderClick.bind(this._controller)
@@ -148,6 +159,13 @@ export default class ConvenientEffectsApp extends Application {
     );
   }
 
+  get _allDirectories() {
+    return this._rootView.find('.folder');
+  }
+
+  get _collapseAllButton() {
+    return this._rootView.find('.collapse-all');
+  }
   get _effectListItems() {
     return this._rootView.find('.entity');
   }
