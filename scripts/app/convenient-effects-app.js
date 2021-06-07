@@ -42,6 +42,7 @@ export default class ConvenientEffectsApp extends Application {
     this._initClickListeners();
     this._initContextMenus();
     this._initDragDrop();
+    this._initSearchFilters();
 
     this._controller.expandSavedFolders();
   }
@@ -159,6 +160,16 @@ export default class ConvenientEffectsApp extends Application {
     );
   }
 
+  _initSearchFilters() {
+    const searchFilter = new SearchFilter({
+      inputSelector: 'input[name="search"]',
+      contentSelector: '.directory-list',
+      callback: this._controller.onSearchTextChange.bind(this._controller),
+    });
+
+    searchFilter.bind(this._rootView[0]);
+  }
+
   get _allDirectories() {
     return this._rootView.find('.folder');
   }
@@ -166,6 +177,7 @@ export default class ConvenientEffectsApp extends Application {
   get _collapseAllButton() {
     return this._rootView.find('.collapse-all');
   }
+
   get _effectListItems() {
     return this._rootView.find('.entity');
   }

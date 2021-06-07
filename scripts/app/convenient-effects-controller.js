@@ -251,6 +251,31 @@ export default class ConvenientEffectsController {
     this._viewMvc.render();
   }
 
+  /**
+   * Handles search text changes
+   *
+   * @param {KeyboardEvent} event - event that corresponds to the text entered
+   */
+  onSearchTextChange(event, query, regex, html) {
+    const isSearch = !!query;
+    let effectNames = new Set();
+
+    if (isSearch) {
+      for (let effect of game.dfreds.effects.all) {
+        if (regex.test(SearchFilter.cleanQuery(effect.name))) {
+          effectNames.add(effect.name);
+        }
+      }
+    }
+
+    for (let el of html.querySelectorAll('.directory-item')) {
+      if (el.classList.contains('entity')) {
+        el.style.display =
+          !isSearch || effectNames.has(el.dataset.effectName) ? 'flex' : 'none';
+      }
+    }
+  }
+
   _isEventTargetFavorites(event) {
     return event.currentTarget.dataset.folderLabel === 'Favorites';
   }
