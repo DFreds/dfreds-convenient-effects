@@ -8,8 +8,11 @@ export default class DynamicEffectsAdder {
    * @param {Effect} effect - the effect to handle
    * @param {Actor5e} actor - the effected actor
    */
-  addDynamicEffects(effect, actor) {
+  async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
+      case "enhance ability (bear's endurance)":
+        await this._addEnhanceAbilityBearsEnduranceEffects(effect, actor);
+        break;
       case 'mage armor':
         this._addMageArmorEffects(effect, actor);
         break;
@@ -20,6 +23,17 @@ export default class DynamicEffectsAdder {
         this._addRageEffects(effect, actor);
         break;
     }
+  }
+
+  async _addEnhanceAbilityBearsEnduranceEffects(effect, actor) {
+    const roll = new Roll('2d6');
+    const evaluation = await roll.evaluate({ async: true });
+
+    effect.effects.push({
+      key: 'data.attributes.hp.temp',
+      mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+      value: evaluation.total,
+    });
   }
 
   _addMageArmorEffects(effect, actor) {

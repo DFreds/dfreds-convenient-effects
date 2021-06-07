@@ -44,9 +44,17 @@ export default class EffectDefinitions {
       this._fly,
       this._fireShieldColdResistance,
       this._fireShieldFireResistance,
+      this._enhanceAbilityBearsEndurance,
+      this._enhanceAbilityBullsStrength,
+      this._enhanceAbilityCatsGrace,
+      this._enhanceAbilityEaglesSplendor,
+      this._enhanceAbilityFoxsCunning,
+      this._enhanceAbilityOwlsWisdom,
       this._guidance,
       this._guidingBolt,
       this._haste,
+      // this._heroesFeast, - TODO when the issue with aid increasing current/max hp is fixed
+      // this._heroism, TODO how to get the spellcasting modifier of the one casting it
       this._huntersMark,
       this._longstrider,
       this._mageArmor,
@@ -86,7 +94,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Blinded',
       description:
-        'Forces disadvantage on attack rolls while granting advantage to all who attack',
+        'Disadvantage on attack rolls while granting advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
       effects: [
         {
@@ -890,6 +898,110 @@ export default class EffectDefinitions {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: 'fire',
+        },
+      ],
+    });
+  }
+
+  get _enhanceAbilityBearsEndurance() {
+    return new Effect({
+      name: "Enhance Ability (Bear's Endurance) for 1 hour",
+      description:
+        'Advantage on constitution checks and 2d6 temp hit points (rolled automatically)',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      isDynamic: true,
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.con',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _enhanceAbilityBullsStrength() {
+    return new Effect({
+      name: "Enhance Ability (Bull's Strength) for 1 hour",
+      description:
+        'Advantage on strength checks and double maximum carrying capacity',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'data.attributes.encumbrance.max',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: '2',
+        },
+      ],
+    });
+  }
+
+  get _enhanceAbilityCatsGrace() {
+    return new Effect({
+      name: "Enhance Ability (Cat's Grace) for 1 hour",
+      description: 'Advantage on dexterity checks',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _enhanceAbilityEaglesSplendor() {
+    return new Effect({
+      name: "Enhance Ability (Eagle's Splendor) for 1 hour",
+      description: 'Advantage on charisma checks',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.cha',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _enhanceAbilityFoxsCunning() {
+    return new Effect({
+      name: "Enhance Ability (Fox's Cunning)",
+      description: 'Advantage on intelligence checks for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.int',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _enhanceAbilityOwlsWisdom() {
+    return new Effect({
+      name: "Enhance Ability (Owl's Wisdom)",
+      description: 'Advantage on wisdom checks for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.wis',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
         },
       ],
     });
