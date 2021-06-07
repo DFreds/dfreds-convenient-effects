@@ -63,46 +63,6 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   /**
-   * Adds a given effect to the favorites folder UI
-   *
-   * @param {string} effectName - name of effect to add to the directory
-   */
-  addEffectToFavoritesDirectory(effectName) {
-    const draggable = this._rootView.find(
-      `.entity[data-effect-name="${effectName}"]`
-    );
-    this._favoritesSubdirectory.append(draggable);
-  }
-
-  /**
-   * Removes a given effect from the favorites folder UI
-   *
-   * @param {string} effectName - name of effect to remove from the directory
-   */
-  removeEffectFromFavoritesDirectory(effectName) {
-    const item = this._rootView.find(
-      `.entity[data-effect-name="${effectName}"]`
-    );
-    this._favoritesSubdirectory.find(item).remove();
-  }
-
-  /**
-   * Sort the favorites directory by the effect name of the data
-   */
-  sortFavoritesDirectory() {
-    let newHtml = this._favoritesItems.sort((a, b) => {
-      const effectA = $(a).data().effectName.toLowerCase();
-      const effectB = $(b).data().effectName.toLowerCase();
-
-      if (effectA < effectB) return -1;
-      if (effectA > effectB) return 1;
-      return 0;
-    });
-
-    newHtml.appendTo(this._favoritesSubdirectory);
-  }
-
-  /**
    * Either adds or removes the class 'collapsed' to the folder
    *
    * @param {string} folderName - the name of the folder to add or remove the collapsed class to or from

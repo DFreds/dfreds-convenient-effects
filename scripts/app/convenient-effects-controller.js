@@ -173,7 +173,6 @@ export default class ConvenientEffectsController {
   onRemoveFavorite(effectItem) {
     const effectName = effectItem.data().effectName;
 
-    this._viewMvc.removeEffectFromFavoritesDirectory(effectName);
     this._settings.removeFavoriteEffect(effectName);
     this._viewMvc.render();
   }
@@ -223,17 +222,15 @@ export default class ConvenientEffectsController {
     if (!this._isEventTargetFavorites(event)) {
       return;
     }
-    this._viewMvc.removeDropTargetClassFromFavorites();
 
     const effectName = event.dataTransfer.getData('text/plain');
 
     // Don't add favorites twice
-    if (this._settings.favoriteEffectNames.includes(effectName)) return;
+    if (!this._settings.favoriteEffectNames.includes(effectName)) {
+      this._settings.addFavoriteEffect(effectName);
+    }
 
-    this._settings.addFavoriteEffect(effectName);
-
-    this._viewMvc.addEffectToFavoritesDirectory(effectName);
-    this._viewMvc.sortFavoritesDirectory();
+    this._viewMvc.render();
   }
 
   _isEventTargetFavorites(event) {
