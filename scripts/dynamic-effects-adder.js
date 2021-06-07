@@ -1,13 +1,32 @@
+/**
+ * Handles adding dynamic effects for certain effects
+ */
 export default class DynamicEffectsAdder {
+  /**
+   * Adds dynamic effects for specific effects
+   * 
+   * @param {Effect} effect - the effect to handle
+   * @param {Actor5e} actor - the effected actor
+   */
   addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
-      case 'rage':
-        this._addRageEffects(effect, actor);
-        break;
       case 'mage armor':
         this._addMageArmorEffects(effect, actor);
         break;
+      case 'rage':
+        this._addRageEffects(effect, actor);
+        break;
     }
+  }
+
+  _addMageArmorEffects(effect, actor) {
+    const armorClass = 13 + actor.data.data.abilities.dex.mod;
+
+    effect.effects.push({
+      key: 'data.attributes.ac.value',
+      mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+      value: armorClass,
+    });
   }
 
   _addRageEffects(effect, actor) {
@@ -93,15 +112,5 @@ export default class DynamicEffectsAdder {
         ]
       );
     }
-  }
-
-  _addMageArmorEffects(effect, actor) {
-    const armorClass = 13 + actor.data.data.abilities.dex.mod;
-
-    effect.effects.push({
-      key: 'data.attributes.ac.value',
-      mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-      value: armorClass,
-    });
   }
 }
