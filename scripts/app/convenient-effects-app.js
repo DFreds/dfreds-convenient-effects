@@ -11,7 +11,7 @@ export default class ConvenientEffectsApp extends Application {
       title: 'Convenient Effects',
       popOut: true,
       width: 300,
-      height: "auto",
+      height: 600,
       minimizable: true,
       resizable: true,
       top: 75,
