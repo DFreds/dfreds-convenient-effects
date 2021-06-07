@@ -106,10 +106,6 @@ export default class ConvenientEffectsController {
     }
 
     for (const actor of controlledTokens.map((token) => token.actor)) {
-      if (toggledEffect.isDynamic) {
-        this._dynamicEffectsAdder.addDynamicEffects(toggledEffect, actor);
-      }
-
       const activeEffecData = toggledEffect.convertToActiveEffectData();
 
       const effectToRemove = actor.data.effects.find(
@@ -122,6 +118,10 @@ export default class ConvenientEffectsController {
           effectToRemove.id,
         ]);
       } else {
+        if (toggledEffect.isDynamic) {
+          this._dynamicEffectsAdder.addDynamicEffects(toggledEffect, actor);
+        }
+
         await actor.createEmbeddedDocuments('ActiveEffect', [activeEffecData]);
       }
     }
