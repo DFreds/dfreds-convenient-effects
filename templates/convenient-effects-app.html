@@ -17,13 +17,8 @@
   <!-- Directories List -->
   <ol class="directory-list">
     {{#each folders as |folder|}}
-    {{#if folder.expanded}}
-    <li class="directory-item folder flexcol" data-folder-label="{{folder.label}}"
-      draggable="false">
-    {{else}}
     <li class="directory-item folder flexcol collapsed" data-folder-label="{{folder.label}}"
       draggable="false">
-    {{/if}}
       <header class="folder-header flexrow">
         <h3>
           <i class="fas fa-folder-open fa-fw"></i>

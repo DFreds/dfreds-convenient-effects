@@ -67,6 +67,12 @@ export default class ConvenientEffectsController {
       });
   }
 
+  expandSavedFolders() {
+    this._settings.expandedFolders.forEach((folderName) => {
+      this._viewMvc.toggleCollapsedClassOnFolder(folderName);
+    });
+  }
+
   /**
    * Handles clicks on folders by collapsing or expanding them
    *

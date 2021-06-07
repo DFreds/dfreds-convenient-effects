@@ -40,6 +40,8 @@ export default class ConvenientEffectsApp extends Application {
     this._initClickListeners();
     this._initContextMenu();
     this._initDragDrop();
+
+    this._controller.expandSavedFolders();
   }
 
   /**
