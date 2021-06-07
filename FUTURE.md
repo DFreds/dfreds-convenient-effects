@@ -8,7 +8,7 @@
 
 ## Release 1.2
 
-- Dialog for individual removal of effects
+- Dialog for choosing effects for certain spells (enhance ability, fire shield)
 - Dragging to macro (public functions, generating macro)
 - Included macros
 
