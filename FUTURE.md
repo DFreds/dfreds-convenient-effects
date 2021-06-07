@@ -18,7 +18,5 @@
 
 ## Beyond
 
-- Hunter's mark style damage dealers that only add extra damage for specific PC
-- Add to tabs?
 - Integration with dynamic active vision module (darkvision spell or light spell), dynamic active auras
 - Integration with token magic for spells
