@@ -253,17 +253,26 @@ export default class ConvenientEffectsController {
 
   /**
    * Handles search text changes
-   *
+   * 
    * @param {KeyboardEvent} event - event that corresponds to the text entered
+   * @param {string} query - string representation of the entered search text
+   * @param {RegExp} regex - the regex representation of the entered search text
+   * @param {HTML} html - the html the SearchFilter is being applied to
    */
   onSearchTextChange(event, query, regex, html) {
     const isSearch = !!query;
+    const displayedData = this.dataForView.folders;
+
     let effectNames = new Set();
+    let folderLabels = new Set();
 
     if (isSearch) {
-      for (let effect of game.dfreds.effects.all) {
-        if (regex.test(SearchFilter.cleanQuery(effect.name))) {
-          effectNames.add(effect.name);
+      for (let folder of displayedData) {
+        for (let effect of folder.effects) {
+          if (regex.test(SearchFilter.cleanQuery(effect.name))) {
+            effectNames.add(effect.name);
+            folderLabels.add(folder.label);
+          }
         }
       }
     }
@@ -272,6 +281,12 @@ export default class ConvenientEffectsController {
       if (el.classList.contains('entity')) {
         el.style.display =
           !isSearch || effectNames.has(el.dataset.effectName) ? 'flex' : 'none';
+      }
+
+      if (el.classList.contains('folder')) {
+        let match = isSearch && folderLabels.has(el.dataset.folderLabel);
+        el.style.display = !isSearch || match ? 'flex' : 'none';
+        if (isSearch && match) el.classList.remove('collapsed');
       }
     }
   }
