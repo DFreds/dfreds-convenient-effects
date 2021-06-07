@@ -838,7 +838,7 @@ export default class EffectDefinitions {
       effects: [
         // todo dim light
         {
-          key: 'flags.midi-qol.advantage.attack.all',
+          key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
