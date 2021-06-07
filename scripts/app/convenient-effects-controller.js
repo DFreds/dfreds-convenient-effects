@@ -22,7 +22,7 @@ export default class ConvenientEffectsController {
    *
    * @returns the data to pass to the template
    */
-  get dataForView() {
+  get data() {
     return {
       folders: [
         {
@@ -63,21 +63,21 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedConditions() {
     const effects = game.dfreds.effects;
     return effects.conditions.filter(
-      (effect) => !this._settings.favoriteEffectNames.includes(effect.name)
+      (effect) => !this._settings.isFavoritedEffect(effect.name)
     );
   }
 
   _fetchUnfavoritedSpells() {
     const effects = game.dfreds.effects;
     return effects.spells.filter(
-      (effect) => !this._settings.favoriteEffectNames.includes(effect.name)
+      (effect) => !this._settings.isFavoritedEffect(effect.name)
     );
   }
 
   _fetchUnfavoritedOther() {
     const effects = game.dfreds.effects;
     return effects.other.filter(
-      (effect) => !this._settings.favoriteEffectNames.includes(effect.name)
+      (effect) => !this._settings.isFavoritedEffect(effect.name)
     );
   }
 
@@ -106,18 +106,18 @@ export default class ConvenientEffectsController {
    * @param {MouseEvent} event - event that corresponds to clicking on the folder
    */
   onFolderClick(event) {
-    let folderName = event.currentTarget.parentElement.dataset.folderLabel;
+    let folderLabel = event.currentTarget.parentElement.dataset.folderLabel;
 
-    if (this._viewMvc.isFolderCollapsed(folderName)) {
-      this._viewMvc.expandFolder(folderName);
+    if (this._viewMvc.isFolderCollapsed(folderLabel)) {
+      this._viewMvc.expandFolder(folderLabel);
     } else {
-      this._viewMvc.collapseFolder(folderName);
+      this._viewMvc.collapseFolder(folderLabel);
     }
 
-    if (this._settings.expandedFolders.includes(folderName)) {
-      this._settings.removeExpandedFolder(folderName);
+    if (this._settings.isFolderExpanded(folderLabel)) {
+      this._settings.removeExpandedFolder(folderLabel);
     } else {
-      this._settings.addExpandedFolder(folderName);
+      this._settings.addExpandedFolder(folderLabel);
     }
   }
 
@@ -177,7 +177,7 @@ export default class ConvenientEffectsController {
     const effectName = effectItem.data().effectName;
 
     // Don't add favorites twice
-    if (this._settings.favoriteEffectNames.includes(effectName)) return;
+    if (this._settings.isFavoritedEffect(effectName)) return;
 
     this._settings.addFavoriteEffect(effectName);
     this._viewMvc.render();
@@ -244,7 +244,7 @@ export default class ConvenientEffectsController {
     const effectName = event.dataTransfer.getData('text/plain');
 
     // Don't add favorites twice
-    if (!this._settings.favoriteEffectNames.includes(effectName)) {
+    if (!this._settings.isFavoritedEffect(effectName)) {
       this._settings.addFavoriteEffect(effectName);
     }
 
@@ -253,42 +253,63 @@ export default class ConvenientEffectsController {
 
   /**
    * Handles search text changes
-   * 
-   * @param {KeyboardEvent} event - event that corresponds to the text entered
+   *
+   * @param {KeyboardEvent} event - event that corresponds to the key press
    * @param {string} query - string representation of the entered search text
    * @param {RegExp} regex - the regex representation of the entered search text
    * @param {HTML} html - the html the SearchFilter is being applied to
    */
   onSearchTextChange(event, query, regex, html) {
     const isSearch = !!query;
-    const displayedData = this.dataForView.folders;
 
+    let matchingItems = {};
+
+    if (isSearch) {
+      matchingItems = this._getMatchingItems(regex);
+    }
+
+    // TODO move logic to view
+    for (let el of html.querySelectorAll('.directory-item')) {
+      let isEntity = el.classList.contains('entity');
+      let isFolder = el.classList.contains('folder');
+
+      if (isEntity) {
+        let match =
+          isSearch && matchingItems.effectNames.has(el.dataset.effectName);
+        el.style.display = !isSearch || match ? 'flex' : 'none';
+      } else if (isFolder) {
+        let match =
+          isSearch && matchingItems.folderLabels.has(el.dataset.folderLabel);
+        el.style.display = !isSearch || match ? 'flex' : 'none';
+
+        // Expand folders with matches
+        if (match) el.classList.remove('collapsed');
+        else
+          el.classList.toggle(
+            'collapsed',
+            !this._settings.isFolderExpanded(el.dataset.folderLabel)
+          );
+      }
+    }
+  }
+
+  _getMatchingItems(regex) {
     let effectNames = new Set();
     let folderLabels = new Set();
 
-    if (isSearch) {
-      for (let folder of displayedData) {
-        for (let effect of folder.effects) {
-          if (regex.test(SearchFilter.cleanQuery(effect.name))) {
-            effectNames.add(effect.name);
-            folderLabels.add(folder.label);
-          }
+    for (let folder of this.data.folders) {
+      for (let effect of folder.effects) {
+        if (regex.test(SearchFilter.cleanQuery(effect.name))) {
+          effectNames.add(effect.name);
+          folderLabels.add(folder.label);
         }
       }
     }
 
-    for (let el of html.querySelectorAll('.directory-item')) {
-      if (el.classList.contains('entity')) {
-        el.style.display =
-          !isSearch || effectNames.has(el.dataset.effectName) ? 'flex' : 'none';
-      }
-
-      if (el.classList.contains('folder')) {
-        let match = isSearch && folderLabels.has(el.dataset.folderLabel);
-        el.style.display = !isSearch || match ? 'flex' : 'none';
-        if (isSearch && match) el.classList.remove('collapsed');
-      }
-    }
+    return {
+      effectNames,
+      folderLabels,
+    };
   }
 
   _isEventTargetFavorites(event) {

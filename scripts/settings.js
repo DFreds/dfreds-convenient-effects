@@ -91,6 +91,16 @@ export default class Settings {
   }
 
   /**
+   * Checks if the given effect name is favorited 
+   * 
+   * @param {string} name - the effect name to search for
+   * @returns {boolean} true if the effect is favorited, false otherwise
+   */
+  isFavoritedEffect(name) {
+    return this.favoriteEffectNames.includes(name);
+  }
+
+  /**
    * Returns the game setting for the saved expanded folder names
    * 
    * @returns {Array} the names of all of the saved expanded folders
@@ -128,5 +138,15 @@ export default class Settings {
    */
   clearExpandedFolders() {
     game.settings.set(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, '');
+  }
+
+  /**
+   * Checks if the given folder name is expanded
+   * 
+   * @param {string} name - the folder name to search for
+   * @returns {boolean} true if the folder is in the saved expanded folders, false otherwise
+   */
+  isFolderExpanded(name) {
+    return this.expandedFolders.includes(name);
   }
 }

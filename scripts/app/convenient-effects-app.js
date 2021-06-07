@@ -32,7 +32,7 @@ export default class ConvenientEffectsApp extends Application {
 
   /** @override */
   getData() {
-    return this._controller.dataForView;
+    return this._controller.data;
   }
 
   /** @override */
