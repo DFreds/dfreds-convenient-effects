@@ -125,7 +125,10 @@ export default class ConvenientEffectsController {
         ]);
       } else {
         if (toggledEffect.isDynamic) {
-          await this._dynamicEffectsAdder.addDynamicEffects(toggledEffect, actor);
+          await this._dynamicEffectsAdder.addDynamicEffects(
+            toggledEffect,
+            actor
+          );
         }
 
         await actor.createEmbeddedDocuments('ActiveEffect', [activeEffecData]);
