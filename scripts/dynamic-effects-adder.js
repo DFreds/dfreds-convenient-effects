@@ -4,7 +4,7 @@
 export default class DynamicEffectsAdder {
   /**
    * Adds dynamic effects for specific effects
-   * 
+   *
    * @param {Effect} effect - the effect to handle
    * @param {Actor5e} actor - the effected actor
    */
@@ -12,6 +12,9 @@ export default class DynamicEffectsAdder {
     switch (effect.name.toLowerCase()) {
       case 'mage armor':
         this._addMageArmorEffects(effect, actor);
+        break;
+      case 'spider climb':
+        this._addSpiderClimbEffects(effect, actor);
         break;
       case 'rage':
         this._addRageEffects(effect, actor);
@@ -26,6 +29,16 @@ export default class DynamicEffectsAdder {
       key: 'data.attributes.ac.value',
       mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
       value: armorClass,
+    });
+  }
+
+  _addSpiderClimbEffects(effect, actor) {
+    const walkingSpeed = actor.data.data.attributes.movement.walk;
+
+    effect.effects.push({
+      key: 'data.attributes.movement.climb',
+      mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+      value: walkingSpeed,
     });
   }
 

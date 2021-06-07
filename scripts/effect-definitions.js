@@ -62,6 +62,7 @@ export default class EffectDefinitions {
       this._shield,
       this._shieldOfFaith,
       this._slow,
+      this._spiderClimb,
       this._stoneskin,
       this._trueStrike,
     ];
@@ -355,7 +356,7 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
-      ]
+      ],
     });
   }
 
@@ -1277,6 +1278,16 @@ export default class EffectDefinitions {
           value: 0.5,
         },
       ],
+    });
+  }
+
+  get _spiderClimb() {
+    return new Effect({
+      name: 'Spider Climb',
+      description: 'Grants climbing speed equal to walking speed for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/shielding-spirit-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      isDynamic: true,
     });
   }
 
