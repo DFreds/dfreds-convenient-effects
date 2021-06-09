@@ -9,6 +9,7 @@ export default class EffectDefinitions {
 
   get conditions() {
     return [
+      this._almostDead,
       this._blinded,
       this._charmed,
       this._concentrating,
@@ -37,7 +38,6 @@ export default class EffectDefinitions {
   get spells() {
     return [
       this._aid, // TODO handle higher levels
-      this._almostDead,
       this._bane,
       this._barkskin,
       this._beaconOfHope,
