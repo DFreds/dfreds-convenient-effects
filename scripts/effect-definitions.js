@@ -96,7 +96,6 @@ export default class EffectDefinitions {
       this._greatWeaponMaster,
       this._heavilyEncumbered,
       this._rage,
-      this._ragePathOfTheTotemWarrior,
       this._rangedDisadvantage,
       this._sharpshooter,
     ];
@@ -1130,32 +1129,5 @@ export default class EffectDefinitions {
         {key: "data.bonuses.rwak.damage", mode: 2, value: "4"},
       ],
     };
-  }
-
-  get _ragePathOfTheTotemWarrior() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.featureRagePathOfTheTotemWarrior,
-      description: 'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.',
-      icon: 'systems/dnd5e/icons/skills/red_10.jpg',
-      seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      isDynamic: true,
-      effects: [
-        { key: 'flags.midi-qol.advantage.ability.check.str', mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: '1'},
-        { key: 'flags.midi-qol.advantage.ability.save.str', mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: '1'},
-        { key: 'data.traits.dr.value', mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: 'slashing'},
-        { key: 'data.traits.dr.value', mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: 'piercing'},
-        { key: 'data.traits.dr.value', mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: 'bludgeoning'},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "acid"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "cold"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "fire"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "force"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "lightning"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "necrotic"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "poison"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "physical"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "radiant"},
-        { key: "data.traits.dr.value", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: "thunder"}
-      ],
-    });
   }
 }
