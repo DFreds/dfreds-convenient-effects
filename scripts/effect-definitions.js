@@ -32,7 +32,7 @@ export default class EffectDefinitions {
 
   get spells() {
     return [
-      this._aid,
+      this._aid, // TODO handle higher levels
       this._bane,
       this._barkskin,
       this._beaconOfHope,
@@ -40,22 +40,25 @@ export default class EffectDefinitions {
       this._blur,
       this._darkvision,
       this._enlarge,
-      this._faerieFire,
-      this._fly,
-      this._fireShieldColdResistance,
-      this._fireShieldFireResistance,
       this._enhanceAbilityBearsEndurance,
       this._enhanceAbilityBullsStrength,
       this._enhanceAbilityCatsGrace,
       this._enhanceAbilityEaglesSplendor,
       this._enhanceAbilityFoxsCunning,
       this._enhanceAbilityOwlsWisdom,
+      this._faerieFire,
+      // this._falseLife, // TODO when we figure out higher level casting
+      this._fly,
+      this._fireShieldColdResistance,
+      this._fireShieldFireResistance,
+      this._greaterInvisibility,
       this._guidance,
       this._guidingBolt,
       this._haste,
       // this._heroesFeast, - TODO when the issue with aid increasing current/max hp is fixed
       // this._heroism, TODO how to get the spellcasting modifier of the one casting it
       this._huntersMark,
+      this._invisibility,
       this._longstrider,
       this._mageArmor,
       this._mindBlank,
@@ -818,7 +821,7 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
-        // todo data.traits.size
+        // TODO data.traits.size
         {
           key: 'data.bonuses.weapon.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -845,7 +848,7 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
-        // todo dim light
+        // TODO dim light
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1007,6 +1010,28 @@ export default class EffectDefinitions {
     });
   }
 
+  get _greaterInvisibility() {
+    return new Effect({
+      name: 'Greater Invisibility',
+      description:
+        'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/fog-water-air-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _guidance() {
     return new Effect({
       name: 'Guidance',
@@ -1103,6 +1128,28 @@ export default class EffectDefinitions {
       name: "Hunter's Mark",
       description: 'No active effects',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
+    });
+  }
+
+  get _invisibility() {
+    return new Effect({
+      name: 'Invisibility',
+      description:
+        'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/fog-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
     });
   }
 
@@ -1274,7 +1321,7 @@ export default class EffectDefinitions {
       effects: [
         {
           key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // todo
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
           value: 'poison',
         },
       ],
@@ -1289,7 +1336,7 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       effects: [
-        // todo data.traits.size
+        // TODO data.traits.size
         {
           key: 'data.bonuses.weapon.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1412,7 +1459,7 @@ export default class EffectDefinitions {
       effects: [
         {
           key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // todo
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
           value: 'physical',
         },
       ],
