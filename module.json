@@ -26,12 +26,23 @@
   "styles": [
     "./styles/dfreds-convenient-effects.css"
   ],
-  "languages": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
   "system": ["dnd5e"],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "name": "midi-qol"
+    },
+  ],
   "socket": false,
   "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json",
   "download": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/v1.0.0/dfreds-convenient-effects.zip",
   "protected": false,
-  "coreTranslation": false
+  "coreTranslation": false,
+  "allowBugReporter": true
 }
