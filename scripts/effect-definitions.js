@@ -65,9 +65,6 @@ export default class EffectDefinitions {
       // this._heroesFeast, - TODO when the issue with aid increasing current/max hp is fixed
       // this._heroism, TODO how to get the spellcasting modifier of the one casting it
       this._huntersMark,
-      this._huntersMark1h,
-      this._huntersMark8h,
-      this._huntersMark24h,
       this._invisibility,
       this._longstrider,
       this._mageArmor,
@@ -94,7 +91,7 @@ export default class EffectDefinitions {
       this._encumbered,
       this._flanked,
       this._flanking,
-      this-_favouredEnemy,
+      this._favouredEnemy,
       this._greaterFavouredEnemy,
       this._greatWeaponMaster,
       this._heavilyEncumbered,
@@ -728,10 +725,6 @@ export default class EffectDefinitions {
   }
 
   get _guidance() {
-    let effect = retrieveEffectFromCompendium(COMPENDIUM_PACK,Helper.LANG_EFFECT.spellGuidance).then(effect => {
-    if(effect){
-      return effect;
-    }
     return new Effect({
         name: Helper.LANG_EFFECT.spellGuidance,
         description: "Toggled Effect: Guidance",
@@ -745,7 +738,6 @@ export default class EffectDefinitions {
             { key: "data.bonuses.abilities.check", mode: 2, value: "1d4"},
             { key: "data.attributes.init.value", mode: 2, value: "+1d4"},
         ],
-    });
     });
   }
 
@@ -770,30 +762,6 @@ export default class EffectDefinitions {
   get _huntersMark() {
     return new Effect({
       name: Helper.LANG_EFFECT.spellHuntersMark1h,
-      description: 'No active effects',
-      icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
-    });
-  }
-
-  get _huntersMark1h() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.spellHuntersMark1h,
-      description: 'No active effects',
-      icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
-    });
-  }
-
-  get _huntersMark8h() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.spellHuntersMark8h,
-      description: 'No active effects',
-      icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
-    });
-  }
-
-  get _huntersMark24h() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.spellHuntersMark24h,
       description: 'No active effects',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
     });
@@ -1145,7 +1113,6 @@ export default class EffectDefinitions {
       name: Helper.LANG_EFFECT.featureFavouredEnemy,
       description: "Toggled Effect: Favoured Enemy",
       icon: 'modules/dfreds-convenient-effects/images/favoured-enemy.png',
-      duration: getDurationData(100),
       changes: [
         {key: "data.bonuses.mwak.damage", mode: 2, value: "2"},
         {key: "data.bonuses.rwak.damage", mode: 2, value: "2"},

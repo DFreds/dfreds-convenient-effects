@@ -7,17 +7,13 @@ Hooks.once('init', () => {
   new Settings().registerSettings();
 
   game.dfreds = game.dfreds || {};
-  game.dfreds.effects = new EffectDefinitions();
+
 });
 
-Hooks.once('ready', async function () {
+Hooks.once('ready', function () {
 	// Do anything once the module is ready
-	// if (!game.modules.get("lib-wrapper")?.active && game.user.isGM){
-	// 	ui.notifications.error(`The '${MODULE_NAME}' module requires to install and activate the 'libWrapper' module.`);
-	// 	return;
-	// }
   Helper.initLangEffect();
-
+  game.dfreds.effects = new EffectDefinitions();
 });
 
 Hooks.on('getSceneControlButtons', (controls) => {

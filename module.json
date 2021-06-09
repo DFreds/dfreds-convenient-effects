@@ -37,7 +37,7 @@
   "dependencies": [
     {
       "name": "midi-qol"
-    },
+    }
   ],
   "socket": false,
   "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json",
