@@ -48,9 +48,9 @@ export default class EffectDefinitions {
       this._enhanceAbilityOwlsWisdom,
       this._faerieFire,
       // this._falseLife, // TODO when we figure out higher level casting
-      this._fly,
       this._fireShieldColdResistance,
       this._fireShieldFireResistance,
+      this._fly,
       this._greaterInvisibility,
       this._guidance,
       this._guidingBolt,
