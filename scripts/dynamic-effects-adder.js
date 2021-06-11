@@ -66,7 +66,13 @@ export default class DynamicEffectsAdder {
       return;
     }
 
-    let rageDamage = 'CONST.ACTIVE_EFFECT_MODES.ADD';
+    this._determineRageBonusDamage(effect, barbarianClass);
+    this._addResistancesIfTotemWarrior(effect, barbarianClass);
+    this._determineIfPersistantRage(effect, barbarianClass);
+  }
+
+  _determineRageBonusDamage(effect, barbarianClass) {
+    let rageDamage = '2';
 
     if (barbarianClass.data.data.levels > 15) {
       rageDamage = '4';
@@ -79,9 +85,11 @@ export default class DynamicEffectsAdder {
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: rageDamage,
     });
+  }
 
+  _addResistancesIfTotemWarrior(effect, barbarianClass) {
     if (
-      barbarianClass.data.data.subclass.toLowerCase() ===
+      barbarianClass.data.data.subclass?.toLowerCase() ===
       'path of the totem warrior'
     ) {
       effect.effects.push(
@@ -138,6 +146,12 @@ export default class DynamicEffectsAdder {
           },
         ]
       );
+    }
+  }
+
+  _determineIfPersistantRage(effect, barbarianClass) {
+    if (barbarianClass.data.data.levels > 14) {
+      effect.seconds = undefined;
     }
   }
 }
