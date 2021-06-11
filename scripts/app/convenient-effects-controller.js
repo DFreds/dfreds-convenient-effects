@@ -138,44 +138,8 @@ export default class ConvenientEffectsController {
    * @param {MouseEvent} event - event that corresponds to clicking an effect item
    */
   async onEffectClick(event) {
-    const toggledEffect = game.dfreds.effects.all.find(
-      (effect) =>
-        effect.name == event.target.innerText ||
-        effect.name == event.target.title
-    );
-    await this._toggleEffect(toggledEffect);
-  }
-
-  async _toggleEffect(toggledEffect) {
-    const controlledTokens = canvas.tokens.controlled;
-
-    if (controlledTokens.length === 0) {
-      this._viewMvc.notifyNoTokensSelected();
-      return;
-    }
-
-    for (const actor of controlledTokens.map((token) => token.actor)) {
-      const effectToRemove = actor.data.effects.find(
-        (effect) =>
-          effect.data.label == 'Convenient Effect: ' + toggledEffect.name
-      );
-
-      if (effectToRemove) {
-        await actor.deleteEmbeddedDocuments('ActiveEffect', [
-          effectToRemove.id,
-        ]);
-      } else {
-        if (toggledEffect.isDynamic) {
-          await this._dynamicEffectsAdder.addDynamicEffects(
-            toggledEffect,
-            actor
-          );
-        }
-
-        const activeEffectData = toggledEffect.convertToActiveEffectData();
-        await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
-      }
-    }
+    const effectName = event.target.innerText ? event.target.innerText : event.target.title;
+    await game.dfreds.toggleEffect(effectName);
   }
 
   /**
