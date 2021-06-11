@@ -7,15 +7,14 @@ Hooks.once('init', () => {
   new Settings().registerSettings();
 
   game.dfreds = game.dfreds || {};
-
 });
 
-Hooks.once('ready', function () {
-	// Do anything once the module is ready
+Hooks.once('ready', function() {
+  // Do anything once the module is ready
   Helper.initLangEffect();
   game.dfreds.effects = new EffectDefinitions();
 });
 
-Hooks.on('getSceneControlButtons', (controls) => {
+Hooks.on('getSceneControlButtons', controls => {
   new Controls().initializeControls(controls);
 });

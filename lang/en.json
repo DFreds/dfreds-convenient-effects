@@ -1,5 +1,4 @@
 {
-
   "dfreds-convenient-effects.conditionAlmostdead": "Almost dead",
   "dfreds-convenient-effects.conditionBlinded": "Blind",
   "dfreds-convenient-effects.conditionCharmed": "Charmed",
@@ -53,22 +52,22 @@
   "dfreds-convenient-effects.spellShield": "Shield",
   "dfreds-convenient-effects.spellShieldOfFaith": "Shield of Faith",
   "dfreds-convenient-effects.spellSlow": "Slow",
-  
+
   "dfreds-convenient-effects.featureSharpshooter": "Sharpshooter",
   "dfreds-convenient-effects.featureGreatWeaponMaster": "Great Weapon Master",
 
-  "dfreds-convenient-effects.settingsLI-SETTING.title" : "Lingering Injuries",
-  "dfreds-convenient-effects.settingsLI-SETTING.hint"  : "If a player character takes a critical hit, drops to 0 hp, or fails a death saving throw by 5 or more, Lingering Injuries will roll for the player.",
-  "dfreds-convenient-effects.settingsMD-SETTING.title" : "Massive Damage",
-  "dfreds-convenient-effects.settingsMD-SETTING.hint"  : "If a creature takes more than half its health in 1 hit, Massive Damage will roll for the creature.",
-  "dfreds-convenient-effects.settingsTH-SETTING.title" : "Token HP",
-  "dfreds-convenient-effects.settingsTH-SETTING.hint"  : "Randomly rolls HP for unlinked tokens.",
-  "dfreds-convenient-effects.settingsUE-SETTING.title" : "Unconscious Exhaustion",
-  "dfreds-convenient-effects.settingsUE-SETTING.hint"  : "When a player's health lowers to 0, they gain a level of exhaustion.",
-  "dfreds-convenient-effects.settingsHS-SETTING.title" : "Healing Surge",
-  "dfreds-convenient-effects.settingsHS-SETTING.hint"  : "Changes the behaviour of short rests, restoring a 1/4 of hit die and changes the behaviour of long rests, restoring all hit die.",
-  "dfreds-convenient-effects.settingsER-SETTING.title" : "Exhaustion Removal",
-  "dfreds-convenient-effects.settingsER-SETTING.hint"  : "When a character finishes a long rest, automatically removes a level of exhaustions (assumes based on the rules that player at `their fill`)",
+  "dfreds-convenient-effects.settingsLI-SETTING.title": "Lingering Injuries",
+  "dfreds-convenient-effects.settingsLI-SETTING.hint": "If a player character takes a critical hit, drops to 0 hp, or fails a death saving throw by 5 or more, Lingering Injuries will roll for the player.",
+  "dfreds-convenient-effects.settingsMD-SETTING.title": "Massive Damage",
+  "dfreds-convenient-effects.settingsMD-SETTING.hint": "If a creature takes more than half its health in 1 hit, Massive Damage will roll for the creature.",
+  "dfreds-convenient-effects.settingsTH-SETTING.title": "Token HP",
+  "dfreds-convenient-effects.settingsTH-SETTING.hint": "Randomly rolls HP for unlinked tokens.",
+  "dfreds-convenient-effects.settingsUE-SETTING.title": "Unconscious Exhaustion",
+  "dfreds-convenient-effects.settingsUE-SETTING.hint": "When a player's health lowers to 0, they gain a level of exhaustion.",
+  "dfreds-convenient-effects.settingsHS-SETTING.title": "Healing Surge",
+  "dfreds-convenient-effects.settingsHS-SETTING.hint": "Changes the behaviour of short rests, restoring a 1/4 of hit die and changes the behaviour of long rests, restoring all hit die.",
+  "dfreds-convenient-effects.settingsER-SETTING.title": "Exhaustion Removal",
+  "dfreds-convenient-effects.settingsER-SETTING.hint": "When a character finishes a long rest, automatically removes a level of exhaustions (assumes based on the rules that player at `their fill`)",
 
   "dfreds-convenient-effects.settingsBlindingSettingTitle": "Blinding Setting",
   "dfreds-convenient-effects.settingsBlindingSettingHint": "Toggles the \"blinded\" effect on token vision.",
