@@ -3,7 +3,12 @@ import Constants from './constants.js';
 
 export default class EffectDefinitions {
   get all() {
-    return [...this.conditions, ...this.spells, ...this.other];
+    return [
+      ...this.conditions,
+      ...this.spells,
+      ...this.classFeatures,
+      ...this.other,
+    ];
   }
 
   get conditions() {
@@ -79,6 +84,13 @@ export default class EffectDefinitions {
     ];
   }
 
+  get classFeatures() {
+    return [
+      this._rage,
+      this._recklessAttack,
+    ];
+  }
+
   get other() {
     return [
       this._encumbered,
@@ -86,7 +98,6 @@ export default class EffectDefinitions {
       this._flanking,
       this._greatWeaponMaster,
       this._heavilyEncumbered,
-      this._rage,
       this._rangedDisadvantage,
       this._sharpshooter,
     ];
@@ -1489,6 +1500,66 @@ export default class EffectDefinitions {
     });
   }
 
+  /** Class specific */
+  get _rage() {
+    return new Effect({
+      name: 'Rage',
+      description:
+        'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.',
+      icon: 'systems/dnd5e/icons/skills/red_10.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      isDynamic: true,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'slashing',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'piercing',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'bludgeoning',
+        },
+      ],
+    });
+  }
+
+  get _recklessAttack() {
+    return new Effect({
+      name: 'Reckless Attack',
+      description: 'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
+      icon: 'systems/dnd5e/icons/skills/weapon_34.jpg',
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      effects: [
+        {
+          key: 'flags.midi-qol.advantage.attack.mwak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   /* Other effects */
   get _encumbered() {
     return new Effect({
@@ -1596,44 +1667,6 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.disadvantage.ability.save.con',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
-        },
-      ],
-    });
-  }
-
-  get _rage() {
-    return new Effect({
-      name: 'Rage',
-      description:
-        'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.',
-      icon: 'systems/dnd5e/icons/skills/red_10.jpg',
-      seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      isDynamic: true,
-      effects: [
-        {
-          key: 'flags.midi-qol.advantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.advantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'slashing',
-        },
-        {
-          key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'piercing',
-        },
-        {
-          key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'bludgeoning',
         },
       ],
     });

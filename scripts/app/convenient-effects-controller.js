@@ -38,6 +38,10 @@ export default class ConvenientEffectsController {
           effects: this._fetchUnfavoritedSpells(),
         },
         {
+          label: 'Class Features',
+          effects: this._fetchUnfavoritedClassFeatures(),
+        },
+        {
           label: 'Other',
           effects: this._fetchUnfavoritedOther(),
         },
@@ -70,6 +74,13 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedSpells() {
     const effects = game.dfreds.effects;
     return effects.spells.filter(
+      (effect) => !this._settings.isFavoritedEffect(effect.name)
+    );
+  }
+
+  _fetchUnfavoritedClassFeatures() {
+    const effects = game.dfreds.effects;
+    return effects.classFeatures.filter(
       (effect) => !this._settings.isFavoritedEffect(effect.name)
     );
   }

@@ -60,7 +60,7 @@ export default class Settings {
   /**
    * Returns the game setting for the favorite effect names
    *
-   * @returns {Array} the names of all the favorite effects
+   * @returns {String[]} the names of all the favorite effects
    */
   get favoriteEffectNames() {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.FAVORITE_EFFECT_NAMES).split(';').filter(name => name.trim());
@@ -103,7 +103,7 @@ export default class Settings {
   /**
    * Returns the game setting for the saved expanded folder names
    * 
-   * @returns {Array} the names of all of the saved expanded folders
+   * @returns {String[]} the names of all of the saved expanded folders
    */
   get expandedFolders() {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS).split(';').filter(name => name.trim());
