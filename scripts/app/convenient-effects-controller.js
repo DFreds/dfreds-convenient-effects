@@ -155,11 +155,9 @@ export default class ConvenientEffectsController {
     }
 
     for (const actor of controlledTokens.map((token) => token.actor)) {
-      const activeEffecData = toggledEffect.convertToActiveEffectData();
-
       const effectToRemove = actor.data.effects.find(
         (effect) =>
-          effect.data.label == 'Convenient Effect: ' + activeEffecData.name
+          effect.data.label == 'Convenient Effect: ' + toggledEffect.name
       );
 
       if (effectToRemove) {
@@ -174,7 +172,8 @@ export default class ConvenientEffectsController {
           );
         }
 
-        await actor.createEmbeddedDocuments('ActiveEffect', [activeEffecData]);
+        const activeEffectData = toggledEffect.convertToActiveEffectData();
+        await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
       }
     }
   }
