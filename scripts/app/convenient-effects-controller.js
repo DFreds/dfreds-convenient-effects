@@ -221,7 +221,7 @@ export default class ConvenientEffectsController {
    * @param {DragEvent} event - event that corresponds to the drag over
    */
   onFolderDragOver(event) {
-    if (!this._isEventTargetFavorites(event)) {
+    if (!this._isValidEffect(event) || !this._isEventTargetFavorites(event)) {
       return;
     }
     event.preventDefault();
@@ -234,7 +234,7 @@ export default class ConvenientEffectsController {
    * @param {DragEvent} event - event that corresponds to the drag leave
    */
   onFolderDragLeave(event) {
-    if (!this._isEventTargetFavorites(event)) {
+    if (!this._isValidEffect(event) || !this._isEventTargetFavorites(event)) {
       return;
     }
     event.preventDefault();
@@ -247,11 +247,9 @@ export default class ConvenientEffectsController {
    * @param {DragEvent} event - event that corresponds to the drop
    */
   onDropOntoFolder(event) {
-    if (!this._isEventTargetFavorites(event)) {
+    if (!this._isValidEffect(event) || !this._isEventTargetFavorites(event)) {
       return;
     }
-
-    const effectName = event.dataTransfer.getData('text/plain');
 
     // Don't add favorites twice
     if (!this._settings.isFavoritedEffect(effectName)) {
@@ -319,6 +317,12 @@ export default class ConvenientEffectsController {
       effectNames,
       folderLabels,
     };
+  }
+
+  // Fixes bug when dragging over any item onto the convenient effects
+  _isValidEffect(event) {
+    const effectName = event.dataTransfer.getData('text/plain');
+    return game.dfreds.effects.all.includes(effectName);
   }
 
   _isEventTargetFavorites(event) {
