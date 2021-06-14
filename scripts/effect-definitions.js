@@ -1,6 +1,5 @@
 import Effect from './effect.js';
 import Constants from './constants.js';
-import Helper from './helper-lang.js';
 
 export default class EffectDefinitions {
   get all() {
@@ -14,10 +13,10 @@ export default class EffectDefinitions {
 
   get conditions() {
     return [
-      this._almostDead,
       this._blinded,
       this._charmed,
       this._concentrating,
+      this._dead,
       this._deafened,
       this._diseased,
       this._exhaustion1,
@@ -61,8 +60,6 @@ export default class EffectDefinitions {
       this._fireShieldColdResistance,
       this._fireShieldFireResistance,
       this._fly,
-      this._fortunesFavor,
-      this._giftOfAlacrity,
       this._greaterInvisibility,
       this._guidance,
       this._guidingBolt,
@@ -103,8 +100,8 @@ export default class EffectDefinitions {
       this._encumbered,
       this._flanked,
       this._flanking,
-      this._favouredEnemy,
-      this._greaterFavouredEnemy,
+      this._favoredEnemy,
+      this._greaterFavoredEnemy,
       this._greatWeaponMaster,
       this._heavilyEncumbered,
       this._rage,
@@ -115,18 +112,18 @@ export default class EffectDefinitions {
 
   /* Condition Effects */
 
-  get _almostDead() {
+  get _dead() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionAlmostdead,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionDead'),
       description: 'No active effects',
-      icon: 'modules/dfreds-convenient-effects/images/almostdead.svg',
+      icon: 'modules/dfreds-convenient-effects/images/dead.svg',
       changes: [],
     });
   }
 
   get _blinded() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionBlinded,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionBlinded'),
       description:
         'Disadvantage on attack rolls while granting advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
@@ -162,7 +159,7 @@ export default class EffectDefinitions {
 
   get _charmed() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionCharmed,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionCharmed'),
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/charmed.svg',
     });
@@ -170,7 +167,7 @@ export default class EffectDefinitions {
 
   get _concentrating() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionConcentrating,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionConcentrating'),
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/concentrating.svg',
     });
@@ -178,7 +175,7 @@ export default class EffectDefinitions {
 
   get _deafened() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionDeafened,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionDeafened'),
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/deafened.svg',
     });
@@ -186,7 +183,7 @@ export default class EffectDefinitions {
 
   get _diseased() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionDiseased,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionDiseased'),
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/diseased.svg',
     });
@@ -194,7 +191,7 @@ export default class EffectDefinitions {
 
   get _exhaustion1() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionExhausted1,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionExhausted1'),
       description: 'Disadvantage on all ability checks',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion1.svg',
       effects: [
@@ -203,15 +200,13 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
-        // TODO INtegration with CUB ?
-        // { key: 'macro.execute', mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM, value: 'CUB-Exhausted' },
       ],
     });
   }
 
   get _exhaustion2() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionExhausted2,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionExhausted2'),
       description: 'Disadvantage on all ability checks and half movement',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion2.svg',
       effects: [
@@ -251,7 +246,7 @@ export default class EffectDefinitions {
 
   get _exhaustion3() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionExhausted3,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionExhausted3'),
       description:
         'Disadvantage on all ability checks, half movement, disadvantage on all attacks, and disadvantage on all saving throws',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion3.svg',
@@ -297,7 +292,7 @@ export default class EffectDefinitions {
 
   get _exhaustion4() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionExhausted4,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionExhausted4'),
       description:
         'Disadvantage on all ability checks, half movement, disadvantage on all attacks, disadvantage on all saving throws, and half HP',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion4.svg',
@@ -353,7 +348,7 @@ export default class EffectDefinitions {
 
   get _exhaustion5() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionExhausted5,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionExhausted5'),
       description:
         'Disadvantage on all ability checks, zero movement, disadvantage on all attacks, disadvantage on all saving throws, and half HP',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion5.svg',
@@ -409,7 +404,7 @@ export default class EffectDefinitions {
 
   get _frightened() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionFrightened,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionFrightened'),
       description: 'Disadvantage on all attack rolls and ability checks',
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
       effects: [
@@ -429,7 +424,7 @@ export default class EffectDefinitions {
 
   get _grappled() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionGrappled,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionGrappled'),
       description: 'No movement',
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
       effects: [
@@ -464,7 +459,7 @@ export default class EffectDefinitions {
 
   get _incapacitated() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionIncapacitated,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionIncapacitated'),
       description: 'No movement',
       icon: 'modules/dfreds-convenient-effects/images/incapacitated.svg',
       effects: [
@@ -499,7 +494,7 @@ export default class EffectDefinitions {
 
   get _invisible() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionInvisible,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionInvisible'),
       description:
         'Grants advantage on attack rolls while forcing disadvantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/invisible.svg',
@@ -520,7 +515,7 @@ export default class EffectDefinitions {
 
   get _paralyzed() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionParalyzed,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionParalyzed'),
       description:
         'Fail all dexterity and strength saves, grant advantage to all who attack, and all melee attacks that hit are criticals',
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
@@ -550,15 +545,13 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
-        // TODO Integration with token magic think about it
-        //{ key: 'macro.tokenMagic', mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM, value: 'waves'},
       ],
     });
   }
 
   get _petrified() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionPetrified,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionPetrified'),
       description:
         'Grant advantage to all who attack and add damage resistance to all magical and physical attacks',
       icon: 'modules/dfreds-convenient-effects/images/petrified.svg',
@@ -584,7 +577,7 @@ export default class EffectDefinitions {
 
   get _poisoned() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionPoisoned,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionPoisoned'),
       description: 'Disadvantage on all attack rolls and ability checks',
       icon: 'modules/dfreds-convenient-effects/images/poisoned.svg',
       effects: [
@@ -604,7 +597,7 @@ export default class EffectDefinitions {
 
   get _prone() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionProne,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionProne'),
       description:
         'Grant advantage to all who melee attack and disadvantage to all who range attack',
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
@@ -635,7 +628,7 @@ export default class EffectDefinitions {
 
   get _restrained() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionRestrained,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionRestrained'),
       description:
         'Disadvantage on dexterity saving throws, disadvantage on all attacks, grant advantage to all who attack, and no movement',
       icon: 'modules/dfreds-convenient-effects/images/restrained.svg',
@@ -686,7 +679,7 @@ export default class EffectDefinitions {
 
   get _stunned() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionStunned,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionStunned'),
       description:
         'Fail all dexterity and strength saves and grant advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/stunned.svg',
@@ -706,19 +699,13 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
-	// TODO TO ADD ?
-        // { key: 'data.attributes.movement.walk', mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: '0'},
-        // { key: 'data.attributes.movement.climb', mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: '0'},
-        // { key: 'data.attributes.movement.swim', mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: '0'},
-        // { key: 'data.attributes.movement.burrow', mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: '0'},
-        // { key: 'data.attributes.movement.fly', mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: '0'},
       ],
     });
   }
 
   get _unconscious() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionUnconscious,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionUnconscious'),
       description: '',
       icon: 'modules/dfreds-convenient-effects/images/unconscious.svg',
       effects: [
@@ -768,7 +755,7 @@ export default class EffectDefinitions {
 
   get _wounded() {
     return new Effect({
-      name: Helper.LANG_EFFECT.conditionWounded,
+      name: game.i18n.localize('dfreds-convenient-effects.conditionWounded'),
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/wounded.svg',
     });
@@ -778,7 +765,7 @@ export default class EffectDefinitions {
 
   get _aid() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellAid,
+      name: game.i18n.localize('dfreds-convenient-effects.spellAid'),
       description: 'Add 5 to current and maximum hit points for 8 hours',
       icon: 'systems/dnd5e/icons/spells/heal-sky-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -799,7 +786,7 @@ export default class EffectDefinitions {
 
   get _bane() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellBane,
+      name: game.i18n.localize('dfreds-convenient-effects.spellBane'),
       description:
         'Subtract 1d4 from all saving throws and attack rolls for 1 minute',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-2.jpg',
@@ -836,7 +823,7 @@ export default class EffectDefinitions {
 
   get _barkskin() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellBarkskin,
+      name: game.i18n.localize('dfreds-convenient-effects.spellBarkskin'),
       description: 'Upgrade AC to 16 for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-orange-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -852,7 +839,7 @@ export default class EffectDefinitions {
 
   get _beaconOfHope() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellBeaconOfHope,
+      name: game.i18n.localize('dfreds-convenient-effects.spellBeaconOfHope'),
       description:
         'Adds advantage to wisdom saving throws and death saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/light-sky-3.jpg',
@@ -874,7 +861,7 @@ export default class EffectDefinitions {
 
   get _bless() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellBless,
+      name: game.i18n.localize('dfreds-convenient-effects.spellBless'),
       description: 'Add 1d4 to all saving throws and attack rolls for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -910,7 +897,7 @@ export default class EffectDefinitions {
 
   get _blur() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellBlur,
+      name: game.i18n.localize('dfreds-convenient-effects.spellBlur'),
       description: 'Grants disadvantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/air-burst-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -926,7 +913,7 @@ export default class EffectDefinitions {
 
   get _darkvision() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellDarkvision,
+      name: game.i18n.localize('dfreds-convenient-effects.spellDarkvision'),
       description: 'Upgrade darkvision to 60 ft. for 8 hours',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -942,7 +929,7 @@ export default class EffectDefinitions {
 
   get _enlarge() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellEnlarge,
+      name: game.i18n.localize('dfreds-convenient-effects.spellEnlarge'),
       description:
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
@@ -987,7 +974,7 @@ export default class EffectDefinitions {
 
   get _fly() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellFly,
+      name: game.i18n.localize('dfreds-convenient-effects.spellFly'),
       description: 'Upgrade flying speed to 60 ft. for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -998,15 +985,6 @@ export default class EffectDefinitions {
           value: '60',
         },
       ],
-    });
-  }
-
-  get _fortunesFavor() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.spellFortunesFavor,
-      description: "Toggled Effect: Fortune's Favor",
-      icon: 'modules/dfreds-convenient-effects/images/fortunes-favor.jpg',
-      changes: [{ key: 'data.attributes.inspiration', mode: 4, value: '1' }],
     });
   }
 
@@ -1170,7 +1148,7 @@ export default class EffectDefinitions {
 
   get _guidance() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellGuidance,
+      name: game.i18n.localize('dfreds-convenient-effects.spellGuidance'),
       description: 'Adds 1d4 to one ability or skill check for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1212,35 +1190,9 @@ export default class EffectDefinitions {
     });
   }
 
-  get _giftOfAlacrity() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.spellGiftOfAlacrity,
-      description: 'Toggled Effect: Gift of Alacrity',
-      icon: 'modules/dfreds-convenient-effects/images/gift-of-alacrity.jpg',
-      changes: [{ key: 'data.attributes.init.value', mode: 2, value: '1d8' }],
-    });
-  }
-
-  get _guidance() {
-    return new Effect({
-      name: Helper.LANG_EFFECT.spellGuidance,
-      description: 'Toggled Effect: Guidance',
-      icon: 'modules/dfreds-convenient-effects/images/guidance.jpg',
-      flags: {
-        dae: {
-          specialDuration: ['isCheck', 'isSkill'],
-        },
-      },
-      changes: [
-        { key: 'data.bonuses.abilities.check', mode: 2, value: '1d4' },
-        { key: 'data.attributes.init.value', mode: 2, value: '+1d4' },
-      ],
-    });
-  }
-
   get _haste() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellHaste,
+      name: game.i18n.localize('dfreds-convenient-effects.spellHaste'),
       description:
         'Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
@@ -1287,7 +1239,7 @@ export default class EffectDefinitions {
 
   get _huntersMark() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellHuntersMark1h,
+      name: game.i18n.localize('dfreds-convenient-effects.spellHuntersMark1h'),
       description: 'No active effects',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
     });
@@ -1317,7 +1269,7 @@ export default class EffectDefinitions {
 
   get _longstrider() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellLongstrider,
+      name: game.i18n.localize('dfreds-convenient-effects.spellLongstrider'),
       description: 'Increase all movement by 10 ft. for 1 hour',
       icon: 'systems/dnd5e/icons/spells/wind-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1353,7 +1305,7 @@ export default class EffectDefinitions {
 
   get _mageArmor() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellMageArmor,
+      name: game.i18n.localize('dfreds-convenient-effects.spellMageArmor'),
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
       icon: 'systems/dnd5e/icons/spells/protect-blue-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -1379,7 +1331,7 @@ export default class EffectDefinitions {
 
   get _passWithoutTrace() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellPassWithoutTrace,
+      name: game.i18n.localize('dfreds-convenient-effects.spellPassWithoutTrace'),
       description: 'Add 10 to stealth checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/fog-air-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1492,7 +1444,7 @@ export default class EffectDefinitions {
 
   get _reduce() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellReduce,
+      name: game.i18n.localize('dfreds-convenient-effects.spellReduce'),
       description:
         'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
@@ -1520,7 +1472,7 @@ export default class EffectDefinitions {
 
   get _shield() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellShield,
+      name: game.i18n.localize('dfreds-convenient-effects.spellShield'),
       description: 'Add 5 to AC until next turn',
       icon: 'systems/dnd5e/icons/spells/protect-magenta-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_ROUND,
@@ -1541,7 +1493,7 @@ export default class EffectDefinitions {
 
   get _shieldOfFaith() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellShieldOfFaith,
+      name: game.i18n.localize('dfreds-convenient-effects.spellShieldOfFaith'),
       description: 'Adds 2 to the AC for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-sky-2.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -1557,7 +1509,7 @@ export default class EffectDefinitions {
 
   get _slow() {
     return new Effect({
-      name: Helper.LANG_EFFECT.spellSlow,
+      name: game.i18n.localize('dfreds-convenient-effects.spellSlow'),
       description:
         'Halves speed and and subtract 2 from AC and dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fog-magenta-2.jpg',
@@ -1769,7 +1721,7 @@ export default class EffectDefinitions {
 
   get _greatWeaponMaster() {
     return new Effect({
-      name: Helper.LANG_EFFECT.featureGreatWeaponMaster,
+      name: game.i18n.localize('dfreds-convenient-effects.featureGreatWeaponMaster'),
       description: 'Subtracts 5 from melee attacks but adds 10 to melee damage',
       icon: 'systems/dnd5e/icons/skills/red_05.jpg',
       effects: [
@@ -1825,7 +1777,7 @@ export default class EffectDefinitions {
 
   get _rage() {
     return new Effect({
-      name: Helper.LANG_EFFECT.featureRage,
+      name: game.i18n.localize('dfreds-convenient-effects.featureRage'),
       description:
         'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.',
       icon: 'systems/dnd5e/icons/skills/red_10.jpg',
@@ -1883,7 +1835,7 @@ export default class EffectDefinitions {
 
   get _sharpshooter() {
     return new Effect({
-      name: Helper.LANG_EFFECT.featureSharpshooter,
+      name: game.i18n.localize('dfreds-convenient-effects.featureSharpshooter'),
       description:
         'Subtracts 5 from ranged attacks but adds 10 to ranged damage',
       icon: 'systems/dnd5e/icons/skills/green_01.jpg',
@@ -1902,26 +1854,42 @@ export default class EffectDefinitions {
     });
   }
 
-  get _favouredEnemy() {
+  get _favoredEnemy() {
     return {
-      name: Helper.LANG_EFFECT.featureFavouredEnemy,
-      description: 'Toggled Effect: Favoured Enemy',
-      icon: 'modules/dfreds-convenient-effects/images/favoured-enemy.png',
+      name: game.i18n.localize('dfreds-convenient-effects.featureFavoredEnemy'),
+      description: 'Adds 2 to ranged and melee damage rolls',
+      icon: 'systems/dnd5e/icons/skills/red_01.jpg',
       changes: [
-        { key: 'data.bonuses.mwak.damage', mode: 2, value: '2' },
-        { key: 'data.bonuses.rwak.damage', mode: 2, value: '2' },
+        { 
+          key: 'data.bonuses.mwak.damage', 
+          mode: 2, 
+          value: '2' 
+        },
+        { 
+          key: 'data.bonuses.rwak.damage', 
+          mode: 2, 
+          value: '2' 
+        },
       ],
     };
   }
 
-  get _greaterFavouredEnemy() {
+  get _greaterFavoredEnemy() {
     return {
-      name: Helper.LANG_EFFECT.featureGreaterFavouredEnemy,
-      description: 'Toggled Effect: Greater Favoured Enemy',
-      icon: 'modules/dfreds-convenient-effects/images/favoured-enemy.png',
+      name: game.i18n.localize('dfreds-convenient-effects.featureGreaterFavoredEnemy'),
+      description: 'Adds 4 to ranged and melee damage rolls',
+      icon: 'systems/dnd5e/icons/skills/red_02.jpg',
       changes: [
-        { key: 'data.bonuses.mwak.damage', mode: 2, value: '4' },
-        { key: 'data.bonuses.rwak.damage', mode: 2, value: '4' },
+        { 
+          key: 'data.bonuses.mwak.damage', 
+          mode: 2, 
+          value: '4' 
+        },
+        { 
+          key: 'data.bonuses.rwak.damage',
+          mode: 2, 
+          value: '4' 
+        },
       ],
     };
   }
