@@ -4,8 +4,6 @@
 
 - Displaying description somewhere else
 - Dialog for choosing effects for certain spells (enhance ability, fire shield)
-- Dragging to macro (public functions, generating macro)
-- Included macro examples
 
 ## Release 1.3
 
