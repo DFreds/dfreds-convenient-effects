@@ -1862,12 +1862,12 @@ export default class EffectDefinitions {
       changes: [
         { 
           key: 'data.bonuses.mwak.damage', 
-          mode: 2, 
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, 
           value: '2' 
         },
         { 
           key: 'data.bonuses.rwak.damage', 
-          mode: 2, 
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '2' 
         },
       ],
@@ -1882,12 +1882,12 @@ export default class EffectDefinitions {
       changes: [
         { 
           key: 'data.bonuses.mwak.damage', 
-          mode: 2, 
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, 
           value: '4' 
         },
         { 
           key: 'data.bonuses.rwak.damage',
-          mode: 2, 
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD, 
           value: '4' 
         },
       ],
