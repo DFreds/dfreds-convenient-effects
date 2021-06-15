@@ -1,4 +1,5 @@
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
+import log from './logger.js';
 
 /**
  * Toggles an effect on or off by name
@@ -28,6 +29,7 @@ export default async function toggleEffect(name) {
 
     if (effectToRemove) {
       await actor.deleteEmbeddedDocuments('ActiveEffect', [effectToRemove.id]);
+      log(`Removed effect ${toggledEffect.name}`);
     } else {
       if (toggledEffect.isDynamic) {
         const dynamicEffectsAdder = new DynamicEffectsAdder();
@@ -36,6 +38,7 @@ export default async function toggleEffect(name) {
 
       const activeEffectData = toggledEffect.convertToActiveEffectData();
       await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
+      log(`Added effect ${toggledEffect.name}`);
     }
   }
 }
