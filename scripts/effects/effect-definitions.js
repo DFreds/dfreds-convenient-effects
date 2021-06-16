@@ -66,6 +66,7 @@ export default class EffectDefinitions {
       this._heroism,
       this._huntersMark,
       this._invisibility,
+      this._light,
       this._longstrider,
       this._mageArmor,
       this._mindBlank,
@@ -88,6 +89,8 @@ export default class EffectDefinitions {
 
   get classFeatures() {
     return [
+      this._channelDivinitySacredWeapon,
+      this._channelDivinityTurnUndead,
       this._rage,
       this._recklessAttack,
     ];
@@ -1175,7 +1178,7 @@ export default class EffectDefinitions {
   get _huntersMark() {
     return new Effect({
       name: "Hunter's Mark",
-      description: 'No active effects',
+      description: 'No active effects and lasts until removed (for now)',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
     });
   }
@@ -1200,6 +1203,42 @@ export default class EffectDefinitions {
         },
       ],
     });
+  }
+
+  get _light() {
+    return new Effect({
+      name: 'Light',
+      description: 'Emits 20/40 light for 1 hour (requires ATL)',
+      icon: 'systems/dnd5e/icons/spells/light-sky-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      effects: [
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '40',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '20',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '#ffffff',
+        },
+        {
+          key: 'ATL.colorIntensity',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0.15',
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "pulse", "speed": 3,"intensity": 1}',
+        },
+      ]
+    })
   }
 
   get _longstrider() {
@@ -1520,7 +1559,7 @@ export default class EffectDefinitions {
       effects: [
         {
           key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: 'physical',
         },
       ],
@@ -1551,6 +1590,63 @@ export default class EffectDefinitions {
   }
 
   /** Class specific */
+  get _channelDivinitySacredWeapon() {
+    return new Effect({
+      name: 'Channel Divinity: Sacred Weapon',
+      description:
+        'Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)',
+      icon: 'systems/dnd5e/icons/skills/light_05.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      effects: [
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '40',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '20',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '#ffffff',
+        },
+        {
+          key: 'ATL.colorIntensity',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0.25',
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+        },
+        {
+          key: 'data.bonuses.mwak.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'max(1, @abilities.cha.mod)',
+        },
+        {
+          key: 'data.bonuses.rwak.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'max(1, @abilities.cha.mod)',
+        },
+      ],
+    });
+  }
+
+  get _channelDivinityTurnUndead() {
+    return new Effect({
+      name: 'Channel Divinity: Turn Undead',
+      description:
+        'No active effects, but lasts for 1 minute',
+      icon: 'systems/dnd5e/icons/skills/yellow_19.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    });
+  }
+
   get _rage() {
     return new Effect({
       name: 'Rage',
