@@ -3,8 +3,8 @@ import log from '../logger.js';
 
 /**
  * Toggles an effect on or off by name
- * 
- * @param {string} name - name of the effect to toggle 
+ *
+ * @param {string} name - name of the effect to toggle
  */
 export default async function toggleEffect(name) {
   const controlledTokens = canvas.tokens.controlled;
@@ -16,12 +16,19 @@ export default async function toggleEffect(name) {
     ui.notifications.error(`Effect ${name} was not found`);
     return;
   }
-  if (controlledTokens.length === 0) {
-    ui.notifications.error('Please select a token');
-    return;
+
+  let actorsToEffect = [];
+  if (game.user.targets.size === 0) {
+    if (controlledTokens.length === 0) {
+      ui.notifications.error('Please select a token');
+      return;
+    }
+    actorsToEffect = controlledTokens.map((token) => token.actor);
+  } else {
+    actorsToEffect = Array.from(game.user.targets).map((token) => token.actor);
   }
 
-  for (const actor of controlledTokens.map((token) => token.actor)) {
+  for (const actor of actorsToEffect) {
     const effectToRemove = actor.data.effects.find(
       (effect) =>
         effect.data.label == 'Convenient Effect: ' + toggledEffect.name
