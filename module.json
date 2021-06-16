@@ -16,7 +16,7 @@
   "bugs": "https://github.com/DFreds/dfreds-convenient-effects/issues",
   "changelog": "https://github.com/DFreds/dfreds-convenient-effects/releases",
   "flags": {},
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "0.8.6",
   "scripts": [],
@@ -37,7 +37,7 @@
   ],
   "socket": false,
   "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json",
-  "download": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/v1.2.0/dfreds-convenient-effects.zip",
+  "download": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/v1.2.1/dfreds-convenient-effects.zip",
   "protected": false,
   "coreTranslation": false
 }
