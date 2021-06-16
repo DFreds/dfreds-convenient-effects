@@ -12,7 +12,7 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsButton);
-    tokenButton.tools.push(this.removeAllButton);
+    tokenButton.tools.push(this._removeAllButton);
   }
 
   get _convenientEffectsButton() {
@@ -30,7 +30,7 @@ export default class Controls {
     new ConvenientEffectsApp().render(true);
   }
 
-  get removeAllButton() {
+  get _removeAllButton() {
     return {
       name: 'remove-all-convenient-effects',
       title: 'Remove All Convenient Effects',
