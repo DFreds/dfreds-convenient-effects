@@ -13,12 +13,6 @@ export default class DynamicEffectsAdder {
       case "enhance ability (bear's endurance)":
         await this._addEnhanceAbilityBearsEnduranceEffects(effect, actor);
         break;
-      case 'mage armor':
-        this._addMageArmorEffects(effect, actor);
-        break;
-      case 'spider climb':
-        this._addSpiderClimbEffects(effect, actor);
-        break;
       case 'rage':
         this._addRageEffects(effect, actor);
         break;
@@ -33,26 +27,6 @@ export default class DynamicEffectsAdder {
       key: 'data.attributes.hp.temp',
       mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
       value: evaluation.total,
-    });
-  }
-
-  _addMageArmorEffects(effect, actor) {
-    const armorClass = 13 + actor.data.data.abilities.dex.mod;
-
-    effect.effects.push({
-      key: 'data.attributes.ac.value',
-      mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-      value: armorClass,
-    });
-  }
-
-  _addSpiderClimbEffects(effect, actor) {
-    const walkingSpeed = actor.data.data.attributes.movement.walk;
-
-    effect.effects.push({
-      key: 'data.attributes.movement.climb',
-      mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-      value: walkingSpeed,
     });
   }
 

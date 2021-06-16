@@ -1244,7 +1244,13 @@ export default class EffectDefinitions {
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
       icon: 'systems/dnd5e/icons/spells/protect-blue-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
-      isDynamic: true,
+      effects: [
+        {
+          key: 'data.attributes.ac.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: '13 + @abilities.dex.mod',
+        },
+      ],
     });
   }
 
@@ -1495,7 +1501,13 @@ export default class EffectDefinitions {
       description: 'Grants climbing speed equal to walking speed for 1 hour',
       icon: 'systems/dnd5e/icons/spells/shielding-spirit-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      isDynamic: true,
+      effects: [
+        {
+          key: 'data.attributes.movement.climb',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: '@attributes.movement.walk',
+        },
+      ],
     });
   }
 
@@ -1580,7 +1592,8 @@ export default class EffectDefinitions {
   get _recklessAttack() {
     return new Effect({
       name: 'Reckless Attack',
-      description: 'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
+      description:
+        'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
       icon: 'systems/dnd5e/icons/skills/weapon_34.jpg',
       seconds: Constants.SECONDS.IN_ONE_ROUND,
       effects: [
