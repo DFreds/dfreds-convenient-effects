@@ -1,6 +1,6 @@
 import Controls from './controls.js';
-import EffectDefinitions from './effect-definitions.js';
-import toggleEffect from './toggle-effect.js';
+import EffectDefinitions from './effects/effect-definitions.js';
+import toggleEffect from './effects/toggle-effect.js';
 import Settings from './settings.js';
 
 Hooks.once('init', () => {

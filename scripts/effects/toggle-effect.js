@@ -1,5 +1,5 @@
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
-import log from './logger.js';
+import log from '../logger.js';
 
 /**
  * Toggles an effect on or off by name

@@ -1,5 +1,5 @@
 import Effect from './effect.js';
-import Constants from './constants.js';
+import Constants from '../constants.js';
 
 export default class EffectDefinitions {
   get all() {

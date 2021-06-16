@@ -1,4 +1,4 @@
-import DynamicEffectsAdder from '../dynamic-effects-adder.js';
+import DynamicEffectsAdder from '../effects/dynamic-effects-adder.js';
 import Settings from '../settings.js';
 
 /**
