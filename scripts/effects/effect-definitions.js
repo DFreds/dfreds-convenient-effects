@@ -947,9 +947,9 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityBearsEndurance() {
     return new Effect({
-      name: "Enhance Ability (Bear's Endurance) for 1 hour",
+      name: "Enhance Ability (Bear's Endurance)",
       description:
-        'Advantage on constitution checks and 2d6 temp hit points (rolled automatically)',
+        'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isDynamic: true,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -965,9 +965,9 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityBullsStrength() {
     return new Effect({
-      name: "Enhance Ability (Bull's Strength) for 1 hour",
+      name: "Enhance Ability (Bull's Strength)",
       description:
-        'Advantage on strength checks and double maximum carrying capacity',
+        'Advantage on strength checks and double maximum carrying capacity for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       effects: [
@@ -987,8 +987,8 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityCatsGrace() {
     return new Effect({
-      name: "Enhance Ability (Cat's Grace) for 1 hour",
-      description: 'Advantage on dexterity checks',
+      name: "Enhance Ability (Cat's Grace)",
+      description: 'Advantage on dexterity checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       effects: [
@@ -1003,8 +1003,8 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityEaglesSplendor() {
     return new Effect({
-      name: "Enhance Ability (Eagle's Splendor) for 1 hour",
-      description: 'Advantage on charisma checks',
+      name: "Enhance Ability (Eagle's Splendor)",
+      description: 'Advantage on charisma checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       effects: [
