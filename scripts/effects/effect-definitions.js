@@ -64,6 +64,7 @@ export default class EffectDefinitions {
       this._haste,
       // this._heroesFeast, // TODO when the issue with aid increasing current/max hp is fixed
       this._heroism,
+      this._holyAura,
       this._huntersMark,
       this._invisibility,
       this._light,
@@ -78,12 +79,14 @@ export default class EffectDefinitions {
       this._protectionFromEnergyThunder,
       this._protectionFromPoison,
       this._reduce,
+      // this._resistance, // TODO when we can ask if they want to spend it
       this._shield,
       this._shieldOfFaith,
       this._slow,
       this._spiderClimb,
       this._stoneskin,
       this._trueStrike,
+      this._viciousMockery,
     ];
   }
 
@@ -1175,6 +1178,48 @@ export default class EffectDefinitions {
     });
   }
 
+  get _holyAura() {
+    return new Effect({
+      name: 'Holy Aura',
+      description:
+        'Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/haste-sky-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      effects: [
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '5',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '#ffffff',
+        },
+        {
+          key: 'ATL.colorIntensity',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0.25',
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+        },
+        {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _huntersMark() {
     return new Effect({
       name: "Hunter's Mark",
@@ -1582,6 +1627,29 @@ export default class EffectDefinitions {
       effects: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _viciousMockery() {
+    return new Effect({
+      name: 'Vicious Mockery',
+      description:
+        'Grants disadvantage on next attack or until the end of next turn',
+      icon: 'systems/dnd5e/icons/skills/affliction_24.jpg',
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      turns: 1,
+      flags: {
+        dae: {
+          specialDuration: ['1Attack'],
+        },
+      },
+      effects: [
+        {
+          key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
