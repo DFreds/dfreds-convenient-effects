@@ -43,6 +43,7 @@ export default class EffectDefinitions {
       this._beaconOfHope,
       this._bless,
       this._blur,
+      // this._contagion, // TODO when dialog choices are handled
       this._darkvision,
       this._enlarge,
       this._enhanceAbilityBearsEndurance,
@@ -52,6 +53,7 @@ export default class EffectDefinitions {
       this._enhanceAbilityFoxsCunning,
       this._enhanceAbilityOwlsWisdom,
       this._faerieFire,
+      this._feeblemind,
       // this._falseLife, // TODO when we figure out higher level casting
       this._fireShieldColdResistance,
       this._fireShieldFireResistance,
@@ -60,8 +62,8 @@ export default class EffectDefinitions {
       this._guidance,
       this._guidingBolt,
       this._haste,
-      // this._heroesFeast, - TODO when the issue with aid increasing current/max hp is fixed
-      // this._heroism, TODO how to get the spellcasting modifier of the one casting it
+      // this._heroesFeast, // TODO when the issue with aid increasing current/max hp is fixed
+      this._heroism,
       this._huntersMark,
       this._invisibility,
       this._longstrider,
@@ -885,6 +887,26 @@ export default class EffectDefinitions {
     });
   }
 
+  get _feeblemind() {
+    return new Effect({
+      name: 'Feeblemind',
+      description: 'Set intelligence and charisma scores to 1 until removed',
+      icon: 'systems/dnd5e/icons/spells/light-eerie-3.jpg',
+      effects: [
+        {
+          key: 'data.abilities.int.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+          value: '1',
+        },
+        {
+          key: 'data.abilities.cha.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _fireShieldColdResistance() {
     return new Effect({
       name: 'Fire Shield (Cold Resistance)',
@@ -1129,6 +1151,22 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: 2,
+        },
+      ],
+    });
+  }
+
+  get _heroism() {
+    return new Effect({
+      name: 'Heroism',
+      description: 'Immunity to frightened for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/heal-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      effects: [
+        {
+          key: 'data.traits.ci.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'frightened',
         },
       ],
     });
