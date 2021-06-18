@@ -81,12 +81,15 @@ export default class EffectDefinitions {
       this._mageArmor,
       this._mindBlank,
       this._passWithoutTrace,
-      this._protectionFromEnergyAcid, // TODO do dialog
+
+      this._protectionFromEnergy,
+      this._protectionFromEnergyAcid,
       this._protectionFromEnergyCold,
       this._protectionFromEnergyFire,
       this._protectionFromEnergyLightning,
       this._protectionFromEnergyThunder,
       this._protectionFromPoison,
+
       // this._resistance, // TODO when we can ask if they want to spend it
       this._shield,
       this._shieldOfFaith,
@@ -974,7 +977,7 @@ export default class EffectDefinitions {
 
   get _fireShieldColdResistance() {
     return new Effect({
-      name: 'Cold Resistance',
+      name: 'Fire Shield (Cold Resistance)',
       description: 'Add damage resistance to cold for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
       isViewable: false,
@@ -991,7 +994,7 @@ export default class EffectDefinitions {
 
   get _fireShieldFireResistance() {
     return new Effect({
-      name: 'Fire Resistance',
+      name: 'Fire Shield (Fire Resistance)',
       description: 'Add damage resistance to fire for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
       isViewable: false,
@@ -1454,11 +1457,27 @@ export default class EffectDefinitions {
     });
   }
 
+  get _protectionFromEnergy() {
+    return new Effect({
+      name: 'Protection from Energy',
+      description: 'Choose between acid, cold, fire, lightning, or thunder resistance',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      nestedEffects: [
+        this._protectionFromEnergyAcid,
+        this._protectionFromEnergyCold,
+        this._protectionFromEnergyFire,
+        this._protectionFromEnergyLightning,
+        this._protectionFromEnergyThunder,
+      ]
+    });
+  }
+
   get _protectionFromEnergyAcid() {
     return new Effect({
-      name: 'Protection from Energy (Acid)',
+      name: 'Protection from Acid',
       description: 'Adds damage resistance to acid for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1472,9 +1491,10 @@ export default class EffectDefinitions {
 
   get _protectionFromEnergyCold() {
     return new Effect({
-      name: 'Protection from Energy (Cold)',
+      name: 'Protection from Cold',
       description: 'Adds damage resistance to cold for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1488,9 +1508,10 @@ export default class EffectDefinitions {
 
   get _protectionFromEnergyFire() {
     return new Effect({
-      name: 'Protection from Energy (Fire)',
+      name: 'Protection from Fire',
       description: 'Adds damage resistance to fire for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1504,9 +1525,10 @@ export default class EffectDefinitions {
 
   get _protectionFromEnergyLightning() {
     return new Effect({
-      name: 'Protection from Energy (Lightning)',
+      name: 'Protection from Lightning',
       description: 'Adds damage resistance to lightning for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1520,9 +1542,10 @@ export default class EffectDefinitions {
 
   get _protectionFromEnergyThunder() {
     return new Effect({
-      name: 'Protection from Energy (Thunder)',
+      name: 'Protection from Thunder',
       description: 'Adds damage resistance to thunder for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
