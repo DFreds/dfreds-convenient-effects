@@ -880,12 +880,11 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Filth Fever',
       description:
-        'Disadvantage on strength checks and strength saving throws for 7 days',
+        'Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
-        // TODO disadvantage on weapon attacks with str
         {
           key: 'flags.midi-qol.disadvantage.ability.save.str',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -893,6 +892,11 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.attack.str',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
@@ -950,12 +954,11 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Seizure',
       description:
-        'Disadvantage on dexterity checks and dexterity saving throws for 7 days',
+        'Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
-        // TODO disadvantage on weapon attacks with dex
         {
           key: 'flags.midi-qol.disadvantage.ability.save.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -963,6 +966,11 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.attack.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
