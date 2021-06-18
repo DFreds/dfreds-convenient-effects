@@ -1,11 +1,20 @@
 import ConvenientEffectsApp from './app/convenient-effects-app.js';
 import Settings from './settings.js';
 
+/**
+ * Handles setting up the controls for the module
+ */
 export default class Controls {
   constructor() {
     this._settings = new Settings();
   }
 
+  /**
+   * Adds the convenient effect buttons to the token controls
+   * 
+   * @param {Object[]} controls - the default controls provided by foundry
+   * @returns 
+   */
   initializeControls(controls) {
     const tokenButton = controls.find((control) => control.name === 'token');
 

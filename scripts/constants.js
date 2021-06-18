@@ -1,3 +1,6 @@
+/**
+ * Contains any constants for the application
+ */
 export default class Constants {
   static SECONDS = {
     IN_ONE_ROUND: 6,

@@ -1,3 +1,6 @@
+/**
+ * Data class for defining an effect
+ */
 export default class Effect {
   constructor({
     name,
