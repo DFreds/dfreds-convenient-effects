@@ -1,3 +1,4 @@
+import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
 
@@ -6,6 +7,7 @@ import log from '../logger.js';
  */
 export default class EffectHandler {
   constructor() {
+    this._dynamicEffectsAdder = new DynamicEffectsAdder();
     this._settings = new Settings();
   }
 
@@ -90,8 +92,7 @@ export default class EffectHandler {
 
   async _addEffect(effect, actor) {
     if (effect.isDynamic) {
-      const dynamicEffectsAdder = new DynamicEffectsAdder();
-      await dynamicEffectsAdder.addDynamicEffects(effect, actor);
+      await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
 
     const activeEffectData = effect.convertToActiveEffectData();

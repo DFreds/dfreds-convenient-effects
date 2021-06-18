@@ -1282,8 +1282,8 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '{"type": "pulse", "speed": 3,"intensity": 1}',
         },
-      ]
-    })
+      ],
+    });
   }
 
   get _longstrider() {
@@ -1708,8 +1708,7 @@ export default class EffectDefinitions {
   get _channelDivinityTurnUndead() {
     return new Effect({
       name: 'Channel Divinity: Turn Undead',
-      description:
-        'No active effects, but lasts for 1 minute',
+      description: 'No active effects, but lasts for 1 minute',
       icon: 'systems/dnd5e/icons/skills/yellow_19.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
