@@ -43,7 +43,15 @@ export default class EffectDefinitions {
       this._beaconOfHope,
       this._bless,
       this._blur,
-      // this._contagion, // TODO when dialog choices are handled
+
+      this._contagion,
+      this._contagionBlindingSickness,
+      this._contagionFilthFever,
+      this._contagionFleshRot,
+      this._contagionMindfire,
+      this._contagionSeizure,
+      this._contagionSlimyDoom,
+
       this._darkvision,
 
       this._enlargeReduce,
@@ -827,6 +835,164 @@ export default class EffectDefinitions {
     });
   }
 
+  get _contagion() {
+    return new Effect({
+      name: 'Contagion',
+      description:
+        'Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      nestedEffects: [
+        this._contagionBlindingSickness,
+        this._contagionFilthFever,
+        this._contagionFleshRot,
+        this._contagionMindfire,
+        this._contagionSeizure,
+        this._contagionSlimyDoom,
+      ]
+    });
+  }
+
+  get _contagionBlindingSickness() {
+    return new Effect({
+      name: 'Blinding Sickness',
+      description:
+        'Disadvantage on wisdom checks and wisdom saving throws for 7 days',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_WEEK,
+      changes: [
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.wis',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.wis',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        ...this._blinded.changes,
+      ],
+    });
+  }
+
+  get _contagionFilthFever() {
+    return new Effect({
+      name: 'Filth Fever',
+      description:
+        'Disadvantage on strength checks and strength saving throws for 7 days',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_WEEK,
+      changes: [
+        // TODO disadvantage on weapon attacks with str
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _contagionFleshRot() {
+    return new Effect({
+      name: 'Flesh Rot',
+      description:
+        'Disadvantage on charisma checks and vulnerability to all damage',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_WEEK,
+      changes: [
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.cha',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'data.traits.dv.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _contagionMindfire() {
+    return new Effect({
+      name: 'Mindfire',
+      description:
+        'Disadvantage on intelligence checks and intelligence saving throws for 7 days',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_WEEK,
+      changes: [
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.int',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.int',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _contagionSeizure() {
+    return new Effect({
+      name: 'Seizure',
+      description:
+        'Disadvantage on dexterity checks and dexterity saving throws for 7 days',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_WEEK,
+      changes: [
+        // TODO disadvantage on weapon attacks with dex
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _contagionSlimyDoom() {
+    return new Effect({
+      name: 'Slimy Doom',
+      description:
+        'Disadvantage on constitution checks and constitution saving throws for 7 days',
+      icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_WEEK,
+      changes: [
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.con',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.con',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _darkvision() {
     return new Effect({
       name: 'Darkvision',
@@ -970,8 +1136,8 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
       nestedEffects: [
         this._fireShieldColdResistance,
-        this._fireShieldFireResistance
-      ]
+        this._fireShieldFireResistance,
+      ],
     });
   }
 
@@ -1460,7 +1626,8 @@ export default class EffectDefinitions {
   get _protectionFromEnergy() {
     return new Effect({
       name: 'Protection from Energy',
-      description: 'Choose between acid, cold, fire, lightning, or thunder resistance',
+      description:
+        'Choose between acid, cold, fire, lightning, or thunder resistance',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       nestedEffects: [
         this._protectionFromEnergyAcid,
@@ -1468,7 +1635,7 @@ export default class EffectDefinitions {
         this._protectionFromEnergyFire,
         this._protectionFromEnergyLightning,
         this._protectionFromEnergyThunder,
-      ]
+      ],
     });
   }
 
