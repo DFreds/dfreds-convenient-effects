@@ -10,7 +10,7 @@ export default class DynamicEffectsAdder {
    */
   async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
-      case "enhance ability (bear's endurance)":
+      case "bear's endurance":
         await this._addEnhanceAbilityBearsEnduranceEffects(effect, actor);
         break;
       case 'rage':
@@ -23,7 +23,7 @@ export default class DynamicEffectsAdder {
     const roll = new Roll('2d6');
     const evaluation = await roll.evaluate({ async: true });
 
-    effect.effects.push({
+    effect.changes.push({
       key: 'data.attributes.hp.temp',
       mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
       value: evaluation.total,
@@ -54,7 +54,7 @@ export default class DynamicEffectsAdder {
       rageDamage = '3';
     }
 
-    effect.effects.push({
+    effect.changes.push({
       key: 'data.bonuses.mwak.damage',
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: rageDamage,
@@ -66,7 +66,7 @@ export default class DynamicEffectsAdder {
       barbarianClass.data.data.subclass?.toLowerCase() ===
       'path of the totem warrior'
     ) {
-      effect.effects.push(
+      effect.changes.push(
         ...[
           {
             key: 'data.traits.dr.value',
