@@ -1,0 +1,117 @@
+import Settings from '../settings.js';
+import log from '../logger.js';
+
+/**
+ * Handles toggling on and off effects on actors
+ */
+export default class EffectHandler {
+  constructor() {
+    this._settings = new Settings();
+  }
+
+  /**
+   * Toggles an effect on or off by name
+   *
+   * @param {string} name - name of the effect to toggle
+   */
+  async toggleEffect(name) {
+    const actorsToEffect = this._determineActorsToEffect();
+    const effect = game.dfreds.effects.all.find(
+      (effect) => effect.name == name
+    );
+
+    if (!effect) {
+      ui.notifications.error(`Effect ${name} was not found`);
+      return;
+    }
+
+    for (const actor of actorsToEffect) {
+      if (this._hasEffectApplied(effect, actor)) {
+        await this._removeEffect(effect, actor);
+      } else {
+        await this._addEffect(effect, actor);
+      }
+    }
+  }
+
+  /**
+   * Creates an expiration chat message when a convenient effect expires. This
+   * only creates the message if the setting is enabled.
+   *
+   * @param {string} effectName - the name of the expired effect
+   * @param {Actor5e} actor - the actor the effect expired on
+   */
+  async createChatOnExpiredConvenientEffect(effectName, actor) {
+    if (!this._settings.createChatMessage) return;
+
+    const effect = game.dfreds.effects.all.find(
+      (effect) => effect.name == effectName
+    );
+
+    if (effect) {
+      await this._createEffectChatMessage(effect, 'Expired from', actor);
+    }
+  }
+
+  _determineActorsToEffect() {
+    if (canvas.tokens.controlled.length == 0 && game.user.targets.size == 0) {
+      ui.notifications.error(
+        'Please select or target a token to apply an effect'
+      );
+      return;
+    }
+
+    if (game.user.targets.size === 0) {
+      return canvas.tokens.controlled.map((token) => token.actor);
+    } else {
+      return Array.from(game.user.targets).map((token) => token.actor);
+    }
+  }
+
+  _hasEffectApplied(effect, actor) {
+    return actor.data.effects.some(
+      (activeEffect) =>
+        activeEffect.data.label == `Convenient Effect: ${effect.name}`
+    );
+  }
+
+  async _removeEffect(effect, actor) {
+    const effectToRemove = actor.data.effects.find(
+      (activeEffect) =>
+        activeEffect.data.label == `Convenient Effect: ${effect.name}`
+    );
+    await actor.deleteEmbeddedDocuments('ActiveEffect', [effectToRemove.id]);
+    log(`Removed effect ${effect.name}`);
+
+    if (this._settings.createChatMessage) {
+      this._createEffectChatMessage(effect, 'Removed from', actor);
+    }
+  }
+
+  async _addEffect(effect, actor) {
+    if (effect.isDynamic) {
+      const dynamicEffectsAdder = new DynamicEffectsAdder();
+      await dynamicEffectsAdder.addDynamicEffects(effect, actor);
+    }
+
+    const activeEffectData = effect.convertToActiveEffectData();
+    await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
+
+    log(`Added effect ${effect.name}`);
+
+    if (this._settings.createChatMessage) {
+      this._createEffectChatMessage(effect, 'Applied to', actor);
+    }
+  }
+
+  async _createEffectChatMessage(effect, reason, actor) {
+    const actorName = actor.token ? actor.token.name : actor.name;
+
+    await ChatMessage.create({
+      user: game.userId,
+      content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
+         <p>${effect.description}</p>
+         `,
+    });
+  }
+}

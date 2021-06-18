@@ -6,6 +6,7 @@ export default class Settings {
 
   // Settings keys
   static ALLOW_FOR_PLAYERS = 'allowForPlayers';
+  static CREATE_CHAT_MESSAGE = 'createChatMessage';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
 
@@ -21,6 +22,15 @@ export default class Settings {
       default: false,
       type: Boolean,
       onChange: () => window.location.reload(),
+    });
+
+    game.settings.register(Settings.PACKAGE_NAME, Settings.CREATE_CHAT_MESSAGE, {
+      name: 'Create Chat Message',
+      hint: 'If enabled, a chat message will be created whenever a convenient effect is applied or removed',
+      scope: 'world',
+      config: true,
+      default: true,
+      type: Boolean,
     });
 
     game.settings.register(
@@ -55,6 +65,15 @@ export default class Settings {
    */
   get allowForPlayers() {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.ALLOW_FOR_PLAYERS);
+  }
+
+  /**
+   * Returns the game setting for create chat message 
+   *
+   * @returns {Boolean} true if chat messages will be created
+   */
+  get createChatMessage() {
+    return game.settings.get(Settings.PACKAGE_NAME, Settings.CREATE_CHAT_MESSAGE);
   }
 
   /**

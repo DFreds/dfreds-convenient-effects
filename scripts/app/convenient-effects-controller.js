@@ -139,7 +139,7 @@ export default class ConvenientEffectsController {
    */
   async onEffectClick(event) {
     const effectName = event.target.innerText ? event.target.innerText : event.target.title;
-    await game.dfreds.toggleEffect(effectName);
+    await game.dfreds.effectHandler.toggleEffect(effectName);
   }
 
   /**
