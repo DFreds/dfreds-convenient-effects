@@ -61,8 +61,11 @@ export default class EffectDefinitions {
       this._faerieFire,
       this._feeblemind,
       // this._falseLife, // TODO when we figure out higher level casting
-      this._fireShieldColdResistance, // TODO do dialog
-      this._fireShieldFireResistance, // TODO do dialog
+
+      this._fireShield,
+      this._fireShieldColdResistance,
+      this._fireShieldFireResistance,
+
       this._fly,
       this._greaterInvisibility,
       this._guidance,
@@ -840,7 +843,7 @@ export default class EffectDefinitions {
   get _enlargeReduce() {
     return new Effect({
       name: 'Enlarge/Reduce',
-      description: 'Choose between Enlarge or Reduce for 1 minute',
+      description: 'Choose between Enlarge or Reduce',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
       nestedEffects: [this._enlargeReduceEnlarge, this._enlargeReduceReduce],
     });
@@ -957,11 +960,24 @@ export default class EffectDefinitions {
     });
   }
 
+  get _fireShield() {
+    return new Effect({
+      name: 'Fire Shield',
+      description: 'Choose between cold or fire resistance',
+      icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
+      nestedEffects: [
+        this._fireShieldColdResistance,
+        this._fireShieldFireResistance
+      ]
+    });
+  }
+
   get _fireShieldColdResistance() {
     return new Effect({
-      name: 'Fire Shield (Cold Resistance)',
+      name: 'Cold Resistance',
       description: 'Add damage resistance to cold for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -975,9 +991,10 @@ export default class EffectDefinitions {
 
   get _fireShieldFireResistance() {
     return new Effect({
-      name: 'Fire Shield (Fire Resistance)',
+      name: 'Fire Resistance',
       description: 'Add damage resistance to fire for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -993,7 +1010,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Enhance Ability',
       description:
-        "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, and Owl's Wisdom for 1 hour",
+        "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       nestedEffects: [
         this._enhanceAbilityBearsEndurance,
