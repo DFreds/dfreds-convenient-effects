@@ -2,7 +2,6 @@
 
 ## Release 1.3
 
-- Displaying description somewhere else
 - Dialog for choosing effects for certain spells (enhance ability, fire shield)
 
 ## Release 1.4
@@ -13,6 +12,7 @@
 
 ## Beyond
 
+- Hovering over chat messages highlights the token on the canvas
 - Integration with dynamic active vision module (darkvision spell or light spell), dynamic active auras
 - Integration with token magic for spells
 - Passive effects (like unarmored defense)
