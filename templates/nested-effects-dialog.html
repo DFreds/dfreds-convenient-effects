@@ -1,0 +1,14 @@
+<form id="convenient-effects-dialog" onsubmit="event.preventDefault();">
+  <p>{{parentEffect.description}}</p>
+  <div class="form-group">
+    <div class="form-fields">
+      <select name="effect-choice">
+        {{#select effectChoice}}
+          {{#each parentEffect.nestedEffects as |effect|}}
+          <option value="{{effect.name}}">{{effect.name}}</option>
+          {{/each}}
+        {{/select}}
+      </select>
+    </div>
+  </div>
+</form>

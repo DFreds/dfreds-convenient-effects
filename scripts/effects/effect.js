@@ -11,6 +11,7 @@ export default class Effect {
     isDynamic = false,
     flags = {},
     changes = [],
+    nestedEffects = [],
   }) {
     this.name = name;
     this.description = description;
@@ -20,6 +21,7 @@ export default class Effect {
     this.isDynamic = isDynamic;
     this.flags = flags;
     this.changes = changes;
+    this.nestedEffects = nestedEffects;
   }
 
   /**

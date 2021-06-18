@@ -46,12 +46,7 @@ export default class EffectDefinitions {
       // this._contagion, // TODO when dialog choices are handled
       this._darkvision,
       this._enlarge,
-      this._enhanceAbilityBearsEndurance,
-      this._enhanceAbilityBullsStrength,
-      this._enhanceAbilityCatsGrace,
-      this._enhanceAbilityEaglesSplendor,
-      this._enhanceAbilityFoxsCunning,
-      this._enhanceAbilityOwlsWisdom,
+      this._enhanceAbility,
       this._faerieFire,
       this._feeblemind,
       // this._falseLife, // TODO when we figure out higher level casting
@@ -945,9 +940,25 @@ export default class EffectDefinitions {
     });
   }
 
+  get _enhanceAbility() {
+    return new Effect({
+      name: 'Enhance Ability',
+      description: "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, and Owl's Wisdom for 1 hour",
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
+      nestedEffects: [
+        this._enhanceAbilityBearsEndurance,
+        this._enhanceAbilityBullsStrength,
+        this._enhanceAbilityCatsGrace,
+        this._enhanceAbilityEaglesSplendor,
+        this._enhanceAbilityFoxsCunning,
+        this._enhanceAbilityOwlsWisdom,
+      ]
+    });
+  }
+
   get _enhanceAbilityBearsEndurance() {
     return new Effect({
-      name: "Enhance Ability (Bear's Endurance)",
+      name: "Bear's Endurance",
       description:
         'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
@@ -965,7 +976,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityBullsStrength() {
     return new Effect({
-      name: "Enhance Ability (Bull's Strength)",
+      name: "Bull's Strength",
       description:
         'Advantage on strength checks and double maximum carrying capacity for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
@@ -987,7 +998,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityCatsGrace() {
     return new Effect({
-      name: "Enhance Ability (Cat's Grace)",
+      name: "Cat's Grace",
       description: 'Advantage on dexterity checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1003,7 +1014,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityEaglesSplendor() {
     return new Effect({
-      name: "Enhance Ability (Eagle's Splendor)",
+      name: "Eagle's Splendor",
       description: 'Advantage on charisma checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1019,7 +1030,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityFoxsCunning() {
     return new Effect({
-      name: "Enhance Ability (Fox's Cunning)",
+      name: "Fox's Cunning",
       description: 'Advantage on intelligence checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1035,7 +1046,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityOwlsWisdom() {
     return new Effect({
-      name: "Enhance Ability (Owl's Wisdom)",
+      name: "Owl's Wisdom",
       description: 'Advantage on wisdom checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,

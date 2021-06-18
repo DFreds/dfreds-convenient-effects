@@ -18,13 +18,35 @@ export default class EffectHandler {
    */
   async toggleEffect(name) {
     const actorsToEffect = this._determineActorsToEffect();
-    const effect = game.dfreds.effects.all.find(
+    if (!actorsToEffect) return;
+
+    let effect = game.dfreds.effects.all.find(
       (effect) => effect.name == name
     );
-
     if (!effect) {
       ui.notifications.error(`Effect ${name} was not found`);
       return;
+    }
+
+    if (effect.nestedEffects.length > 0) {
+      const content = await renderTemplate(
+        'modules/dfreds-convenient-effects/templates/nested-effects-dialog.html',
+        { parentEffect: effect }
+      );
+      const choice = await Dialog.prompt(
+        {
+          title: effect.name,
+          content: content,
+          label: 'Choose',
+          callback: (html) => {
+            const htmlChoice = html.find('select[name="effect-choice"]').val();
+            return htmlChoice;
+          },
+        },
+        { width: 320 }
+      );
+
+      effect = effect.nestedEffects.find(nestedEffect => nestedEffect.name == choice);
     }
 
     for (const actor of actorsToEffect) {
