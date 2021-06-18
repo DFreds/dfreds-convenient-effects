@@ -45,7 +45,7 @@ export default class EffectDefinitions {
       this._blur,
       // this._contagion, // TODO when dialog choices are handled
       this._darkvision,
-      this._enlarge,
+      this._enlarge, // TODO dialog
       this._enhanceAbility,
       this._enhanceAbilityBearsEndurance,
       this._enhanceAbilityBullsStrength,

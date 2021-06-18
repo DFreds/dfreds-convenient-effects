@@ -1,5 +1,9 @@
 # Future
 
+## Release 1.3.1
+
+- Description in dialogs for choices
+
 ## Release 1.4
 
 - Nested folders (cantrips, 1st level, etc. and Barbarian, Cleric, etc.)
