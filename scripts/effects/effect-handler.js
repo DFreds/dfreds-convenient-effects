@@ -35,13 +35,13 @@ export default class EffectHandler {
         {
           title: effect.name,
           content: content,
-          label: 'Choose',
+          label: 'Select Effect',
           callback: (html) => {
             const htmlChoice = html.find('select[name="effect-choice"]').val();
             return htmlChoice;
           },
         },
-        { width: 320 }
+        { width: 300 }
       );
 
       effect = effect.nestedEffects.find(
