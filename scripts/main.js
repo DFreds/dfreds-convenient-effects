@@ -17,6 +17,7 @@ Hooks.on('getSceneControlButtons', (controls) => {
   new Controls().initializeControls(controls);
 });
 
+// TODO consider handling all chat messages via hooks
 Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
   const isExpired = activeEffect?.duration?.remaining === 0;
   const effectName = activeEffect?.data?.label?.split('Convenient Effect: ')[1];

@@ -52,7 +52,9 @@ export default class ConvenientEffectsController {
   _fetchFavorites() {
     return this._settings.favoriteEffectNames
       .map((name) => {
-        return game.dfreds.effects.all.find((effect) => effect.name == name);
+        return game.dfreds.effects.all.find(
+          (effect) => effect.name == name && effect.isViewable
+        );
       })
       .sort((a, b) => {
         let nameA = a.name.toLowerCase();
@@ -67,28 +69,32 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedConditions() {
     const effects = game.dfreds.effects;
     return effects.conditions.filter(
-      (effect) => !this._settings.isFavoritedEffect(effect.name)
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) && effect.isViewable
     );
   }
 
   _fetchUnfavoritedSpells() {
     const effects = game.dfreds.effects;
     return effects.spells.filter(
-      (effect) => !this._settings.isFavoritedEffect(effect.name)
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) && effect.isViewable
     );
   }
 
   _fetchUnfavoritedClassFeatures() {
     const effects = game.dfreds.effects;
     return effects.classFeatures.filter(
-      (effect) => !this._settings.isFavoritedEffect(effect.name)
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) && effect.isViewable
     );
   }
 
   _fetchUnfavoritedOther() {
     const effects = game.dfreds.effects;
     return effects.other.filter(
-      (effect) => !this._settings.isFavoritedEffect(effect.name)
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) && effect.isViewable
     );
   }
 
@@ -138,7 +144,9 @@ export default class ConvenientEffectsController {
    * @param {MouseEvent} event - event that corresponds to clicking an effect item
    */
   async onEffectClick(event) {
-    const effectName = event.target.innerText ? event.target.innerText : event.target.title;
+    const effectName = event.target.innerText
+      ? event.target.innerText
+      : event.target.title;
     await game.dfreds.effectHandler.toggleEffect(effectName);
   }
 
@@ -288,7 +296,7 @@ export default class ConvenientEffectsController {
   // Fixes bug when dragging over any item onto the convenient effects
   _isValidEffect(event) {
     const effectName = event.dataTransfer.getData('text/plain');
-    return game.dfreds.effects.all.some(effect => effect.name === effectName);
+    return game.dfreds.effects.all.some((effect) => effect.name === effectName);
   }
 
   _isEventTargetFavorites(event) {

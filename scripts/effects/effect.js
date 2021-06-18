@@ -9,6 +9,7 @@ export default class Effect {
     seconds,
     turns,
     isDynamic = false,
+    isViewable = true,
     flags = {},
     changes = [],
     nestedEffects = [],
@@ -19,6 +20,7 @@ export default class Effect {
     this.seconds = seconds;
     this.turns = turns;
     this.isDynamic = isDynamic;
+    this.isViewable = isViewable;
     this.flags = flags;
     this.changes = changes;
     this.nestedEffects = nestedEffects;
