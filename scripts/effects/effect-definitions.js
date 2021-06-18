@@ -45,7 +45,11 @@ export default class EffectDefinitions {
       this._blur,
       // this._contagion, // TODO when dialog choices are handled
       this._darkvision,
-      this._enlarge, // TODO dialog
+
+      this._enlargeReduce,
+      this._enlargeReduceEnlarge,
+      this._enlargeReduceReduce,
+
       this._enhanceAbility,
       this._enhanceAbilityBearsEndurance,
       this._enhanceAbilityBullsStrength,
@@ -53,6 +57,7 @@ export default class EffectDefinitions {
       this._enhanceAbilityEaglesSplendor,
       this._enhanceAbilityFoxsCunning,
       this._enhanceAbilityOwlsWisdom,
+
       this._faerieFire,
       this._feeblemind,
       // this._falseLife, // TODO when we figure out higher level casting
@@ -79,7 +84,6 @@ export default class EffectDefinitions {
       this._protectionFromEnergyLightning,
       this._protectionFromEnergyThunder,
       this._protectionFromPoison,
-      this._reduce,
       // this._resistance, // TODO when we can ask if they want to spend it
       this._shield,
       this._shieldOfFaith,
@@ -833,12 +837,22 @@ export default class EffectDefinitions {
     });
   }
 
-  get _enlarge() {
+  get _enlargeReduce() {
+    return new Effect({
+      name: 'Enlarge/Reduce',
+      description: 'Choose between Enlarge or Reduce for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      nestedEffects: [this._enlargeReduceEnlarge, this._enlargeReduceReduce],
+    });
+  }
+
+  get _enlargeReduceEnlarge() {
     return new Effect({
       name: 'Enlarge',
       description:
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         // TODO data.traits.size
@@ -854,6 +868,35 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _enlargeReduceReduce() {
+    return new Effect({
+      name: 'Reduce',
+      description:
+        'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        // TODO data.traits.size
+        {
+          key: 'data.bonuses.weapon.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '-1d4',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.check.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.str',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
@@ -1486,34 +1529,6 @@ export default class EffectDefinitions {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
           value: 'poison',
-        },
-      ],
-    });
-  }
-
-  get _reduce() {
-    return new Effect({
-      name: 'Reduce',
-      description:
-        'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
-      icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
-      seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [
-        // TODO data.traits.size
-        {
-          key: 'data.bonuses.weapon.damage',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '-1d4',
-        },
-        {
-          key: 'flags.midi-qol.disadvantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.disadvantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
         },
       ],
     });
