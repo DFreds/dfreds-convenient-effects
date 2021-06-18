@@ -120,6 +120,8 @@ export default class EffectDefinitions {
 
   get other() {
     return [
+      this._coverHalf,
+      this._coverThreeQuarters,
       this._encumbered,
       this._flanked,
       this._flanking,
@@ -2029,6 +2031,46 @@ export default class EffectDefinitions {
   }
 
   /* Other effects */
+  get _coverHalf() {
+    return new Effect({
+      name: 'Cover (Half)',
+      description: 'Adds 2 to AC and dexterity saving throws',
+      icon: 'modules/dfreds-convenient-effects/images/broken-wall.svg',
+      changes: [
+        {
+          key: 'data.attributes.ac.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '2',
+        },
+        {
+          key: 'data.abilities.dex.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '2',
+        },
+      ],
+    });
+  }
+
+  get _coverThreeQuarters() {
+    return new Effect({
+      name: 'Cover (Three-Quarters)',
+      description: 'Adds 5 to AC and dexterity saving throws',
+      icon: 'modules/dfreds-convenient-effects/images/brick-wall.svg',
+      changes: [
+        {
+          key: 'data.attributes.ac.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '5',
+        },
+        {
+          key: 'data.abilities.dex.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '5',
+        },
+      ],
+    });
+  }
+
   get _encumbered() {
     return new Effect({
       name: 'Encumbered',
