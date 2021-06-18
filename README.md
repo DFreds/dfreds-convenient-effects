@@ -20,9 +20,15 @@ Sure, you could figure all that out... if you wanna be lame. Or you could be coo
 
 This module  helps with the types of issues described above by providing dozens of pre-configured effects for conditions and spells that can all be applied quickly and easily.
 
+### Demo Showcasing Adding Effects and Favorites
+
 ![Demo](docs/demo.gif)
 
-You can configure some stuff:
+### Demo Showcasing Chat Messages and Auto-Expiration of Effects
+
+![Demo 2](docs/demo2.gif)
+
+### Settings
 
 ![Settings](docs/settings.png)
 
