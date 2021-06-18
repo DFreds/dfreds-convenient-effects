@@ -102,13 +102,6 @@ export default class ConvenientEffectsApp extends Application {
     return this._rootView.find(`.folder[data-folder-label="${folderName}"]`);
   }
 
-  /**
-   * Notify the user that they do not have any tokens selected
-   */
-  notifyNoTokensSelected() {
-    ui.notifications.error('Please select a token');
-  }
-
   _initClickListeners() {
     this._collapseAllButton.on(
       'click',
