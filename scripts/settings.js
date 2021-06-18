@@ -26,7 +26,7 @@ export default class Settings {
 
     game.settings.register(Settings.PACKAGE_NAME, Settings.CREATE_CHAT_MESSAGE, {
       name: 'Create Chat Message',
-      hint: 'If enabled, a chat message will be created whenever a convenient effect is applied or removed',
+      hint: 'If enabled, a chat message will be created whenever a convenient effect is applied, removed, or expires.',
       scope: 'world',
       config: true,
       default: true,
