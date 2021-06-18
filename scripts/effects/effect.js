@@ -10,7 +10,7 @@ export default class Effect {
     turns,
     isDynamic = false,
     flags = {},
-    effects = [],
+    changes = [],
   }) {
     this.name = name;
     this.description = description;
@@ -19,7 +19,7 @@ export default class Effect {
     this.turns = turns;
     this.isDynamic = isDynamic;
     this.flags = flags;
-    this.effects = effects;
+    this.changes = changes;
   }
 
   /**
@@ -38,7 +38,7 @@ export default class Effect {
           statusId: `convenient-effect-${this.name.toLowerCase()}`
         }
       }),
-      changes: this.effects,
+      changes: this.changes,
     };
   }
 

@@ -118,7 +118,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on attack rolls while granting advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -162,7 +162,7 @@ export default class EffectDefinitions {
       name: 'Exhaustion 1',
       description: 'Disadvantage on all ability checks',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion1.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -177,7 +177,7 @@ export default class EffectDefinitions {
       name: 'Exhaustion 2',
       description: 'Disadvantage on all ability checks and half movement',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion2.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -218,7 +218,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on all ability checks, half movement, disadvantage on all attacks, and disadvantage on all saving throws',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion3.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -264,7 +264,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on all ability checks, half movement, disadvantage on all attacks, disadvantage on all saving throws, and half HP',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion4.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -320,7 +320,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on all ability checks, zero movement, disadvantage on all attacks, disadvantage on all saving throws, and half HP',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion5.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -375,7 +375,7 @@ export default class EffectDefinitions {
       name: 'Frightened',
       description: 'Disadvantage on all attack rolls and ability checks',
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -395,7 +395,7 @@ export default class EffectDefinitions {
       name: 'Grappled',
       description: 'No movement',
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -430,7 +430,7 @@ export default class EffectDefinitions {
       name: 'Incapacitated',
       description: 'No movement',
       icon: 'modules/dfreds-convenient-effects/images/incapacitated.svg',
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -466,7 +466,7 @@ export default class EffectDefinitions {
       description:
         'Grants advantage on attack rolls while forcing disadvantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/invisible.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -487,7 +487,7 @@ export default class EffectDefinitions {
       description:
         'Fail all dexterity and strength saves, grant advantage to all who attack, and all melee attacks that hit are criticals',
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.fail.ability.save.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -518,7 +518,7 @@ export default class EffectDefinitions {
       description:
         'Grant advantage to all who attack and add damage resistance to all magical and physical attacks',
       icon: 'modules/dfreds-convenient-effects/images/petrified.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -543,7 +543,7 @@ export default class EffectDefinitions {
       name: 'Poisoned',
       description: 'Disadvantage on all attack rolls and ability checks',
       icon: 'modules/dfreds-convenient-effects/images/poisoned.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -564,7 +564,7 @@ export default class EffectDefinitions {
       description:
         'Grant advantage to all who melee attack and disadvantage to all who range attack',
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.mwak',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -595,7 +595,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on dexterity saving throws, disadvantage on all attacks, grant advantage to all who attack, and no movement',
       icon: 'modules/dfreds-convenient-effects/images/restrained.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -646,7 +646,7 @@ export default class EffectDefinitions {
       description:
         'Fail all dexterity and strength saves and grant advantage to all who attack',
       icon: 'modules/dfreds-convenient-effects/images/stunned.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.fail.ability.save.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -674,7 +674,7 @@ export default class EffectDefinitions {
       description: 'Add 5 to current and maximum hit points for 8 hours',
       icon: 'systems/dnd5e/icons/spells/heal-sky-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.hp.tempmax',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -696,7 +696,7 @@ export default class EffectDefinitions {
         'Subtract 1d4 from all saving throws and attack rolls for 1 minute',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'data.bonuses.abilities.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -732,7 +732,7 @@ export default class EffectDefinitions {
       description: 'Upgrade AC to 16 for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-orange-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
@@ -749,7 +749,7 @@ export default class EffectDefinitions {
         'Adds advantage to wisdom saving throws and death saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/light-sky-3.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.save.wis',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -770,7 +770,7 @@ export default class EffectDefinitions {
       description: 'Add 1d4 to all saving throws and attack rolls for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'data.bonuses.abilities.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -806,7 +806,7 @@ export default class EffectDefinitions {
       description: 'Grants disadvantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/air-burst-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -822,7 +822,7 @@ export default class EffectDefinitions {
       description: 'Upgrade darkvision to 60 ft. for 8 hours',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.senses.darkvision',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
@@ -839,7 +839,7 @@ export default class EffectDefinitions {
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         // TODO data.traits.size
         {
           key: 'data.bonuses.weapon.damage',
@@ -866,7 +866,7 @@ export default class EffectDefinitions {
       description: 'Grants advantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         // TODO dim light
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
@@ -883,7 +883,7 @@ export default class EffectDefinitions {
       description: 'Upgrade flying speed to 60 ft. for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
@@ -898,7 +898,7 @@ export default class EffectDefinitions {
       name: 'Feeblemind',
       description: 'Set intelligence and charisma scores to 1 until removed',
       icon: 'systems/dnd5e/icons/spells/light-eerie-3.jpg',
-      effects: [
+      changes: [
         {
           key: 'data.abilities.int.value',
           mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
@@ -919,7 +919,7 @@ export default class EffectDefinitions {
       description: 'Add damage resistance to cold for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -935,7 +935,7 @@ export default class EffectDefinitions {
       description: 'Add damage resistance to fire for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -953,7 +953,7 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isDynamic: true,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.con',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -970,7 +970,7 @@ export default class EffectDefinitions {
         'Advantage on strength checks and double maximum carrying capacity for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.str',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -991,7 +991,7 @@ export default class EffectDefinitions {
       description: 'Advantage on dexterity checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1007,7 +1007,7 @@ export default class EffectDefinitions {
       description: 'Advantage on charisma checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.cha',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1023,7 +1023,7 @@ export default class EffectDefinitions {
       description: 'Advantage on intelligence checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.int',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1039,7 +1039,7 @@ export default class EffectDefinitions {
       description: 'Advantage on wisdom checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.wis',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1056,7 +1056,7 @@ export default class EffectDefinitions {
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fog-water-air-3.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1082,7 +1082,7 @@ export default class EffectDefinitions {
           specialDuration: ['isCheck', 'isSkill'],
         },
       },
-      effects: [
+      changes: [
         {
           key: 'data.bonuses.abilities.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1105,7 +1105,7 @@ export default class EffectDefinitions {
           specialDuration: ['isAttacked'],
         },
       },
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1122,7 +1122,7 @@ export default class EffectDefinitions {
         'Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1168,7 +1168,7 @@ export default class EffectDefinitions {
       description: 'Immunity to frightened for 1 minute',
       icon: 'systems/dnd5e/icons/spells/heal-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'data.traits.ci.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1185,7 +1185,7 @@ export default class EffectDefinitions {
         'Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-3.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -1235,7 +1235,7 @@ export default class EffectDefinitions {
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 hour',
       icon: 'systems/dnd5e/icons/spells/fog-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1256,7 +1256,7 @@ export default class EffectDefinitions {
       description: 'Emits 20/40 light for 1 hour (requires ATL)',
       icon: 'systems/dnd5e/icons/spells/light-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -1292,7 +1292,7 @@ export default class EffectDefinitions {
       description: 'Increase all movement by 10 ft. for 1 hour',
       icon: 'systems/dnd5e/icons/spells/wind-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.burrow',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1328,7 +1328,7 @@ export default class EffectDefinitions {
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
       icon: 'systems/dnd5e/icons/spells/protect-blue-1.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
@@ -1344,7 +1344,7 @@ export default class EffectDefinitions {
       description: 'Adds immunity to psychic damage for 24 hours',
       icon: 'systems/dnd5e/icons/spells/air-burst-sky-3.jpg',
       seconds: Constants.SECONDS.IN_ONE_DAY,
-      effects: [
+      changes: [
         {
           key: 'data.traits.di.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1360,7 +1360,7 @@ export default class EffectDefinitions {
       description: 'Add 10 to stealth checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/fog-air-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.skills.ste.mod',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1376,7 +1376,7 @@ export default class EffectDefinitions {
       description: 'Adds damage resistance to acid for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1392,7 +1392,7 @@ export default class EffectDefinitions {
       description: 'Adds damage resistance to cold for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1408,7 +1408,7 @@ export default class EffectDefinitions {
       description: 'Adds damage resistance to fire for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1424,7 +1424,7 @@ export default class EffectDefinitions {
       description: 'Adds damage resistance to lightning for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1440,7 +1440,7 @@ export default class EffectDefinitions {
       description: 'Adds damage resistance to thunder for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1457,7 +1457,7 @@ export default class EffectDefinitions {
         'Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)',
       icon: 'systems/dnd5e/icons/spells/protect-acid-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
@@ -1474,7 +1474,7 @@ export default class EffectDefinitions {
         'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         // TODO data.traits.size
         {
           key: 'data.bonuses.weapon.damage',
@@ -1506,7 +1506,7 @@ export default class EffectDefinitions {
           specialDuration: ['turnStart'],
         },
       },
-      effects: [
+      changes: [
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1522,7 +1522,7 @@ export default class EffectDefinitions {
       description: 'Adds 2 to the AC for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-sky-2.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1539,7 +1539,7 @@ export default class EffectDefinitions {
         'Halves speed and and subtract 2 from AC and dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fog-magenta-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1585,7 +1585,7 @@ export default class EffectDefinitions {
       description: 'Grants climbing speed equal to walking speed for 1 hour',
       icon: 'systems/dnd5e/icons/spells/shielding-spirit-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
@@ -1601,7 +1601,7 @@ export default class EffectDefinitions {
       description: 'Adds resistance to non-magical physical damage for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-orange-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      effects: [
+      changes: [
         {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1624,7 +1624,7 @@ export default class EffectDefinitions {
           specialDuration: ['1Attack'],
         },
       },
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1647,7 +1647,7 @@ export default class EffectDefinitions {
           specialDuration: ['1Attack'],
         },
       },
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1665,7 +1665,7 @@ export default class EffectDefinitions {
         'Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)',
       icon: 'systems/dnd5e/icons/skills/light_05.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      effects: [
+      changes: [
         {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -1723,7 +1723,7 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/skills/red_10.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       isDynamic: true,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.str',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1760,7 +1760,7 @@ export default class EffectDefinitions {
         'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
       icon: 'systems/dnd5e/icons/skills/weapon_34.jpg',
       seconds: Constants.SECONDS.IN_ONE_ROUND,
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.attack.mwak',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1781,7 +1781,7 @@ export default class EffectDefinitions {
       name: 'Encumbered',
       description: 'Lowers movement by 10 ft.',
       icon: 'icons/svg/down.svg',
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1796,7 +1796,7 @@ export default class EffectDefinitions {
       name: 'Flanked',
       description: 'Grants advantage to all who melee attack',
       icon: 'modules/dfreds-convenient-effects/images/encirclement.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.mwak',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1816,7 +1816,7 @@ export default class EffectDefinitions {
       name: 'Flanking',
       description: 'Grants advantage on melee attack rolls',
       icon: 'icons/svg/sword.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.advantage.attack.mwak',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1836,7 +1836,7 @@ export default class EffectDefinitions {
       name: 'Great Weapon Master',
       description: 'Subtracts 5 from melee attacks but adds 10 to melee damage',
       icon: 'systems/dnd5e/icons/skills/red_05.jpg',
-      effects: [
+      changes: [
         {
           key: 'data.bonuses.mwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1857,7 +1857,7 @@ export default class EffectDefinitions {
       description:
         'Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves',
       icon: 'icons/svg/downgrade.svg',
-      effects: [
+      changes: [
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1892,7 +1892,7 @@ export default class EffectDefinitions {
       name: 'Ranged Disadvantage',
       description: 'Disadvantage on ranged attack rolls',
       icon: 'modules/dfreds-convenient-effects/images/broken-arrow.svg',
-      effects: [
+      changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.rwak',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1913,7 +1913,7 @@ export default class EffectDefinitions {
       description:
         'Subtracts 5 from ranged attacks but adds 10 to ranged damage',
       icon: 'systems/dnd5e/icons/skills/green_01.jpg',
-      effects: [
+      changes: [
         {
           key: 'data.bonuses.rwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
