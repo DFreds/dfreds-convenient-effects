@@ -850,7 +850,7 @@ export default class EffectDefinitions {
         this._contagionMindfire,
         this._contagionSeizure,
         this._contagionSlimyDoom,
-      ]
+      ],
     });
   }
 

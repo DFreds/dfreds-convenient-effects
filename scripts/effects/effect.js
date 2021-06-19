@@ -39,8 +39,8 @@ export default class Effect {
       duration: this._getDurationData(),
       flags: foundry.utils.mergeObject(this.flags, {
         core: {
-          statusId: `convenient-effect-${this.name.toLowerCase()}`
-        }
+          statusId: `convenient-effect-${this.name.toLowerCase()}`,
+        },
       }),
       changes: this.changes,
     };
@@ -52,12 +52,12 @@ export default class Effect {
         startRound: game.combat.round,
         rounds: this.seconds ? this.seconds / 6 : undefined,
         turns: this.turns,
-      }
+      };
     } else {
       return {
         startTime: game.time.worldTime,
         seconds: this.seconds ? this.seconds : undefined,
-      }
+      };
     }
   }
 }

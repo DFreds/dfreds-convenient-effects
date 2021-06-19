@@ -11,9 +11,9 @@ export default class Controls {
 
   /**
    * Adds the convenient effect buttons to the token controls
-   * 
+   *
    * @param {Object[]} controls - the default controls provided by foundry
-   * @returns 
+   * @returns
    */
   initializeControls(controls) {
     const tokenButton = controls.find((control) => control.name === 'token');
