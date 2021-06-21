@@ -52,9 +52,10 @@ export default class ConvenientEffectsController {
   _fetchFavorites() {
     return this._settings.favoriteEffectNames
       .map((name) => {
-        return game.dfreds.effects.all.find(
-          (effect) => effect.name == name && effect.isViewable
-        );
+        return game.dfreds.effects.all.find((effect) => effect.name == name);
+      })
+      .filter((effect) => {
+        return effect;
       })
       .sort((a, b) => {
         let nameA = a.name.toLowerCase();
