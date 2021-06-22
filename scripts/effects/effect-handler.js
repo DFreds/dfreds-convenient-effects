@@ -126,9 +126,17 @@ export default class EffectHandler {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
 
+    if (this._settings.integrateWithAtl && effect.atlChanges.length > 0) {
+      this._addAtlChangesToEffect(effect);
+    }
+
     const activeEffectData = effect.convertToActiveEffectData();
     await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
 
     log(`Added effect ${effect.name}`);
+  }
+
+  _addAtlChangesToEffect(effect) {
+    effect.changes.push(...effect.atlChanges);
   }
 }

@@ -1470,6 +1470,18 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+      ],
+      atlChanges: [
+        {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '5',
@@ -1488,16 +1500,6 @@ export default class EffectDefinitions {
           key: 'ATL.lightAnimation',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-        },
-        {
-          key: 'flags.midi-qol.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1',
         },
       ],
     });

@@ -12,6 +12,7 @@ export default class Effect {
     isViewable = true,
     flags = {},
     changes = [],
+    atlChanges = [],
     nestedEffects = [],
   }) {
     this.name = name;
@@ -23,6 +24,7 @@ export default class Effect {
     this.isViewable = isViewable;
     this.flags = flags;
     this.changes = changes;
+    this.atlChanges = atlChanges;
     this.nestedEffects = nestedEffects;
   }
 

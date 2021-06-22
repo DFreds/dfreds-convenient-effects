@@ -7,6 +7,7 @@ export default class Settings {
   // Settings keys
   static ALLOW_FOR_PLAYERS = 'allowForPlayers';
   static CREATE_CHAT_MESSAGE = 'createChatMessage';
+  static INTEGRATE_WITH_ATL = 'integrateWithAtl';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
 
@@ -36,6 +37,15 @@ export default class Settings {
         type: Boolean,
       }
     );
+
+    game.settings.register(Settings.PACKAGE_NAME, Settings.INTEGRATE_WITH_ATL, {
+      name: 'Integrate with ATL',
+      hint: 'If enabled, certain effects will also change light emitted from tokens via Active Token Lighting.',
+      scope: 'world',
+      config: true,
+      default: true,
+      type: Boolean,
+    });
 
     game.settings.register(
       Settings.PACKAGE_NAME,
@@ -76,6 +86,18 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.CREATE_CHAT_MESSAGE
+    );
+  }
+
+  /**
+   * Returns the game setting for integrating with ATL
+   *
+   * @returns {Boolean} true if integration with ATL is enabled
+   */
+  get integrateWithAtl() {
+    return game.settings.get(
+      Settings.PACKAGE_NAME,
+      Settings.INTEGRATE_WITH_ATL
     );
   }
 
