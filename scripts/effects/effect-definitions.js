@@ -1111,6 +1111,8 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: Constants.COLORS.WHITE,
         },
+      ],
+      atlChanges: [
         {
           key: 'ATL.lightAlpha',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -1616,7 +1618,7 @@ export default class EffectDefinitions {
       description: 'Emits 20/40 light for 1 hour (requires ATL)',
       icon: 'systems/dnd5e/icons/spells/light-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      changes: [
+      atlChanges: [
         {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -2036,6 +2038,18 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
+          key: 'data.bonuses.mwak.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'max(1, @abilities.cha.mod)',
+        },
+        {
+          key: 'data.bonuses.rwak.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'max(1, @abilities.cha.mod)',
+        },
+      ],
+      atlChanges: [
+        {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '40',
@@ -2059,16 +2073,6 @@ export default class EffectDefinitions {
           key: 'ATL.lightAnimation',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-        },
-        {
-          key: 'data.bonuses.mwak.attack',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'max(1, @abilities.cha.mod)',
-        },
-        {
-          key: 'data.bonuses.rwak.attack',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'max(1, @abilities.cha.mod)',
         },
       ],
     });
