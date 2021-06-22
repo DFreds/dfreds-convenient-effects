@@ -44,6 +44,7 @@ While not strictly required, the functionalities provided by these modules drast
 - [DAE](https://gitlab.com/tposney/dae) by tposney - With midi-qol, handles various additional expiration effects such as after 1 attack or when an enemy is attacked
 - [Midi-QOL](https://gitlab.com/tposney/midi-qol) by tposney - Handles a vast amount of automation relating to advantage and disadvantage
 - [Active Token Lighting](https://github.com/kandashi/Active-Token-Lighting) by Kandashi - Certain effects and spells can emit light, and this module allows active effects to do that
+- [Token Magic FX](https://github.com/Feu-Secret/Tokenmagic) by SecretFire - Certain effects and spells can have an effect applied, and this module allows active effects to do that. Note that this requires DAE active as well.
 
 ## My Philosophy
 
