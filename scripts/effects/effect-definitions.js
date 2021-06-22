@@ -750,6 +750,7 @@ export default class EffectDefinitions {
   }
 
   get _barkskin() {
+    // TODO token magic effects
     return new Effect({
       name: 'Barkskin',
       description: 'Upgrade AC to 16 for 1 hour',
@@ -1425,6 +1426,7 @@ export default class EffectDefinitions {
   }
 
   get _greaterInvisibility() {
+    // TODO token magic effects
     return new Effect({
       name: 'Greater Invisibility',
       description:
@@ -1606,6 +1608,7 @@ export default class EffectDefinitions {
   }
 
   get _invisibility() {
+    // TODO token magic effects
     return new Effect({
       name: 'Invisibility',
       description:
@@ -1700,6 +1703,7 @@ export default class EffectDefinitions {
   }
 
   get _mageArmor() {
+    // TODO token magic effects
     return new Effect({
       name: 'Mage Armor',
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
@@ -1748,6 +1752,7 @@ export default class EffectDefinitions {
   }
 
   get _passWithoutTrace() {
+    // TODO token magic effects
     return new Effect({
       name: 'Pass without Trace',
       description: 'Add 10 to stealth checks for 1 hour',
@@ -1780,6 +1785,7 @@ export default class EffectDefinitions {
   }
 
   get _protectionFromEnergyAcid() {
+    // TODO token magic effects
     return new Effect({
       name: 'Protection from Acid',
       description: 'Adds damage resistance to acid for 1 hour',
@@ -1797,6 +1803,7 @@ export default class EffectDefinitions {
   }
 
   get _protectionFromEnergyCold() {
+    // TODO token magic effects
     return new Effect({
       name: 'Protection from Cold',
       description: 'Adds damage resistance to cold for 1 hour',
@@ -1814,6 +1821,7 @@ export default class EffectDefinitions {
   }
 
   get _protectionFromEnergyFire() {
+    // TODO token magic effects
     return new Effect({
       name: 'Protection from Fire',
       description: 'Adds damage resistance to fire for 1 hour',
@@ -1831,6 +1839,7 @@ export default class EffectDefinitions {
   }
 
   get _protectionFromEnergyLightning() {
+    // TODO token magic effects
     return new Effect({
       name: 'Protection from Lightning',
       description: 'Adds damage resistance to lightning for 1 hour',
@@ -1848,6 +1857,7 @@ export default class EffectDefinitions {
   }
 
   get _protectionFromEnergyThunder() {
+    // TODO token magic effects
     return new Effect({
       name: 'Protection from Thunder',
       description: 'Adds damage resistance to thunder for 1 hour',
@@ -1865,6 +1875,7 @@ export default class EffectDefinitions {
   }
 
   get _protectionFromPoison() {
+    // TODO token magic effects
     return new Effect({
       name: 'Protection from Poison',
       description:
@@ -1996,6 +2007,7 @@ export default class EffectDefinitions {
   }
 
   get _stoneskin() {
+    // TODO token magic effects
     return new Effect({
       name: 'Stoneskin',
       description: 'Adds resistance to non-magical physical damage for 1 hour',
