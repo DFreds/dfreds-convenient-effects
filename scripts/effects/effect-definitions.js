@@ -834,6 +834,8 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
+      ],
+      tokenMagicChanges: [
         {
           key: 'macro.tokenMagic',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
@@ -1650,7 +1652,7 @@ export default class EffectDefinitions {
       description: 'No active effects, but lasts for 1 minute',
       icon: 'systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [
+      tokenMagicChanges: [
         {
           key: 'macro.tokenMagic',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,

@@ -130,6 +130,13 @@ export default class EffectHandler {
       this._addAtlChangesToEffect(effect);
     }
 
+    if (
+      this._settings.integrateWithTokenMagic &&
+      effect.tokenMagicChanges.length > 0
+    ) {
+      this._addTokenMagicChangesToEffect(effect);
+    }
+
     const activeEffectData = effect.convertToActiveEffectData();
     await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
 
@@ -138,5 +145,9 @@ export default class EffectHandler {
 
   _addAtlChangesToEffect(effect) {
     effect.changes.push(...effect.atlChanges);
+  }
+
+  _addTokenMagicChangesToEffect(effect) {
+    effect.changes.push(...effect.tokenMagicChanges);
   }
 }

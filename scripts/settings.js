@@ -8,6 +8,7 @@ export default class Settings {
   static ALLOW_FOR_PLAYERS = 'allowForPlayers';
   static CREATE_CHAT_MESSAGE = 'createChatMessage';
   static INTEGRATE_WITH_ATL = 'integrateWithAtl';
+  static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
 
@@ -46,6 +47,19 @@ export default class Settings {
       default: true,
       type: Boolean,
     });
+
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.INTEGRATE_WITH_TOKEN_MAGIC,
+      {
+        name: 'Integrate with Token Magic',
+        hint: 'If enabled, certain effects will also apply a token magic filter to tokens via Token Magic.',
+        scope: 'world',
+        config: true,
+        default: true,
+        type: Boolean,
+      }
+    );
 
     game.settings.register(
       Settings.PACKAGE_NAME,
@@ -98,6 +112,18 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.INTEGRATE_WITH_ATL
+    );
+  }
+
+  /**
+   * Returns the game setting for integrating with Token Magic
+   *
+   * @returns {Boolean} true if integration with Token Magic is enabled
+   */
+  get integrateWithTokenMagic() {
+    return game.settings.get(
+      Settings.PACKAGE_NAME,
+      Settings.INTEGRATE_WITH_TOKEN_MAGIC
     );
   }
 
