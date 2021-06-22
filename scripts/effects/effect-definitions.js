@@ -1130,6 +1130,13 @@ export default class EffectDefinitions {
           value: '1',
         },
       ],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'glow',
+        },
+      ],
     });
   }
 
