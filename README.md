@@ -40,11 +40,11 @@ On the controls on the left, two new buttons have been added to the Token Contro
 
 While not strictly required, the functionalities provided by these modules drastically improve the usage of the various effects included in this module.
 
-- [About Time](https://gitlab.com/tposney/about-time) and [Times Up](https://gitlab.com/tposney/times-up) by tposney - Handles spell effects expiring when their time is up or after a certain number of rounds or turns
-- [DAE](https://gitlab.com/tposney/dae) by tposney - With midi-qol, handles various additional expiration effects such as after 1 attack or when an enemy is attacked
-- [Midi-QOL](https://gitlab.com/tposney/midi-qol) by tposney - Handles a vast amount of automation relating to advantage and disadvantage
-- [Active Token Lighting](https://github.com/kandashi/Active-Token-Lighting) by Kandashi - Certain effects and spells can emit light, and this module allows active effects to do that
-- [Token Magic FX](https://github.com/Feu-Secret/Tokenmagic) by SecretFire - Certain effects and spells can have an effect applied, and this module allows active effects to do that. Note that this requires DAE active as well.
+- [About Time](https://foundryvtt.com/packages/about-time) and [Times Up](https://foundryvtt.com/packages/times-up) by tposney - Handles spell effects expiring when their time is up or after a certain number of rounds or turns
+- [DAE](https://foundryvtt.com/packages/dae) by tposney - With midi-qol, handles various additional expiration effects such as after 1 attack or when an enemy is attacked
+- [Midi-QOL](https://foundryvtt.com/packages/midi-qol) by tposney - Handles a vast amount of automation relating to advantage and disadvantage
+- [Active Token Lighting](https://foundryvtt.com/packages/ATL) by Kandashi - Certain effects and spells can emit light, and this module allows active effects to do that
+- [Token Magic FX](https://foundryvtt.com/packages/tokenmagic) by SecretFire - Certain effects and spells can have an effect applied, and this module allows active effects to do that. Note that this requires DAE active as well.
 
 ## My Philosophy
 
