@@ -126,6 +126,15 @@ export default class EffectHandler {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
 
+    this._handleIntegrations(effect);
+
+    const activeEffectData = effect.convertToActiveEffectData();
+    await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
+
+    log(`Added effect ${effect.name}`);
+  }
+
+  _handleIntegrations(effect) {
     if (this._settings.integrateWithAtl && effect.atlChanges.length > 0) {
       this._addAtlChangesToEffect(effect);
     }
@@ -136,11 +145,6 @@ export default class EffectHandler {
     ) {
       this._addTokenMagicChangesToEffect(effect);
     }
-
-    const activeEffectData = effect.convertToActiveEffectData();
-    await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
-
-    log(`Added effect ${effect.name}`);
   }
 
   _addAtlChangesToEffect(effect) {
