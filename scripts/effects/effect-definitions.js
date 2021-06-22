@@ -1637,7 +1637,7 @@ export default class EffectDefinitions {
         {
           key: 'ATL.lightAlpha',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: 0.15,
+          value: 0.25,
         },
         {
           key: 'ATL.lightAnimation',
