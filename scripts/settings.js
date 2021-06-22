@@ -18,7 +18,7 @@ export default class Settings {
   registerSettings() {
     game.settings.register(Settings.PACKAGE_NAME, Settings.ALLOW_FOR_PLAYERS, {
       name: 'Players Can See',
-      hint: 'If enabled, players can see the effects and toggle them on or off.',
+      hint: 'If enabled, players can see the effects and toggle them on or off. Requires a Foundry reload.',
       scope: 'world',
       config: true,
       default: false,
