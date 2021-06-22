@@ -820,6 +820,13 @@ export default class EffectDefinitions {
           value: '1d4',
         },
       ],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'bloom',
+        },
+      ],
     });
   }
 
