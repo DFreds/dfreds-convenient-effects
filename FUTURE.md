@@ -9,6 +9,5 @@
 ## Beyond
 
 - Hovering over chat messages highlights the token on the canvas
-- Integration with dynamic active vision module (darkvision spell or light spell), dynamic active auras
-- Integration with token magic for spells
+- Integration with dynamic active auras
 - Passive effects (like unarmored defense)
