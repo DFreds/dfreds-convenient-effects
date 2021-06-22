@@ -13,6 +13,9 @@ export default class DynamicEffectsAdder {
       case "bear's endurance":
         await this._addEnhanceAbilityBearsEnduranceEffects(effect, actor);
         break;
+      case 'longstrider':
+        this._addLongstriderEffects(effect, actor);
+        break;
       case 'rage':
         this._addRageEffects(effect, actor);
         break;
@@ -28,6 +31,42 @@ export default class DynamicEffectsAdder {
       mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
       value: evaluation.total,
     });
+  }
+
+  _addLongstriderEffects(effect, actor) {
+    const movement = actor.data.data.attributes.movement;
+
+    if (movement.burrow > 0) {
+      effect.changes.push({
+        key: 'data.attributes.movement.burrow',
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: '10',
+      });
+    }
+
+    if (movement.climb > 0) {
+      effect.changes.push({
+        key: 'data.attributes.movement.climb',
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: '10',
+      });
+    }
+
+    if (movement.fly > 0) {
+      effect.changes.push({
+        key: 'data.attributes.movement.fly',
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: '10',
+      });
+    }
+
+    if (movement.swim > 0) {
+      effect.changes.push({
+        key: 'data.attributes.movement.swim',
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: '10',
+      });
+    }
   }
 
   _addRageEffects(effect, actor) {
