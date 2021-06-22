@@ -124,6 +124,7 @@ export default class EffectDefinitions {
       this._coverHalf,
       this._coverThreeQuarters,
       this._encumbered,
+      this._dodge,
       this._flanked,
       this._flanking,
       this._greatWeaponMaster,
@@ -2198,6 +2199,26 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '-10',
+        },
+      ],
+    });
+  }
+
+  get _dodge() {
+    return new Effect({
+      name: 'Dodge',
+      description: 'Grants disadvantage to all who attack until next turn',
+      icon: 'modules/dfreds-convenient-effects/images/dodging.svg',
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
+      changes: [
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
         },
       ],
     });
