@@ -1885,6 +1885,13 @@ export default class EffectDefinitions {
           value: '5',
         },
       ],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'water-field',
+        },
+      ],
     });
   }
 
@@ -1899,6 +1906,13 @@ export default class EffectDefinitions {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '2',
+        },
+      ],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'bloom',
         },
       ],
     });
