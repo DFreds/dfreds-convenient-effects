@@ -1094,7 +1094,26 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/fire-arrows-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
-        // TODO dim light
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '10',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '#ffffff',
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.25,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "pulse","speed": 1,"intensity": 1}',
+        },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1461,9 +1480,9 @@ export default class EffectDefinitions {
           value: '#ffffff',
         },
         {
-          key: 'ATL.colorIntensity',
+          key: 'ATL.lightAlpha',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0.25',
+          value: 0.25,
         },
         {
           key: 'ATL.lightAnimation',
@@ -1537,9 +1556,9 @@ export default class EffectDefinitions {
           value: '#ffffff',
         },
         {
-          key: 'ATL.colorIntensity',
+          key: 'ATL.lightAlpha',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0.15',
+          value: 0.15,
         },
         {
           key: 'ATL.lightAnimation',
@@ -1948,9 +1967,9 @@ export default class EffectDefinitions {
           value: '#ffffff',
         },
         {
-          key: 'ATL.colorIntensity',
+          key: 'ATL.lightAlpha',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0.25',
+          value: 0.25,
         },
         {
           key: 'ATL.lightAnimation',
