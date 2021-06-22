@@ -1109,7 +1109,7 @@ export default class EffectDefinitions {
         {
           key: 'ATL.lightColor',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '#ffffff',
+          value: Constants.COLORS.WHITE,
         },
         {
           key: 'ATL.lightAlpha',
@@ -1192,6 +1192,40 @@ export default class EffectDefinitions {
           value: 'cold',
         },
       ],
+      atlChanges: [
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '20',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '10',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.25,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch", "speed": 3, "intensity": 1}',
+        },
+      ],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'fire',
+        },
+      ],
     });
   }
 
@@ -1207,6 +1241,40 @@ export default class EffectDefinitions {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: 'fire',
+        },
+      ],
+      atlChanges: [
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '20',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '10',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.COLD_FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.25,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch", "speed": 3, "intensity": 1}',
+        },
+      ],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Fire v2 (coldfire)',
         },
       ],
     });
@@ -1496,7 +1564,7 @@ export default class EffectDefinitions {
         {
           key: 'ATL.lightColor',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '#ffffff',
+          value: Constants.COLORS.WHITE,
         },
         {
           key: 'ATL.lightAlpha',
@@ -1562,7 +1630,7 @@ export default class EffectDefinitions {
         {
           key: 'ATL.lightColor',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '#ffffff',
+          value: Constants.COLORS.WHITE,
         },
         {
           key: 'ATL.lightAlpha',
@@ -1980,7 +2048,7 @@ export default class EffectDefinitions {
         {
           key: 'ATL.lightColor',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '#ffffff',
+          value: Constants.COLORS.WHITE,
         },
         {
           key: 'ATL.lightAlpha',
