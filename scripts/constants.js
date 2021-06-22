@@ -2,6 +2,12 @@
  * Contains any constants for the application
  */
 export default class Constants {
+  static COLORS = {
+    COLD_FIRE: '#389888',
+    FIRE: '#f98026',
+    WHITE: '#ffffff',
+  };
+
   static SECONDS = {
     IN_ONE_ROUND: 6,
     IN_ONE_MINUTE: 60,
