@@ -14,3 +14,9 @@
 #nested-effect-descriptions {
   flex-direction: column;
 }
+
+.integration-icon {
+  margin-right: 12px;
+  flex: none;
+  align-self: center;
+}

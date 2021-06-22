@@ -1,11 +1,13 @@
 import Controls from './controls.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectHandler from './effects/effect-handler.js';
+import HandlebarHelpers from './handlebar-helpers.js';
 import toggleEffect from './effects/toggle-effect.js';
 import Settings from './settings.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
+  new HandlebarHelpers().registerHelpers();
 
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();

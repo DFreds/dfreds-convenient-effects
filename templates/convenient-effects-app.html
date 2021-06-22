@@ -33,6 +33,12 @@
           <h4 class="entity-name">
             <a title="{{effect.description}}">{{effect.name}}</a>
           </h4>
+          {{#hasAtlChanges effect}}
+            <i class="fas fa-lightbulb integration-icon" title="Has ATL effects"></i>
+          {{/hasAtlChanges}}
+          {{#hasTokenMagicChanges effect}}
+            <i class="fas fa-magic integration-icon" title="Has Token Magic effects"></i>
+          {{/hasTokenMagicChanges}}
         </li>
         {{/each}}
       </ol>
