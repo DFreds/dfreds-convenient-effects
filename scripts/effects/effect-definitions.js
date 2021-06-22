@@ -88,6 +88,7 @@ export default class EffectDefinitions {
       this._longstrider,
       this._mageArmor,
       this._mindBlank,
+      this._mirrorImage,
       this._passWithoutTrace,
 
       this._protectionFromEnergy,
@@ -1614,6 +1615,15 @@ export default class EffectDefinitions {
           value: 'psychic',
         },
       ],
+    });
+  }
+
+  get _mirrorImage() {
+    return new Effect({
+      name: 'Mirror Image',
+      description: 'No active effects, but lasts for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
 
