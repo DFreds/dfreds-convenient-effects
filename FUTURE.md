@@ -1,6 +1,6 @@
 # Future
 
-## Release 1.4
+## Release 1.5
 
 - Nested folders (cantrips, 1st level, etc. and Barbarian, Cleric, etc.)
 - Creating your own convenient effects
