@@ -28,6 +28,10 @@ This module  helps with the types of issues described above by providing dozens 
 
 ![Demo 2](docs/demo2.gif)
 
+### Demo Showcasing ATL and Token Magic Integration
+
+![Demo 3](docs/demo3.gif)
+
 ### Settings
 
 ![Settings](docs/settings.png)
