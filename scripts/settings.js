@@ -6,7 +6,7 @@ export default class Settings {
 
   // Settings keys
   static ALLOW_FOR_PLAYERS = 'allowForPlayers';
-  static CREATE_CHAT_MESSAGE = 'createChatMessage';
+  static CHAT_MESSAGE_TYPE = 'chatMessageType';
   static INTEGRATE_WITH_ATL = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
@@ -26,18 +26,19 @@ export default class Settings {
       onChange: () => window.location.reload(),
     });
 
-    game.settings.register(
-      Settings.PACKAGE_NAME,
-      Settings.CREATE_CHAT_MESSAGE,
-      {
-        name: 'Create Chat Message',
-        hint: 'If enabled, a chat message will be created whenever a convenient effect is applied, removed, or expires.',
-        scope: 'world',
-        config: true,
-        default: true,
-        type: Boolean,
-      }
-    );
+    game.settings.register(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE, {
+      name: 'Chat Message Type',
+      hint: 'This is how chat messages will be displayed when effects are applied, remove, or expire.',
+      scope: 'world',
+      config: true,
+      default: 'private',
+      choices: {
+        none: 'None',
+        gmOnly: 'GM Only',
+        everyone: 'Everyone',
+      },
+      type: String,
+    });
 
     game.settings.register(Settings.PACKAGE_NAME, Settings.INTEGRATE_WITH_ATL, {
       name: 'Integrate with ATL',
@@ -92,15 +93,12 @@ export default class Settings {
   }
 
   /**
-   * Returns the game setting for create chat message
+   * Returns the game setting for chat message type
    *
-   * @returns {Boolean} true if chat messages will be created
+   * @returns {String} a string representing the chosen chat message type
    */
-  get createChatMessage() {
-    return game.settings.get(
-      Settings.PACKAGE_NAME,
-      Settings.CREATE_CHAT_MESSAGE
-    );
+  get chatMessageType() {
+    return game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE);
   }
 
   /**

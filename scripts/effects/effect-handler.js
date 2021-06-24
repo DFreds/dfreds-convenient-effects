@@ -49,7 +49,7 @@ export default class EffectHandler {
    * @param {Actor5e} actor - the actor the effect change occurred to
    */
   async createChatForEffect(effectName, reason, actor) {
-    if (!this._settings.createChatMessage) return;
+    if (this._settings.chatMessageType === 'none') return;
 
     const effect = game.dfreds.effects.all.find(
       (effect) => effect.name == effectName
@@ -61,6 +61,10 @@ export default class EffectHandler {
 
     await ChatMessage.create({
       user: game.userId,
+      whisper:
+        this._settings.chatMessageType === 'gmOnly'
+          ? game.users.filter((user) => user.isGM).map((gm) => gm.id)
+          : undefined,
       content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
          <p>${effect.description}</p>
          `,
