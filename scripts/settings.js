@@ -31,7 +31,7 @@ export default class Settings {
       hint: 'This is how chat messages will be displayed when effects are applied, remove, or expire.',
       scope: 'world',
       config: true,
-      default: 'private',
+      default: 'gmOnly',
       choices: {
         none: 'None',
         gmOnly: 'GM Only',
