@@ -18,7 +18,7 @@
   "flags": {},
   "version": "1.2.1",
   "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "0.8.7",
+  "compatibleCoreVersion": "0.8.8",
   "scripts": [],
   "esmodules": ["./scripts/main.js"],
   "styles": ["./styles/dfreds-convenient-effects.css"],
