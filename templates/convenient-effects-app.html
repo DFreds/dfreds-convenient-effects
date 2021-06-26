@@ -17,7 +17,7 @@
   <!-- Directories List -->
   <ol class="directory-list">
     {{#each folders as |folder|}}
-    <li class="directory-item folder flexcol collapsed" data-folder-label="{{folder.label}}"
+    <li class="directory-item folder flexcol collapsed convenient-folder" data-folder-label="{{folder.label}}"
       draggable="false">
       <header class="folder-header flexrow">
         <h3>
@@ -27,7 +27,7 @@
       </header>
       <ol class="subdirectory">
         {{#each folder.effects as |effect|}}
-        <li class="directory-item entity flexrow" data-effect-name="{{effect.name}}" draggable="true"
+        <li class="directory-item entity flexrow convenient-effect" data-effect-name="{{effect.name}}" draggable="true"
           style="display: flex;">
           <img title="{{effect.name}}" src="{{effect.icon}}" />
           <h4 class="entity-name">
