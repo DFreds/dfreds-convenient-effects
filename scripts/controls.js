@@ -54,14 +54,14 @@ export default class Controls {
     canvas.tokens.controlled
       .map((token) => token.actor)
       .forEach(async (actor) => {
-        const effectToRemoves = actor.data.effects
+        const effectsToRemove = actor.data.effects
           .filter((effect) =>
             effect.data.label.startsWith('Convenient Effect:')
           )
           .map((effect) => effect.id);
 
-        if (effectToRemoves) {
-          await actor.deleteEmbeddedDocuments('ActiveEffect', effectToRemoves);
+        if (effectsToRemove) {
+          await actor.deleteEmbeddedDocuments('ActiveEffect', effectsToRemove);
         }
       });
   }
