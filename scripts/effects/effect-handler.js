@@ -112,14 +112,16 @@ export default class EffectHandler {
   _hasEffectApplied(effect, actor) {
     return actor.data.effects.some(
       (activeEffect) =>
-        activeEffect.data.label == `Convenient Effect: ${effect.name}`
+        activeEffect?.data?.flags?.isConvenient &&
+        activeEffect?.data?.label == effect.name
     );
   }
 
   async _removeEffect(effect, actor) {
     const effectToRemove = actor.data.effects.find(
       (activeEffect) =>
-        activeEffect.data.label == `Convenient Effect: ${effect.name}`
+        activeEffect?.data?.flags?.isConvenient &&
+        activeEffect?.data?.label == effect.name
     );
     await actor.deleteEmbeddedDocuments('ActiveEffect', [effectToRemove.id]);
     log(`Removed effect ${effect.name}`);

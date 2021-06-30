@@ -39,13 +39,14 @@ export default class Effect {
     return {
       id: this._nameAsId,
       name: this.name,
-      label: 'Convenient Effect: ' + this.name,
+      label: this.name,
       icon: this.icon,
       duration: this._getDurationData(),
       flags: foundry.utils.mergeObject(this.flags, {
         core: {
           statusId: this._nameAsId,
         },
+        isConvenient: true,
       }),
       changes: this.changes,
     };

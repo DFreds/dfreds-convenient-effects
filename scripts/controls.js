@@ -55,9 +55,7 @@ export default class Controls {
       .map((token) => token.actor)
       .forEach(async (actor) => {
         const effectsToRemove = actor.data.effects
-          .filter((effect) =>
-            effect.data.label.startsWith('Convenient Effect:')
-          )
+          .filter((effect) => effect?.data?.flags?.isConvenient)
           .map((effect) => effect.id);
 
         if (effectsToRemove) {

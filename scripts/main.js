@@ -23,12 +23,10 @@ Hooks.on('getSceneControlButtons', (controls) => {
 });
 
 Hooks.on('preCreateActiveEffect', async (activeEffect, config, userId) => {
-  const effectName = activeEffect?.data?.label?.split('Convenient Effect: ')[1];
-
-  if (!effectName) return;
+  if (!activeEffect?.data?.flags?.isConvenient) return;
 
   game.dfreds.effectHandler.createChatForEffect({
-    effectName,
+    effectName: activeEffect?.data?.label,
     reason: 'Applied to',
     actor: activeEffect?.parent,
   });
@@ -38,19 +36,18 @@ Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
   const isExpired =
     activeEffect?.duration?.remaining !== null &&
     activeEffect?.duration?.remaining <= 0;
-  const effectName = activeEffect?.data?.label?.split('Convenient Effect: ')[1];
 
-  if (!effectName) return;
+  if (!activeEffect?.data?.flags?.isConvenient) return;
 
   if (isExpired) {
     game.dfreds.effectHandler.createChatForEffect({
-      effectName,
+      effectName: activeEffect?.data?.label,
       reason: 'Expired from',
       actor: activeEffect?.parent,
     });
   } else {
     game.dfreds.effectHandler.createChatForEffect({
-      effectName,
+      effectName: activeEffect?.data?.label,
       reason: 'Removed from',
       actor: activeEffect?.parent,
     });
