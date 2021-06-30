@@ -2077,6 +2077,11 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
+          key: 'flags.midi-qol.optional.bardic-inspiration.label',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Bardic Inspiration',
+        },
+        {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1d6',
@@ -2103,6 +2108,11 @@ export default class EffectDefinitions {
       isViewable: false,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.label',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Bardic Inspiration',
+        },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -2131,6 +2141,11 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
+          key: 'flags.midi-qol.optional.bardic-inspiration.label',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Bardic Inspiration',
+        },
+        {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1d10',
@@ -2157,6 +2172,11 @@ export default class EffectDefinitions {
       isViewable: false,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.label',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Bardic Inspiration',
+        },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
