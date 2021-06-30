@@ -37,18 +37,22 @@ export default class Effect {
    */
   convertToActiveEffectData() {
     return {
-      id: `convenient-effect-${this.name.replace(' ', '-').toLowerCase()}`,
+      id: this._nameAsId,
       name: this.name,
       label: 'Convenient Effect: ' + this.name,
       icon: this.icon,
       duration: this._getDurationData(),
       flags: foundry.utils.mergeObject(this.flags, {
         core: {
-          statusId: `convenient-effect-${this.name.toLowerCase()}`,
+          statusId: this._nameAsId,
         },
       }),
       changes: this.changes,
     };
+  }
+
+  get _nameAsId() {
+    return `convenient-effect-${this.name.replace(' ', '-').toLowerCase()}`;
   }
 
   _getDurationData() {
