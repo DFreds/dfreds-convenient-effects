@@ -48,7 +48,7 @@ export default class EffectHandler {
    * @param {string} reason - the reason for the chat message
    * @param {Actor5e} actor - the actor the effect change occurred to
    */
-  async createChatForEffect(effectName, reason, actor) {
+  async createChatForEffect({ effectName, reason, actor }) {
     if (this._settings.chatMessageType === 'none') return;
 
     const effect = game.dfreds.effects.all.find(

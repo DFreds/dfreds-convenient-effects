@@ -24,11 +24,11 @@ Hooks.on('preCreateActiveEffect', async (activeEffect, config, userId) => {
 
   if (!effectName) return;
 
-  game.dfreds.effectHandler.createChatForEffect(
+  game.dfreds.effectHandler.createChatForEffect({
     effectName,
-    'Applied to',
-    activeEffect?.parent
-  );
+    reason: 'Applied to',
+    actor: activeEffect?.parent,
+  });
 });
 
 Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
@@ -38,16 +38,16 @@ Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
   if (!effectName) return;
 
   if (isExpired) {
-    game.dfreds.effectHandler.createChatForEffect(
+    game.dfreds.effectHandler.createChatForEffect({
       effectName,
-      'Expired from',
-      activeEffect?.parent
-    );
+      reason: 'Expired from',
+      actor: activeEffect?.parent,
+    });
   } else {
-    game.dfreds.effectHandler.createChatForEffect(
+    game.dfreds.effectHandler.createChatForEffect({
       effectName,
-      'Removed from',
-      activeEffect?.parent
-    );
+      reason: 'Removed from',
+      actor: activeEffect?.parent,
+    });
   }
 });
