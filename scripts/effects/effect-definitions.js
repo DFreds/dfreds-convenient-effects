@@ -16,6 +16,7 @@ export default class EffectDefinitions {
       this._blinded,
       this._charmed,
       this._concentrating,
+      this._dead,
       this._deafened,
       this._exhaustion1,
       this._exhaustion2,
@@ -32,6 +33,7 @@ export default class EffectDefinitions {
       this._prone,
       this._restrained,
       this._stunned,
+      this._unconscious,
     ];
   }
 
@@ -170,6 +172,14 @@ export default class EffectDefinitions {
       name: 'Concentrating',
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/concentrating.svg',
+    });
+  }
+
+  get _dead() {
+    return new Effect({
+      name: 'Dead',
+      description: 'No active effects',
+      icon: 'icons/svg/skull.svg',
     });
   }
 
@@ -687,6 +697,14 @@ export default class EffectDefinitions {
           value: '1',
         },
       ],
+    });
+  }
+
+  get _unconscious() {
+    return new Effect({
+      name: 'Unconscious',
+      description: 'icons/svg/unconscious.svg',
+      icon: 'icons/svg/unconscious.svg',
     });
   }
 
