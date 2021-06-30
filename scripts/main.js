@@ -30,7 +30,9 @@ Hooks.on('preCreateActiveEffect', async (activeEffect, config, userId) => {
 });
 
 Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
-  const isExpired = activeEffect?.duration?.remaining === 0;
+  const isExpired =
+    activeEffect?.duration?.remaining !== null &&
+    activeEffect?.duration?.remaining <= 0;
   const effectName = activeEffect?.data?.label?.split('Convenient Effect: ')[1];
 
   if (!effectName) return;
