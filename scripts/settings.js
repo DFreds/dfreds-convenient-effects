@@ -9,6 +9,7 @@ export default class Settings {
   static CHAT_MESSAGE_TYPE = 'chatMessageType';
   static INTEGRATE_WITH_ATL = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
+  static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
 
@@ -18,7 +19,7 @@ export default class Settings {
   registerSettings() {
     game.settings.register(Settings.PACKAGE_NAME, Settings.ALLOW_FOR_PLAYERS, {
       name: 'Players Can See',
-      hint: 'If enabled, players can see the effects and toggle them on or off. Requires a Foundry reload.',
+      hint: 'If enabled, players can see the effects and toggle them on or off. Requires a Foundry reload on change.',
       scope: 'world',
       config: true,
       default: false,
@@ -28,7 +29,7 @@ export default class Settings {
 
     game.settings.register(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE, {
       name: 'Chat Message Type',
-      hint: 'This is how chat messages will be displayed when effects are applied, remove, or expire.',
+      hint: 'This is how chat messages will be displayed when effects are applied, removed, or expire.',
       scope: 'world',
       config: true,
       default: 'gmOnly',
@@ -59,6 +60,25 @@ export default class Settings {
         config: true,
         default: true,
         type: Boolean,
+      }
+    );
+
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.MODIFY_STATUS_EFFECTS,
+      {
+        name: 'Modify Status Effects',
+        hint: 'This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.',
+        scope: 'world',
+        config: true,
+        default: 'none',
+        choices: {
+          none: 'None',
+          replace: 'Replace',
+          add: 'Add',
+        },
+        type: String,
+        onChange: () => window.location.reload(),
       }
     );
 
@@ -122,6 +142,18 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.INTEGRATE_WITH_TOKEN_MAGIC
+    );
+  }
+
+  /**
+   * Returns the game setting for status effect type
+   *
+   * @returns {String} a string representing the chosen status effect type
+   */
+  get statusEffectType() {
+    return game.settings.get(
+      Settings.PACKAGE_NAME,
+      Settings.MODIFY_STATUS_EFFECTS
     );
   }
 

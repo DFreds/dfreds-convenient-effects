@@ -3,6 +3,7 @@ import EffectDefinitions from './effects/effect-definitions.js';
 import EffectHandler from './effects/effect-handler.js';
 import HandlebarHelpers from './handlebar-helpers.js';
 import Settings from './settings.js';
+import StatusEffects from './status-effects.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -11,6 +12,10 @@ Hooks.once('init', () => {
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectHandler = new EffectHandler();
+});
+
+Hooks.once('ready', () => {
+  new StatusEffects().initializeStatusEffects();
 });
 
 Hooks.on('getSceneControlButtons', (controls) => {

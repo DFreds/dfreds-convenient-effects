@@ -37,6 +37,7 @@ export default class Effect {
    */
   convertToActiveEffectData() {
     return {
+      id: `convenient-effect-${this.name.replace(' ', '-').toLowerCase()}`,
       name: this.name,
       label: 'Convenient Effect: ' + this.name,
       icon: this.icon,
