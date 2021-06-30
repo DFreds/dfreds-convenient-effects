@@ -112,6 +112,7 @@ export default class EffectDefinitions {
 
   get classFeatures() {
     return [
+      this._bardicInspiration,
       this._channelDivinitySacredWeapon,
       this._channelDivinityTurnUndead,
       this._rage,
@@ -2051,6 +2052,130 @@ export default class EffectDefinitions {
   }
 
   /** Class specific */
+  get _bardicInspiration() {
+    return new Effect({
+      name: 'Bardic Inspiration',
+      description:
+        'Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes',
+      icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      nestedEffects: [
+        this._bardicInspirationD6,
+        this._bardicInspirationD8,
+        this._bardicInspirationD10,
+        this._bardicInspirationD12,
+      ],
+    });
+  }
+
+  get _bardicInspirationD6() {
+    return new Effect({
+      name: 'Bardic Inspiration (d6)',
+      description: 'For bards from level 1 to level 4',
+      icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      changes: [
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d6',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d6',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d6',
+        },
+      ],
+    });
+  }
+
+  get _bardicInspirationD8() {
+    return new Effect({
+      name: 'Bardic Inspiration (d8)',
+      description: 'For bards from level 5 to level 9',
+      icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      changes: [
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d8',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d8',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d8',
+        },
+      ],
+    });
+  }
+
+  get _bardicInspirationD10() {
+    return new Effect({
+      name: 'Bardic Inspiration (d10)',
+      description: 'For bards from level 10 to level 14',
+      icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      changes: [
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d10',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d10',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d10',
+        },
+      ],
+    });
+  }
+
+  get _bardicInspirationD12() {
+    return new Effect({
+      name: 'Bardic Inspiration (d12)',
+      description: 'For bards from level 15 to level 20',
+      icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
+      isViewable: false,
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      changes: [
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d12',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d12',
+        },
+        {
+          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1d12',
+        },
+      ],
+    });
+  }
+
   get _channelDivinitySacredWeapon() {
     return new Effect({
       name: 'Channel Divinity: Sacred Weapon',
