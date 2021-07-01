@@ -720,12 +720,12 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.hp.tempmax',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '5',
+          value: '+5',
         },
         {
-          key: 'data.attributes.hp.temp',
+          key: 'data.attributes.hp.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '5',
+          value: '+5',
         },
       ],
     });
@@ -817,27 +817,27 @@ export default class EffectDefinitions {
         {
           key: 'data.bonuses.abilities.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
         {
           key: 'data.bonuses.msak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
         {
           key: 'data.bonuses.mwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
         {
           key: 'data.bonuses.rsak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
         {
           key: 'data.bonuses.rwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
       ],
       tokenMagicChanges: [
@@ -1077,7 +1077,7 @@ export default class EffectDefinitions {
         {
           key: 'data.bonuses.weapon.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
         {
           key: 'flags.midi-qol.advantage.ability.check.str',
@@ -1482,7 +1482,7 @@ export default class EffectDefinitions {
         {
           key: 'data.bonuses.abilities.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d4',
+          value: '+1d4',
         },
       ],
     });
@@ -1532,27 +1532,27 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.movement.burrow',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 2,
+          value: '2',
         },
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 2,
+          value: '2',
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 2,
+          value: '2',
         },
         {
           key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 2,
+          value: '2',
         },
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 2,
+          value: '2',
         },
       ],
     });
@@ -1695,7 +1695,7 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '10',
+          value: '+10',
         },
       ],
       isDynamic: true,
@@ -1762,7 +1762,7 @@ export default class EffectDefinitions {
         {
           key: 'data.skills.ste.mod',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '10',
+          value: '+10',
         },
       ],
     });
@@ -1907,7 +1907,7 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '5',
+          value: '+5',
         },
       ],
       tokenMagicChanges: [
@@ -1930,7 +1930,7 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '2',
+          value: '+2',
         },
       ],
       tokenMagicChanges: [
@@ -1964,27 +1964,27 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.movement.burrow',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 0.5,
+          value: '0.5',
         },
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 0.5,
+          value: '0.5',
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 0.5,
+          value: '0.5',
         },
         {
           key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 0.5,
+          value: '0.5',
         },
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: 0.5,
+          value: '0.5',
         },
       ],
     });
@@ -2102,17 +2102,17 @@ export default class EffectDefinitions {
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d6',
+          value: '+1d6',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d6',
+          value: '+1d6',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d6',
+          value: '+1d6',
         },
       ],
     });
@@ -2134,17 +2134,17 @@ export default class EffectDefinitions {
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d8',
+          value: '+1d8',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d8',
+          value: '+1d8',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d8',
+          value: '+1d8',
         },
       ],
     });
@@ -2166,17 +2166,17 @@ export default class EffectDefinitions {
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d10',
+          value: '+1d10',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d10',
+          value: '+1d10',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d10',
+          value: '+1d10',
         },
       ],
     });
@@ -2198,17 +2198,17 @@ export default class EffectDefinitions {
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d12',
+          value: '+1d12',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d12',
+          value: '+1d12',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '1d12',
+          value: '+1d12',
         },
       ],
     });
@@ -2225,12 +2225,12 @@ export default class EffectDefinitions {
         {
           key: 'data.bonuses.mwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'max(1, @abilities.cha.mod)',
+          value: '+max(1, @abilities.cha.mod)',
         },
         {
           key: 'data.bonuses.rwak.attack',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: 'max(1, @abilities.cha.mod)',
+          value: '+max(1, @abilities.cha.mod)',
         },
       ],
       atlChanges: [
@@ -2342,12 +2342,12 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '2',
+          value: '+2',
         },
         {
           key: 'data.abilities.dex.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '2',
+          value: '+2',
         },
       ],
     });
@@ -2362,12 +2362,12 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '5',
+          value: '+5',
         },
         {
           key: 'data.abilities.dex.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '5',
+          value: '+5',
         },
       ],
     });
