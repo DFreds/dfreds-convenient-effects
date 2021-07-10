@@ -462,35 +462,8 @@ export default class EffectDefinitions {
   get _incapacitated() {
     return new Effect({
       name: 'Incapacitated',
-      description: 'No movement',
+      description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/incapacitated.svg',
-      changes: [
-        {
-          key: 'data.attributes.movement.climb',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.walk',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.swim',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.fly',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.burrow',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-      ],
     });
   }
 
