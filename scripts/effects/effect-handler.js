@@ -14,16 +14,19 @@ export default class EffectHandler {
   /**
    * Toggles an effect on or off by name
    *
-   * @param {string} name - name of the effect to toggle
+   * @param {string} effectName - name of the effect to toggle
+   * @param {Actor5e[]} tokenNames - optional actors to apply the effect to. If not provided, it will use the targeted or selected tokens
    */
-  async toggleEffect(name) {
-    const actorsToEffect = this._determineActorsToEffect();
-    if (!actorsToEffect) return;
+  async toggleEffect(effectName, ...tokenNames) {
+    const actorsToEffect = this._determineActorsToEffect(tokenNames);
+    if (!actorsToEffect || actorsToEffect.length === 0) return;
 
-    let effect = game.dfreds.effects.all.find((effect) => effect.name == name);
+    let effect = game.dfreds.effects.all.find(
+      (effect) => effect.name == effectName
+    );
 
     if (!effect) {
-      ui.notifications.error(`Effect ${name} was not found`);
+      ui.notifications.error(`Effect ${effectName} was not found`);
       return;
     }
 
@@ -71,7 +74,18 @@ export default class EffectHandler {
     });
   }
 
-  _determineActorsToEffect() {
+  _determineActorsToEffect(tokenNames) {
+    const definedTokenNames = tokenNames.filter((tokenName) => tokenName);
+    if (definedTokenNames && definedTokenNames.length > 0) {
+      return tokenNames
+        .flatMap((tokenName) => {
+          return canvas.tokens.placeables.filter(
+            (placeable) => placeable.name === tokenName
+          );
+        })
+        .map((token) => token.actor);
+    }
+
     if (canvas.tokens.controlled.length == 0 && game.user.targets.size == 0) {
       ui.notifications.error(
         'Please select or target a token to apply an effect'
