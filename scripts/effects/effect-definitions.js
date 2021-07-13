@@ -1025,6 +1025,13 @@ export default class EffectDefinitions {
           value: '60',
         },
       ],
+      atlChanges: [
+        {
+          key: 'ATL.dimSight',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: '60',
+        },
+      ],
     });
   }
 
