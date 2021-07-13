@@ -44,7 +44,7 @@ On the controls on the left, two new buttons have been added to the Token Contro
 
 While not strictly required, the functionalities provided by these modules drastically improve the usage of the various effects included in this module.
 
-- [About Time](https://foundryvtt.com/packages/about-time) and [Times Up](https://foundryvtt.com/packages/times-up) by tposney - Handles spell effects expiring when their time is up or after a certain number of rounds or turns
+- [Times Up](https://foundryvtt.com/packages/times-up) by tposney - Handles spell effects expiring when their time is up or after a certain number of rounds or turns
 - [DAE](https://foundryvtt.com/packages/dae) by tposney - With midi-qol, handles various additional expiration effects such as after 1 attack or when an enemy is attacked
 - [Midi-QOL](https://foundryvtt.com/packages/midi-qol) by tposney - Handles a vast amount of automation relating to advantage and disadvantage
 - [Active Token Lighting](https://foundryvtt.com/packages/ATL) by Kandashi - Certain effects and spells can emit light, and this module allows active effects to do that
