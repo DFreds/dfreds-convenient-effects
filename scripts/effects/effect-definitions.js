@@ -2358,13 +2358,7 @@ export default class EffectDefinitions {
       name: 'Encumbered',
       description: 'Lowers movement by 10 ft.',
       icon: 'icons/svg/down.svg',
-      changes: [
-        {
-          key: 'data.attributes.movement.walk',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '-10',
-        },
-      ],
+      isDynamic: true,
     });
   }
 
@@ -2454,12 +2448,8 @@ export default class EffectDefinitions {
       description:
         'Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves',
       icon: 'icons/svg/downgrade.svg',
+      isDynamic: true,
       changes: [
-        {
-          key: 'data.attributes.movement.walk',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '-20',
-        },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
