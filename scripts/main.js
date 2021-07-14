@@ -4,6 +4,7 @@ import EffectHandler from './effects/effect-handler.js';
 import HandlebarHelpers from './handlebar-helpers.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
+import { libWrapper } from './lib/shim.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -12,10 +13,30 @@ Hooks.once('init', () => {
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectHandler = new EffectHandler();
+  game.dfreds.statusEffects = new StatusEffects();
 });
 
 Hooks.once('ready', () => {
   new StatusEffects().initializeStatusEffects();
+});
+
+Hooks.once('setup', () => {
+  const MODULE_ID = 'dfreds-convenient-effects';
+
+  libWrapper.register(
+    MODULE_ID,
+    'TokenHUD.prototype._onToggleEffect',
+    function (wrapper, ...args) {
+      const [event] = args;
+      const statusEffectId = event.currentTarget.dataset.statusId;
+      if (statusEffectId.startsWith('Convenient Effect: ')) {
+        const effectName = statusEffectId.replace('Convenient Effect: ', '');
+        game.dfreds.effectHandler.toggleEffect(effectName);
+      } else {
+        wrapper(...args);
+      }
+    }
+  );
 });
 
 Hooks.on('getSceneControlButtons', (controls) => {
