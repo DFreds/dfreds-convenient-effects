@@ -30,6 +30,8 @@ Hooks.once('setup', () => {
       const [event] = args;
       const statusEffectId = event.currentTarget.dataset.statusId;
       if (statusEffectId.startsWith('Convenient Effect: ')) {
+        event.preventDefault();
+        event.stopPropagation();
         const effectName = statusEffectId.replace('Convenient Effect: ', '');
         game.dfreds.effectHandler.toggleEffect(effectName);
       } else {
