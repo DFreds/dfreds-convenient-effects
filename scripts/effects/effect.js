@@ -53,7 +53,7 @@ export default class Effect {
   }
 
   get _nameAsId() {
-    return `convenient-effect-${this.name.replace(' ', '-').toLowerCase()}`;
+    return `Convenient Effect: ${this.name}`;
   }
 
   _getDurationData() {
