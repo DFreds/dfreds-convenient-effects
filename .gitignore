@@ -1,1 +1,3 @@
 *.lock
+.vscode
+foundry.js
