@@ -13,7 +13,6 @@ Hooks.once('init', () => {
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectHandler = new EffectHandler();
-  game.dfreds.statusEffects = new StatusEffects();
 });
 
 Hooks.once('ready', () => {
@@ -33,7 +32,7 @@ Hooks.once('setup', () => {
         event.preventDefault();
         event.stopPropagation();
         const effectName = statusEffectId.replace('Convenient Effect: ', '');
-        game.dfreds.effectHandler.toggleEffect(effectName);
+        game.dfreds.effectHandler.toggleStatusEffect(effectName, this.object);
       } else {
         wrapper(...args);
       }

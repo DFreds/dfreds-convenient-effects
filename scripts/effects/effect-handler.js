@@ -15,63 +15,13 @@ export default class EffectHandler {
    * Toggles an effect on or off by name
    *
    * @param {string} effectName - name of the effect to toggle
-   * @param {Actor5e[]} tokenNames - optional actors to apply the effect to. If not provided, it will use the targeted or selected tokens
+   * @param {string[]} tokenNames - optional tokens to apply the effect to. If not provided, it will use the targeted or selected tokens
    */
   async toggleEffect(effectName, ...tokenNames) {
     const actorsToEffect = this._determineActorsToEffect(tokenNames);
     if (!actorsToEffect || actorsToEffect.length === 0) return;
 
-    let effect = game.dfreds.effects.all.find(
-      (effect) => effect.name == effectName
-    );
-
-    if (!effect) {
-      ui.notifications.error(`Effect ${effectName} was not found`);
-      return;
-    }
-
-    if (effect.nestedEffects.length > 0) {
-      effect = await this._getNestedEffectSelection(effect);
-    }
-
-    for (const actor of actorsToEffect) {
-      if (this._hasEffectApplied(effect, actor)) {
-        await this._removeEffect(effect, actor);
-      } else {
-        await this._addEffect(effect, actor);
-      }
-    }
-  }
-
-  /**
-   * Creates a chat message when a convenient effect is applied or removed. This
-   * only creates the message if the setting is enabled.
-   *
-   * @param {string} effectName - the name of the effect
-   * @param {string} reason - the reason for the chat message
-   * @param {Actor5e} actor - the actor the effect change occurred to
-   */
-  async createChatForEffect({ effectName, reason, actor }) {
-    if (this._settings.chatMessageType === 'none') return;
-
-    const effect = game.dfreds.effects.all.find(
-      (effect) => effect.name == effectName
-    );
-
-    if (!effect) return;
-
-    const actorName = actor.token ? actor.token.name : actor.name;
-
-    await ChatMessage.create({
-      user: game.userId,
-      whisper:
-        this._settings.chatMessageType === 'gmOnly'
-          ? game.users.filter((user) => user.isGM).map((gm) => gm.id)
-          : undefined,
-      content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
-         <p>${effect.description}</p>
-         `,
-    });
+    await this._toggleEffect(effectName, actorsToEffect);
   }
 
   _determineActorsToEffect(tokenNames) {
@@ -97,6 +47,39 @@ export default class EffectHandler {
       return canvas.tokens.controlled.map((token) => token.actor);
     } else {
       return Array.from(game.user.targets).map((token) => token.actor);
+    }
+  }
+
+  /**
+   * Toggles an effect on or off via the token HUD
+   *
+   * @param {string} effectName - name of the effect to toggle
+   * @param {Token5e} token - token to apply the effect to
+   */
+  async toggleStatusEffect(effectName, token) {
+    await this._toggleEffect(effectName, [token.actor]);
+  }
+
+  async _toggleEffect(effectName, actors) {
+    let effect = game.dfreds.effects.all.find(
+      (effect) => effect.name == effectName
+    );
+
+    if (!effect) {
+      ui.notifications.error(`Effect ${effectName} was not found`);
+      return;
+    }
+
+    if (effect.nestedEffects.length > 0) {
+      effect = await this._getNestedEffectSelection(effect);
+    }
+
+    for (const actor of actors) {
+      if (this._hasEffectApplied(effect, actor)) {
+        await this._removeEffect(effect, actor);
+      } else {
+        await this._addEffect(effect, actor);
+      }
     }
   }
 
@@ -173,5 +156,36 @@ export default class EffectHandler {
 
   _addTokenMagicChangesToEffect(effect) {
     effect.changes.push(...effect.tokenMagicChanges);
+  }
+
+  /**
+   * Creates a chat message when a convenient effect is applied or removed. This
+   * only creates the message if the setting is enabled.
+   *
+   * @param {string} effectName - the name of the effect
+   * @param {string} reason - the reason for the chat message
+   * @param {Actor5e} actor - the actor the effect change occurred to
+   */
+  async createChatForEffect({ effectName, reason, actor }) {
+    if (this._settings.chatMessageType === 'none') return;
+
+    const effect = game.dfreds.effects.all.find(
+      (effect) => effect.name == effectName
+    );
+
+    if (!effect) return;
+
+    const actorName = actor.token ? actor.token.name : actor.name;
+
+    await ChatMessage.create({
+      user: game.userId,
+      whisper:
+        this._settings.chatMessageType === 'gmOnly'
+          ? game.users.filter((user) => user.isGM).map((gm) => gm.id)
+          : undefined,
+      content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
+         <p>${effect.description}</p>
+         `,
+    });
   }
 }
