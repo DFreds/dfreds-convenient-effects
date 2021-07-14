@@ -1,5 +1,8 @@
 import Settings from './settings.js';
 
+/**
+ * Initializes the status effects present on the token HUD
+ */
 export default class StatusEffects {
   constructor() {
     this._settings = new Settings();
