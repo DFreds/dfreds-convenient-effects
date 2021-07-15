@@ -1,13 +1,33 @@
 import Settings from './settings.js';
 
+/**
+ * Handles setting up all handlebar helpers
+ */
 export default class HandlebarHelpers {
   constructor() {
     this._settings = new Settings();
   }
 
+  /**
+   * Registers the handlebar helpers
+   */
   registerHelpers() {
+    this._registerIsStatusEffectHelper();
     this._registerHasAtlChangesHelper();
     this._registerHasTokenMagicChangesHelper();
+  }
+
+  _registerIsStatusEffectHelper() {
+    Handlebars.registerHelper('isStatusEffect', (effect, options) => {
+      if (
+        this._settings.statusEffectType !== 'none' &&
+        this._settings.isStatusEffect(effect.name)
+      ) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    });
   }
 
   _registerHasAtlChangesHelper() {

@@ -33,6 +33,9 @@
           <h4 class="entity-name">
             <a title="{{effect.description}}">{{effect.name}}</a>
           </h4>
+          {{#isStatusEffect effect}}
+            <i class="fas fa-street-view integration-icon" title="Is Token Status Effect"></i>
+          {{/isStatusEffect}}
           {{#hasAtlChanges effect}}
             <i class="fas fa-lightbulb integration-icon" title="Has ATL effects"></i>
           {{/hasAtlChanges}}
