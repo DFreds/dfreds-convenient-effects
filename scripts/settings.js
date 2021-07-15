@@ -268,14 +268,15 @@ export default class Settings {
    * Adds a given effect name to the saved status effect settings
    *
    * @param {string} name - the name of the effect to add to status effects
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  addStatusEffect(name) {
+  async addStatusEffect(name) {
     let statusEffectsArray = this.statusEffectNames;
     statusEffectsArray.push(name);
 
     statusEffectsArray = [...new Set(statusEffectsArray)]; // remove duplicates
 
-    game.settings.set(
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.STATUS_EFFECT_NAMES,
       statusEffectsArray.join(';')
@@ -286,12 +287,13 @@ export default class Settings {
    * Removes a given effect name from the saved status effect settings
    *
    * @param {string} name - the name of the effect to remove from status effects
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  removeStatusEffect(name) {
+  async removeStatusEffect(name) {
     let statusEffectsArray = this.statusEffectNames.filter(
       (statusEffect) => statusEffect !== name
     );
-    game.settings.set(
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.STATUS_EFFECT_NAMES,
       statusEffectsArray.join(';')
@@ -300,9 +302,11 @@ export default class Settings {
 
   /**
    * Reset status effects back to the original defaults
+   *
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  resetStatusEffects() {
-    game.settings.set(
+  async resetStatusEffects() {
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.STATUS_EFFECT_NAMES,
       this._defaultStatusEffectNames

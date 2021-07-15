@@ -186,6 +186,26 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handle adding/removing the effect from the to/from the status effect settings
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   */
+  async onToggleStatusEffect(effectItem) {
+    const effectName = effectItem.data().effectName;
+
+    if (this._settings.isStatusEffect(effectName)) {
+      await this._settings.removeStatusEffect(effectName);
+    } else {
+      await this._settings.addStatusEffect(effectName);
+    }
+
+    // ui.notifications.warn(
+    //   'Foundry must be reloaded to update token status effects'
+    // );
+    this._viewMvc.render();
+  }
+
+  /**
    * Handles starting the drag for effect items
    *
    * @param {DragEvent} event - event that corresponds to the drag start
