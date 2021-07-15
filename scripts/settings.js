@@ -253,6 +253,62 @@ export default class Settings {
   }
 
   /**
+   * Returns the game setting for the status effect names
+   *
+   * @returns {String[]} the names of all the status effects
+   */
+  get statusEffectNames() {
+    return game.settings
+      .get(Settings.PACKAGE_NAME, Settings.STATUS_EFFECT_NAMES)
+      .split(';')
+      .filter((name) => name.trim());
+  }
+
+  /**
+   * Adds a given effect name to the saved status effect settings
+   *
+   * @param {string} name - the name of the effect to add to status effects
+   */
+  addStatusEffect(name) {
+    let statusEffectsArray = this.statusEffectNames;
+    statusEffectsArray.push(name);
+
+    statusEffectsArray = [...new Set(statusEffectsArray)]; // remove duplicates
+
+    game.settings.set(
+      Settings.PACKAGE_NAME,
+      Settings.STATUS_EFFECT_NAMES,
+      statusEffectsArray.join(';')
+    );
+  }
+
+  /**
+   * Removes a given effect name from the saved status effect settings
+   *
+   * @param {string} name - the name of the effect to remove from status effects
+   */
+  removeStatusEffect(name) {
+    let statusEffectsArray = this.statusEffectNames.filter(
+      (statusEffect) => statusEffect !== name
+    );
+    game.settings.set(
+      Settings.PACKAGE_NAME,
+      Settings.STATUS_EFFECT_NAMES,
+      statusEffectsArray.join(';')
+    );
+  }
+
+  /**
+   * Checks if the given effect name is a status effect
+   *
+   * @param {string} name - the effect name to search for
+   * @returns {boolean} true if the effect is a status effect, false otherwise
+   */
+  isStatusEffect(name) {
+    return this.statusEffectNames.includes(name);
+  }
+
+  /**
    * Returns the game setting for the saved expanded folder names
    *
    * @returns {String[]} the names of all of the saved expanded folders
