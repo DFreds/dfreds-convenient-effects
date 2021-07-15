@@ -1498,6 +1498,11 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+1d4',
         },
+        {
+          key: 'data.attributes.init.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+1d4',
+        },
       ],
     });
   }
