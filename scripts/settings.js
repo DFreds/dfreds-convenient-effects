@@ -212,14 +212,15 @@ export default class Settings {
    * Adds a given effect name to the saved favorite settings
    *
    * @param {string} name - the name of the effect to add to favorites
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  addFavoriteEffect(name) {
+  async addFavoriteEffect(name) {
     let favoriteEffectsArray = this.favoriteEffectNames;
     favoriteEffectsArray.push(name);
 
     favoriteEffectsArray = [...new Set(favoriteEffectsArray)]; // remove duplicates
 
-    game.settings.set(
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.FAVORITE_EFFECT_NAMES,
       favoriteEffectsArray.join(';')
@@ -230,12 +231,13 @@ export default class Settings {
    * Removes a given effect name from the saved favorite settings
    *
    * @param {string} name - the name of the effect to remove from favorites
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  removeFavoriteEffect(name) {
+  async removeFavoriteEffect(name) {
     let favoriteEffectsArray = this.favoriteEffectNames.filter(
       (favoriteEffect) => favoriteEffect !== name
     );
-    game.settings.set(
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.FAVORITE_EFFECT_NAMES,
       favoriteEffectsArray.join(';')
@@ -339,14 +341,15 @@ export default class Settings {
    * Adds a given folder name to the saved expanded folders
    *
    * @param {string} name - the name of the folder to add to the saved expanded folders
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  addExpandedFolder(name) {
+  async addExpandedFolder(name) {
     let expandedFolderArray = this.expandedFolders;
     expandedFolderArray.push(name);
 
     expandedFolderArray = [...new Set(expandedFolderArray)]; // remove duplicates
 
-    game.settings.set(
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.EXPANDED_FOLDERS,
       expandedFolderArray.join(';')
@@ -357,12 +360,13 @@ export default class Settings {
    * Removes a given folder name from the saved expanded folders
    *
    * @param {string} name - the name of the folder to remove from the saved expanded folders
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  removeExpandedFolder(name) {
+  async removeExpandedFolder(name) {
     let expandedFolderArray = this.expandedFolders.filter(
       (expandedFolder) => expandedFolder !== name
     );
-    game.settings.set(
+    return game.settings.set(
       Settings.PACKAGE_NAME,
       Settings.EXPANDED_FOLDERS,
       expandedFolderArray.join(';')
@@ -371,9 +375,15 @@ export default class Settings {
 
   /**
    * Removes all saved expanded folders
+   *
+   * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  clearExpandedFolders() {
-    game.settings.set(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, '');
+  async clearExpandedFolders() {
+    return game.settings.set(
+      Settings.PACKAGE_NAME,
+      Settings.EXPANDED_FOLDERS,
+      ''
+    );
   }
 
   /**

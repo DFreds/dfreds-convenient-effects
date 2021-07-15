@@ -109,9 +109,9 @@ export default class ConvenientEffectsController {
   /**
    * Handles clicks on the reset status effects button
    */
-  onResetStatusEffectsClick(event) {
+  async onResetStatusEffectsClick(event) {
     // TODO dialog?
-    this._settings.resetStatusEffects();
+    await this._settings.resetStatusEffects();
     window.location.reload();
   }
 
@@ -120,9 +120,9 @@ export default class ConvenientEffectsController {
    *
    * @param {MouseEvent} event
    */
-  onCollapseAllClick(event) {
+  async onCollapseAllClick(event) {
     this._viewMvc.collapseAllFolders();
-    this._settings.clearExpandedFolders();
+    await this._settings.clearExpandedFolders();
   }
 
   /**
@@ -130,7 +130,7 @@ export default class ConvenientEffectsController {
    *
    * @param {MouseEvent} event - event that corresponds to clicking on the folder
    */
-  onFolderClick(event) {
+  async onFolderClick(event) {
     let folderLabel = event.currentTarget.parentElement.dataset.folderLabel;
 
     if (this._viewMvc.isFolderCollapsed(folderLabel)) {
@@ -140,9 +140,9 @@ export default class ConvenientEffectsController {
     }
 
     if (this._settings.isFolderExpanded(folderLabel)) {
-      this._settings.removeExpandedFolder(folderLabel);
+      await this._settings.removeExpandedFolder(folderLabel);
     } else {
-      this._settings.addExpandedFolder(folderLabel);
+      await this._settings.addExpandedFolder(folderLabel);
     }
   }
 
@@ -163,13 +163,13 @@ export default class ConvenientEffectsController {
    *
    * @param {jQuery} effectItem - jQuery element representing the effect list item
    */
-  onAddFavorite(effectItem) {
+  async onAddFavorite(effectItem) {
     const effectName = effectItem.data().effectName;
 
     // Don't add favorites twice
     if (this._settings.isFavoritedEffect(effectName)) return;
 
-    this._settings.addFavoriteEffect(effectName);
+    await this._settings.addFavoriteEffect(effectName);
     this._viewMvc.render();
   }
 
@@ -178,10 +178,10 @@ export default class ConvenientEffectsController {
    *
    * @param {jQuery} effectItem - jQuery element representing the effect list item
    */
-  onRemoveFavorite(effectItem) {
+  async onRemoveFavorite(effectItem) {
     const effectName = effectItem.data().effectName;
 
-    this._settings.removeFavoriteEffect(effectName);
+    await this._settings.removeFavoriteEffect(effectName);
     this._viewMvc.render();
   }
 
@@ -244,7 +244,7 @@ export default class ConvenientEffectsController {
    *
    * @param {DragEvent} event - event that corresponds to the drop
    */
-  onDropOntoFolder(event) {
+  async onDropOntoFolder(event) {
     if (!this._isValidEffect(event) || !this._isEventTargetFavorites(event)) {
       return;
     }
@@ -253,7 +253,7 @@ export default class ConvenientEffectsController {
 
     // Don't add favorites twice
     if (!this._settings.isFavoritedEffect(effectName)) {
-      this._settings.addFavoriteEffect(effectName);
+      await this._settings.addFavoriteEffect(effectName);
     }
 
     this._viewMvc.render();
