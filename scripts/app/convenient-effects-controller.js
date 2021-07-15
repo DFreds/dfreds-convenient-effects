@@ -110,9 +110,15 @@ export default class ConvenientEffectsController {
    * Handles clicks on the reset status effects button
    */
   async onResetStatusEffectsClick(event) {
-    // TODO dialog?
-    await this._settings.resetStatusEffects();
-    window.location.reload();
+    return Dialog.confirm({
+      title: 'Reset Status Effects',
+      content:
+        '<h4>Are You Sure</h4><p>This will reset all configured status effects to the module defaults and reload the window.</p>',
+      yes: async () => {
+        await this._settings.resetStatusEffects();
+        window.location.reload();
+      },
+    });
   }
 
   /**
