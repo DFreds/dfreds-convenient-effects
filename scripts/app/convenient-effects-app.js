@@ -103,6 +103,10 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initClickListeners() {
+    this._resetStatusEffectsButton.on(
+      'click',
+      this._controller.onResetStatusEffectsClick.bind(this._controller)
+    );
     this._collapseAllButton.on(
       'click',
       this._controller.onCollapseAllClick.bind(this._controller)
@@ -165,6 +169,10 @@ export default class ConvenientEffectsApp extends Application {
 
   get _allDirectories() {
     return this._rootView.find('.folder');
+  }
+
+  get _resetStatusEffectsButton() {
+    return this._rootView.find('.reset-status-effects');
   }
 
   get _collapseAllButton() {

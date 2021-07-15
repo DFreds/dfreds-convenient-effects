@@ -109,6 +109,15 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handles clicks on the reset status effects button
+   */
+  onResetStatusEffectsClick(event) {
+    // TODO dialog?
+    this._settings.resetStatusEffects();
+    window.location.reload();
+  }
+
+  /**
    * Handles clicks on the collapse all button
    *
    * @param {MouseEvent} event
