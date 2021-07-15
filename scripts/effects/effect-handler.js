@@ -43,10 +43,10 @@ export default class EffectHandler {
       return;
     }
 
-    if (game.user.targets.size === 0) {
-      return canvas.tokens.controlled.map((token) => token.actor);
-    } else {
+    if (this._settings.prioritizeTargets && game.user.targets.size !== 0) {
       return Array.from(game.user.targets).map((token) => token.actor);
+    } else {
+      return canvas.tokens.controlled.map((token) => token.actor);
     }
   }
 

@@ -10,6 +10,7 @@ export default class Settings {
   static INTEGRATE_WITH_ATL = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
+  static PRIORITIZE_TARGETS = 'prioritizeTargets';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
@@ -82,6 +83,15 @@ export default class Settings {
         onChange: () => window.location.reload(),
       }
     );
+
+    game.settings.register(Settings.PACKAGE_NAME, Settings.PRIORITIZE_TARGETS, {
+      name: 'Prioritize Targets',
+      hint: 'If enabled, effects will be applied to any targeted tokens instead of selected tokens.',
+      scope: 'client',
+      config: true,
+      default: false,
+      type: Boolean,
+    });
 
     game.settings.register(
       Settings.PACKAGE_NAME,
@@ -193,6 +203,18 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.MODIFY_STATUS_EFFECTS
+    );
+  }
+
+  /**
+   * Returns the game setting for prioritizing targets
+   *
+   * @returns {Boolean} true if targets should take first priority
+   */
+  get prioritizeTargets() {
+    return game.settings.get(
+      Settings.PACKAGE_NAME,
+      Settings.PRIORITIZE_TARGETS
     );
   }
 
