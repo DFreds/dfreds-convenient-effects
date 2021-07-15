@@ -113,7 +113,7 @@ export default class ConvenientEffectsController {
     return Dialog.confirm({
       title: 'Reset Status Effects',
       content:
-        '<h4>Are You Sure</h4><p>This will reset all configured status effects to the module defaults and reload the window.</p>',
+        '<h4>Are You Sure?</h4><p>This will reset all configured status effects to the module defaults and reload Foundry.',
       yes: async () => {
         await this._settings.resetStatusEffects();
         window.location.reload();
@@ -205,9 +205,7 @@ export default class ConvenientEffectsController {
       await this._settings.addStatusEffect(effectName);
     }
 
-    // ui.notifications.warn(
-    //   'Foundry must be reloaded to update token status effects'
-    // );
+    this._viewMvc.showReloadRequired();
     this._viewMvc.render();
   }
 

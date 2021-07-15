@@ -98,6 +98,15 @@ export default class ConvenientEffectsApp extends Application {
     this._allDirectories.addClass('collapsed');
   }
 
+  /**
+   * Indicate to the user that a reload is required to update status effects
+   */
+  showReloadRequired() {
+    ui.notifications.warn(
+      'Foundry must be reloaded to update token status effects.'
+    );
+  }
+
   _getFolderByName(folderName) {
     return this._rootView.find(`.folder[data-folder-label="${folderName}"]`);
   }
