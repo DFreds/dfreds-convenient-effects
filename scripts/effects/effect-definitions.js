@@ -218,29 +218,34 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'data.attributes.movement.burrow',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: '0.5',
+          priority: 5,
+        },
+        {
           key: 'data.attributes.movement.climb',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
-        },
-        {
-          key: 'data.attributes.movement.swim',
-          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
-          key: 'data.attributes.movement.burrow',
+          key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: '0.5',
+          priority: 5,
         },
       ],
     });
@@ -259,24 +264,34 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
-          key: 'data.attributes.movement.walk',
+          key: 'data.attributes.movement.burrow',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
-          key: 'data.attributes.movement.swim',
+          key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
-          key: 'data.attributes.movement.burrow',
+          key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: '0.5',
+          priority: 5,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -305,29 +320,34 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'data.attributes.movement.burrow',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: '0.5',
+          priority: 5,
+        },
+        {
           key: 'data.attributes.movement.climb',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
-        },
-        {
-          key: 'data.attributes.movement.swim',
-          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-          value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
-          key: 'data.attributes.movement.burrow',
+          key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          value: '0.5',
+          priority: 5,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -343,6 +363,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.hp.max',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
       ],
     });
@@ -361,29 +382,34 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'data.attributes.movement.burrow',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+          priority: 5,
+        },
+        {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
-        },
-        {
-          key: 'data.attributes.movement.walk',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
-        },
-        {
-          key: 'data.attributes.movement.swim',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '0',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
+          priority: 5,
         },
         {
-          key: 'data.attributes.movement.burrow',
+          key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
+          priority: 5,
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+          priority: 5,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -399,6 +425,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.hp.max',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
       ],
     });
@@ -753,6 +780,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '16',
+          priority: 5,
         },
       ],
     });
@@ -1023,6 +1051,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.senses.darkvision',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '60',
+          priority: 5,
         },
       ],
       atlChanges: [
@@ -1030,6 +1059,7 @@ export default class EffectDefinitions {
           key: 'ATL.dimSight',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '60',
+          priority: 5,
         },
       ],
     });
@@ -1158,6 +1188,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '60',
+          priority: 5,
         },
       ],
     });
@@ -1173,11 +1204,13 @@ export default class EffectDefinitions {
           key: 'data.abilities.int.value',
           mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
           value: '1',
+          priority: 5,
         },
         {
           key: 'data.abilities.cha.value',
           mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
           value: '1',
+          priority: 5,
         },
       ],
     });
@@ -1351,6 +1384,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.encumbrance.max',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '2',
+          priority: 5,
         },
       ],
     });
@@ -1513,26 +1547,31 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.burrow',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '2',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '2',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '2',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '2',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '2',
+          priority: 5,
         },
       ],
     });
@@ -1683,7 +1722,6 @@ export default class EffectDefinitions {
   }
 
   get _mageArmor() {
-    // TODO token magic effects
     return new Effect({
       name: 'Mage Armor',
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
@@ -1694,6 +1732,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '13 + @abilities.dex.mod',
+          priority: 5,
         },
       ],
     });
@@ -1945,26 +1984,31 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.burrow',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.swim',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
         {
           key: 'data.attributes.movement.walk',
           mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
           value: '0.5',
+          priority: 5,
         },
       ],
     });
@@ -1981,6 +2025,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '@attributes.movement.walk',
+          priority: 5,
         },
       ],
     });
