@@ -125,12 +125,12 @@ export default class DynamicEffectsAdder {
   }
 
   _determineRageBonusDamage(effect, barbarianClass) {
-    let rageDamage = '2';
+    let rageDamage = '+2';
 
     if (barbarianClass.data.data.levels > 15) {
-      rageDamage = '4';
+      rageDamage = '+4';
     } else if (barbarianClass.data.data.levels > 8) {
-      rageDamage = '3';
+      rageDamage = '+3';
     }
 
     effect.changes.push({
