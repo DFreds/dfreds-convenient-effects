@@ -80,7 +80,7 @@ export default class DynamicEffectsAdder {
       effect.changes.push({
         key: 'data.attributes.movement.burrow',
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '10',
+        value: '+10',
       });
     }
 
@@ -88,7 +88,7 @@ export default class DynamicEffectsAdder {
       effect.changes.push({
         key: 'data.attributes.movement.climb',
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '10',
+        value: '+10',
       });
     }
 
@@ -96,7 +96,7 @@ export default class DynamicEffectsAdder {
       effect.changes.push({
         key: 'data.attributes.movement.fly',
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '10',
+        value: '+10',
       });
     }
 
@@ -104,7 +104,7 @@ export default class DynamicEffectsAdder {
       effect.changes.push({
         key: 'data.attributes.movement.swim',
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '10',
+        value: '+10',
       });
     }
   }
