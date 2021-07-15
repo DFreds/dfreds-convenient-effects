@@ -1650,9 +1650,14 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Invisibility',
       description:
-        'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 hour',
+        'Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.',
       icon: 'systems/dnd5e/icons/spells/fog-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
+      flags: {
+        dae: {
+          specialDuration: ['1Attack'],
+        },
+      },
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
