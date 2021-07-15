@@ -54,9 +54,7 @@ export default class ConvenientEffectsController {
       .map((name) => {
         return game.dfreds.effects.all.find((effect) => effect.name == name);
       })
-      .filter((effect) => {
-        return effect;
-      })
+      .filter((effect) => effect)
       .sort((a, b) => {
         let nameA = a.name.toLowerCase();
         let nameB = b.name.toLowerCase();
@@ -163,7 +161,7 @@ export default class ConvenientEffectsController {
   /**
    * Handle adding the effect to the favorites settings and to the favorites folder
    *
-   * @param {jQuery} effectItem - jQuery element represented the effect list item
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
    */
   onAddFavorite(effectItem) {
     const effectName = effectItem.data().effectName;
@@ -178,7 +176,7 @@ export default class ConvenientEffectsController {
   /**
    * Handle removing the effect from the favorites settings and from the favorites folder
    *
-   * @param {jQuery} effectItem - jQuery element represented the effect list item
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
    */
   onRemoveFavorite(effectItem) {
     const effectName = effectItem.data().effectName;
@@ -203,9 +201,8 @@ export default class ConvenientEffectsController {
    * @param {DragEvent} event - event that corresponds to the drag over
    */
   onFolderDragOver(event) {
-    if (!this._isEventTargetFavorites(event)) {
-      return;
-    }
+    if (!this._isEventTargetFavorites(event)) return;
+
     event.preventDefault();
     this._viewMvc.addDropTargetClassToFavorites();
   }
@@ -216,9 +213,8 @@ export default class ConvenientEffectsController {
    * @param {DragEvent} event - event that corresponds to the drag leave
    */
   onFolderDragLeave(event) {
-    if (!this._isEventTargetFavorites(event)) {
-      return;
-    }
+    if (!this._isEventTargetFavorites(event)) return;
+
     event.preventDefault();
     this._viewMvc.removeDropTargetClassFromFavorites();
   }
