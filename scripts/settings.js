@@ -11,6 +11,7 @@ export default class Settings {
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
+  static STATUS_EFFECT_NAMES = 'statusEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
 
   /**
@@ -94,6 +95,18 @@ export default class Settings {
       }
     );
 
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.STATUS_EFFECT_NAMES,
+      {
+        name: 'Status Effect Names',
+        scope: 'world',
+        config: false,
+        default: this._defaultStatusEffectNames,
+        type: String,
+      }
+    );
+
     game.settings.register(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, {
       name: 'Expanded Folders',
       scope: 'client',
@@ -101,6 +114,32 @@ export default class Settings {
       default: 'Favorites',
       type: String,
     });
+  }
+
+  get _defaultStatusEffectNames() {
+    return [
+      'Blinded',
+      'Charmed',
+      'Concentrating',
+      'Dead',
+      'Deafened',
+      'Exhaustion 1',
+      'Exhaustion 2',
+      'Exhaustion 3',
+      'Exhaustion 4',
+      'Exhaustion 5',
+      'Frightened',
+      'Grappled',
+      'Incapacitated',
+      'Invisible',
+      'Paralyzed',
+      'Petrified',
+      'Poisoned',
+      'Prone',
+      'Restrained',
+      'Stunned',
+      'Unconscious',
+    ].join(';');
   }
 
   /**
