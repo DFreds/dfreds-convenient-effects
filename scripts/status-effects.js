@@ -12,20 +12,24 @@ export default class StatusEffects {
    * Initialize the token status effects based on the user configured settings.
    */
   initializeStatusEffects() {
-    const conditions = game.dfreds.effects.conditions;
     const statusEffectType = this._settings.statusEffectType;
 
     if (statusEffectType === 'replace') {
-      CONFIG.statusEffects = conditions.map((condition) => {
-        return condition.convertToActiveEffectData();
-      });
+      CONFIG.statusEffects = this._fetchStatusEffects();
     } else if (statusEffectType === 'add') {
       CONFIG.statusEffects = CONFIG.statusEffects.concat(
-        conditions.map((condition) => {
-          return condition.convertToActiveEffectData();
-        })
+        this._fetchStatusEffects()
       );
     }
+  }
+
+  _fetchStatusEffects() {
+    return this._settings.statusEffectNames
+      .map((name) =>
+        game.dfreds.effects.all.find((effect) => effect.name == name)
+      )
+      .filter((effect) => effect)
+      .map((effect) => effect.convertToActiveEffectData());
   }
 
   /**
