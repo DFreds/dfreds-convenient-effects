@@ -299,6 +299,17 @@ export default class Settings {
   }
 
   /**
+   * Reset status effects back to the original defaults
+   */
+  resetStatusEffects() {
+    game.settings.set(
+      Settings.PACKAGE_NAME,
+      Settings.STATUS_EFFECT_NAMES,
+      this._defaultStatusEffectNames
+    );
+  }
+
+  /**
    * Checks if the given effect name is a status effect
    *
    * @param {string} name - the effect name to search for
