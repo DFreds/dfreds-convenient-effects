@@ -13,10 +13,11 @@ Hooks.once('init', () => {
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectHandler = new EffectHandler();
+  game.dfreds.statusEffects = new StatusEffects();
 });
 
 Hooks.once('ready', () => {
-  new StatusEffects().initializeStatusEffects();
+  game.dfreds.statusEffects.initializeStatusEffects();
 });
 
 Hooks.once('setup', () => {
@@ -26,16 +27,11 @@ Hooks.once('setup', () => {
     MODULE_ID,
     'TokenHUD.prototype._onToggleEffect',
     function (wrapper, ...args) {
-      const [event] = args;
-      const statusEffectId = event.currentTarget.dataset.statusId;
-      if (statusEffectId.startsWith('Convenient Effect: ')) {
-        event.preventDefault();
-        event.stopPropagation();
-        const effectName = statusEffectId.replace('Convenient Effect: ', '');
-        game.dfreds.effectHandler.toggleStatusEffect(effectName, this.object);
-      } else {
-        wrapper(...args);
-      }
+      game.dfreds.statusEffects.onToggleEffect({
+        token: this.object,
+        wrapper,
+        args,
+      });
     }
   );
 });
