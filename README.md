@@ -32,6 +32,10 @@ This module  helps with the types of issues described above by providing dozens 
 
 ![Demo 3](docs/demo3.gif)
 
+### Demo Showcasing Adding Status Effects
+
+![Demo 4](docs/demo4.gif)
+
 ### Settings
 
 ![Settings](docs/settings.png)
