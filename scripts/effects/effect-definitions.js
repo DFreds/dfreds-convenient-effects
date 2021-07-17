@@ -1661,7 +1661,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
         dae: {
-          specialDuration: ['1Attack'],
+          specialDuration: ['1Attack', '1Spell'],
         },
       },
       changes: [
