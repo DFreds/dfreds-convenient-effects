@@ -574,8 +574,10 @@ export default class EffectDefinitions {
   get _unconscious() {
     return new Effect({
       name: 'Unconscious',
-      description: 'icons/svg/unconscious.svg',
+      description:
+        'Fail all dexterity and strength saves, grants advantage to all who attack, and all melee attacks are criticals',
       icon: 'icons/svg/unconscious.svg',
+      changes: [...this._paralyzed.changes, ...this._prone.changes],
     });
   }
 
