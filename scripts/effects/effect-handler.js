@@ -15,23 +15,28 @@ export default class EffectHandler {
    * Toggles an effect on or off by name
    *
    * @param {string} effectName - name of the effect to toggle
-   * @param {string[]} tokenNames - optional tokens to apply the effect to. If not provided, it will use the targeted or selected tokens
+   * @param {string[]} tokenIdentifiers - optional tokens to apply the effect to. If not provided, it will use the targeted or selected tokens
    */
-  async toggleEffect(effectName, ...tokenNames) {
-    const actorsToEffect = this._determineActorsToEffect(tokenNames);
+  async toggleEffect(effectName, ...tokenIdentifiers) {
+    const actorsToEffect = this._determineActorsToEffect(tokenIdentifiers);
     if (!actorsToEffect || actorsToEffect.length === 0) return;
 
     await this._toggleEffect(effectName, actorsToEffect);
   }
 
-  _determineActorsToEffect(tokenNames) {
-    const definedTokenNames = tokenNames.filter((tokenName) => tokenName);
-    if (definedTokenNames && definedTokenNames.length > 0) {
-      return tokenNames
-        .flatMap((tokenName) => {
-          return canvas.tokens.placeables.filter(
-            (placeable) => placeable.name === tokenName
-          );
+  _determineActorsToEffect(tokenIdentifiers) {
+    const definedTokenIdentifiers = tokenIdentifiers.filter(
+      (tokenIdentifier) => tokenIdentifier
+    );
+    if (definedTokenIdentifiers && definedTokenIdentifiers.length > 0) {
+      return definedTokenIdentifiers
+        .flatMap((tokenIdentifier) => {
+          return canvas.tokens.placeables.filter((placeable) => {
+            return (
+              placeable.id === tokenIdentifier ||
+              placeable.name === tokenIdentifier
+            );
+          });
         })
         .map((token) => token.actor);
     }
