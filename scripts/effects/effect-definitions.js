@@ -481,7 +481,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Prone',
       description:
-        'Grant advantage to all who melee attack and disadvantage to all who range attack',
+        'Grant advantage to all who melee attack, disadvantage to all who range attack, and disadvantage on all attacks',
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
       changes: [
         {
@@ -501,6 +501,11 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.rsak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
