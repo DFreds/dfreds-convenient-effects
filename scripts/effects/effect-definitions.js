@@ -427,6 +427,11 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
+        {
+          key: 'flags.midi-qol.grants.critical.msak',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
       ],
     });
   }
