@@ -2244,7 +2244,8 @@ export default class EffectDefinitions {
   get _dodge() {
     return new Effect({
       name: 'Dodge',
-      description: 'Grants disadvantage to all who attack until next turn',
+      description:
+        'Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn',
       icon: 'modules/dfreds-convenient-effects/images/dodging.svg',
       flags: {
         dae: {
@@ -2254,6 +2255,11 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.dex',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '1',
         },
