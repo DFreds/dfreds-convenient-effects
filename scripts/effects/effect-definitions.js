@@ -147,12 +147,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -199,7 +199,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -214,7 +214,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -236,7 +236,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -247,12 +247,12 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -268,7 +268,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -279,12 +279,12 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -306,7 +306,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -317,12 +317,12 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -343,12 +343,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -388,12 +388,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -409,27 +409,27 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.fail.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.fail.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.critical.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.critical.msak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -445,7 +445,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -470,12 +470,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -491,27 +491,27 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.msak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.rsak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.rsak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -527,17 +527,17 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -559,17 +559,17 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.fail.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.fail.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -675,12 +675,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.save.wis',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.advantage.deathSave',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -739,7 +739,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -781,12 +781,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.wis',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.wis',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         ...this._blinded.changes,
@@ -805,17 +805,17 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -833,7 +833,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.cha',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -856,12 +856,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.int',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.int',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -879,17 +879,17 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -907,12 +907,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.save.con',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.con',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -970,12 +970,12 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.advantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -999,12 +999,12 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1042,7 +1042,7 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1238,7 +1238,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.con',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1256,7 +1256,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -1279,7 +1279,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1296,7 +1296,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.cha',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1313,7 +1313,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.int',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1330,7 +1330,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.wis',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1348,12 +1348,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1402,7 +1402,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1424,7 +1424,7 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -1463,12 +1463,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1521,12 +1521,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1905,7 +1905,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1928,7 +1928,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -1967,17 +1967,17 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d6',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d6',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d6',
         },
       ],
@@ -1999,17 +1999,17 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d8',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d8',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d8',
         },
       ],
@@ -2031,17 +2031,17 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d10',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d10',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d10',
         },
       ],
@@ -2063,17 +2063,17 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.attack',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d12',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.save',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d12',
         },
         {
           key: 'flags.midi-qol.optional.bardic-inspiration.check',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d12',
         },
       ],
@@ -2149,12 +2149,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
@@ -2186,12 +2186,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -2262,12 +2262,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -2282,12 +2282,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.grants.advantage.attack.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.grants.advantage.attack.msak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -2302,12 +2302,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.advantage.attack.msak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -2344,22 +2344,22 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.str',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.dex',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.con',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
@@ -2374,12 +2374,12 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.rwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.rsak',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
       ],
