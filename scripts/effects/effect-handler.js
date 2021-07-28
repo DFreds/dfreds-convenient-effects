@@ -15,30 +15,22 @@ export default class EffectHandler {
    * Toggles an effect on or off by name
    *
    * @param {string} effectName - name of the effect to toggle
-   * @param {string[]} tokenIdentifiers - optional tokens to apply the effect to. If not provided, it will use the targeted or selected tokens
+   * @param {string[]} identifiers - optional ids to apply the effect to. If not provided, it will use the targeted or selected tokens
    */
-  async toggleEffect(effectName, ...tokenIdentifiers) {
-    const actorsToEffect = this._determineActorsToEffect(tokenIdentifiers);
+  async toggleEffect(effectName, ...identifiers) {
+    const actorsToEffect = this._determineActorsToEffect(identifiers);
     if (!actorsToEffect || actorsToEffect.length === 0) return;
 
     await this._toggleEffect(effectName, actorsToEffect);
   }
 
-  _determineActorsToEffect(tokenIdentifiers) {
-    const definedTokenIdentifiers = tokenIdentifiers.filter(
-      (tokenIdentifier) => tokenIdentifier
-    );
-    if (definedTokenIdentifiers && definedTokenIdentifiers.length > 0) {
-      return definedTokenIdentifiers
-        .flatMap((tokenIdentifier) => {
-          return canvas.tokens.placeables.filter((placeable) => {
-            return (
-              placeable.id === tokenIdentifier ||
-              placeable.name === tokenIdentifier
-            );
-          });
-        })
-        .map((token) => token.actor);
+  _determineActorsToEffect(identifiers) {
+    const definedIdentifiers = identifiers.filter((identifier) => identifier);
+    if (definedIdentifiers && definedIdentifiers.length > 0) {
+      return [
+        ...this._findPlaceablesThatMatch(identifiers),
+        ...this._findActorsThatMatch(identifiers),
+      ];
     }
 
     if (canvas.tokens.controlled.length == 0 && game.user.targets.size == 0) {
@@ -53,6 +45,24 @@ export default class EffectHandler {
     } else {
       return canvas.tokens.controlled.map((token) => token.actor);
     }
+  }
+
+  _findPlaceablesThatMatch(identifiers) {
+    return identifiers
+      .flatMap((identifier) => {
+        return canvas.tokens.placeables.filter((placeable) => {
+          return placeable.id === identifier || placeable.name === identifier;
+        });
+      })
+      .map((token) => token.actor);
+  }
+
+  _findActorsThatMatch(identifiers) {
+    return identifiers.flatMap((identifier) => {
+      return game.actors.filter((actor) => {
+        return actor.uuid === identifier || actor.id === identifier;
+      });
+    });
   }
 
   /**
