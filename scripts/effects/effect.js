@@ -33,9 +33,10 @@ export default class Effect {
   /**
    * Converts the effect data to an active effect data object
    *
+   * @param {string} origin - the origin to add to the effect
    * @returns The active effect data object for this effect
    */
-  convertToActiveEffectData() {
+  convertToActiveEffectData(origin) {
     return {
       id: this._id,
       name: this.name,
@@ -48,6 +49,7 @@ export default class Effect {
         },
         isConvenient: true,
       }),
+      origin: origin,
       changes: this.changes,
     };
   }
