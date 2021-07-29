@@ -155,7 +155,7 @@ export default class Settings {
   /**
    * Returns the game setting for allow for players
    *
-   * @returns {Boolean} true if players can use the effects
+   * @returns {boolean} true if players can use the effects
    */
   get allowForPlayers() {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.ALLOW_FOR_PLAYERS);
@@ -164,7 +164,7 @@ export default class Settings {
   /**
    * Returns the game setting for chat message type
    *
-   * @returns {String} a string representing the chosen chat message type
+   * @returns {string} a string representing the chosen chat message type
    */
   get chatMessageType() {
     return game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE);
@@ -173,7 +173,7 @@ export default class Settings {
   /**
    * Returns the game setting for integrating with ATL
    *
-   * @returns {Boolean} true if integration with ATL is enabled
+   * @returns {boolean} true if integration with ATL is enabled
    */
   get integrateWithAtl() {
     return game.settings.get(
@@ -185,7 +185,7 @@ export default class Settings {
   /**
    * Returns the game setting for integrating with Token Magic
    *
-   * @returns {Boolean} true if integration with Token Magic is enabled
+   * @returns {boolean} true if integration with Token Magic is enabled
    */
   get integrateWithTokenMagic() {
     return game.settings.get(
@@ -197,7 +197,7 @@ export default class Settings {
   /**
    * Returns the game setting for status effect type
    *
-   * @returns {String} a string representing the chosen status effect type
+   * @returns {string} a string representing the chosen status effect type
    */
   get statusEffectType() {
     return game.settings.get(
@@ -209,7 +209,7 @@ export default class Settings {
   /**
    * Returns the game setting for prioritizing targets
    *
-   * @returns {Boolean} true if targets should take first priority
+   * @returns {boolean} true if targets should take first priority
    */
   get prioritizeTargets() {
     return game.settings.get(
