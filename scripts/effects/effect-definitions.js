@@ -81,7 +81,7 @@ export default class EffectDefinitions {
       this._guidance,
       this._guidingBolt,
       this._haste,
-      // this._heroesFeast, // TODO when the issue with aid increasing current/max hp is fixed
+      this._heroesFeast,
       this._heroism,
       this._holyAura,
       this._huntersMark,
@@ -1427,6 +1427,36 @@ export default class EffectDefinitions {
     });
   }
 
+  get _heroesFeast() {
+    return new Effect({
+      name: "Heroes' Feast",
+      description:
+        'Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours',
+      icon: 'systems/dnd5e/icons/spells/heal-royal-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_DAY,
+      flags: {
+        requiresActorUpdate: true,
+      },
+      changes: [
+        {
+          key: 'data.traits.di.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'poison',
+        },
+        {
+          key: 'data.traits.ci.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'frightened',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.wis',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _heroism() {
     return new Effect({
       name: 'Heroism',
@@ -1759,7 +1789,7 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'data.traits.dr.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: 'poison',
         },
       ],
