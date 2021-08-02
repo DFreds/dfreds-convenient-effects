@@ -101,6 +101,7 @@ export default class EffectDefinitions {
       this._protectionFromEnergyThunder,
       this._protectionFromPoison,
 
+      this._resilientSphere,
       // this._resistance, // TODO when we can ask if they want to spend it
       this._shield,
       this._shieldOfFaith,
@@ -1771,6 +1772,28 @@ export default class EffectDefinitions {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD, // TODO
           value: 'poison',
+        },
+      ],
+    });
+  }
+
+  get _resilientSphere() {
+    return new Effect({
+      name: 'Resilient Sphere',
+      description: 'Adds total immunity to all damage and half movement',
+      icon: 'systems/dnd5e/icons/spells/light-magenta-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '*0.5',
+          priority: 5,
+        },
+        {
+          key: 'data.traits.di.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
         },
       ],
     });
