@@ -39,7 +39,7 @@ export default class EffectDefinitions {
 
   get spells() {
     return [
-      // this._aid,
+      this._aid,
       this._bane,
       this._barkskin,
       this._beaconOfHope,
@@ -588,28 +588,17 @@ export default class EffectDefinitions {
   }
 
   /* Spell Effects */
-
-  // TODO put back in when weird auto add HP is fixed
-  // get _aid() {
-  //   return new Effect({
-  //     name: 'Aid',
-  //     description: 'Add 5 to current and maximum hit points for 8 hours',
-  //     icon: 'systems/dnd5e/icons/spells/heal-sky-1.jpg',
-  //     seconds: Constants.SECONDS.IN_EIGHT_HOURS,
-  //     changes: [
-  //       {
-  //         key: 'data.attributes.hp.tempmax',
-  //         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-  //         value: '+5',
-  //       },
-  //       {
-  //         key: 'data.attributes.hp.temp',
-  //         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-  //         value: '+5',
-  //       },
-  //     ],
-  //   });
-  // }
+  get _aid() {
+    return new Effect({
+      name: 'Aid',
+      description: 'Add 5 to current and maximum hit points for 8 hours',
+      icon: 'systems/dnd5e/icons/spells/heal-sky-1.jpg',
+      seconds: Constants.SECONDS.IN_EIGHT_HOURS,
+      flags: {
+        requiresActorUpdate: true,
+      },
+    });
+  }
 
   get _bane() {
     return new Effect({

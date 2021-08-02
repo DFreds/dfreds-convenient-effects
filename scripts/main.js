@@ -1,4 +1,5 @@
 import Controls from './controls.js';
+import ActorUpdater from './effects/actor-updater.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectHandler from './effects/effect-handler.js';
 import HandlebarHelpers from './handlebar-helpers.js';
@@ -43,6 +44,14 @@ Hooks.on('getSceneControlButtons', (controls) => {
 Hooks.on('preCreateActiveEffect', async (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
+  if (activeEffect?.data?.flags?.requiresActorUpdate) {
+    const actorUpdater = new ActorUpdater();
+    await actorUpdater.addActorDataChanges(
+      activeEffect?.data?.label,
+      activeEffect?.parent
+    );
+  }
+
   game.dfreds.effectHandler.createChatForEffect({
     effectName: activeEffect?.data?.label,
     reason: 'Applied to',
@@ -56,6 +65,14 @@ Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
     activeEffect?.duration?.remaining <= 0;
 
   if (!activeEffect?.data?.flags?.isConvenient) return;
+
+  if (activeEffect?.data?.flags?.requiresActorUpdate) {
+    const actorUpdater = new ActorUpdater();
+    await actorUpdater.removeActorDataChanges(
+      activeEffect?.data?.label,
+      activeEffect?.parent
+    );
+  }
 
   game.dfreds.effectHandler.createChatForEffect({
     effectName: activeEffect?.data?.label,
