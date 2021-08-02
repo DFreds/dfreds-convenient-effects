@@ -1854,7 +1854,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Slow',
       description:
-        'Halves speed and and subtract 2 from AC and dexterity saving throws for 1 minute',
+        'Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/fog-magenta-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
