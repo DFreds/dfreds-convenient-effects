@@ -57,17 +57,9 @@ Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
 
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
-  if (isExpired) {
-    game.dfreds.effectHandler.createChatForEffect({
-      effectName: activeEffect?.data?.label,
-      reason: 'Expired from',
-      actor: activeEffect?.parent,
-    });
-  } else {
-    game.dfreds.effectHandler.createChatForEffect({
-      effectName: activeEffect?.data?.label,
-      reason: 'Removed from',
-      actor: activeEffect?.parent,
-    });
-  }
+  game.dfreds.effectHandler.createChatForEffect({
+    effectName: activeEffect?.data?.label,
+    reason: isExpired ? 'Expired from' : 'Removed from',
+    actor: activeEffect?.parent,
+  });
 });
