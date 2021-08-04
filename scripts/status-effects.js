@@ -12,11 +12,11 @@ export default class StatusEffects {
    * Initialize the token status effects based on the user configured settings.
    */
   initializeStatusEffects() {
-    const statusEffectType = this._settings.statusEffectType;
+    const modifyStatusEffects = this._settings.modifyStatusEffects;
 
-    if (statusEffectType === 'replace') {
+    if (modifyStatusEffects === 'replace') {
       CONFIG.statusEffects = this._fetchStatusEffects();
-    } else if (statusEffectType === 'add') {
+    } else if (modifyStatusEffects === 'add') {
       CONFIG.statusEffects = CONFIG.statusEffects.concat(
         this._fetchStatusEffects()
       );

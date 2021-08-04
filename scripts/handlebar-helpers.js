@@ -20,7 +20,7 @@ export default class HandlebarHelpers {
   _registerIsStatusEffectHelper() {
     Handlebars.registerHelper('isStatusEffect', (effect, options) => {
       if (
-        this._settings.statusEffectType !== 'none' &&
+        this._settings.modifyStatusEffects !== 'none' &&
         this._settings.isStatusEffect(effect.name)
       ) {
         return options.fn(this);

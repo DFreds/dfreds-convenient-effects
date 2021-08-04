@@ -199,7 +199,7 @@ export default class Settings {
    *
    * @returns {string} a string representing the chosen status effect type
    */
-  get statusEffectType() {
+  get modifyStatusEffects() {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.MODIFY_STATUS_EFFECTS
