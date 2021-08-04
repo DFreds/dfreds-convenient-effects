@@ -23,7 +23,7 @@ export default class ActorUpdater {
   }
 
   async _addAidEffects(actor) {
-    await actor.data.update({
+    await actor.update({
       'data.attributes.hp.max': actor.data.data.attributes.hp.max + 5,
       'data.attributes.hp.value': actor.data.data.attributes.hp.value + 5,
     });
@@ -33,7 +33,7 @@ export default class ActorUpdater {
     const roll = new Roll('2d6');
     const evaluation = await roll.evaluate({ async: true });
 
-    await actor.data.update({
+    await actor.update({
       'data.attributes.hp.temp': evaluation.total,
     });
   }
@@ -42,7 +42,7 @@ export default class ActorUpdater {
     const roll = new Roll('2d10');
     const evaluation = await roll.evaluate({ async: true });
 
-    await actor.data.update({
+    await actor.update({
       'data.attributes.hp.max':
         actor.data.data.attributes.hp.max + evaluation.total,
       'data.attributes.hp.value':
@@ -79,19 +79,19 @@ export default class ActorUpdater {
     const newMax = actor.data.data.attributes.hp.max - 5;
     const value = actor.data.data.attributes.hp.value;
 
-    await actor.data.update({
+    await actor.update({
       'data.attributes.hp.max': newMax,
     });
 
     if (value > newMax) {
-      await actor.data.update({
+      await actor.update({
         'data.attributes.hp.value': newMax,
       });
     }
   }
 
   async _removeBearsEnduranceEffects(actor) {
-    await actor.data.update({
+    await actor.update({
       'data.attributes.hp.temp': 0,
     });
   }
@@ -102,12 +102,12 @@ export default class ActorUpdater {
     const newMax = actor.data.data.attributes.hp.max - total;
     const value = actor.data.data.attributes.hp.value;
 
-    await actor.data.update({
+    await actor.update({
       'data.attributes.hp.max': newMax,
     });
 
     if (value > newMax) {
-      await actor.data.update({
+      await actor.update({
         'data.attributes.hp.value': newMax,
       });
     }
