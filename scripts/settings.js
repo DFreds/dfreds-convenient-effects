@@ -5,11 +5,11 @@ export default class Settings {
   static PACKAGE_NAME = 'dfreds-convenient-effects';
 
   // Settings keys
-  static CHAT_MESSAGE_TYPE = 'chatMessageType';
+  static CHAT_MESSAGE_PERMISSION = 'chatMessagePermission';
+  static CONTROLS_PERMISSION = 'controlsPermission';
   static INTEGRATE_WITH_ATL = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
-  static PERMISSION_LEVEL_TO_USE = 'permissionLevelToUse';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
 
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
@@ -29,9 +29,23 @@ export default class Settings {
 
     game.settings.register(
       Settings.PACKAGE_NAME,
-      Settings.PERMISSION_LEVEL_TO_USE,
+      Settings.CHAT_MESSAGE_PERMISSION,
       {
-        name: 'Permission Level to Use',
+        name: 'Chat Message Permission',
+        hint: 'This defines the minimum permission level to see chat messages when effects are applied, removed, or expire. Setting this to None will never show chat messages.',
+        scope: 'world',
+        config: true,
+        default: CONST.USER_ROLES.GAMEMASTER,
+        choices: userRoles,
+        type: String,
+      }
+    );
+
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.CONTROLS_PERMISSION,
+      {
+        name: 'Controls Permission',
         hint: 'This defines the minimum permission level to see and apply Convenient Effects via the token controls. Setting this to None will disable the controls entirely.',
         scope: 'world',
         config: true,
@@ -41,16 +55,6 @@ export default class Settings {
         onChange: () => window.location.reload(),
       }
     );
-
-    game.settings.register(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE, {
-      name: 'Chat Message Type',
-      hint: 'This defines the minimum permission level to see chat messages when effects are applied, removed, or expire. Setting this to None will never show chat messages.',
-      scope: 'world',
-      config: true,
-      default: CONST.USER_ROLES.GAMEMASTER,
-      choices: userRoles,
-      type: String,
-    });
 
     game.settings.register(Settings.PACKAGE_NAME, Settings.INTEGRATE_WITH_ATL, {
       name: 'Integrate with ATL',
@@ -162,13 +166,24 @@ export default class Settings {
   }
 
   /**
-   * Returns the game setting for chat message type
+   * Returns the game setting for chat message permission
    *
    * @returns {number} a number representing the chosen role
    */
-  get chatMessageType() {
+  get chatMessagePermission() {
     return parseInt(
-      game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE)
+      game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_PERMISSION)
+    );
+  }
+
+  /**
+   * Returns the game setting for controls permission
+   *
+   * @returns {number} a number representing the chosen role
+   */
+  get controlsPermission() {
+    return parseInt(
+      game.settings.get(Settings.PACKAGE_NAME, Settings.CONTROLS_PERMISSION)
     );
   }
 
@@ -205,17 +220,6 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.MODIFY_STATUS_EFFECTS
-    );
-  }
-
-  /**
-   * Returns the game setting for permission to use
-   *
-   * @returns {number} a number representing the chosen role
-   */
-  get permissionLevelToUse() {
-    return parseInt(
-      game.settings.get(Settings.PACKAGE_NAME, Settings.PERMISSION_LEVEL_TO_USE)
     );
   }
 

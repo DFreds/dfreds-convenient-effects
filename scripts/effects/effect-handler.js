@@ -241,7 +241,8 @@ export default class EffectHandler {
    */
   async createChatForEffect({ effectName, reason, actor }) {
     // Handle if it set to None
-    if (this._settings.chatMessageType > CONST.USER_ROLES.GAMEMASTER) return;
+    if (this._settings.chatMessagePermission > CONST.USER_ROLES.GAMEMASTER)
+      return;
 
     const effect = game.dfreds.effects.all.find(
       (effect) => effect.name == effectName
@@ -254,10 +255,12 @@ export default class EffectHandler {
     await ChatMessage.create({
       user: game.userId,
       whisper:
-        this._settings.chatMessageType === CONST.USER_ROLES.PLAYER
+        this._settings.chatMessagePermission === CONST.USER_ROLES.PLAYER
           ? undefined
           : game.users
-              .filter((user) => user.role >= this._settings.chatMessageType)
+              .filter(
+                (user) => user.role >= this._settings.chatMessagePermission
+              )
               .map((user) => user.id),
       content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
          <p>${effect.description}</p>

@@ -30,7 +30,7 @@ export default class Controls {
       title: 'Add Convenient Effects',
       icon: 'fas fa-hand-sparkles',
       button: true,
-      visible: game.user.role >= this._settings.permissionLevelToUse,
+      visible: game.user.role >= this._settings.controlsPermission,
       onClick: this._handleConvenientEffectsClick,
     };
   }
@@ -45,7 +45,7 @@ export default class Controls {
       title: 'Remove All Convenient Effects',
       icon: 'fas fa-trash-alt',
       button: true,
-      visible: game.user.role >= this._settings.permissionLevelToUse,
+      visible: game.user.role >= this._settings.controlsPermission,
       onClick: this._handleRemoveAllClick,
     };
   }
