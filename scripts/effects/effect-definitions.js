@@ -1217,7 +1217,7 @@ export default class EffectDefinitions {
       name: 'Enhance Ability',
       description:
         "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
-      icon: 'systems/dnd5e/icons/spells/haste-royal-1.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       nestedEffects: [
         this._enhanceAbilityBearsEndurance,
         this._enhanceAbilityBullsStrength,
@@ -1234,7 +1234,7 @@ export default class EffectDefinitions {
       name: "Bear's Endurance",
       description:
         'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
-      icon: 'systems/dnd5e/icons/skills/red_01.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
@@ -1255,7 +1255,7 @@ export default class EffectDefinitions {
       name: "Bull's Strength",
       description:
         'Advantage on strength checks and double maximum carrying capacity for 1 hour',
-      icon: 'systems/dnd5e/icons/skills/red_23.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1278,7 +1278,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Cat's Grace",
       description: 'Advantage on dexterity checks for 1 hour',
-      icon: 'systems/dnd5e/icons/skills/emerald_07.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1295,7 +1295,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Eagle's Splendor",
       description: 'Advantage on charisma checks for 1 hour',
-      icon: 'systems/dnd5e/icons/skills/violet_18.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1312,7 +1312,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Fox's Cunning",
       description: 'Advantage on intelligence checks for 1 hour',
-      icon: 'systems/dnd5e/icons/skills/emerald_11.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1329,7 +1329,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Owl's Wisdom",
       description: 'Advantage on wisdom checks for 1 hour',
-      icon: 'systems/dnd5e/icons/skills/nature_01.jpg',
+      icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
