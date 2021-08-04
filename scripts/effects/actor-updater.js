@@ -22,19 +22,19 @@ export default class ActorUpdater {
     }
   }
 
+  async _addAidEffects(actor) {
+    await actor.data.update({
+      'data.attributes.hp.max': actor.data.data.attributes.hp.max + 5,
+      'data.attributes.hp.value': actor.data.data.attributes.hp.value + 5,
+    });
+  }
+
   async _addBearsEnduranceEffects(actor) {
     const roll = new Roll('2d6');
     const evaluation = await roll.evaluate({ async: true });
 
     await actor.data.update({
       'data.attributes.hp.temp': evaluation.total,
-    });
-  }
-
-  async _addAidEffects(actor) {
-    await actor.data.update({
-      'data.attributes.hp.max': actor.data.data.attributes.hp.max + 5,
-      'data.attributes.hp.value': actor.data.data.attributes.hp.value + 5,
     });
   }
 
