@@ -24,7 +24,7 @@ export default class ActorUpdater {
 
   async _addAidEffects(actor) {
     await actor.update({
-      'data.attributes.hp.max': actor.data.data.attributes.hp.max + 5,
+      'data.attributes.hp.tempmax': actor.data.data.attributes.hp.tempmax + 5,
       'data.attributes.hp.value': actor.data.data.attributes.hp.value + 5,
     });
   }
@@ -43,8 +43,8 @@ export default class ActorUpdater {
     const evaluation = await roll.evaluate({ async: true });
 
     await actor.update({
-      'data.attributes.hp.max':
-        actor.data.data.attributes.hp.max + evaluation.total,
+      'data.attributes.hp.tempmax':
+        actor.data.data.attributes.hp.tempmax + evaluation.total,
       'data.attributes.hp.value':
         actor.data.data.attributes.hp.value + evaluation.total,
       flags: foundry.utils.mergeObject(actor.data.flags, {
@@ -76,16 +76,17 @@ export default class ActorUpdater {
   }
 
   async _removeAidEffects(actor) {
-    const newMax = actor.data.data.attributes.hp.max - 5;
+    const newTempMax = actor.data.data.attributes.hp.tempmax - 5;
     const value = actor.data.data.attributes.hp.value;
+    const max = actor.data.data.attributes.hp.max;
 
     await actor.update({
-      'data.attributes.hp.max': newMax,
+      'data.attributes.hp.tempmax': newTempMax,
     });
 
-    if (value > newMax) {
+    if (value > max + newTempMax) {
       await actor.update({
-        'data.attributes.hp.value': newMax,
+        'data.attributes.hp.value': max + newTempMax,
       });
     }
   }
@@ -99,16 +100,17 @@ export default class ActorUpdater {
   async _removeHeroesFeastEffects(actor) {
     const total = actor.data.flags.convenientEffects.heroesFeastRoll;
 
-    const newMax = actor.data.data.attributes.hp.max - total;
+    const newTempMax = actor.data.data.attributes.hp.tempmax - total;
     const value = actor.data.data.attributes.hp.value;
+    const max = actor.data.data.attributes.hp.max;
 
     await actor.update({
-      'data.attributes.hp.max': newMax,
+      'data.attributes.hp.tempmax': newTempMax,
     });
 
-    if (value > newMax) {
+    if (value > max + newTempMax) {
       await actor.update({
-        'data.attributes.hp.value': newMax,
+        'data.attributes.hp.value': max + newTempMax,
       });
     }
   }
