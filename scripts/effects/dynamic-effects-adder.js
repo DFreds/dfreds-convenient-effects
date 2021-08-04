@@ -10,9 +10,6 @@ export default class DynamicEffectsAdder {
    */
   async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
-      case "bear's endurance":
-        await this._addEnhanceAbilityBearsEnduranceEffects(effect);
-        break;
       case 'encumbered':
         this._addEncumbranceEffects({ effect, actor, value: 10 });
         break;
@@ -26,17 +23,6 @@ export default class DynamicEffectsAdder {
         this._addRageEffects(effect, actor);
         break;
     }
-  }
-
-  async _addEnhanceAbilityBearsEnduranceEffects(effect) {
-    const roll = new Roll('2d6');
-    const evaluation = await roll.evaluate({ async: true });
-
-    effect.changes.push({
-      key: 'data.attributes.hp.temp',
-      mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-      value: evaluation.total,
-    });
   }
 
   _addEncumbranceEffects({ effect, actor, value }) {

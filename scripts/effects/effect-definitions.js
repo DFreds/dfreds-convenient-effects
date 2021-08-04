@@ -1222,9 +1222,11 @@ export default class EffectDefinitions {
       description:
         'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isDynamic: true,
       isViewable: false,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
+      flags: {
+        requiresActorUpdate: true,
+      },
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.con',
