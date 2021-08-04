@@ -76,11 +76,22 @@ export default class EffectHandler {
   }
 
   async _toggleEffect(effectName, actors) {
+    let effect = this._findEffectByName(effectName);
+
+    if (!effect) {
+      ui.notifications.error(`Effect ${effectName} was not found`);
+      return;
+    }
+
+    if (effect.nestedEffects.length > 0) {
+      effect = await this._getNestedEffectSelection(effect);
+    }
+
     for (const actor of actors) {
-      if (this.hasEffectApplied(effectName, actor)) {
-        await this.removeEffect(effectName, actor);
+      if (this.hasEffectApplied(effect.name, actor)) {
+        await this.removeEffect(effect.name, actor);
       } else {
-        await this.addEffect({ effectName, actor });
+        await this.addEffect({ effectName: effect.name, actor });
       }
     }
   }
@@ -108,7 +119,7 @@ export default class EffectHandler {
    * @param {Actor5e} actor - the actor to remove the effect from
    */
   async removeEffect(effectName, actor) {
-    const effect = this._findEffectByName(effectName);
+    let effect = this._findEffectByName(effectName);
 
     if (!effect) {
       ui.notifications.error(`Effect ${effectName} was not found`);
@@ -144,7 +155,7 @@ export default class EffectHandler {
    * @param {string} origin - the origin to add to the effect
    */
   async addEffect({ effectName, actor, origin }) {
-    const effect = this._findEffectByName(effectName);
+    let effect = this._findEffectByName(effectName);
 
     if (!effect) {
       ui.notifications.error(`Effect ${effectName} was not found`);
