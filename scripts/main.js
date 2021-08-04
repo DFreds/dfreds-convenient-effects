@@ -41,16 +41,8 @@ Hooks.on('getSceneControlButtons', (controls) => {
   new Controls().initializeControls(controls);
 });
 
-Hooks.on('preCreateActiveEffect', async (activeEffect, config, userId) => {
+Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
-
-  if (activeEffect?.data?.flags?.requiresActorUpdate) {
-    const actorUpdater = new ActorUpdater();
-    await actorUpdater.addActorDataChanges(
-      activeEffect?.data?.label,
-      activeEffect?.parent
-    );
-  }
 
   game.dfreds.effectHandler.createChatForEffect({
     effectName: activeEffect?.data?.label,
@@ -59,24 +51,40 @@ Hooks.on('preCreateActiveEffect', async (activeEffect, config, userId) => {
   });
 });
 
-Hooks.on('preDeleteActiveEffect', async (activeEffect, config, userId) => {
-  const isExpired =
-    activeEffect?.duration?.remaining !== null &&
-    activeEffect?.duration?.remaining <= 0;
-
+Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
     const actorUpdater = new ActorUpdater();
-    await actorUpdater.removeActorDataChanges(
+    actorUpdater.addActorDataChanges(
       activeEffect?.data?.label,
       activeEffect?.parent
     );
   }
+});
+
+Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
+  if (!activeEffect?.data?.flags?.isConvenient) return;
+
+  const isExpired =
+    activeEffect?.duration?.remaining !== null &&
+    activeEffect?.duration?.remaining <= 0;
 
   game.dfreds.effectHandler.createChatForEffect({
     effectName: activeEffect?.data?.label,
     reason: isExpired ? 'Expired from' : 'Removed from',
     actor: activeEffect?.parent,
   });
+});
+
+Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
+  if (!activeEffect?.data?.flags?.isConvenient) return;
+
+  if (activeEffect?.data?.flags?.requiresActorUpdate) {
+    const actorUpdater = new ActorUpdater();
+    actorUpdater.removeActorDataChanges(
+      activeEffect?.data?.label,
+      activeEffect?.parent
+    );
+  }
 });
