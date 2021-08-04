@@ -5,12 +5,13 @@ export default class Settings {
   static PACKAGE_NAME = 'dfreds-convenient-effects';
 
   // Settings keys
-  static ALLOW_FOR_PLAYERS = 'allowForPlayers';
   static CHAT_MESSAGE_TYPE = 'chatMessageType';
   static INTEGRATE_WITH_ATL = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
+  static PERMISSION_LEVEL_TO_USE = 'permissionLevelToUse';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
+
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
@@ -19,27 +20,35 @@ export default class Settings {
    * Register all the settings for the module
    */
   registerSettings() {
-    game.settings.register(Settings.PACKAGE_NAME, Settings.ALLOW_FOR_PLAYERS, {
-      name: 'Players Can See',
-      hint: 'If enabled, players can see the effects and toggle them on or off. Requires a Foundry reload on change.',
-      scope: 'world',
-      config: true,
-      default: false,
-      type: Boolean,
-      onChange: () => window.location.reload(),
-    });
+    const userRoles = {};
+    userRoles[CONST.USER_ROLES.PLAYER] = 'Player';
+    userRoles[CONST.USER_ROLES.TRUSTED] = 'Trusted Player';
+    userRoles[CONST.USER_ROLES.ASSISTANT] = 'Assistant GM';
+    userRoles[CONST.USER_ROLES.GAMEMASTER] = 'Game Master';
+    userRoles[5] = 'None';
+
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.PERMISSION_LEVEL_TO_USE,
+      {
+        name: 'Permission Level to Use',
+        hint: 'This defines the minimum permission level to see and apply Convenient Effects via the token controls. Setting this to None will disable the controls entirely.',
+        scope: 'world',
+        config: true,
+        default: CONST.USER_ROLES.GAMEMASTER,
+        choices: userRoles,
+        type: String,
+        onChange: () => window.location.reload(),
+      }
+    );
 
     game.settings.register(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE, {
       name: 'Chat Message Type',
-      hint: 'This is how chat messages will be displayed when effects are applied, removed, or expire.',
+      hint: 'This defines the minimum permission level to see chat messages when effects are applied, removed, or expire. Setting this to None will never show chat messages.',
       scope: 'world',
       config: true,
-      default: 'gmOnly',
-      choices: {
-        none: 'None',
-        gmOnly: 'GM Only',
-        everyone: 'Everyone',
-      },
+      default: CONST.USER_ROLES.GAMEMASTER,
+      choices: userRoles,
       type: String,
     });
 
@@ -153,21 +162,14 @@ export default class Settings {
   }
 
   /**
-   * Returns the game setting for allow for players
-   *
-   * @returns {boolean} true if players can use the effects
-   */
-  get allowForPlayers() {
-    return game.settings.get(Settings.PACKAGE_NAME, Settings.ALLOW_FOR_PLAYERS);
-  }
-
-  /**
    * Returns the game setting for chat message type
    *
-   * @returns {string} a string representing the chosen chat message type
+   * @returns {number} a number representing the chosen role
    */
   get chatMessageType() {
-    return game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE);
+    return parseInt(
+      game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_TYPE)
+    );
   }
 
   /**
@@ -203,6 +205,17 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.MODIFY_STATUS_EFFECTS
+    );
+  }
+
+  /**
+   * Returns the game setting for permission to use
+   *
+   * @returns {number} a number representing the chosen role
+   */
+  get permissionLevelToUse() {
+    return parseInt(
+      game.settings.get(Settings.PACKAGE_NAME, Settings.PERMISSION_LEVEL_TO_USE)
     );
   }
 
