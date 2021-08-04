@@ -16,6 +16,9 @@ export default class ActorUpdater {
       case "bear's endurance":
         await this._addBearsEnduranceEffects(actor);
         break;
+      case 'false life':
+        await this._addFalseLifeEffects(actor);
+        break;
       case "heroes' feast":
         await this._addHeroesFeastEffects(actor);
         break;
@@ -31,6 +34,15 @@ export default class ActorUpdater {
 
   async _addBearsEnduranceEffects(actor) {
     const roll = new Roll('2d6');
+    const evaluation = await roll.evaluate({ async: true });
+
+    await actor.update({
+      'data.attributes.hp.temp': evaluation.total,
+    });
+  }
+
+  async _addFalseLifeEffects(actor) {
+    const roll = new Roll('1d4 + 4');
     const evaluation = await roll.evaluate({ async: true });
 
     await actor.update({
@@ -69,6 +81,9 @@ export default class ActorUpdater {
       case "bear's endurance":
         await this._removeBearsEnduranceEffects(actor);
         break;
+      case 'false life':
+        await this._removeFalseLifeEffects(actor);
+        break;
       case "heroes' feast":
         await this._removeHeroesFeastEffects(actor);
         break;
@@ -92,6 +107,12 @@ export default class ActorUpdater {
   }
 
   async _removeBearsEnduranceEffects(actor) {
+    await actor.update({
+      'data.attributes.hp.temp': 0,
+    });
+  }
+
+  async _removeFalseLifeEffects(actor) {
     await actor.update({
       'data.attributes.hp.temp': 0,
     });

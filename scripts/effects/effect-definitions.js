@@ -39,7 +39,7 @@ export default class EffectDefinitions {
 
   get spells() {
     return [
-      this._aid,
+      this._aid, // TODO figure out higher level casting
       this._bane,
       this._barkskin,
       this._beaconOfHope,
@@ -70,7 +70,7 @@ export default class EffectDefinitions {
 
       this._faerieFire,
       this._feeblemind,
-      // this._falseLife, // TODO when we figure out higher level casting
+      this._falseLife, // TODO figure out higher level casting
 
       this._fireShield,
       this._fireShieldColdResistance,
@@ -1082,6 +1082,19 @@ export default class EffectDefinitions {
           priority: 5,
         },
       ],
+    });
+  }
+
+  get _falseLife() {
+    return new Effect({
+      name: 'False Life',
+      description:
+        'Add 1d4 + 4 temp hit points (rolled automatically) for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/heal-royal-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      flags: {
+        requiresActorUpdate: true,
+      },
     });
   }
 
