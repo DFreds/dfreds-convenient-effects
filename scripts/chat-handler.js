@@ -1,5 +1,8 @@
 import Settings from './settings.js';
 
+/**
+ * Handles creating chats for applied and removed effects
+ */
 export default class ChatHandler {
   constructor() {
     this._settings = new Settings();

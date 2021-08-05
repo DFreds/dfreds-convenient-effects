@@ -14,27 +14,22 @@ export default class EffectHandler {
   }
 
   /**
-   * Toggles an effect on or off by name on an actor by UUID
+   * Searches through the list of available effects and returns one matching the
+   * effect name
    *
-   * @param {string} effectName - name of the effect to toggle
-   * @param {string[]} uuids - uuids to apply the effect to
+   * @param {string} effectName - the effect name to search for
+   * @returns {Effect} the found effect
    */
-  async toggleEffect(effectName, ...uuids) {
-    let effect = this.findEffectByName(effectName);
-
-    for (const uuid of uuids) {
-      if (await this.hasEffectApplied(effectName, uuid)) {
-        await this.removeEffect(effect.name, uuid);
-      } else {
-        await this.addEffect(effect.name, uuid);
-      }
-    }
-  }
-
   findEffectByName(effectName) {
     return game.dfreds.effects.all.find((effect) => effect.name == effectName);
   }
 
+  /**
+   * Prompts the user to select a nested effect from the choices available
+   *
+   * @param {Effect} effect - the parent effect
+   * @returns {Effect} the chosen nested effect
+   */
   async getNestedEffectSelection(effect) {
     const content = await renderTemplate(
       'modules/dfreds-convenient-effects/templates/nested-effects-dialog.html',
@@ -59,11 +54,30 @@ export default class EffectHandler {
   }
 
   /**
-   * Checks a provided actor to see if any of its current active effects are a convenient effect
+   * Toggles an effect on or off by name on an actor by UUID
+   *
+   * @param {string} effectName - name of the effect to toggle
+   * @param {string[]} uuids - uuids to apply the effect to
+   */
+  async toggleEffect(effectName, ...uuids) {
+    let effect = this.findEffectByName(effectName);
+
+    for (const uuid of uuids) {
+      if (await this.hasEffectApplied(effectName, uuid)) {
+        await this.removeEffect(effect.name, uuid);
+      } else {
+        await this.addEffect(effect.name, uuid);
+      }
+    }
+  }
+
+  /**
+   * Checks to see if any of the current active effects applied to the actor
+   * with the given UUID match the effect name and are a convenient effect
    *
    * @param {string} effectName - the name of the effect to check
-   * @param {string} identifier - the identifier to search for. Can be a token
-   * name, token ID, actor ID, or actor UUID
+   * @param {string} uuid - the uuid of the actor to see if the effect is
+   * applied to
    * @returns {boolean} true if the effect is applied, false otherwise
    */
   async hasEffectApplied(effectName, uuid) {
@@ -75,6 +89,13 @@ export default class EffectHandler {
     );
   }
 
+  /**
+   * Removes the effect with the provided name from an actor matching the
+   * provided UUID
+   *
+   * @param {string} effectName - the name of the effect to remove
+   * @param {string} uuid - the uuid of the actor to remove the effect from
+   */
   async removeEffect(effectName, uuid) {
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
     const effectToRemove = actor.data.effects.find(
@@ -89,6 +110,13 @@ export default class EffectHandler {
     }
   }
 
+  /**
+   * Adds the effect with the provided name to an actor matching the provided
+   * UUID
+   *
+   * @param {string} effectName - the name of the effect to add
+   * @param {string} uuid - the uuid of the actor to add the effect to
+   */
   async addEffect(effectName, uuid, origin) {
     let effect = this.findEffectByName(effectName);
     const actor = await this._foundryHelpers.getActorByUuid(uuid);

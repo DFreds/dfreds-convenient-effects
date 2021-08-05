@@ -1,7 +1,15 @@
 import Effect from './effect.js';
 import Constants from '../constants.js';
 
+/**
+ * Defines all of the effect definitions
+ */
 export default class EffectDefinitions {
+  /**
+   * Get all effects
+   *
+   * @returns {Effect[]} all the effects
+   */
   get all() {
     return [
       ...this.conditions,
@@ -11,6 +19,11 @@ export default class EffectDefinitions {
     ];
   }
 
+  /**
+   * Get all the condition effects
+   *
+   * @returns {Effect[]} all the condition effects
+   */
   get conditions() {
     return [
       this._blinded,
@@ -37,6 +50,11 @@ export default class EffectDefinitions {
     ];
   }
 
+  /**
+   * Get all the spell effects
+   *
+   * @returns {Effect[]} all the spell effects
+   */
   get spells() {
     return [
       this._aid, // TODO figure out higher level casting
@@ -113,6 +131,11 @@ export default class EffectDefinitions {
     ];
   }
 
+  /**
+   * Get all the class feature effects
+   *
+   * @returns {Effect[]} all the class feature effects
+   */
   get classFeatures() {
     return [
       this._bardicInspiration,
@@ -127,6 +150,11 @@ export default class EffectDefinitions {
     ];
   }
 
+  /**
+   * Get all the other effects
+   *
+   * @returns {Effect[]} all the other effects
+   */
   get other() {
     return [
       this._coverHalf,
