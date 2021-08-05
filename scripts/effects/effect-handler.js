@@ -19,16 +19,16 @@ export default class EffectHandler {
    * @param {Token5e} token - token to apply the effect to
    */
   async toggleStatusEffect(effectName, token) {
-    await this.toggleEffect(effectName, token.id);
+    await this.toggleEffect(effectName, token.actor.uuid);
   }
 
   /**
    * Toggles an effect on or off by name
    *
    * @param {string} effectName - name of the effect to toggle
-   * @param {string[]} identifiers - optional identifiers to apply the effect to. If not provided, it will use the targeted or selected tokens
+   * @param {string[]} uuids - optional identifiers to apply the effect to. If not provided, it will use the targeted or selected tokens
    */
-  async toggleEffect(effectName, ...identifiers) {
+  async toggleEffect(effectName, ...uuids) {
     let effect = this._findEffectByName(effectName);
 
     if (!effect) {
@@ -36,11 +36,11 @@ export default class EffectHandler {
       return;
     }
 
-    if (identifiers.length === 0) {
-      identifiers = this._getTokenIdsFromCanvas();
+    if (uuids.length === 0) {
+      uuids = this._getActorUuidsFromCanvas();
     }
 
-    if (identifiers.length == 0) {
+    if (uuids.length == 0) {
       ui.notifications.error(
         `Please select or target a token to toggle ${effectName}`
       );
@@ -51,11 +51,11 @@ export default class EffectHandler {
       effect = await this._getNestedEffectSelection(effect);
     }
 
-    for (const identifier of identifiers) {
-      if (this.hasEffectApplied(effect.name, identifier)) {
-        await this.removeEffect(effect.name, identifier);
+    for (const uuid of uuids) {
+      if (await this.hasEffectApplied(effectName, uuid)) {
+        await this.removeEffect(effect.name, uuid);
       } else {
-        await this.addEffect(effect.name, identifier);
+        await this.addEffect(effect.name, uuid);
       }
     }
   }
@@ -64,15 +64,15 @@ export default class EffectHandler {
     return game.dfreds.effects.all.find((effect) => effect.name == effectName);
   }
 
-  _getTokenIdsFromCanvas() {
+  _getActorUuidsFromCanvas() {
     if (canvas.tokens.controlled.length == 0 && game.user.targets.size == 0) {
       return [];
     }
 
     if (this._settings.prioritizeTargets && game.user.targets.size !== 0) {
-      return Array.from(game.user.targets).map((token) => token.id);
+      return Array.from(game.user.targets).map((token) => token.actor.uuid);
     } else {
-      return canvas.tokens.controlled.map((token) => token.id);
+      return canvas.tokens.controlled.map((token) => token.actor.uuid);
     }
   }
 
@@ -107,8 +107,8 @@ export default class EffectHandler {
    * name, token ID, actor ID, or actor UUID
    * @returns {boolean} true if the effect is applied, false otherwise
    */
-  hasEffectApplied(effectName, identifier) {
-    let actor = this._findActorFromIdentifier(identifier);
+  async hasEffectApplied(effectName, uuid) {
+    const actor = await this._getActorByUuid(uuid);
     return actor?.data?.effects?.some(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
@@ -116,24 +116,20 @@ export default class EffectHandler {
     );
   }
 
-  _findActorFromIdentifier(identifier) {
-    return (
-      this._findGameActorThatMatches(identifier) ??
-      this._findCanvasActorThatMatches(identifier)
-    );
-  }
-
-  _findGameActorThatMatches(identifier) {
-    return game.actors.find(
-      (actor) => actor.id === identifier || actor.uuid === identifier
-    );
-  }
-
-  _findCanvasActorThatMatches(identifier) {
-    return canvas.tokens.placeables.find(
+  _getUuidByIdentifier(identifier) {
+    let actor = game.actors.find((actor) => actor.id === identifier);
+    let placeable = canvas.tokens.placeables.find(
       (placeable) =>
         placeable.id === identifier || placeable.name === identifier
-    )?.actor;
+    );
+
+    return actor ? actor?.uuid : placeable?.actor?.uuid;
+  }
+
+  async _getActorByUuid(uuid) {
+    const actorToken = await fromUuid(uuid);
+    const actor = actorToken?.actor ? actorToken?.actor : actorToken;
+    return actor;
   }
 
   /**
@@ -141,18 +137,18 @@ export default class EffectHandler {
    * effect exists on it
    *
    * @param {string} effectName - the name of the effect to remove
-   * @param {string} identifier - the identifier to search for. Can be a token
+   * @param {string} uuid - the identifier to search for. Can be a token
    * name, token ID, actor ID, or actor UUID
    */
-  async removeEffect(effectName, identifier) {
-    socketInstance.socket.executeAsGM(
+  removeEffect(effectName, uuid) {
+    return socketInstance.socket.executeAsGM(
       'removeEffectAsGM',
       effectName,
-      identifier
+      uuid
     );
   }
 
-  async removeEffectAsGM(effectName, identifier) {
+  async removeEffectAsGM(effectName, uuid) {
     let effect = this._findEffectByName(effectName);
 
     if (!effect) {
@@ -160,10 +156,10 @@ export default class EffectHandler {
       return;
     }
 
-    let actor = this._findActorFromIdentifier(identifier);
+    const actor = await this._getActorByUuid(uuid);
 
     if (!actor) {
-      ui.notifications.error(`Actor ${identifier} could not be found`);
+      ui.notifications.error(`Actor ${uuid} could not be found`);
       return;
     }
 
@@ -187,20 +183,20 @@ export default class EffectHandler {
    * Adds a convenient effect matching the provided name to an actor
    *
    * @param {string} effectName - the name of the effect to add
-   * @param {string} identifier - the identifier to search for. Can be a token
+   * @param {string} uuid - the identifier to search for. Can be a token
    * name, token ID, actor ID, or actor UUID
    * @param {string} origin - the origin to add to the effect
    */
-  async addEffect(effectName, identifier, origin) {
-    socketInstance.socket.executeAsGM(
+  addEffect(effectName, uuid, origin) {
+    return socketInstance.socket.executeAsGM(
       'addEffectAsGM',
       effectName,
-      identifier,
+      uuid,
       origin
     );
   }
 
-  async addEffectAsGM(effectName, identifier, origin) {
+  async addEffectAsGM(effectName, uuid, origin) {
     let effect = this._findEffectByName(effectName);
 
     if (!effect) {
@@ -208,10 +204,10 @@ export default class EffectHandler {
       return;
     }
 
-    let actor = this._findActorFromIdentifier(identifier);
+    const actor = await this._getActorByUuid(uuid);
 
     if (!actor) {
-      ui.notifications.error(`Actor ${identifier} could not be found`);
+      ui.notifications.error(`Actor ${uuid} could not be found`);
       return;
     }
 
