@@ -9,6 +9,18 @@ class Socket {
       'removeEffectAsGM',
       game.dfreds.effectHandler.removeEffectAsGM.bind(game.dfreds.effectHandler)
     );
+    this._socket.register(
+      'addActorDataChangesAsGM',
+      game.dfreds.actorUpdater.addActorDataChangesAsGM.bind(
+        game.dfreds.actorUpdater
+      )
+    );
+    this._socket.register(
+      'removeActorDataChangesAsGM',
+      game.dfreds.actorUpdater.removeActorDataChangesAsGM.bind(
+        game.dfreds.actorUpdater
+      )
+    );
   }
 
   get socket() {

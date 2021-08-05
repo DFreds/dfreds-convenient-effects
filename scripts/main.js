@@ -16,6 +16,7 @@ Hooks.once('init', () => {
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectHandler = new EffectHandler();
   game.dfreds.statusEffects = new StatusEffects();
+  game.dfreds.actorUpdater = new ActorUpdater();
 });
 
 Hooks.once('socketlib.ready', () => {
@@ -60,10 +61,9 @@ Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
-    const actorUpdater = new ActorUpdater();
-    actorUpdater.addActorDataChanges(
+    game.dfreds.actorUpdater.addActorDataChanges(
       activeEffect?.data?.label,
-      activeEffect?.parent
+      activeEffect?.parent?.uuid
     );
   }
 });
@@ -86,10 +86,9 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
-    const actorUpdater = new ActorUpdater();
-    actorUpdater.removeActorDataChanges(
+    game.dfreds.actorUpdater.removeActorDataChanges(
       activeEffect?.data?.label,
-      activeEffect?.parent
+      activeEffect?.parent?.uuid
     );
   }
 });
