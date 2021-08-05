@@ -1,12 +1,11 @@
+import ChatHandler from './chat-handler.js';
 import Controls from './controls.js';
-import ActorUpdater from './effects/actor-updater.js';
 import EffectDefinitions from './effects/effect-definitions.js';
-import EffectHandler from './effects/effect-handler.js';
+import EffectInterface from './effect-interface.js';
 import HandlebarHelpers from './handlebar-helpers.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
-import socketInstance from './socket.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -14,13 +13,12 @@ Hooks.once('init', () => {
 
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();
-  game.dfreds.effectHandler = new EffectHandler();
+  game.dfreds.effectInterface = new EffectInterface();
   game.dfreds.statusEffects = new StatusEffects();
-  game.dfreds.actorUpdater = new ActorUpdater();
 });
 
 Hooks.once('socketlib.ready', () => {
-  socketInstance.initialize();
+  game.dfreds.effectInterface.initialize();
 });
 
 Hooks.once('ready', () => {
@@ -50,7 +48,8 @@ Hooks.on('getSceneControlButtons', (controls) => {
 Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
-  game.dfreds.effectHandler.createChatForEffect({
+  const chatHandler = new ChatHandler();
+  chatHandler.createChatForEffect({
     effectName: activeEffect?.data?.label,
     reason: 'Applied to',
     actor: activeEffect?.parent,
@@ -61,7 +60,7 @@ Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
-    game.dfreds.actorUpdater.addActorDataChanges(
+    game.dfreds.effectInterface.addActorDataChanges(
       activeEffect?.data?.label,
       activeEffect?.parent?.uuid
     );
@@ -75,7 +74,8 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
     activeEffect?.duration?.remaining !== null &&
     activeEffect?.duration?.remaining <= 0;
 
-  game.dfreds.effectHandler.createChatForEffect({
+  const chatHandler = new ChatHandler();
+  chatHandler.createChatForEffect({
     effectName: activeEffect?.data?.label,
     reason: isExpired ? 'Expired from' : 'Removed from',
     actor: activeEffect?.parent,
@@ -86,7 +86,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
-    game.dfreds.actorUpdater.removeActorDataChanges(
+    game.dfreds.effectInterface.removeActorDataChanges(
       activeEffect?.data?.label,
       activeEffect?.parent?.uuid
     );

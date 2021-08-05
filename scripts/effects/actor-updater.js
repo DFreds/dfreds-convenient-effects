@@ -1,25 +1,15 @@
-import socketInstance from '../socket.js';
+import FoundryHelpers from '../foundry-helpers.js';
 
 /**
  * Handles updating actor data for certain effects
  */
 export default class ActorUpdater {
-  /**
-   * Adds actor data changes for specific effects
-   *
-   * @param {string} effectName - the effect name to handle
-   * @param {Actor5e} actor - the effected actor
-   */
-  addActorDataChanges(effectName, uuid) {
-    return socketInstance.socket.executeAsGM(
-      'addActorDataChangesAsGM',
-      effectName,
-      uuid
-    );
+  constructor() {
+    this._foundryHelpers = new FoundryHelpers();
   }
 
-  async addActorDataChangesAsGM(effectName, uuid) {
-    const actor = await this._getActorByUuid(uuid);
+  async addActorDataChanges(effectName, uuid) {
+    const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
     switch (effectName.toLowerCase()) {
       case 'aid':
@@ -35,12 +25,6 @@ export default class ActorUpdater {
         await this._addHeroesFeastEffects(actor);
         break;
     }
-  }
-
-  async _getActorByUuid(uuid) {
-    const actorToken = await fromUuid(uuid);
-    const actor = actorToken?.actor ? actorToken?.actor : actorToken;
-    return actor;
   }
 
   async _addAidEffects(actor) {
@@ -85,22 +69,8 @@ export default class ActorUpdater {
     });
   }
 
-  /**
-   * Removes actor data changes for specific effects
-   *
-   * @param {string} effectName - the effect name to handle
-   * @param {Actor5e} uuid - the effected actor
-   */
-  removeActorDataChanges(effectName, uuid) {
-    return socketInstance.socket.executeAsGM(
-      'removeActorDataChangesAsGM',
-      effectName,
-      uuid
-    );
-  }
-
-  async removeActorDataChangesAsGM(effectName, uuid) {
-    const actor = await this._getActorByUuid(uuid);
+  async removeActorDataChanges(effectName, uuid) {
+    const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
     switch (effectName.toLowerCase()) {
       case 'aid':

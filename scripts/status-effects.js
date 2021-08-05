@@ -48,7 +48,7 @@ export default class StatusEffects {
       event.preventDefault();
       event.stopPropagation();
       const effectName = statusEffectId.replace('Convenient Effect: ', '');
-      game.dfreds.effectHandler.toggleStatusEffect(effectName, token);
+      game.dfreds.effectInterface.toggleEffect(effectName, token.actor.uuid);
     } else {
       wrapper(...args);
     }

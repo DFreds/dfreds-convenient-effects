@@ -1,25 +1,16 @@
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
+import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
-import socketInstance from '../socket.js';
 
 /**
  * Handles toggling on and off effects on actors
  */
 export default class EffectHandler {
   constructor() {
+    this._foundryHelpers = new FoundryHelpers();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
     this._settings = new Settings();
-  }
-
-  /**
-   * Toggles an effect on or off via the token HUD
-   *
-   * @param {string} effectName - name of the effect to toggle
-   * @param {Token5e} token - token to apply the effect to
-   */
-  async toggleStatusEffect(effectName, token) {
-    await this.toggleEffect(effectName, token.actor.uuid);
   }
 
   /**
@@ -37,7 +28,7 @@ export default class EffectHandler {
     }
 
     if (uuids.length === 0) {
-      uuids = this._getActorUuidsFromCanvas();
+      uuids = this._foundryHelpers.getActorUuidsFromCanvas();
     }
 
     if (uuids.length == 0) {
@@ -62,18 +53,6 @@ export default class EffectHandler {
 
   _findEffectByName(effectName) {
     return game.dfreds.effects.all.find((effect) => effect.name == effectName);
-  }
-
-  _getActorUuidsFromCanvas() {
-    if (canvas.tokens.controlled.length == 0 && game.user.targets.size == 0) {
-      return [];
-    }
-
-    if (this._settings.prioritizeTargets && game.user.targets.size !== 0) {
-      return Array.from(game.user.targets).map((token) => token.actor.uuid);
-    } else {
-      return canvas.tokens.controlled.map((token) => token.actor.uuid);
-    }
   }
 
   async _getNestedEffectSelection(effect) {
@@ -108,7 +87,7 @@ export default class EffectHandler {
    * @returns {boolean} true if the effect is applied, false otherwise
    */
   async hasEffectApplied(effectName, uuid) {
-    const actor = await this._getActorByUuid(uuid);
+    const actor = await this._foundryHelpers.getActorByUuid(uuid);
     return actor?.data?.effects?.some(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
@@ -116,39 +95,7 @@ export default class EffectHandler {
     );
   }
 
-  _getUuidByIdentifier(identifier) {
-    let actor = game.actors.find((actor) => actor.id === identifier);
-    let placeable = canvas.tokens.placeables.find(
-      (placeable) =>
-        placeable.id === identifier || placeable.name === identifier
-    );
-
-    return actor ? actor?.uuid : placeable?.actor?.uuid;
-  }
-
-  async _getActorByUuid(uuid) {
-    const actorToken = await fromUuid(uuid);
-    const actor = actorToken?.actor ? actorToken?.actor : actorToken;
-    return actor;
-  }
-
-  /**
-   * Removes a convenient effect matching the provided name from an actor if the
-   * effect exists on it
-   *
-   * @param {string} effectName - the name of the effect to remove
-   * @param {string} uuid - the identifier to search for. Can be a token
-   * name, token ID, actor ID, or actor UUID
-   */
-  removeEffect(effectName, uuid) {
-    return socketInstance.socket.executeAsGM(
-      'removeEffectAsGM',
-      effectName,
-      uuid
-    );
-  }
-
-  async removeEffectAsGM(effectName, uuid) {
+  async removeEffect(effectName, uuid) {
     let effect = this._findEffectByName(effectName);
 
     if (!effect) {
@@ -156,7 +103,7 @@ export default class EffectHandler {
       return;
     }
 
-    const actor = await this._getActorByUuid(uuid);
+    const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
       ui.notifications.error(`Actor ${uuid} could not be found`);
@@ -179,24 +126,7 @@ export default class EffectHandler {
     }
   }
 
-  /**
-   * Adds a convenient effect matching the provided name to an actor
-   *
-   * @param {string} effectName - the name of the effect to add
-   * @param {string} uuid - the identifier to search for. Can be a token
-   * name, token ID, actor ID, or actor UUID
-   * @param {string} origin - the origin to add to the effect
-   */
-  addEffect(effectName, uuid, origin) {
-    return socketInstance.socket.executeAsGM(
-      'addEffectAsGM',
-      effectName,
-      uuid,
-      origin
-    );
-  }
-
-  async addEffectAsGM(effectName, uuid, origin) {
+  async addEffect(effectName, uuid, origin) {
     let effect = this._findEffectByName(effectName);
 
     if (!effect) {
@@ -204,7 +134,7 @@ export default class EffectHandler {
       return;
     }
 
-    const actor = await this._getActorByUuid(uuid);
+    const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
       ui.notifications.error(`Actor ${uuid} could not be found`);
@@ -246,42 +176,5 @@ export default class EffectHandler {
 
   _addTokenMagicChangesToEffect(effect) {
     effect.changes.push(...effect.tokenMagicChanges);
-  }
-
-  /**
-   * Creates a chat message when a convenient effect is applied or removed. This
-   * only creates the message if the setting is enabled.
-   *
-   * @param {string} effectName - the name of the effect
-   * @param {string} reason - the reason for the chat message
-   * @param {Actor5e} actor - the actor the effect change occurred to
-   */
-  async createChatForEffect({ effectName, reason, actor }) {
-    // Handle if it set to None
-    if (this._settings.chatMessagePermission > CONST.USER_ROLES.GAMEMASTER)
-      return;
-
-    const effect = game.dfreds.effects.all.find(
-      (effect) => effect.name == effectName
-    );
-
-    if (!effect) return;
-
-    const actorName = actor.token ? actor.token.name : actor.name;
-
-    await ChatMessage.create({
-      user: game.userId,
-      whisper:
-        this._settings.chatMessagePermission === CONST.USER_ROLES.PLAYER
-          ? undefined
-          : game.users
-              .filter(
-                (user) => user.role >= this._settings.chatMessagePermission
-              )
-              .map((user) => user.id),
-      content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
-         <p>${effect.description}</p>
-         `,
-    });
   }
 }
