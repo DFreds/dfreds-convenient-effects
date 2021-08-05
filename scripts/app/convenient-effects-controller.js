@@ -1,4 +1,5 @@
 import DynamicEffectsAdder from '../effects/dynamic-effects-adder.js';
+import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 
 /**
@@ -13,8 +14,9 @@ export default class ConvenientEffectsController {
   constructor(viewMvc) {
     this._viewMvc = viewMvc;
 
-    this._settings = new Settings();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
+    this._foundryHelpers = new FoundryHelpers();
+    this._settings = new Settings();
   }
 
   /**
@@ -161,7 +163,9 @@ export default class ConvenientEffectsController {
     const effectName = event.target.innerText
       ? event.target.innerText
       : event.target.title;
-    await game.dfreds.effectInterface.toggleEffect(effectName);
+
+    const uuids = this._foundryHelpers.getActorUuidsFromCanvas();
+    await game.dfreds.effectInterface.toggleEffect(effectName, ...uuids);
   }
 
   /**
