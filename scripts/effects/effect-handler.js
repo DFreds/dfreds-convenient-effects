@@ -14,10 +14,10 @@ export default class EffectHandler {
   }
 
   /**
-   * Toggles an effect on or off by name
+   * Toggles an effect on or off by name on an actor by UUID
    *
    * @param {string} effectName - name of the effect to toggle
-   * @param {string[]} uuids - optional identifiers to apply the effect to. If not provided, it will use the targeted or selected tokens
+   * @param {string[]} uuids - uuids to apply the effect to
    */
   async toggleEffect(effectName, ...uuids) {
     let effect = this._findEffectByName(effectName);
@@ -25,10 +25,6 @@ export default class EffectHandler {
     if (!effect) {
       ui.notifications.error(`Effect ${effectName} was not found`);
       return;
-    }
-
-    if (uuids.length === 0) {
-      uuids = this._foundryHelpers.getActorUuidsFromCanvas();
     }
 
     if (uuids.length == 0) {
