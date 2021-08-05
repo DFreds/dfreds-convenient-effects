@@ -6,6 +6,7 @@ import HandlebarHelpers from './handlebar-helpers.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
+import socketInstance from './socket.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -15,6 +16,10 @@ Hooks.once('init', () => {
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectHandler = new EffectHandler();
   game.dfreds.statusEffects = new StatusEffects();
+});
+
+Hooks.once('socketlib.ready', () => {
+  socketInstance.initialize();
 });
 
 Hooks.once('ready', () => {
