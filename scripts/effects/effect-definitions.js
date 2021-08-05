@@ -505,7 +505,7 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
-          key: 'flags.midi-qol.grants.disadvantage.attack.rsak',
+          key: 'flags.midi-qol.grants.disadvantage.attack.rwak',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
