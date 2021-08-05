@@ -20,23 +20,7 @@ export default class EffectHandler {
    * @param {string[]} uuids - uuids to apply the effect to
    */
   async toggleEffect(effectName, ...uuids) {
-    let effect = this._findEffectByName(effectName);
-
-    if (!effect) {
-      ui.notifications.error(`Effect ${effectName} was not found`);
-      return;
-    }
-
-    if (uuids.length == 0) {
-      ui.notifications.error(
-        `Please select or target a token to toggle ${effectName}`
-      );
-      return;
-    }
-
-    if (effect.nestedEffects.length > 0) {
-      effect = await this._getNestedEffectSelection(effect);
-    }
+    let effect = this.findEffectByName(effectName);
 
     for (const uuid of uuids) {
       if (await this.hasEffectApplied(effectName, uuid)) {
@@ -47,11 +31,11 @@ export default class EffectHandler {
     }
   }
 
-  _findEffectByName(effectName) {
+  findEffectByName(effectName) {
     return game.dfreds.effects.all.find((effect) => effect.name == effectName);
   }
 
-  async _getNestedEffectSelection(effect) {
+  async getNestedEffectSelection(effect) {
     const content = await renderTemplate(
       'modules/dfreds-convenient-effects/templates/nested-effects-dialog.html',
       { parentEffect: effect }
@@ -92,54 +76,22 @@ export default class EffectHandler {
   }
 
   async removeEffect(effectName, uuid) {
-    let effect = this._findEffectByName(effectName);
-
-    if (!effect) {
-      ui.notifications.error(`Effect ${effectName} could not be found`);
-      return;
-    }
-
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
-
-    if (!actor) {
-      ui.notifications.error(`Actor ${uuid} could not be found`);
-      return;
-    }
-
-    if (effect.nestedEffects.length > 0) {
-      effect = await this._getNestedEffectSelection(effect);
-    }
-
     const effectToRemove = actor.data.effects.find(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
-        activeEffect?.data?.label == effect.name
+        activeEffect?.data?.label == effectName
     );
 
     if (effectToRemove) {
       await actor.deleteEmbeddedDocuments('ActiveEffect', [effectToRemove.id]);
-      log(`Removed effect ${effect.name} from ${actor.name} - ${actor.id}`);
+      log(`Removed effect ${effectName} from ${actor.name} - ${actor.id}`);
     }
   }
 
   async addEffect(effectName, uuid, origin) {
-    let effect = this._findEffectByName(effectName);
-
-    if (!effect) {
-      ui.notifications.error(`Effect ${effectName} could not be found`);
-      return;
-    }
-
+    let effect = this.findEffectByName(effectName);
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
-
-    if (!actor) {
-      ui.notifications.error(`Actor ${uuid} could not be found`);
-      return;
-    }
-
-    if (effect.nestedEffects.length > 0) {
-      effect = await this._getNestedEffectSelection(effect);
-    }
 
     if (effect.isDynamic) {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
