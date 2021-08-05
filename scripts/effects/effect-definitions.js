@@ -116,6 +116,10 @@ export default class EffectDefinitions {
   get classFeatures() {
     return [
       this._bardicInspiration,
+      this._bardicInspirationD6,
+      this._bardicInspirationD8,
+      this._bardicInspirationD10,
+      this._bardicInspirationD12,
       this._channelDivinitySacredWeapon,
       this._channelDivinityTurnUndead,
       this._rage,
