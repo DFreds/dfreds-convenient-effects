@@ -164,8 +164,7 @@ export default class ConvenientEffectsController {
       ? event.target.innerText
       : event.target.title;
 
-    const uuids = this._foundryHelpers.getActorUuidsFromCanvas();
-    await game.dfreds.effectInterface.toggleEffect(effectName, ...uuids);
+    await game.dfreds.effectInterface.toggleEffect(effectName);
   }
 
   /**
