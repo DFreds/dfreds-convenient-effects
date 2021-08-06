@@ -35,6 +35,15 @@ Hooks.once('setup', () => {
       });
     }
   );
+
+  libWrapper.register(
+    MODULE_ID,
+    'TokenHUD.prototype._getStatusEffectChoices',
+    function (_wrapper, ..._args) {
+      const token = this.object;
+      return game.dfreds.statusEffects.getStatusEffectChoices(token);
+    }
+  );
 });
 
 Hooks.on('getSceneControlButtons', (controls) => {

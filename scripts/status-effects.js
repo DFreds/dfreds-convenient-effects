@@ -53,4 +53,59 @@ export default class StatusEffects {
       wrapper(...args);
     }
   }
+
+  /**
+   * This function is called when the status effect view is shown. It does
+   * essentially the same thing that the original method does, except that it
+   * keys the resulting object based on the ID of the status effect, rather than
+   * the icon.
+   *
+   * @param {Token5e} token - the token to get the status effects for
+   * @returns {Object} object mapping for all the status effects
+   */
+  getStatusEffectChoices(token) {
+    // NOTE: taken entirely from foundry.js, modified to remove the icon being the key
+
+    // Get statuses which are active for the token actor
+    const actor = token.actor || null;
+    const statuses = actor
+      ? actor.effects.reduce((obj, e) => {
+          const id = e.getFlag('core', 'statusId');
+          if (id) {
+            obj[id] = {
+              id: id,
+              overlay: !!e.getFlag('core', 'overlay'),
+            };
+          }
+          return obj;
+        }, {})
+      : {};
+
+    // Prepare the list of effects from the configured defaults and any additional effects present on the Token
+    const tokenEffects = foundry.utils.deepClone(token.data.effects) || [];
+    if (token.data.overlayEffect) tokenEffects.push(token.data.overlayEffect);
+    return CONFIG.statusEffects.concat(tokenEffects).reduce((obj, e) => {
+      const src = e.icon ?? e;
+      if (src in obj) return obj;
+      const status = statuses[e.id] || {};
+      const isActive = !!status.id || token.data.effects.includes(src);
+      const isOverlay = !!status.overlay || token.data.overlayEffect === src;
+
+      const id = e.id;
+
+      // NOTE: changed key from src to id
+      obj[id] = {
+        id: e.id ?? '',
+        title: e.label ? game.i18n.localize(e.label) : null,
+        src,
+        isActive,
+        isOverlay,
+        cssClass: [
+          isActive ? 'active' : null,
+          isOverlay ? 'overlay' : null,
+        ].filterJoin(' '),
+      };
+      return obj;
+    }, {});
+  }
 }
