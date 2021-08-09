@@ -1455,9 +1455,9 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
-          key: 'data.attributes.ac.value',
+          key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '2',
+          value: '+2',
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.dex',
@@ -1878,7 +1878,7 @@ export default class EffectDefinitions {
       },
       changes: [
         {
-          key: 'data.attributes.ac.value',
+          key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
         },
@@ -1901,7 +1901,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
-          key: 'data.attributes.ac.value',
+          key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+2',
         },
@@ -1925,7 +1925,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
-          key: 'data.attributes.ac.value',
+          key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '-2',
         },
@@ -2295,7 +2295,7 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/broken-wall.svg',
       changes: [
         {
-          key: 'data.attributes.ac.value',
+          key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+2',
         },
@@ -2315,7 +2315,7 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/brick-wall.svg',
       changes: [
         {
-          key: 'data.attributes.ac.value',
+          key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
         },
