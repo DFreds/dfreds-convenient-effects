@@ -158,10 +158,10 @@ export default class EffectDefinitions {
    */
   get equipment() {
     return [
+      this._bullseyeLantern,
       this._candle,
+      this._hoodedLantern,
       this._lantern,
-      this._lanternBullseye,
-      this._lanternHooded,
       this._torch,
     ];
   }
@@ -2304,41 +2304,9 @@ export default class EffectDefinitions {
   }
 
   /* Equipment effects */
-  get _candle() {
+  get _bullseyeLantern() {
     return new Effect({
-      name: 'Candle',
-      description: 'Adds candle light for 1 hour (requires ATL)',
-      icon: 'systems/dnd5e/icons/items/inventory/candle.jpg',
-      seconds: Constants.SECONDS.IN_ONE_HOUR,
-      atlChanges: [
-        {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'candle',
-        },
-      ],
-    });
-  }
-
-  get _lantern() {
-    return new Effect({
-      name: 'Lantern',
-      description: 'Adds lantern light for 6 hours (requires ATL)',
-      icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
-      seconds: Constants.SECONDS.IN_SIX_HOURS,
-      atlChanges: [
-        {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'lantern',
-        },
-      ],
-    });
-  }
-
-  get _lanternBullseye() {
-    return new Effect({
-      name: 'Lantern (Bullseye)',
+      name: 'Bullseye Lantern',
       description:
         'Adds lantern light in a 60 degree cone for 6 hours (requires ATL)',
       icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
@@ -2358,9 +2326,25 @@ export default class EffectDefinitions {
     });
   }
 
-  get _lanternHooded() {
+  get _candle() {
     return new Effect({
-      name: 'Lantern (Hooded)',
+      name: 'Candle',
+      description: 'Adds candle light for 1 hour (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/candle.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'candle',
+        },
+      ],
+    });
+  }
+
+  get _hoodedLantern() {
+    return new Effect({
+      name: 'Hooded Lantern',
       description: 'Adds hooded lantern light for 6 hours (requires ATL)',
       icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
       seconds: Constants.SECONDS.IN_SIX_HOURS,
@@ -2379,6 +2363,22 @@ export default class EffectDefinitions {
           key: 'ATL.brightLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
+        },
+      ],
+    });
+  }
+
+  get _lantern() {
+    return new Effect({
+      name: 'Lantern',
+      description: 'Adds lantern light for 6 hours (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
+      seconds: Constants.SECONDS.IN_SIX_HOURS,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'lantern',
         },
       ],
     });
