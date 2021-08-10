@@ -15,6 +15,7 @@ export default class EffectDefinitions {
       ...this.conditions,
       ...this.spells,
       ...this.classFeatures,
+      ...this.equipment,
       ...this.other,
     ];
   }
@@ -147,6 +148,21 @@ export default class EffectDefinitions {
       this._channelDivinityTurnUndead,
       this._rage,
       this._recklessAttack,
+    ];
+  }
+
+  /**
+   * Get all the equipment effects
+   *
+   * @returns {Effect[]} all the ATL effects
+   */
+  get equipment() {
+    return [
+      this._candle,
+      this._lantern,
+      this._lanternBullseye,
+      this._lanternHooded,
+      this._torch,
     ];
   }
 
@@ -1608,8 +1624,8 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       atlChanges: [
         {
-          key: 'ATL.dimLight',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '40',
         },
         {
@@ -2282,6 +2298,103 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
+        },
+      ],
+    });
+  }
+
+  /* Equipment effects */
+  get _candle() {
+    return new Effect({
+      name: 'Candle',
+      description: 'Adds candle light for 1 hour (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/candle.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'candle',
+        },
+      ],
+    });
+  }
+
+  get _lantern() {
+    return new Effect({
+      name: 'Lantern',
+      description: 'Adds lantern light for 6 hours (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
+      seconds: Constants.SECONDS.IN_SIX_HOURS,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'lantern',
+        },
+      ],
+    });
+  }
+
+  get _lanternBullseye() {
+    return new Effect({
+      name: 'Lantern (Bullseye)',
+      description:
+        'Adds lantern light in a 60 degree cone for 6 hours (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
+      seconds: Constants.SECONDS.IN_SIX_HOURS,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'lantern',
+        },
+        {
+          key: 'ATL.lightAngle',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '60',
+        },
+      ],
+    });
+  }
+
+  get _lanternHooded() {
+    return new Effect({
+      name: 'Lantern (Hooded)',
+      description: 'Adds hooded lantern light for 6 hours (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/lantern.jpg',
+      seconds: Constants.SECONDS.IN_SIX_HOURS,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'lantern',
+        },
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '5',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '0',
+        },
+      ],
+    });
+  }
+
+  get _torch() {
+    return new Effect({
+      name: 'Torch',
+      description: 'Adds torch light for 1 hour (requires ATL)',
+      icon: 'systems/dnd5e/icons/items/inventory/torch.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      atlChanges: [
+        {
+          key: 'ATL.preset',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: 'torch',
         },
       ],
     });

@@ -44,6 +44,10 @@ export default class ConvenientEffectsController {
           effects: this._fetchUnfavoritedClassFeatures(),
         },
         {
+          label: 'Equipment',
+          effects: this._fetchUnfavoritedEquipment(),
+        },
+        {
           label: 'Other',
           effects: this._fetchUnfavoritedOther(),
         },
@@ -86,6 +90,14 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedClassFeatures() {
     const effects = game.dfreds.effects;
     return effects.classFeatures.filter(
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) && effect.isViewable
+    );
+  }
+
+  _fetchUnfavoritedEquipment() {
+    const effects = game.dfreds.effects;
+    return effects.equipment.filter(
       (effect) =>
         !this._settings.isFavoritedEffect(effect.name) && effect.isViewable
     );
