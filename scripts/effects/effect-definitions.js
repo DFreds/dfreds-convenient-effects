@@ -122,7 +122,7 @@ export default class EffectDefinitions {
 
       this._rayOfFrost,
       this._resilientSphere,
-      // this._resistance, // TODO when we can ask if they want to spend it
+      this._resistance,
       this._shield,
       this._shieldOfFaith,
       this._slow,
@@ -1894,6 +1894,27 @@ export default class EffectDefinitions {
           key: 'data.traits.di.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
+        },
+      ],
+    });
+  }
+
+  get _resistance() {
+    return new Effect({
+      name: 'Resistance',
+      description: 'Add 1d4 to a single saving throw in the next minute',
+      icon: 'systems/dnd5e/icons/spells/protect-royal-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        {
+          key: 'flags.midi-qol.optional.resistance.label',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Resistance',
+        },
+        {
+          key: 'flags.midi-qol.optional.resistance.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '+1d4',
         },
       ],
     });
