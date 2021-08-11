@@ -2408,7 +2408,7 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/broken-wall.svg',
       changes: [
         {
-          key: 'data.attributes.ac.bonus',
+          key: 'data.attributes.ac.cover',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+2',
         },
@@ -2428,7 +2428,7 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/brick-wall.svg',
       changes: [
         {
-          key: 'data.attributes.ac.bonus',
+          key: 'data.attributes.ac.cover',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
         },
