@@ -1392,7 +1392,6 @@ export default class EffectDefinitions {
   }
 
   get _greaterInvisibility() {
-    // TODO token magic effects
     return new Effect({
       name: 'Greater Invisibility',
       description:
@@ -1590,7 +1589,6 @@ export default class EffectDefinitions {
   }
 
   get _invisibility() {
-    // TODO token magic effects
     return new Effect({
       name: 'Invisibility',
       description:
