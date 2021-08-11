@@ -1419,20 +1419,21 @@ export default class EffectDefinitions {
       description: 'Adds 1d4 to one ability or skill check for 1 minute',
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      flags: {
-        dae: {
-          specialDuration: ['isCheck', 'isSkill'],
-        },
-      },
       changes: [
+        // TODO change this to an optional if supported
         {
-          key: 'data.bonuses.abilities.check',
+          key: 'data.attributes.init.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+1d4',
         },
         {
-          key: 'data.attributes.init.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          key: 'flags.midi-qol.optional.guidance.label',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'Guidance',
+        },
+        {
+          key: 'flags.midi-qol.optional.guidance.skill',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d4',
         },
       ],
