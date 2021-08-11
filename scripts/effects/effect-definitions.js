@@ -454,7 +454,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Paralyzed',
       description:
-        'Fail all dexterity and strength saves, grant advantage to all who attack, and all melee attacks that hit are criticals',
+        'Remove all movement, fail all dexterity and strength saves, grant advantage to all who attack, and all melee attacks that hit are criticals',
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
       changes: [
         {
@@ -482,6 +482,12 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '0',
+          priority: 5,
+        },
       ],
     });
   }
@@ -490,7 +496,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Petrified',
       description:
-        'Grant advantage to all who attack and add damage resistance to all magical and physical attacks',
+        'Remove all movement, grant advantage to all who attack, and add damage resistance to all magical and physical attacks',
       icon: 'modules/dfreds-convenient-effects/images/petrified.svg',
       changes: [
         {
@@ -507,6 +513,12 @@ export default class EffectDefinitions {
           key: 'data.traits.dr.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: 'magical',
+        },
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '0',
+          priority: 5,
         },
       ],
     });
