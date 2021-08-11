@@ -120,6 +120,7 @@ export default class EffectDefinitions {
       this._protectionFromEnergyThunder,
       this._protectionFromPoison,
 
+      this._rayOfFrost,
       this._resilientSphere,
       // this._resistance, // TODO when we can ask if they want to spend it
       this._shield,
@@ -1854,6 +1855,23 @@ export default class EffectDefinitions {
           key: 'data.traits.dr.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: 'poison',
+        },
+      ],
+    });
+  }
+
+  get _rayOfFrost() {
+    return new Effect({
+      name: 'Ray of Frost',
+      description: 'Lowers movement by 10 ft',
+      icon: 'systems/dnd5e/icons/spells/beam-blue-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      changes: [
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '-10',
+          priority: 5,
         },
       ],
     });
