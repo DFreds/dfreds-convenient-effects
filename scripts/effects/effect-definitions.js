@@ -2120,7 +2120,7 @@ export default class EffectDefinitions {
           value: '+1d6',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d6',
         },
@@ -2152,7 +2152,7 @@ export default class EffectDefinitions {
           value: '+1d8',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d8',
         },
@@ -2184,7 +2184,7 @@ export default class EffectDefinitions {
           value: '+1d10',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d10',
         },
@@ -2216,7 +2216,7 @@ export default class EffectDefinitions {
           value: '+1d12',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.check',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d12',
         },
