@@ -1070,6 +1070,13 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
+          key: 'flags.midi-qol.grants.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
+      atlChanges: [
+        {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '10',
@@ -1079,8 +1086,6 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: Constants.COLORS.WHITE,
         },
-      ],
-      atlChanges: [
         {
           key: 'ATL.lightAlpha',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -1090,11 +1095,6 @@ export default class EffectDefinitions {
           key: 'ATL.lightAnimation',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '{"type": "pulse","speed": 1,"intensity": 1}',
-        },
-        {
-          key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
         },
       ],
       tokenMagicChanges: [
