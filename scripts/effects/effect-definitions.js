@@ -2363,14 +2363,34 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'lantern',
-        },
-        {
           key: 'ATL.lightAngle',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '60',
+        },
+        {
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '60',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '30',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.4,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch","speed": 1,"intensity": 1}',
         },
       ],
     });
@@ -2384,9 +2404,29 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       atlChanges: [
         {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'candle',
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '10',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '5',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.2,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch","speed": 1,"intensity": 1}',
         },
       ],
     });
@@ -2400,11 +2440,6 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'lantern',
-        },
-        {
           key: 'ATL.dimLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '5',
@@ -2413,6 +2448,21 @@ export default class EffectDefinitions {
           key: 'ATL.brightLight',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '0',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.4,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch","speed": 1,"intensity": 1}',
         },
       ],
     });
@@ -2426,9 +2476,29 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'lantern',
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '60',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '30',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.4,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch","speed": 1,"intensity": 1}',
         },
       ],
     });
@@ -2442,9 +2512,29 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       atlChanges: [
         {
-          key: 'ATL.preset',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: 'torch',
+          key: 'ATL.dimLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '40',
+        },
+        {
+          key: 'ATL.brightLight',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '20',
+        },
+        {
+          key: 'ATL.lightColor',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: Constants.COLORS.FIRE,
+        },
+        {
+          key: 'ATL.lightAlpha',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 0.4,
+        },
+        {
+          key: 'ATL.lightAnimation',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '{"type": "torch","speed": 1,"intensity": 1}',
         },
       ],
     });
