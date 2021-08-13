@@ -183,6 +183,8 @@ export default class EffectDefinitions {
       this._greatWeaponMaster,
       this._heavilyEncumbered,
       this._rangedDisadvantage,
+      this._reaction,
+      this._ready,
       this._sharpshooter,
     ];
   }
@@ -2725,6 +2727,22 @@ export default class EffectDefinitions {
           value: '1',
         },
       ],
+    });
+  }
+
+  get _reaction() {
+    return new Effect({
+      name: 'Reaction',
+      description: 'No active effects',
+      icon: 'modules/dfreds-convenient-effects/images/reaction.svg',
+    });
+  }
+
+  get _ready() {
+    return new Effect({
+      name: 'Ready',
+      description: 'No active effects',
+      icon: 'modules/dfreds-convenient-effects/images/ready.svg',
     });
   }
 
