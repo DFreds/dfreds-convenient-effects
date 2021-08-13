@@ -190,6 +190,10 @@ export default class ConvenientEffectsApp extends Application {
     return this._rootView.find('.folder');
   }
 
+  get _createEffectButton() {
+    return this._rootView.find('.create-effect');
+  }
+
   get _resetStatusEffectsButton() {
     return this._rootView.find('.reset-status-effects');
   }
