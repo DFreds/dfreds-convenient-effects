@@ -1691,7 +1691,7 @@ export default class EffectDefinitions {
         {
           key: 'data.attributes.ac.base',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: '13 + @abilities.dex.mod',
+          value: '13',
           priority: 5,
         },
       ],
