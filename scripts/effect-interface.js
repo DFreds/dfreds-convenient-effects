@@ -71,6 +71,7 @@ export default class EffectInterface {
 
     if (effect.nestedEffects.length > 0) {
       effect = await this._effectHandler.getNestedEffectSelection(effect);
+      if (!effect) return; // dialog closed without selecting one
     }
 
     return this._socket.executeAsGM('toggleEffect', effect.name, ...uuids);

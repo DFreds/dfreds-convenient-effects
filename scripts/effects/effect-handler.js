@@ -44,6 +44,7 @@ export default class EffectHandler {
           const htmlChoice = html.find('select[name="effect-choice"]').val();
           return htmlChoice;
         },
+        rejectClose: false,
       },
       { width: 300 }
     );
