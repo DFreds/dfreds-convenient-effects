@@ -112,6 +112,10 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initClickListeners() {
+    this._createEffectButton.on(
+      'click',
+      this._controller.onCreateEffectClick.bind(this._controller)
+    );
     this._resetStatusEffectsButton.on(
       'click',
       this._controller.onResetStatusEffectsClick.bind(this._controller)
