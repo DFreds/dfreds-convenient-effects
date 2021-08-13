@@ -707,7 +707,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
-          key: 'data.attributes.ac.base',
+          key: 'data.attributes.ac.value',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '16',
           priority: 5,
