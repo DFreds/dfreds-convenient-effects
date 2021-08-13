@@ -120,6 +120,27 @@ export default class ConvenientEffectsController {
     });
   }
 
+  async onCreateEffectClick(event) {
+    const item = await CONFIG.Item.documentClass.create({
+      name: 'Temporary Item',
+      type: 'consumable',
+    });
+    const effects = await item.createEmbeddedDocuments('ActiveEffect', [
+      {
+        label: game.i18n.localize('DND5E.EffectNew'),
+        icon: 'icons/svg/aura.svg',
+        origin: item.uuid,
+        'duration.rounds': undefined,
+        disabled: false,
+        flags: {
+          isNewConvenient: true,
+          itemIdToDelete: item.id,
+        },
+      },
+    ]);
+    effects[0].sheet.render(true);
+  }
+
   /**
    * Handles clicks on the reset status effects button
    */
