@@ -103,10 +103,10 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
 });
 
 Hooks.on('closeActiveEffectConfig', (activeEffect, configSheet) => {
-  if (activeEffect?.object?.data?.flags?.isNewConvenient) {
-    const itemToDelete = game.items.get(
-      activeEffect.object.data.flags.itemIdToDelete
-    );
-    itemToDelete.delete();
-  }
+  if (!activeEffect?.object?.data?.flags?.isCustomConvenient) return;
+
+  const itemToDelete = game.items.get(
+    activeEffect.object.data.flags.itemIdToDelete
+  );
+  itemToDelete?.delete();
 });
