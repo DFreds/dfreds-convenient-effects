@@ -1691,9 +1691,9 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       changes: [
         {
-          key: 'data.attributes.ac.base',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: '13',
+          key: 'data.attributes.ac.calc',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 'mage',
           priority: 5,
         },
       ],
