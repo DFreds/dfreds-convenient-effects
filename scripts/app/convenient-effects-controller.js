@@ -32,6 +32,10 @@ export default class ConvenientEffectsController {
           effects: this._fetchFavorites(),
         },
         {
+          label: 'Custom',
+          effects: this._fetchUnfavoritedCustomEffects(),
+        },
+        {
           label: 'Conditions',
           effects: this._fetchUnfavoritedConditions(),
         },
@@ -69,6 +73,13 @@ export default class ConvenientEffectsController {
         if (nameA > nameB) return 1;
         return 0;
       });
+  }
+
+  _fetchUnfavoritedCustomEffects() {
+    const effects = game.dfreds.effects;
+    return effects.customEffects.filter(
+      (effect) => !this._settings.isFavoritedEffect(effect.name)
+    );
   }
 
   _fetchUnfavoritedConditions() {
