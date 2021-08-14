@@ -2735,6 +2735,11 @@ export default class EffectDefinitions {
       name: 'Reaction',
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/reaction.svg',
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
     });
   }
 
@@ -2743,6 +2748,11 @@ export default class EffectDefinitions {
       name: 'Ready',
       description: 'No active effects',
       icon: 'modules/dfreds-convenient-effects/images/ready.svg',
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
     });
   }
 
