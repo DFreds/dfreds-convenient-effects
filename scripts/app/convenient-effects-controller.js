@@ -133,7 +133,7 @@ export default class ConvenientEffectsController {
         'duration.rounds': undefined,
         disabled: false,
         flags: {
-          isNewConvenient: true,
+          isCustomConvenient: true,
           itemIdToDelete: item.id,
         },
       },
