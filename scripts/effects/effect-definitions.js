@@ -64,6 +64,7 @@ export default class EffectDefinitions {
       this._beaconOfHope,
       this._bless,
       this._blur,
+      this._command,
 
       this._contagion,
       this._contagionBlindingSickness,
@@ -803,6 +804,20 @@ export default class EffectDefinitions {
           value: 'blur',
         },
       ],
+    });
+  }
+
+  get _command() {
+    return new Effect({
+      name: 'Command',
+      description: 'No active effects and lasts for 1 round',
+      icon: 'systems/dnd5e/icons/spells/explosion-magenta-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      flags: {
+        dae: {
+          specialDuration: ['turnEnd'],
+        },
+      },
     });
   }
 
