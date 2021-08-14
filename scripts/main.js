@@ -102,6 +102,13 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
   }
 });
 
+Hooks.on('updateActiveEffect', (activeEffect, obj, info, id) => {
+  if (!activeEffect?.data?.flags?.isCustomConvenient) return;
+
+  // TODO this is called whenver a change or DAE custom duration flag is added... so won't work here
+  game.dfreds.effectInterface.addNewEffect(activeEffect);
+});
+
 Hooks.on('closeActiveEffectConfig', (activeEffect, configSheet) => {
   if (!activeEffect?.object?.data?.flags?.isCustomConvenient) return;
 

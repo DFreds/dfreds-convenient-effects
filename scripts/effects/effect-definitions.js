@@ -1,10 +1,15 @@
 import Effect from './effect.js';
 import Constants from '../constants.js';
+import Settings from '../settings.js';
 
 /**
  * Defines all of the effect definitions
  */
 export default class EffectDefinitions {
+  constructor() {
+    this._settings = new Settings();
+  }
+
   /**
    * Get all effects
    *
@@ -13,6 +18,7 @@ export default class EffectDefinitions {
   get all() {
     return [
       ...this.conditions,
+      ...this.customEffects,
       ...this.spells,
       ...this.classFeatures,
       ...this.equipment,
@@ -49,6 +55,10 @@ export default class EffectDefinitions {
       this._stunned,
       this._unconscious,
     ];
+  }
+
+  get customEffects() {
+    return [];
   }
 
   /**
