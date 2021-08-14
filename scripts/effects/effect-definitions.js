@@ -2733,7 +2733,7 @@ export default class EffectDefinitions {
   get _reaction() {
     return new Effect({
       name: 'Reaction',
-      description: 'No active effects',
+      description: 'No active effects and expires on turn start',
       icon: 'modules/dfreds-convenient-effects/images/reaction.svg',
       flags: {
         dae: {
@@ -2746,7 +2746,7 @@ export default class EffectDefinitions {
   get _ready() {
     return new Effect({
       name: 'Ready',
-      description: 'No active effects',
+      description: 'No active effects and expires on turn start',
       icon: 'modules/dfreds-convenient-effects/images/ready.svg',
       flags: {
         dae: {
