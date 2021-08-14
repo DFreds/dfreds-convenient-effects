@@ -109,11 +109,11 @@ Hooks.on('updateActiveEffect', (activeEffect, obj, info, id) => {
   game.dfreds.effectInterface.addNewEffect(activeEffect);
 });
 
-Hooks.on('closeActiveEffectConfig', (activeEffect, configSheet) => {
-  if (!activeEffect?.object?.data?.flags?.isCustomConvenient) return;
+Hooks.on('closeActiveEffectConfig', (activeEffectConfig, configSheet) => {
+  if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
   const itemToDelete = game.items.get(
-    activeEffect.object.data.flags.itemIdToDelete
+    activeEffectConfig.object.data.flags.itemIdToDelete
   );
   itemToDelete?.delete();
 });
