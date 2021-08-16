@@ -102,14 +102,27 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
   }
 });
 
-Hooks.on('updateActiveEffect', (activeEffect, obj, info, id) => {
+Hooks.on('updateActiveEffect', (activeEffect, difference, info, id) => {
   if (!activeEffect?.data?.flags?.isCustomConvenient) return;
 
   // TODO this is called whenver a change or DAE custom duration flag is added... so won't work here
   game.dfreds.effectInterface.addNewEffect(activeEffect);
 });
 
-Hooks.on('closeActiveEffectConfig', (activeEffectConfig, configSheet) => {
+Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
+  if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
+
+  const submitButton = html.find('.window-content .sheet-footer button');
+  submitButton.on(
+    'click',
+    function (event) {
+      console.log(event);
+    }.bind(this)
+  );
+  return;
+});
+
+Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
   const itemToDelete = game.items.get(
