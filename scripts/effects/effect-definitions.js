@@ -103,6 +103,7 @@ export default class EffectDefinitions {
       this._haste,
       this._heroesFeast,
       this._heroism,
+      this._hideousLaughter,
       this._holyAura,
       this._huntersMark,
       this._invisibility,
@@ -1563,6 +1564,17 @@ export default class EffectDefinitions {
           value: 'frightened',
         },
       ],
+    });
+  }
+
+  get _hideousLaughter() {
+    return new Effect({
+      name: 'Hideous Laughter',
+      description:
+        'Apply the effects of the prone and incapacitated conditions',
+      icon: 'systems/dnd5e/icons/spells/explosion-magenta-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [...this._incapacitated.changes, ...this._prone.changes],
     });
   }
 
