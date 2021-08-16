@@ -129,6 +129,7 @@ export default class EffectDefinitions {
       this._shieldOfFaith,
       this._slow,
       this._spiderClimb,
+      this._spiritualWeapon,
       this._stoneskin,
       this._trueStrike,
       this._viciousMockery,
@@ -2053,6 +2054,15 @@ export default class EffectDefinitions {
           priority: 5,
         },
       ],
+    });
+  }
+
+  get _spiritualWeapon() {
+    return new Effect({
+      name: 'Spiritual Weapon',
+      description: 'No active effects and lasts for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/enchant-magenta-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
 
