@@ -6,6 +6,7 @@ import HandlebarHelpers from './handlebar-helpers.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
+import CustomEffectStore from './effects/custom-effect-store.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -105,28 +106,32 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
 Hooks.on('updateActiveEffect', (activeEffect, difference, info, id) => {
   if (!activeEffect?.data?.flags?.isCustomConvenient) return;
 
-  // TODO this is called whenver a change or DAE custom duration flag is added... so won't work here
-  game.dfreds.effectInterface.addNewEffect(activeEffect);
+  const itemIdToDelete = activeEffect.data.flags.itemIdToDelete;
+  CustomEffectStore.addInProgressEffect(itemIdToDelete, activeEffect);
 });
 
 Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
-  const submitButton = html.find('.window-content .sheet-footer button');
-  submitButton.on(
-    'click',
-    function (event) {
-      console.log(event);
-    }.bind(this)
-  );
+  const itemIdToDelete = activeEffectConfig.object.data.flags.itemIdToDelete;
+  const submitButton = html.find('button[type="submit"');
+  submitButton.bind('click', { itemId: itemIdToDelete }, function (event) {
+    CustomEffectStore.setAsCreate(event.data.itemId);
+  });
   return;
 });
 
 Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
-  const itemToDelete = game.items.get(
-    activeEffectConfig.object.data.flags.itemIdToDelete
-  );
+  const itemIdToDelete = activeEffectConfig.object.data.flags.itemIdToDelete;
+
+  if (CustomEffectStore.isCreate(itemIdToDelete)) {
+    CustomEffectStore.createCustomEffect(itemIdToDelete);
+  }
+
+  CustomEffectStore.deleteInProgressEffect(itemIdToDelete);
+
+  const itemToDelete = game.items.get(itemIdToDelete);
   itemToDelete?.delete();
 });
