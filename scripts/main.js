@@ -10,14 +10,14 @@ import { libWrapper } from './lib/shim.js';
 Hooks.once('init', () => {
   new Settings().registerSettings();
   new HandlebarHelpers().registerHelpers();
+});
 
+Hooks.once('socketlib.ready', () => {
   game.dfreds = game.dfreds || {};
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectInterface = new EffectInterface();
   game.dfreds.statusEffects = new StatusEffects();
-});
 
-Hooks.once('socketlib.ready', () => {
   game.dfreds.effectInterface.initialize();
 });
 
