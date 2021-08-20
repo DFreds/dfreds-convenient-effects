@@ -1,9 +1,11 @@
 <section id="convenient-effects" class="convenient-effects sidebar-tab directory flexcol">
   <!-- Directory Header -->
   <header class="directory-header">
+    {{#isGm}}
     <div class="header-actions action-buttons flexrow">
       <button class="create-effect"><i class="fas fa-hand-sparkles"></i> Create Effect</button>
     </div>
+    {{/isGm}}
     <div class="header-search flexrow">
       <i class="fas fa-search"></i>
       <input type="text" name="search" value="" placeholder="Search Effects" autocomplete="off">
