@@ -17,6 +17,9 @@ export default class ChatHandler {
    * @param {Actor5e} actor - the actor the effect change occurred to
    */
   async createChatForEffect({ effectName, reason, actor }) {
+    // Fixes issue where chat messages were being created for the custom effects being deleted
+    if (this._settings.customEffectsItemId === actor.id) return;
+
     // Handle if it set to None
     if (this._settings.chatMessagePermission > CONST.USER_ROLES.GAMEMASTER)
       return;
