@@ -92,23 +92,32 @@ export default class CustomEffectsHandler {
   /**
    * Opens the configuration sheet for the custom effect corresponding with the custom ID
    *
-   * @param {string} customId - the ID of the active effect to edit
+   * @param {Effect} effect - the effect to edit
    */
-  async editCustomEffect(customId) {
+  async editCustomEffect(effect) {
+    // if (this._settings.isStatusEffect(effect.name)) {
+    //   this._settings.removeStatusEffect(effect.name);
+    // }
     const item = await this._findCustomEffectsItem();
-    const effect = item.effects.find((effect) => effect.id === customId);
-    effect.sheet.render(true);
+    const activeEffect = item.effects.find(
+      (activeEffect) => activeEffect.id === effect.customId
+    );
+    activeEffect.sheet.render(true);
   }
 
   /**
    * Deletes the custom effect corresponding with the custom ID
    *
-   * @param {string} customId - the ID of the active effect to delete
+   * @param {effect} effect - the effect to delete
    * @returns {Promise} resolves when the active effect is deleted
    */
-  async deleteCustomEffect(customId) {
+  async deleteCustomEffect(effect) {
+    if (this._settings.isStatusEffect(effect.name)) {
+      this._settings.removeStatusEffect(effect.name);
+    }
+
     const item = await this._findCustomEffectsItem();
-    return item.deleteEmbeddedDocuments('ActiveEffect', [customId]);
+    return item.deleteEmbeddedDocuments('ActiveEffect', [effect.customId]);
   }
 
   async _findOrCreateCustomEffectsItem() {

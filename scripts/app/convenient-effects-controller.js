@@ -155,7 +155,7 @@ export default class ConvenientEffectsController {
       (effect) => effect.name === effectName
     );
 
-    await this._customEffectsHandler.editCustomEffect(customEffect.customId);
+    await this._customEffectsHandler.editCustomEffect(customEffect);
   }
 
   /**
@@ -169,7 +169,7 @@ export default class ConvenientEffectsController {
       (effect) => effect.name === effectName
     );
 
-    await this._customEffectsHandler.deleteCustomEffect(customEffect.customId);
+    await this._customEffectsHandler.deleteCustomEffect(customEffect);
     this._viewMvc.render();
   }
 
