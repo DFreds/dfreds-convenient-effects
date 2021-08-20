@@ -1,6 +1,9 @@
 import Effect from './effect.js';
 import Settings from '../settings.js';
 
+/**
+ * Handles initializing, creating, editing, and deleting custom effects.
+ */
 export default class CustomEffectsHandler {
   constructor() {
     this._settings = new Settings();
@@ -30,6 +33,12 @@ export default class CustomEffectsHandler {
   }
 
   _convertToEffectClass(effect) {
+    const atlChanges = effect.data.changes.filter((changes) =>
+      changes.key.startsWith('ATL')
+    );
+    const tokenMagicChanges = effect.data.changes.filter(
+      (changes) => changes.key === 'macro.tokenMagic'
+    );
     return new Effect({
       customId: effect.id,
       name: effect.data.label,
@@ -38,7 +47,9 @@ export default class CustomEffectsHandler {
       seconds: effect.data.duration.seconds,
       turns: effect.data.duration.turns,
       flags: effect.data.flags,
-      changes: this.changes, // TODO separate ATL and token magic ones
+      changes: effect.data.changes,
+      atlChanges,
+      tokenMagicChanges,
     });
   }
 
@@ -62,17 +73,26 @@ export default class CustomEffectsHandler {
     effects[0].sheet.render(true);
   }
 
-  //TODO test this
+  /**
+   * Opens the configuration sheet for the custom effect corresponding with the custom ID
+   *
+   * @param {string} customId - the ID of the active effect to edit
+   */
   async editCustomEffect(customId) {
     const item = await this._findCustomEffectsItem();
     const effect = item.effects.find((effect) => effect.id === customId);
     effect.sheet.render(true);
   }
 
-  //TODO test this
+  /**
+   * Deletes the custom effect corresponding with the custom ID
+   *
+   * @param {string} customId - the ID of the active effect to delete
+   * @returns {Promise} resolves when the active effect is deleted
+   */
   async deleteCustomEffect(customId) {
     const item = await this._findCustomEffectsItem();
-    item.effects.delete(customId);
+    return item.deleteEmbeddedDocuments('ActiveEffect', [customId]);
   }
 
   async _findOrCreateCustomEffectsItem() {
