@@ -8,6 +8,7 @@ import Settings from '../settings.js';
 export default class EffectDefinitions {
   constructor() {
     this._settings = new Settings();
+    this._customEffects = [];
   }
 
   /**
@@ -57,8 +58,21 @@ export default class EffectDefinitions {
     ];
   }
 
+  /**
+   * Get all the custom effects
+   *
+   * @returns {Effect[]} all the custom effects
+   */
   get customEffects() {
-    return [];
+    return this._customEffects;
+  }
+
+  /**
+   * Set the custom effects
+   * @param {Effect[]} effects - the custom effects to set
+   */
+  set customEffects(effects) {
+    this._customEffects = effects;
   }
 
   /**

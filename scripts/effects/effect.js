@@ -3,6 +3,7 @@
  */
 export default class Effect {
   constructor({
+    customId = null,
     name,
     description,
     icon,
@@ -16,6 +17,7 @@ export default class Effect {
     tokenMagicChanges = [],
     nestedEffects = [],
   }) {
+    this.customId = customId;
     this.name = name;
     this.description = description;
     this.icon = icon;

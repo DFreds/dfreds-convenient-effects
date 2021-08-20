@@ -1,3 +1,4 @@
+import CustomEffectsHandler from '../effects/custom-effects-handler.js';
 import DynamicEffectsAdder from '../effects/dynamic-effects-adder.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
@@ -14,6 +15,7 @@ export default class ConvenientEffectsController {
   constructor(viewMvc) {
     this._viewMvc = viewMvc;
 
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
     this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
@@ -25,6 +27,8 @@ export default class ConvenientEffectsController {
    * @returns the data to pass to the template
    */
   get data() {
+    this._customEffectsHandler.initialize();
+
     return {
       folders: [
         {
@@ -132,24 +136,7 @@ export default class ConvenientEffectsController {
   }
 
   async onCreateEffectClick(event) {
-    const item = await CONFIG.Item.documentClass.create({
-      name: 'Temporary Item',
-      type: 'consumable',
-    });
-    const effects = await item.createEmbeddedDocuments('ActiveEffect', [
-      {
-        label: game.i18n.localize('DND5E.EffectNew'),
-        icon: 'icons/svg/aura.svg',
-        origin: item.uuid,
-        'duration.rounds': undefined,
-        disabled: false,
-        flags: {
-          isCustomConvenient: true,
-          itemIdToDelete: item.id,
-        },
-      },
-    ]);
-    effects[0].sheet.render(true);
+    this._customEffectsHandler.createNewCustomEffect();
   }
 
   /**

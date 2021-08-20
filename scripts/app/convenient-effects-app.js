@@ -134,6 +134,7 @@ export default class ConvenientEffectsApp extends Application {
     );
   }
 
+  // TODO better way of determining what contexts menus to put on a given entity - for edit/delete custom effects
   _initContextMenus() {
     new ContextMenu(this._nonFavoritesDirectories, '.entity', [
       {
