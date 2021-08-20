@@ -1,5 +1,6 @@
 import ChatHandler from './chat-handler.js';
 import Controls from './controls.js';
+import ConvenientEffectsApp from './app/convenient-effects-app.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectInterface from './effect-interface.js';
@@ -94,6 +95,9 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
   });
 });
 
+/**
+ * Handle removing any actor data changes when an active effect is deleted from an actor
+ */
 Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -102,5 +106,21 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
       activeEffect?.data?.label,
       activeEffect?.parent?.uuid
     );
+  }
+});
+
+/**
+ * Handle re-rendering the ConvenientEffectsApp if it is open and a custom convenient active effect sheet is closed
+ */
+Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
+  if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
+
+  const openApps = Object.values(ui.windows);
+  const convenientEffectsApp = openApps.find(
+    (app) => app instanceof ConvenientEffectsApp
+  );
+
+  if (convenientEffectsApp) {
+    convenientEffectsApp.render();
   }
 });
