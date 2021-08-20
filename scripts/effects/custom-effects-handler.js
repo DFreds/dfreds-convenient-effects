@@ -23,6 +23,22 @@ export default class CustomEffectsHandler {
     game.dfreds.effects.customEffects = customEffects;
   }
 
+  /**
+   * Deletes invalid custom effects
+   *
+   * @returns {Promise} resolves when all invalid effects are deleted
+   */
+  deleteInvalidEffects() {
+    const item = this._findCustomEffectsItem();
+    if (!item) return;
+
+    const invalidCustomEffectIds = item.effects
+      .filter((effect) => !this._isValid(effect))
+      .map((effect) => effect.id);
+
+    return item.deleteEmbeddedDocuments('ActiveEffect', invalidCustomEffectIds);
+  }
+
   _isValid(effect) {
     const hasNonDefaultName =
       effect.data.label !== game.i18n.localize('DND5E.EffectNew');
