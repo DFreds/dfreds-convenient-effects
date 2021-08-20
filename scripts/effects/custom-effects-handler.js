@@ -1,5 +1,6 @@
 import Effect from './effect.js';
 import Settings from '../settings.js';
+import log from '../logger.js';
 
 /**
  * Handles initializing, creating, editing, and deleting custom effects.
@@ -44,6 +45,16 @@ export default class CustomEffectsHandler {
       effect.data.label !== game.i18n.localize('DND5E.EffectNew');
     const hasChanges = effect.data.changes.length > 0;
     const isCustomConvenient = effect.data.flags.isCustomConvenient;
+
+    const hasSameNameAsAnotherEffect = game.dfreds.effects.all.some(
+      (definedEffects) => definedEffects.name === effect.data.label
+    );
+    if (hasSameNameAsAnotherEffect) {
+      log(
+        `Custom effect ${effect.data.label} is invalid because it has the same name as a predefined effect.`
+      );
+      return false;
+    }
 
     return (hasNonDefaultName || hasChanges) && isCustomConvenient;
   }
