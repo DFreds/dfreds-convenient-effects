@@ -136,7 +136,7 @@ export default class ConvenientEffectsApp extends Application {
 
   // TODO better way of determining what contexts menus to put on a given entity - for edit/delete custom effects
   _initContextMenus() {
-    new ContextMenu(this._nonFavoritesDirectories, '.entity', [
+    new ContextMenu(this._nonFavoritesNonCustomDirectories, '.entity', [
       {
         name: 'Add Favorite',
         icon: '<i class="fas fa-star fa-fw"></i>',
@@ -154,6 +154,24 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Remove Favorite',
         icon: '<i class="far fa-star fa-fw"></i>',
         callback: this._controller.onRemoveFavorite.bind(this._controller),
+      },
+      {
+        name: 'Toggle Status Effect',
+        icon: '<i class="fas fa-street-view fa-fw"></i>',
+        callback: this._controller.onToggleStatusEffect.bind(this._controller),
+      },
+    ]);
+
+    new ContextMenu(this._customDirectory, '.entity', [
+      {
+        name: 'Edit Effect',
+        icon: '<i class="fas fa-edit fa-fw"></i>',
+        callback: this._controller.onEditEffectClick.bind(this._controller),
+      },
+      {
+        name: 'Delete Effect',
+        icon: '<i class="fas fa-trash fa-fw"></i>',
+        callback: this._controller.onDeleteEffectClick.bind(this._controller),
       },
       {
         name: 'Toggle Status Effect',
@@ -199,12 +217,12 @@ export default class ConvenientEffectsApp extends Application {
     return this._rootView.find('.create-effect');
   }
 
-  get _resetStatusEffectsButton() {
-    return this._rootView.find('.reset-status-effects');
-  }
-
   get _collapseAllButton() {
     return this._rootView.find('.collapse-all');
+  }
+
+  get _customDirectory() {
+    return this._rootView.find('.folder[data-folder-label="Custom"]');
   }
 
   get _effectListItems() {
@@ -227,9 +245,14 @@ export default class ConvenientEffectsApp extends Application {
     return this._rootView.find('.directory-list .folder-header');
   }
 
-  get _nonFavoritesDirectories() {
+  get _nonFavoritesNonCustomDirectories() {
     return this._rootView
       .find('.folder')
-      .filter(':not([data-folder-label="Favorites"])');
+      .filter(':not([data-folder-label="Favorites"])')
+      .filter(':not([data-folder-label="Custom"])');
+  }
+
+  get _resetStatusEffectsButton() {
+    return this._rootView.find('.reset-status-effects');
   }
 }

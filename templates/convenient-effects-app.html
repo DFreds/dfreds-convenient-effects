@@ -26,14 +26,10 @@
           <i class="fas fa-folder-open fa-fw"></i>
           {{folder.label}}
         </h3>
-        <!-- <a class="dumb" style="flex: 0 0 20px; text-align: center;" title="Reset Status Effects">
-          <i class="fas fa-undo fa-fw"></i>
-        </a> -->
       </header>
       <ol class="subdirectory">
         {{#each folder.effects as |effect|}}
-        <li class="directory-item entity flexrow convenient-effect" data-effect-name="{{effect.name}}" draggable="true"
-          style="display: flex;">
+        <li class="directory-item entity flexrow convenient-effect" data-effect-name="{{effect.name}}" draggable="true" style="display: flex;">
           <img title="{{effect.name}}" src="{{effect.icon}}" />
           <h4 class="entity-name">
             <a title="{{effect.description}}">{{effect.name}}</a>

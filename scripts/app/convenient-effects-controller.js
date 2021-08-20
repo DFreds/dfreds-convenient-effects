@@ -135,12 +135,48 @@ export default class ConvenientEffectsController {
     });
   }
 
+  /**
+   * Handles clicks on the create effect button
+   *
+   * @param {MouseEvent} event
+   */
   async onCreateEffectClick(event) {
-    this._customEffectsHandler.createNewCustomEffect();
+    await this._customEffectsHandler.createNewCustomEffect();
+  }
+
+  /**
+   * Handle editing the custom effect
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   */
+  async onEditEffectClick(effectItem) {
+    const effectName = effectItem.data().effectName;
+    const customEffect = game.dfreds.effects.customEffects.find(
+      (effect) => effect.name === effectName
+    );
+
+    await this._customEffectsHandler.editCustomEffect(customEffect.customId);
+  }
+
+  /**
+   * Handle deleting the custom effect
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   */
+  async onDeleteEffectClick(effectItem) {
+    const effectName = effectItem.data().effectName;
+    const customEffect = game.dfreds.effects.customEffects.find(
+      (effect) => effect.name === effectName
+    );
+
+    await this._customEffectsHandler.deleteCustomEffect(customEffect.customId);
+    this._viewMvc.render();
   }
 
   /**
    * Handles clicks on the reset status effects button
+   *
+   * @param {MouseEvent} event
    */
   async onResetStatusEffectsClick(event) {
     return Dialog.confirm({
