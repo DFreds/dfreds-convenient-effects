@@ -42,7 +42,7 @@ export default class CustomEffectsHandler {
     return new Effect({
       customId: effect.id,
       name: effect.data.label,
-      description: 'Custom', // TODO allow setting this somewhere?
+      description: effect.data.flags.customEffectDescription,
       icon: effect.data.icon,
       seconds: effect.data.duration.seconds,
       turns: effect.data.duration.turns,

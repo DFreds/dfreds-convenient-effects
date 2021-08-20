@@ -110,6 +110,24 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
 });
 
 /**
+ * Handle adding a form item for effect description to custom effects
+ */
+Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
+  if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
+
+  const labelFormGroup = html
+    .find('section[data-tab="details"] .form-group')
+    .first();
+
+  const description =
+    activeEffectConfig.object.data.flags.customEffectDescription ??
+    'Applies custom effects';
+  labelFormGroup.after(
+    `<div class="form-group"><label>Effect Description</label><div class="form-fields"><input type="text" name="flags.customEffectDescription" value="${description}"></div></div>`
+  );
+});
+
+/**
  * Handle re-rendering the ConvenientEffectsApp if it is open and a custom convenient active effect sheet is closed
  */
 Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
