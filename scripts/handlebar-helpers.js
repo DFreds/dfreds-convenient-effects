@@ -12,9 +12,16 @@ export default class HandlebarHelpers {
    * Registers the handlebar helpers
    */
   registerHelpers() {
+    this._registerIsGmHelper();
     this._registerIsStatusEffectHelper();
     this._registerHasAtlChangesHelper();
     this._registerHasTokenMagicChangesHelper();
+  }
+
+  _registerIsGmHelper() {
+    Handlebars.registerHelper('isGm', (options) => {
+      return game.user.isGM ? options.fn(this) : options.inverse(this);
+    });
   }
 
   _registerIsStatusEffectHelper() {
