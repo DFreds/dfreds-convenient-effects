@@ -15,6 +15,7 @@ export default class Settings {
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
   static EXPANDED_FOLDERS = 'expandedFolders';
+  static CUSTOM_EFFECTS_ITEM_ID = 'customEffectsItemId';
 
   /**
    * Register all the settings for the module
@@ -137,6 +138,18 @@ export default class Settings {
       default: 'Favorites',
       type: String,
     });
+
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.CUSTOM_EFFECTS_ITEM_ID,
+      {
+        name: 'Custom Effects Item ID',
+        scope: 'world',
+        config: false,
+        default: '',
+        type: String,
+      }
+    );
   }
 
   get _defaultStatusEffectNames() {
@@ -433,5 +446,31 @@ export default class Settings {
    */
   isFolderExpanded(name) {
     return this.expandedFolders.includes(name);
+  }
+
+  /**
+   * Returns the game setting for the custom effects item ID
+   *
+   * @returns {string} the ID of the custom effects item
+   */
+  get customEffectsItemId() {
+    return game.settings.get(
+      Settings.PACKAGE_NAME,
+      Settings.CUSTOM_EFFECTS_ITEM_ID
+    );
+  }
+
+  /**
+   * Sets the custom effects item ID
+   *
+   * @param {string} id - the ID of the custom effects item
+   * @returns {Promise} a promise that resolves when the settings update is complete
+   */
+  async setCustomEffectsItemId(id) {
+    return game.settings.set(
+      Settings.PACKAGE_NAME,
+      Settings.CUSTOM_EFFECTS_ITEM_ID,
+      id
+    );
   }
 }

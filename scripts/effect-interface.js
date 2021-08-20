@@ -157,24 +157,4 @@ export default class EffectInterface {
   removeActorDataChanges(effectName, uuid) {
     return this._socket.executeAsGM('removeActorDataChanges', effectName, uuid);
   }
-
-  /**
-   *
-   * @param {ActiveEffect5e} activeEffect
-   */
-  addNewEffect(activeEffect) {
-    const data = activeEffect.data;
-
-    const effectData = {
-      name: data.label,
-      description: 'Custom Effect',
-      icon: data.icon,
-      seconds: data.duration?.seconds,
-      turns: data.duration?.turns,
-      changes: data.changes,
-      flags: data.flags,
-    };
-
-    const effect = new Effect(effectData);
-  }
 }
