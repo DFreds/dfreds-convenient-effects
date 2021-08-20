@@ -25,7 +25,9 @@ Hooks.once('socketlib.ready', () => {
 });
 
 Hooks.once('ready', () => {
-  new CustomEffectsHandler().initialize();
+  const customEffects = new CustomEffectsHandler();
+  customEffects.initialize();
+  customEffects.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
 });
 
