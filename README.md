@@ -20,21 +20,25 @@ Sure, you could figure all that out... if you wanna be lame. Or you could be coo
 
 This module  helps with the types of issues described above by providing dozens of pre-configured effects for conditions and spells that can all be applied quickly and easily.
 
-### Demo Showcasing Adding Effects and Favorites
+### Demo Showcasing Toggling Effects and Adding Favorites
 
-![Demo](docs/demo.gif)
+![Toggle Effects and Add Favorites Demo](docs/toggling-effects-and-adding-favorites-demo.gif)
 
 ### Demo Showcasing Chat Messages and Auto-Expiration of Effects
 
-![Demo 2](docs/demo2.gif)
+![Chat Messages and Auto-Expiration of Effects Demo](docs/chat-message-and-expiration-demo.gif)
 
 ### Demo Showcasing ATL and Token Magic Integration
 
-![Demo 3](docs/demo3.gif)
+![ATL and Token Magic Integration Demo](docs/atl-and-token-magic-demo.gif)
 
 ### Demo Showcasing Adding Status Effects
 
-![Demo 4](docs/demo4.gif)
+![Add Status Effects Demo](docs/add-status-effects-demo.gif)
+
+### Demo Showcasing Creating Custom Effects
+
+![Create Custom Effects Demo](docs/create-effects-demo.gif)
 
 ### Settings
 
