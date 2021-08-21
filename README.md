@@ -18,35 +18,22 @@ Sure, you could figure all that out... if you wanna be lame. Or you could be coo
 
 ## What This Module Does
 
-This module  helps with the types of issues described above by providing dozens of pre-configured effects for conditions and spells that can all be applied quickly and easily.
+This module helps with the types of issues described above by providing dozens of pre-configured effects for conditions and spells that can all be applied quickly and easily.
 
-### Demo Showcasing Toggling Effects and Adding Favorites
+For a better idea of what this module does, check out the [demos](https://github.com/DFreds/dfreds-convenient-effects/wiki/Demos).
 
-![Toggle Effects and Add Favorites Demo](docs/toggling-effects-and-adding-favorites-demo.gif)
-
-### Demo Showcasing Chat Messages and Auto-Expiration of Effects
-
-![Chat Messages and Auto-Expiration of Effects Demo](docs/chat-message-and-expiration-demo.gif)
-
-### Demo Showcasing ATL and Token Magic Integration
-
-![ATL and Token Magic Integration Demo](docs/atl-and-token-magic-demo.gif)
-
-### Demo Showcasing Adding Status Effects
-
-![Add Status Effects Demo](docs/add-status-effects-demo.gif)
-
-### Demo Showcasing Creating Custom Effects
-
-![Create Custom Effects Demo](docs/create-effects-demo.gif)
-
-### Settings
+You can configure some stuff:
 
 ![Settings](docs/settings.png)
 
 ## How to Use
 
 On the controls on the left, two new buttons have been added to the Token Controls. One opens the Convenient Effects application and the other deletes any convenient effects currently applied to the selected token. To apply a new effect, open the application and select the tokens you want to apply to apply an effect to, and then click the effect you want to apply. This will toggle it on or off for the selected tokens. If any tokens are targeted, the effect will be applied to them instead.
+
+## Required Modules
+
+- [libWrapper](https://foundryvtt.com/packages/lib-wrapper) by ruipin - A library that wraps core Foundry methods to make it easier for modules developers to do their thang. Note that if you for some reason don't want to install this, a shim will be used instead. You'll be pestered to install it though so... [just do it](https://www.youtube.com/watch?v=ZXsQAXx_ao0)
+- [socketlib](https://foundryvtt.com/packages/socketlib) by Stäbchenfisch - A library that makes it easy to do difficult things with sockets 
 
 ## Modules That Help
 
