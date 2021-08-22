@@ -24,10 +24,10 @@ Hooks.once('socketlib.ready', () => {
   game.dfreds.effectInterface.initialize();
 });
 
-Hooks.once('ready', () => {
+Hooks.once('ready', async () => {
   const customEffects = new CustomEffectsHandler();
+  await customEffects.deleteInvalidEffects();
   customEffects.initialize();
-  customEffects.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
 });
 
