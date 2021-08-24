@@ -66,6 +66,11 @@ export default class CustomEffectsHandler {
     const tokenMagicChanges = effect.data.changes.filter(
       (changes) => changes.key === 'macro.tokenMagic'
     );
+    const changes = effect.data.changes.filter(
+      (change) =>
+        !change.key.startsWith('ATL') && change.key !== 'macro.tokenMagic'
+    );
+
     return new Effect({
       customId: effect.id,
       name: effect.data.label,
@@ -74,7 +79,7 @@ export default class CustomEffectsHandler {
       seconds: effect.data.duration.seconds,
       turns: effect.data.duration.turns,
       flags: effect.data.flags,
-      changes: effect.data.changes,
+      changes,
       atlChanges,
       tokenMagicChanges,
     });
