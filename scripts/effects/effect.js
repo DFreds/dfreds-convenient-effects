@@ -1,3 +1,5 @@
+import Constants from '../constants.js';
+
 /**
  * Data class for defining an effect
  */
@@ -8,6 +10,7 @@ export default class Effect {
     description,
     icon,
     seconds,
+    rounds,
     turns,
     isDynamic = false,
     isViewable = true,
@@ -22,6 +25,7 @@ export default class Effect {
     this.description = description;
     this.icon = icon;
     this.seconds = seconds;
+    this.rounds = rounds;
     this.turns = turns;
     this.isDynamic = isDynamic;
     this.isViewable = isViewable;
@@ -64,14 +68,38 @@ export default class Effect {
     if (game.combat) {
       return {
         startRound: game.combat.round,
-        rounds: this.seconds ? this.seconds / 6 : undefined,
+        rounds: this._getCombatRounds(),
         turns: this.turns,
       };
     } else {
       return {
         startTime: game.time.worldTime,
-        seconds: this.seconds ? this.seconds : undefined,
+        seconds: this._getSeconds(),
       };
     }
+  }
+
+  _getCombatRounds() {
+    if (this.rounds) {
+      return this.rounds;
+    }
+
+    if (this.seconds) {
+      return this.seconds / Constants.SECONDS.IN_ONE_ROUND;
+    }
+
+    return undefined;
+  }
+
+  _getSeconds() {
+    if (this.seconds) {
+      return this.seconds;
+    }
+
+    if (this.rounds) {
+      return this.rounds * Constants.SECONDS.IN_ONE_ROUND;
+    }
+
+    return undefined;
   }
 }
