@@ -9,6 +9,7 @@ export default class Effect {
     name,
     description,
     icon,
+    tint = null,
     seconds,
     rounds,
     turns,
@@ -24,6 +25,7 @@ export default class Effect {
     this.name = name;
     this.description = description;
     this.icon = icon;
+    this.tint = tint;
     this.seconds = seconds;
     this.rounds = rounds;
     this.turns = turns;
@@ -48,6 +50,7 @@ export default class Effect {
       name: this.name,
       label: this.name,
       icon: this.icon,
+      tint: this.tint,
       duration: this._getDurationData(),
       flags: foundry.utils.mergeObject(this.flags, {
         core: {

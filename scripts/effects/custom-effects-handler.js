@@ -76,6 +76,7 @@ export default class CustomEffectsHandler {
       name: effect.data.label,
       description: effect.data.flags.customEffectDescription,
       icon: effect.data.icon,
+      tint: effect.data.tint,
       seconds: effect.data.duration.seconds,
       rounds: effect.data.duration.rounds,
       turns: effect.data.duration.turns,
