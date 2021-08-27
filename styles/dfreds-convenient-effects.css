@@ -15,6 +15,18 @@
   flex-direction: column;
 }
 
+#remove-effects-dialog {
+  margin-bottom: 1em;
+}
+
+#remove-effects-dialog .remove-effects-actor-group {
+  margin-top: 1em;
+}
+
+#remove-effects-dialog .remove-effects-effect-group {
+  margin-left: 1em;
+}
+
 .integration-icon {
   margin-right: 12px;
   flex: none;

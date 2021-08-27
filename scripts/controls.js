@@ -1,4 +1,5 @@
 import ConvenientEffectsApp from './app/convenient-effects-app.js';
+import RemoveEffectsHandler from './effects/remove-effects-handler.js';
 import Settings from './settings.js';
 
 /**
@@ -21,7 +22,7 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsButton);
-    tokenButton.tools.push(this._removeAllButton);
+    tokenButton.tools.push(this._removeEffectsButton);
   }
 
   get _convenientEffectsButton() {
@@ -39,28 +40,19 @@ export default class Controls {
     new ConvenientEffectsApp().render(true);
   }
 
-  get _removeAllButton() {
+  get _removeEffectsButton() {
     return {
-      name: 'remove-all-convenient-effects',
-      title: 'Remove All Convenient Effects',
+      name: 'remove-convenient-effects',
+      title: 'Remove Convenient Effects',
       icon: 'fas fa-trash-alt',
       button: true,
       visible: game.user.role >= this._settings.controlsPermission,
-      onClick: this._handleRemoveAllClick,
+      onClick: this._handleRemoveEffectsClick,
     };
   }
 
-  _handleRemoveAllClick() {
-    canvas.tokens.controlled
-      .map((token) => token.actor)
-      .forEach(async (actor) => {
-        const effectsToRemove = actor.data.effects
-          .filter((effect) => effect?.data?.flags?.isConvenient)
-          .map((effect) => effect.id);
-
-        if (effectsToRemove) {
-          await actor.deleteEmbeddedDocuments('ActiveEffect', effectsToRemove);
-        }
-      });
+  async _handleRemoveEffectsClick() {
+    const removeEffectsHandler = new RemoveEffectsHandler();
+    return removeEffectsHandler.handle();
   }
 }
