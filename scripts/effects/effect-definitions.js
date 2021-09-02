@@ -2365,8 +2365,14 @@ export default class EffectDefinitions {
   get _channelDivinityTurnUndead() {
     return new Effect({
       name: 'Channel Divinity: Turn Undead',
-      description: 'No active effects, but lasts for 1 minute',
+      description:
+        'No active effects, but lasts for 1 minute. Expires on taking damage.',
       icon: 'systems/dnd5e/icons/skills/yellow_19.jpg',
+      flags: {
+        dae: {
+          specialDuration: ['isDamaged'],
+        },
+      },
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
