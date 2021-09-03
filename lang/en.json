@@ -7,7 +7,6 @@
   "dfreds-convenient-effects.conditionDead": "Dead",
   "dfreds-convenient-effects.conditionDeafened": "Deafened",
   "dfreds-convenient-effects.conditionDiseased": "Diseased",
-  "dfreds-convenient-effects.conditionExhaustion": "Exhaustion",
   "dfreds-convenient-effects.conditionExhaustion1": "Exhaustion 1",
   "dfreds-convenient-effects.conditionExhaustion2": "Exhaustion 2",
   "dfreds-convenient-effects.conditionExhaustion3": "Exhaustion 3",
@@ -51,6 +50,8 @@
   "dfreds-convenient-effects.spellReduce": "Reduce",
   "dfreds-convenient-effects.spellShield": "Shield",
   "dfreds-convenient-effects.spellShieldOfFaith": "Shield of Faith",
-  "dfreds-convenient-effects.spellSlow": "Slow"
+  "dfreds-convenient-effects.spellSlow": "Slow",
+
+  "dfreds-convenient-effects.lightLanternBullseye": "Lantern (Bullseye)"
 
 }

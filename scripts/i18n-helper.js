@@ -1,12 +1,5 @@
 export default class I18nHelper {
-  constructor() {}
 
-  /**
-   * If midi-qol module is present and active
-   *
-   * @readonly
-   * @memberof I18nHelper
-   */
   get _usesMidiQol() {
     return game.modules.get('midi-qol')?.active;
   }
@@ -38,10 +31,6 @@ export default class I18nHelper {
     // This is a example done for the conditions ... if you like it we can do the same thing
     // for the feature and the spell SRD
 
-    // An example that comes to mind is that the Dnd5e system has the label for "Exhaustion",
-    // but it does not differ in the 5 levels except at the code level while we would only
-    // need to show the labels "Exhaustion 1", "Exhaustion 2" , etc. not sure what the best solution can be
-
     if (customIdOrKey.startWith(MODULE_ID + '.condition')) {
       let keyDnd5e = customIdOrKey.replace(
         MODULE_ID + '.condition',
@@ -55,10 +44,12 @@ export default class I18nHelper {
     }
 
     // If label is empty (so is not founded on Dnd5e system) we try again with the inner vocabolary
-    if (data) {
-      label = game.i18n.format(customIdOrKey, data);
-    } else {
-      label = game.i18n.localize(customIdOrKey);
+    if(label){
+      if (data) {
+        label = game.i18n.format(customIdOrKey, data);
+      } else {
+        label = game.i18n.localize(customIdOrKey);
+      }
     }
 
     // Check for midiqol...
