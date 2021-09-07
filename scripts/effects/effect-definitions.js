@@ -851,14 +851,10 @@ export default class EffectDefinitions {
   get _command() {
     return new Effect({
       name: 'Command',
-      description: 'No active effects and lasts for 1 round',
+      description: 'No active effects and lasts until the end of next turn',
       icon: 'systems/dnd5e/icons/spells/explosion-magenta-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_ROUND,
-      flags: {
-        dae: {
-          specialDuration: ['turnEnd'],
-        },
-      },
+      turns: 1,
     });
   }
 
