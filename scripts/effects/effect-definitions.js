@@ -620,6 +620,12 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '*0.5',
+          priority: 5,
+        },
       ],
     });
   }
