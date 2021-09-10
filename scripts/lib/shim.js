@@ -6,6 +6,14 @@
 // A shim for the libWrapper library
 export let libWrapper = undefined;
 
+export const VERSIONS = [1, 10, 0];
+export const TGT_SPLIT_RE = new RegExp(
+  '([^.[]+|\\[(\'([^\']|\\\'|\\\\)+?\'|"([^"]|\\"|\\\\)+?")\\])',
+  'g'
+);
+export const TGT_CLEANUP_RE = new RegExp('(^\\[\'|\'\\]$|^\\["|"\\]$)', 'g');
+
+// Main shim code
 Hooks.once('init', () => {
   // Check if the real module is already loaded - if so, use it
   if (globalThis.libWrapper && !(globalThis.libWrapper.is_fallback ?? true)) {
@@ -19,6 +27,16 @@ Hooks.once('init', () => {
       return true;
     }
 
+    static get WRAPPER() {
+      return 'WRAPPER';
+    }
+    static get MIXED() {
+      return 'MIXED';
+    }
+    static get OVERRIDE() {
+      return 'OVERRIDE';
+    }
+
     static register(
       package_id,
       target,
@@ -28,14 +46,23 @@ Hooks.once('init', () => {
     ) {
       const is_setter = target.endsWith('#set');
       target = !is_setter ? target : target.slice(0, -4);
-      const split = target.split('.');
-      const fn_name = split.pop();
+      const split = target
+        .match(TGT_SPLIT_RE)
+        .map((x) => x.replace(/\\(.)/g, '$1').replace(TGT_CLEANUP_RE, ''));
       const root_nm = split.splice(0, 1)[0];
-      const _eval = eval; // The browser doesn't expose all global variables (e.g. 'Game') inside globalThis, but it does to an eval. We copy it to a variable to have it run in global scope.
-      const obj = split.reduce(
-        (x, y) => x[y],
-        globalThis[root_nm] ?? _eval(root_nm)
-      );
+
+      let obj, fn_name;
+      if (split.length == 0) {
+        obj = globalThis;
+        fn_name = root_nm;
+      } else {
+        const _eval = eval;
+        fn_name = split.pop();
+        obj = split.reduce(
+          (x, y) => x[y],
+          globalThis[root_nm] ?? _eval(root_nm)
+        );
+      }
 
       let iObj = obj;
       let descriptor = null;
@@ -49,7 +76,7 @@ Hooks.once('init', () => {
 
       let original = null;
       const wrapper =
-        chain ?? type != 'OVERRIDE'
+        chain ?? (type.toUpperCase?.() != 'OVERRIDE' && type != 3)
           ? function () {
               return fn.call(this, original.bind(this), ...arguments);
             }
@@ -78,11 +105,8 @@ Hooks.once('init', () => {
   };
 
   //************** USER CUSTOMIZABLE:
-  // Whether to warn GM that the fallback is being used
-  const WARN_FALLBACK = true;
-
-  // Set up the ready hook that shows the "libWrapper not installed" warning dialog
-  if (WARN_FALLBACK) {
+  // Set up the ready hook that shows the "libWrapper not installed" warning dialog. Remove if undesired.
+  {
     //************** USER CUSTOMIZABLE:
     // Package ID & Package Title - by default attempts to auto-detect, but you might want to hardcode your package ID and title here to avoid potential auto-detect issues
     const [PACKAGE_ID, PACKAGE_TITLE] = (() => {
