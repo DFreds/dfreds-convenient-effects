@@ -15,12 +15,18 @@ export default class EffectHandler {
 
   /**
    * Searches through the list of available effects and returns one matching the
-   * effect name
+   * effect name. Prioritizes finding custom effects first.
    *
    * @param {string} effectName - the effect name to search for
    * @returns {Effect} the found effect
    */
   findEffectByName(effectName) {
+    const effect = game.dfreds.effects.customEffects.find(
+      (effect) => effect.name == effectName
+    );
+
+    if (effect) return effect;
+
     return game.dfreds.effects.all.find((effect) => effect.name == effectName);
   }
 

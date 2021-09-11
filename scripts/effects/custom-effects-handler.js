@@ -46,16 +46,6 @@ export default class CustomEffectsHandler {
     const hasChanges = effect.data.changes.length > 0;
     const isCustomConvenient = effect.data.flags.isCustomConvenient;
 
-    const hasSameNameAsDefinedEffect = game.dfreds.effects.nonCustom.some(
-      (definedEffect) => definedEffect.name === effect.data.label
-    );
-    if (hasSameNameAsDefinedEffect) {
-      log(
-        `Custom effect ${effect.data.label} is invalid because it has the same name as a predefined effect.`
-      );
-      return false;
-    }
-
     return (hasNonDefaultName || hasChanges) && isCustomConvenient;
   }
 
