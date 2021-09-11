@@ -147,6 +147,11 @@ export default class ConvenientEffectsApp extends Application {
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
       },
+      {
+        name: 'Duplicate as Custom',
+        icon: '<i class="far fa-copy fa-fw"></i>',
+        callback: this._controller.onDuplicateAsCustom.bind(this._controller),
+      },
     ]);
 
     new ContextMenu(this._favoritesDirectory, '.entity', [
@@ -159,6 +164,11 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Toggle Status Effect',
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
+      },
+      {
+        name: 'Duplicate as Custom',
+        icon: '<i class="far fa-copy fa-fw"></i>',
+        callback: this._controller.onDuplicateAsCustom.bind(this._controller),
       },
     ]);
 
@@ -177,6 +187,11 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Toggle Status Effect',
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
+      },
+      {
+        name: 'Duplicate as Custom',
+        icon: '<i class="far fa-copy fa-fw"></i>',
+        callback: this._controller.onDuplicateAsCustom.bind(this._controller),
       },
     ]);
   }

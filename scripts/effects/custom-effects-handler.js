@@ -128,6 +128,38 @@ export default class CustomEffectsHandler {
     return item.deleteEmbeddedDocuments('ActiveEffect', [effect.customId]);
   }
 
+  /**
+   * Duplicates an exisiting effect
+   *
+   * @param {Effect} effect - the effect to duplicate
+   */
+  async duplicateExistingEffect(effect) {
+    const item = await this._findOrCreateCustomEffectsItem();
+    const effects = await item.createEmbeddedDocuments('ActiveEffect', [
+      {
+        label: effect.name,
+        icon: effect.icon,
+        tint: effect.tint,
+        duration: {
+          seconds: effect.seconds,
+          rounds: effect.rounds,
+          turns: effect.turns,
+        },
+        flags: {
+          isCustomConvenient: true,
+          customEffectDescription: effect.description,
+        },
+        origin: item.uuid,
+        changes: [
+          ...effect.changes,
+          ...effect.atlChanges,
+          ...effect.tokenMagicChanges,
+        ],
+      },
+    ]);
+    effects[0].sheet.render(true);
+  }
+
   async _findOrCreateCustomEffectsItem() {
     return (
       this._findCustomEffectsItem() ?? (await this._createCustomEffectsItem())

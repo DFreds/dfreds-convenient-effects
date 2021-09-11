@@ -280,6 +280,23 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handle duplicating an effect and adding as a custom effect
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   */
+  async onDuplicateAsCustom(effectItem) {
+    const effectName = effectItem.data().effectName;
+
+    const effect = game.dfreds.effects.all.find(
+      (effect) => effect.name === effectName
+    );
+
+    await this._customEffectsHandler.duplicateExistingEffect(effect);
+
+    this._viewMvc.render();
+  }
+
+  /**
    * Handles starting the drag for effect items
    *
    * @param {DragEvent} event - event that corresponds to the drag start
