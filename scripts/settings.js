@@ -11,6 +11,7 @@ export default class Settings {
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
+  static SHOW_NESTED_EFFECTS = 'hideNestedEffects';
 
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
@@ -106,6 +107,19 @@ export default class Settings {
       default: false,
       type: Boolean,
     });
+
+    game.settings.register(
+      Settings.PACKAGE_NAME,
+      Settings.SHOW_NESTED_EFFECTS,
+      {
+        name: 'Show Nested Effects',
+        hint: 'If enabled, nested effects will be shown in the application.',
+        scope: 'client',
+        config: true,
+        default: false,
+        type: Boolean,
+      }
+    );
 
     game.settings.register(
       Settings.PACKAGE_NAME,
@@ -245,6 +259,18 @@ export default class Settings {
     return game.settings.get(
       Settings.PACKAGE_NAME,
       Settings.PRIORITIZE_TARGETS
+    );
+  }
+
+  /**
+   * Returns the game setting for showing nested effects
+   *
+   * @returns {boolean} true if nested effects should be shown
+   */
+  get showNestedEffects() {
+    return game.settings.get(
+      Settings.PACKAGE_NAME,
+      Settings.SHOW_NESTED_EFFECTS
     );
   }
 

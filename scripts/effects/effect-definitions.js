@@ -887,7 +887,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on wisdom checks and wisdom saving throws for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
         {
@@ -911,7 +911,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
         {
@@ -939,7 +939,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on charisma checks and vulnerability to all damage',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
         {
@@ -962,7 +962,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on intelligence checks and intelligence saving throws for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
         {
@@ -985,7 +985,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
         {
@@ -1013,7 +1013,7 @@ export default class EffectDefinitions {
       description:
         'Disadvantage on constitution checks and constitution saving throws for 7 days',
       icon: 'systems/dnd5e/icons/spells/rip-magenta-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
         {
@@ -1070,7 +1070,7 @@ export default class EffectDefinitions {
       description:
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         // TODO data.traits.size
@@ -1099,7 +1099,7 @@ export default class EffectDefinitions {
       description:
         'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         // TODO data.traits.size
@@ -1236,7 +1236,7 @@ export default class EffectDefinitions {
       name: 'Fire Shield (Cold Resistance)',
       description: 'Add damage resistance to cold for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -1287,7 +1287,7 @@ export default class EffectDefinitions {
       name: 'Fire Shield (Fire Resistance)',
       description: 'Add damage resistance to fire for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/protect-red-3.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -1356,7 +1356,7 @@ export default class EffectDefinitions {
       description:
         'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
         requiresActorUpdate: true,
@@ -1377,7 +1377,7 @@ export default class EffectDefinitions {
       description:
         'Advantage on strength checks and double maximum carrying capacity for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1400,7 +1400,7 @@ export default class EffectDefinitions {
       name: "Cat's Grace",
       description: 'Advantage on dexterity checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1417,7 +1417,7 @@ export default class EffectDefinitions {
       name: "Eagle's Splendor",
       description: 'Advantage on charisma checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1434,7 +1434,7 @@ export default class EffectDefinitions {
       name: "Fox's Cunning",
       description: 'Advantage on intelligence checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1451,7 +1451,7 @@ export default class EffectDefinitions {
       name: "Owl's Wisdom",
       description: 'Advantage on wisdom checks for 1 hour',
       icon: 'systems/dnd5e/icons/spells/haste-royal-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1840,7 +1840,7 @@ export default class EffectDefinitions {
       name: 'Protection from Acid',
       description: 'Adds damage resistance to acid for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1858,7 +1858,7 @@ export default class EffectDefinitions {
       name: 'Protection from Cold',
       description: 'Adds damage resistance to cold for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1876,7 +1876,7 @@ export default class EffectDefinitions {
       name: 'Protection from Fire',
       description: 'Adds damage resistance to fire for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1894,7 +1894,7 @@ export default class EffectDefinitions {
       name: 'Protection from Lightning',
       description: 'Adds damage resistance to lightning for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1912,7 +1912,7 @@ export default class EffectDefinitions {
       name: 'Protection from Thunder',
       description: 'Adds damage resistance to thunder for 1 hour',
       icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2187,7 +2187,7 @@ export default class EffectDefinitions {
       name: 'Bardic Inspiration (d6)',
       description: 'For bards from level 1 to level 4',
       icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -2219,7 +2219,7 @@ export default class EffectDefinitions {
       name: 'Bardic Inspiration (d8)',
       description: 'For bards from level 5 to level 9',
       icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -2251,7 +2251,7 @@ export default class EffectDefinitions {
       name: 'Bardic Inspiration (d10)',
       description: 'For bards from level 10 to level 14',
       icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -2283,7 +2283,7 @@ export default class EffectDefinitions {
       name: 'Bardic Inspiration (d12)',
       description: 'For bards from level 15 to level 20',
       icon: 'systems/dnd5e/icons/skills/yellow_08.jpg',
-      isViewable: false,
+      isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {

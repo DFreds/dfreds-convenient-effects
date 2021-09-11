@@ -126,7 +126,7 @@ export default class CustomEffectsHandler {
   /**
    * Deletes the custom effect corresponding with the custom ID
    *
-   * @param {effect} effect - the effect to delete
+   * @param {Effect} effect - the effect to delete
    * @returns {Promise} resolves when the active effect is deleted
    */
   async deleteCustomEffect(effect) {
