@@ -47,6 +47,9 @@
           {{#hasTokenMagicChanges effect}}
             <i class="fas fa-magic integration-icon" title="Token Magic Effects"></i>
           {{/hasTokenMagicChanges}}
+          {{#hasNestedEffects effect}}
+            <i class="fas fa-tree integration-icon" title="Nested Effects"></i>
+          {{/hasNestedEffects}}
         </li>
         {{/each}}
       </ol>
