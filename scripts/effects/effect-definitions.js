@@ -237,6 +237,7 @@ export default class EffectDefinitions {
       this._flanking,
       this._greatWeaponMaster,
       this._heavilyEncumbered,
+      this._inspiration,
       this._rangedDisadvantage,
       this._reaction,
       this._ready,
@@ -2796,6 +2797,27 @@ export default class EffectDefinitions {
         {
           key: 'flags.midi-qol.disadvantage.ability.save.con',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _inspiration() {
+    return new Effect({
+      name: 'Inspiration',
+      description:
+        'Advantage on everything and expires after any action, save, check, or skill roll',
+      icon: 'icons/magic/control/buff-luck-fortune-green.webp',
+      flags: {
+        dae: {
+          specialDuration: ['1Action', 'isSave', 'isCheck', 'isSkill'],
+        },
+      },
+      changes: [
+        {
+          key: 'flags.midi-qol.advantage.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '1',
         },
       ],
