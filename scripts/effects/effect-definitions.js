@@ -117,6 +117,7 @@ export default class EffectDefinitions {
       this._bless,
       this._blur,
       this._command,
+      this._comprehendLanguages,
 
       this._contagion,
       this._contagionBlindingSickness,
@@ -875,6 +876,22 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/explosion-magenta-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_ROUND,
       turns: 1,
+    });
+  }
+
+  get _comprehendLanguages() {
+    return new Effect({
+      name: 'Comprehend Languages',
+      description: 'Adds all languages for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/runes-royal-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      changes: [
+        {
+          key: 'data.traits.languages.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
     });
   }
 
