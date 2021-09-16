@@ -79,6 +79,19 @@ export default class EffectInterface {
   }
 
   /**
+   * Checks to see if any of the current active effects applied to the actor
+   * with the given UUID match the effect name and are a convenient effect
+   *
+   * @param {string} effectName - the name of the effect to check
+   * @param {string} uuid - the uuid of the actor to see if the effect is
+   * applied to
+   * @returns {Promise<boolean>} true if the effect is applied, false otherwise
+   */
+  async hasEffectApplied(effectName, uuid) {
+    return this._effectHandler.hasEffectApplied(effectName, uuid);
+  }
+
+  /**
    * Removes the effect from the provided actor UUID as the GM via sockets
    *
    * @param {string} effectName - the name of the effect to remove
