@@ -25,9 +25,15 @@ export default class StatusEffects {
 
   _fetchStatusEffects() {
     return this._settings.statusEffectNames
-      .map((name) =>
-        game.dfreds.effects.all.find((effect) => effect.name == name)
-      )
+      .map((name) => {
+        const effect = game.dfreds.effects.customEffects.find(
+          (effect) => effect.name == name
+        );
+
+        if (effect) return effect;
+
+        return game.dfreds.effects.all.find((effect) => effect.name == name);
+      })
       .filter((effect) => effect)
       .map((effect) => effect.convertToActiveEffectData());
   }
