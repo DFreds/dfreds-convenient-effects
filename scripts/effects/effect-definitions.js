@@ -176,6 +176,7 @@ export default class EffectDefinitions {
       this._protectionFromPoison,
 
       this._rayOfFrost,
+      this._regenerate,
       this._resilientSphere,
       this._resistance,
       this._shield,
@@ -1985,6 +1986,24 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '-10',
           priority: 5,
+        },
+      ],
+    });
+  }
+
+  // TODO add label=Regenerate when fixed
+  get _regenerate() {
+    return new Effect({
+      name: 'Regenerate',
+      description: 'Regain 1 hit point at the start of each turn for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/heal-jade-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      changes: [
+        {
+          key: 'flags.midi-qol.OverTime.regenerate',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value:
+            'turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max',
         },
       ],
     });
