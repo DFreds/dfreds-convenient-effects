@@ -1991,7 +1991,6 @@ export default class EffectDefinitions {
     });
   }
 
-  // TODO add label=Regenerate when fixed
   get _regenerate() {
     return new Effect({
       name: 'Regenerate',
@@ -2003,7 +2002,7 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.OverTime.regenerate',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value:
-            'turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max',
+            'label=Regenerate +1 HP,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max',
         },
       ],
     });
