@@ -8,6 +8,7 @@ import HandlebarHelpers from './handlebar-helpers.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
+import FoundryHelpers from './foundry-helpers.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -135,12 +136,6 @@ Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
 Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
-  const openApps = Object.values(ui.windows);
-  const convenientEffectsApp = openApps.find(
-    (app) => app instanceof ConvenientEffectsApp
-  );
-
-  if (convenientEffectsApp) {
-    convenientEffectsApp.render();
-  }
+  const foundryHelpers = new FoundryHelpers();
+  foundryHelpers.renderConvenientEffectsAppIfOpen();
 });
