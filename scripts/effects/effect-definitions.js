@@ -2002,7 +2002,7 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.OverTime.regenerate',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value:
-            'label=Regenerate +1 HP,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max',
+            'label=Regenerate,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max',
         },
       ],
     });
