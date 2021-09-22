@@ -32,30 +32,37 @@ export default class ConvenientEffectsController {
     return {
       folders: [
         {
+          id: 'favorites',
           label: 'Favorites',
           effects: this._fetchFavorites(),
         },
         {
+          id: 'custom',
           label: 'Custom',
           effects: this._fetchUnfavoritedCustomEffects(),
         },
         {
+          id: 'conditions',
           label: 'Conditions',
           effects: this._fetchUnfavoritedConditions(),
         },
         {
+          id: 'spells',
           label: 'Spells',
           effects: this._fetchUnfavoritedSpells(),
         },
         {
+          id: 'class-features',
           label: 'Class Features',
           effects: this._fetchUnfavoritedClassFeatures(),
         },
         {
+          id: 'equipment',
           label: 'Equipment',
           effects: this._fetchUnfavoritedEquipment(),
         },
         {
+          id: 'other',
           label: 'Other',
           effects: this._fetchUnfavoritedOther(),
         },
