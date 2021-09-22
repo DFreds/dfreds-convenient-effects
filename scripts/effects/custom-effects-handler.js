@@ -103,9 +103,6 @@ export default class CustomEffectsHandler {
    * @param {Effect} effect - the effect to edit
    */
   async editCustomEffect(effect) {
-    // if (this._settings.isStatusEffect(effect.name)) {
-    //   this._settings.removeStatusEffect(effect.name);
-    // }
     const item = await this._findCustomEffectsItem();
     const activeEffect = item.effects.find(
       (activeEffect) => activeEffect.id === effect.customId
