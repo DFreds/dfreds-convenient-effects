@@ -13,15 +13,25 @@ export default class HandlebarHelpers {
    */
   registerHelpers() {
     this._registerIsGmHelper();
+    this._registerHasNestedEffectsHelper();
     this._registerIsStatusEffectHelper();
     this._registerHasAtlChangesHelper();
     this._registerHasTokenMagicChangesHelper();
-    this._registerHasNestedEffectsHelper();
   }
 
   _registerIsGmHelper() {
     Handlebars.registerHelper('isGm', (options) => {
       return game.user.isGM ? options.fn(this) : options.inverse(this);
+    });
+  }
+
+  _registerHasNestedEffectsHelper() {
+    Handlebars.registerHelper('hasNestedEffects', (effect, options) => {
+      if (effect.nestedEffects.length > 0) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
     });
   }
 
@@ -63,16 +73,6 @@ export default class HandlebarHelpers {
         this._settings.integrateWithTokenMagic &&
         (effect.tokenMagicChanges.length > 0 || anyNestedHaveTokenMagicChanges)
       ) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
-    });
-  }
-
-  _registerHasNestedEffectsHelper() {
-    Handlebars.registerHelper('hasNestedEffects', (effect, options) => {
-      if (effect.nestedEffects.length > 0) {
         return options.fn(this);
       } else {
         return options.inverse(this);
