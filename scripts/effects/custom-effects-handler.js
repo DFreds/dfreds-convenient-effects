@@ -1,12 +1,14 @@
 import Effect from './effect.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
+import FoundryHelpers from '../foundry-helpers.js';
 
 /**
  * Handles initializing, creating, editing, and deleting custom effects.
  */
 export default class CustomEffectsHandler {
   constructor() {
+    this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
   }
 
@@ -170,9 +172,54 @@ export default class CustomEffectsHandler {
    */
   async importCustomEffectsFromJson() {
     const item = await this._findOrCreateCustomEffectsItem();
-    await item.importFromJSONDialog();
-    // TODO render the app when import is done... requires not using this method on item explicitly, and doing it yourself
-    // this._foundryHelpers.renderConvenientEffectsAppIfOpen();
+
+    const content = await renderTemplate('templates/apps/import-data.html', {
+      hint1: game.i18n.format('DOCUMENT.ImportDataHint1', {
+        document: item.documentName,
+      }),
+      hint2: game.i18n.format('DOCUMENT.ImportDataHint2', {
+        name: item.name,
+      }),
+    });
+
+    // NOTE: this is taken from foundry, wrapped in a promise by me
+    const importPromise = new Promise((resolve, reject) => {
+      new Dialog(
+        {
+          title: `Import Data: ${item.name}`,
+          content: content,
+          buttons: {
+            import: {
+              icon: '<i class="fas fa-file-import"></i>',
+              label: 'Import',
+              callback: (html) => {
+                const form = html.find('form')[0];
+                if (!form.data.files.length) {
+                  return ui.notifications.error(
+                    'You did not upload a data file!'
+                  );
+                }
+                readTextFromFile(form.data.files[0]).then((json) => {
+                  item.importFromJSON(json);
+                  resolve(true);
+                });
+              },
+            },
+            no: {
+              icon: '<i class="fas fa-times"></i>',
+              label: 'Cancel',
+            },
+          },
+          default: 'import',
+        },
+        {
+          width: 400,
+        }
+      ).render(true);
+    });
+
+    await importPromise;
+    this._foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
 
   async _findOrCreateCustomEffectsItem() {
