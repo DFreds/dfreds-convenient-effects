@@ -31,10 +31,10 @@
           {{folder.label}}
         </h3>
 
-        {{#ifEquals folder.id "custom"}}
+        {{#ifCustomFolder folder.id}}
           <a title="Import custom effects" class="import-custom-effects create-folder"><i class="fas fa-file-import fa-fw"></i></a>
           <a title="Export custom effects" class="export-custom-effects create-folder"><i class="fas fa-file-export fa-fw"></i></a>
-        {{/ifEquals}}
+        {{/ifCustomFolder}}
       </header>
       <ol class="subdirectory">
         {{#each folder.effects as |effect|}}

@@ -13,6 +13,7 @@ export default class HandlebarHelpers {
    */
   registerHelpers() {
     this._registerIsGmHelper();
+    this._registerIfCustomFolderHelper();
     this._registerHasNestedEffectsHelper();
     this._registerIsStatusEffectHelper();
     this._registerHasMidiQoLChangesHelper();
@@ -23,6 +24,12 @@ export default class HandlebarHelpers {
   _registerIsGmHelper() {
     Handlebars.registerHelper('isGm', (options) => {
       return game.user.isGM ? options.fn(this) : options.inverse(this);
+    });
+  }
+
+  _registerIfCustomFolderHelper() {
+    Handlebars.registerHelper('ifCustomFolder', (folderId, options) => {
+      return folderId === 'custom' ? options.fn(this) : options.inverse(this);
     });
   }
 
