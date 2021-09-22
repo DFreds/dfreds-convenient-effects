@@ -112,25 +112,33 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initClickListeners() {
+    this._collapseAllButton.on(
+      'click',
+      this._controller.onCollapseAllClick.bind(this._controller)
+    );
     this._createEffectButton.on(
       'click',
       this._controller.onCreateEffectClick.bind(this._controller)
     );
-    this._resetStatusEffectsButton.on(
+    this._effectListItems.on(
       'click',
-      this._controller.onResetStatusEffectsClick.bind(this._controller)
+      this._controller.onEffectClick.bind(this._controller)
     );
-    this._collapseAllButton.on(
+    this._exportCustomEffectsButton.on(
       'click',
-      this._controller.onCollapseAllClick.bind(this._controller)
+      this._controller.onExportCustomEffectsClick.bind(this._controller)
     );
     this._folderHeaders.on(
       'click',
       this._controller.onFolderClick.bind(this._controller)
     );
-    this._effectListItems.on(
+    this._importCustomEffectsButton.on(
       'click',
-      this._controller.onEffectClick.bind(this._controller)
+      this._controller.onImportCustomEffectsClick.bind(this._controller)
+    );
+    this._resetStatusEffectsButton.on(
+      'click',
+      this._controller.onResetStatusEffectsClick.bind(this._controller)
     );
   }
 

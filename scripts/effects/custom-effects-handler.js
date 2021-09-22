@@ -160,6 +160,24 @@ export default class CustomEffectsHandler {
     effects[0].sheet.render(true);
   }
 
+  /**
+   * Exports all custom effects on the custom item to JSON
+   */
+  async exportCustomEffectsToJson() {
+    const item = await this._findOrCreateCustomEffectsItem();
+    item.exportToJSON();
+  }
+
+  /**
+   * Imports JSON to the custom effects item via a dialog
+   */
+  async importCustomEffectsFromJson() {
+    const item = await this._findOrCreateCustomEffectsItem();
+    await item.importFromJSONDialog();
+    // TODO render the app when import is done... requires not using this method on item explicitly, and doing it yourself
+    // this._foundryHelpers.renderConvenientEffectsAppIfOpen();
+  }
+
   async _findOrCreateCustomEffectsItem() {
     return (
       this._findCustomEffectsItem() ?? (await this._createCustomEffectsItem())
@@ -177,6 +195,7 @@ export default class CustomEffectsHandler {
       type: 'consumable',
     });
 
+    log(`Creating custom item with ${item.id}`);
     await this._settings.setCustomEffectsItemId(item.id);
 
     return item;

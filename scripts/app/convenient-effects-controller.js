@@ -200,7 +200,7 @@ export default class ConvenientEffectsController {
   /**
    * Handles clicks on the collapse all button
    *
-   * @param {MouseEvent} event
+   * @param {MouseEvent} event - event that corresponds to clicking the collapse all
    */
   async onCollapseAllClick(event) {
     this._viewMvc.collapseAllFolders();
@@ -301,6 +301,26 @@ export default class ConvenientEffectsController {
     await this._customEffectsHandler.duplicateExistingEffect(effect);
 
     this._viewMvc.render();
+  }
+
+  /**
+   * Handle clicks on the export custom effects button
+   *
+   * @param {MouseEvent} event - event that corresponds to clicking the export
+   */
+  async onExportCustomEffectsClick(event) {
+    event.stopPropagation();
+    await this._customEffectsHandler.exportCustomEffectsToJson();
+  }
+
+  /**
+   * Handle clicks on the import custom effects button
+   *
+   * @param {MouseEvent} event - event that corresponds to clicking the export
+   */
+  async onImportCustomEffectsClick(event) {
+    event.stopPropagation();
+    await this._customEffectsHandler.importCustomEffectsFromJson();
   }
 
   /**
