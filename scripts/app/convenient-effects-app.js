@@ -244,6 +244,10 @@ export default class ConvenientEffectsApp extends Application {
     return this._rootView.find('.entity');
   }
 
+  get _exportCustomEffectsButton() {
+    return this._rootView.find('.export-custom-effects');
+  }
+
   get _favoritesDirectory() {
     return this._rootView.find('.folder[data-folder-label="Favorites"]');
   }
@@ -258,6 +262,10 @@ export default class ConvenientEffectsApp extends Application {
 
   get _folderHeaders() {
     return this._rootView.find('.directory-list .folder-header');
+  }
+
+  get _importCustomEffectsButton() {
+    return this._rootView.find('.import-custom-effects');
   }
 
   get _nonFavoritesNonCustomDirectories() {
