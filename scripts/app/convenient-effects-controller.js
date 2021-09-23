@@ -330,7 +330,7 @@ export default class ConvenientEffectsController {
    */
   onEffectDragStart(event) {
     const effectName = event.target.dataset.effectName;
-    event.dataTransfer.setData('text/plain', effectName);
+    event.dataTransfer.setData('text/plain', JSON.stringify({ effectName }));
   }
 
   /**
@@ -367,11 +367,16 @@ export default class ConvenientEffectsController {
       return;
     }
 
-    const effectName = event.dataTransfer.getData('text/plain');
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    } catch (err) {
+      return;
+    }
 
     // Don't add favorites twice
-    if (!this._settings.isFavoritedEffect(effectName)) {
-      await this._settings.addFavoriteEffect(effectName);
+    if (!this._settings.isFavoritedEffect(data.effectName)) {
+      await this._settings.addFavoriteEffect(data.effectName);
     }
 
     this._viewMvc.render();
@@ -439,8 +444,14 @@ export default class ConvenientEffectsController {
 
   // Fixes bug when dragging over any item onto the convenient effects
   _isValidEffect(event) {
-    const effectName = event.dataTransfer.getData('text/plain');
-    return game.dfreds.effects.all.some((effect) => effect.name === effectName);
+    try {
+      const data = JSON.parse(event.dataTransfer.getData('text/plain'));
+      return game.dfreds.effects.all.some(
+        (effect) => effect.name === data.effectName
+      );
+    } catch (err) {
+      return false;
+    }
   }
 
   _isEventTargetFavorites(event) {
