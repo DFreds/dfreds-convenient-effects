@@ -1,6 +1,5 @@
 import ChatHandler from './chat-handler.js';
 import Controls from './controls.js';
-import ConvenientEffectsApp from './app/convenient-effects-app.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectInterface from './effect-interface.js';
@@ -9,6 +8,7 @@ import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
 import FoundryHelpers from './foundry-helpers.js';
+import MacroHandler from './macro-handler.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
@@ -138,4 +138,9 @@ Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
 
   const foundryHelpers = new FoundryHelpers();
   foundryHelpers.renderConvenientEffectsAppIfOpen();
+});
+
+Hooks.on('hotbarDrop', (bar, data, slot) => {
+  const macroHandler = new MacroHandler();
+  macroHandler.createMacro(data, slot);
 });
