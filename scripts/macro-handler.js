@@ -1,4 +1,14 @@
+/**
+ * Handles creating macros
+ */
 export default class MacroHandler {
+  /**
+   * Create a Macro from a Convenient Effect drop.
+   * Get an existing item macro if one exists, otherwise create a new one.
+   *
+   * @param {Object} data - the dropped data
+   * @param {number} slot - the hotbar slot to use
+   */
   async createMacro(data, slot) {
     if (!data.effectName) return;
 

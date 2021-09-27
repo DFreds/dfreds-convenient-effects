@@ -3,12 +3,12 @@ import Controls from './controls.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectInterface from './effect-interface.js';
+import FoundryHelpers from './foundry-helpers.js';
 import HandlebarHelpers from './handlebar-helpers.js';
+import MacroHandler from './macro-handler.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
-import FoundryHelpers from './foundry-helpers.js';
-import MacroHandler from './macro-handler.js';
 
 Hooks.once('init', () => {
   new Settings().registerSettings();
