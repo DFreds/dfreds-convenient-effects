@@ -26,7 +26,7 @@ You can configure some stuff:
 
 ![Settings](docs/settings.png)
 
-Check the [User Guide](https://github.com/DFreds/dfreds-convenient-effects/wiki/User-Guide). for more details.
+Check the [User Guide](https://github.com/DFreds/dfreds-convenient-effects/wiki/User-Guide) for more details.
 
 ## How to Use
 
