@@ -1842,7 +1842,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
-          key: 'data.skills.ste.mod',
+          key: 'data.skills.ste.bonuses.check',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+10',
         },
@@ -2111,7 +2111,7 @@ export default class EffectDefinitions {
           value: '-2',
         },
         {
-          key: 'data.abilities.dex.save',
+          key: 'data.abilities.dex.bonuses.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '-2',
         },
@@ -2683,7 +2683,7 @@ export default class EffectDefinitions {
           value: '+2',
         },
         {
-          key: 'data.abilities.dex.save',
+          key: 'data.abilities.dex.bonuses.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+2',
         },
@@ -2703,7 +2703,7 @@ export default class EffectDefinitions {
           value: '+5',
         },
         {
-          key: 'data.abilities.dex.save',
+          key: 'data.abilities.dex.bonuses.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
         },
