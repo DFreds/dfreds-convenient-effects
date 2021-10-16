@@ -67,11 +67,11 @@ export default class ActorUpdater {
         actor.data.data.attributes.hp.tempmax + evaluation.total,
       'data.attributes.hp.value':
         actor.data.data.attributes.hp.value + evaluation.total,
-      flags: foundry.utils.mergeObject(actor.data.flags, {
+      flags: {
         convenientEffects: {
           heroesFeastRoll: evaluation.total,
         },
-      }),
+      },
     });
   }
 
