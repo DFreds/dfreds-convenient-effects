@@ -200,7 +200,11 @@ export default class CustomEffectsHandler {
                   );
                 }
                 readTextFromFile(form.data.files[0]).then((json) => {
-                  item.importFromJSON(json);
+                  let jsonData = this._combinePrevAndNewCustomEffects(
+                    item,
+                    json
+                  );
+                  item.importFromJSON(jsonData);
                   resolve(true);
                 });
               },
@@ -243,5 +247,14 @@ export default class CustomEffectsHandler {
     await this._settings.setCustomEffectsItemId(item.id);
 
     return item;
+  }
+
+  _combinePrevAndNewCustomEffects(item, json) {
+    let itemDataEffects = Array.from(item.data.effects);
+    let jsonData = JSON.parse(json);
+
+    jsonData.effects.push(...itemDataEffects);
+
+    return JSON.stringify(jsonData, null, 2);
   }
 }
