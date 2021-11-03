@@ -2057,6 +2057,11 @@ export default class EffectDefinitions {
       description: 'Add 5 to AC until next turn',
       icon: 'systems/dnd5e/icons/spells/protect-magenta-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_ROUND,
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
       changes: [
         {
           key: 'data.attributes.ac.bonus',
