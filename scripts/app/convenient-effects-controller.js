@@ -234,11 +234,14 @@ export default class ConvenientEffectsController {
    * @param {MouseEvent} event - event that corresponds to clicking an effect item
    */
   async onEffectClick(event) {
-    const effectName = event.target.innerText
-      ? event.target.innerText
-      : event.target.title;
-
+    const effectName = this._findNearestEffectName(event);
     await game.dfreds.effectInterface.toggleEffect(effectName);
+  }
+
+  _findNearestEffectName(event) {
+    return $(event.target)
+      .closest('[data-effect-name], .convenient-effect')
+      .data()?.effectName;
   }
 
   /**
