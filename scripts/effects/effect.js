@@ -59,6 +59,7 @@ export default class Effect {
         isConvenient: true,
       }),
       origin: origin,
+      transfer: false,
       changes: this.changes,
     };
   }
