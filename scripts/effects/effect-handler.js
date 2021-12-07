@@ -128,6 +128,10 @@ export default class EffectHandler {
     let effect = this.findEffectByName(effectName);
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
+    if (effect.name.startsWith('Exhaustion')) {
+      await this._removeAllExhaustionEffects(uuid);
+    }
+
     if (effect.isDynamic) {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
@@ -138,6 +142,14 @@ export default class EffectHandler {
     await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
 
     log(`Added effect ${effect.name} to ${actor.name} - ${actor.id}`);
+  }
+
+  async _removeAllExhaustionEffects(uuid) {
+    await this.removeEffect('Exhaustion 1', uuid);
+    await this.removeEffect('Exhaustion 2', uuid);
+    await this.removeEffect('Exhaustion 3', uuid);
+    await this.removeEffect('Exhaustion 4', uuid);
+    await this.removeEffect('Exhaustion 5', uuid);
   }
 
   _handleIntegrations(effect) {
