@@ -202,6 +202,8 @@ export default class EffectDefinitions {
       this._bardicInspirationD8,
       this._bardicInspirationD10,
       this._bardicInspirationD12,
+      this._bladesong,
+      this._bladesongSongOfVictory,
       this._channelDivinitySacredWeapon,
       this._channelDivinityTurnUndead,
       this._rage,
@@ -2359,6 +2361,56 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.optional.bardic-inspiration.skill',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d12',
+        },
+      ],
+    });
+  }
+  
+  get _bladesong() {
+    return new Effect({
+      name: 'Bladesong',
+      description:
+        'Add intelligence modifier (minimum +1) to AC and concentration check, add 10ft to walking speed and advantage on Acrobatics(Dexterity) checks',
+      icon: 'systems/dnd5e/icons/spells/enchant-blue-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        {
+          key: 'data.attributes.ac.bonus',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+max(1, @abilities.int.mod)', 
+        },
+        {
+          key: 'flags.midi-qol.concentrationSaveBonus',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+max(1, @abilities.int.mod)',
+        },
+        {
+          key: 'data.attributes.movement.walk',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: +10,
+        },
+        {
+          key: 'flags.midi-qol.advantage.skill.acr',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 1,
+        },
+      ],
+    });
+  }
+  
+  get _bladesongSongOfVictory() {
+    return new Effect({
+      name: 'Bladesong (Song of victory)',
+      description:
+        'Add intelligence modifier (minimum +1) to AC, melee damages and concentration checks, add 10ft to walking speed and advantage on Acrobatics(Dexterity) checks',
+      icon: 'systems/dnd5e/icons/spells/enchant-blue-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        ...this._bladesong.changes,
+        {
+          key: 'data.bonuses.mwak.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value '+max(1, @abilities.int.mod)',
         },
       ],
     });
