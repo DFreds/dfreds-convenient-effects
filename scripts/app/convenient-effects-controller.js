@@ -27,8 +27,6 @@ export default class ConvenientEffectsController {
    * @returns the data to pass to the template
    */
   get data() {
-    this._customEffectsHandler.initialize();
-
     return {
       folders: [
         {
@@ -87,10 +85,9 @@ export default class ConvenientEffectsController {
   }
 
   _fetchUnfavoritedCustomEffects() {
-    const effects = game.dfreds.effects;
-    return effects.customEffects.filter(
-      (effect) => !this._settings.isFavoritedEffect(effect.name)
-    );
+    return this._customEffectsHandler
+      .getCustomEffects()
+      .filter((effect) => !this._settings.isFavoritedEffect(effect.name));
   }
 
   _fetchUnfavoritedConditions() {
@@ -158,9 +155,9 @@ export default class ConvenientEffectsController {
    */
   async onEditEffectClick(effectItem) {
     const effectName = effectItem.data().effectName;
-    const customEffect = game.dfreds.effects.customEffects.find(
-      (effect) => effect.name === effectName
-    );
+    const customEffect = this._customEffectsHandler
+      .getCustomEffects()
+      .find((effect) => effect.name == effectName);
 
     await this._customEffectsHandler.editCustomEffect(customEffect);
   }
@@ -172,9 +169,9 @@ export default class ConvenientEffectsController {
    */
   async onDeleteEffectClick(effectItem) {
     const effectName = effectItem.data().effectName;
-    const customEffect = game.dfreds.effects.customEffects.find(
-      (effect) => effect.name === effectName
-    );
+    const customEffect = this._customEffectsHandler
+      .getCustomEffects()
+      .find((effect) => effect.name == effectName);
 
     await this._customEffectsHandler.deleteCustomEffect(customEffect);
     this._viewMvc.render();

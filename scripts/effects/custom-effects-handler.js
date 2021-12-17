@@ -13,17 +13,17 @@ export default class CustomEffectsHandler {
   }
 
   /**
-   * Initializes the custom effect
+   * Gets all custom effects
+   *
+   * @returns {Effect[]} the list of custom effects defined on the custom item
    */
-  initialize() {
+  getCustomEffects() {
     const item = this._findCustomEffectsItem();
-    if (!item) return;
+    if (!item) return [];
 
-    const customEffects = item.effects
+    return item.effects
       .filter((effect) => this._isValid(effect))
       .map((effect) => this._convertToEffectClass(effect));
-
-    game.dfreds.effects.customEffects = customEffects;
   }
 
   /**

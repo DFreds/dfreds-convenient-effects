@@ -1,3 +1,4 @@
+import CustomEffectsHandler from './custom-effects-handler.js';
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
@@ -8,6 +9,7 @@ import log from '../logger.js';
  */
 export default class EffectHandler {
   constructor() {
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._foundryHelpers = new FoundryHelpers();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
     this._settings = new Settings();
@@ -21,9 +23,9 @@ export default class EffectHandler {
    * @returns {Effect} the found effect
    */
   findEffectByName(effectName) {
-    const effect = game.dfreds.effects.customEffects.find(
-      (effect) => effect.name == effectName
-    );
+    const effect = this._customEffectsHandler
+      .getCustomEffects()
+      .find((effect) => effect.name == effectName);
 
     if (effect) return effect;
 

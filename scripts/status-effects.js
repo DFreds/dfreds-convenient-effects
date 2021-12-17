@@ -1,3 +1,4 @@
+import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import Settings from './settings.js';
 
 /**
@@ -5,6 +6,7 @@ import Settings from './settings.js';
  */
 export default class StatusEffects {
   constructor() {
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._settings = new Settings();
   }
 
@@ -26,9 +28,9 @@ export default class StatusEffects {
   _fetchStatusEffects() {
     return this._settings.statusEffectNames
       .map((name) => {
-        const effect = game.dfreds.effects.customEffects.find(
-          (effect) => effect.name == name
-        );
+        const effect = this._customEffectsHandler
+          .getCustomEffects()
+          .find((effect) => effect.name == name);
 
         if (effect) return effect;
 
