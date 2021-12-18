@@ -312,6 +312,11 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
+        {
+          key: 'flags.dnd5e.initiativeDisadv',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
       ],
     });
   }
@@ -324,6 +329,11 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.dnd5e.initiativeDisadv',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
@@ -346,6 +356,11 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.dnd5e.initiativeDisadv',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
@@ -378,6 +393,11 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.dnd5e.initiativeDisadv',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
@@ -416,6 +436,11 @@ export default class EffectDefinitions {
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.dnd5e.initiativeDisadv',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
