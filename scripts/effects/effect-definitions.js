@@ -1,14 +1,15 @@
 import Effect from './effect.js';
 import Constants from '../constants.js';
 import Settings from '../settings.js';
+import CustomEffectsHandler from './custom-effects-handler.js';
 
 /**
  * Defines all of the effect definitions
  */
 export default class EffectDefinitions {
   constructor() {
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._settings = new Settings();
-    this._customEffects = [];
   }
 
   /**
@@ -79,28 +80,7 @@ export default class EffectDefinitions {
    * @returns {Effect[]} all the custom effects
    */
   get customEffects() {
-    return this._customEffects;
-  }
-
-  /**
-   * Set the custom effects
-   * @param {Effect[]} effects - the custom effects to set
-   */
-  set customEffects(effects) {
-    this._customEffects = effects;
-    this._customEffects.sort((a, b) => {
-      let nameA = a.name.toUpperCase(); // ignore upper and lowercase
-      let nameB = b.name.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    });
+    return this._customEffectsHandler.getCustomEffects();
   }
 
   /**
