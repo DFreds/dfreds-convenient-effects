@@ -2503,7 +2503,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
-          key: 'ATL.light.angle',
+          key: 'ATL.lightAngle',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '60',
         },
