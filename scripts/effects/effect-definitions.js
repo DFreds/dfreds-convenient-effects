@@ -1665,7 +1665,7 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
-          key: 'flags.midi-qol.advantage.attack.all',
+          key: 'flags.midi-qol.advantage.ability.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
