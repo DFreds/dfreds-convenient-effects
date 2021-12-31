@@ -1529,7 +1529,6 @@ export default class EffectDefinitions {
       icon: 'systems/dnd5e/icons/spells/haste-sky-1.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
-        // TODO change this to an optional if supported
         {
           key: 'data.attributes.init.value',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1541,7 +1540,7 @@ export default class EffectDefinitions {
           value: 'Guidance',
         },
         {
-          key: 'flags.midi-qol.optional.guidance.skill',
+          key: 'flags.midi-qol.optional.guidance.check',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d4',
         },
