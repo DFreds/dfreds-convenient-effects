@@ -143,3 +143,12 @@ Hooks.on('hotbarDrop', (bar, data, slot) => {
   const macroHandler = new MacroHandler();
   macroHandler.createMacro(data, slot);
 });
+
+/**
+ * Handle dropping an effect onto an actor sheet
+ */
+Hooks.on('dropActorSheetData', (actor, actorSheetCharacter, data) => {
+  if (!data.effectName) return;
+
+  game.dfreds.effectInterface.addEffect(data.effectName, actor.uuid);
+});
