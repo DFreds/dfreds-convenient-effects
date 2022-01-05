@@ -10,11 +10,17 @@ import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
 
+/**
+ * Initialize the settings and handlebar helpers
+ */
 Hooks.once('init', () => {
   new Settings().registerSettings();
   new HandlebarHelpers().registerHelpers();
 });
 
+/**
+ * Handle initializing the API when socket lib is ready
+ */
 Hooks.once('socketlib.ready', () => {
   game.dfreds = game.dfreds || {};
 
@@ -25,12 +31,18 @@ Hooks.once('socketlib.ready', () => {
   game.dfreds.effectInterface.initialize();
 });
 
+/**
+ * Handle initializing the status and custom effects
+ */
 Hooks.once('ready', async () => {
   const customEffectsHandler = new CustomEffectsHandler();
   await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
 });
 
+/**
+ * Handle setting up the lib wrapper overrides
+ */
 Hooks.once('setup', () => {
   const MODULE_ID = 'dfreds-convenient-effects';
 
@@ -56,10 +68,16 @@ Hooks.once('setup', () => {
   );
 });
 
+/**
+ * Handle adding new controls
+ */
 Hooks.on('getSceneControlButtons', (controls) => {
   new Controls().initializeControls(controls);
 });
 
+/**
+ * Handle creating a chat message if an effect is added
+ */
 Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -71,6 +89,9 @@ Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
   });
 });
 
+/**
+ * Handle adding any actor data changes when an active effect is added to an actor
+ */
 Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -82,6 +103,9 @@ Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   }
 });
 
+/**
+ * Handle creating a chat message if an effect has expired or was removed
+ */
 Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -139,6 +163,9 @@ Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
   foundryHelpers.renderConvenientEffectsAppIfOpen();
 });
 
+/**
+ * Handle dropping an effect onto the hotbar
+ */
 Hooks.on('hotbarDrop', (bar, data, slot) => {
   const macroHandler = new MacroHandler();
   macroHandler.createMacro(data, slot);
