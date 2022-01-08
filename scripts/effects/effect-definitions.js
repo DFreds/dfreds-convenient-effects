@@ -1530,11 +1530,6 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
-          key: 'data.attributes.init.value',
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '+1d4',
-        },
-        {
           key: 'flags.midi-qol.optional.guidance.label',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: 'Guidance',
