@@ -176,5 +176,8 @@ Hooks.on('hotbarDrop', (bar, data, slot) => {
 Hooks.on('dropActorSheetData', (actor, actorSheetCharacter, data) => {
   if (!data.effectName) return;
 
-  game.dfreds.effectInterface.addEffect(data.effectName, actor.uuid);
+  game.dfreds.effectInterface.addEffect({
+    effectName: data.effectName,
+    uuid: actor.uuid,
+  });
 });

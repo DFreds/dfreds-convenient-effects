@@ -47,11 +47,13 @@ export default class EffectInterface {
   /**
    * Toggles the effect on the provided actor UUIDS as the GM via sockets
    *
-   * @param {string} effectName - the name of the effect to toggle
-   * @param  {...string} uuids - the UUIDs of the actors to toggle the effect on
+   * @param {string} effectName - name of the effect to toggle
+   * @param {object} params - the effect parameters
+   * @param {string} params.overlay - name of the effect to toggle
+   * @param {string[]} params.uuids - UUIDS of the actors to toggle the effect on
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  async toggleEffect(effectName, ...uuids) {
+  async toggleEffect(effectName, { overlay, uuids = [] } = {}) {
     if (uuids.length == 0) {
       uuids = this._foundryHelpers.getActorUuidsFromCanvas();
     }
@@ -75,7 +77,10 @@ export default class EffectInterface {
       if (!effect) return; // dialog closed without selecting one
     }
 
-    return this._socket.executeAsGM('toggleEffect', effect.name, ...uuids);
+    return this._socket.executeAsGM('toggleEffect', effect.name, {
+      overlay,
+      uuids,
+    });
   }
 
   /**
@@ -94,11 +99,12 @@ export default class EffectInterface {
   /**
    * Removes the effect from the provided actor UUID as the GM via sockets
    *
-   * @param {string} effectName - the name of the effect to remove
-   * @param {string} uuid - the UUID of the actor to remove the effect from
+   * @param {object} params - the effect params
+   * @param {string} params.effectName - the name of the effect to remove
+   * @param {string} params.uuid - the UUID of the actor to remove the effect from
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  async removeEffect(effectName, uuid) {
+  async removeEffect({ effectName, uuid }) {
     let effect = this._effectHandler.findEffectByName(effectName);
 
     if (!effect) {
@@ -117,17 +123,22 @@ export default class EffectInterface {
       effect = await this._effectHandler.getNestedEffectSelection(effect);
     }
 
-    return this._socket.executeAsGM('removeEffect', effect.name, uuid);
+    return this._socket.executeAsGM('removeEffect', {
+      effectName: effect.name,
+      uuid,
+    });
   }
 
   /**
    * Adds the effect to the provided actor UUID as the GM via sockets
    *
-   * @param {string} effectName - the name of the effect to add
-   * @param {string} uuid - the UUID of the actor to add the effect to
+   * @param {object} params - the effect params
+   * @param {string} params.effectName - the name of the effect to add
+   * @param {string} params.uuid - the UUID of the actor to add the effect to
+   * @param {string} params.origin - the origin of the effect
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  async addEffect(effectName, uuid, origin) {
+  async addEffect({ effectName, uuid, origin }) {
     let effect = this._effectHandler.findEffectByName(effectName);
 
     if (!effect) {
@@ -146,7 +157,11 @@ export default class EffectInterface {
       effect = await this._effectHandler.getNestedEffectSelection(effect);
     }
 
-    return this._socket.executeAsGM('addEffect', effect.name, uuid, origin);
+    return this._socket.executeAsGM('addEffect', {
+      effectName: effect.name,
+      uuid,
+      origin,
+    });
   }
 
   /**
