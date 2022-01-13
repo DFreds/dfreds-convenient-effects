@@ -1,9 +1,9 @@
+import Constants from './constants.js';
+
 /**
  * Handle setting and fetching all settings in the module
  */
 export default class Settings {
-  static PACKAGE_NAME = 'dfreds-convenient-effects';
-
   // Settings keys
   static CHAT_MESSAGE_PERMISSION = 'chatMessagePermission';
   static CONTROLS_PERMISSION = 'controlsPermission';
@@ -30,7 +30,7 @@ export default class Settings {
     userRoles[5] = 'None';
 
     game.settings.register(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.CHAT_MESSAGE_PERMISSION,
       {
         name: 'Chat Message Permission',
@@ -43,22 +43,18 @@ export default class Settings {
       }
     );
 
-    game.settings.register(
-      Settings.PACKAGE_NAME,
-      Settings.CONTROLS_PERMISSION,
-      {
-        name: 'Controls Permission',
-        hint: 'This defines the minimum permission level to see and apply Convenient Effects via the token controls. Setting this to None will disable the controls entirely.',
-        scope: 'world',
-        config: true,
-        default: CONST.USER_ROLES.GAMEMASTER,
-        choices: userRoles,
-        type: String,
-        onChange: () => window.location.reload(),
-      }
-    );
+    game.settings.register(Constants.MODULE_ID, Settings.CONTROLS_PERMISSION, {
+      name: 'Controls Permission',
+      hint: 'This defines the minimum permission level to see and apply Convenient Effects via the token controls. Setting this to None will disable the controls entirely.',
+      scope: 'world',
+      config: true,
+      default: CONST.USER_ROLES.GAMEMASTER,
+      choices: userRoles,
+      type: String,
+      onChange: () => window.location.reload(),
+    });
 
-    game.settings.register(Settings.PACKAGE_NAME, Settings.INTEGRATE_WITH_ATL, {
+    game.settings.register(Constants.MODULE_ID, Settings.INTEGRATE_WITH_ATL, {
       name: 'Integrate with ATL',
       hint: 'If enabled, certain effects will also change light emitted from tokens via Active Token Lighting.',
       scope: 'world',
@@ -68,7 +64,7 @@ export default class Settings {
     });
 
     game.settings.register(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.INTEGRATE_WITH_TOKEN_MAGIC,
       {
         name: 'Integrate with Token Magic',
@@ -81,7 +77,7 @@ export default class Settings {
     );
 
     game.settings.register(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.MODIFY_STATUS_EFFECTS,
       {
         name: 'Modify Status Effects',
@@ -99,7 +95,7 @@ export default class Settings {
       }
     );
 
-    game.settings.register(Settings.PACKAGE_NAME, Settings.PRIORITIZE_TARGETS, {
+    game.settings.register(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS, {
       name: 'Prioritize Targets',
       hint: 'If enabled, effects will be applied to any targeted tokens instead of selected tokens.',
       scope: 'client',
@@ -108,21 +104,17 @@ export default class Settings {
       type: Boolean,
     });
 
-    game.settings.register(
-      Settings.PACKAGE_NAME,
-      Settings.SHOW_NESTED_EFFECTS,
-      {
-        name: 'Show Nested Effects',
-        hint: 'If enabled, nested effects will be shown in the application.',
-        scope: 'client',
-        config: true,
-        default: false,
-        type: Boolean,
-      }
-    );
+    game.settings.register(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS, {
+      name: 'Show Nested Effects',
+      hint: 'If enabled, nested effects will be shown in the application.',
+      scope: 'client',
+      config: true,
+      default: false,
+      type: Boolean,
+    });
 
     game.settings.register(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
       {
         name: 'Favorite Effect Names',
@@ -133,19 +125,15 @@ export default class Settings {
       }
     );
 
-    game.settings.register(
-      Settings.PACKAGE_NAME,
-      Settings.STATUS_EFFECT_NAMES,
-      {
-        name: 'Status Effect Names',
-        scope: 'world',
-        config: false,
-        default: this._defaultStatusEffectNames,
-        type: String,
-      }
-    );
+    game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
+      name: 'Status Effect Names',
+      scope: 'world',
+      config: false,
+      default: this._defaultStatusEffectNames,
+      type: String,
+    });
 
-    game.settings.register(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS, {
+    game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
       name: 'Expanded Folders',
       scope: 'client',
       config: false,
@@ -154,7 +142,7 @@ export default class Settings {
     });
 
     game.settings.register(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.CUSTOM_EFFECTS_ITEM_ID,
       {
         name: 'Custom Effects Item ID',
@@ -199,7 +187,7 @@ export default class Settings {
    */
   get chatMessagePermission() {
     return parseInt(
-      game.settings.get(Settings.PACKAGE_NAME, Settings.CHAT_MESSAGE_PERMISSION)
+      game.settings.get(Constants.MODULE_ID, Settings.CHAT_MESSAGE_PERMISSION)
     );
   }
 
@@ -210,7 +198,7 @@ export default class Settings {
    */
   get controlsPermission() {
     return parseInt(
-      game.settings.get(Settings.PACKAGE_NAME, Settings.CONTROLS_PERMISSION)
+      game.settings.get(Constants.MODULE_ID, Settings.CONTROLS_PERMISSION)
     );
   }
 
@@ -220,10 +208,7 @@ export default class Settings {
    * @returns {boolean} true if integration with ATL is enabled
    */
   get integrateWithAtl() {
-    return game.settings.get(
-      Settings.PACKAGE_NAME,
-      Settings.INTEGRATE_WITH_ATL
-    );
+    return game.settings.get(Constants.MODULE_ID, Settings.INTEGRATE_WITH_ATL);
   }
 
   /**
@@ -233,7 +218,7 @@ export default class Settings {
    */
   get integrateWithTokenMagic() {
     return game.settings.get(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.INTEGRATE_WITH_TOKEN_MAGIC
     );
   }
@@ -245,7 +230,7 @@ export default class Settings {
    */
   get modifyStatusEffects() {
     return game.settings.get(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.MODIFY_STATUS_EFFECTS
     );
   }
@@ -256,10 +241,7 @@ export default class Settings {
    * @returns {boolean} true if targets should take first priority
    */
   get prioritizeTargets() {
-    return game.settings.get(
-      Settings.PACKAGE_NAME,
-      Settings.PRIORITIZE_TARGETS
-    );
+    return game.settings.get(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS);
   }
 
   /**
@@ -268,10 +250,7 @@ export default class Settings {
    * @returns {boolean} true if nested effects should be shown
    */
   get showNestedEffects() {
-    return game.settings.get(
-      Settings.PACKAGE_NAME,
-      Settings.SHOW_NESTED_EFFECTS
-    );
+    return game.settings.get(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS);
   }
 
   /**
@@ -281,7 +260,7 @@ export default class Settings {
    */
   get favoriteEffectNames() {
     return game.settings
-      .get(Settings.PACKAGE_NAME, Settings.FAVORITE_EFFECT_NAMES)
+      .get(Constants.MODULE_ID, Settings.FAVORITE_EFFECT_NAMES)
       .split(';')
       .filter((name) => name.trim());
   }
@@ -299,7 +278,7 @@ export default class Settings {
     favoriteEffectsArray = [...new Set(favoriteEffectsArray)]; // remove duplicates
 
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
       favoriteEffectsArray.join(';')
     );
@@ -316,7 +295,7 @@ export default class Settings {
       (favoriteEffect) => favoriteEffect !== name
     );
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
       favoriteEffectsArray.join(';')
     );
@@ -339,7 +318,7 @@ export default class Settings {
    */
   get statusEffectNames() {
     return game.settings
-      .get(Settings.PACKAGE_NAME, Settings.STATUS_EFFECT_NAMES)
+      .get(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES)
       .split(';')
       .filter((name) => name.trim());
   }
@@ -357,7 +336,7 @@ export default class Settings {
     statusEffectsArray = [...new Set(statusEffectsArray)]; // remove duplicates
 
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.STATUS_EFFECT_NAMES,
       statusEffectsArray.join(';')
     );
@@ -374,7 +353,7 @@ export default class Settings {
       (statusEffect) => statusEffect !== name
     );
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.STATUS_EFFECT_NAMES,
       statusEffectsArray.join(';')
     );
@@ -387,7 +366,7 @@ export default class Settings {
    */
   async resetStatusEffects() {
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.STATUS_EFFECT_NAMES,
       this._defaultStatusEffectNames
     );
@@ -410,7 +389,7 @@ export default class Settings {
    */
   get expandedFolders() {
     return game.settings
-      .get(Settings.PACKAGE_NAME, Settings.EXPANDED_FOLDERS)
+      .get(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS)
       .split(';')
       .filter((name) => name.trim());
   }
@@ -428,7 +407,7 @@ export default class Settings {
     expandedFolderArray = [...new Set(expandedFolderArray)]; // remove duplicates
 
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.EXPANDED_FOLDERS,
       expandedFolderArray.join(';')
     );
@@ -445,7 +424,7 @@ export default class Settings {
       (expandedFolder) => expandedFolder !== name
     );
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.EXPANDED_FOLDERS,
       expandedFolderArray.join(';')
     );
@@ -458,7 +437,7 @@ export default class Settings {
    */
   async clearExpandedFolders() {
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.EXPANDED_FOLDERS,
       ''
     );
@@ -481,7 +460,7 @@ export default class Settings {
    */
   get customEffectsItemId() {
     return game.settings.get(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.CUSTOM_EFFECTS_ITEM_ID
     );
   }
@@ -494,7 +473,7 @@ export default class Settings {
    */
   async setCustomEffectsItemId(id) {
     return game.settings.set(
-      Settings.PACKAGE_NAME,
+      Constants.MODULE_ID,
       Settings.CUSTOM_EFFECTS_ITEM_ID,
       id
     );

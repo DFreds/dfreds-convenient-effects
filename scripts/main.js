@@ -1,4 +1,5 @@
 import ChatHandler from './chat-handler.js';
+import Constants from './constants.js';
 import Controls from './controls.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectDefinitions from './effects/effect-definitions.js';
@@ -44,10 +45,8 @@ Hooks.once('ready', async () => {
  * Handle setting up the lib wrapper overrides
  */
 Hooks.once('setup', () => {
-  const MODULE_ID = 'dfreds-convenient-effects';
-
   libWrapper.register(
-    MODULE_ID,
+    Constants.MODULE_ID,
     'TokenHUD.prototype._onToggleEffect',
     function (wrapper, ...args) {
       game.dfreds.statusEffects.onToggleEffect({
@@ -59,7 +58,7 @@ Hooks.once('setup', () => {
   );
 
   libWrapper.register(
-    MODULE_ID,
+    Constants.MODULE_ID,
     'TokenHUD.prototype._getStatusEffectChoices',
     function (_wrapper, ..._args) {
       const token = this.object;

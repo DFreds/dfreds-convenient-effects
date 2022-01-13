@@ -1,6 +1,6 @@
 import ActorUpdater from './effects/actor-updater.js';
+import Constants from './constants.js';
 import EffectHandler from './effects/effect-handler.js';
-import Effect from './effects/effect.js';
 import FoundryHelpers from './foundry-helpers.js';
 
 /**
@@ -17,7 +17,7 @@ export default class EffectInterface {
    * Initializes the socket and registers the socket functions
    */
   initialize() {
-    this._socket = socketlib.registerModule('dfreds-convenient-effects');
+    this._socket = socketlib.registerModule(Constants.MODULE_ID);
     this._registerFunctions();
   }
 
