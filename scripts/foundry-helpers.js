@@ -39,6 +39,9 @@ export default class FoundryHelpers {
     return actor;
   }
 
+  /**
+   * Re-renders the Convenient Effects application if open
+   */
   renderConvenientEffectsAppIfOpen() {
     const openApps = Object.values(ui.windows);
     const convenientEffectsApp = openApps.find(

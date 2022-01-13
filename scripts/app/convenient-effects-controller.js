@@ -24,7 +24,7 @@ export default class ConvenientEffectsController {
   /**
    * Configures and returns the data that the app will send to the template
    *
-   * @returns the data to pass to the template
+   * @returns {Object} the data to pass to the template
    */
   get data() {
     return {
