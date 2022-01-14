@@ -60,6 +60,7 @@ export default class Effect {
           overlay,
         },
         isConvenient: true,
+        convenientDescription: this.description,
       }),
       origin,
       transfer: false,
