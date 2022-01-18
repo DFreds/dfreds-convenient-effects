@@ -1,3 +1,4 @@
+import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import Settings from './settings.js';
 
 /**
@@ -5,6 +6,7 @@ import Settings from './settings.js';
  */
 export default class StatusEffects {
   constructor() {
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._settings = new Settings();
   }
 
@@ -25,9 +27,15 @@ export default class StatusEffects {
 
   _fetchStatusEffects() {
     return this._settings.statusEffectNames
-      .map((name) =>
-        game.dfreds.effects.all.find((effect) => effect.name == name)
-      )
+      .map((name) => {
+        const effect = this._customEffectsHandler
+          .getCustomEffects()
+          .find((effect) => effect.name == name);
+
+        if (effect) return effect;
+
+        return game.dfreds.effects.all.find((effect) => effect.name == name);
+      })
       .filter((effect) => effect)
       .map((effect) => effect.convertToActiveEffectData());
   }
@@ -48,7 +56,11 @@ export default class StatusEffects {
       event.preventDefault();
       event.stopPropagation();
       const effectName = statusEffectId.replace('Convenient Effect: ', '');
-      game.dfreds.effectInterface.toggleEffect(effectName, token.actor.uuid);
+
+      game.dfreds.effectInterface.toggleEffect(effectName, {
+        overlay: args.length > 1 && args[1].overlay,
+        uuids: [token.actor.uuid],
+      });
     } else {
       wrapper(...args);
     }

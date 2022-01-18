@@ -2,6 +2,8 @@
  * Contains any constants for the application
  */
 export default class Constants {
+  static MODULE_ID = 'dfreds-convenient-effects';
+
   static COLORS = {
     COLD_FIRE: '#389888',
     FIRE: '#f98026',

@@ -41,10 +41,12 @@ export default class Effect {
   /**
    * Converts the effect data to an active effect data object
    *
-   * @param {string} origin - the origin to add to the effect
+   * @param {object} params - the params to use for conversion
+   * @param {string} params.origin - the origin to add to the effect
+   * @param {boolean} params.overlay - whether the effect is an overlay or not
    * @returns The active effect data object for this effect
    */
-  convertToActiveEffectData(origin) {
+  convertToActiveEffectData({ origin, overlay } = {}) {
     return {
       id: this._id,
       name: this.name,
@@ -55,10 +57,13 @@ export default class Effect {
       flags: foundry.utils.mergeObject(this.flags, {
         core: {
           statusId: this._id,
+          overlay,
         },
         isConvenient: true,
+        convenientDescription: this.description,
       }),
-      origin: origin,
+      origin,
+      transfer: false,
       changes: this.changes,
     };
   }

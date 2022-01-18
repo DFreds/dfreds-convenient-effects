@@ -1,3 +1,4 @@
+import ConvenientEffectsApp from './app/convenient-effects-app.js';
 import Settings from './settings.js';
 
 /**
@@ -36,5 +37,19 @@ export default class FoundryHelpers {
     const actorToken = await fromUuid(uuid);
     const actor = actorToken?.actor ? actorToken?.actor : actorToken;
     return actor;
+  }
+
+  /**
+   * Re-renders the Convenient Effects application if open
+   */
+  renderConvenientEffectsAppIfOpen() {
+    const openApps = Object.values(ui.windows);
+    const convenientEffectsApp = openApps.find(
+      (app) => app instanceof ConvenientEffectsApp
+    );
+
+    if (convenientEffectsApp) {
+      convenientEffectsApp.render();
+    }
   }
 }

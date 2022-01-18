@@ -1,27 +1,45 @@
 import Effect from './effect.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
+import FoundryHelpers from '../foundry-helpers.js';
 
 /**
  * Handles initializing, creating, editing, and deleting custom effects.
  */
 export default class CustomEffectsHandler {
   constructor() {
+    this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
   }
 
   /**
-   * Initializes the custom effect
+   * Gets all custom effects
+   *
+   * @returns {Effect[]} the list of custom effects defined on the custom item
    */
-  initialize() {
+  getCustomEffects() {
     const item = this._findCustomEffectsItem();
-    if (!item) return;
+    if (!item) return [];
 
-    const customEffects = item.effects
+    let customEffects = item.effects
       .filter((effect) => this._isValid(effect))
       .map((effect) => this._convertToEffectClass(effect));
 
-    game.dfreds.effects.customEffects = customEffects;
+    customEffects.sort((a, b) => {
+      let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+
+    return customEffects;
   }
 
   /**
@@ -45,16 +63,6 @@ export default class CustomEffectsHandler {
       effect.data.label !== game.i18n.localize('DND5E.EffectNew');
     const hasChanges = effect.data.changes.length > 0;
     const isCustomConvenient = effect.data.flags.isCustomConvenient;
-
-    const hasSameNameAsDefinedEffect = game.dfreds.effects.nonCustom.some(
-      (definedEffect) => definedEffect.name === effect.data.label
-    );
-    if (hasSameNameAsDefinedEffect) {
-      log(
-        `Custom effect ${effect.data.label} is invalid because it has the same name as a predefined effect.`
-      );
-      return false;
-    }
 
     return (hasNonDefaultName || hasChanges) && isCustomConvenient;
   }
@@ -113,9 +121,6 @@ export default class CustomEffectsHandler {
    * @param {Effect} effect - the effect to edit
    */
   async editCustomEffect(effect) {
-    // if (this._settings.isStatusEffect(effect.name)) {
-    //   this._settings.removeStatusEffect(effect.name);
-    // }
     const item = await this._findCustomEffectsItem();
     const activeEffect = item.effects.find(
       (activeEffect) => activeEffect.id === effect.customId
@@ -126,7 +131,7 @@ export default class CustomEffectsHandler {
   /**
    * Deletes the custom effect corresponding with the custom ID
    *
-   * @param {effect} effect - the effect to delete
+   * @param {Effect} effect - the effect to delete
    * @returns {Promise} resolves when the active effect is deleted
    */
   async deleteCustomEffect(effect) {
@@ -136,6 +141,105 @@ export default class CustomEffectsHandler {
 
     const item = await this._findCustomEffectsItem();
     return item.deleteEmbeddedDocuments('ActiveEffect', [effect.customId]);
+  }
+
+  /**
+   * Duplicates an exisiting effect
+   *
+   * @param {Effect} effect - the effect to duplicate
+   */
+  async duplicateExistingEffect(effect) {
+    const item = await this._findOrCreateCustomEffectsItem();
+    const effects = await item.createEmbeddedDocuments('ActiveEffect', [
+      {
+        label: effect.name,
+        icon: effect.icon,
+        tint: effect.tint,
+        duration: {
+          seconds: effect.seconds,
+          rounds: effect.rounds,
+          turns: effect.turns,
+        },
+        flags: {
+          isCustomConvenient: true,
+          customEffectDescription: effect.description,
+        },
+        origin: item.uuid,
+        changes: [
+          ...effect.changes,
+          ...effect.atlChanges,
+          ...effect.tokenMagicChanges,
+        ],
+      },
+    ]);
+    effects[0].sheet.render(true);
+  }
+
+  /**
+   * Exports all custom effects on the custom item to JSON
+   */
+  async exportCustomEffectsToJson() {
+    const item = await this._findOrCreateCustomEffectsItem();
+    item.exportToJSON();
+  }
+
+  /**
+   * Imports JSON to the custom effects item via a dialog
+   */
+  async importCustomEffectsFromJson() {
+    const item = await this._findOrCreateCustomEffectsItem();
+
+    const content = await renderTemplate('templates/apps/import-data.html', {
+      hint1: game.i18n.format('DOCUMENT.ImportDataHint1', {
+        document: item.documentName,
+      }),
+      hint2: game.i18n.format('DOCUMENT.ImportDataHint2', {
+        name: item.name,
+      }),
+    });
+
+    // NOTE: this is taken from foundry, wrapped in a promise by me
+    const importPromise = new Promise((resolve, reject) => {
+      new Dialog(
+        {
+          title: `Import Data: ${item.name}`,
+          content: content,
+          buttons: {
+            import: {
+              icon: '<i class="fas fa-file-import"></i>',
+              label: 'Import',
+              callback: (html) => {
+                const form = html.find('form')[0];
+                if (!form.data.files.length) {
+                  return ui.notifications.error(
+                    'You did not upload a data file!'
+                  );
+                }
+                readTextFromFile(form.data.files[0]).then((json) => {
+                  let jsonData = this._combinePrevAndNewCustomEffects(
+                    item,
+                    json
+                  );
+                  item.importFromJSON(jsonData);
+                  resolve(true);
+                });
+              },
+            },
+            no: {
+              icon: '<i class="fas fa-times"></i>',
+              label: 'Cancel',
+            },
+          },
+          default: 'import',
+        },
+        {
+          width: 400,
+        }
+      ).render(true);
+    });
+
+    await importPromise;
+    this._foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
 
   async _findOrCreateCustomEffectsItem() {
@@ -155,8 +259,18 @@ export default class CustomEffectsHandler {
       type: 'consumable',
     });
 
+    log(`Creating custom item with ${item.id}`);
     await this._settings.setCustomEffectsItemId(item.id);
 
     return item;
+  }
+
+  _combinePrevAndNewCustomEffects(item, json) {
+    let itemDataEffects = Array.from(item.data.effects);
+    let jsonData = JSON.parse(json);
+
+    jsonData.effects.push(...itemDataEffects);
+
+    return JSON.stringify(jsonData, null, 2);
   }
 }

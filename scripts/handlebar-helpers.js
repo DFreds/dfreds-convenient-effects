@@ -13,7 +13,10 @@ export default class HandlebarHelpers {
    */
   registerHelpers() {
     this._registerIsGmHelper();
+    this._registerIfCustomFolderHelper();
+    this._registerHasNestedEffectsHelper();
     this._registerIsStatusEffectHelper();
+    this._registerHasMidiQoLChangesHelper();
     this._registerHasAtlChangesHelper();
     this._registerHasTokenMagicChangesHelper();
   }
@@ -24,12 +27,46 @@ export default class HandlebarHelpers {
     });
   }
 
+  _registerIfCustomFolderHelper() {
+    Handlebars.registerHelper('ifCustomFolder', (folderId, options) => {
+      return folderId === 'custom' ? options.fn(this) : options.inverse(this);
+    });
+  }
+
+  _registerHasNestedEffectsHelper() {
+    Handlebars.registerHelper('hasNestedEffects', (effect, options) => {
+      if (effect.nestedEffects.length > 0) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    });
+  }
+
   _registerIsStatusEffectHelper() {
     Handlebars.registerHelper('isStatusEffect', (effect, options) => {
       if (
         this._settings.modifyStatusEffects !== 'none' &&
         this._settings.isStatusEffect(effect.name)
       ) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    });
+  }
+
+  _registerHasMidiQoLChangesHelper() {
+    Handlebars.registerHelper('hasMidiQoLChanges', (effect, options) => {
+      const anyNestedHaveMidiChanges = effect.nestedEffects
+        .flatMap((nestedEffect) => nestedEffect.changes)
+        .some((change) => change.key.startsWith('flags.midi-qol'));
+
+      const effectHasMidiQoLChanges = effect.changes.some((change) =>
+        change.key.startsWith('flags.midi-qol')
+      );
+
+      if (effectHasMidiQoLChanges || anyNestedHaveMidiChanges) {
         return options.fn(this);
       } else {
         return options.inverse(this);

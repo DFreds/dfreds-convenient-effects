@@ -24,38 +24,43 @@ export default class ConvenientEffectsController {
   /**
    * Configures and returns the data that the app will send to the template
    *
-   * @returns the data to pass to the template
+   * @returns {Object} the data to pass to the template
    */
   get data() {
-    this._customEffectsHandler.initialize();
-
     return {
       folders: [
         {
+          id: 'favorites',
           label: 'Favorites',
           effects: this._fetchFavorites(),
         },
         {
+          id: 'custom',
           label: 'Custom',
           effects: this._fetchUnfavoritedCustomEffects(),
         },
         {
+          id: 'conditions',
           label: 'Conditions',
           effects: this._fetchUnfavoritedConditions(),
         },
         {
+          id: 'spells',
           label: 'Spells',
           effects: this._fetchUnfavoritedSpells(),
         },
         {
+          id: 'class-features',
           label: 'Class Features',
           effects: this._fetchUnfavoritedClassFeatures(),
         },
         {
+          id: 'equipment',
           label: 'Equipment',
           effects: this._fetchUnfavoritedEquipment(),
         },
         {
+          id: 'other',
           label: 'Other',
           effects: this._fetchUnfavoritedOther(),
         },
@@ -80,10 +85,9 @@ export default class ConvenientEffectsController {
   }
 
   _fetchUnfavoritedCustomEffects() {
-    const effects = game.dfreds.effects;
-    return effects.customEffects.filter(
-      (effect) => !this._settings.isFavoritedEffect(effect.name)
-    );
+    return this._customEffectsHandler
+      .getCustomEffects()
+      .filter((effect) => !this._settings.isFavoritedEffect(effect.name));
   }
 
   _fetchUnfavoritedConditions() {
@@ -151,9 +155,9 @@ export default class ConvenientEffectsController {
    */
   async onEditEffectClick(effectItem) {
     const effectName = effectItem.data().effectName;
-    const customEffect = game.dfreds.effects.customEffects.find(
-      (effect) => effect.name === effectName
-    );
+    const customEffect = this._customEffectsHandler
+      .getCustomEffects()
+      .find((effect) => effect.name == effectName);
 
     await this._customEffectsHandler.editCustomEffect(customEffect);
   }
@@ -165,9 +169,9 @@ export default class ConvenientEffectsController {
    */
   async onDeleteEffectClick(effectItem) {
     const effectName = effectItem.data().effectName;
-    const customEffect = game.dfreds.effects.customEffects.find(
-      (effect) => effect.name === effectName
-    );
+    const customEffect = this._customEffectsHandler
+      .getCustomEffects()
+      .find((effect) => effect.name == effectName);
 
     await this._customEffectsHandler.deleteCustomEffect(customEffect);
     this._viewMvc.render();
@@ -193,7 +197,7 @@ export default class ConvenientEffectsController {
   /**
    * Handles clicks on the collapse all button
    *
-   * @param {MouseEvent} event
+   * @param {MouseEvent} event - event that corresponds to clicking the collapse all
    */
   async onCollapseAllClick(event) {
     this._viewMvc.collapseAllFolders();
@@ -227,11 +231,14 @@ export default class ConvenientEffectsController {
    * @param {MouseEvent} event - event that corresponds to clicking an effect item
    */
   async onEffectClick(event) {
-    const effectName = event.target.innerText
-      ? event.target.innerText
-      : event.target.title;
-
+    const effectName = this._findNearestEffectName(event);
     await game.dfreds.effectInterface.toggleEffect(effectName);
+  }
+
+  _findNearestEffectName(event) {
+    return $(event.target)
+      .closest('[data-effect-name], .convenient-effect')
+      .data()?.effectName;
   }
 
   /**
@@ -280,13 +287,50 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handle duplicating an effect and adding as a custom effect
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   */
+  async onDuplicateAsCustom(effectItem) {
+    const effectName = effectItem.data().effectName;
+
+    const effect = game.dfreds.effects.all.find(
+      (effect) => effect.name === effectName
+    );
+
+    await this._customEffectsHandler.duplicateExistingEffect(effect);
+
+    this._viewMvc.render();
+  }
+
+  /**
+   * Handle clicks on the export custom effects button
+   *
+   * @param {MouseEvent} event - event that corresponds to clicking the export
+   */
+  async onExportCustomEffectsClick(event) {
+    event.stopPropagation();
+    await this._customEffectsHandler.exportCustomEffectsToJson();
+  }
+
+  /**
+   * Handle clicks on the import custom effects button
+   *
+   * @param {MouseEvent} event - event that corresponds to clicking the export
+   */
+  async onImportCustomEffectsClick(event) {
+    event.stopPropagation();
+    await this._customEffectsHandler.importCustomEffectsFromJson();
+  }
+
+  /**
    * Handles starting the drag for effect items
    *
    * @param {DragEvent} event - event that corresponds to the drag start
    */
   onEffectDragStart(event) {
     const effectName = event.target.dataset.effectName;
-    event.dataTransfer.setData('text/plain', effectName);
+    event.dataTransfer.setData('text/plain', JSON.stringify({ effectName }));
   }
 
   /**
@@ -323,11 +367,16 @@ export default class ConvenientEffectsController {
       return;
     }
 
-    const effectName = event.dataTransfer.getData('text/plain');
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    } catch (err) {
+      return;
+    }
 
     // Don't add favorites twice
-    if (!this._settings.isFavoritedEffect(effectName)) {
-      await this._settings.addFavoriteEffect(effectName);
+    if (!this._settings.isFavoritedEffect(data.effectName)) {
+      await this._settings.addFavoriteEffect(data.effectName);
     }
 
     this._viewMvc.render();
@@ -395,8 +444,14 @@ export default class ConvenientEffectsController {
 
   // Fixes bug when dragging over any item onto the convenient effects
   _isValidEffect(event) {
-    const effectName = event.dataTransfer.getData('text/plain');
-    return game.dfreds.effects.all.some((effect) => effect.name === effectName);
+    try {
+      const data = JSON.parse(event.dataTransfer.getData('text/plain'));
+      return game.dfreds.effects.all.some(
+        (effect) => effect.name === data.effectName
+      );
+    } catch (err) {
+      return false;
+    }
   }
 
   _isEventTargetFavorites(event) {

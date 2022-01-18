@@ -1,19 +1,27 @@
 import ChatHandler from './chat-handler.js';
+import Constants from './constants.js';
 import Controls from './controls.js';
-import ConvenientEffectsApp from './app/convenient-effects-app.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectInterface from './effect-interface.js';
+import FoundryHelpers from './foundry-helpers.js';
 import HandlebarHelpers from './handlebar-helpers.js';
+import MacroHandler from './macro-handler.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
 
+/**
+ * Initialize the settings and handlebar helpers
+ */
 Hooks.once('init', () => {
   new Settings().registerSettings();
   new HandlebarHelpers().registerHelpers();
 });
 
+/**
+ * Handle initializing the API when socket lib is ready
+ */
 Hooks.once('socketlib.ready', () => {
   game.dfreds = game.dfreds || {};
 
@@ -24,18 +32,21 @@ Hooks.once('socketlib.ready', () => {
   game.dfreds.effectInterface.initialize();
 });
 
+/**
+ * Handle initializing the status and custom effects
+ */
 Hooks.once('ready', async () => {
-  const customEffects = new CustomEffectsHandler();
-  await customEffects.deleteInvalidEffects();
-  customEffects.initialize();
+  const customEffectsHandler = new CustomEffectsHandler();
+  await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
 });
 
+/**
+ * Handle setting up the lib wrapper overrides
+ */
 Hooks.once('setup', () => {
-  const MODULE_ID = 'dfreds-convenient-effects';
-
   libWrapper.register(
-    MODULE_ID,
+    Constants.MODULE_ID,
     'TokenHUD.prototype._onToggleEffect',
     function (wrapper, ...args) {
       game.dfreds.statusEffects.onToggleEffect({
@@ -47,7 +58,7 @@ Hooks.once('setup', () => {
   );
 
   libWrapper.register(
-    MODULE_ID,
+    Constants.MODULE_ID,
     'TokenHUD.prototype._getStatusEffectChoices',
     function (_wrapper, ..._args) {
       const token = this.object;
@@ -56,10 +67,16 @@ Hooks.once('setup', () => {
   );
 });
 
+/**
+ * Handle adding new controls
+ */
 Hooks.on('getSceneControlButtons', (controls) => {
   new Controls().initializeControls(controls);
 });
 
+/**
+ * Handle creating a chat message if an effect is added
+ */
 Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -71,6 +88,9 @@ Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
   });
 });
 
+/**
+ * Handle adding any actor data changes when an active effect is added to an actor
+ */
 Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -82,6 +102,9 @@ Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
   }
 });
 
+/**
+ * Handle creating a chat message if an effect has expired or was removed
+ */
 Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
   if (!activeEffect?.data?.flags?.isConvenient) return;
 
@@ -135,12 +158,26 @@ Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
 Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
-  const openApps = Object.values(ui.windows);
-  const convenientEffectsApp = openApps.find(
-    (app) => app instanceof ConvenientEffectsApp
-  );
+  const foundryHelpers = new FoundryHelpers();
+  foundryHelpers.renderConvenientEffectsAppIfOpen();
+});
 
-  if (convenientEffectsApp) {
-    convenientEffectsApp.render();
-  }
+/**
+ * Handle dropping an effect onto the hotbar
+ */
+Hooks.on('hotbarDrop', (bar, data, slot) => {
+  const macroHandler = new MacroHandler();
+  macroHandler.createMacro(data, slot);
+});
+
+/**
+ * Handle dropping an effect onto an actor sheet
+ */
+Hooks.on('dropActorSheetData', (actor, actorSheetCharacter, data) => {
+  if (!data.effectName) return;
+
+  game.dfreds.effectInterface.addEffect({
+    effectName: data.effectName,
+    uuid: actor.uuid,
+  });
 });

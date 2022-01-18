@@ -112,25 +112,33 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initClickListeners() {
+    this._collapseAllButton.on(
+      'click',
+      this._controller.onCollapseAllClick.bind(this._controller)
+    );
     this._createEffectButton.on(
       'click',
       this._controller.onCreateEffectClick.bind(this._controller)
     );
-    this._resetStatusEffectsButton.on(
+    this._effectListItems.on(
       'click',
-      this._controller.onResetStatusEffectsClick.bind(this._controller)
+      this._controller.onEffectClick.bind(this._controller)
     );
-    this._collapseAllButton.on(
+    this._exportCustomEffectsButton.on(
       'click',
-      this._controller.onCollapseAllClick.bind(this._controller)
+      this._controller.onExportCustomEffectsClick.bind(this._controller)
     );
     this._folderHeaders.on(
       'click',
       this._controller.onFolderClick.bind(this._controller)
     );
-    this._effectListItems.on(
+    this._importCustomEffectsButton.on(
       'click',
-      this._controller.onEffectClick.bind(this._controller)
+      this._controller.onImportCustomEffectsClick.bind(this._controller)
+    );
+    this._resetStatusEffectsButton.on(
+      'click',
+      this._controller.onResetStatusEffectsClick.bind(this._controller)
     );
   }
 
@@ -147,6 +155,11 @@ export default class ConvenientEffectsApp extends Application {
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
       },
+      {
+        name: 'Duplicate as Custom',
+        icon: '<i class="far fa-copy fa-fw"></i>',
+        callback: this._controller.onDuplicateAsCustom.bind(this._controller),
+      },
     ]);
 
     new ContextMenu(this._favoritesDirectory, '.entity', [
@@ -159,6 +172,11 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Toggle Status Effect',
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
+      },
+      {
+        name: 'Duplicate as Custom',
+        icon: '<i class="far fa-copy fa-fw"></i>',
+        callback: this._controller.onDuplicateAsCustom.bind(this._controller),
       },
     ]);
 
@@ -177,6 +195,11 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Toggle Status Effect',
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
+      },
+      {
+        name: 'Duplicate as Custom',
+        icon: '<i class="far fa-copy fa-fw"></i>',
+        callback: this._controller.onDuplicateAsCustom.bind(this._controller),
       },
     ]);
   }
@@ -229,6 +252,10 @@ export default class ConvenientEffectsApp extends Application {
     return this._rootView.find('.entity');
   }
 
+  get _exportCustomEffectsButton() {
+    return this._rootView.find('.export-custom-effects');
+  }
+
   get _favoritesDirectory() {
     return this._rootView.find('.folder[data-folder-label="Favorites"]');
   }
@@ -243,6 +270,10 @@ export default class ConvenientEffectsApp extends Application {
 
   get _folderHeaders() {
     return this._rootView.find('.directory-list .folder-header');
+  }
+
+  get _importCustomEffectsButton() {
+    return this._rootView.find('.import-custom-effects');
   }
 
   get _nonFavoritesNonCustomDirectories() {
