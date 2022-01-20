@@ -1,3 +1,5 @@
+import Constants from '../constants.js';
+
 /**
  * Handles adding dynamic effects for certain effects
  */
@@ -24,6 +26,10 @@ export default class DynamicEffectsAdder {
         break;
       case 'ray of frost':
         this._addLowerMovementEffects({ effect, actor, value: 10 });
+        break;
+      case 'enlarge':
+      case 'reduce':
+        this._addEnlargeReduceEffect(effect, actor);
         break;
     }
   }
@@ -60,6 +66,42 @@ export default class DynamicEffectsAdder {
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: movement.walk > value ? `-${value}` : `-${movement.walk}`,
     });
+  }
+
+  _addEnlargeReduceEffect(effect, actor) {
+
+    let size = actor.data.data.traits.size;
+    let index = Constants.SIZES_ORDERED.indexOf(size);
+
+    if (effect.name.toLowerCase() === 'enlarge') {
+      index = Math.min(Constants.SIZES_ORDERED.length - 1, index + 1);
+    } else if (effect.name.toLowerCase() === 'reduce') {
+      index = Math.max(0, index - 1);
+    }
+
+    size = Constants.SIZES_ORDERED[index];
+    const tokenSize = game.dnd5e.config.tokenSizes[size];
+
+    effect.changes.push({
+      key: 'data.traits.size',
+      mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+      value: size,
+    });
+
+    effect.atlChanges.push(
+      ...[
+        {
+          key: 'ATL.width',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: tokenSize,
+        },
+        {
+          key: 'ATL.height',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: tokenSize,
+        },
+      ]
+    );
   }
 
   _addLongstriderEffects(effect, actor) {
