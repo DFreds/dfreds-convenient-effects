@@ -11,10 +11,10 @@ export default class DynamicEffectsAdder {
   async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
       case 'encumbered':
-        this._addEncumbranceEffects({ effect, actor, value: 10 });
+        this._addLowerMovementEffects({ effect, actor, value: 10 });
         break;
       case 'heavily encumbered':
-        this._addEncumbranceEffects({ effect, actor, value: 20 });
+        this._addLowerMovementEffects({ effect, actor, value: 20 });
         break;
       case 'longstrider':
         this._addLongstriderEffects(effect, actor);
@@ -22,10 +22,13 @@ export default class DynamicEffectsAdder {
       case 'rage':
         this._addRageEffects(effect, actor);
         break;
+      case 'ray of frost':
+        this._addLowerMovementEffects({ effect, actor, value: 10 });
+        break;
     }
   }
 
-  _addEncumbranceEffects({ effect, actor, value }) {
+  _addLowerMovementEffects({ effect, actor, value }) {
     const movement = actor.data.data.attributes.movement;
 
     effect.changes.push({
