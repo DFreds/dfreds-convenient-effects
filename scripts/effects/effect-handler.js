@@ -94,7 +94,8 @@ export default class EffectHandler {
     return actor?.data?.effects?.some(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
-        activeEffect?.data?.label == effectName
+        activeEffect?.data?.label == effectName &&
+        !activeEffect?.data?.disabled
     );
   }
 
