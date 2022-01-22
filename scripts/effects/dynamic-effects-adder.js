@@ -15,6 +15,9 @@ export default class DynamicEffectsAdder {
       case 'encumbered':
         this._addLowerMovementEffects({ effect, actor, value: 10 });
         break;
+      case 'enlarge':
+        this._addEnlargeEffects(effect, actor);
+        break;
       case 'heavily encumbered':
         this._addLowerMovementEffects({ effect, actor, value: 20 });
         break;
@@ -27,9 +30,8 @@ export default class DynamicEffectsAdder {
       case 'ray of frost':
         this._addLowerMovementEffects({ effect, actor, value: 10 });
         break;
-      case 'enlarge':
       case 'reduce':
-        this._addEnlargeReduceEffect(effect, actor);
+        this._addReduceEffects(effect, actor);
         break;
     }
   }
@@ -68,18 +70,22 @@ export default class DynamicEffectsAdder {
     });
   }
 
-  _addEnlargeReduceEffect(effect, actor) {
+  _addEnlargeEffects(effect, actor) {
+    const size = actor.data.data.traits.size;
+    const index = Constants.SIZES_ORDERED.indexOf(size);
+    
+    this._addSizeChangeEffects(effect, Math.min(Constants.SIZES_ORDERED.length - 1, index + 1));
+  }
 
-    let size = actor.data.data.traits.size;
-    let index = Constants.SIZES_ORDERED.indexOf(size);
+  _addReduceEffects(effect, actor) {
+    const size = actor.data.data.traits.size;
+    const index = Constants.SIZES_ORDERED.indexOf(size);
 
-    if (effect.name.toLowerCase() === 'enlarge') {
-      index = Math.min(Constants.SIZES_ORDERED.length - 1, index + 1);
-    } else if (effect.name.toLowerCase() === 'reduce') {
-      index = Math.max(0, index - 1);
-    }
+    this._addSizeChangeEffects(effect, Math.max(0, index - 1));
+  }
 
-    size = Constants.SIZES_ORDERED[index];
+  _addSizeChangeEffects(effect, sizeIndex) {
+    const size = Constants.SIZES_ORDERED[sizeIndex];
     const tokenSize = game.dnd5e.config.tokenSizes[size];
 
     effect.changes.push({
