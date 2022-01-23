@@ -20,4 +20,13 @@ export default class Constants {
     IN_ONE_DAY: 86400,
     IN_ONE_WEEK: 604800,
   };
+
+  static SIZES_ORDERED = [
+    'tiny',
+    'sm',
+    'med',
+    'lg',
+    'huge',
+    'grg',
+  ];
 }

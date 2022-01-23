@@ -1107,10 +1107,10 @@ export default class EffectDefinitions {
       description:
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      isDynamic: true,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
-        // TODO data.traits.size
         {
           key: 'data.bonuses.weapon.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -1136,10 +1136,10 @@ export default class EffectDefinitions {
       description:
         'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
       icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      isDynamic: true,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
-        // TODO data.traits.size
         {
           key: 'data.bonuses.weapon.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
