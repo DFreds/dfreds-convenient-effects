@@ -97,13 +97,13 @@ export default class StatusEffects {
     const tokenEffects = foundry.utils.deepClone(token.data.effects) || [];
     if (token.data.overlayEffect) tokenEffects.push(token.data.overlayEffect);
     return CONFIG.statusEffects.concat(tokenEffects).reduce((obj, e) => {
+      const id = e.id; // NOTE: added this
+
       const src = e.icon ?? e;
-      if (src in obj) return obj;
+      if (id in obj) return obj; // NOTE: changed from src to id
       const status = statuses[e.id] || {};
       const isActive = !!status.id || token.data.effects.includes(src);
       const isOverlay = !!status.overlay || token.data.overlayEffect === src;
-
-      const id = e.id;
 
       // NOTE: changed key from src to id
       obj[id] = {
@@ -119,5 +119,27 @@ export default class StatusEffects {
       };
       return obj;
     }, {});
+  }
+
+  /**
+   * This function is called when the status effects are refreshed. It does
+   * essentially the same thing as the original method does, except that it
+   * bases the status on the token.dataset.statusId rather than the src
+   * attribute
+   *
+   * Refresh the currently active state of all status effect icons in the Token
+   * HUD selector.
+   *
+   * @param {TokenHUD} tokenHud - the token HUD application
+   */
+  refreshStatusIcons(tokenHud) {
+    const effects = tokenHud.element.find('.status-effects')[0];
+    const statuses = tokenHud._getStatusEffectChoices();
+    for (let img of effects.children) {
+      // NOTE: changed from img.getAttribute('src') to img.dataset.statusId
+      const status = statuses[img.dataset.statusId] || {};
+      img.classList.toggle('overlay', !!status.isOverlay);
+      img.classList.toggle('active', !!status.isActive);
+    }
   }
 }

@@ -65,6 +65,15 @@ Hooks.once('setup', () => {
       return game.dfreds.statusEffects.getStatusEffectChoices(token);
     }
   );
+
+  libWrapper.register(
+    Constants.MODULE_ID,
+    'TokenHUD.prototype.refreshStatusIcons',
+    function (wrapper, ...args) {
+      const tokenHud = this;
+      game.dfreds.statusEffects.refreshStatusIcons(tokenHud);
+    }
+  );
 });
 
 /**
