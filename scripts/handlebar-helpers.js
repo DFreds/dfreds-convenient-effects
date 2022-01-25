@@ -80,7 +80,7 @@ export default class HandlebarHelpers {
         (effect) => effect.atlChanges.length > 0
       );
       if (
-        this._settings.integrateWithAtl &&
+        this._settings.integrateWithAte &&
         (effect.atlChanges.length > 0 || anyNestedHaveAtlChanges)
       ) {
         return options.fn(this);

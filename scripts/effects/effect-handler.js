@@ -163,7 +163,7 @@ export default class EffectHandler {
   }
 
   _handleIntegrations(effect) {
-    if (this._settings.integrateWithAtl && effect.atlChanges.length > 0) {
+    if (this._settings.integrateWithAte && effect.atlChanges.length > 0) {
       this._addAtlChangesToEffect(effect);
     }
 
