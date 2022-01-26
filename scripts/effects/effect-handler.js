@@ -67,7 +67,7 @@ export default class EffectHandler {
    *
    * @param {string} effectName - name of the effect to toggle
    * @param {object} params - the effect parameters
-   * @param {string} params.overlay - name of the effect to toggle
+   * @param {boolean} params.overlay - if the effect is an overlay or not
    * @param {string[]} params.uuids - UUIDS of the actors to toggle the effect on
    */
   async toggleEffect(effectName, { overlay, uuids }) {
