@@ -136,9 +136,10 @@ export default class EffectInterface {
    * @param {string} params.effectName - the name of the effect to add
    * @param {string} params.uuid - the UUID of the actor to add the effect to
    * @param {string} params.origin - the origin of the effect
+   * @param {boolean} params.overlay - if the effect is an overlay or not
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  async addEffect({ effectName, uuid, origin }) {
+  async addEffect({ effectName, uuid, origin, overlay }) {
     let effect = this._effectHandler.findEffectByName(effectName);
 
     if (!effect) {
@@ -161,6 +162,7 @@ export default class EffectInterface {
       effectName: effect.name,
       uuid,
       origin,
+      overlay,
     });
   }
 
