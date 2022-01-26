@@ -269,6 +269,18 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Handle toggling effects as overlays
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   */
+  async onToggleOverlay(effectItem) {
+    const effectName = effectItem.data().effectName;
+    await game.dfreds.effectInterface.toggleEffect(effectName, {
+      overlay: true,
+    });
+  }
+
+  /**
    * Handle adding/removing the effect from the to/from the status effect settings
    *
    * @param {jQuery} effectItem - jQuery element representing the effect list item

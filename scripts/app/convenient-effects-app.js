@@ -151,6 +151,11 @@ export default class ConvenientEffectsApp extends Application {
         callback: this._controller.onAddFavorite.bind(this._controller),
       },
       {
+        name: 'Toggle as Overlay',
+        icon: '<i class="far fa-dot-circle fa-fw"></i>',
+        callback: this._controller.onToggleOverlay.bind(this._controller),
+      },
+      {
         name: 'Toggle Status Effect',
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
@@ -167,6 +172,11 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Remove Favorite',
         icon: '<i class="far fa-star fa-fw"></i>',
         callback: this._controller.onRemoveFavorite.bind(this._controller),
+      },
+      {
+        name: 'Toggle as Overlay',
+        icon: '<i class="far fa-dot-circle fa-fw"></i>',
+        callback: this._controller.onToggleOverlay.bind(this._controller),
       },
       {
         name: 'Toggle Status Effect',
