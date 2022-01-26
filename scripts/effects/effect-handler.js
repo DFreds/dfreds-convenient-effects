@@ -115,10 +115,10 @@ export default class EffectHandler {
         activeEffect?.data?.label == effectName
     );
 
-    if (effectToRemove) {
-      await actor.deleteEmbeddedDocuments('ActiveEffect', [effectToRemove.id]);
-      log(`Removed effect ${effectName} from ${actor.name} - ${actor.id}`);
-    }
+    if (!effectToRemove) return;
+
+    await effectToRemove.delete();
+    log(`Removed effect ${effectName} from ${actor.name} - ${actor.id}`);
   }
 
   /**
