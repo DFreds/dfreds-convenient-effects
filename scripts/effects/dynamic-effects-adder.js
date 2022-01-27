@@ -27,8 +27,11 @@ export default class DynamicEffectsAdder {
   _addEnlargeEffects(effect, actor) {
     const size = actor.data.data.traits.size;
     const index = Constants.SIZES_ORDERED.indexOf(size);
-    
-    this._addSizeChangeEffects(effect, Math.min(Constants.SIZES_ORDERED.length - 1, index + 1));
+
+    this._addSizeChangeEffects(
+      effect,
+      Math.min(Constants.SIZES_ORDERED.length - 1, index + 1)
+    );
   }
 
   _addReduceEffects(effect, actor) {
