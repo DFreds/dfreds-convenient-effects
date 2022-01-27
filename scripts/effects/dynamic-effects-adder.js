@@ -12,17 +12,8 @@ export default class DynamicEffectsAdder {
    */
   async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
-      case 'encumbered':
-        this._addEncumbranceEffects({ effect, actor, value: 10 });
-        break;
       case 'enlarge':
         this._addEnlargeEffects(effect, actor);
-        break;
-      case 'heavily encumbered':
-        this._addEncumbranceEffects({ effect, actor, value: 20 });
-        break;
-      case 'longstrider':
-        this._addLongstriderEffects(effect, actor);
         break;
       case 'rage':
         this._addRageEffects(effect, actor);
@@ -31,40 +22,6 @@ export default class DynamicEffectsAdder {
         this._addReduceEffects(effect, actor);
         break;
     }
-  }
-
-  _addEncumbranceEffects({ effect, actor, value }) {
-    const movement = actor.data.data.attributes.movement;
-
-    effect.changes.push({
-      key: 'data.attributes.movement.burrow',
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: movement.burrow > value ? `-${value}` : `-${movement.burrow}`,
-    });
-
-    effect.changes.push({
-      key: 'data.attributes.movement.climb',
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: movement.climb > value ? `-${value}` : `-${movement.climb}`,
-    });
-
-    effect.changes.push({
-      key: 'data.attributes.movement.fly',
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: movement.fly > value ? `-${value}` : `-${movement.fly}`,
-    });
-
-    effect.changes.push({
-      key: 'data.attributes.movement.swim',
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: movement.swim > value ? `-${value}` : `-${movement.swim}`,
-    });
-
-    effect.changes.push({
-      key: 'data.attributes.movement.walk',
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: movement.walk > value ? `-${value}` : `-${movement.walk}`,
-    });
   }
 
   _addEnlargeEffects(effect, actor) {
@@ -105,42 +62,6 @@ export default class DynamicEffectsAdder {
         },
       ]
     );
-  }
-
-  _addLongstriderEffects(effect, actor) {
-    const movement = actor.data.data.attributes.movement;
-
-    if (movement.burrow > 0) {
-      effect.changes.push({
-        key: 'data.attributes.movement.burrow',
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '+10',
-      });
-    }
-
-    if (movement.climb > 0) {
-      effect.changes.push({
-        key: 'data.attributes.movement.climb',
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '+10',
-      });
-    }
-
-    if (movement.fly > 0) {
-      effect.changes.push({
-        key: 'data.attributes.movement.fly',
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '+10',
-      });
-    }
-
-    if (movement.swim > 0) {
-      effect.changes.push({
-        key: 'data.attributes.movement.swim',
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: '+10',
-      });
-    }
   }
 
   _addRageEffects(effect, actor) {
