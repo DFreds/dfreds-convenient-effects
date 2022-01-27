@@ -134,8 +134,8 @@ export default class ConvenientEffectsController {
    * Remove the collapsed class from all saved, expanded folders
    */
   expandSavedFolders() {
-    this._settings.expandedFolders.forEach((folderName) => {
-      this._viewMvc.expandFolder(folderName);
+    this._settings.expandedFolders.forEach((folderId) => {
+      this._viewMvc.expandFolder(folderId);
     });
   }
 
@@ -210,18 +210,18 @@ export default class ConvenientEffectsController {
    * @param {MouseEvent} event - event that corresponds to clicking on the folder
    */
   async onFolderClick(event) {
-    let folderLabel = event.currentTarget.parentElement.dataset.folderLabel;
+    let folderId = event.currentTarget.parentElement.dataset.folderId;
 
-    if (this._viewMvc.isFolderCollapsed(folderLabel)) {
-      this._viewMvc.expandFolder(folderLabel);
+    if (this._viewMvc.isFolderCollapsed(folderId)) {
+      this._viewMvc.expandFolder(folderId);
     } else {
-      this._viewMvc.collapseFolder(folderLabel);
+      this._viewMvc.collapseFolder(folderId);
     }
 
-    if (this._settings.isFolderExpanded(folderLabel)) {
-      await this._settings.removeExpandedFolder(folderLabel);
+    if (this._settings.isFolderExpanded(folderId)) {
+      await this._settings.removeExpandedFolder(folderId);
     } else {
-      await this._settings.addExpandedFolder(folderLabel);
+      await this._settings.addExpandedFolder(folderId);
     }
   }
 
@@ -421,7 +421,7 @@ export default class ConvenientEffectsController {
         el.style.display = !isSearch || match ? 'flex' : 'none';
       } else if (isFolder) {
         let match =
-          isSearch && matchingItems.folderLabels.has(el.dataset.folderLabel);
+          isSearch && matchingItems.folderIds.has(el.dataset.folderId);
         el.style.display = !isSearch || match ? 'flex' : 'none';
 
         // Expand folders with matches
@@ -429,7 +429,7 @@ export default class ConvenientEffectsController {
         else
           el.classList.toggle(
             'collapsed',
-            !this._settings.isFolderExpanded(el.dataset.folderLabel)
+            !this._settings.isFolderExpanded(el.dataset.folderId)
           );
       }
     }
@@ -437,20 +437,20 @@ export default class ConvenientEffectsController {
 
   _getMatchingItems(regex) {
     let effectNames = new Set();
-    let folderLabels = new Set();
+    let folderIds = new Set();
 
     for (let folder of this.data.folders) {
       for (let effect of folder.effects) {
         if (regex.test(SearchFilter.cleanQuery(effect.name))) {
           effectNames.add(effect.name);
-          folderLabels.add(folder.label);
+          folderIds.add(folder.id);
         }
       }
     }
 
     return {
       effectNames,
-      folderLabels,
+      folderIds,
     };
   }
 
@@ -467,6 +467,6 @@ export default class ConvenientEffectsController {
   }
 
   _isEventTargetFavorites(event) {
-    return event.currentTarget.dataset.folderLabel === 'Favorites';
+    return event.currentTarget.dataset.folderId === 'favorites';
   }
 }

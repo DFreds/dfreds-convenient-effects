@@ -66,29 +66,29 @@ export default class ConvenientEffectsApp extends Application {
   /**
    * Checks if the folder is collapsed
    *
-   * @param {string} folderName - the folder name to check
+   * @param {string} folderId - the folder ID to check
    * @returns {boolean} true if the folder is collapsed, false otherwise
    */
-  isFolderCollapsed(folderName) {
-    return this._getFolderByName(folderName).hasClass('collapsed');
+  isFolderCollapsed(folderId) {
+    return this._getFolderById(folderId).hasClass('collapsed');
   }
 
   /**
    * Collapses a folder by adding the 'collapsed' CSS class to it
    *
-   * @param {string} folderName - the folder name to collapse
+   * @param {string} folderId - the folder ID to collapse
    */
-  collapseFolder(folderName) {
-    this._getFolderByName(folderName).addClass('collapsed');
+  collapseFolder(folderId) {
+    this._getFolderById(folderId).addClass('collapsed');
   }
 
   /**
    * Expands a folder by removing the 'collapsed' CSS class from it
    *
-   * @param {string} folderName - the folder name to expand
+   * @param {string} folderId - the folder ID to expand
    */
-  expandFolder(folderName) {
-    this._getFolderByName(folderName).removeClass('collapsed');
+  expandFolder(folderId) {
+    this._getFolderById(folderId).removeClass('collapsed');
   }
 
   /**
@@ -107,8 +107,8 @@ export default class ConvenientEffectsApp extends Application {
     );
   }
 
-  _getFolderByName(folderName) {
-    return this._rootView.find(`.folder[data-folder-label="${folderName}"]`);
+  _getFolderById(folderId) {
+    return this._rootView.find(`.folder[data-folder-id="${folderId}"]`);
   }
 
   _initClickListeners() {
@@ -255,7 +255,7 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   get _customDirectory() {
-    return this._rootView.find('.folder[data-folder-label="Custom"]');
+    return this._rootView.find('.folder[data-folder-id="custom"]');
   }
 
   get _effectListItems() {
@@ -267,7 +267,7 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   get _favoritesDirectory() {
-    return this._rootView.find('.folder[data-folder-label="Favorites"]');
+    return this._rootView.find('.folder[data-folder-id="favorites"]');
   }
 
   get _favoritesItems() {
@@ -289,8 +289,8 @@ export default class ConvenientEffectsApp extends Application {
   get _nonFavoritesNonCustomDirectories() {
     return this._rootView
       .find('.folder')
-      .filter(':not([data-folder-label="Favorites"])')
-      .filter(':not([data-folder-label="Custom"])');
+      .filter(':not([data-folder-id="favorites"])')
+      .filter(':not([data-folder-id="custom"])');
   }
 
   get _resetStatusEffectsButton() {
