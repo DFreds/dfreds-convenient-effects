@@ -160,10 +160,10 @@ export default class CustomEffectsHandler {
           rounds: effect.rounds,
           turns: effect.turns,
         },
-        flags: {
+        flags: foundry.utils.mergeObject(effect.flags, {
           isCustomConvenient: true,
           customEffectDescription: effect.description,
-        },
+        }),
         origin: item.uuid,
         changes: [
           ...effect.changes,
