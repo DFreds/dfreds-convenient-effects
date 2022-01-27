@@ -121,7 +121,7 @@ export default class Settings {
         scope: 'client',
         config: false,
         default: '',
-        type: String,
+        type: Array,
       }
     );
 
@@ -130,7 +130,7 @@ export default class Settings {
       scope: 'world',
       config: false,
       default: this._defaultStatusEffectNames,
-      type: String,
+      type: Array,
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
@@ -138,7 +138,7 @@ export default class Settings {
       scope: 'client',
       config: false,
       default: 'Favorites',
-      type: String,
+      type: Array,
     });
 
     game.settings.register(
@@ -177,7 +177,7 @@ export default class Settings {
       'Restrained',
       'Stunned',
       'Unconscious',
-    ].join(';');
+    ];
   }
 
   /**
@@ -259,10 +259,10 @@ export default class Settings {
    * @returns {String[]} the names of all the favorite effects
    */
   get favoriteEffectNames() {
-    return game.settings
-      .get(Constants.MODULE_ID, Settings.FAVORITE_EFFECT_NAMES)
-      .split(';')
-      .filter((name) => name.trim());
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.FAVORITE_EFFECT_NAMES
+    );
   }
 
   /**
@@ -280,7 +280,7 @@ export default class Settings {
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
-      favoriteEffectsArray.join(';')
+      favoriteEffectsArray
     );
   }
 
@@ -297,7 +297,7 @@ export default class Settings {
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
-      favoriteEffectsArray.join(';')
+      favoriteEffectsArray
     );
   }
 
@@ -317,10 +317,7 @@ export default class Settings {
    * @returns {String[]} the names of all the status effects
    */
   get statusEffectNames() {
-    return game.settings
-      .get(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES)
-      .split(';')
-      .filter((name) => name.trim());
+    return game.settings.get(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES);
   }
 
   /**
@@ -338,7 +335,7 @@ export default class Settings {
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.STATUS_EFFECT_NAMES,
-      statusEffectsArray.join(';')
+      statusEffectsArray
     );
   }
 
@@ -355,7 +352,7 @@ export default class Settings {
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.STATUS_EFFECT_NAMES,
-      statusEffectsArray.join(';')
+      statusEffectsArray
     );
   }
 
@@ -385,48 +382,45 @@ export default class Settings {
   /**
    * Returns the game setting for the saved expanded folder names
    *
-   * @returns {String[]} the names of all of the saved expanded folders
+   * @returns {String[]} the IDs of all of the saved expanded folders
    */
   get expandedFolders() {
-    return game.settings
-      .get(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS)
-      .split(';')
-      .filter((name) => name.trim());
+    return game.settings.get(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS);
   }
 
   /**
-   * Adds a given folder name to the saved expanded folders
+   * Adds a given folder ID to the saved expanded folders
    *
-   * @param {string} name - the name of the folder to add to the saved expanded folders
+   * @param {string} id - the ID of the folder to add to the saved expanded folders
    * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  async addExpandedFolder(name) {
+  async addExpandedFolder(id) {
     let expandedFolderArray = this.expandedFolders;
-    expandedFolderArray.push(name);
+    expandedFolderArray.push(id);
 
     expandedFolderArray = [...new Set(expandedFolderArray)]; // remove duplicates
 
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.EXPANDED_FOLDERS,
-      expandedFolderArray.join(';')
+      expandedFolderArray
     );
   }
 
   /**
    * Removes a given folder name from the saved expanded folders
    *
-   * @param {string} name - the name of the folder to remove from the saved expanded folders
+   * @param {string} id - the ID of the folder to remove from the saved expanded folders
    * @returns {Promise} a promise that resolves when the settings update is complete
    */
-  async removeExpandedFolder(name) {
+  async removeExpandedFolder(id) {
     let expandedFolderArray = this.expandedFolders.filter(
-      (expandedFolder) => expandedFolder !== name
+      (expandedFolder) => expandedFolder !== id
     );
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.EXPANDED_FOLDERS,
-      expandedFolderArray.join(';')
+      expandedFolderArray
     );
   }
 
@@ -439,18 +433,18 @@ export default class Settings {
     return game.settings.set(
       Constants.MODULE_ID,
       Settings.EXPANDED_FOLDERS,
-      ''
+      []
     );
   }
 
   /**
    * Checks if the given folder name is expanded
    *
-   * @param {string} name - the folder name to search for
+   * @param {string} id - the folder ID to search for
    * @returns {boolean} true if the folder is in the saved expanded folders, false otherwise
    */
-  isFolderExpanded(name) {
-    return this.expandedFolders.includes(name);
+  isFolderExpanded(id) {
+    return this.expandedFolders.includes(id);
   }
 
   /**
