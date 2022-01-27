@@ -154,6 +154,38 @@ export default class Settings {
     );
   }
 
+  async migrateOldSettings() {
+    const needsMigrating =
+      (this.favoriteEffectNames.length === 1 &&
+        this.favoriteEffectNames[0].includes(';')) ||
+      (this.expandedFolders.length === 1 &&
+        this.expandedFolders[0].includes(';')) ||
+      (this.statusEffectNames.length === 1 &&
+        this.statusEffectNames[0].includes(';'));
+
+    if (needsMigrating) {
+      ui.notifications.info('Migrating Convenient Effect settings...');
+      await game.settings.set(
+        Constants.MODULE_ID,
+        Settings.FAVORITE_EFFECT_NAMES,
+        this.favoriteEffectNames[0].split(';')
+      );
+      await game.settings.set(
+        Constants.MODULE_ID,
+        Settings.EXPANDED_FOLDERS,
+        this.expandedFolders[0].split(';')
+      );
+      await game.settings.set(
+        Constants.MODULE_ID,
+        Settings.STATUS_EFFECT_NAMES,
+        this.statusEffectNames[0].split(';')
+      );
+      ui.notifications.info(
+        'Finished migrating Convenient Effect settings. Please reload the game.'
+      );
+    }
+  }
+
   get _defaultStatusEffectNames() {
     return [
       'Blinded',

@@ -36,6 +36,8 @@ Hooks.once('socketlib.ready', () => {
  * Handle initializing the status and custom effects
  */
 Hooks.once('ready', async () => {
+  new Settings().migrateOldSettings();
+
   const customEffectsHandler = new CustomEffectsHandler();
   await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
