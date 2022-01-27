@@ -60,9 +60,13 @@ Hooks.once('setup', () => {
   libWrapper.register(
     Constants.MODULE_ID,
     'TokenHUD.prototype._getStatusEffectChoices',
-    function (_wrapper, ..._args) {
+    function (wrapper, ...args) {
       const token = this.object;
-      return game.dfreds.statusEffects.getStatusEffectChoices(token);
+      return game.dfreds.statusEffects.getStatusEffectChoices({
+        token,
+        wrapper,
+        args,
+      });
     }
   );
 
@@ -72,7 +76,9 @@ Hooks.once('setup', () => {
     function (wrapper, ...args) {
       const tokenHud = this;
       game.dfreds.statusEffects.refreshStatusIcons(tokenHud);
-    }
+      wrapper(...args);
+    },
+    'WRAPPER'
   );
 });
 

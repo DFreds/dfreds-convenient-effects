@@ -75,11 +75,16 @@ export default class StatusEffects {
    * the icon.
    *
    * @param {Token5e} token - the token to get the status effects for
+   * @param {fn} wrapper - the original getStatusEffectChoices function
+   * @param {any[]} args - any arguments provided with the original getStatusEffectChoices function
    * @returns {Object} object mapping for all the status effects
    */
-  getStatusEffectChoices(token) {
-    // NOTE: taken entirely from foundry.js, modified to remove the icon being the key
+  getStatusEffectChoices({ token, wrapper, args }) {
+    if (this._settings.modifyStatusEffects === 'none') {
+      return wrapper(...args);
+    }
 
+    // NOTE: taken entirely from foundry.js, modified to remove the icon being the key
     // Get statuses which are active for the token actor
     const actor = token.actor || null;
     const statuses = actor
