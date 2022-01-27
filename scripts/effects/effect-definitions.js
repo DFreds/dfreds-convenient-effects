@@ -1978,8 +1978,15 @@ export default class EffectDefinitions {
       name: 'Ray of Frost',
       description: 'Lowers movement by 10 ft',
       icon: 'systems/dnd5e/icons/spells/beam-blue-1.jpg',
-      isDynamic: true,
       seconds: Constants.SECONDS.IN_ONE_ROUND,
+      changes: [
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '-10',
+          priority: 5,
+        },
+      ],
     });
   }
 
