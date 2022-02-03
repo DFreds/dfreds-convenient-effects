@@ -44,7 +44,7 @@ export default class Effect {
    * @param {object} params - the params to use for conversion
    * @param {string} params.origin - the origin to add to the effect
    * @param {boolean} params.overlay - whether the effect is an overlay or not
-   * @returns The active effect data object for this effect
+   * @returns {object} The active effect data object for this effect
    */
   convertToActiveEffectData({ origin, overlay } = {}) {
     return {
@@ -66,6 +66,15 @@ export default class Effect {
       transfer: false,
       changes: this.changes,
     };
+  }
+
+  /**
+   * Converts the Effect into an object
+   *
+   * @returns {object} the object representation of this effect
+   */
+  convertToObject() {
+    return { ...this };
   }
 
   get _id() {
