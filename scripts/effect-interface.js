@@ -1,5 +1,6 @@
 import ActorUpdater from './effects/actor-updater.js';
 import Constants from './constants.js';
+import Effect from './effects/effect.js';
 import EffectHandler from './effects/effect-handler.js';
 import FoundryHelpers from './foundry-helpers.js';
 
@@ -77,7 +78,7 @@ export default class EffectInterface {
       if (!effect) return; // dialog closed without selecting one
     }
 
-    return this._socket.executeAsGM('toggleEffect', effect.name, {
+    return this._socket.executeAsGM('toggleEffect', effect, {
       overlay,
       uuids,
     });
@@ -124,7 +125,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('removeEffect', {
-      effectName: effect.name,
+      effect,
       uuid,
     });
   }
@@ -159,7 +160,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effectName: effect.name,
+      effect,
       uuid,
       origin,
       overlay,

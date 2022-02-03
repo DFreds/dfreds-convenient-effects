@@ -1,5 +1,6 @@
 import CustomEffectsHandler from './custom-effects-handler.js';
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
+import Effect from './effect.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
@@ -15,6 +16,7 @@ export default class EffectHandler {
     this._settings = new Settings();
   }
 
+  // TODO should this be here or in effect-interface.js?
   /**
    * Searches through the list of available effects and returns one matching the
    * effect name. Prioritizes finding custom effects first.
@@ -65,17 +67,17 @@ export default class EffectHandler {
   /**
    * Toggles an effect on or off by name on an actor by UUID
    *
-   * @param {string} effectName - name of the effect to toggle
+   * @param {Effect} effect - the effect to toggle
    * @param {object} params - the effect parameters
    * @param {boolean} params.overlay - if the effect is an overlay or not
    * @param {string[]} params.uuids - UUIDS of the actors to toggle the effect on
    */
-  async toggleEffect(effectName, { overlay, uuids }) {
+  async toggleEffect(effect, { overlay, uuids }) {
     for (const uuid of uuids) {
-      if (await this.hasEffectApplied(effectName, uuid)) {
-        await this.removeEffect({ effectName, uuid });
+      if (await this.hasEffectApplied(effect.name, uuid)) {
+        await this.removeEffect({ effect, uuid });
       } else {
-        await this.addEffect({ effectName, uuid, overlay });
+        await this.addEffect({ effect, uuid, overlay });
       }
     }
   }
@@ -104,21 +106,21 @@ export default class EffectHandler {
    * provided UUID
    *
    * @param {object} params - the effect parameters
-   * @param {string} params.effectName - the name of the effect to remove
+   * @param {string} params.effect - the effect to remove
    * @param {string} params.uuid - the uuid of the actor to remove the effect from
    */
-  async removeEffect({ effectName, uuid }) {
+  async removeEffect({ effect, uuid }) {
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
     const effectToRemove = actor.data.effects.find(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
-        activeEffect?.data?.label == effectName
+        activeEffect?.data?.label == effect.name
     );
 
     if (!effectToRemove) return;
 
     await effectToRemove.delete();
-    log(`Removed effect ${effectName} from ${actor.name} - ${actor.id}`);
+    log(`Removed effect ${effect.name} from ${actor.name} - ${actor.id}`);
   }
 
   /**
@@ -126,13 +128,12 @@ export default class EffectHandler {
    * UUID
    *
    * @param {object} params - the effect parameters
-   * @param {string} params.effectName - the name of the effect to add
+   * @param {Effect} params.effect - the effect to add
    * @param {string} params.uuid - the uuid of the actor to add the effect to
    * @param {string} params.origin - the origin of the effect
    * @param {boolean} params.overlay - if the effect is an overlay or not
    */
-  async addEffect({ effectName, uuid, origin, overlay }) {
-    let effect = this.findEffectByName(effectName);
+  async addEffect({ effect, uuid, origin, overlay }) {
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
     if (effect.name.startsWith('Exhaustion')) {
