@@ -1,68 +1,115 @@
-<section id="convenient-effects" class="convenient-effects sidebar-tab directory flexcol">
+<section
+  id="convenient-effects"
+  class="convenient-effects sidebar-tab directory flexcol"
+>
   <!-- Directory Header -->
   <header class="directory-header">
     {{#isGm}}
-    <div class="header-actions action-buttons flexrow">
-      <button class="create-effect">
-        <i class="fas fa-hand-sparkles"></i> Create Effect
-      </button>
-    </div>
+      <div class="header-actions action-buttons flexrow">
+        <button class="create-effect">
+          <i class="fas fa-hand-sparkles"></i>
+          Create Effect
+        </button>
+      </div>
     {{/isGm}}
     <div class="header-search flexrow">
       <i class="fas fa-search"></i>
-      <input type="text" name="search" value="" placeholder="Search Effects" autocomplete="off" />
+      <input
+        type="text"
+        name="search"
+        value=""
+        placeholder="Search Effects"
+        autocomplete="off"
+      />
       <a class="header-control collapse-all" title="Collapse All Folders">
         <i class="fas fa-sort-amount-up fa-fw"></i>
       </a>
       {{#isGm}}
-      <a class="header-control reset-status-effects" title="Reset Status Effects to Defaults">
-        <i class="fas fa-undo fa-fw"></i>
-      </a>
+        <a
+          class="header-control reset-status-effects"
+          title="Reset Status Effects to Defaults"
+        >
+          <i class="fas fa-undo fa-fw"></i>
+        </a>
       {{/isGm}}
     </div>
   </header>
-
   <!-- Directories List -->
   <ol class="directory-list">
     {{#each folders as |folder|}}
-    <li class="directory-item folder flexcol collapsed convenient-folder" data-folder-id="{{folder.id}}"
-      draggable="false">
-      <header class="folder-header flexrow">
-        <h3>
-          <i class="fas fa-folder-open fa-fw"></i>
-          {{folder.label}}
-        </h3>
-
-        {{#ifCustomFolder folder.id}}
-        <a title="Import custom effects" class="import-custom-effects create-folder"><i
-            class="fas fa-file-import fa-fw"></i></a>
-        <a title="Export custom effects" class="export-custom-effects create-folder"><i
-            class="fas fa-file-export fa-fw"></i></a>
-        {{/ifCustomFolder}}
-      </header>
-      <ol class="subdirectory">
-        {{#each folder.effects as |effect|}}
-        <li class="directory-item document entity flexrow convenient-effect" data-effect-name="{{effect.name}}" draggable="true"
-          style="display: flex">
-          <img title="{{effect.name}}" src="{{effect.icon}}" />
-          <h4 class="document-name entity-name">
-            <a title="{{effect.description}}">{{effect.name}}</a>
-          </h4>
-          {{#hasNestedEffects effect}}
-          <i class="fas fa-tree integration-icon" title="Nested Effects"></i>
-          {{/hasNestedEffects}} {{#isStatusEffect effect}}
-          <i class="fas fa-street-view integration-icon" title="Token Status Effect"></i>
-          {{/isStatusEffect}} {{#hasMidiQoLChanges effect}}
-          <i class="fas fa-dice-d20 integration-icon" title="Midi-QoL Effects"></i>
-          {{/hasMidiQoLChanges}} {{#hasAtlChanges effect}}
-          <i class="fas fa-lightbulb integration-icon" title="Active Token Lighting Effects"></i>
-          {{/hasAtlChanges}} {{#hasTokenMagicChanges effect}}
-          <i class="fas fa-magic integration-icon" title="Token Magic Effects"></i>
-          {{/hasTokenMagicChanges}}
-        </li>
-        {{/each}}
-      </ol>
-    </li>
+      <li
+        class="directory-item folder flexcol collapsed convenient-folder"
+        data-folder-id="{{folder.id}}"
+        draggable="false"
+      >
+        <header class="folder-header flexrow">
+          <h3>
+            <i class="fas fa-folder-open fa-fw"></i>
+            {{folder.label}}
+          </h3>
+          {{#ifCustomFolder folder.id}}
+            <a
+              title="Import custom effects"
+              class="import-custom-effects create-folder"
+            >
+              <i class="fas fa-file-import fa-fw"></i>
+            </a>
+            <a
+              title="Export custom effects"
+              class="export-custom-effects create-folder"
+            >
+              <i class="fas fa-file-export fa-fw"></i>
+            </a>
+          {{/ifCustomFolder}}
+        </header>
+        <ol class="subdirectory">
+          {{#each folder.effects as |effect|}}
+            <li
+              class="directory-item document entity flexrow convenient-effect"
+              data-effect-name="{{effect.name}}"
+              draggable="true"
+              style="display: flex"
+            >
+              <img title="{{effect.name}}" src="{{effect.icon}}" />
+              <h4 class="document-name entity-name">
+                <a title="{{effect.description}}">
+                  {{effect.name}}
+                </a>
+              </h4>
+              {{#hasNestedEffects effect}}
+                <i
+                  class="fas fa-tree integration-icon"
+                  title="Nested Effects"
+                ></i>
+              {{/hasNestedEffects}}
+              {{#isStatusEffect effect}}
+                <i
+                  class="fas fa-street-view integration-icon"
+                  title="Token Status Effect"
+                ></i>
+              {{/isStatusEffect}}
+              {{#hasMidiQoLChanges effect}}
+                <i
+                  class="fas fa-dice-d20 integration-icon"
+                  title="Midi-QoL Effects"
+                ></i>
+              {{/hasMidiQoLChanges}}
+              {{#hasAtlChanges effect}}
+                <i
+                  class="fas fa-lightbulb integration-icon"
+                  title="Active Token Lighting Effects"
+                ></i>
+              {{/hasAtlChanges}}
+              {{#hasTokenMagicChanges effect}}
+                <i
+                  class="fas fa-magic integration-icon"
+                  title="Token Magic Effects"
+                ></i>
+              {{/hasTokenMagicChanges}}
+            </li>
+          {{/each}}
+        </ol>
+      </li>
     {{/each}}
   </ol>
 </section>
