@@ -880,7 +880,7 @@ export default class EffectDefinitions {
       name: 'Command',
       description: 'No active effects and lasts until the end of next turn',
       icon: 'systems/dnd5e/icons/spells/explosion-magenta-1.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       turns: 1,
     });
   }
@@ -1549,7 +1549,7 @@ export default class EffectDefinitions {
       description:
         'Grants advantage to next attacker or until the end of next turn',
       icon: 'systems/dnd5e/icons/spells/fireball-sky-2.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       turns: 1,
       flags: {
         dae: {
@@ -1977,7 +1977,7 @@ export default class EffectDefinitions {
       name: 'Ray of Frost',
       description: 'Lowers movement by 10 ft',
       icon: 'systems/dnd5e/icons/spells/beam-blue-1.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       changes: [
         {
           key: 'data.attributes.movement.all',
@@ -2054,7 +2054,7 @@ export default class EffectDefinitions {
       name: 'Shield',
       description: 'Add 5 to AC until next turn',
       icon: 'systems/dnd5e/icons/spells/protect-magenta-1.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       flags: {
         dae: {
           specialDuration: ['turnStart'],
@@ -2177,7 +2177,7 @@ export default class EffectDefinitions {
       description:
         'Grants advantage on next attack or until the end of next turn',
       icon: 'systems/dnd5e/icons/spells/enchant-sky-1.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       turns: 1,
       flags: {
         dae: {
@@ -2200,7 +2200,7 @@ export default class EffectDefinitions {
       description:
         'Grants disadvantage on next attack or until the end of next turn',
       icon: 'systems/dnd5e/icons/skills/affliction_24.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       turns: 1,
       flags: {
         dae: {
@@ -2470,7 +2470,7 @@ export default class EffectDefinitions {
       description:
         'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
       icon: 'systems/dnd5e/icons/skills/weapon_34.jpg',
-      seconds: Constants.SECONDS.IN_ONE_ROUND,
+      seconds: CONFIG.time.roundTime,
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.mwak',

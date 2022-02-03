@@ -93,7 +93,7 @@ export default class Effect {
     }
 
     if (this.seconds) {
-      return this.seconds / Constants.SECONDS.IN_ONE_ROUND;
+      return this.seconds / CONFIG.time.roundTime;
     }
 
     return undefined;
@@ -105,7 +105,7 @@ export default class Effect {
     }
 
     if (this.rounds) {
-      return this.rounds * Constants.SECONDS.IN_ONE_ROUND;
+      return this.rounds * CONFIG.time.roundTime;
     }
 
     return undefined;
