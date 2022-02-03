@@ -152,7 +152,7 @@ export default class EffectInterface {
   /**
    * Adds the effect to the provided actor UUID as the GM via sockets
    *
-   * @param {object} params - the effect params
+   * @param {object} params - the params for adding an effect
    * @param {string} params.effectName - the name of the effect to add
    * @param {string} params.uuid - the UUID of the actor to add the effect to
    * @param {string} params.origin - the origin of the effect
@@ -166,6 +166,38 @@ export default class EffectInterface {
       ui.notifications.error(`Effect ${effectName} could not be found`);
       return;
     }
+
+    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+
+    if (!actor) {
+      ui.notifications.error(`Actor ${uuid} could not be found`);
+      return;
+    }
+
+    if (effect.nestedEffects.length > 0) {
+      effect = await this._getNestedEffectSelection(effect);
+    }
+
+    return this._socket.executeAsGM('addEffect', {
+      effect,
+      uuid,
+      origin,
+      overlay,
+    });
+  }
+
+  /**
+   * Adds the defined effect to the provided actor UUID as the GM via sockets
+   *
+   * @param {object} params - the params for adding an effect
+   * @param {object} params.effectData - the object containing all of the relevant effect data
+   * @param {string} params.uuid - the UUID of the actor to add the effect to
+   * @param {string} params.origin - the origin of the effect
+   * @param {boolean} params.overlay - if the effect is an overlay or not
+   * @returns {Promise} a promise that resolves when the GM socket function completes
+   */
+  async addEffectWith({ effectData, uuid, origin, overlay }) {
+    let effect = new Effect(effectData);
 
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
