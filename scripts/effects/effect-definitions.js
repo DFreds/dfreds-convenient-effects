@@ -29,21 +29,6 @@ export default class EffectDefinitions {
   }
 
   /**
-   * Get all effects except custom effects
-   *
-   * @returns {Effect[]} all but custom effects
-   */
-  get nonCustom() {
-    return [
-      ...this.conditions,
-      ...this.spells,
-      ...this.classFeatures,
-      ...this.equipment,
-      ...this.other,
-    ];
-  }
-
-  /**
    * Get all the condition effects
    *
    * @returns {Effect[]} all the condition effects
