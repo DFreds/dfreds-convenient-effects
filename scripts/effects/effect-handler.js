@@ -14,37 +14,6 @@ export default class EffectHandler {
     this._settings = new Settings();
   }
 
-
-  /**
-   * Prompts the user to select a nested effect from the choices available
-   *
-   * @param {Effect} effect - the parent effect
-   * @returns {Effect} the chosen nested effect
-   */
-  async getNestedEffectSelection(effect) {
-    const content = await renderTemplate(
-      'modules/dfreds-convenient-effects/templates/nested-effects-dialog.html',
-      { parentEffect: effect }
-    );
-    const choice = await Dialog.prompt(
-      {
-        title: effect.name,
-        content: content,
-        label: 'Select Effect',
-        callback: (html) => {
-          const htmlChoice = html.find('select[name="effect-choice"]').val();
-          return htmlChoice;
-        },
-        rejectClose: false,
-      },
-      { width: 300 }
-    );
-
-    return effect.nestedEffects.find(
-      (nestedEffect) => nestedEffect.name == choice
-    );
-  }
-
   /**
    * Toggles an effect on or off by name on an actor by UUID
    *

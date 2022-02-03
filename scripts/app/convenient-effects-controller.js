@@ -350,6 +350,7 @@ export default class ConvenientEffectsController {
    *
    * @param {DragEvent} event - event that corresponds to the drag over
    */
+  // TODO handle adding to folder
   onFolderDragOver(event) {
     if (!this._isEventTargetFavorites(event)) return;
 
@@ -362,6 +363,7 @@ export default class ConvenientEffectsController {
    *
    * @param {DragEvent} event - event that corresponds to the drag leave
    */
+  // TODO handle adding to folder
   onFolderDragLeave(event) {
     if (!this._isEventTargetFavorites(event)) return;
 
@@ -466,6 +468,7 @@ export default class ConvenientEffectsController {
     }
   }
 
+  // TODO delete
   _isEventTargetFavorites(event) {
     return event.currentTarget.dataset.folderId === 'favorites';
   }

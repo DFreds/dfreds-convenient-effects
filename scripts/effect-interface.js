@@ -93,7 +93,7 @@ export default class EffectInterface {
     }
 
     if (effect.nestedEffects.length > 0) {
-      effect = await this._effectHandler.getNestedEffectSelection(effect);
+      effect = await this._getNestedEffectSelection(effect);
       if (!effect) return; // dialog closed without selecting one
     }
 
@@ -140,7 +140,7 @@ export default class EffectInterface {
     }
 
     if (effect.nestedEffects.length > 0) {
-      effect = await this._effectHandler.getNestedEffectSelection(effect);
+      effect = await this._getNestedEffectSelection(effect);
     }
 
     return this._socket.executeAsGM('removeEffect', {
@@ -175,7 +175,7 @@ export default class EffectInterface {
     }
 
     if (effect.nestedEffects.length > 0) {
-      effect = await this._effectHandler.getNestedEffectSelection(effect);
+      effect = await this._getNestedEffectSelection(effect);
     }
 
     return this._socket.executeAsGM('addEffect', {
@@ -206,5 +206,29 @@ export default class EffectInterface {
    */
   removeActorDataChanges(effectName, uuid) {
     return this._socket.executeAsGM('removeActorDataChanges', effectName, uuid);
+  }
+
+  async _getNestedEffectSelection(effect) {
+    const content = await renderTemplate(
+      'modules/dfreds-convenient-effects/templates/nested-effects-dialog.html',
+      { parentEffect: effect }
+    );
+    const choice = await Dialog.prompt(
+      {
+        title: effect.name,
+        content: content,
+        label: 'Select Effect',
+        callback: (html) => {
+          const htmlChoice = html.find('select[name="effect-choice"]').val();
+          return htmlChoice;
+        },
+        rejectClose: false,
+      },
+      { width: 300 }
+    );
+
+    return effect.nestedEffects.find(
+      (nestedEffect) => nestedEffect.name == choice
+    );
   }
 }
