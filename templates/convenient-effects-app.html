@@ -3,12 +3,14 @@
   <header class="directory-header">
     {{#isGm}}
     <div class="header-actions action-buttons flexrow">
-      <button class="create-effect"><i class="fas fa-hand-sparkles"></i> Create Effect</button>
+      <button class="create-effect">
+        <i class="fas fa-hand-sparkles"></i> Create Effect
+      </button>
     </div>
     {{/isGm}}
     <div class="header-search flexrow">
       <i class="fas fa-search"></i>
-      <input type="text" name="search" value="" placeholder="Search Effects" autocomplete="off">
+      <input type="text" name="search" value="" placeholder="Search Effects" autocomplete="off" />
       <a class="header-control collapse-all" title="Collapse All Folders">
         <i class="fas fa-sort-amount-up fa-fw"></i>
       </a>
@@ -32,31 +34,30 @@
         </h3>
 
         {{#ifCustomFolder folder.id}}
-          <a title="Import custom effects" class="import-custom-effects create-folder"><i class="fas fa-file-import fa-fw"></i></a>
-          <a title="Export custom effects" class="export-custom-effects create-folder"><i class="fas fa-file-export fa-fw"></i></a>
+        <a title="Import custom effects" class="import-custom-effects create-folder"><i
+            class="fas fa-file-import fa-fw"></i></a>
+        <a title="Export custom effects" class="export-custom-effects create-folder"><i
+            class="fas fa-file-export fa-fw"></i></a>
         {{/ifCustomFolder}}
       </header>
       <ol class="subdirectory">
         {{#each folder.effects as |effect|}}
-        <li class="directory-item entity flexrow convenient-effect" data-effect-name="{{effect.name}}" draggable="true" style="display: flex;">
+        <li class="directory-item document entity flexrow convenient-effect" data-effect-name="{{effect.name}}" draggable="true"
+          style="display: flex">
           <img title="{{effect.name}}" src="{{effect.icon}}" />
-          <h4 class="entity-name">
+          <h4 class="document-name entity-name">
             <a title="{{effect.description}}">{{effect.name}}</a>
           </h4>
           {{#hasNestedEffects effect}}
-            <i class="fas fa-tree integration-icon" title="Nested Effects"></i>
-          {{/hasNestedEffects}}
-          {{#isStatusEffect effect}}
-            <i class="fas fa-street-view integration-icon" title="Token Status Effect"></i>
-          {{/isStatusEffect}}
-          {{#hasMidiQoLChanges effect}}
-            <i class="fas fa-dice-d20 integration-icon" title="Midi-QoL Effects"></i>
-          {{/hasMidiQoLChanges}}
-          {{#hasAtlChanges effect}}
-            <i class="fas fa-lightbulb integration-icon" title="Active Token Lighting Effects"></i>
-          {{/hasAtlChanges}}
-          {{#hasTokenMagicChanges effect}}
-            <i class="fas fa-magic integration-icon" title="Token Magic Effects"></i>
+          <i class="fas fa-tree integration-icon" title="Nested Effects"></i>
+          {{/hasNestedEffects}} {{#isStatusEffect effect}}
+          <i class="fas fa-street-view integration-icon" title="Token Status Effect"></i>
+          {{/isStatusEffect}} {{#hasMidiQoLChanges effect}}
+          <i class="fas fa-dice-d20 integration-icon" title="Midi-QoL Effects"></i>
+          {{/hasMidiQoLChanges}} {{#hasAtlChanges effect}}
+          <i class="fas fa-lightbulb integration-icon" title="Active Token Lighting Effects"></i>
+          {{/hasAtlChanges}} {{#hasTokenMagicChanges effect}}
+          <i class="fas fa-magic integration-icon" title="Token Magic Effects"></i>
           {{/hasTokenMagicChanges}}
         </li>
         {{/each}}
