@@ -1,5 +1,6 @@
 import ActorUpdater from './effects/actor-updater.js';
 import Constants from './constants.js';
+import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import Effect from './effects/effect.js';
 import EffectHandler from './effects/effect-handler.js';
 import FoundryHelpers from './foundry-helpers.js';
@@ -10,6 +11,7 @@ import FoundryHelpers from './foundry-helpers.js';
 export default class EffectInterface {
   constructor() {
     this._actorUpdater = new ActorUpdater();
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHandler = new EffectHandler();
     this._foundryHelpers = new FoundryHelpers();
   }
@@ -46,6 +48,23 @@ export default class EffectInterface {
   }
 
   /**
+   * Searches through the list of available effects and returns one matching the
+   * effect name. Prioritizes finding custom effects first.
+   *
+   * @param {string} effectName - the effect name to search for
+   * @returns {Effect} the found effect
+   */
+  findEffectByName(effectName) {
+    const effect = this._customEffectsHandler
+      .getCustomEffects()
+      .find((effect) => effect.name == effectName);
+
+    if (effect) return effect;
+
+    return game.dfreds.effects.all.find((effect) => effect.name == effectName);
+  }
+
+  /**
    * Toggles the effect on the provided actor UUIDS as the GM via sockets
    *
    * @param {string} effectName - name of the effect to toggle
@@ -66,7 +85,7 @@ export default class EffectInterface {
       return;
     }
 
-    let effect = this._effectHandler.findEffectByName(effectName);
+    let effect = this.findEffectByName(effectName);
 
     if (!effect) {
       ui.notifications.error(`Effect ${effectName} was not found`);
@@ -106,7 +125,7 @@ export default class EffectInterface {
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
   async removeEffect({ effectName, uuid }) {
-    let effect = this._effectHandler.findEffectByName(effectName);
+    let effect = this.findEffectByName(effectName);
 
     if (!effect) {
       ui.notifications.error(`Effect ${effectName} could not be found`);
@@ -141,7 +160,7 @@ export default class EffectInterface {
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
   async addEffect({ effectName, uuid, origin, overlay }) {
-    let effect = this._effectHandler.findEffectByName(effectName);
+    let effect = this.findEffectByName(effectName);
 
     if (!effect) {
       ui.notifications.error(`Effect ${effectName} could not be found`);

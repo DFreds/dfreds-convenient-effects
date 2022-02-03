@@ -1,4 +1,3 @@
-import EffectHandler from './effects/effect-handler.js';
 import Settings from './settings.js';
 
 /**
@@ -6,7 +5,6 @@ import Settings from './settings.js';
  */
 export default class ChatHandler {
   constructor() {
-    this._effectHandler = new EffectHandler();
     this._settings = new Settings();
   }
 
@@ -26,7 +24,7 @@ export default class ChatHandler {
     if (this._settings.chatMessagePermission > CONST.USER_ROLES.GAMEMASTER)
       return;
 
-    const effect = this._effectHandler.findEffectByName(effectName);
+    const effect = game.dfreds.effectInterface.findEffectByName(effectName);
 
     if (!effect) return;
 

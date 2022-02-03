@@ -1,4 +1,3 @@
-import CustomEffectsHandler from './custom-effects-handler.js';
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import Effect from './effect.js';
 import FoundryHelpers from '../foundry-helpers.js';
@@ -10,29 +9,11 @@ import log from '../logger.js';
  */
 export default class EffectHandler {
   constructor() {
-    this._customEffectsHandler = new CustomEffectsHandler();
     this._foundryHelpers = new FoundryHelpers();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
     this._settings = new Settings();
   }
 
-  // TODO should this be here or in effect-interface.js?
-  /**
-   * Searches through the list of available effects and returns one matching the
-   * effect name. Prioritizes finding custom effects first.
-   *
-   * @param {string} effectName - the effect name to search for
-   * @returns {Effect} the found effect
-   */
-  findEffectByName(effectName) {
-    const effect = this._customEffectsHandler
-      .getCustomEffects()
-      .find((effect) => effect.name == effectName);
-
-    if (effect) return effect;
-
-    return game.dfreds.effects.all.find((effect) => effect.name == effectName);
-  }
 
   /**
    * Prompts the user to select a nested effect from the choices available
