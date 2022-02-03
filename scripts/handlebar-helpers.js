@@ -22,42 +22,34 @@ export default class HandlebarHelpers {
   }
 
   _registerIsGmHelper() {
-    Handlebars.registerHelper('isGm', (options) => {
-      return game.user.isGM ? options.fn(this) : options.inverse(this);
+    Handlebars.registerHelper('isGm', () => {
+      return game.user.isGM;
     });
   }
 
   _registerIfCustomFolderHelper() {
-    Handlebars.registerHelper('ifCustomFolder', (folderId, options) => {
-      return folderId === 'custom' ? options.fn(this) : options.inverse(this);
+    Handlebars.registerHelper('isCustomFolder', (folderId) => {
+      return folderId === 'custom';
     });
   }
 
   _registerHasNestedEffectsHelper() {
-    Handlebars.registerHelper('hasNestedEffects', (effect, options) => {
-      if (effect.nestedEffects.length > 0) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
+    Handlebars.registerHelper('hasNestedEffects', (effect) => {
+      return effect.nestedEffects.length > 0;
     });
   }
 
   _registerIsStatusEffectHelper() {
-    Handlebars.registerHelper('isStatusEffect', (effect, options) => {
-      if (
+    Handlebars.registerHelper('isStatusEffect', (effect) => {
+      return (
         this._settings.modifyStatusEffects !== 'none' &&
         this._settings.isStatusEffect(effect.name)
-      ) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
+      );
     });
   }
 
   _registerHasMidiQoLChangesHelper() {
-    Handlebars.registerHelper('hasMidiQoLChanges', (effect, options) => {
+    Handlebars.registerHelper('hasMidiQoLChanges', (effect) => {
       const anyNestedHaveMidiChanges = effect.nestedEffects
         .flatMap((nestedEffect) => nestedEffect.changes)
         .some((change) => change.key.startsWith('flags.midi-qol'));
@@ -66,43 +58,31 @@ export default class HandlebarHelpers {
         change.key.startsWith('flags.midi-qol')
       );
 
-      if (effectHasMidiQoLChanges || anyNestedHaveMidiChanges) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
+      return effectHasMidiQoLChanges || anyNestedHaveMidiChanges;
     });
   }
 
   _registerHasAtlChangesHelper() {
-    Handlebars.registerHelper('hasAtlChanges', (effect, options) => {
+    Handlebars.registerHelper('hasAtlChanges', (effect) => {
       const anyNestedHaveAtlChanges = effect.nestedEffects.some(
         (effect) => effect.atlChanges.length > 0
       );
-      if (
+      return (
         this._settings.integrateWithAte &&
         (effect.atlChanges.length > 0 || anyNestedHaveAtlChanges)
-      ) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
+      );
     });
   }
 
   _registerHasTokenMagicChangesHelper() {
-    Handlebars.registerHelper('hasTokenMagicChanges', (effect, options) => {
+    Handlebars.registerHelper('hasTokenMagicChanges', (effect) => {
       const anyNestedHaveTokenMagicChanges = effect.nestedEffects.some(
         (effect) => effect.tokenMagicChanges.length > 0
       );
-      if (
+      return (
         this._settings.integrateWithTokenMagic &&
         (effect.tokenMagicChanges.length > 0 || anyNestedHaveTokenMagicChanges)
-      ) {
-        return options.fn(this);
-      } else {
-        return options.inverse(this);
-      }
+      );
     });
   }
 }

@@ -4,14 +4,14 @@
 >
   <!-- Directory Header -->
   <header class="directory-header">
-    {{#isGm}}
+    {{#if (isGm)}}
       <div class="header-actions action-buttons flexrow">
         <button class="create-effect">
           <i class="fas fa-hand-sparkles"></i>
           Create Effect
         </button>
       </div>
-    {{/isGm}}
+    {{/if}}
     <div class="header-search flexrow">
       <i class="fas fa-search"></i>
       <input
@@ -24,14 +24,14 @@
       <a class="header-control collapse-all" title="Collapse All Folders">
         <i class="fas fa-sort-amount-up fa-fw"></i>
       </a>
-      {{#isGm}}
+      {{#if (isGm)}}
         <a
           class="header-control reset-status-effects"
           title="Reset Status Effects to Defaults"
         >
           <i class="fas fa-undo fa-fw"></i>
         </a>
-      {{/isGm}}
+      {{/if}}
     </div>
   </header>
   <!-- Directories List -->
@@ -47,7 +47,7 @@
             <i class="fas fa-folder-open fa-fw"></i>
             {{folder.label}}
           </h3>
-          {{#ifCustomFolder folder.id}}
+          {{#if (isCustomFolder folder.id)}}
             <a
               title="Import custom effects"
               class="import-custom-effects create-folder"
@@ -60,7 +60,7 @@
             >
               <i class="fas fa-file-export fa-fw"></i>
             </a>
-          {{/ifCustomFolder}}
+          {{/if}}
         </header>
         <ol class="subdirectory">
           {{#each folder.effects as |effect|}}
@@ -76,36 +76,36 @@
                   {{effect.name}}
                 </a>
               </h4>
-              {{#hasNestedEffects effect}}
+              {{#if (hasNestedEffects effect)}}
                 <i
                   class="fas fa-tree integration-icon"
                   title="Nested Effects"
                 ></i>
-              {{/hasNestedEffects}}
-              {{#isStatusEffect effect}}
+              {{/if}}
+              {{#if (isStatusEffect effect)}}
                 <i
                   class="fas fa-street-view integration-icon"
                   title="Token Status Effect"
                 ></i>
-              {{/isStatusEffect}}
-              {{#hasMidiQoLChanges effect}}
+              {{/if}}
+              {{#if (hasMidiQoLChanges effect)}}
                 <i
                   class="fas fa-dice-d20 integration-icon"
                   title="Midi-QoL Effects"
                 ></i>
-              {{/hasMidiQoLChanges}}
-              {{#hasAtlChanges effect}}
+              {{/if}}
+              {{#if (hasAtlChanges effect)}}
                 <i
                   class="fas fa-lightbulb integration-icon"
                   title="Active Token Lighting Effects"
                 ></i>
-              {{/hasAtlChanges}}
-              {{#hasTokenMagicChanges effect}}
+              {{/if}}
+              {{#if (hasTokenMagicChanges effect)}}
                 <i
                   class="fas fa-magic integration-icon"
                   title="Token Magic Effects"
                 ></i>
-              {{/hasTokenMagicChanges}}
+              {{/if}}
             </li>
           {{/each}}
         </ol>
