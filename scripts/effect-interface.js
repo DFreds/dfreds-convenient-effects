@@ -97,7 +97,7 @@ export default class EffectInterface {
       if (!effect) return; // dialog closed without selecting one
     }
 
-    return this._socket.executeAsGM('toggleEffect', effect, {
+    return this._socket.executeAsGM('toggleEffect', effect.name, {
       overlay,
       uuids,
     });
@@ -144,7 +144,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('removeEffect', {
-      effect,
+      effectName: effect.name,
       uuid,
     });
   }
@@ -179,7 +179,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effect,
+      effectName: effect.name,
       uuid,
       origin,
       overlay,
@@ -211,7 +211,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effect,
+      effectName: effect.name,
       uuid,
       origin,
       overlay,
