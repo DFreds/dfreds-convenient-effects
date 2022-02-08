@@ -163,7 +163,7 @@ export default class Settings {
       (this.statusEffectNames.length === 1 &&
         this.statusEffectNames[0].includes(';'));
 
-    if (needsMigrating) {
+    if (needsMigrating && game.user.isGM) {
       ui.notifications.info('Migrating Convenient Effect settings...');
       await game.settings.set(
         Constants.MODULE_ID,
