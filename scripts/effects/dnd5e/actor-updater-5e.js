@@ -1,9 +1,9 @@
-import FoundryHelpers from '../foundry-helpers.js';
+import FoundryHelpers from '../../foundry-helpers.js';
 
 /**
  * Handles updating actor data for certain effects
  */
-export default class ActorUpdater {
+export default class ActorUpdater5e {
   constructor() {
     this._foundryHelpers = new FoundryHelpers();
   }

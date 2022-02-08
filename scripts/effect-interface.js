@@ -1,4 +1,4 @@
-import ActorUpdater from './effects/actor-updater.js';
+import ActorUpdaterDelegate from './effects/actor-updater-delegate.js';
 import Constants from './constants.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import Effect from './effects/effect.js';
@@ -10,7 +10,7 @@ import FoundryHelpers from './foundry-helpers.js';
  */
 export default class EffectInterface {
   constructor() {
-    this._actorUpdater = new ActorUpdater();
+    this._actorUpdaterDelegate = new ActorUpdaterDelegate();
     this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHandler = new EffectHandler();
     this._foundryHelpers = new FoundryHelpers();
@@ -39,11 +39,15 @@ export default class EffectInterface {
     );
     this._socket.register(
       'addActorDataChanges',
-      this._actorUpdater.addActorDataChanges.bind(this._actorUpdater)
+      this._actorUpdaterDelegate.addActorDataChanges.bind(
+        this._actorUpdaterDelegate
+      )
     );
     this._socket.register(
       'removeActorDataChanges',
-      this._actorUpdater.removeActorDataChanges.bind(this._actorUpdater)
+      this._actorUpdaterDelegate.removeActorDataChanges.bind(
+        this._actorUpdaterDelegate
+      )
     );
   }
 

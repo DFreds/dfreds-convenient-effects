@@ -21,4 +21,8 @@ export default class Constants {
   };
 
   static SIZES_ORDERED = ['tiny', 'sm', 'med', 'lg', 'huge', 'grg'];
+
+  static SYSTEM_IDS = {
+    DND_5E: 'dnd5e',
+  };
 }

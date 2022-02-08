@@ -9,6 +9,10 @@ export default class FoundryHelpers {
     this._settings = new Settings();
   }
 
+  get systemId() {
+    return game.system.id;
+  }
+
   /**
    * Gets all UUIDs for selected or targeted tokens, depending on if priortize
    * targets is enabled
