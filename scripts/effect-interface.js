@@ -211,7 +211,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effectName: effect.name,
+      effectData,
       uuid,
       origin,
       overlay,

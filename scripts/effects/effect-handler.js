@@ -2,6 +2,7 @@ import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
+import Effect from './effect.js';
 
 /**
  * Handles toggling on and off effects on actors
@@ -78,12 +79,18 @@ export default class EffectHandler {
    *
    * @param {object} params - the effect parameters
    * @param {string} params.effectName - the name of the effect to add
+   * @param {object} params.effectData - the effect data to add if effectName is not provided
    * @param {string} params.uuid - the uuid of the actor to add the effect to
    * @param {string} params.origin - the origin of the effect
    * @param {boolean} params.overlay - if the effect is an overlay or not
    */
-  async addEffect({ effectName, uuid, origin, overlay }) {
+  async addEffect({ effectName, effectData, uuid, origin, overlay }) {
     let effect = game.dfreds.effectInterface.findEffectByName(effectName);
+
+    if (!effect && effectData) {
+      effect = new Effect(effectData);
+    }
+
     const actor = await this._foundryHelpers.getActorByUuid(uuid);
 
     if (effect.name.startsWith('Exhaustion')) {
