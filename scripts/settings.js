@@ -11,7 +11,8 @@ export default class Settings {
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
-  static SHOW_NESTED_EFFECTS = 'hideNestedEffects';
+  static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
+  static SHOW_NESTED_EFFECTS = 'showNestedEffects';
 
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
@@ -103,6 +104,25 @@ export default class Settings {
       default: false,
       type: Boolean,
     });
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
+      {
+        name: 'Show Chat Message Effect Description',
+        hint: 'This is when effect descriptions are shown on chat messages.',
+        scope: 'world',
+        config: true,
+        default: true,
+        default: 'onAddOrRemove',
+        choices: {
+          onAddOrRemove: 'On Add or Remove',
+          onAddOnly: 'On Add Only',
+          never: 'Never',
+        },
+        type: String,
+      }
+    );
 
     game.settings.register(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS, {
       name: 'Show Nested Effects',
@@ -274,6 +294,18 @@ export default class Settings {
    */
   get prioritizeTargets() {
     return game.settings.get(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS);
+  }
+
+  /**
+   * Returns the game setting for the chat effect description
+   *
+   * @returns {string} a string representing the chosen chat effect description
+   */
+  get showChatMessageEffectDescription() {
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION
+    );
   }
 
   /**

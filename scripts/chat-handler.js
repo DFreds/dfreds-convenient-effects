@@ -15,8 +15,14 @@ export default class ChatHandler {
    * @param {string} effectName - the name of the effect
    * @param {string} reason - the reason for the chat message
    * @param {Actor5e} actor - the actor the effect change occurred to
+   * @param {boolean} isCreateActiveEffect - true if this chat occurs on creating an active effect
    */
-  async createChatForEffect({ effectName, reason, actor }) {
+  async createChatForEffect({
+    effectName,
+    reason,
+    actor,
+    isCreateActiveEffect,
+  }) {
     // Fixes issue where chat messages were being created for the custom effects being deleted
     if (this._settings.customEffectsItemId === actor.id) return;
 
@@ -40,9 +46,25 @@ export default class ChatHandler {
                 (user) => user.role >= this._settings.chatMessagePermission
               )
               .map((user) => user.id),
-      content: `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>
-         <p>${effect.description}</p>
-         `,
+      content: this._getChatContent({
+        effect,
+        reason,
+        actorName,
+        isCreateActiveEffect,
+      }),
     });
+  }
+
+  _getChatContent({ effect, reason, actorName, isCreateActiveEffect }) {
+    let message = `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>`;
+    if (
+      this._settings.showChatMessageEffectDescription === 'onAddOrRemove' ||
+      (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
+        isCreateActiveEffect)
+    ) {
+      message += `<p>${effect.description}</p>`;
+    }
+
+    return message;
   }
 }

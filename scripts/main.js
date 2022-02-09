@@ -102,6 +102,7 @@ Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
     effectName: activeEffect?.data?.label,
     reason: 'Applied to',
     actor: activeEffect?.parent,
+    isCreateActiveEffect: true,
   });
 });
 
@@ -134,6 +135,7 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
     effectName: activeEffect?.data?.label,
     reason: isExpired ? 'Expired from' : 'Removed from',
     actor: activeEffect?.parent,
+    isCreateActiveEffect: false,
   });
 });
 
