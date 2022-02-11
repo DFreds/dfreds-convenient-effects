@@ -169,9 +169,10 @@ export default class EffectInterface {
    * @param {string} params.uuid - the UUID of the actor to add the effect to
    * @param {string} params.origin - the origin of the effect
    * @param {boolean} params.overlay - if the effect is an overlay or not
+   * @param {object} params.metadata - additional contextual data for the application of the effect (likely provided by midi-qol)
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  async addEffect({ effectName, uuid, origin, overlay }) {
+  async addEffect({ effectName, uuid, origin, overlay, metadata }) {
     let effect = this.findEffectByName(effectName);
 
     if (!effect) {
