@@ -41,6 +41,8 @@ Hooks.once('ready', async () => {
   const customEffectsHandler = new CustomEffectsHandler();
   await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
+
+  Hooks.callAll('dfreds-convenient-effects.ready');
 });
 
 /**
