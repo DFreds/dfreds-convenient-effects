@@ -59,12 +59,7 @@ export default class CustomEffectsHandler {
   }
 
   _isValid(effect) {
-    const hasNonDefaultName =
-      effect.data.label !== game.i18n.localize('DND5E.EffectNew');
-    const hasChanges = effect.data.changes.length > 0;
-    const isCustomConvenient = effect.data.flags.isCustomConvenient;
-
-    return (hasNonDefaultName || hasChanges) && isCustomConvenient;
+    return effect.data?.flags?.isCustomConvenient;
   }
 
   _convertToEffectClass(effect) {
