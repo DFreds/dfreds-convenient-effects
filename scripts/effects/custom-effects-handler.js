@@ -116,6 +116,29 @@ export default class CustomEffectsHandler {
   }
 
   /**
+   * Creates a new custom effect on the custom effect
+   *
+   * @param {object} params - the params for adding an effect
+   * @param {object[]} params.activeEffects - array of active effects to add
+   * @returns {Promise} a promise that resolves when the active effects have finished being added
+   */
+  async createNewCustomEffectsWith({ activeEffects }) {
+    const item = await this._findOrCreateCustomEffectsItem();
+    const customEffects = activeEffects.map((activeEffect) => {
+      const flags = activeEffect?.flags ?? {};
+      flags.isCustomConvenient = true;
+      activeEffect.flags = flags;
+
+      if (!activeEffect.origin) {
+        activeEffect.origin = item.uuid;
+      }
+
+      return activeEffect;
+    });
+    return item.createEmbeddedDocuments('ActiveEffect', customEffects);
+  }
+
+  /**
    * Opens the configuration sheet for the custom effect corresponding with the custom ID
    *
    * @param {Effect} effect - the effect to edit

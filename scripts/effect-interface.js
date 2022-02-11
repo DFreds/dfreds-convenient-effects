@@ -219,6 +219,19 @@ export default class EffectInterface {
   }
 
   /**
+   * Creates new custom effects with the provided active effect data.
+   *
+   * @param {object} params - the params for adding an effect
+   * @param {object[]} params.activeEffects - array of active effects to add
+   * @returns {Promise} a promise that resolves when the active effects have finished being added
+   */
+  createNewCustomEffectsWith({ activeEffects }) {
+    return this._customEffectsHandler.createNewCustomEffectsWith({
+      activeEffects,
+    });
+  }
+
+  /**
    * Adds data changes to the provided actor UUID as the GM via sockets
    *
    * @param {string} effectName - the name of the effect that is adding actor data changes
