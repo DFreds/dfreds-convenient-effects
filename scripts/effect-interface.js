@@ -55,13 +55,25 @@ export default class EffectInterface {
    * @returns {Effect} the found effect
    */
   findEffectByName(effectName) {
+    const effect = this.findCustomEffectByName(effectName);
+    if (effect) return effect;
+
+    return game.dfreds.effects.all.find((effect) => effect.name == effectName);
+  }
+
+  /**
+   * Searches through the list of available custom effects and returns one matching the
+   * effect name.
+   *
+   * @param {string} effectName - the effect name to search for
+   * @returns {Effect} the found effect
+   */
+  findCustomEffectByName(effectName) {
     const effect = this._customEffectsHandler
       .getCustomEffects()
       .find((effect) => effect.name == effectName);
 
-    if (effect) return effect;
-
-    return game.dfreds.effects.all.find((effect) => effect.name == effectName);
+    return effect;
   }
 
   /**
