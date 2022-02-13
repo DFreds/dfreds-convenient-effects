@@ -148,6 +148,23 @@ export default class ConvenientEffectsController {
     await this._customEffectsHandler.createNewCustomEffect();
   }
 
+  async onCreateFolderClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const button = event.currentTarget;
+    const parent = button.dataset.parentFolder;
+    const data = {
+      parent: parent ? parent : null,
+      type: 'Item',
+      flags: { isConvenientFolder: true },
+    };
+    const options = {
+      top: button.offsetTop,
+      left: button.offsetLeft + 100 + FolderConfig.defaultOptions.width,
+    };
+    Folder.createDialog(data, options);
+  }
+
   /**
    * Handle editing the custom effect
    *

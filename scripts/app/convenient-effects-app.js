@@ -120,6 +120,10 @@ export default class ConvenientEffectsApp extends Application {
       'click',
       this._controller.onCreateEffectClick.bind(this._controller)
     );
+    this._createFolderButton.on(
+      'click',
+      this._controller.onCreateFolderClick.bind(this._controller)
+    );
     this._effectListItems.on(
       'click',
       this._controller.onEffectClick.bind(this._controller)
@@ -248,6 +252,10 @@ export default class ConvenientEffectsApp extends Application {
 
   get _createEffectButton() {
     return this._rootView.find('.create-effect');
+  }
+
+  get _createFolderButton() {
+    return this._rootView.find('.create-folder');
   }
 
   get _collapseAllButton() {
