@@ -337,8 +337,8 @@ export default class ConvenientEffectsController {
 
   /**
    * Handles starting the drag for effect items
-   * Populates the dataTransfer with Foundry's expected ActiveEffect type
-   * and data to make drag drop work with no further handling.
+   * For non-nested effects, populates the dataTransfer with Foundry's expected
+   * ActiveEffect type and data to make non-nested effects behave as core does
    *
    * @param {DragEvent} event - event that corresponds to the drag start
    */
