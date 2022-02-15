@@ -97,7 +97,7 @@ Hooks.on('getSceneControlButtons', (controls) => {
  * Handle creating a chat message if an effect is added
  */
 Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
-  if (!activeEffect?.data?.flags?.isConvenient) return;
+  if (!activeEffect?.data?.flags?.isConvenient || !(activeEffect?.parent instanceof Actor)) return;
 
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
@@ -112,7 +112,7 @@ Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
  * Handle adding any actor data changes when an active effect is added to an actor
  */
 Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
-  if (!activeEffect?.data?.flags?.isConvenient) return;
+  if (!activeEffect?.data?.flags?.isConvenient || !(activeEffect?.parent instanceof Actor)) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
     game.dfreds.effectInterface.addActorDataChanges(
@@ -126,7 +126,7 @@ Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
  * Handle creating a chat message if an effect has expired or was removed
  */
 Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
-  if (!activeEffect?.data?.flags?.isConvenient) return;
+  if (!activeEffect?.data?.flags?.isConvenient || !(activeEffect?.parent instanceof Actor)) return;
 
   const isExpired =
     activeEffect?.duration?.remaining !== null &&
@@ -145,7 +145,7 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
  * Handle removing any actor data changes when an active effect is deleted from an actor
  */
 Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
-  if (!activeEffect?.data?.flags?.isConvenient) return;
+  if (!activeEffect?.data?.flags?.isConvenient || !(activeEffect?.parent instanceof Actor)) return;
 
   if (activeEffect?.data?.flags?.requiresActorUpdate) {
     game.dfreds.effectInterface.removeActorDataChanges(
@@ -196,6 +196,11 @@ Hooks.on('hotbarDrop', (bar, data, slot) => {
  */
 Hooks.on('dropActorSheetData', (actor, actorSheetCharacter, data) => {
   if (!data.effectName) return;
+
+  const effect = game.dfreds.effectInterface.findEffectByName(data.effectName);
+
+  // core will handle the drop since we are not using a nested effect
+  if (!effect.nestedEffects.length) return;
 
   game.dfreds.effectInterface.addEffect({
     effectName: data.effectName,

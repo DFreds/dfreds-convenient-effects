@@ -337,12 +337,31 @@ export default class ConvenientEffectsController {
 
   /**
    * Handles starting the drag for effect items
+   * Populates the dataTransfer with Foundry's expected ActiveEffect type
+   * and data to make drag drop work with no further handling.
    *
    * @param {DragEvent} event - event that corresponds to the drag start
    */
   onEffectDragStart(event) {
     const effectName = event.target.dataset.effectName;
-    event.dataTransfer.setData('text/plain', JSON.stringify({ effectName }));
+
+    const effect = game.dfreds.effectInterface.findEffectByName(effectName);
+
+    // special handling for nested effects
+    if (effect.nestedEffects.length) {
+      event.dataTransfer.setData('text/plain', JSON.stringify({
+        effectName,
+      }));
+      return;
+    }
+
+    // otherwise use core default format
+    const effectData = effect.convertToActiveEffectData();
+
+    event.dataTransfer.setData('text/plain', JSON.stringify({
+      type: "ActiveEffect",
+      data: effectData
+    }));
   }
 
   /**
