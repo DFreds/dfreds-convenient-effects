@@ -359,6 +359,7 @@ export default class ConvenientEffectsController {
     const effectData = effect.convertToActiveEffectData();
 
     event.dataTransfer.setData('text/plain', JSON.stringify({
+      effectName,
       type: "ActiveEffect",
       data: effectData
     }));
