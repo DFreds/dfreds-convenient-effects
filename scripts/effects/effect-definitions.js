@@ -103,6 +103,7 @@ export default class EffectDefinitions {
       this._darkvision,
       this._disguiseSelf,
       this._divineFavor,
+      this._divineWord,
 
       this._enlargeReduce,
       this._enlargeReduceEnlarge,
@@ -1191,6 +1192,18 @@ export default class EffectDefinitions {
           value: '+1d4[radiant]',
         },
       ],
+    });
+  }
+
+  get _divineWord() {
+    return new Effect({
+      name: 'Divine Word',
+      description: 'Adds various effects based on the remaining hit points',
+      icon: 'systems/dnd5e/icons/spells/light-royal-3.jpg',
+      isDynamic: true,
+      flags: {
+        requiresActorUpdate: true,
+      },
     });
   }
 

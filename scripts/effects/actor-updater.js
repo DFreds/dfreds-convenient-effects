@@ -24,6 +24,9 @@ export default class ActorUpdater {
       case "bear's endurance":
         await this._addBearsEnduranceEffects(actor);
         break;
+      case 'divine word':
+        await this._addDivineWordEffects(actor);
+        break;
       case 'false life':
         await this._addFalseLifeEffects(actor);
         break;
@@ -47,6 +50,14 @@ export default class ActorUpdater {
     await actor.update({
       'data.attributes.hp.temp': evaluation.total,
     });
+  }
+
+  async _addDivineWordEffects(actor) {
+    if (actor.data.data.attributes.hp.value <= 20) {
+      await actor.update({
+        'data.attributes.hp.value': 0,
+      });
+    }
   }
 
   async _addFalseLifeEffects(actor) {

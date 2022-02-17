@@ -12,6 +12,9 @@ export default class DynamicEffectsAdder {
    */
   async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
+      case 'divine word':
+        this._addDivineWordEffects(effect, actor);
+        break;
       case 'enlarge':
         this._addEnlargeEffects(effect, actor);
         break;
@@ -21,6 +24,36 @@ export default class DynamicEffectsAdder {
       case 'reduce':
         this._addReduceEffects(effect, actor);
         break;
+    }
+  }
+
+  _addDivineWordEffects(effect, actor) {
+    const remainingHp = actor.data.data.attributes.hp.value;
+    const blinded = game.dfreds.effectInterface.findEffectByName('Blinded');
+    const deafened = game.dfreds.effectInterface.findEffectByName('Deafened');
+    const stunned = game.dfreds.effectInterface.findEffectByName('Stunned');
+
+    if (remainingHp <= 20) {
+      // killed, handled in actor-updater
+    } else if (remainingHp <= 30) {
+      // TODO this?
+      // await game.dfreds.effectInterface.addEffect({
+      //   effectName: 'Blinded',
+      //   uuid: actor.uuid,
+      //   origin: effect.origin,
+      // });
+      effect.changes.push(
+        ...blinded.changes,
+        ...deafened.changes,
+        ...stunned.changes
+      );
+      effect.seconds = Constants.SECONDS.IN_ONE_HOUR;
+    } else if (remainingHp <= 40) {
+      effect.changes.push(...blinded.changes, ...deafened.changes);
+      effect.seconds = Constants.SECONDS.IN_TEN_MINUTES;
+    } else if (remainingHp <= 50) {
+      effect.changes.push(...deafened.changes);
+      effect.seconds = Constants.SECONDS.IN_ONE_MINUTE;
     }
   }
 
