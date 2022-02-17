@@ -84,6 +84,9 @@ export default class EffectDefinitions {
       this._beaconOfHope,
       this._blackTentacles,
       this._bless,
+      this._blindnessDeafness,
+      this._blindnessDeafnessBlindness,
+      this._blindnessDeafnessDeafness,
       this._blur,
       this._command,
       this._comprehendLanguages,
@@ -875,6 +878,40 @@ export default class EffectDefinitions {
           value: 'bloom',
         },
       ],
+    });
+  }
+
+  get _blindnessDeafness() {
+    return new Effect({
+      name: 'Blindness/Deafness',
+      description: 'Choose between blindness or deafness',
+      icon: 'systems/dnd5e/icons/spells/evil-eye-red-2.jpg',
+      nestedEffects: [
+        this._blindnessDeafnessBlindness,
+        this._blindnessDeafnessDeafness,
+      ],
+    });
+  }
+
+  get _blindnessDeafnessBlindness() {
+    return new Effect({
+      name: 'Blindness',
+      description: this._blinded.description,
+      icon: 'systems/dnd5e/icons/spells/evil-eye-red-2.jpg',
+      isViewable: this._settings.showNestedEffects,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [...this._blinded.changes],
+    });
+  }
+
+  get _blindnessDeafnessDeafness() {
+    return new Effect({
+      name: 'Deafness',
+      description: this._deafened.description,
+      icon: 'systems/dnd5e/icons/spells/evil-eye-red-2.jpg',
+      isViewable: this._settings.showNestedEffects,
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [...this._deafened.changes],
     });
   }
 
