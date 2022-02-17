@@ -88,6 +88,7 @@ export default class EffectDefinitions {
       this._blindnessDeafnessBlindness,
       this._blindnessDeafnessDeafness,
       this._blur,
+      this._charmPerson,
       this._command,
       this._comprehendLanguages,
 
@@ -936,6 +937,16 @@ export default class EffectDefinitions {
           value: 'blur',
         },
       ],
+    });
+  }
+
+  get _charmPerson() {
+    return new Effect({
+      name: 'Charm Person',
+      description: 'No active effects and lasts for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/explosion-magenta-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      changes: [...this._charmed.changes],
     });
   }
 
