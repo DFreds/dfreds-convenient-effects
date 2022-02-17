@@ -115,8 +115,8 @@ export default class EffectDefinitions {
       this._enhanceAbilityOwlsWisdom,
 
       this._faerieFire,
-      this._feeblemind,
       this._falseLife, // TODO figure out higher level casting
+      this._feeblemind,
 
       this._fireShield,
       this._fireShieldColdResistance,
@@ -1279,20 +1279,16 @@ export default class EffectDefinitions {
     });
   }
 
-  get _fly() {
+  get _falseLife() {
     return new Effect({
-      name: 'Fly',
-      description: 'Upgrade flying speed to 60 ft. for 10 minutes',
-      icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
-      seconds: Constants.SECONDS.IN_TEN_MINUTES,
-      changes: [
-        {
-          key: 'data.attributes.movement.fly',
-          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-          value: '60',
-          priority: 5,
-        },
-      ],
+      name: 'False Life',
+      description:
+        'Add 1d4 + 4 temp hit points (rolled automatically) for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/heal-royal-1.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      flags: {
+        requiresActorUpdate: true,
+      },
     });
   }
 
@@ -1315,19 +1311,6 @@ export default class EffectDefinitions {
           priority: 5,
         },
       ],
-    });
-  }
-
-  get _falseLife() {
-    return new Effect({
-      name: 'False Life',
-      description:
-        'Add 1d4 + 4 temp hit points (rolled automatically) for 1 hour',
-      icon: 'systems/dnd5e/icons/spells/heal-royal-1.jpg',
-      seconds: Constants.SECONDS.IN_ONE_HOUR,
-      flags: {
-        requiresActorUpdate: true,
-      },
     });
   }
 
@@ -1440,6 +1423,23 @@ export default class EffectDefinitions {
           key: 'macro.tokenMagic',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: 'Fire v2 (coldfire)',
+        },
+      ],
+    });
+  }
+
+  get _fly() {
+    return new Effect({
+      name: 'Fly',
+      description: 'Upgrade flying speed to 60 ft. for 10 minutes',
+      icon: 'systems/dnd5e/icons/spells/link-spirit-1.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      changes: [
+        {
+          key: 'data.attributes.movement.fly',
+          mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+          value: '60',
+          priority: 5,
         },
       ],
     });
