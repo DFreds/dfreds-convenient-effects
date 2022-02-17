@@ -82,6 +82,7 @@ export default class EffectDefinitions {
       this._bane,
       this._barkskin,
       this._beaconOfHope,
+      this._blackTentacles,
       this._bless,
       this._blur,
       this._command,
@@ -821,6 +822,16 @@ export default class EffectDefinitions {
           value: '1',
         },
       ],
+    });
+  }
+
+  get _blackTentacles() {
+    return new Effect({
+      name: 'Black Tentacles',
+      description: 'Apply the effects of the restrained condition for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/vines-eerie-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [...this._restrained.changes],
     });
   }
 
