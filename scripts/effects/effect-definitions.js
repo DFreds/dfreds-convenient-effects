@@ -129,6 +129,7 @@ export default class EffectDefinitions {
       this._findThePath,
       this._fly,
       this._foresight,
+      this._globeOfInvulnerability,
       this._greaterInvisibility,
       this._guidance,
       this._guidingBolt,
@@ -1658,6 +1659,22 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.advantage.ability.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
+        },
+      ],
+    });
+  }
+
+  get _globeOfInvulnerability() {
+    return new Effect({
+      name: 'Globe of Invulnerability',
+      description: 'No active effects and lasts for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/protect-blue-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'warp-field',
         },
       ],
     });
