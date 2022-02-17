@@ -119,6 +119,7 @@ export default class EffectDefinitions {
 
       this._faerieFire,
       this._falseLife, // TODO figure out higher level casting
+      this._featherFall,
       this._feeblemind,
 
       this._fireShield,
@@ -1329,6 +1330,15 @@ export default class EffectDefinitions {
       flags: {
         requiresActorUpdate: true,
       },
+    });
+  }
+
+  get _featherFall() {
+    return new Effect({
+      name: 'Feather Fall',
+      description: 'No active effects and lasts for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/wind-magenta-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
 
