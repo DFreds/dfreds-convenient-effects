@@ -77,6 +77,7 @@ export default class EffectDefinitions {
     return [
       this._aid, // TODO figure out higher level casting
       this._alterSelf,
+      this._antilifeShell,
       this._bane,
       this._barkskin,
       this._beaconOfHope,
@@ -723,6 +724,15 @@ export default class EffectDefinitions {
       name: 'Alter Self',
       description: 'No active effects and lasts for 1 hour',
       icon: 'icons/magic/control/debuff-energy-hold-green.webp',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+    });
+  }
+
+  get _antilifeShell() {
+    return new Effect({
+      name: 'Antilife Shell',
+      description: 'No active effects and lasts for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-jade-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
