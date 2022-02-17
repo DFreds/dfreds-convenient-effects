@@ -86,6 +86,16 @@ Hooks.once('setup', () => {
   );
 });
 
+Hooks.on('renderItemDirectory', (itemDirectory, html, data) => {
+  const settings = new Settings();
+  const customEffectsItemId = settings.customEffectsItemId;
+
+  if (!customEffectsItemId) return;
+
+  const li = html.find(`li[data-document-id="${customEffectsItemId}"]`);
+  li.remove();
+});
+
 /**
  * Handle adding new controls
  */
