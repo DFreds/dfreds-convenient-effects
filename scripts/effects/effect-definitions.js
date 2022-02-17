@@ -76,6 +76,7 @@ export default class EffectDefinitions {
   get spells() {
     return [
       this._aid, // TODO figure out higher level casting
+      this._alterSelf,
       this._bane,
       this._barkskin,
       this._beaconOfHope,
@@ -717,6 +718,14 @@ export default class EffectDefinitions {
     });
   }
 
+  get _alterSelf() {
+    return new Effect({
+      name: 'Alter Self',
+      description: 'No active effects and lasts for 1 hour',
+      icon: 'icons/magic/control/debuff-energy-hold-green.webp',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+    });
+  }
   get _bane() {
     return new Effect({
       name: 'Bane',
