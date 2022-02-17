@@ -2274,7 +2274,7 @@ export default class EffectDefinitions {
       name: 'Vicious Mockery',
       description:
         'Grants disadvantage on next attack or until the end of next turn',
-      icon: 'systems/dnd5e/icons/skills/affliction_24.jpg',
+      icon: 'icons/skills/toxins/cup-goblet-poisoned-spilled.webp',
       seconds: CONFIG.time.roundTime,
       turns: 1,
       flags: {
