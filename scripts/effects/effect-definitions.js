@@ -896,7 +896,8 @@ export default class EffectDefinitions {
   get _blindnessDeafnessBlindness() {
     return new Effect({
       name: 'Blindness',
-      description: this._blinded.description,
+      description:
+        'Disadvantage on attack rolls while granting advantage to all who attack for 1 minute',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-2.jpg',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -907,7 +908,7 @@ export default class EffectDefinitions {
   get _blindnessDeafnessDeafness() {
     return new Effect({
       name: 'Deafness',
-      description: this._deafened.description,
+      description: 'No active effects and lasts for 1 minute',
       icon: 'systems/dnd5e/icons/spells/evil-eye-red-2.jpg',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1707,7 +1708,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Hideous Laughter',
       description:
-        'Apply the effects of the prone and incapacitated conditions',
+        'Apply the effects of the prone and incapacitated conditions for 1 minute',
       icon: 'systems/dnd5e/icons/spells/explosion-magenta-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._incapacitated.changes, ...this._prone.changes],
@@ -1881,7 +1882,7 @@ export default class EffectDefinitions {
   get _mirrorImage() {
     return new Effect({
       name: 'Mirror Image',
-      description: 'No active effects, but lasts for 1 minute',
+      description: 'No active effects and lasts for 1 minute',
       icon: 'systems/dnd5e/icons/spells/wind-grasp-magenta-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       tokenMagicChanges: [
@@ -2478,7 +2479,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Channel Divinity: Turn Undead',
       description:
-        'No active effects, but lasts for 1 minute. Expires on taking damage.',
+        'No active effects and lasts for 1 minute. Expires on taking damage.',
       icon: 'systems/dnd5e/icons/skills/yellow_19.jpg',
       flags: {
         dae: {
