@@ -137,6 +137,7 @@ export default class EffectDefinitions {
       this._heroesFeast,
       this._heroism,
       this._hideousLaughter,
+      this._holdMonster,
       this._holyAura,
       this._huntersMark,
       this._invisibility,
@@ -1831,6 +1832,22 @@ export default class EffectDefinitions {
     });
   }
 
+  get _holdMonster() {
+    return new Effect({
+      name: 'Hold Monster',
+      description: 'Apply the effects of the paralyzed condition for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/shielding-fire-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [...this._paralyzed.changes],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'mantle-of-madness',
+        },
+      ],
+    });
+  }
   get _holyAura() {
     return new Effect({
       name: 'Holy Aura',
