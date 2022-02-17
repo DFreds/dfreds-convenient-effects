@@ -86,7 +86,7 @@ Hooks.once('setup', () => {
   );
 });
 
-Hooks.on('renderItemDirectory', (itemDirectory, html, data) => {
+Hooks.on('renderItemDirectory', (_itemDirectory, html, _data) => {
   const settings = new Settings();
   const customEffectsItemId = settings.customEffectsItemId;
 
@@ -106,7 +106,7 @@ Hooks.on('getSceneControlButtons', (controls) => {
 /**
  * Handle creating a chat message if an effect is added
  */
-Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
+Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
   if (
     !activeEffect?.data?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
@@ -125,7 +125,7 @@ Hooks.on('preCreateActiveEffect', (activeEffect, config, userId) => {
 /**
  * Handle adding any actor data changes when an active effect is added to an actor
  */
-Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
+Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
   if (
     !activeEffect?.data?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
@@ -143,7 +143,7 @@ Hooks.on('createActiveEffect', (activeEffect, config, userId) => {
 /**
  * Handle creating a chat message if an effect has expired or was removed
  */
-Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
+Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
   if (
     !activeEffect?.data?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
@@ -166,7 +166,7 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, config, userId) => {
 /**
  * Handle removing any actor data changes when an active effect is deleted from an actor
  */
-Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
+Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   if (
     !activeEffect?.data?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
@@ -184,7 +184,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, config, userId) => {
 /**
  * Handle adding a form item for effect description to custom effects
  */
-Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
+Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
   const labelFormGroup = html
@@ -202,7 +202,7 @@ Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, data) => {
 /**
  * Handle re-rendering the ConvenientEffectsApp if it is open and a custom convenient active effect sheet is closed
  */
-Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
+Hooks.on('closeActiveEffectConfig', (activeEffectConfig, _html) => {
   if (!activeEffectConfig?.object?.data?.flags?.isCustomConvenient) return;
 
   const foundryHelpers = new FoundryHelpers();
@@ -212,7 +212,7 @@ Hooks.on('closeActiveEffectConfig', (activeEffectConfig, html) => {
 /**
  * Handle dropping an effect onto the hotbar
  */
-Hooks.on('hotbarDrop', (bar, data, slot) => {
+Hooks.on('hotbarDrop', (_bar, data, slot) => {
   const macroHandler = new MacroHandler();
   macroHandler.createMacro(data, slot);
 });
@@ -220,7 +220,7 @@ Hooks.on('hotbarDrop', (bar, data, slot) => {
 /**
  * Handle dropping an effect onto an actor sheet
  */
-Hooks.on('dropActorSheetData', (actor, actorSheetCharacter, data) => {
+Hooks.on('dropActorSheetData', (actor, _actorSheetCharacter, data) => {
   if (!data.effectName) return;
 
   const effect = game.dfreds.effectInterface.findEffectByName(data.effectName);
