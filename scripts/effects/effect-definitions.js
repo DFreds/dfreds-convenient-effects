@@ -126,6 +126,7 @@ export default class EffectDefinitions {
       this._fireShieldColdResistance,
       this._fireShieldFireResistance,
 
+      this._findThePath,
       this._fly,
       this._foresight,
       this._greaterInvisibility,
@@ -1606,6 +1607,15 @@ export default class EffectDefinitions {
           value: 'Fire v2 (coldfire)',
         },
       ],
+    });
+  }
+
+  get _findThePath() {
+    return new Effect({
+      name: 'Find the Path',
+      description: 'No active effects and lasts for 1 day',
+      icon: 'systems/dnd5e/icons/spells/light-jade-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_DAY,
     });
   }
 
