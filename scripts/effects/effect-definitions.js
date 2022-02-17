@@ -78,6 +78,7 @@ export default class EffectDefinitions {
       this._aid, // TODO figure out higher level casting
       this._alterSelf,
       this._antilifeShell,
+      this._arcaneHand,
       this._bane,
       this._barkskin,
       this._beaconOfHope,
@@ -736,6 +737,16 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
+
+  get _arcaneHand() {
+    return new Effect({
+      name: 'Arcane Hand',
+      description: 'No active effects and lasts for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/fireball-eerie-3.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    });
+  }
+
   get _bane() {
     return new Effect({
       name: 'Bane',
