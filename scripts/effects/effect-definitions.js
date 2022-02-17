@@ -102,6 +102,7 @@ export default class EffectDefinitions {
 
       this._darkvision,
       this._disguiseSelf,
+      this._divineFavor,
 
       this._enlargeReduce,
       this._enlargeReduceEnlarge,
@@ -1174,6 +1175,22 @@ export default class EffectDefinitions {
       description: 'No active effects and lasts for 1 hour',
       icon: 'systems/dnd5e/icons/spells/wind-grasp-eerie-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
+    });
+  }
+
+  get _divineFavor() {
+    return new Effect({
+      name: 'Divine Favor',
+      description: 'Add 1d4 radiant damage to weapon attacks for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/enchant-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        {
+          key: 'data.bonuses.weapon.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+1d4[radiant]',
+        },
+      ],
     });
   }
 
