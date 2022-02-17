@@ -101,6 +101,7 @@ export default class EffectDefinitions {
       this._contagionSlimyDoom,
 
       this._darkvision,
+      this._disguiseSelf,
 
       this._enlargeReduce,
       this._enlargeReduceEnlarge,
@@ -1164,6 +1165,15 @@ export default class EffectDefinitions {
           priority: 5,
         },
       ],
+    });
+  }
+
+  get _disguiseSelf() {
+    return new Effect({
+      name: 'Disguise Self',
+      description: 'No active effects and lasts for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/wind-grasp-eerie-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
 
