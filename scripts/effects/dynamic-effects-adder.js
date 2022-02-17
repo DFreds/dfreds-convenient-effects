@@ -35,6 +35,7 @@ export default class DynamicEffectsAdder {
 
     if (remainingHp <= 20) {
       // killed, handled in actor-updater
+      effect.description = 'Killed instantly';
     } else if (remainingHp <= 30) {
       // TODO this?
       // await game.dfreds.effectInterface.addEffect({
@@ -42,18 +43,21 @@ export default class DynamicEffectsAdder {
       //   uuid: actor.uuid,
       //   origin: effect.origin,
       // });
+      effect.description = 'Blinded, deafened, and stunned for 1 hour';
+      effect.seconds = Constants.SECONDS.IN_ONE_HOUR;
       effect.changes.push(
         ...blinded.changes,
         ...deafened.changes,
         ...stunned.changes
       );
-      effect.seconds = Constants.SECONDS.IN_ONE_HOUR;
     } else if (remainingHp <= 40) {
-      effect.changes.push(...blinded.changes, ...deafened.changes);
+      effect.description = 'Deafened and blinded for 10 minutes';
       effect.seconds = Constants.SECONDS.IN_TEN_MINUTES;
+      effect.changes.push(...blinded.changes, ...deafened.changes);
     } else if (remainingHp <= 50) {
-      effect.changes.push(...deafened.changes);
+      effect.description = 'Deafened for 1 minute';
       effect.seconds = Constants.SECONDS.IN_ONE_MINUTE;
+      effect.changes.push(...deafened.changes);
     }
   }
 
