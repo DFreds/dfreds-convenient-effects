@@ -138,6 +138,7 @@ export default class EffectDefinitions {
       this._heroism,
       this._hideousLaughter,
       this._holdMonster,
+      this._holdPerson,
       this._holyAura,
       this._huntersMark,
       this._invisibility,
@@ -1848,6 +1849,24 @@ export default class EffectDefinitions {
       ],
     });
   }
+
+  get _holdPerson() {
+    return new Effect({
+      name: 'Hold Person',
+      description: 'Apply the effects of the paralyzed condition for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/shielding-eerie-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [...this._paralyzed.changes],
+      tokenMagicChanges: [
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'mantle-of-madness',
+        },
+      ],
+    });
+  }
+
   get _holyAura() {
     return new Effect({
       name: 'Holy Aura',
