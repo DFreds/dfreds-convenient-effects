@@ -1686,6 +1686,11 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'flags.dnd5e.initiativeAdv',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
