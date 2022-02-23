@@ -1666,7 +1666,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Foresight',
       description:
-        'Grants advantage on attack rolls, ability checks, and saving throws for 8 hours',
+        'Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours',
       icon: 'systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       changes: [
@@ -1682,6 +1682,11 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.advantage.ability.save.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
