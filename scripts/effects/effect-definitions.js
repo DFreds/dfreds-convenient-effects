@@ -75,6 +75,7 @@ export default class EffectDefinitions {
    */
   get spells() {
     return [
+      this._acidArrow, // TODO figure out higher level casting
       this._aid, // TODO figure out higher level casting
       this._alterSelf,
       this._antilifeShell,
@@ -728,6 +729,22 @@ export default class EffectDefinitions {
   }
 
   /* Spell Effects */
+  get _acidArrow() {
+    return new Effect({
+      name: 'Acid Arrow',
+      description: 'Causes 2d4 acid damage at the end of next turn',
+      icon: 'systems/dnd5e/icons/spells/needles-acid-2.jpg',
+      changes: [
+        {
+          key: 'flags.midi-qol.OverTime',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value:
+            'turn=end,removeCondition=true,damageRoll=2d4,damageType=acid,label=Acid Arrow',
+        },
+      ],
+    });
+  }
+
   get _aid() {
     return new Effect({
       name: 'Aid',
