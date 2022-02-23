@@ -1887,6 +1887,12 @@ export default class EffectDefinitions {
     });
   }
 
+  // TODO: potentially use overtime here if find a good way to do it
+  // flags.midi-qol.OverTime
+  // turn=end,
+  // saveAbility=wis,
+  // saveDC=30,
+  // label=Hold Person
   get _holdPerson() {
     return new Effect({
       name: 'Hold Person',
