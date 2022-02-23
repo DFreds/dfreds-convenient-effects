@@ -129,6 +129,7 @@ export default class EffectDefinitions {
       this._findThePath,
       this._fly,
       this._foresight,
+      this._freedomOfMovement,
       this._globeOfInvulnerability,
       this._greaterInvisibility,
       this._guidance,
@@ -1667,6 +1668,15 @@ export default class EffectDefinitions {
           value: '1',
         },
       ],
+    });
+  }
+
+  get _freedomOfMovement() {
+    return new Effect({
+      name: 'Freedom of Movement',
+      description: 'No active effects and lasts for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/slice-spirit-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
 
