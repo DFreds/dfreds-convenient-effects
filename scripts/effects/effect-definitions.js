@@ -142,6 +142,7 @@ export default class EffectDefinitions {
       this._holyAura,
       this._huntersMark,
       this._invisibility,
+      this._irresistibleDance,
       this._jump,
       this._light,
       this._longstrider,
@@ -1942,6 +1943,39 @@ export default class EffectDefinitions {
         },
         {
           key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
+    });
+  }
+
+  get _irresistibleDance() {
+    return new Effect({
+      name: 'Irresistible Dance',
+      description:
+        'Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute',
+      icon: 'systems/dnd5e/icons/spells/link-blue-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        {
+          key: 'data.attributes.movement.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '0',
+          priority: 5,
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.ability.save.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.advantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
         },
