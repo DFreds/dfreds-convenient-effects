@@ -218,6 +218,7 @@ export default class EffectDefinitions {
    */
   get other() {
     return [
+      this._bonusAction,
       this._coverHalf,
       this._coverThreeQuarters,
       this._encumbered,
@@ -2964,6 +2965,19 @@ export default class EffectDefinitions {
   }
 
   /* Other effects */
+  get _bonusAction() {
+    return new Effect({
+      name: 'Bonus Action',
+      description: 'No active effects and expires on turn start',
+      icon: 'modules/dfreds-convenient-effects/images/bonus-action.svg',
+      flags: {
+        dae: {
+          specialDuration: ['turnStart', 'shortRest', 'longRest'],
+        },
+      },
+    });
+  }
+
   get _coverHalf() {
     return new Effect({
       name: 'Cover (Half)',
