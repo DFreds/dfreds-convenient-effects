@@ -3205,7 +3205,7 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/reaction.svg',
       flags: {
         dae: {
-          specialDuration: ['turnStart'],
+          specialDuration: ['turnStart', 'shortRest', 'longRest'],
         },
       },
     });
