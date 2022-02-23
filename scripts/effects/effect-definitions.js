@@ -157,6 +157,7 @@ export default class EffectDefinitions {
       this._protectionFromEnergyThunder,
       this._protectionFromPoison,
 
+      this._protectionFromEvilAndGood,
       this._rayOfFrost,
       this._regenerate,
       this._resilientSphere,
@@ -2185,6 +2186,15 @@ export default class EffectDefinitions {
           value: 'poison',
         },
       ],
+    });
+  }
+
+  get _protectionFromEvilAndGood() {
+    return new Effect({
+      name: 'Protection from Evil and Good',
+      description: 'No active effects and lasts for 10 minutes',
+      icon: 'systems/dnd5e/icons/spells/protect-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
 
