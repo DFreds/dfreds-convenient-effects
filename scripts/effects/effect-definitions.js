@@ -142,6 +142,7 @@ export default class EffectDefinitions {
       this._holyAura,
       this._huntersMark,
       this._invisibility,
+      this._jump,
       this._light,
       this._longstrider,
       this._mageArmor,
@@ -1945,6 +1946,15 @@ export default class EffectDefinitions {
           value: '1',
         },
       ],
+    });
+  }
+
+  get _jump() {
+    return new Effect({
+      name: 'Jump',
+      description: 'No active effects and lasts for 1 minutes',
+      icon: 'systems/dnd5e/icons/spells/wind-grasp-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
 
