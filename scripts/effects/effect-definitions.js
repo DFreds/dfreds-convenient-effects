@@ -168,6 +168,7 @@ export default class EffectDefinitions {
       this._spiderClimb,
       this._spiritualWeapon,
       this._stoneskin,
+      this._telekinesis,
       this._trueStrike,
       this._viciousMockery,
     ];
@@ -2394,6 +2395,15 @@ export default class EffectDefinitions {
           value: 'physical',
         },
       ],
+    });
+  }
+
+  get _telekinesis() {
+    return new Effect({
+      name: 'Telekinesis',
+      description: 'No active effects and lasts for 10 minutes',
+      icon: 'systems/dnd5e/icons/spells/wind-grasp-air-3.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
 
