@@ -1996,7 +1996,7 @@ export default class EffectDefinitions {
   get _jump() {
     return new Effect({
       name: 'Jump',
-      description: 'No active effects and lasts for 1 minutes',
+      description: 'No active effects and lasts for 1 minute',
       icon: 'systems/dnd5e/icons/spells/wind-grasp-sky-2.jpg',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
