@@ -27,11 +27,9 @@ You can configure some stuff:
 
 ![Settings](docs/settings.png)
 
-Check the [User Guide](https://github.com/DFreds/dfreds-convenient-effects/wiki/User-Guide) for more details.
-
 ## How to Use
 
-On the controls on the left, two new buttons have been added to the Token Controls. One opens the Convenient Effects application and the other deletes any convenient effects currently applied to the selected token. To apply a new effect, open the application and select the tokens you want to apply to apply an effect to, and then click the effect you want to apply. This will toggle it on or off for the selected tokens. If any tokens are targeted, the effect will be applied to them instead.
+Check the [User Guide](https://github.com/DFreds/dfreds-convenient-effects/wiki/User-Guide) for details.
 
 ## Required Modules
 
