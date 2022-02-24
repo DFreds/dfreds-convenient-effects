@@ -179,6 +179,7 @@ export default class EffectDefinitions {
       this._telekinesis,
       this._trueStrike,
       this._viciousMockery,
+      this._waterBreathing,
     ];
   }
 
@@ -2581,6 +2582,14 @@ export default class EffectDefinitions {
     });
   }
 
+  get _waterBreathing() {
+    return new Effect({
+      name: 'Water Breathing',
+      description: 'No active effects and lasts for 24 hours',
+      icon: 'icons/magic/water/pseudopod-swirl-blue.webp',
+      seconds: Constants.SECONDS.IN_ONE_DAY,
+    });
+  }
   /** Class specific */
   get _bardicInspiration() {
     return new Effect({
