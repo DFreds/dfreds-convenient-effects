@@ -170,6 +170,7 @@ export default class EffectDefinitions {
       this._shieldOfFaith,
       this._slow,
       this._speakWithAnimals,
+      this._speakWithDead,
       this._spiderClimb,
       this._spiritualWeapon,
       this._stoneskin,
@@ -2449,6 +2450,15 @@ export default class EffectDefinitions {
       name: 'Speak with Animals',
       description: 'No active effects and lasts for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/wild-jade-1.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    });
+  }
+
+  get _speakWithDead() {
+    return new Effect({
+      name: 'Speak with Dead',
+      description: 'No active effects and lasts for 10 minutes',
+      icon: 'systems/dnd5e/icons/spells/horror-acid-1.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
