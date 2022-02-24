@@ -180,6 +180,7 @@ export default class EffectDefinitions {
       this._trueStrike,
       this._viciousMockery,
       this._waterBreathing,
+      this._waterWalk,
     ];
   }
 
@@ -2590,6 +2591,16 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_ONE_DAY,
     });
   }
+
+  get _waterWalk() {
+    return new Effect({
+      name: 'Water Walk',
+      description: 'No active effects and lasts for 1 hour',
+      icon: 'icons/creatures/slimes/slime-movement-swirling-blue.webp',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+    });
+  }
+
   /** Class specific */
   get _bardicInspiration() {
     return new Effect({
