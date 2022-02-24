@@ -171,6 +171,7 @@ export default class EffectDefinitions {
       this._slow,
       this._speakWithAnimals,
       this._speakWithDead,
+      this._speakWithPlants,
       this._spiderClimb,
       this._spiritualWeapon,
       this._stoneskin,
@@ -2462,6 +2463,16 @@ export default class EffectDefinitions {
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
+
+  get _speakWithPlants() {
+    return new Effect({
+      name: 'Speak with Plants',
+      description: 'No active effects and lasts for 10 minutes',
+      icon: 'systems/dnd5e/icons/spells/leaf-jade-1.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    });
+  }
+
   get _spiderClimb() {
     return new Effect({
       name: 'Spider Climb',
