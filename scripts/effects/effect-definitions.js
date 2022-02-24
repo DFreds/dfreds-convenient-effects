@@ -175,6 +175,7 @@ export default class EffectDefinitions {
       this._spiderClimb,
       this._spiritualWeapon,
       this._stoneskin,
+      this._suggestion,
       this._telekinesis,
       this._trueStrike,
       this._viciousMockery,
@@ -2513,6 +2514,15 @@ export default class EffectDefinitions {
           value: 'physical',
         },
       ],
+    });
+  }
+
+  get _suggestion() {
+    return new Effect({
+      name: 'Suggestion',
+      description: 'No active effects and lasts for 8 hours',
+      icon: 'systems/dnd5e/icons/spells/air-burst-magenta-2.jpg',
+      seconds: Constants.SECONDS.IN_EIGHT_HOURS,
     });
   }
 
