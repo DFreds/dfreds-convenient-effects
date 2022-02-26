@@ -192,10 +192,10 @@ Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
     .first();
 
   const description =
-    activeEffectConfig.object.data.flags.customEffectDescription ??
+    activeEffectConfig.object.data.flags.convenientDescription ??
     'Applies custom effects';
   labelFormGroup.after(
-    `<div class="form-group"><label>Effect Description</label><div class="form-fields"><input type="text" name="flags.customEffectDescription" value="${description}"></div></div>`
+    `<div class="form-group"><label>Effect Description</label><div class="form-fields"><input type="text" name="flags.convenientDescription" value="${description}"></div></div>`
   );
 });
 

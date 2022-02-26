@@ -77,7 +77,7 @@ export default class CustomEffectsHandler {
     return new Effect({
       customId: effect.id,
       name: effect.data.label,
-      description: effect.data.flags.customEffectDescription,
+      description: effect.data.flags.convenientDescription,
       icon: effect.data.icon,
       tint: effect.data.tint,
       seconds: effect.data.duration.seconds,
@@ -180,7 +180,7 @@ export default class CustomEffectsHandler {
         },
         flags: foundry.utils.mergeObject(effect.flags, {
           isCustomConvenient: true,
-          customEffectDescription: effect.description,
+          convenientDescription: effect.description,
         }),
         origin: item.uuid,
         changes: [
