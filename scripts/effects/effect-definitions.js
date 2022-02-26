@@ -56,6 +56,7 @@ export default class EffectDefinitions {
       this._restrained,
       this._stunned,
       this._unconscious,
+      this._wounded,
     ];
   }
 
@@ -731,6 +732,14 @@ export default class EffectDefinitions {
         'Fail all dexterity and strength saves, grants advantage to all who attack, and all melee attacks are criticals',
       icon: 'icons/svg/unconscious.svg',
       changes: [...this._paralyzed.changes, ...this._prone.changes],
+    });
+  }
+
+  get _wounded() {
+    return new Effect({
+      name: 'Wounded',
+      description: 'No active effects',
+      icon: 'modules/dfreds-convenient-effects/images/wounded.svg',
     });
   }
 
