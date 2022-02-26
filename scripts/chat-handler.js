@@ -62,7 +62,11 @@ export default class ChatHandler {
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
         isCreateActiveEffect)
     ) {
-      message += `<p>${effect.description}</p>`;
+      message += `<p>${
+        effect.description
+          ? effect.description
+          : effect.flags.convenientDescription
+      }</p>`;
     }
 
     return message;
