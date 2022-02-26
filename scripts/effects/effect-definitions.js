@@ -1774,7 +1774,12 @@ export default class EffectDefinitions {
           value: 'Guidance',
         },
         {
-          key: 'flags.midi-qol.optional.guidance.check',
+          key: 'flags.midi-qol.optional.guidance.check.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '+1d4',
+        },
+        {
+          key: 'flags.midi-qol.optional.guidance.skill.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d4',
         },
