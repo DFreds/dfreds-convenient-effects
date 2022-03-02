@@ -200,6 +200,7 @@ export default class EffectDefinitions {
       this._channelDivinitySacredWeapon,
       this._channelDivinityTurnUndead,
       this._kiEmptyBody,
+      this._kiPatientDefense,
       this._rage,
       this._recklessAttack,
     ];
@@ -2816,6 +2817,7 @@ export default class EffectDefinitions {
       description:
         'No active effects and lasts for 1 minute. Expires on taking damage.',
       icon: 'systems/dnd5e/icons/skills/yellow_19.jpg',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
       flags: {
         dae: {
           specialDuration: ['isDamaged'],
@@ -2921,6 +2923,33 @@ export default class EffectDefinitions {
       ],
     });
   }
+
+  get _kiPatientDefense() {
+    return new Effect({
+      name: 'Ki: Patient Defense',
+      description:
+        'Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn',
+      icon: 'icons/magic/defensive/shield-barrier-glowing-blue.webp',
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
+      changes: [
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.advantage.ability.save.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
+    });
+  }
+
   get _rage() {
     return new Effect({
       name: 'Rage',
