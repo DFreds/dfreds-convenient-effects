@@ -62,13 +62,19 @@ export default class ChatHandler {
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
         isCreateActiveEffect)
     ) {
-      message += `<p>${
-        effect.description
-          ? effect.description
-          : effect.flags.convenientDescription
-      }</p>`;
+      message += `<p>${this._getDescription(effect)}</p>`;
     }
 
     return message;
+  }
+
+  _getDescription(effect) {
+    if (effect.description) {
+      return effect.description;
+    } else if (effect.flags.convenientDescription) {
+      return effect.flags.convenientDescription;
+    } else {
+      return 'Applies custom effects';
+    }
   }
 }
