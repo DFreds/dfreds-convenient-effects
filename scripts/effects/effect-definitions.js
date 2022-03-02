@@ -199,6 +199,7 @@ export default class EffectDefinitions {
       this._bardicInspirationD12,
       this._channelDivinitySacredWeapon,
       this._channelDivinityTurnUndead,
+      this._kiEmptyBody,
       this._rage,
       this._recklessAttack,
     ];
@@ -2824,6 +2825,102 @@ export default class EffectDefinitions {
     });
   }
 
+  get _kiEmptyBody() {
+    return new Effect({
+      name: 'Ki: Empty Body',
+      description:
+        'Grants advantage on attack rolls, forces disadvantage to all who attack, and grants resistance to all damage except force for 1 minute',
+      icon: 'icons/magic/perception/silhouette-stealth-shadow.webp',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      changes: [
+        {
+          key: 'flags.midi-qol.advantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.grants.disadvantage.attack.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'physical',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'bludgeoning',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'piercing',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'slashing',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'silver',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'adamant',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'acid',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'cold',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'fire',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'lightning',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'necrotic',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'poison',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'psychic',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'radiant',
+        },
+        {
+          key: 'data.traits.dr.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'thunder',
+        },
+      ],
+    });
+  }
   get _rage() {
     return new Effect({
       name: 'Rage',
