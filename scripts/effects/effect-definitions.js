@@ -198,6 +198,7 @@ export default class EffectDefinitions {
       this._bardicInspirationD10,
       this._bardicInspirationD12,
       this._channelDivinitySacredWeapon,
+      this._channelDivinityTurnTheUnholy,
       this._channelDivinityTurnUndead,
       this._kiEmptyBody,
       this._kiPatientDefense,
@@ -2811,6 +2812,21 @@ export default class EffectDefinitions {
     });
   }
 
+  get _channelDivinityTurnTheUnholy() {
+    return new Effect({
+      name: 'Channel Divinity: Turn the Unholy',
+      description:
+        'No active effects and lasts for 1 minute. Expires on taking damage.',
+      icon: 'icons/magic/fire/explosion-embers-evade-silhouette.webp',
+      seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      flags: {
+        dae: {
+          specialDuration: ['isDamaged'],
+        },
+      },
+    });
+  }
+
   get _channelDivinityTurnUndead() {
     return new Effect({
       name: 'Channel Divinity: Turn Undead',
@@ -2823,7 +2839,6 @@ export default class EffectDefinitions {
           specialDuration: ['isDamaged'],
         },
       },
-      seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
 
