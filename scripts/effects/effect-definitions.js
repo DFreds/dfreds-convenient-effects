@@ -181,6 +181,7 @@ export default class EffectDefinitions {
       this._telekinesis,
       this._trueStrike,
       this._viciousMockery,
+      this._wardingBond,
       this._waterBreathing,
       this._waterWalk,
     ];
@@ -2605,6 +2606,38 @@ export default class EffectDefinitions {
           key: 'flags.midi-qol.disadvantage.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
+        },
+      ],
+    });
+  }
+
+  get _wardingBond() {
+    return new Effect({
+      name: 'Warding Bond',
+      description:
+        'Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour',
+      icon: 'systems/dnd5e/icons/spells/protect-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_ONE_HOUR,
+      changes: [
+        {
+          key: 'data.attributes.ac.bonus',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+1',
+        },
+        {
+          key: 'data.bonuses.abilities.save',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '+1',
+        },
+        {
+          key: 'data.traits.dr.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'physical',
+        },
+        {
+          key: 'data.traits.dr.all',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'magical',
         },
       ],
     });
