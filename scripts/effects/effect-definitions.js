@@ -174,6 +174,7 @@ export default class EffectDefinitions {
       this._speakWithDead,
       this._speakWithPlants,
       this._spiderClimb,
+      this._spiritGuardians,
       this._spiritualWeapon,
       this._stoneskin,
       this._suggestion,
@@ -2507,6 +2508,15 @@ export default class EffectDefinitions {
           priority: 5,
         },
       ],
+    });
+  }
+
+  get _spiritGuardians() {
+    return new Effect({
+      name: 'Spirit Guardians',
+      description: 'No active effects and lasts for 10 minute',
+      icon: 'systems/dnd5e/icons/spells/needles-sky-2.jpg',
+      seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
 
