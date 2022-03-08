@@ -2515,7 +2515,7 @@ export default class EffectDefinitions {
   get _spiritGuardians() {
     return new Effect({
       name: 'Spirit Guardians',
-      description: 'No active effects and lasts for 10 minute',
+      description: 'No active effects and lasts for 10 minutes',
       icon: 'systems/dnd5e/icons/spells/needles-sky-2.jpg',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
