@@ -23,7 +23,7 @@ export default class RemoveEffectsHandler {
 
     const selections = await this._getSelectionsFromDialog();
     selections?.forEach(async (effectIds, actorUuid) => {
-      const actor = await this._foundryHelpers.getActorByUuid(actorUuid);
+      const actor = this._foundryHelpers.getActorByUuid(actorUuid);
       await actor.deleteEmbeddedDocuments('ActiveEffect', effectIds);
     });
   }

@@ -41,8 +41,8 @@ export default class EffectHandler {
    * applied to
    * @returns {boolean} true if the effect is applied, false otherwise
    */
-  async hasEffectApplied(effectName, uuid) {
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+  hasEffectApplied(effectName, uuid) {
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
     return actor?.data?.effects?.some(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
@@ -60,7 +60,7 @@ export default class EffectHandler {
    * @param {string} params.uuid - the uuid of the actor to remove the effect from
    */
   async removeEffect({ effectName, uuid }) {
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
     const effectToRemove = actor.data.effects.find(
       (activeEffect) =>
         activeEffect?.data?.flags?.isConvenient &&
@@ -91,7 +91,7 @@ export default class EffectHandler {
       effect = new Effect(effectData);
     }
 
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     if (effect.name.startsWith('Exhaustion')) {
       await this._removeAllExhaustionEffects(uuid);

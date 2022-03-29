@@ -124,9 +124,9 @@ export default class EffectInterface {
    * @param {string} effectName - the name of the effect to check
    * @param {string} uuid - the uuid of the actor to see if the effect is
    * applied to
-   * @returns {Promise<boolean>} true if the effect is applied, false otherwise
+   * @returns {boolean} true if the effect is applied, false otherwise
    */
-  async hasEffectApplied(effectName, uuid) {
+  hasEffectApplied(effectName, uuid) {
     return this._effectHandler.hasEffectApplied(effectName, uuid);
   }
 
@@ -146,7 +146,7 @@ export default class EffectInterface {
       return;
     }
 
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
       ui.notifications.error(`Actor ${uuid} could not be found`);
@@ -182,7 +182,7 @@ export default class EffectInterface {
       return;
     }
 
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
       ui.notifications.error(`Actor ${uuid} could not be found`);
@@ -214,7 +214,7 @@ export default class EffectInterface {
   async addEffectWith({ effectData, uuid, origin, overlay }) {
     let effect = new Effect(effectData);
 
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
       ui.notifications.error(`Actor ${uuid} could not be found`);

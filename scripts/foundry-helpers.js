@@ -33,8 +33,8 @@ export default class FoundryHelpers {
    * @param {string} uuid - the actor UUID
    * @returns {Actor5e} the actor that was found via the UUID
    */
-  async getActorByUuid(uuid) {
-    const actorToken = await fromUuid(uuid);
+  getActorByUuid(uuid) {
+    const actorToken = this.fromUuid(uuid);
     const actor = actorToken?.actor ? actorToken?.actor : actorToken;
     return actor;
   }
@@ -51,5 +51,34 @@ export default class FoundryHelpers {
     if (convenientEffectsApp) {
       convenientEffectsApp.render();
     }
+  }
+
+  /**
+   * Retrieve a Document by its Universally Unique Identifier (uuid).
+   *
+   * Note: This was taken from Foundry and modified to remove support for
+   * searching in compendiums.
+   *
+   * @param {string} uuid - The uuid of the Document to retrieve
+   * @return {Document|null}
+   */
+  fromUuid(uuid) {
+    if (!uuid || uuid === '') return null;
+    let parts = uuid.split('.');
+    let doc;
+
+    const [docName, docId] = parts.slice(0, 2);
+    parts = parts.slice(2);
+    const collection = CONFIG[docName]?.collection.instance;
+    if (!collection) return null;
+    doc = collection.get(docId);
+
+    // Embedded Documents
+    while (doc && parts.length > 1) {
+      const [embeddedName, embeddedId] = parts.slice(0, 2);
+      doc = doc.getEmbeddedDocument(embeddedName, embeddedId);
+      parts = parts.slice(2);
+    }
+    return doc || null;
   }
 }

@@ -15,7 +15,7 @@ export default class ActorUpdater {
    * @param {string} uuid - the UUID of the actor to add the data changes to
    */
   async addActorDataChanges(effectName, uuid) {
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     switch (effectName.toLowerCase()) {
       case 'aid':
@@ -93,7 +93,7 @@ export default class ActorUpdater {
    * @param {string} uuid - the UUID of the actor to remove the data changes from
    */
   async removeActorDataChanges(effectName, uuid) {
-    const actor = await this._foundryHelpers.getActorByUuid(uuid);
+    const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     switch (effectName.toLowerCase()) {
       case 'aid':
