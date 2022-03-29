@@ -308,7 +308,7 @@ export default class EffectInterface {
    *
    * @param {string} effectName - the effect name to remove as a status effect
    */
-  removeStatusEffect(effectName) {
+  async removeStatusEffect(effectName) {
     await this._settings.removeStatusEffect(effectName);
   }
 }
