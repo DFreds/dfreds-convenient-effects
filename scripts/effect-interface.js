@@ -4,6 +4,7 @@ import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import Effect from './effects/effect.js';
 import EffectHandler from './effects/effect-handler.js';
 import FoundryHelpers from './foundry-helpers.js';
+import Settings from './settings.js';
 
 /**
  * Interface for working with effects and executing them as a GM via sockets
@@ -14,6 +15,7 @@ export default class EffectInterface {
     this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHandler = new EffectHandler();
     this._foundryHelpers = new FoundryHelpers();
+    this._settings = new Settings();
   }
 
   /**
@@ -288,5 +290,25 @@ export default class EffectInterface {
     return effect.nestedEffects.find(
       (nestedEffect) => nestedEffect.name == choice
     );
+  }
+
+  /**
+   * Adds the given effect name to the status effects. Note that Foundry
+   * needs to be refreshed to reflect the changes on the token HUD.
+   *
+   * @param {string} effectName - the effect name to add as a status effect
+   */
+  async addStatusEffect(effectName) {
+    await this._settings.addStatusEffect(effectName);
+  }
+
+  /**
+   * Removes the given effect name from the status effects. Note that Foundry
+   * needs to be refreshed to reflect the changes on the token HUD.
+   *
+   * @param {string} effectName - the effect name to remove as a status effect
+   */
+  removeStatusEffect(effectName) {
+    await this._settings.removeStatusEffect(effectName);
   }
 }
