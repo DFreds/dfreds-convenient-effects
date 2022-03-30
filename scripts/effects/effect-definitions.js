@@ -2381,7 +2381,7 @@ export default class EffectDefinitions {
           value: 'Resistance',
         },
         {
-          key: 'flags.midi-qol.optional.resistance.save',
+          key: 'flags.midi-qol.optional.resistance.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+1d4',
         },
@@ -2692,17 +2692,17 @@ export default class EffectDefinitions {
           value: 'Bardic Inspiration',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d6',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          key: 'flags.midi-qol.optional.bardic-inspiration.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d6',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d6',
         },
@@ -2724,17 +2724,17 @@ export default class EffectDefinitions {
           value: 'Bardic Inspiration',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d8',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          key: 'flags.midi-qol.optional.bardic-inspiration.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d8',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d8',
         },
@@ -2756,17 +2756,17 @@ export default class EffectDefinitions {
           value: 'Bardic Inspiration',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d10',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          key: 'flags.midi-qol.optional.bardic-inspiration.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d10',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d10',
         },
@@ -2788,17 +2788,17 @@ export default class EffectDefinitions {
           value: 'Bardic Inspiration',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.attack',
+          key: 'flags.midi-qol.optional.bardic-inspiration.attack.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d12',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.save',
+          key: 'flags.midi-qol.optional.bardic-inspiration.save.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d12',
         },
         {
-          key: 'flags.midi-qol.optional.bardic-inspiration.skill',
+          key: 'flags.midi-qol.optional.bardic-inspiration.skill.all',
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: '+1d12',
         },
