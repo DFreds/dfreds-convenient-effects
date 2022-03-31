@@ -128,7 +128,16 @@ export default class CustomEffectsHandler {
         activeEffect.origin = item.uuid;
       }
 
-      return activeEffect;
+      return {
+        changes: activeEffect.changes,
+        duration: activeEffect.duration,
+        flags: flags,
+        icon: activeEffect.icon,
+        label: activeEffect.label,
+        origin: activeEffect.origin,
+        tint: activeEffect.tint,
+        transfer: activeEffect.transfer,
+      };
     });
     return item.createEmbeddedDocuments('ActiveEffect', customEffects);
   }
