@@ -394,55 +394,6 @@ export default class ConvenientEffectsController {
   }
 
   /**
-   * Handles dragging an effect over a folder
-   *
-   * @param {DragEvent} event - event that corresponds to the drag over
-   */
-  onFolderDragOver(event) {
-    if (!this._isEventTargetFavorites(event)) return;
-
-    event.preventDefault();
-    this._viewMvc.addDropTargetClassToFavorites();
-  }
-
-  /**
-   * Handles dragging an effect off of a folder
-   *
-   * @param {DragEvent} event - event that corresponds to the drag leave
-   */
-  onFolderDragLeave(event) {
-    if (!this._isEventTargetFavorites(event)) return;
-
-    event.preventDefault();
-    this._viewMvc.removeDropTargetClassFromFavorites();
-  }
-
-  /**
-   * Handles dropping an effect onto a folder
-   *
-   * @param {DragEvent} event - event that corresponds to the drop
-   */
-  async onDropOntoFolder(event) {
-    if (!this._isValidEffect(event) || !this._isEventTargetFavorites(event)) {
-      return;
-    }
-
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData('text/plain'));
-    } catch (err) {
-      return;
-    }
-
-    // Don't add favorites twice
-    if (!this._settings.isFavoritedEffect(data.effectName)) {
-      await this._settings.addFavoriteEffect(data.effectName);
-    }
-
-    this._viewMvc.render();
-  }
-
-  /**
    * Handles search text changes
    *
    * @param {KeyboardEvent} event - event that corresponds to the key press

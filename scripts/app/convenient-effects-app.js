@@ -48,22 +48,6 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   /**
-   * Adds the droptarget CSS class to the favorites directory
-   */
-  addDropTargetClassToFavorites() {
-    if (this._favoritesDirectory.hasClass('droptarget')) return;
-    this._favoritesDirectory.addClass('droptarget');
-  }
-
-  /**
-   * Removes the droptarget CSS class from the favorites directory
-   */
-  removeDropTargetClassFromFavorites() {
-    if (!this._favoritesDirectory.hasClass('droptarget')) return;
-    this._favoritesDirectory.removeClass('droptarget');
-  }
-
-  /**
    * Checks if the folder is collapsed
    *
    * @param {string} folderId - the folder ID to check
@@ -197,19 +181,11 @@ export default class ConvenientEffectsApp extends Application {
   _initDragDrop() {
     const dragDrop = new DragDrop({
       dragSelector: '.entity',
-      dropSelector: '.folder',
       callbacks: {
         dragstart: this._controller.onEffectDragStart.bind(this._controller),
-        dragover: this._controller.onFolderDragOver.bind(this._controller),
-        drop: this._controller.onDropOntoFolder.bind(this._controller),
       },
     });
     dragDrop.bind(this._rootView[0]);
-
-    this._favoritesDirectory.on(
-      'dragleave',
-      this._controller.onFolderDragLeave.bind(this._controller)
-    );
   }
 
   _initSearchFilters() {
@@ -240,10 +216,6 @@ export default class ConvenientEffectsApp extends Application {
 
   get _exportCustomEffectsButton() {
     return this._rootView.find('.export-custom-effects');
-  }
-
-  get _favoritesDirectory() {
-    return this._rootView.find('.folder[data-folder-id="favorites"]');
   }
 
   get _folderHeaders() {
