@@ -13,6 +13,19 @@ export default class CustomEffectsHandler {
   }
 
   /**
+   * Checks if a custom effect exists with the provided name
+   *
+   * @param {string} effectName - name of the effect to check if it is custom
+   * @returns {boolean} true if a custom effect exists with the name
+   */
+  isCustomEffect(effectName) {
+    const item = this._findCustomEffectsItem();
+    return (
+      item && item.effects.find((effect) => effect.data.label == effectName)
+    );
+  }
+
+  /**
    * Gets all custom effects
    *
    * @returns {Effect[]} the list of custom effects defined on the custom item

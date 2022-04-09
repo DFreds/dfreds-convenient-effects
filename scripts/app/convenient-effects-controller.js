@@ -178,6 +178,17 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Checks if the provided effect is custom
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   * @returns true if the effect is custom
+   */
+  isCustomEffect(effectItem) {
+    const effectName = effectItem.data().effectName;
+    return this._customEffectsHandler.isCustomEffect(effectName);
+  }
+
+  /**
    * Handles clicks on the reset status effects button
    *
    * @param {MouseEvent} event
@@ -269,6 +280,17 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Checks if the provided effect is favorited
+   *
+   * @param {jQuery} effectItem - jQuery element representing the effect list item
+   * @returns true if the effect is favorited
+   */
+  isFavoritedEffect(effectItem) {
+    const effectName = effectItem.data().effectName;
+    return this._settings.isFavoritedEffect(effectName);
+  }
+
+  /**
    * Handle toggling effects as overlays
    *
    * @param {jQuery} effectItem - jQuery element representing the effect list item
@@ -349,20 +371,26 @@ export default class ConvenientEffectsController {
 
     // special handling for nested effects
     if (effect.nestedEffects.length) {
-      event.dataTransfer.setData('text/plain', JSON.stringify({
-        effectName,
-      }));
+      event.dataTransfer.setData(
+        'text/plain',
+        JSON.stringify({
+          effectName,
+        })
+      );
       return;
     }
 
     // otherwise use core default format
     const effectData = effect.convertToActiveEffectData();
 
-    event.dataTransfer.setData('text/plain', JSON.stringify({
-      effectName,
-      type: "ActiveEffect",
-      data: effectData
-    }));
+    event.dataTransfer.setData(
+      'text/plain',
+      JSON.stringify({
+        effectName,
+        type: 'ActiveEffect',
+        data: effectData,
+      })
+    );
   }
 
   /**
@@ -370,7 +398,6 @@ export default class ConvenientEffectsController {
    *
    * @param {DragEvent} event - event that corresponds to the drag over
    */
-  // TODO handle adding to folder
   onFolderDragOver(event) {
     if (!this._isEventTargetFavorites(event)) return;
 
@@ -383,7 +410,6 @@ export default class ConvenientEffectsController {
    *
    * @param {DragEvent} event - event that corresponds to the drag leave
    */
-  // TODO handle adding to folder
   onFolderDragLeave(event) {
     if (!this._isEventTargetFavorites(event)) return;
 
