@@ -137,8 +137,8 @@ export default class DynamicEffectsAdder {
 
   _addResistancesIfTotemWarrior(effect, barbarianClass) {
     if (
-      barbarianClass.data.data.subclass?.toLowerCase() ===
-      'path of the totem warrior'
+      barbarianClass.data.data.subclass?.identifier ===
+      'path-of-the-totem-warrior'
     ) {
       effect.changes.push(
         ...[
