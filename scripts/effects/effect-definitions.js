@@ -342,7 +342,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*0.5',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -369,7 +369,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*0.5',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -406,7 +406,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*0.5',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -449,7 +449,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '0',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
@@ -501,7 +501,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '0',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -572,7 +572,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '0',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -604,7 +604,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '0',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -666,7 +666,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*0.5',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -698,7 +698,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '0',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -1530,13 +1530,13 @@ export default class EffectDefinitions {
           key: 'data.abilities.int.value',
           mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
           value: '1',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'data.abilities.cha.value',
           mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
           value: '1',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -1676,7 +1676,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.fly',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '60',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -1837,7 +1837,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*2',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -2031,7 +2031,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '0',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'flags.midi-qol.disadvantage.ability.save.dex',
@@ -2108,6 +2108,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '+10',
+          priority: 25,
         },
       ],
     });
@@ -2323,7 +2324,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '-10',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -2357,7 +2358,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*0.5',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'data.traits.di.all',
@@ -2405,6 +2406,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.ac.bonus',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
+          priority: 5,
         },
       ],
       tokenMagicChanges: [
@@ -2462,7 +2464,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '*0.5',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -2506,7 +2508,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.climb',
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '@attributes.movement.walk',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -3319,7 +3321,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '-10',
-          priority: 5,
+          priority: 25,
         },
       ],
     });
@@ -3422,7 +3424,7 @@ export default class EffectDefinitions {
           key: 'data.attributes.movement.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '-20',
-          priority: 5,
+          priority: 25,
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.all',
