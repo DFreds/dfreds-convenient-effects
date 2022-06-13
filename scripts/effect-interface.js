@@ -79,7 +79,12 @@ export default class EffectInterface {
   }
 
   /**
-   * Toggles the effect on the provided actor UUIDS as the GM via sockets
+   * Toggles the effect on the provided actor UUIDS as the GM via sockets. If no actor
+   * UUIDs are provided, it finds one of these in this priority:
+   *
+   * 1. The targeted tokens (if prioritize targets is enabled)
+   * 2. The currently selected tokens on the canvas
+   * 3. The user configured character
    *
    * @param {string} effectName - name of the effect to toggle
    * @param {object} params - the effect parameters
@@ -89,7 +94,7 @@ export default class EffectInterface {
    */
   async toggleEffect(effectName, { overlay, uuids = [] } = {}) {
     if (uuids.length == 0) {
-      uuids = this._foundryHelpers.getActorUuidsFromCanvas();
+      uuids = this._foundryHelpers.getActorUuids();
     }
 
     if (uuids.length == 0) {

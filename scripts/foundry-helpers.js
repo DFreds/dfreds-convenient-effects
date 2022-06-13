@@ -15,15 +15,21 @@ export default class FoundryHelpers {
    *
    * @returns {string[]} actor uuids for selected or targeted tokens
    */
-  getActorUuidsFromCanvas() {
-    if (canvas.tokens.controlled.length == 0 && game.user.targets.size == 0) {
+  getActorUuids() {
+    if (
+      canvas.tokens.controlled.length == 0 &&
+      game.user.targets.size == 0 &&
+      game.user.character == undefined
+    ) {
       return [];
     }
 
     if (this._settings.prioritizeTargets && game.user.targets.size !== 0) {
       return Array.from(game.user.targets).map((token) => token.actor.uuid);
-    } else {
+    } else if (canvas.tokens.controlled.length !== 0) {
       return canvas.tokens.controlled.map((token) => token.actor.uuid);
+    } else {
+      return [game.user.character.uuid];
     }
   }
 
