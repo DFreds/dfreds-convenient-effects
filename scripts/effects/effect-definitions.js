@@ -540,7 +540,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Paralyzed',
       description:
-        'Remove all movement, fail all dexterity and strength saves, grant advantage to all who attack, and all melee attacks that hit are criticals',
+        'Remove all movement, fail all dexterity and strength saves, grant advantage to all who attack, and all attacks within 5 ft. are criticals',
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
       changes: [
         {
@@ -559,14 +559,9 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
-          key: 'flags.midi-qol.grants.critical.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.grants.critical.msak',
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
+          key: 'flags.midi-qol.grants.critical.range',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '5',
         },
         {
           key: 'data.attributes.movement.all',
