@@ -21,17 +21,17 @@ export default class Controls {
 
     if (!tokenButton) return;
 
-    tokenButton.tools.push(this._convenientEffectsButton);
+    tokenButton.tools.push(this._convenientEffectsAppButton);
     tokenButton.tools.push(this._removeEffectsButton);
   }
 
-  get _convenientEffectsButton() {
+  get _convenientEffectsAppButton() {
     return {
       name: 'convenient-effects',
       title: 'Add Convenient Effects',
       icon: 'fas fa-hand-sparkles',
       button: true,
-      visible: game.user.role >= this._settings.controlsPermission,
+      visible: game.user.role >= this._settings.appControlsPermission,
       onClick: this._handleConvenientEffectsClick,
     };
   }
@@ -46,7 +46,7 @@ export default class Controls {
       title: 'Remove Convenient Effects',
       icon: 'fas fa-trash-alt',
       button: true,
-      visible: game.user.role >= this._settings.controlsPermission,
+      visible: game.user.role >= this._settings.removeControlsPermission,
       onClick: this._handleRemoveEffectsClick,
     };
   }

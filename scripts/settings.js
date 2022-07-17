@@ -6,11 +6,12 @@ import Constants from './constants.js';
 export default class Settings {
   // Settings keys
   static CHAT_MESSAGE_PERMISSION = 'chatMessagePermission';
-  static CONTROLS_PERMISSION = 'controlsPermission';
+  static APP_CONTROLS_PERMISSION = 'controlsPermission';
   static INTEGRATE_WITH_ATE = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
+  static REMOVE_CONTROLS_PERMISSION = 'removeControlsPermission';
   static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
 
@@ -44,16 +45,35 @@ export default class Settings {
       }
     );
 
-    game.settings.register(Constants.MODULE_ID, Settings.CONTROLS_PERMISSION, {
-      name: 'Controls Permission',
-      hint: 'This defines the minimum permission level to see and apply Convenient Effects via the token controls. Setting this to None will disable the controls entirely.',
-      scope: 'world',
-      config: true,
-      default: CONST.USER_ROLES.GAMEMASTER,
-      choices: userRoles,
-      type: String,
-      onChange: () => window.location.reload(),
-    });
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.APP_CONTROLS_PERMISSION,
+      {
+        name: 'App Controls Permission',
+        hint: 'This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.',
+        scope: 'world',
+        config: true,
+        default: CONST.USER_ROLES.GAMEMASTER,
+        choices: userRoles,
+        type: String,
+        onChange: () => window.location.reload(),
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.REMOVE_CONTROLS_PERMISSION,
+      {
+        name: 'Remove Controls Permission',
+        hint: 'This defines the minimum permission level to remove Convenient Effects through the button on the token controls. Setting this to None will disable the button entirely.',
+        scope: 'world',
+        config: true,
+        default: CONST.USER_ROLES.GAMEMASTER,
+        choices: userRoles,
+        type: String,
+        onChange: () => window.location.reload(),
+      }
+    );
 
     game.settings.register(Constants.MODULE_ID, Settings.INTEGRATE_WITH_ATE, {
       name: 'Integrate with ATE',
@@ -260,13 +280,13 @@ export default class Settings {
   }
 
   /**
-   * Returns the game setting for controls permission
+   * Returns the game setting for app controls permission
    *
    * @returns {number} a number representing the chosen role
    */
-  get controlsPermission() {
+  get appControlsPermission() {
     return parseInt(
-      game.settings.get(Constants.MODULE_ID, Settings.CONTROLS_PERMISSION)
+      game.settings.get(Constants.MODULE_ID, Settings.APP_CONTROLS_PERMISSION)
     );
   }
 
@@ -310,6 +330,20 @@ export default class Settings {
    */
   get prioritizeTargets() {
     return game.settings.get(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS);
+  }
+
+  /**
+   * Returns the game setting for remove controls permission
+   *
+   * @returns {number} a number representing the chosen role
+   */
+  get removeControlsPermission() {
+    return parseInt(
+      game.settings.get(
+        Constants.MODULE_ID,
+        Settings.REMOVE_CONTROLS_PERMISSION
+      )
+    );
   }
 
   /**
