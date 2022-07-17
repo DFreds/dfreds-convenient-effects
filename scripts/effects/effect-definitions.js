@@ -253,7 +253,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Blinded',
       description:
-        'Disadvantage on attack rolls while granting advantage to all who attack',
+        "- A blinded creature can't see and automatically fails any ability check that requires sight.<br/>- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.",
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
       changes: [
         {
@@ -273,7 +273,8 @@ export default class EffectDefinitions {
   get _charmed() {
     return new Effect({
       name: 'Charmed',
-      description: 'No active effects',
+      description:
+        "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature.",
       icon: 'modules/dfreds-convenient-effects/images/charmed.svg',
     });
   }
@@ -281,7 +282,8 @@ export default class EffectDefinitions {
   get _concentrating() {
     return new Effect({
       name: 'Concentrating',
-      description: 'No active effects',
+      description:
+        'Some Spells require you to maintain Concentration in order to keep their magic active. If you lose Concentration, such a spell ends.',
       icon: 'modules/dfreds-convenient-effects/images/concentrating.svg',
     });
   }
@@ -297,7 +299,8 @@ export default class EffectDefinitions {
   get _deafened() {
     return new Effect({
       name: 'Deafened',
-      description: 'No active effects',
+      description:
+        "- A deafened creature can't hear and automatically fails any ability check that requires hearing.",
       icon: 'modules/dfreds-convenient-effects/images/deafened.svg',
     });
   }
@@ -305,7 +308,7 @@ export default class EffectDefinitions {
   get _exhaustion1() {
     return new Effect({
       name: 'Exhaustion 1',
-      description: 'Disadvantage on all ability checks',
+      description: 'Disadvantage on ability checks',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion1.svg',
       changes: [
         {
@@ -325,7 +328,7 @@ export default class EffectDefinitions {
   get _exhaustion2() {
     return new Effect({
       name: 'Exhaustion 2',
-      description: 'Disadvantage on all ability checks and half movement',
+      description: 'Disadvantage on ability checks and speed halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion2.svg',
       changes: [
         {
@@ -352,7 +355,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Exhaustion 3',
       description:
-        'Disadvantage on all ability checks, half movement, disadvantage on all attacks, and disadvantage on all saving throws',
+        'Disadvantage on ability checks, speed halved, and disadvantage on attacks and saving throws',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion3.svg',
       changes: [
         {
@@ -389,7 +392,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Exhaustion 4',
       description:
-        'Disadvantage on all ability checks, half movement, disadvantage on all attacks, disadvantage on all saving throws, and half HP',
+        'Disadvantage on ability checks, speed halved, disadvantage on attacks and saving throws, and hit point maximum halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion4.svg',
       changes: [
         {
@@ -432,7 +435,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Exhaustion 5',
       description:
-        'Disadvantage on all ability checks, zero movement, disadvantage on all attacks, disadvantage on all saving throws, and half HP',
+        'Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion5.svg',
       changes: [
         {
@@ -474,7 +477,8 @@ export default class EffectDefinitions {
   get _frightened() {
     return new Effect({
       name: 'Frightened',
-      description: 'Disadvantage on all attack rolls and ability checks',
+      description:
+        "- A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.<br/>- The creature can't willingly move closer to the source of its fear.",
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
       changes: [
         {
@@ -494,7 +498,8 @@ export default class EffectDefinitions {
   get _grappled() {
     return new Effect({
       name: 'Grappled',
-      description: 'No movement',
+      description:
+        "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br/>- The condition ends if the grappler is incapacitated.<br/>- The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect.",
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
       changes: [
         {
@@ -510,7 +515,8 @@ export default class EffectDefinitions {
   get _incapacitated() {
     return new Effect({
       name: 'Incapacitated',
-      description: 'No active effects',
+      description:
+        "- An incapacitated creature can't take actions or reactions",
       icon: 'modules/dfreds-convenient-effects/images/incapacitated.svg',
     });
   }
@@ -519,7 +525,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Invisible',
       description:
-        'Grants advantage on attack rolls while forcing disadvantage to all who attack',
+        "- An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature's location can be detected by any noise it makes or any tracks it leaves.<br/>- Attack rolls against the creature have disadvantage, and the creature's attack rolls have advantage.",
       icon: 'modules/dfreds-convenient-effects/images/invisible.svg',
       changes: [
         {
@@ -540,7 +546,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Paralyzed',
       description:
-        'Remove all movement, fail all dexterity and strength saves, grant advantage to all who attack, and all attacks within 5 ft. are criticals',
+        "- A paralyzed creature is incapacitated (see the condition) and can't move or speak.<br/>- The creature automatically fails Strength and Dexterity saving throws. Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
       changes: [
         {
@@ -577,7 +583,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Petrified',
       description:
-        'Remove all movement, grant advantage to all who attack, and add damage resistance to all magical and physical attacks',
+        "- A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.<br/>- The creature is incapacitated (see the condition), can't move or speak, and is unaware of its surroundings.<br/>- Attack rolls against the creature have advantage.<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- The creature has resistance to all damage.<br/>- The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized. Remove all movement, grant advantage to all who attack, and add damage resistance to all magical and physical attacks",
       icon: 'modules/dfreds-convenient-effects/images/petrified.svg',
       changes: [
         {
@@ -623,7 +629,8 @@ export default class EffectDefinitions {
   get _poisoned() {
     return new Effect({
       name: 'Poisoned',
-      description: 'Disadvantage on all attack rolls and ability checks',
+      description:
+        '- A poisoned creature has disadvantage on attack rolls and ability checks.',
       icon: 'modules/dfreds-convenient-effects/images/poisoned.svg',
       changes: [
         {
@@ -644,7 +651,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Prone',
       description:
-        'Grant advantage to all who melee attack, disadvantage to all who range attack, and disadvantage on all attacks',
+        "- A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.<br/>- The creature has disadvantage on attack rolls.<br/>- An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage.",
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
       changes: [
         {
@@ -686,7 +693,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Restrained',
       description:
-        'Disadvantage on dexterity saving throws, disadvantage on all attacks, grant advantage to all who attack, and no movement',
+        "- A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br/>- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.<br/>- The creature has disadvantage on Dexterity saving throws.",
       icon: 'modules/dfreds-convenient-effects/images/restrained.svg',
       changes: [
         {
@@ -718,7 +725,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Stunned',
       description:
-        'Fail all dexterity and strength saves and grant advantage to all who attack',
+        "- A stunned creature is incapacitated (see the condition), can't move, and can speak only falteringly.<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.",
       icon: 'modules/dfreds-convenient-effects/images/stunned.svg',
       changes: [
         {
@@ -744,7 +751,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Unconscious',
       description:
-        'Fail all dexterity and strength saves, grants advantage to all who attack, and all melee attacks are criticals',
+        "- An unconscious creature is incapacitated (See the condition) can't move or speak, and is unaware of its surroundings.<br/>- The creature drops whatever its holding and falls prone (See the condition).<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
       icon: 'icons/svg/unconscious.svg',
       changes: [...this._paralyzed.changes, ...this._prone.changes],
     });
