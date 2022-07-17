@@ -586,6 +586,21 @@ export default class EffectDefinitions {
           value: '1',
         },
         {
+          key: 'flags.midi-qol.fail.ability.save.dex',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'flags.midi-qol.fail.ability.save.str',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+        {
+          key: 'data.traits.di.value',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: 'poison',
+        },
+        {
           key: 'data.traits.dr.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: 'physical',
