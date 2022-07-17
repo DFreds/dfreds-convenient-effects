@@ -115,7 +115,7 @@ export default class DynamicEffectsAdder {
     }
 
     this._determineRageBonusDamage(effect, barbarianClass);
-    this._addResistancesIfTotemWarrior(effect, barbarianClass);
+    this._addResistancesIfBearTotem(effect, actor, barbarianClass);
     this._determineIfPersistantRage(effect, barbarianClass);
   }
 
@@ -135,11 +135,15 @@ export default class DynamicEffectsAdder {
     });
   }
 
-  _addResistancesIfTotemWarrior(effect, barbarianClass) {
-    if (
+  _addResistancesIfBearTotem(effect, actor, barbarianClass) {
+    const isTotemWarrior =
       barbarianClass.data.data.subclass?.identifier ===
-      'path-of-the-totem-warrior'
-    ) {
+      'path-of-the-totem-warrior';
+    const hasBearTotemSpirit = actor.data.items.find(
+      (item) => item.type === 'feat' && item.name === 'Totem Spirit: Bear'
+    );
+
+    if (isTotemWarrior && hasBearTotemSpirit) {
       effect.changes.push(
         ...[
           {
