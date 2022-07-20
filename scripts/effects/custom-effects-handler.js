@@ -118,6 +118,7 @@ export default class CustomEffectsHandler {
         flags: {
           isCustomConvenient: true,
         },
+        transfer: false,
       },
     ]);
     effects[0].sheet.render(true);
@@ -210,6 +211,7 @@ export default class CustomEffectsHandler {
           ...effect.atlChanges,
           ...effect.tokenMagicChanges,
         ],
+        transfer: false,
       },
     ]);
     effects[0].sheet.render(true);
