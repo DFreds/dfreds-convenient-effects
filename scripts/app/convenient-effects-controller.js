@@ -369,10 +369,26 @@ export default class ConvenientEffectsController {
 
     const effect = game.dfreds.effectInterface.findEffectByName(effectName);
 
+    // special handling for nested effects
+    if (effect.nestedEffects.length) {
+      event.dataTransfer.setData(
+        'text/plain',
+        JSON.stringify({
+          effectName,
+        })
+      );
+      return;
+    }
+
+    // otherwise use core default format
+    const effectData = effect.convertToActiveEffectData();
+
     event.dataTransfer.setData(
       'text/plain',
       JSON.stringify({
         effectName,
+        type: 'ActiveEffect',
+        data: effectData,
       })
     );
   }

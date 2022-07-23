@@ -223,6 +223,11 @@ Hooks.on('hotbarDrop', (_bar, data, slot) => {
 Hooks.on('dropActorSheetData', (actor, _actorSheetCharacter, data) => {
   if (!data.effectName) return;
 
+  const effect = game.dfreds.effectInterface.findEffectByName(data.effectName);
+
+  // core will handle the drop since we are not using a nested effect
+  if (!effect.nestedEffects.length) return;
+
   game.dfreds.effectInterface.addEffect({
     effectName: data.effectName,
     uuid: actor.uuid,
