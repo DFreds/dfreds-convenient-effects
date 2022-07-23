@@ -213,6 +213,7 @@ Hooks.on('closeActiveEffectConfig', (activeEffectConfig, _html) => {
  * Handle dropping an effect onto the hotbar
  */
 Hooks.on('hotbarDrop', (_bar, data, slot) => {
+  delete data.type; // This stops dnd5e from creating its own macro by obscuring that the drop data is an ActiveEffect
   const macroHandler = new MacroHandler();
   macroHandler.createMacro(data, slot);
 });
