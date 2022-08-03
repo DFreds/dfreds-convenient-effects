@@ -74,7 +74,7 @@ export default class Effect {
    * @returns {object} the object representation of this effect
    */
   convertToObject() {
-    return { ...this };
+    return deepClone({ ...this });
   }
 
   get _id() {
