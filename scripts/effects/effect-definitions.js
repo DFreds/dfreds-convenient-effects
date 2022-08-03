@@ -3104,12 +3104,12 @@ export default class EffectDefinitions {
         {
           key: this._createAtlEffectKey('ATL.dimLight'),
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '60',
+          value: '120',
         },
         {
           key: this._createAtlEffectKey('ATL.brightLight'),
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: '30',
+          value: '60',
         },
         {
           key: this._createAtlEffectKey('ATL.lightColor'),
