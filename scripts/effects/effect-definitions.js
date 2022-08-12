@@ -3061,6 +3061,16 @@ export default class EffectDefinitions {
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: 'bludgeoning',
         },
+        {
+          key: 'data.bonuses.mwak.damage',
+          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          value: '@scale.barbarian.rage-damage',
+        },
+        {
+          key: 'macro.tokenMagic',
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: 'outline',
+        },
       ],
     });
   }
