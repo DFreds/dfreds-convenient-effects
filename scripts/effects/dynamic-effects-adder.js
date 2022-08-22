@@ -114,25 +114,8 @@ export default class DynamicEffectsAdder {
       return;
     }
 
-    this._determineRageBonusDamage(effect, barbarianClass);
     this._addResistancesIfBearTotem(effect, actor, barbarianClass);
     this._determineIfPersistantRage(effect, barbarianClass);
-  }
-
-  _determineRageBonusDamage(effect, barbarianClass) {
-    let rageDamage = '+2';
-
-    if (barbarianClass.data.data.levels > 15) {
-      rageDamage = '+4';
-    } else if (barbarianClass.data.data.levels > 8) {
-      rageDamage = '+3';
-    }
-
-    effect.changes.push({
-      key: 'data.bonuses.mwak.damage',
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: rageDamage,
-    });
   }
 
   _addResistancesIfBearTotem(effect, actor, barbarianClass) {
