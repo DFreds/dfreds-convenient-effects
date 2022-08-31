@@ -99,7 +99,8 @@ export default class StatusEffects {
       return wrapper(...args);
     }
 
-    // NOTE: taken entirely from foundry.js, modified to remove the icon being the key
+    const doc = token.document;
+
     // Get statuses which are active for the token actor
     const actor = token.actor || null;
     const statuses = actor
@@ -116,16 +117,16 @@ export default class StatusEffects {
       : {};
 
     // Prepare the list of effects from the configured defaults and any additional effects present on the Token
-    const tokenEffects = foundry.utils.deepClone(token.data.effects) || [];
-    if (token.data.overlayEffect) tokenEffects.push(token.data.overlayEffect);
+    const tokenEffects = foundry.utils.deepClone(doc.effects) || [];
+    if (doc.overlayEffect) tokenEffects.push(doc.overlayEffect);
     return CONFIG.statusEffects.concat(tokenEffects).reduce((obj, e) => {
       const id = e.id; // NOTE: added this
 
       const src = e.icon ?? e;
       if (id in obj) return obj; // NOTE: changed from src to id
       const status = statuses[e.id] || {};
-      const isActive = !!status.id || token.data.effects.includes(src);
-      const isOverlay = !!status.overlay || token.data.overlayEffect === src;
+      const isActive = !!status.id || doc.effects.includes(src);
+      const isOverlay = !!status.overlay || doc.overlayEffect === src;
 
       // NOTE: changed key from src to id
       obj[id] = {

@@ -20,9 +20,7 @@ export default class CustomEffectsHandler {
    */
   isCustomEffect(effectName) {
     const item = this._findCustomEffectsItem();
-    return (
-      item && item.effects.find((effect) => effect.data.label == effectName)
-    );
+    return item && item.effects.find((effect) => effect.label == effectName);
   }
 
   /**
@@ -72,31 +70,31 @@ export default class CustomEffectsHandler {
   }
 
   _isValid(effect) {
-    return effect.data?.flags?.isCustomConvenient;
+    return effect.flags?.isCustomConvenient;
   }
 
   _convertToEffectClass(effect) {
-    const atlChanges = effect.data.changes.filter((changes) =>
+    const atlChanges = effect.changes.filter((changes) =>
       changes.key.startsWith('ATL')
     );
-    const tokenMagicChanges = effect.data.changes.filter(
+    const tokenMagicChanges = effect.changes.filter(
       (changes) => changes.key === 'macro.tokenMagic'
     );
-    const changes = effect.data.changes.filter(
+    const changes = effect.changes.filter(
       (change) =>
         !change.key.startsWith('ATL') && change.key !== 'macro.tokenMagic'
     );
 
     return new Effect({
       customId: effect.id,
-      name: effect.data.label,
-      description: effect.data.flags.convenientDescription,
-      icon: effect.data.icon,
-      tint: effect.data.tint,
-      seconds: effect.data.duration.seconds,
-      rounds: effect.data.duration.rounds,
-      turns: effect.data.duration.turns,
-      flags: effect.data.flags,
+      name: effect.label,
+      description: effect.flags.convenientDescription,
+      icon: effect.icon,
+      tint: effect.tint,
+      seconds: effect.duration.seconds,
+      rounds: effect.duration.rounds,
+      turns: effect.duration.turns,
+      flags: effect.flags,
       changes,
       atlChanges,
       tokenMagicChanges,
@@ -308,7 +306,7 @@ export default class CustomEffectsHandler {
   }
 
   _combinePrevAndNewCustomEffects(item, json) {
-    let itemDataEffects = Array.from(item.data.effects);
+    let itemDataEffects = Array.from(item.effects);
     let jsonData = JSON.parse(json);
 
     jsonData.effects.push(...itemDataEffects);
