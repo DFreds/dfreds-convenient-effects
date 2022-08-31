@@ -22,7 +22,7 @@ export default class MacroHandler {
     const command = `game.dfreds.effectInterface.toggleEffect("${effect.name}")`;
 
     let macro = game.macros.find(
-      (macro) => macro.name === name && macro.data.command === command
+      (macro) => macro.name === name && macro.command === command
     );
 
     if (!macro) {

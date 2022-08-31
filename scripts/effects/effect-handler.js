@@ -43,11 +43,11 @@ export default class EffectHandler {
    */
   hasEffectApplied(effectName, uuid) {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
-    return actor?.data?.effects?.some(
+    return actor?.effects?.some(
       (activeEffect) =>
-        activeEffect?.data?.flags?.isConvenient &&
-        activeEffect?.data?.label == effectName &&
-        !activeEffect?.data?.disabled
+        activeEffect?.flags?.isConvenient &&
+        activeEffect?.label == effectName &&
+        !activeEffect?.disabled
     );
   }
 
@@ -61,10 +61,9 @@ export default class EffectHandler {
    */
   async removeEffect({ effectName, uuid }) {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
-    const effectToRemove = actor.data.effects.find(
+    const effectToRemove = actor.effects.find(
       (activeEffect) =>
-        activeEffect?.data?.flags?.isConvenient &&
-        activeEffect?.data?.label == effectName
+        activeEffect?.flags?.isConvenient && activeEffect?.label == effectName
     );
 
     if (!effectToRemove) return;

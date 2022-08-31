@@ -28,7 +28,7 @@ export default class DynamicEffectsAdder {
   }
 
   _addDivineWordEffects(effect, actor) {
-    const remainingHp = actor.data.data.attributes.hp.value;
+    const remainingHp = actor.system.attributes.hp.value;
     const blinded = game.dfreds.effectInterface.findEffectByName('Blinded');
     const deafened = game.dfreds.effectInterface.findEffectByName('Deafened');
     const stunned = game.dfreds.effectInterface.findEffectByName('Stunned');
@@ -62,7 +62,7 @@ export default class DynamicEffectsAdder {
   }
 
   _addEnlargeEffects(effect, actor) {
-    const size = actor.data.data.traits.size;
+    const size = actor.system.traits.size;
     const index = Constants.SIZES_ORDERED.indexOf(size);
 
     this._addSizeChangeEffects(
@@ -72,7 +72,7 @@ export default class DynamicEffectsAdder {
   }
 
   _addReduceEffects(effect, actor) {
-    const size = actor.data.data.traits.size;
+    const size = actor.system.traits.size;
     const index = Constants.SIZES_ORDERED.indexOf(size);
 
     this._addSizeChangeEffects(effect, Math.max(0, index - 1));
@@ -83,7 +83,7 @@ export default class DynamicEffectsAdder {
     const tokenSize = game.dnd5e.config.tokenSizes[size];
 
     effect.changes.push({
-      key: 'data.traits.size',
+      key: 'system.traits.size',
       mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
       value: size,
     });
@@ -105,7 +105,7 @@ export default class DynamicEffectsAdder {
   }
 
   _addRageEffects(effect, actor) {
-    const barbarianClass = actor.data.items.find(
+    const barbarianClass = actor.items.find(
       (item) => item.type === 'class' && item.name === 'Barbarian'
     );
 
@@ -120,9 +120,8 @@ export default class DynamicEffectsAdder {
 
   _addResistancesIfBearTotem(effect, actor, barbarianClass) {
     const isTotemWarrior =
-      barbarianClass.data.data.subclass?.identifier ===
-      'path-of-the-totem-warrior';
-    const hasBearTotemSpirit = actor.data.items.find(
+      barbarianClass.subclass?.identifier === 'path-of-the-totem-warrior';
+    const hasBearTotemSpirit = actor.items.find(
       (item) => item.type === 'feat' && item.name === 'Totem Spirit: Bear'
     );
 
@@ -130,52 +129,52 @@ export default class DynamicEffectsAdder {
       effect.changes.push(
         ...[
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'acid',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'cold',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'fire',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'force',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'lightning',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'necrotic',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'poison',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'physical',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'radiant',
           },
           {
-            key: 'data.traits.dr.value',
+            key: 'system.traits.dr.value',
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
             value: 'thunder',
           },
@@ -185,7 +184,7 @@ export default class DynamicEffectsAdder {
   }
 
   _determineIfPersistantRage(effect, barbarianClass) {
-    if (barbarianClass.data.data.levels > 14) {
+    if (barbarianClass.system.levels > 14) {
       effect.seconds = undefined;
     }
   }
