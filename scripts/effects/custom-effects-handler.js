@@ -174,10 +174,6 @@ export default class CustomEffectsHandler {
    * @returns {Promise} resolves when the active effect is deleted
    */
   async deleteCustomEffect(effect) {
-    if (this._settings.isStatusEffect(effect.name)) {
-      this._settings.removeStatusEffect(effect.name);
-    }
-
     const item = await this._findCustomEffectsItem();
     return item.deleteEmbeddedDocuments('ActiveEffect', [effect.customId]);
   }
