@@ -115,6 +115,7 @@ export default class CustomEffectsHandler {
         disabled: false,
         flags: {
           isCustomConvenient: true,
+          convenientDescription: 'Applies custom effects',
         },
         transfer: false,
       },
