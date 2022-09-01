@@ -42,7 +42,7 @@ Hooks.once('ready', async () => {
   await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
 
-  Hooks.callAll('dfreds-convenient-effects.ready');
+  Hooks.callAll(`${Constants.MODULE_ID}.ready`);
 });
 
 /**
