@@ -149,5 +149,4 @@ const v10 = {
     WardingBond: 'icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp'
 };
 
-const icons = parseInt(game.version) >= 10 ? v10 : v9;
-export default icons;
+export default (version) => version >= 10 ? v10 : v9;

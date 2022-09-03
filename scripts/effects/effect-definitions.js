@@ -2,9 +2,9 @@ import Effect from './effect.js';
 import Constants from '../constants.js';
 import Settings from '../settings.js';
 import CustomEffectsHandler from './custom-effects-handler.js';
-import SpellIcons from './effect-icons-spells.js'
-import SkillIcons from './effect-icons-skills.js'
-import ItemIcons from './effect-icons-items.js'
+import getSpellIcons from './effect-icons-spells.js'
+import getSkillIcons from './effect-icons-skills.js'
+import getItemIcons from './effect-icons-items.js'
 
 /**
  * Defines all of the effect definitions
@@ -13,6 +13,12 @@ export default class EffectDefinitions {
   constructor() {
     this._customEffectsHandler = new CustomEffectsHandler();
     this._settings = new Settings();
+    const version = parseInt(game.version)
+    this._icons = {
+      spells: getSpellIcons(version),
+      skills: getSkillIcons(version),
+      items: getItemIcons(version)
+    }
   }
 
   /**
@@ -773,7 +779,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Acid Arrow',
       description: 'Causes 2d4 acid damage at the end of next turn',
-      icon: SpellIcons.AcidArrow,
+      icon: this._icons.spells.AcidArrow,
       changes: [
         {
           key: 'flags.midi-qol.OverTime',
@@ -789,7 +795,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Aid',
       description: 'Add 5 to current and maximum hit points for 8 hours',
-      icon: SpellIcons.Aid,
+      icon: this._icons.spells.Aid,
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       flags: {
         requiresActorUpdate: true,
@@ -810,7 +816,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Antilife Shell',
       description: 'No active effects and lasts for 1 hour',
-      icon: SpellIcons.AntiLifeShell,
+      icon: this._icons.spells.AntiLifeShell,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
@@ -819,7 +825,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Arcane Hand',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.ArcaneHand,
+      icon: this._icons.spells.ArcaneHand,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
@@ -829,7 +835,7 @@ export default class EffectDefinitions {
       name: 'Bane',
       description:
         'Subtract 1d4 from all saving throws and attack rolls for 1 minute',
-      icon: SpellIcons.Bane,
+      icon: this._icons.spells.Bane,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -866,7 +872,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Barkskin',
       description: 'Upgrade AC to 16 for 1 hour',
-      icon: SpellIcons.Barkskin,
+      icon: this._icons.spells.Barkskin,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -884,7 +890,7 @@ export default class EffectDefinitions {
       name: 'Beacon of Hope',
       description:
         'Adds advantage to wisdom saving throws and death saving throws for 1 minute',
-      icon: SpellIcons.BeaconOfHope,
+      icon: this._icons.spells.BeaconOfHope,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -905,7 +911,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Black Tentacles',
       description: 'Apply the effects of the restrained condition for 1 minute',
-      icon: SpellIcons.BlackTentacles,
+      icon: this._icons.spells.BlackTentacles,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._restrained.changes],
     });
@@ -915,7 +921,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Bless',
       description: 'Add 1d4 to all saving throws and attack rolls for 1 minute',
-      icon: SpellIcons.Bless,
+      icon: this._icons.spells.Bless,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -958,7 +964,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Blindness/Deafness',
       description: 'Choose between blindness or deafness',
-      icon: SpellIcons.BlindnessDeafness,
+      icon: this._icons.spells.BlindnessDeafness,
       nestedEffects: [
         this._blindnessDeafnessBlindness,
         this._blindnessDeafnessDeafness,
@@ -971,7 +977,7 @@ export default class EffectDefinitions {
       name: 'Blindness',
       description:
         'Disadvantage on attack rolls while granting advantage to all who attack for 1 minute',
-      icon: SpellIcons.BlindnessDeafness,
+      icon: this._icons.spells.BlindnessDeafness,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._blinded.changes],
@@ -982,7 +988,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Deafness',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.BlindnessDeafness,
+      icon: this._icons.spells.BlindnessDeafness,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._deafened.changes],
@@ -993,7 +999,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Blur',
       description: 'Grants disadvantage to all who attack for 1 minute',
-      icon: SpellIcons.Blur,
+      icon: this._icons.spells.Blur,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1016,7 +1022,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Charm Person',
       description: 'No active effects and lasts for 1 hour',
-      icon: SpellIcons.CharmPerson,
+      icon: this._icons.spells.CharmPerson,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [...this._charmed.changes],
     });
@@ -1026,7 +1032,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Command',
       description: 'No active effects and lasts until the end of next turn',
-      icon: SpellIcons.Command,
+      icon: this._icons.spells.Command,
       seconds: CONFIG.time.roundTime,
       turns: 1,
     });
@@ -1036,7 +1042,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Comprehend Languages',
       description: 'Adds all languages for 1 hour',
-      icon: SpellIcons.ComprehendLanguages,
+      icon: this._icons.spells.ComprehendLanguages,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -1053,7 +1059,7 @@ export default class EffectDefinitions {
       name: 'Contagion',
       description:
         'Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       nestedEffects: [
         this._contagionBlindingSickness,
         this._contagionFilthFever,
@@ -1070,7 +1076,7 @@ export default class EffectDefinitions {
       name: 'Blinding Sickness',
       description:
         'Disadvantage on wisdom checks and wisdom saving throws for 7 days',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
@@ -1094,7 +1100,7 @@ export default class EffectDefinitions {
       name: 'Filth Fever',
       description:
         'Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
@@ -1122,7 +1128,7 @@ export default class EffectDefinitions {
       name: 'Flesh Rot',
       description:
         'Disadvantage on charisma checks and vulnerability to all damage',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
@@ -1145,7 +1151,7 @@ export default class EffectDefinitions {
       name: 'Mindfire',
       description:
         'Disadvantage on intelligence checks and intelligence saving throws for 7 days',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
@@ -1168,7 +1174,7 @@ export default class EffectDefinitions {
       name: 'Seizure',
       description:
         'Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
@@ -1196,7 +1202,7 @@ export default class EffectDefinitions {
       name: 'Slimy Doom',
       description:
         'Disadvantage on constitution checks and constitution saving throws for 7 days',
-      icon: SpellIcons.Contagion,
+      icon: this._icons.spells.Contagion,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_WEEK,
       changes: [
@@ -1218,7 +1224,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Darkvision',
       description: 'Upgrade darkvision to 60 ft. for 8 hours',
-      icon: SpellIcons.Darkvision,
+      icon: this._icons.spells.Darkvision,
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       changes: [
         {
@@ -1243,7 +1249,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Disguise Self',
       description: 'No active effects and lasts for 1 hour',
-      icon: SpellIcons.DisguiseSelf,
+      icon: this._icons.spells.DisguiseSelf,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
@@ -1252,7 +1258,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Divine Favor',
       description: 'Add 1d4 radiant damage to weapon attacks for 1 minute',
-      icon: SpellIcons.DivineFavor,
+      icon: this._icons.spells.DivineFavor,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1268,7 +1274,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Divine Word',
       description: 'Adds various effects based on the remaining hit points',
-      icon: SpellIcons.DivineWord,
+      icon: this._icons.spells.DivineWord,
       isDynamic: true,
       flags: {
         requiresActorUpdate: true,
@@ -1281,7 +1287,7 @@ export default class EffectDefinitions {
       name: 'Enhance Ability',
       description:
         "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       nestedEffects: [
         this._enhanceAbilityBearsEndurance,
         this._enhanceAbilityBullsStrength,
@@ -1298,7 +1304,7 @@ export default class EffectDefinitions {
       name: "Bear's Endurance",
       description:
         'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
@@ -1319,7 +1325,7 @@ export default class EffectDefinitions {
       name: "Bull's Strength",
       description:
         'Advantage on strength checks and double maximum carrying capacity for 1 hour',
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1342,7 +1348,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Cat's Grace",
       description: 'Advantage on dexterity checks for 1 hour',
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1359,7 +1365,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Eagle's Splendor",
       description: 'Advantage on charisma checks for 1 hour',
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1376,7 +1382,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Fox's Cunning",
       description: 'Advantage on intelligence checks for 1 hour',
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1393,7 +1399,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Owl's Wisdom",
       description: 'Advantage on wisdom checks for 1 hour',
-      icon: SpellIcons.EnhanceAbility,
+      icon: this._icons.spells.EnhanceAbility,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -1410,7 +1416,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Enlarge/Reduce',
       description: 'Choose between Enlarge or Reduce',
-      icon: SpellIcons.EnlargeReduce,
+      icon: this._icons.spells.EnlargeReduce,
       nestedEffects: [this._enlargeReduceEnlarge, this._enlargeReduceReduce],
     });
   }
@@ -1420,7 +1426,7 @@ export default class EffectDefinitions {
       name: 'Enlarge',
       description:
         'Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute',
-      icon: SpellIcons.EnlargeReduce,
+      icon: this._icons.spells.EnlargeReduce,
       isDynamic: true,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1449,7 +1455,7 @@ export default class EffectDefinitions {
       name: 'Reduce',
       description:
         'Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute',
-      icon: SpellIcons.EnlargeReduce,
+      icon: this._icons.spells.EnlargeReduce,
       isDynamic: true,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1477,7 +1483,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Faerie Fire',
       description: 'Grants advantage to all who attack for 1 minute',
-      icon: SpellIcons.FaerieFire,
+      icon: this._icons.spells.FaerieFire,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1523,7 +1529,7 @@ export default class EffectDefinitions {
       name: 'False Life',
       description:
         'Add 1d4 + 4 temp hit points (rolled automatically) for 1 hour',
-      icon: SpellIcons.FalseLife,
+      icon: this._icons.spells.FalseLife,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
         requiresActorUpdate: true,
@@ -1535,7 +1541,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Feather Fall',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.FeatherFall,
+      icon: this._icons.spells.FeatherFall,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
@@ -1544,7 +1550,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Feeblemind',
       description: 'Set intelligence and charisma scores to 1 until removed',
-      icon: SpellIcons.Feeblemind,
+      icon: this._icons.spells.Feeblemind,
       changes: [
         {
           key: 'data.abilities.int.value',
@@ -1566,7 +1572,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Fire Shield',
       description: 'Choose between cold or fire resistance',
-      icon: SpellIcons.FireShield,
+      icon: this._icons.spells.FireShield,
       nestedEffects: [
         this._fireShieldColdResistance,
         this._fireShieldFireResistance,
@@ -1578,7 +1584,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Fire Shield (Cold Resistance)',
       description: 'Add damage resistance to cold for 10 minutes',
-      icon: SpellIcons.FireShield,
+      icon: this._icons.spells.FireShield,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
@@ -1629,7 +1635,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Fire Shield (Fire Resistance)',
       description: 'Add damage resistance to fire for 10 minutes',
-      icon: SpellIcons.FireShield,
+      icon: this._icons.spells.FireShield,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
@@ -1680,7 +1686,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Find the Path',
       description: 'No active effects and lasts for 1 day',
-      icon: SpellIcons.FindThePath,
+      icon: this._icons.spells.FindThePath,
       seconds: Constants.SECONDS.IN_ONE_DAY,
     });
   }
@@ -1689,7 +1695,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Fly',
       description: 'Upgrade flying speed to 60 ft. for 10 minutes',
-      icon: SpellIcons.Fly,
+      icon: this._icons.spells.Fly,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -1707,7 +1713,7 @@ export default class EffectDefinitions {
       name: 'Foresight',
       description:
         'Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours',
-      icon: SpellIcons.Foresight,
+      icon: this._icons.spells.Foresight,
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       changes: [
         {
@@ -1743,7 +1749,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Freedom of Movement',
       description: 'No active effects and lasts for 1 hour',
-      icon: SpellIcons.FreedomOfMovement,
+      icon: this._icons.spells.FreedomOfMovement,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
     });
   }
@@ -1752,7 +1758,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Globe of Invulnerability',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.GlobeOfInvulnerability,
+      icon: this._icons.spells.GlobeOfInvulnerability,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       tokenMagicChanges: [
         {
@@ -1769,7 +1775,7 @@ export default class EffectDefinitions {
       name: 'Greater Invisibility',
       description:
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
-      icon: SpellIcons.GreaterInvisibility,
+      icon: this._icons.spells.GreaterInvisibility,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1790,7 +1796,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Guidance',
       description: 'Adds 1d4 to one ability or skill check for 1 minute',
-      icon: SpellIcons.Guidance,
+      icon: this._icons.spells.Guidance,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1817,7 +1823,7 @@ export default class EffectDefinitions {
       name: 'Guiding Bolt',
       description:
         'Grants advantage to next attacker or until the end of next turn',
-      icon: SpellIcons.GuidingBolt,
+      icon: this._icons.spells.GuidingBolt,
       seconds: CONFIG.time.roundTime,
       turns: 1,
       flags: {
@@ -1840,7 +1846,7 @@ export default class EffectDefinitions {
       name: 'Haste',
       description:
         'Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute',
-      icon: SpellIcons.Haste,
+      icon: this._icons.spells.Haste,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1868,7 +1874,7 @@ export default class EffectDefinitions {
       name: "Heroes' Feast",
       description:
         'Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours',
-      icon: SpellIcons.HeroesFeast,
+      icon: this._icons.spells.HeroesFeast,
       seconds: Constants.SECONDS.IN_ONE_DAY,
       flags: {
         requiresActorUpdate: true,
@@ -1897,7 +1903,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Heroism',
       description: 'Immunity to frightened for 1 minute',
-      icon: SpellIcons.Heroism,
+      icon: this._icons.spells.Heroism,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -1914,7 +1920,7 @@ export default class EffectDefinitions {
       name: 'Hideous Laughter',
       description:
         'Apply the effects of the prone and incapacitated conditions for 1 minute',
-      icon: SpellIcons.HideousLaughter,
+      icon: this._icons.spells.HideousLaughter,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._incapacitated.changes, ...this._prone.changes],
     });
@@ -1924,7 +1930,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Hold Monster',
       description: 'Apply the effects of the paralyzed condition for 1 minute',
-      icon: SpellIcons.HoldMonster,
+      icon: this._icons.spells.HoldMonster,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._paralyzed.changes],
       tokenMagicChanges: [
@@ -1947,7 +1953,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Hold Person',
       description: 'Apply the effects of the paralyzed condition for 1 minute',
-      icon: SpellIcons.HoldPerson,
+      icon: this._icons.spells.HoldPerson,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [...this._paralyzed.changes],
       tokenMagicChanges: [
@@ -1965,7 +1971,7 @@ export default class EffectDefinitions {
       name: 'Holy Aura',
       description:
         'Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute',
-      icon: SpellIcons.HolyAura,
+      icon: this._icons.spells.HolyAura,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -2008,7 +2014,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Hunter's Mark",
       description: 'No active effects and lasts until removed (for now)',
-      icon: SpellIcons.HuntersMark,
+      icon: this._icons.spells.HuntersMark,
     });
   }
 
@@ -2017,7 +2023,7 @@ export default class EffectDefinitions {
       name: 'Invisibility',
       description:
         'Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.',
-      icon: SpellIcons.Invisibility,
+      icon: this._icons.spells.Invisibility,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
         dae: {
@@ -2044,7 +2050,7 @@ export default class EffectDefinitions {
       name: 'Irresistible Dance',
       description:
         'Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute',
-      icon: SpellIcons.IrresistibleDance,
+      icon: this._icons.spells.IrresistibleDance,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -2076,7 +2082,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Jump',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.Jump,
+      icon: this._icons.spells.Jump,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
@@ -2085,7 +2091,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Light',
       description: 'Emits 20/40 light for 1 hour (requires ATL)',
-      icon: SpellIcons.Light,
+      icon: this._icons.spells.Light,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       atlChanges: [
         {
@@ -2121,7 +2127,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Longstrider',
       description: 'Increase all movement by 10 ft. for 1 hour',
-      icon: SpellIcons.Longstrider,
+      icon: this._icons.spells.Longstrider,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2138,7 +2144,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Mage Armor',
       description: 'Upgrades armor to 13 + dex modifier for 8 hours',
-      icon: SpellIcons.MageArmor,
+      icon: this._icons.spells.MageArmor,
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
       changes: [
         {
@@ -2155,7 +2161,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Mind Blank',
       description: 'Adds immunity to psychic damage for 24 hours',
-      icon: SpellIcons.MindBlank,
+      icon: this._icons.spells.MindBlank,
       seconds: Constants.SECONDS.IN_ONE_DAY,
       changes: [
         {
@@ -2171,7 +2177,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Mirror Image',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.MirrorImage,
+      icon: this._icons.spells.MirrorImage,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       tokenMagicChanges: [
         {
@@ -2188,7 +2194,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Pass without Trace',
       description: 'Add 10 to stealth checks for 1 hour',
-      icon: SpellIcons.PassWithoutTrace,
+      icon: this._icons.spells.PassWithoutTrace,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2205,7 +2211,7 @@ export default class EffectDefinitions {
       name: 'Protection from Energy',
       description:
         'Choose between acid, cold, fire, lightning, or thunder resistance',
-      icon: SpellIcons.ProtectionFromEnergy,
+      icon: this._icons.spells.ProtectionFromEnergy,
       nestedEffects: [
         this._protectionFromEnergyAcid,
         this._protectionFromEnergyCold,
@@ -2221,7 +2227,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Protection from Acid',
       description: 'Adds damage resistance to acid for 1 hour',
-      icon: SpellIcons.ProtectionFromEnergy,
+      icon: this._icons.spells.ProtectionFromEnergy,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -2239,7 +2245,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Protection from Cold',
       description: 'Adds damage resistance to cold for 1 hour',
-      icon: SpellIcons.ProtectionFromEnergy,
+      icon: this._icons.spells.ProtectionFromEnergy,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -2257,7 +2263,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Protection from Fire',
       description: 'Adds damage resistance to fire for 1 hour',
-      icon: SpellIcons.ProtectionFromEnergy,
+      icon: this._icons.spells.ProtectionFromEnergy,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -2275,7 +2281,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Protection from Lightning',
       description: 'Adds damage resistance to lightning for 1 hour',
-      icon: SpellIcons.ProtectionFromEnergy,
+      icon: this._icons.spells.ProtectionFromEnergy,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -2293,7 +2299,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Protection from Thunder',
       description: 'Adds damage resistance to thunder for 1 hour',
-      icon: SpellIcons.ProtectionFromEnergy,
+      icon: this._icons.spells.ProtectionFromEnergy,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
@@ -2312,7 +2318,7 @@ export default class EffectDefinitions {
       name: 'Protection from Poison',
       description:
         'Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)',
-      icon: SpellIcons.ProtectionFromPoison,
+      icon: this._icons.spells.ProtectionFromPoison,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2328,7 +2334,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Protection from Evil and Good',
       description: 'No active effects and lasts for 10 minutes',
-      icon: SpellIcons.ProtectionFromEvilAndGood,
+      icon: this._icons.spells.ProtectionFromEvilAndGood,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
@@ -2337,7 +2343,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Ray of Frost',
       description: 'Lowers movement by 10 ft',
-      icon: SpellIcons.RayOfFrost,
+      icon: this._icons.spells.RayOfFrost,
       seconds: CONFIG.time.roundTime,
       changes: [
         {
@@ -2354,7 +2360,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Regenerate',
       description: 'Regain 1 hit point at the start of each turn for 1 hour',
-      icon: SpellIcons.Regenerate,
+      icon: this._icons.spells.Regenerate,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2371,7 +2377,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Resilient Sphere',
       description: 'Adds total immunity to all damage and half movement',
-      icon: SpellIcons.ResilientSphere,
+      icon: this._icons.spells.ResilientSphere,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -2393,7 +2399,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Resistance',
       description: 'Add 1d4 to a single saving throw in the next minute',
-      icon: SpellIcons.Resistance,
+      icon: this._icons.spells.Resistance,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -2414,7 +2420,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Shield',
       description: 'Add 5 to AC until next turn',
-      icon: SpellIcons.Shield,
+      icon: this._icons.spells.Shield,
       seconds: CONFIG.time.roundTime,
       flags: {
         dae: {
@@ -2443,7 +2449,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Shield of Faith',
       description: 'Adds 2 to the AC for 10 minutes',
-      icon: SpellIcons.ShieldOfFaith,
+      icon: this._icons.spells.ShieldOfFaith,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
         {
@@ -2467,7 +2473,7 @@ export default class EffectDefinitions {
       name: 'Slow',
       description:
         'Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute',
-      icon: SpellIcons.Slow,
+      icon: this._icons.spells.Slow,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -2494,7 +2500,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Speak with Animals',
       description: 'No active effects and lasts for 10 minutes',
-      icon: SpellIcons.SpeakWithAnimals,
+      icon: this._icons.spells.SpeakWithAnimals,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
@@ -2503,7 +2509,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Speak with Dead',
       description: 'No active effects and lasts for 10 minutes',
-      icon: SpellIcons.SpeakWithDead,
+      icon: this._icons.spells.SpeakWithDead,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
@@ -2512,7 +2518,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Speak with Plants',
       description: 'No active effects and lasts for 10 minutes',
-      icon: SpellIcons.SpeakWithPlants,
+      icon: this._icons.spells.SpeakWithPlants,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
@@ -2521,7 +2527,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Spider Climb',
       description: 'Grants climbing speed equal to walking speed for 1 hour',
-      icon: SpellIcons.SpiderClimb,
+      icon: this._icons.spells.SpiderClimb,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2538,7 +2544,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Spirit Guardians',
       description: 'No active effects and lasts for 10 minutes',
-      icon: SpellIcons.SpiritGuardians,
+      icon: this._icons.spells.SpiritGuardians,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
@@ -2547,7 +2553,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Spiritual Weapon',
       description: 'No active effects and lasts for 1 minute',
-      icon: SpellIcons.SpiritualWeapon,
+      icon: this._icons.spells.SpiritualWeapon,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
     });
   }
@@ -2557,7 +2563,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Stoneskin',
       description: 'Adds resistance to non-magical physical damage for 1 hour',
-      icon: SpellIcons.Stoneskin,
+      icon: this._icons.spells.Stoneskin,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2573,7 +2579,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Suggestion',
       description: 'No active effects and lasts for 8 hours',
-      icon: SpellIcons.Suggestion,
+      icon: this._icons.spells.Suggestion,
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
     });
   }
@@ -2582,7 +2588,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Telekinesis',
       description: 'No active effects and lasts for 10 minutes',
-      icon: SpellIcons.Telekinesis,
+      icon: this._icons.spells.Telekinesis,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
     });
   }
@@ -2592,7 +2598,7 @@ export default class EffectDefinitions {
       name: 'True Strike',
       description:
         'Grants advantage on next attack or until the end of next turn',
-      icon: SpellIcons.TrueStrike,
+      icon: this._icons.spells.TrueStrike,
       seconds: CONFIG.time.roundTime,
       turns: 1,
       flags: {
@@ -2638,7 +2644,7 @@ export default class EffectDefinitions {
       name: 'Warding Bond',
       description:
         'Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour',
-      icon: SpellIcons.WardingBond,
+      icon: this._icons.spells.WardingBond,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       changes: [
         {
@@ -2689,7 +2695,7 @@ export default class EffectDefinitions {
       name: 'Bardic Inspiration',
       description:
         'Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes',
-      icon: SkillIcons.BardicInspiration,
+      icon: this._icons.skills.BardicInspiration,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       nestedEffects: [
         this._bardicInspirationD6,
@@ -2704,7 +2710,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Bardic Inspiration (d6)',
       description: 'For bards from level 1 to level 4',
-      icon: SkillIcons.BardicInspiration,
+      icon: this._icons.skills.BardicInspiration,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
@@ -2736,7 +2742,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Bardic Inspiration (d8)',
       description: 'For bards from level 5 to level 9',
-      icon: SkillIcons.BardicInspiration,
+      icon: this._icons.skills.BardicInspiration,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
@@ -2768,7 +2774,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Bardic Inspiration (d10)',
       description: 'For bards from level 10 to level 14',
-      icon: SkillIcons.BardicInspiration,
+      icon: this._icons.skills.BardicInspiration,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
@@ -2800,7 +2806,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Bardic Inspiration (d12)',
       description: 'For bards from level 15 to level 20',
-      icon: SkillIcons.BardicInspiration,
+      icon: this._icons.skills.BardicInspiration,
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       changes: [
@@ -2833,7 +2839,7 @@ export default class EffectDefinitions {
       name: 'Channel Divinity: Sacred Weapon',
       description:
         'Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)',
-      icon: SkillIcons.ChannelDivinity.SacredWeapon,
+      icon: this._icons.skills.ChannelDivinity.SacredWeapon,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       changes: [
         {
@@ -2897,7 +2903,7 @@ export default class EffectDefinitions {
       name: 'Channel Divinity: Turn Undead',
       description:
         'No active effects and lasts for 1 minute. Expires on taking damage.',
-      icon: SkillIcons.ChannelDivinity.TurnUndead,
+      icon: this._icons.skills.ChannelDivinity.TurnUndead,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       flags: {
         dae: {
@@ -3035,7 +3041,7 @@ export default class EffectDefinitions {
       name: 'Rage',
       description:
         'Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.',
-      icon: SkillIcons.Rage,
+      icon: this._icons.skills.Rage,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
       isDynamic: true,
       changes: [
@@ -3083,7 +3089,7 @@ export default class EffectDefinitions {
       name: 'Reckless Attack',
       description:
         'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
-      icon: SkillIcons.RecklessAttack,
+      icon: this._icons.skills.RecklessAttack,
       seconds: CONFIG.time.roundTime,
       changes: [
         {
@@ -3106,7 +3112,7 @@ export default class EffectDefinitions {
       name: 'Bullseye Lantern',
       description:
         'Adds lantern light in a 60 degree cone for 6 hours (requires ATL)',
-      icon: ItemIcons.BullseyeLantern,
+      icon: this._icons.items.BullseyeLantern,
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
@@ -3147,7 +3153,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Candle',
       description: 'Adds candle light for 1 hour (requires ATL)',
-      icon: ItemIcons.Candle,
+      icon: this._icons.items.Candle,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       atlChanges: [
         {
@@ -3183,7 +3189,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Hooded Lantern',
       description: 'Adds hooded lantern light for 6 hours (requires ATL)',
-      icon: ItemIcons.HoodedLantern,
+      icon: this._icons.items.HoodedLantern,
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
@@ -3219,7 +3225,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Lantern',
       description: 'Adds lantern light for 6 hours (requires ATL)',
-      icon: ItemIcons.Lantern,
+      icon: this._icons.items.Lantern,
       seconds: Constants.SECONDS.IN_SIX_HOURS,
       atlChanges: [
         {
@@ -3255,7 +3261,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Torch',
       description: 'Adds torch light for 1 hour (requires ATL)',
-      icon: ItemIcons.Torch,
+      icon: this._icons.items.Torch,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       atlChanges: [
         {
@@ -3427,7 +3433,7 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Great Weapon Master',
       description: 'Subtracts 5 from melee attacks but adds 10 to melee damage',
-      icon: SkillIcons.GreatWeaponMaster,
+      icon: this._icons.skills.GreatWeaponMaster,
       changes: [
         {
           key: 'data.bonuses.mwak.attack',
@@ -3552,7 +3558,7 @@ export default class EffectDefinitions {
       name: 'Sharpshooter',
       description:
         'Subtracts 5 from ranged attacks but adds 10 to ranged damage',
-      icon: SkillIcons.Sharpshooter,
+      icon: this._icons.skills.Sharpshooter,
       changes: [
         {
           key: 'data.bonuses.rwak.attack',

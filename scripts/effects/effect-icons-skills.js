@@ -22,5 +22,4 @@ const v10 = {
     Sharpshooter: 'icons/weapons/bows/shortbow-recurve-yellow.webp',
 };
 
-const icons = parseInt(game.version) >= 10 ? v10 : v9;
-export default icons;
+export default (version) => version >= 10 ? v10 : v9;
