@@ -47,7 +47,7 @@
       "label": "DFreds Convenient Effects Macros",
       "path": "packs/macros.db",
       "module": "dfreds-convenient-effects",
-      "entity": "Macro",
+      "type": "Macro",
       "private": false
     }
   ],
