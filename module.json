@@ -19,7 +19,7 @@
   "version": "2.1.2",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.286",
+    "verified": "10.288",
     "maximum": 10
   },
   "scripts": [],
