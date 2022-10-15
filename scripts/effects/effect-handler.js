@@ -100,12 +100,13 @@ export default class EffectHandler {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
 
-    this._handleIntegrations(effect);
-
     const activeEffectData = effect.convertToActiveEffectData({
       origin,
       overlay,
+      includeAte: this._settings.integrateWithAte,
+      includeTokenMagic: this._settings.integrateWithTokenMagic,
     });
+
     await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
 
     log(`Added effect ${effect.name} to ${actor.name} - ${actor.id}`);
@@ -117,26 +118,5 @@ export default class EffectHandler {
     await this.removeEffect({ effectName: 'Exhaustion 3', uuid });
     await this.removeEffect({ effectName: 'Exhaustion 4', uuid });
     await this.removeEffect({ effectName: 'Exhaustion 5', uuid });
-  }
-
-  _handleIntegrations(effect) {
-    if (this._settings.integrateWithAte && effect.atlChanges.length > 0) {
-      this._addAtlChangesToEffect(effect);
-    }
-
-    if (
-      this._settings.integrateWithTokenMagic &&
-      effect.tokenMagicChanges.length > 0
-    ) {
-      this._addTokenMagicChangesToEffect(effect);
-    }
-  }
-
-  _addAtlChangesToEffect(effect) {
-    effect.changes.push(...effect.atlChanges);
-  }
-
-  _addTokenMagicChangesToEffect(effect) {
-    effect.changes.push(...effect.tokenMagicChanges);
   }
 }

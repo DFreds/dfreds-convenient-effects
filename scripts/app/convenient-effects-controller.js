@@ -381,7 +381,10 @@ export default class ConvenientEffectsController {
     }
 
     // otherwise use core default format
-    const effectData = effect.convertToActiveEffectData();
+    const effectData = effect.convertToActiveEffectData({
+      includeAte: this._settings.integrateWithAte,
+      includeTokenMagic: this._settings.integrateWithTokenMagic,
+    });
 
     event.dataTransfer.setData(
       'text/plain',

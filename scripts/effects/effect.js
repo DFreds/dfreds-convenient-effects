@@ -44,9 +44,26 @@ export default class Effect {
    * @param {object} params - the params to use for conversion
    * @param {string} params.origin - the origin to add to the effect
    * @param {boolean} params.overlay - whether the effect is an overlay or not
+   * @param {boolean} params.includeAte - whether to include ATE effects or not
+   * @param {boolean} params.includeTokenMagic - whether to include token magic effects or not
    * @returns {object} The active effect data object for this effect
    */
-  convertToActiveEffectData({ origin, overlay } = {}) {
+  convertToActiveEffectData({
+    origin,
+    overlay,
+    includeAte,
+    includeTokenMagic,
+  } = {}) {
+    let changes = this.changes;
+
+    if (includeAte && this.atlChanges.length > 0) {
+      changes.push(...this.atlChanges);
+    }
+
+    if (includeTokenMagic && this.tokenMagicChanges.length > 0) {
+      changes.push(...this.tokenMagicChanges);
+    }
+
     return {
       id: this._id,
       name: this.name,
@@ -64,7 +81,7 @@ export default class Effect {
       }),
       origin,
       transfer: false,
-      changes: this.changes,
+      changes,
     };
   }
 
