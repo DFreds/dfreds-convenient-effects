@@ -141,9 +141,10 @@ export default class EffectInterface {
    * @param {object} params - the effect params
    * @param {string} params.effectName - the name of the effect to remove
    * @param {string} params.uuid - the UUID of the actor to remove the effect from
+   * @param {string | undefined} params.origin - optional, the origin of the effect
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  async removeEffect({ effectName, uuid }) {
+  async removeEffect({ effectName, uuid, origin }) {
     let effect = this.findEffectByName(effectName);
 
     if (!effect) {
@@ -165,6 +166,7 @@ export default class EffectInterface {
     return this._socket.executeAsGM('removeEffect', {
       effectName: effect.name,
       uuid,
+      origin
     });
   }
 
