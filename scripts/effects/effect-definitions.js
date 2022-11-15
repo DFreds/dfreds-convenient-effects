@@ -753,7 +753,7 @@ export default class EffectDefinitions {
       description:
         "- An unconscious creature is incapacitated (See the condition) can't move or speak, and is unaware of its surroundings.<br/>- The creature drops whatever its holding and falls prone (See the condition).<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
       icon: 'icons/svg/unconscious.svg',
-      changes: [...this._paralyzed.changes, ...this._prone.changes],
+      changes: [...this._paralyzed.changes],
     });
   }
 

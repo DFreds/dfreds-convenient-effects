@@ -95,6 +95,7 @@ export default class EffectHandler {
    */
   async addEffect({ effectName, effectData, uuid, origin, overlay }) {
     let effect = game.dfreds.effectInterface.findEffectByName(effectName);
+    let activeEffectsToApply = [];
 
     if (!effect && effectData) {
       effect = new Effect(effectData);
@@ -104,6 +105,10 @@ export default class EffectHandler {
 
     if (effect.name.startsWith('Exhaustion')) {
       await this._removeAllExhaustionEffects(uuid);
+    }
+
+    if (effect.name == 'Unconscious') {
+      activeEffectsToApply.push(this._getProneEffect());
     }
 
     if (effect.isDynamic) {
@@ -117,9 +122,22 @@ export default class EffectHandler {
       includeTokenMagic: this._settings.integrateWithTokenMagic,
     });
 
-    await actor.createEmbeddedDocuments('ActiveEffect', [activeEffectData]);
+    activeEffectsToApply.push(activeEffectData);
+
+    await actor.createEmbeddedDocuments('ActiveEffect', activeEffectsToApply);
 
     log(`Added effect ${effect.name} to ${actor.name} - ${actor.id}`);
+  }
+
+  _getProneEffect() {
+    let proneActiveEffectData =
+      game.dfreds.effectInterface.findEffectByName('Prone');
+    return proneActiveEffectData.convertToActiveEffectData({
+      origin,
+      overlay: false,
+      includeAte: this._settings.integrateWithAte,
+      includeTokenMagic: this._settings.integrateWithTokenMagic,
+    });
   }
 
   async _removeAllExhaustionEffects(uuid) {
