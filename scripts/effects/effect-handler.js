@@ -58,23 +58,27 @@ export default class EffectHandler {
    * @param {object} params - the effect parameters
    * @param {string} params.effectName - the name of the effect to remove
    * @param {string} params.uuid - the uuid of the actor to remove the effect from
-   * @param {string | undefined} params.origin - optional, the origin of the effect
+   * @param {string | undefined} params.origin - only removes the effect if the origin
+   * matches. If undefined, removes any effect with the matching name
    */
   async removeEffect({ effectName, uuid, origin }) {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
+
     let effectToRemove;
-    if (origin == undefined)
-      effectToRemove = actor.effects.find(
-        (activeEffect) =>
-          activeEffect?.flags?.isConvenient && activeEffect?.label == effectName
-      );
-    else
+
+    if (origin) {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
           activeEffect?.flags?.isConvenient &&
           activeEffect?.label == effectName &&
           activeEffect?.origin == origin
       );
+    } else {
+      effectToRemove = actor.effects.find(
+        (activeEffect) =>
+          activeEffect?.flags?.isConvenient && activeEffect?.label == effectName
+      );
+    }
 
     if (!effectToRemove) return;
 
