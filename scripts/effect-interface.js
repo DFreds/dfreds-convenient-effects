@@ -229,15 +229,26 @@ export default class EffectInterface {
     }
 
     if (effect.nestedEffects.length > 0) {
-      effect = await this._getNestedEffectSelection(effect);
-    }
+      let nestedEffect = await this._getNestedEffectSelection(effect);
+      let newEffectData = mergeObject(
+        effectData,
+        nestedEffect.convertToObject()
+      );
 
-    return this._socket.executeAsGM('addEffect', {
-      effectData,
-      uuid,
-      origin,
-      overlay,
-    });
+      return this._socket.executeAsGM('addEffect', {
+        effectData: newEffectData,
+        uuid,
+        origin,
+        overlay,
+      });
+    } else {
+      return this._socket.executeAsGM('addEffect', {
+        effectData,
+        uuid,
+        origin,
+        overlay,
+      });
+    }
   }
 
   /**
