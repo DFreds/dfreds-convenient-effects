@@ -3064,7 +3064,7 @@ export default class EffectDefinitions {
         {
           key: 'system.bonuses.mwak.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '@scale.barbarian.rage-damage',
+          value: '+ @scale.barbarian.rage-damage',
         },
         {
           key: 'macro.tokenMagic',
