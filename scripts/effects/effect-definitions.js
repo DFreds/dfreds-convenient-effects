@@ -1768,6 +1768,9 @@ export default class EffectDefinitions {
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
       icon: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      flags: {
+        requiresActorUpdate: true,
+      },
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
@@ -2017,6 +2020,7 @@ export default class EffectDefinitions {
       icon: 'icons/magic/air/fog-gas-smoke-dense-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
       flags: {
+        requiresActorUpdate: true,
         dae: {
           specialDuration: ['1Attack', '1Spell'],
         },

@@ -269,10 +269,16 @@ export default class EffectInterface {
    *
    * @param {string} effectName - the name of the effect that is adding actor data changes
    * @param {string} uuid - the UUID of the actor to add the data changes to
+   * @param {string} origin - the origin of the effect
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
-  addActorDataChanges(effectName, uuid) {
-    return this._socket.executeAsGM('addActorDataChanges', effectName, uuid);
+  addActorDataChanges(effectName, uuid, origin) {
+    return this._socket.executeAsGM(
+      'addActorDataChanges',
+      effectName,
+      uuid,
+      origin
+    );
   }
 
   /**

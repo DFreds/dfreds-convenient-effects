@@ -135,7 +135,8 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
   if (activeEffect?.flags?.requiresActorUpdate) {
     game.dfreds.effectInterface.addActorDataChanges(
       activeEffect?.label,
-      activeEffect?.parent?.uuid
+      activeEffect?.parent?.uuid,
+      activeEffect?.origin
     );
   }
 });
