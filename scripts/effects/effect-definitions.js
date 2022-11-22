@@ -3571,30 +3571,10 @@ export default class EffectDefinitions {
 
   _createAtlEffectKey(key) {
     let result = key;
-    const version = game.version.split('.')[0];
+    const version = game.release.generation;
 
-    if (version == '10') {
+    if (version >= 9) {
       switch (key) {
-        case 'ATL.preset':
-          break;
-        case 'ATL.brightSight':
-          break;
-        case 'ATL.dimSight':
-          break;
-        case 'ATL.height':
-          break;
-        case 'ATl.img':
-          break;
-        case 'ATL.mirrorX':
-          break;
-        case 'ATL.mirrorY':
-          break;
-        case 'ATL.rotation':
-          break;
-        case 'ATL.scale':
-          break;
-        case 'ATL.width':
-          break;
         case 'ATL.dimLight':
           result = 'ATL.light.dim';
           break;
@@ -3612,6 +3592,16 @@ export default class EffectDefinitions {
           break;
         case 'ATL.lightAngle':
           result = 'ATL.light.angle';
+          break;
+      }
+    }
+    if (version >= 10) {
+      switch (key) {
+        case 'ATL.sightAngle':
+          result = 'ATL.sight.angle';
+          break;
+        case 'ATL.vision':
+          result = 'ATL.sight.enabled';
           break;
       }
     }
