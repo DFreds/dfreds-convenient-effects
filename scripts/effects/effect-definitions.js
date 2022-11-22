@@ -1227,9 +1227,15 @@ export default class EffectDefinitions {
       ],
       atlChanges: [
         {
-          key: this._createAtlEffectKey('ATL.dimSight'),
+          key: this._createAtlEffectKey('ATL.sight.range'),
           mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
           value: '60',
+          priority: 5,
+        },
+        {
+          key: this._createAtlEffectKey('ATL.sight.visionMode'),
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: 'darkvision',
           priority: 5,
         },
       ],
