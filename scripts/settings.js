@@ -81,7 +81,7 @@ export default class Settings {
       Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
       {
         name: 'Allow Player Custom Effects',
-        hint: 'If enabled, players will be allowed to duplicate, edit, and delete all custom effects.',
+        hint: 'If enabled, players will be allowed to create, duplicate, edit, and delete all custom effects.',
         scope: 'world',
         config: true,
         default: false,
