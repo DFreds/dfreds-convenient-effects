@@ -124,6 +124,12 @@ Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
  * Handle adding any actor data changes when an active effect is added to an actor
  */
 Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
+  const settings = new Settings();
+  if (activeEffect.parent.id == settings.customEffectsItemId) {
+    const foundryHelpers = new FoundryHelpers();
+    foundryHelpers.renderConvenientEffectsAppIfOpen();
+  }
+
   if (
     !activeEffect?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
@@ -136,6 +142,17 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
       activeEffect?.parent?.uuid,
       activeEffect?.origin
     );
+  }
+});
+
+/**
+ * Handle re-rendering the app if it is open and an update occurs
+ */
+Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
+  const settings = new Settings();
+  if (activeEffect.parent.id == settings.customEffectsItemId) {
+    const foundryHelpers = new FoundryHelpers();
+    foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
 });
 
@@ -166,6 +183,12 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
  * Handle removing any actor data changes when an active effect is deleted from an actor
  */
 Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
+  const settings = new Settings();
+  if (activeEffect.parent.id == settings.customEffectsItemId) {
+    const foundryHelpers = new FoundryHelpers();
+    foundryHelpers.renderConvenientEffectsAppIfOpen();
+  }
+
   if (
     !activeEffect?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
