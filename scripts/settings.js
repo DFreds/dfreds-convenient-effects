@@ -56,7 +56,7 @@ export default class Settings {
         default: CONST.USER_ROLES.GAMEMASTER,
         choices: userRoles,
         type: String,
-        onChange: () => window.location.reload(),
+        requiresReload: true,
       }
     );
 
@@ -71,7 +71,7 @@ export default class Settings {
         default: CONST.USER_ROLES.GAMEMASTER,
         choices: userRoles,
         type: String,
-        onChange: () => window.location.reload(),
+        requiresReload: true,
       }
     );
 
@@ -112,7 +112,7 @@ export default class Settings {
           add: 'Add',
         },
         type: String,
-        onChange: () => window.location.reload(),
+        requiresReload: true,
       }
     );
 
