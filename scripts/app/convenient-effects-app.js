@@ -132,7 +132,10 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Edit Effect',
         icon: '<i class="fas fa-edit fa-fw"></i>',
         condition: (effectItem) => {
-          return this._controller.isCustomEffect(effectItem);
+          return (
+            this._controller.isCustomEffect(effectItem) &&
+            (game.user.isGM || this._controller.isPlayerAllowedCustomEffects)
+          );
         },
         callback: this._controller.onEditEffectClick.bind(this._controller),
       },
@@ -140,7 +143,10 @@ export default class ConvenientEffectsApp extends Application {
         name: 'Delete Effect',
         icon: '<i class="fas fa-trash fa-fw"></i>',
         condition: (effectItem) => {
-          return this._controller.isCustomEffect(effectItem);
+          return (
+            this._controller.isCustomEffect(effectItem) &&
+            (game.user.isGM || this._controller.isPlayerAllowedCustomEffects)
+          );
         },
         callback: this._controller.onDeleteEffectClick.bind(this._controller),
       },
@@ -168,11 +174,19 @@ export default class ConvenientEffectsApp extends Application {
       {
         name: 'Toggle Status Effect',
         icon: '<i class="fas fa-street-view fa-fw"></i>',
+        condition: () => {
+          return game.user.isGM;
+        },
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
       },
       {
         name: 'Duplicate as Custom',
         icon: '<i class="far fa-copy fa-fw"></i>',
+        condition: () => {
+          return (
+            game.user.isGM || this._controller.isPlayerAllowedCustomEffects
+          );
+        },
         callback: this._controller.onDuplicateAsCustom.bind(this._controller),
       },
     ]);

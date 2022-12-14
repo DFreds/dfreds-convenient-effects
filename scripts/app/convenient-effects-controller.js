@@ -189,6 +189,15 @@ export default class ConvenientEffectsController {
   }
 
   /**
+   * Checks if the player is allowed to change custom effects
+   *
+   * @returns true if the player is allowed to change custom effects
+   */
+  get isPlayerAllowedCustomEffects() {
+    return this._settings.allowPlayerCustomEffects;
+  }
+
+  /**
    * Handles clicks on the reset status effects button
    *
    * @param {MouseEvent} event

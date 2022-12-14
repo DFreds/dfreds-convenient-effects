@@ -13,6 +13,7 @@ export default class HandlebarHelpers {
    */
   registerHelpers() {
     this._registerIsGmHelper();
+    this._registerCanCreateEffectsHelper();
     this._registerIfCustomFolderHelper();
     this._registerHasNestedEffectsHelper();
     this._registerIsStatusEffectHelper();
@@ -24,6 +25,12 @@ export default class HandlebarHelpers {
   _registerIsGmHelper() {
     Handlebars.registerHelper('isGm', () => {
       return game.user.isGM;
+    });
+  }
+
+  _registerCanCreateEffectsHelper() {
+    Handlebars.registerHelper('canCreateEffects', () => {
+      return game.user.isGM || this._settings.allowPlayerCustomEffects;
     });
   }
 

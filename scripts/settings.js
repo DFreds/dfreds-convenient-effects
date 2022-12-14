@@ -7,6 +7,7 @@ export default class Settings {
   // Settings keys
   static CHAT_MESSAGE_PERMISSION = 'chatMessagePermission';
   static APP_CONTROLS_PERMISSION = 'controlsPermission';
+  static ALLOW_PLAYER_CUSTOM_EFFECTS = 'allowPlayerCustomEffects';
   static INTEGRATE_WITH_ATE = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
@@ -72,6 +73,25 @@ export default class Settings {
         choices: userRoles,
         type: String,
         requiresReload: true,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
+      {
+        name: 'Allow Player Custom Effects',
+        hint: 'If enabled, players will be allowed to duplicate, edit, and delete all custom effects.',
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: async (value) => {
+          const customEffectsItem = await this._findOrCreateCustomEffectsItem();
+          let newOwnership = duplicate(customEffectsItem.ownership);
+          newOwnership.default = value ? 3 : 0;
+          customEffectsItem.update({ ownership: newOwnership });
+        },
       }
     );
 
@@ -239,6 +259,18 @@ export default class Settings {
   get appControlsPermission() {
     return parseInt(
       game.settings.get(Constants.MODULE_ID, Settings.APP_CONTROLS_PERMISSION)
+    );
+  }
+
+  /**
+   * Returns the game setting for allowing players to manipulate custom effects.
+   *
+   * @returns {boolean} true if players can manipulate custom effects
+   */
+  get allowPlayerCustomEffects() {
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.ALLOW_PLAYER_CUSTOM_EFFECTS
     );
   }
 
@@ -537,5 +569,29 @@ export default class Settings {
       Settings.CUSTOM_EFFECTS_ITEM_ID,
       id
     );
+  }
+
+  // TODO below is duplicated from custom-effects-handler.js. Issues with circular dependency on settings.js
+  async _findOrCreateCustomEffectsItem() {
+    return (
+      this._findCustomEffectsItem() ?? (await this._createCustomEffectsItem())
+    );
+  }
+
+  _findCustomEffectsItem() {
+    return game.items.get(this.customEffectsItemId);
+  }
+
+  async _createCustomEffectsItem() {
+    const item = await CONFIG.Item.documentClass.create({
+      name: 'Custom Convenient Effects',
+      img: 'modules/dfreds-convenient-effects/images/magic-palm.svg',
+      type: 'consumable',
+    });
+
+    log(`Creating custom item with ${item.id}`);
+    await this.setCustomEffectsItemId(item.id);
+
+    return item;
   }
 }
