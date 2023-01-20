@@ -188,6 +188,18 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   ) {
     return;
   }
+
+  // Remove effects that were added due to this effect
+  const actor = activeEffect.parent;
+  const effectIdsFromThisEffect = actor.effects
+    .filter(
+      (effect) => effect.origin === `Convenient Effect: ${activeEffect.label}`
+    )
+    .map((effect) => effect.id);
+
+  if (effectIdsFromThisEffect) {
+    actor.deleteEmbeddedDocuments('ActiveEffect', effectIdsFromThisEffect);
+  }
 });
 
 /**

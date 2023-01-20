@@ -13,10 +13,16 @@ export default class DynamicEffectsAdder {
   async addDynamicEffects(effect, actor) {
     switch (effect.name.toLowerCase()) {
       case 'divine word':
-        this._addDivineWordEffects(effect, actor);
+        await this._addDivineWordEffects(effect, actor);
         break;
       case 'enlarge':
         this._addEnlargeEffects(effect, actor);
+        break;
+      case 'greater invisibility':
+        this._addInvisibilityEffects(effect, actor);
+        break;
+      case 'invisibility':
+        this._addInvisibilityEffects(effect, actor);
         break;
       case 'rage':
         this._addRageEffects(effect, actor);
@@ -27,37 +33,55 @@ export default class DynamicEffectsAdder {
     }
   }
 
-  _addDivineWordEffects(effect, actor) {
+  async _addDivineWordEffects(effect, actor) {
     const remainingHp = actor.system.attributes.hp.value;
-    const blinded = game.dfreds.effectInterface.findEffectByName('Blinded');
-    const deafened = game.dfreds.effectInterface.findEffectByName('Deafened');
-    const stunned = game.dfreds.effectInterface.findEffectByName('Stunned');
 
     if (remainingHp <= 20) {
-      // killed, handled in actor-updater
+      if (actor.system.attributes.hp.value <= 20) {
+        await actor.update({
+          'system.attributes.hp.value': 0,
+        });
+      }
       effect.description = 'Killed instantly';
     } else if (remainingHp <= 30) {
-      // TODO this?
-      // await game.dfreds.effectInterface.addEffect({
-      //   effectName: 'Blinded',
-      //   uuid: actor.uuid,
-      //   origin: effect.origin,
-      // });
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Blinded',
+        uuid: actor.uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Deafened',
+        uuid: actor.uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Stunned',
+        uuid: actor.uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
       effect.description = 'Blinded, deafened, and stunned for 1 hour';
       effect.seconds = Constants.SECONDS.IN_ONE_HOUR;
-      effect.changes.push(
-        ...blinded.changes,
-        ...deafened.changes,
-        ...stunned.changes
-      );
     } else if (remainingHp <= 40) {
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Blinded',
+        uuid: actor.uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Deafened',
+        uuid: actor.uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
       effect.description = 'Deafened and blinded for 10 minutes';
       effect.seconds = Constants.SECONDS.IN_TEN_MINUTES;
-      effect.changes.push(...blinded.changes, ...deafened.changes);
     } else if (remainingHp <= 50) {
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Deafened',
+        uuid: actor.uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
       effect.description = 'Deafened for 1 minute';
       effect.seconds = Constants.SECONDS.IN_ONE_MINUTE;
-      effect.changes.push(...deafened.changes);
     }
   }
 
@@ -69,6 +93,14 @@ export default class DynamicEffectsAdder {
       effect,
       Math.min(Constants.SIZES_ORDERED.length - 1, index + 1)
     );
+  }
+
+  async _addInvisibilityEffects(effect, actor) {
+    await game.dfreds.effectInterface.addEffect({
+      effectName: 'Invisible',
+      uuid: actor.uuid,
+      origin: `Convenient Effect: ${effect.name}`,
+    });
   }
 
   _addReduceEffects(effect, actor) {
