@@ -1,4 +1,3 @@
-import ActorUpdater from './effects/actor-updater.js';
 import Constants from './constants.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import Effect from './effects/effect.js';
@@ -11,7 +10,6 @@ import Settings from './settings.js';
  */
 export default class EffectInterface {
   constructor() {
-    this._actorUpdater = new ActorUpdater();
     this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHandler = new EffectHandler();
     this._foundryHelpers = new FoundryHelpers();
@@ -38,14 +36,6 @@ export default class EffectInterface {
     this._socket.register(
       'removeEffect',
       this._effectHandler.removeEffect.bind(this._effectHandler)
-    );
-    this._socket.register(
-      'addActorDataChanges',
-      this._actorUpdater.addActorDataChanges.bind(this._actorUpdater)
-    );
-    this._socket.register(
-      'removeActorDataChanges',
-      this._actorUpdater.removeActorDataChanges.bind(this._actorUpdater)
     );
   }
 
@@ -141,7 +131,7 @@ export default class EffectInterface {
    * @param {object} params - the effect params
    * @param {string} params.effectName - the name of the effect to remove
    * @param {string} params.uuid - the UUID of the actor to remove the effect from
-   * @param {string | undefined} params.origin - only removes the effect if the origin 
+   * @param {string | undefined} params.origin - only removes the effect if the origin
    * matches. If undefined, removes any effect with the matching name
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
@@ -263,34 +253,6 @@ export default class EffectInterface {
     return this._customEffectsHandler.createNewCustomEffectsWith({
       activeEffects,
     });
-  }
-
-  /**
-   * Adds data changes to the provided actor UUID as the GM via sockets
-   *
-   * @param {string} effectName - the name of the effect that is adding actor data changes
-   * @param {string} uuid - the UUID of the actor to add the data changes to
-   * @param {string} origin - the origin of the effect
-   * @returns {Promise} a promise that resolves when the GM socket function completes
-   */
-  addActorDataChanges(effectName, uuid, origin) {
-    return this._socket.executeAsGM(
-      'addActorDataChanges',
-      effectName,
-      uuid,
-      origin
-    );
-  }
-
-  /**
-   * Removes data changes from the provided actor UUID as the GM via sockets
-   *
-   * @param {string} effectName - the name of the effect that is removing actor data changes
-   * @param {string} uuid - the UUID of the actor to remove the data changes from
-   * @returns {Promise} a promise that resolves when the GM socket function completes
-   */
-  removeActorDataChanges(effectName, uuid) {
-    return this._socket.executeAsGM('removeActorDataChanges', effectName, uuid);
   }
 
   async _getNestedEffectSelection(effect) {

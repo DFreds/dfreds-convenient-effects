@@ -77,7 +77,7 @@ export default class EffectDefinitions {
   get spells() {
     return [
       this._acidArrow, // TODO figure out higher level casting
-      this._aid, // TODO figure out higher level casting
+      this._aid,
       this._alterSelf,
       this._antilifeShell,
       this._arcaneHand,
@@ -120,7 +120,7 @@ export default class EffectDefinitions {
       this._enhanceAbilityOwlsWisdom,
 
       this._faerieFire,
-      this._falseLife, // TODO figure out higher level casting
+      this._falseLife,
       this._featherFall,
       this._feeblemind,
 
@@ -813,9 +813,6 @@ export default class EffectDefinitions {
       description: 'Add 5 to current and maximum hit points for 8 hours',
       icon: 'icons/magic/life/heart-cross-blue.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
-      flags: {
-        requiresActorUpdate: true,
-      },
     });
   }
 
@@ -1298,9 +1295,6 @@ export default class EffectDefinitions {
       description: 'Adds various effects based on the remaining hit points',
       icon: 'icons/magic/light/explosion-star-large-orange-purple.webp',
       isDynamic: true,
-      flags: {
-        requiresActorUpdate: true,
-      },
     });
   }
 
@@ -1325,13 +1319,10 @@ export default class EffectDefinitions {
     return new Effect({
       name: "Bear's Endurance",
       description:
-        'Advantage on constitution checks and 2d6 temp hit points (rolled automatically) for 1 hour',
+        'Advantage on constitution checks and 2d6 temp hit points for 1 hour',
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      flags: {
-        requiresActorUpdate: true,
-      },
       changes: [
         {
           key: 'flags.midi-qol.advantage.ability.check.con',
@@ -1549,13 +1540,9 @@ export default class EffectDefinitions {
   get _falseLife() {
     return new Effect({
       name: 'False Life',
-      description:
-        'Add 1d4 + 4 temp hit points (rolled automatically) for 1 hour',
+      description: 'Add temporary hit points 1 hour',
       icon: 'icons/magic/life/heart-cross-purple-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
-      flags: {
-        requiresActorUpdate: true,
-      },
     });
   }
 
@@ -1799,9 +1786,7 @@ export default class EffectDefinitions {
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
       icon: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      flags: {
-        requiresActorUpdate: true,
-      },
+      isDynamic: true,
       changes: [
         {
           key: 'flags.midi-qol.advantage.attack.all',
@@ -1901,9 +1886,6 @@ export default class EffectDefinitions {
         'Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours',
       icon: 'icons/magic/life/heart-cross-strong-flame-purple-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_DAY,
-      flags: {
-        requiresActorUpdate: true,
-      },
       changes: [
         {
           key: 'system.traits.di.value',
@@ -2050,8 +2032,8 @@ export default class EffectDefinitions {
         'Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.',
       icon: 'icons/magic/air/fog-gas-smoke-dense-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
+      isDynamic: true,
       flags: {
-        requiresActorUpdate: true,
         dae: {
           specialDuration: ['1Attack', '1Spell'],
         },

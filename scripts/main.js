@@ -133,15 +133,8 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
   if (
     !activeEffect?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
-  )
+  ) {
     return;
-
-  if (activeEffect?.flags?.requiresActorUpdate) {
-    game.dfreds.effectInterface.addActorDataChanges(
-      activeEffect?.label,
-      activeEffect?.parent?.uuid,
-      activeEffect?.origin
-    );
   }
 });
 
@@ -192,14 +185,8 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   if (
     !activeEffect?.flags?.isConvenient ||
     !(activeEffect?.parent instanceof Actor)
-  )
+  ) {
     return;
-
-  if (activeEffect?.flags?.requiresActorUpdate) {
-    game.dfreds.effectInterface.removeActorDataChanges(
-      activeEffect?.label,
-      activeEffect?.parent?.uuid
-    );
   }
 });
 
