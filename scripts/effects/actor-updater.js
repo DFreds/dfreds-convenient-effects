@@ -124,10 +124,10 @@ export default class ActorUpdater {
         await this._removeHeroesFeastEffects(actor);
         break;
       case 'invisibility':
-        await this._removeInvisibleEffect(uuid, origin);
+        await this._removeInvisibleEffect(uuid);
         break;
       case 'greater invisibility':
-        await this._removeInvisibleEffect(uuid, origin);
+        await this._removeInvisibleEffect(uuid);
         break;
     }
   }
@@ -178,11 +178,10 @@ export default class ActorUpdater {
     }
   }
 
-  async _removeInvisibleEffect(uuid, origin) {
+  async _removeInvisibleEffect(uuid) {
     await game.dfreds.effectInterface.removeEffect({
       effectName: 'Invisible',
       uuid,
-      origin,
     });
   }
 }
