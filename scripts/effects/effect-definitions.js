@@ -312,6 +312,11 @@ export default class EffectDefinitions {
       icon: 'modules/dfreds-convenient-effects/images/exhaustion1.svg',
       changes: [
         {
+          key: 'system.attributes.exhaustion',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '1',
+        },
+        {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
           value: '1',
@@ -331,6 +336,11 @@ export default class EffectDefinitions {
       description: 'Disadvantage on ability checks and speed halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion2.svg',
       changes: [
+        {
+          key: 'system.attributes.exhaustion',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '2',
+        },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
@@ -358,6 +368,11 @@ export default class EffectDefinitions {
         'Disadvantage on ability checks, speed halved, and disadvantage on attacks and saving throws',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion3.svg',
       changes: [
+        {
+          key: 'system.attributes.exhaustion',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '3',
+        },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
@@ -395,6 +410,11 @@ export default class EffectDefinitions {
         'Disadvantage on ability checks, speed halved, disadvantage on attacks and saving throws, and hit point maximum halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion4.svg',
       changes: [
+        {
+          key: 'system.attributes.exhaustion',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '4',
+        },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
@@ -438,6 +458,11 @@ export default class EffectDefinitions {
         'Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion5.svg',
       changes: [
+        {
+          key: 'system.attributes.exhaustion',
+          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          value: '5',
+        },
         {
           key: 'flags.midi-qol.disadvantage.ability.check.all',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
