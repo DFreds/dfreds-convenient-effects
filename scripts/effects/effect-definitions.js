@@ -810,7 +810,7 @@ export default class EffectDefinitions {
   get _aid() {
     return new Effect({
       name: 'Aid',
-      description: 'Add 5 to current and maximum hit points for 8 hours',
+      description: 'Add to current and maximum hit points for 8 hours',
       icon: 'icons/magic/life/heart-cross-blue.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
     });
