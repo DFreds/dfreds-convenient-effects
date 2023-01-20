@@ -26,7 +26,6 @@
   "esmodules": ["./scripts/main.js"],
   "styles": ["./styles/dfreds-convenient-effects.css"],
   "languages": [],
-  "system": ["dnd5e", "sw5e"],
   "relationships": {
     "systems": [
       {
@@ -37,6 +36,10 @@
     "requires": [
       {
         "id": "socketlib",
+        "type": "module"
+      },
+      {
+        "id": "lib-wrapper",
         "type": "module"
       }
     ]
