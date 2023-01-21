@@ -100,12 +100,15 @@ Hooks.once('setup', () => {
   );
 });
 
-Hooks.on('renderItemDirectory', (_itemDirectory, html, _data) => {
+Hooks.on('changeSidebarTab', (directory) => {
+  if (!(directory instanceof ItemDirectory)) return;
+
   const settings = new Settings();
   const customEffectsItemId = settings.customEffectsItemId;
 
   if (!customEffectsItemId) return;
 
+  const html = directory.element;
   const li = html.find(`li[data-document-id="${customEffectsItemId}"]`);
   li.remove();
 });
