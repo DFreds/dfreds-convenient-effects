@@ -87,10 +87,13 @@ export default class Settings {
         default: false,
         type: Boolean,
         onChange: async (value) => {
-          const customEffectsItem = await this._findOrCreateCustomEffectsItem();
+          const customEffectsItem = await this._findCustomEffectsItem();
+
+          if (!customEffectsItem) return;
+
           let newOwnership = duplicate(customEffectsItem.ownership);
           newOwnership.default = value ? 3 : 0;
-          customEffectsItem.update({ ownership: newOwnership });
+          await customEffectsItem.update({ ownership: newOwnership });
         },
       }
     );
@@ -571,27 +574,7 @@ export default class Settings {
     );
   }
 
-  // TODO below is duplicated from custom-effects-handler.js. Issues with circular dependency on settings.js
-  async _findOrCreateCustomEffectsItem() {
-    return (
-      this._findCustomEffectsItem() ?? (await this._createCustomEffectsItem())
-    );
-  }
-
   _findCustomEffectsItem() {
     return game.items.get(this.customEffectsItemId);
-  }
-
-  async _createCustomEffectsItem() {
-    const item = await CONFIG.Item.documentClass.create({
-      name: 'Custom Convenient Effects',
-      img: 'modules/dfreds-convenient-effects/images/magic-palm.svg',
-      type: 'consumable',
-    });
-
-    log(`Creating custom item with ${item.id}`);
-    await this.setCustomEffectsItemId(item.id);
-
-    return item;
   }
 }

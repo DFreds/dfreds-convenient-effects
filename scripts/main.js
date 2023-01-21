@@ -36,6 +36,22 @@ Hooks.once('socketlib.ready', () => {
  * Handle initializing the status and custom effects
  */
 Hooks.once('ready', async () => {
+  const settings = new Settings();
+
+  if (!settings.customEffectsItemId) {
+    const item = await CONFIG.Item.documentClass.create({
+      name: 'Custom Convenient Effects',
+      img: 'modules/dfreds-convenient-effects/images/magic-palm.svg',
+      type: 'consumable',
+    });
+
+    await settings.setCustomEffectsItemId(item.id);
+  }
+
+  Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
+});
+
+Hooks.once(`${Constants.MODULE_ID}.initialize`, async () => {
   const customEffectsHandler = new CustomEffectsHandler();
   await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
