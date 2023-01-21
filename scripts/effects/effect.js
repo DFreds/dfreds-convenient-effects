@@ -20,6 +20,7 @@ export default class Effect {
     atlChanges = [],
     tokenMagicChanges = [],
     nestedEffects = [],
+    subEffects = [],
   }) {
     this.customId = customId;
     this.name = name;
@@ -36,6 +37,7 @@ export default class Effect {
     this.atlChanges = atlChanges;
     this.tokenMagicChanges = tokenMagicChanges;
     this.nestedEffects = nestedEffects;
+    this.subEffects = subEffects;
   }
 
   /**

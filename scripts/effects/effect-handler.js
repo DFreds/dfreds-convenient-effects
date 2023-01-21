@@ -119,6 +119,14 @@ export default class EffectHandler {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
 
+    for (const subEffect of effect.subEffects) {
+      await game.dfreds.effectInterface.addEffectWith({
+        effectData: subEffect.convertToObject(),
+        uuid,
+        origin: `Convenient Effect: ${effect.name}`,
+      });
+    }
+
     const activeEffectData = effect.convertToActiveEffectData({
       origin,
       overlay,
