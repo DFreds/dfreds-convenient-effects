@@ -18,12 +18,6 @@ export default class DynamicEffectsAdder {
       case 'enlarge':
         this._addEnlargeEffects(effect, actor);
         break;
-      case 'greater invisibility':
-        this._addInvisibilityEffects(effect, actor);
-        break;
-      case 'invisibility':
-        this._addInvisibilityEffects(effect, actor);
-        break;
       case 'rage':
         this._addRageEffects(effect, actor);
         break;
@@ -93,14 +87,6 @@ export default class DynamicEffectsAdder {
       effect,
       Math.min(Constants.SIZES_ORDERED.length - 1, index + 1)
     );
-  }
-
-  async _addInvisibilityEffects(effect, actor) {
-    await game.dfreds.effectInterface.addEffect({
-      effectName: 'Invisible',
-      uuid: actor.uuid,
-      origin: `Convenient Effect: ${effect.name}`,
-    });
   }
 
   _addReduceEffects(effect, actor) {
