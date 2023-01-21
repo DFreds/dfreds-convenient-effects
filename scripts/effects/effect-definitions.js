@@ -3096,20 +3096,35 @@ export default class EffectDefinitions {
     return new Effect({
       name: 'Reckless Attack',
       description:
-        'Advantage on melee attacks and grants advantage to those who attack for 1 turn',
+        'Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round',
       icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
       seconds: CONFIG.time.roundTime,
-      changes: [
-        {
-          key: 'flags.midi-qol.advantage.attack.mwak',
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-        {
-          key: 'flags.midi-qol.grants.advantage.attack.all',
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
+      subEffects: [
+        new Effect({
+          name: 'Reckless Attack (advantage on attacks)',
+          description: 'Advantage on melee attacks until end of turn',
+          icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
+          turns: 1,
+          changes: [
+            {
+              key: 'flags.midi-qol.advantage.attack.mwak',
+              mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+              value: '1',
+            },
+          ],
+        }),
+        new Effect({
+          name: 'Reckless Attack (grant advantage to those who attack)',
+          description: 'Grant advantage to those who attack until next turn',
+          icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
+          changes: [
+            {
+              key: 'flags.midi-qol.grants.advantage.attack.all',
+              mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+              value: '1',
+            },
+          ],
+        }),
       ],
     });
   }
