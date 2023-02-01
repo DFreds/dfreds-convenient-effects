@@ -95,6 +95,12 @@
                   title="Midi-QoL Effects"
                 ></i>
               {{/if}}
+              {{#if (hasWireChanges effect)}}
+                <i
+                  class="fas fa-plug integration-icon"
+                  title="Wire Effects"
+                ></i>
+              {{/if}}
               {{#if (hasAtlChanges effect)}}
                 <i
                   class="fas fa-lightbulb integration-icon"

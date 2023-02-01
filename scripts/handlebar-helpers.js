@@ -18,6 +18,7 @@ export default class HandlebarHelpers {
     this._registerHasNestedEffectsHelper();
     this._registerIsStatusEffectHelper();
     this._registerHasMidiQoLChangesHelper();
+    this._registerHasWireChangesHelper();
     this._registerHasAtlChangesHelper();
     this._registerHasTokenMagicChangesHelper();
   }
@@ -66,6 +67,20 @@ export default class HandlebarHelpers {
       );
 
       return effectHasMidiQoLChanges || anyNestedHaveMidiChanges;
+    });
+  }
+
+  _registerHasWireChangesHelper() {
+    Handlebars.registerHelper('hasWireChanges', (effect) => {
+      const anyNestedHaveWireChanges = effect.nestedEffects
+        .flatMap((nestedEffect) => nestedEffect.changes)
+        .some((change) => change.key.startsWith('flags.wire'));
+
+      const effectHasWireChanges = effect.changes.some((change) =>
+        change.key.startsWith('flags.wire')
+      );
+
+      return effectHasWireChanges || anyNestedHaveWireChanges;
     });
   }
 
