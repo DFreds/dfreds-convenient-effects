@@ -1,7 +1,6 @@
 import ChatHandler from './chat-handler.js';
 import Constants from './constants.js';
 import Controls from './controls.js';
-import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectDefinitions from './effects/effect-definitions.js';
 import EffectInterface from './effect-interface.js';
 import FoundryHelpers from './foundry-helpers.js';
@@ -52,8 +51,6 @@ Hooks.once('ready', async () => {
 });
 
 Hooks.once(`${Constants.MODULE_ID}.initialize`, async () => {
-  const customEffectsHandler = new CustomEffectsHandler();
-  await customEffectsHandler.deleteInvalidEffects();
   game.dfreds.statusEffects.initializeStatusEffects();
 
   Hooks.callAll(`${Constants.MODULE_ID}.ready`);
@@ -225,7 +222,11 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
  * Handle adding a form item for effect description to custom effects
  */
 Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
-  if (!activeEffectConfig?.object?.flags?.isCustomConvenient) return;
+  const settings = new Settings();
+
+  // Only add description if the effect exists on the custom effect
+  if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+    return;
 
   const labelFormGroup = html
     .find('section[data-tab="details"] .form-group')
@@ -243,7 +244,11 @@ Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
  * Handle re-rendering the ConvenientEffectsApp if it is open and a custom convenient active effect sheet is closed
  */
 Hooks.on('closeActiveEffectConfig', (activeEffectConfig, _html) => {
-  if (!activeEffectConfig?.object?.flags?.isCustomConvenient) return;
+  const settings = new Settings();
+
+  // Only re-render if the effect exists on the custom effect
+  if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+    return;
 
   const foundryHelpers = new FoundryHelpers();
   foundryHelpers.renderConvenientEffectsAppIfOpen();

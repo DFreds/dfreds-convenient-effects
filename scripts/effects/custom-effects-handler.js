@@ -32,9 +32,9 @@ export default class CustomEffectsHandler {
     const item = this._findCustomEffectsItem();
     if (!item) return [];
 
-    let customEffects = item.effects
-      .filter((effect) => this._isValid(effect))
-      .map((effect) => this._convertToEffectClass(effect));
+    let customEffects = item.effects.map((effect) =>
+      this._convertToEffectClass(effect)
+    );
 
     customEffects.sort((a, b) => {
       let nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -51,26 +51,6 @@ export default class CustomEffectsHandler {
     });
 
     return customEffects;
-  }
-
-  /**
-   * Deletes invalid custom effects
-   *
-   * @returns {Promise} resolves when all invalid effects are deleted
-   */
-  deleteInvalidEffects() {
-    const item = this._findCustomEffectsItem();
-    if (!item) return;
-
-    const invalidCustomEffectIds = item.effects
-      .filter((effect) => !this._isValid(effect))
-      .map((effect) => effect.id);
-
-    return item.deleteEmbeddedDocuments('ActiveEffect', invalidCustomEffectIds);
-  }
-
-  _isValid(effect) {
-    return effect.flags?.isCustomConvenient;
   }
 
   _convertToEffectClass(effect) {
@@ -114,7 +94,6 @@ export default class CustomEffectsHandler {
         'duration.rounds': undefined,
         disabled: false,
         flags: {
-          isCustomConvenient: true,
           convenientDescription: 'Applies custom effects',
         },
         transfer: false,
@@ -134,7 +113,6 @@ export default class CustomEffectsHandler {
     const item = await this._findOrCreateCustomEffectsItem();
     const customEffects = activeEffects.map((activeEffect) => {
       const flags = activeEffect?.flags ?? {};
-      flags.isCustomConvenient = true;
       activeEffect.flags = flags;
 
       if (!activeEffect.origin) {
@@ -197,7 +175,6 @@ export default class CustomEffectsHandler {
           turns: effect.turns,
         },
         flags: foundry.utils.mergeObject(effect.flags, {
-          isCustomConvenient: true,
           convenientDescription: effect.description,
         }),
         origin: item.uuid,
