@@ -113,7 +113,12 @@ export default class CustomEffectsHandler {
     const item = await this._findOrCreateCustomEffectsItem();
     const customEffects = activeEffects.map((activeEffect) => {
       const flags = activeEffect?.flags ?? {};
-      activeEffect.flags = flags;
+
+      const ceFlags = {};
+      ceFlags[Constants.MODULE_ID] = {};
+      ceFlags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
+        this.description;
+      ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
 
       if (!activeEffect.origin) {
         activeEffect.origin = item.uuid;
@@ -122,7 +127,7 @@ export default class CustomEffectsHandler {
       return {
         changes: activeEffect.changes,
         duration: activeEffect.duration,
-        flags: flags,
+        flags: foundry.utils.mergeObject(flags, ceFlags),
         icon: activeEffect.icon,
         label: activeEffect.label,
         origin: activeEffect.origin,
