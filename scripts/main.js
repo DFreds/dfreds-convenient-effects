@@ -234,12 +234,6 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
  * Handle adding a form item for effect description to custom effects
  */
 Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
-  const settings = new Settings();
-
-  // Only add description if the effect exists on the custom effect
-  if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
-    return;
-
   const labelFormGroup = html
     .find('section[data-tab="details"] .form-group')
     .first();
