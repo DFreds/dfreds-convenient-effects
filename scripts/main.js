@@ -51,7 +51,7 @@ Hooks.once('ready', async () => {
 });
 
 Hooks.once(`${Constants.MODULE_ID}.initialize`, async () => {
-  game.dfreds.statusEffects.initializeStatusEffects();
+  game.dfreds.statusEffects.initialize();
 
   Hooks.callAll(`${Constants.MODULE_ID}.ready`);
 });
