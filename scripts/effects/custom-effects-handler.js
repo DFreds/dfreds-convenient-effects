@@ -2,6 +2,7 @@ import Effect from './effect.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
 import FoundryHelpers from '../foundry-helpers.js';
+import Constants from '../constants.js';
 
 /**
  * Handles initializing, creating, editing, and deleting custom effects.
@@ -53,28 +54,31 @@ export default class CustomEffectsHandler {
     return customEffects;
   }
 
-  _convertToEffectClass(effect) {
-    const atlChanges = effect.changes.filter((changes) =>
+  _convertToEffectClass(activeEffect) {
+    const atlChanges = activeEffect.changes.filter((changes) =>
       changes.key.startsWith('ATL')
     );
-    const tokenMagicChanges = effect.changes.filter(
+    const tokenMagicChanges = activeEffect.changes.filter(
       (changes) => changes.key === 'macro.tokenMagic'
     );
-    const changes = effect.changes.filter(
+    const changes = activeEffect.changes.filter(
       (change) =>
         !change.key.startsWith('ATL') && change.key !== 'macro.tokenMagic'
     );
 
     return new Effect({
-      customId: effect.id,
-      name: effect.label,
-      description: effect.flags.convenientDescription,
-      icon: effect.icon,
-      tint: effect.tint,
-      seconds: effect.duration.seconds,
-      rounds: effect.duration.rounds,
-      turns: effect.duration.turns,
-      flags: effect.flags,
+      customId: activeEffect.id,
+      name: activeEffect.label,
+      description: activeEffect.getFlag(
+        Constants.MODULE_ID,
+        Constants.FLAGS.DESCRIPTION
+      ),
+      icon: activeEffect.icon,
+      tint: activeEffect.tint,
+      seconds: activeEffect.duration.seconds,
+      rounds: activeEffect.duration.rounds,
+      turns: activeEffect.duration.turns,
+      flags: activeEffect.flags,
       changes,
       atlChanges,
       tokenMagicChanges,
@@ -85,20 +89,16 @@ export default class CustomEffectsHandler {
    * Creates a new custom effect on the custom effect item and renders its sheet
    */
   async createNewCustomEffect() {
+    const newEffect = new Effect({
+      name: 'New Effect',
+      icon: 'icons/svg/aura.svg',
+    });
+
     const item = await this._findOrCreateCustomEffectsItem();
     const effects = await item.createEmbeddedDocuments('ActiveEffect', [
-      {
-        label: game.i18n.localize('DND5E.EffectNew'),
-        icon: 'icons/svg/aura.svg',
-        origin: item.uuid,
-        'duration.rounds': undefined,
-        disabled: false,
-        flags: {
-          convenientDescription: 'Applies custom effects',
-        },
-        transfer: false,
-      },
+      newEffect.convertToActiveEffectData({ origin: item.uuid }),
     ]);
+
     effects[0].sheet.render(true);
   }
 
@@ -165,27 +165,9 @@ export default class CustomEffectsHandler {
   async duplicateExistingEffect(effect) {
     const item = await this._findOrCreateCustomEffectsItem();
     const effects = await item.createEmbeddedDocuments('ActiveEffect', [
-      {
-        label: effect.name,
-        icon: effect.icon,
-        tint: effect.tint,
-        duration: {
-          seconds: effect.seconds,
-          rounds: effect.rounds,
-          turns: effect.turns,
-        },
-        flags: foundry.utils.mergeObject(effect.flags, {
-          convenientDescription: effect.description,
-        }),
-        origin: item.uuid,
-        changes: [
-          ...effect.changes,
-          ...effect.atlChanges,
-          ...effect.tokenMagicChanges,
-        ],
-        transfer: false,
-      },
+      effect.convertToActiveEffectData(),
     ]);
+
     effects[0].sheet.render(true);
   }
 

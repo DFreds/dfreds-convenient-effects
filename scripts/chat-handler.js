@@ -1,3 +1,4 @@
+import Constants from './constants.js';
 import Settings from './settings.js';
 
 /**
@@ -71,10 +72,12 @@ export default class ChatHandler {
   _getDescription(effect) {
     if (effect.description) {
       return effect.description;
-    } else if (effect.flags.convenientDescription) {
-      return effect.flags.convenientDescription;
+    } else if (
+      effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION)
+    ) {
+      return effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION);
     } else {
-      return 'Applies custom effects';
+      return 'Applies effects';
     }
   }
 }

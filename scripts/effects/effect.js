@@ -66,6 +66,17 @@ export default class Effect {
       changes.push(...this.tokenMagicChanges);
     }
 
+    const ceFlags = {
+      core: {
+        statusId: this._id,
+        overlay,
+      },
+    };
+    ceFlags[Constants.MODULE_ID] = {};
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
+      this.description;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
+
     return {
       id: this._id,
       name: this.name,
@@ -73,14 +84,7 @@ export default class Effect {
       icon: this.icon,
       tint: this.tint,
       duration: this._getDurationData(),
-      flags: foundry.utils.mergeObject(this.flags, {
-        core: {
-          statusId: this._id,
-          overlay,
-        },
-        isConvenient: true,
-        convenientDescription: this.description,
-      }),
+      flags: foundry.utils.mergeObject(this.flags, ceFlags),
       origin,
       transfer: false,
       changes,

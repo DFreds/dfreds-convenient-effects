@@ -122,7 +122,10 @@ Hooks.on('getSceneControlButtons', (controls) => {
  */
 Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
   if (
-    !activeEffect?.flags?.isConvenient ||
+    !activeEffect?.getFlag(
+      Constants.MODULE_ID,
+      Constants.FLAGS.IS_CONVENIENT
+    ) ||
     !(activeEffect?.parent instanceof Actor)
   )
     return;
@@ -147,7 +150,10 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
   }
 
   if (
-    !activeEffect?.flags?.isConvenient ||
+    !activeEffect?.getFlag(
+      Constants.MODULE_ID,
+      Constants.FLAGS.IS_CONVENIENT
+    ) ||
     !(activeEffect?.parent instanceof Actor)
   ) {
     return;
@@ -170,7 +176,10 @@ Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
  */
 Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
   if (
-    !activeEffect?.flags?.isConvenient ||
+    !activeEffect?.getFlag(
+      Constants.MODULE_ID,
+      Constants.FLAGS.IS_CONVENIENT
+    ) ||
     !(activeEffect?.parent instanceof Actor)
   )
     return;
@@ -199,7 +208,10 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   }
 
   if (
-    !activeEffect?.flags?.isConvenient ||
+    !activeEffect?.getFlag(
+      Constants.MODULE_ID,
+      Constants.FLAGS.IS_CONVENIENT
+    ) ||
     !(activeEffect?.parent instanceof Actor)
   ) {
     return;
@@ -233,10 +245,15 @@ Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
     .first();
 
   const description =
-    activeEffectConfig.object.flags.convenientDescription ??
-    'Applies custom effects';
+    activeEffectConfig.object.getFlag(
+      Constants.MODULE_ID,
+      Constants.FLAGS.DESCRIPTION
+    ) ??
+    activeEffectConfig.object.convenientDescription ??
+    'Applies effects';
+
   labelFormGroup.after(
-    `<div class="form-group"><label>Effect Description</label><div class="form-fields"><input type="text" name="flags.convenientDescription" value="${description}"></div></div>`
+    `<div class="form-group"><label>Effect Description</label><div class="form-fields"><input type="text" name="flags.${Constants.MODULE_ID}.${Constants.FLAGS.DESCRIPTION}" value="${description}"></div></div>`
   );
 });
 

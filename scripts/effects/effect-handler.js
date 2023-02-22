@@ -1,3 +1,4 @@
+import Constants from '../constants.js';
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
@@ -45,7 +46,10 @@ export default class EffectHandler {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
     return actor?.effects?.some(
       (activeEffect) =>
-        activeEffect?.flags?.isConvenient &&
+        activeEffect?.getFlag(
+          Constants.MODULE_ID,
+          Constants.FLAGS.IS_CONVENIENT
+        ) &&
         activeEffect?.label == effectName &&
         !activeEffect?.disabled
     );
@@ -69,14 +73,20 @@ export default class EffectHandler {
     if (origin) {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
-          activeEffect?.flags?.isConvenient &&
+          activeEffect?.getFlag(
+            Constants.MODULE_ID,
+            Constants.FLAGS.IS_CONVENIENT
+          ) &&
           activeEffect?.label == effectName &&
           activeEffect?.origin == origin
       );
     } else {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
-          activeEffect?.flags?.isConvenient && activeEffect?.label == effectName
+          activeEffect?.getFlag(
+            Constants.MODULE_ID,
+            Constants.FLAGS.IS_CONVENIENT
+          ) && activeEffect?.label == effectName
       );
     }
 

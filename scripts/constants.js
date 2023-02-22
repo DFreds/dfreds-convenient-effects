@@ -3,6 +3,10 @@
  */
 export default class Constants {
   static MODULE_ID = 'dfreds-convenient-effects';
+  static FLAGS = {
+    DESCRIPTION: 'description',
+    IS_CONVENIENT: 'isConvenient',
+  };
 
   static COLORS = {
     COLD_FIRE: '#389888',

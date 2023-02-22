@@ -31,15 +31,21 @@ export default class RemoveEffectsHandler {
   get _effectsByActorMappings() {
     return canvas.tokens.controlled
       .filter((token) => {
-        const effects = token.actor.effects.filter(
-          (effect) => effect?.flags?.isConvenient
+        const effects = token.actor.effects.filter((activeEffect) =>
+          activeEffect?.getFlag(
+            Constants.MODULE_ID,
+            Constants.FLAGS.IS_CONVENIENT
+          )
         );
         return effects.length > 0;
       })
       .map((token) => {
         const actor = token.actor;
-        const effects = token.actor.effects.filter(
-          (effect) => effect?.flags?.isConvenient
+        const effects = token.actor.effects.filter((activeEffect) =>
+          activeEffect?.getFlag(
+            Constants.MODULE_ID,
+            Constants.FLAGS.IS_CONVENIENT
+          )
         );
 
         return { actor, effects };
