@@ -9,6 +9,7 @@ import MacroHandler from './macro-handler.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
+import TextEnrichers from './text-enrichers.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -16,6 +17,7 @@ import { libWrapper } from './lib/shim.js';
 Hooks.once('init', () => {
   new Settings().registerSettings();
   new HandlebarHelpers().registerHelpers();
+  new TextEnrichers().initialize();
 });
 
 /**
