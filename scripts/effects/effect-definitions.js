@@ -12,7 +12,7 @@ export default class EffectDefinitions {
     this._settings = new Settings();
 
     this._flagPrefix = 'midi-qol';
-    if (game.modules.get('wire')) {
+    if (game.modules.get('wire')?.active) {
       this._flagPrefix = 'wire';
     }
   }
