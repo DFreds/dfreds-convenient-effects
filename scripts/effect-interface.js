@@ -257,7 +257,7 @@ export default class EffectInterface {
 
   async _getNestedEffectSelection(effect) {
     const content = await renderTemplate(
-      'modules/dfreds-convenient-effects/templates/nested-effects-dialog.html',
+      'modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs',
       { parentEffect: effect }
     );
     const choice = await Dialog.prompt(

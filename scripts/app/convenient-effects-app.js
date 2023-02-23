@@ -17,7 +17,7 @@ export default class ConvenientEffectsApp extends Application {
       top: 75,
       left: 125,
       template:
-        'modules/dfreds-convenient-effects/templates/convenient-effects-app.html',
+        'modules/dfreds-convenient-effects/templates/convenient-effects-app.hbs',
       scrollY: ['ol.directory-list'],
     });
   }

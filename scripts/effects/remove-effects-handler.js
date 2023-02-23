@@ -61,7 +61,7 @@ export default class RemoveEffectsHandler {
 
   async _getDialog(resolve, _reject) {
     const content = await renderTemplate(
-      'modules/dfreds-convenient-effects/templates/remove-effects-dialog.html',
+      'modules/dfreds-convenient-effects/templates/remove-effects-dialog.hbs',
       { effectsByActorMappings: this._effectsByActorMappings }
     );
     return new Dialog(
