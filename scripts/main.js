@@ -10,6 +10,7 @@ import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
 import TextEnrichers from './text-enrichers.js';
+import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -235,23 +236,12 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
 /**
  * Handle adding a form item for effect description to custom effects
  */
-Hooks.on('renderActiveEffectConfig', (activeEffectConfig, html, _data) => {
-  const labelFormGroup = html
-    .find('section[data-tab="details"] .form-group')
-    .first();
-
-  const description =
-    activeEffectConfig.object.getFlag(
-      Constants.MODULE_ID,
-      Constants.FLAGS.DESCRIPTION
-    ) ??
-    activeEffectConfig.object.convenientDescription ??
-    'Applies effects';
-
-  labelFormGroup.after(
-    `<div class="form-group"><label>Effect Description</label><div class="form-fields"><input type="text" name="flags.${Constants.MODULE_ID}.${Constants.FLAGS.DESCRIPTION}" value="${description}"></div></div>`
-  );
-});
+Hooks.on(
+  'renderActiveEffectConfig',
+  async (activeEffectConfig, $html, _data) => {
+    addDescriptionToEffectConfig(activeEffectConfig, $html);
+  }
+);
 
 /**
  * Handle re-rendering the ConvenientEffectsApp if it is open and a custom convenient active effect sheet is closed
