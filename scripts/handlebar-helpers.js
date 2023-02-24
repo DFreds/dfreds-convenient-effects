@@ -46,10 +46,11 @@ export default class HandlebarHelpers {
 
   _registerHasNestedEffectsHelper() {
     Handlebars.registerHelper('hasNestedEffects', (effect) => {
-      return (
-        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS)
-          .length > 0
-      );
+      const nestedEffectNames =
+        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS) ??
+        [];
+
+      return nestedEffectNames.length > 0;
     });
   }
 
@@ -57,11 +58,13 @@ export default class HandlebarHelpers {
     Handlebars.registerHelper('convenientIcons', (effect) => {
       let icons = '';
 
-      const nestedEffects = effect
-        .getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS)
-        .map((nestedEffect) =>
-          game.dfreds.effectInterface.findEffectByName(nestedEffect)
-        );
+      const nestedEffectNames =
+        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS) ??
+        [];
+
+      const nestedEffects = nestedEffectNames.map((nestedEffect) =>
+        game.dfreds.effectInterface.findEffectByName(nestedEffect)
+      );
 
       const subChanges = nestedEffects.flatMap(
         (nestedEffect) => nestedEffect.changes
