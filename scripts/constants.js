@@ -6,6 +6,10 @@ export default class Constants {
   static FLAGS = {
     DESCRIPTION: 'description',
     IS_CONVENIENT: 'isConvenient',
+    IS_DYNAMIC: 'isDynamic',
+    IS_VIEWABLE: 'isViewable',
+    NESTED_EFFECTS: 'nestedEffects',
+    SUB_EFFECTS: 'subEffects',
   };
 
   static COLORS = {

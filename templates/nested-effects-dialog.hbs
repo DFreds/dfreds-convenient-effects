@@ -1,12 +1,12 @@
 <form id='convenient-effects-dialog' onsubmit='event.preventDefault();'>
-  <p>{{parentEffect.description}}</p>
+  <p>{{parentEffect.flags.dfreds-convenient-effects.description}}</p>
   <div class='form-group'>
     <label>Chosen Effect</label>
     <div class='form-fields'>
       <select name='effect-choice'>
         {{#select effectChoice}}
-          {{#each parentEffect.nestedEffects as |nestedEffect|}}
-            <option value='{{nestedEffect.name}}'>{{nestedEffect.name}}</option>
+          {{#each nestedEffects as |nestedEffect|}}
+            <option value='{{nestedEffect.label}}'>{{nestedEffect.label}}</option>
           {{/each}}
         {{/select}}
       </select>
@@ -14,9 +14,9 @@
   </div>
 
   <div id='nested-effect-descriptions'>
-    {{#each parentEffect.nestedEffects as |nestedEffect|}}
-      <p><strong>{{nestedEffect.name}}.</strong>
-        {{nestedEffect.description}}</p>
+    {{#each nestedEffects as |nestedEffect|}}
+      <p><strong>{{nestedEffect.label}}.</strong>
+        {{nestedEffect.flags.dfreds-convenient-effects.description}}</p>
     {{/each}}
   </div>
 </form>

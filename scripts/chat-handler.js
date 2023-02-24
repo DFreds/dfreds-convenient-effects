@@ -57,7 +57,7 @@ export default class ChatHandler {
   }
 
   _getChatContent({ effect, reason, actorName, isCreateActiveEffect }) {
-    let message = `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>`;
+    let message = `<p><strong>${effect.label}</strong> - ${reason} ${actorName}</p>`;
     if (
       this._settings.showChatMessageEffectDescription === 'onAddOrRemove' ||
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
@@ -70,14 +70,10 @@ export default class ChatHandler {
   }
 
   _getDescription(effect) {
-    if (effect.description) {
-      return effect.description;
-    } else if (
-      effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION)
-    ) {
+    if (effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION)) {
       return effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION);
     } else {
-      return 'Applies effects';
+      return 'No description';
     }
   }
 }

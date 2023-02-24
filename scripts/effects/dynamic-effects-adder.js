@@ -1,17 +1,22 @@
 import Constants from '../constants.js';
+import Settings from '../settings.js';
 
 /**
  * Handles adding dynamic effects for certain effects
  */
 export default class DynamicEffectsAdder {
+  constructor() {
+    this._settings = new Settings();
+  }
+
   /**
    * Adds dynamic effects for specific effects
    *
-   * @param {Effect} effect - the effect to handle
-   * @param {Actor5e} actor - the effected actor
+   * @param {object} effect - the object form of an ActiveEffect to handle
+   * @param {Actor} actor - the affected actor
    */
   async addDynamicEffects(effect, actor) {
-    switch (effect.name.toLowerCase()) {
+    switch (effect.label.toLowerCase()) {
       case 'divine word':
         await this._addDivineWordEffects(effect, actor);
         break;
@@ -31,51 +36,58 @@ export default class DynamicEffectsAdder {
     const remainingHp = actor.system.attributes.hp.value;
 
     if (remainingHp <= 20) {
-      if (actor.system.attributes.hp.value <= 20) {
-        await actor.update({
-          'system.attributes.hp.value': 0,
-        });
-      }
-      effect.description = 'Killed instantly';
+      await actor.update({
+        'system.attributes.hp.value': 0,
+      });
+      await game.dfreds.effectInterface.addEffect({
+        effectName: 'Dead',
+        uuid: actor.uuid,
+        overlay: true,
+      });
+      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
+        'Killed instantly';
     } else if (remainingHp <= 30) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin: `Convenient Effect: ${effect.label}`,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin: `Convenient Effect: ${effect.label}`,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Stunned',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin: `Convenient Effect: ${effect.label}`,
       });
-      effect.description = 'Blinded, deafened, and stunned for 1 hour';
-      effect.seconds = Constants.SECONDS.IN_ONE_HOUR;
+      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
+        'Blinded, deafened, and stunned for 1 hour';
+      effect.duration.seconds = Constants.SECONDS.IN_ONE_HOUR;
     } else if (remainingHp <= 40) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin: `Convenient Effect: ${effect.label}`,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin: `Convenient Effect: ${effect.label}`,
       });
-      effect.description = 'Deafened and blinded for 10 minutes';
-      effect.seconds = Constants.SECONDS.IN_TEN_MINUTES;
+      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
+        'Deafened and blinded for 10 minutes';
+      effect.duration.seconds = Constants.SECONDS.IN_TEN_MINUTES;
     } else if (remainingHp <= 50) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin: `Convenient Effect: ${effect.label}`,
       });
-      effect.description = 'Deafened for 1 minute';
-      effect.seconds = Constants.SECONDS.IN_ONE_MINUTE;
+      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
+        'Deafened for 1 minute';
+      effect.duration.seconds = Constants.SECONDS.IN_ONE_MINUTE;
     }
   }
 
@@ -106,20 +118,22 @@ export default class DynamicEffectsAdder {
       value: size,
     });
 
-    effect.atlChanges.push(
-      ...[
-        {
-          key: 'ATL.width',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: tokenSize,
-        },
-        {
-          key: 'ATL.height',
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: tokenSize,
-        },
-      ]
-    );
+    if (this._settings.integrateWithAte) {
+      effect.changes.push(
+        ...[
+          {
+            key: 'ATL.width',
+            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+            value: tokenSize,
+          },
+          {
+            key: 'ATL.height',
+            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+            value: tokenSize,
+          },
+        ]
+      );
+    }
   }
 
   _addRageEffects(effect, actor) {
@@ -203,7 +217,9 @@ export default class DynamicEffectsAdder {
 
   _determineIfPersistantRage(effect, barbarianClass) {
     if (barbarianClass.system.levels > 14) {
-      effect.seconds = undefined;
+      effect.duration.seconds = null;
+      effect.duration.rounds = null;
+      effect.duration.turns = null;
     }
   }
 }

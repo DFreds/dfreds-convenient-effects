@@ -3,7 +3,7 @@ import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
-import Effect from './effect.js';
+import { addOverlayAndOriginToEffect } from './effect-helpers.js';
 
 /**
  * Handles toggling on and off effects on actors
@@ -25,10 +25,11 @@ export default class EffectHandler {
    */
   async toggleEffect(effectName, { overlay, uuids }) {
     for (const uuid of uuids) {
-      if (await this.hasEffectApplied(effectName, uuid)) {
+      if (this.hasEffectApplied(effectName, uuid)) {
         await this.removeEffect({ effectName, uuid });
       } else {
-        await this.addEffect({ effectName, uuid, overlay });
+        let effect = game.dfreds.effectInterface.findEffectByName(effectName);
+        await this.addEffect({ effect: { ...effect }, uuid, overlay });
       }
     }
   }
@@ -101,65 +102,55 @@ export default class EffectHandler {
    * UUID
    *
    * @param {object} params - the effect parameters
-   * @param {string} params.effectName - the name of the effect to add
-   * @param {object} params.effectData - the effect data to add if effectName is not provided
+   * @param {object} params.effect - the object form of an ActiveEffect to add
    * @param {string} params.uuid - the uuid of the actor to add the effect to
    * @param {string} params.origin - the origin of the effect
    * @param {boolean} params.overlay - if the effect is an overlay or not
    */
-  async addEffect({ effectName, effectData, uuid, origin, overlay }) {
-    let effect = game.dfreds.effectInterface.findEffectByName(effectName);
-    let activeEffectsToApply = [];
-
-    if (!effect && effectData) {
-      effect = new Effect(effectData);
-    }
-
+  async addEffect({ effect, uuid, origin, overlay }) {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
+    const activeEffectsToApply = [];
 
-    if (effect.name.startsWith('Exhaustion')) {
+    activeEffectsToApply.push(effect);
+
+    if (effect.label.startsWith('Exhaustion')) {
       await this._removeAllExhaustionEffects(uuid);
     }
 
-    if (effect.name == 'Unconscious') {
+    if (effect.label == 'Unconscious') {
       activeEffectsToApply.push(this._getProneEffect());
     }
 
-    if (effect.isDynamic) {
+    if (origin) {
+      effect.origin = origin;
+    }
+    effect.flags.core.overlay = overlay;
+
+    if (effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.IS_DYNAMIC]) {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
     }
 
-    for (const subEffect of effect.subEffects) {
-      await game.dfreds.effectInterface.addEffectWith({
-        effectData: subEffect.convertToObject(),
-        uuid,
-        origin: `Convenient Effect: ${effect.name}`,
-      });
-    }
-
-    const activeEffectData = effect.convertToActiveEffectData({
-      origin,
-      overlay,
-      includeAte: this._settings.integrateWithAte,
-      includeTokenMagic: this._settings.integrateWithTokenMagic,
-    });
-
-    activeEffectsToApply.push(activeEffectData);
-
     await actor.createEmbeddedDocuments('ActiveEffect', activeEffectsToApply);
+    log(`Added effect ${effect.label} to ${actor.name} - ${actor.id}`);
 
-    log(`Added effect ${effect.name} to ${actor.name} - ${actor.id}`);
+    const subEffects =
+      effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.SUB_EFFECTS];
+    if (subEffects) {
+      // Apply all sub-effects with the original effect being the origin
+      for (const subEffect of subEffects) {
+        await game.dfreds.effectInterface.addEffectWith({
+          effectData: subEffect,
+          uuid,
+          origin: `Convenient Effect: ${effect.label}`,
+        });
+      }
+    }
   }
 
   _getProneEffect() {
     let proneActiveEffectData =
       game.dfreds.effectInterface.findEffectByName('Prone');
-    return proneActiveEffectData.convertToActiveEffectData({
-      origin,
-      overlay: false,
-      includeAte: this._settings.integrateWithAte,
-      includeTokenMagic: this._settings.integrateWithTokenMagic,
-    });
+    return proneActiveEffectData;
   }
 
   async _removeAllExhaustionEffects(uuid) {

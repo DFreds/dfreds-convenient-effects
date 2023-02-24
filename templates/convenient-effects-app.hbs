@@ -67,14 +67,14 @@
           {{#each folder.effects as |effect|}}
             <li
               class='directory-item document entity flexrow convenient-effect'
-              data-effect-name='{{effect.name}}'
+              data-effect-name='{{effect.label}}'
               draggable='true'
               style='display: flex'
             >
-              <img title='{{effect.name}}' src='{{effect.icon}}' />
+              <img title='{{effect.label}}' src='{{effect.icon}}' />
               <h4 class='document-name entity-name'>
-                <a title='{{effect.description}}'>
-                  {{effect.name}}
+                <a title='{{effect.flags.dfreds-convenient-effects.description}}'>
+                  {{effect.label}}
                 </a>
               </h4>
               {{#if (hasNestedEffects effect)}}

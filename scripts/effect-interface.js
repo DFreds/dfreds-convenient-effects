@@ -1,9 +1,9 @@
 import Constants from './constants.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
-import Effect from './effects/effect.js';
 import EffectHandler from './effects/effect-handler.js';
 import FoundryHelpers from './foundry-helpers.js';
 import Settings from './settings.js';
+import { createActiveEffect } from './effects/effect-helpers.js';
 
 /**
  * Interface for working with effects and executing them as a GM via sockets
@@ -44,13 +44,13 @@ export default class EffectInterface {
    * effect name. Prioritizes finding custom effects first.
    *
    * @param {string} effectName - the effect name to search for
-   * @returns {Effect} the found effect
+   * @returns {ActiveEffect} the found effect
    */
   findEffectByName(effectName) {
     const effect = this.findCustomEffectByName(effectName);
     if (effect) return effect;
 
-    return game.dfreds.effects.all.find((effect) => effect.name == effectName);
+    return game.dfreds.effects.all.find((effect) => effect.label == effectName);
   }
 
   /**
@@ -58,12 +58,12 @@ export default class EffectInterface {
    * effect name.
    *
    * @param {string} effectName - the effect name to search for
-   * @returns {Effect} the found effect
+   * @returns {ActiveEffect} the found effect
    */
   findCustomEffectByName(effectName) {
     const effect = this._customEffectsHandler
       .getCustomEffects()
-      .find((effect) => effect.name == effectName);
+      .find((effect) => effect.label == effectName);
 
     return effect;
   }
@@ -101,12 +101,12 @@ export default class EffectInterface {
       return;
     }
 
-    if (effect.nestedEffects.length > 0) {
+    if (this.hasNestedEffects(effect)) {
       effect = await this._getNestedEffectSelection(effect);
       if (!effect) return; // dialog closed without selecting one
     }
 
-    return this._socket.executeAsGM('toggleEffect', effect.name, {
+    return this._socket.executeAsGM('toggleEffect', effect.label, {
       overlay,
       uuids,
     });
@@ -150,12 +150,13 @@ export default class EffectInterface {
       return;
     }
 
-    if (effect.nestedEffects.length > 0) {
+    if (this.hasNestedEffects(effect)) {
       effect = await this._getNestedEffectSelection(effect);
+      if (!effect) return; // dialog closed without selecting one
     }
 
     return this._socket.executeAsGM('removeEffect', {
-      effectName: effect.name,
+      effectName: effect.label,
       uuid,
       origin,
     });
@@ -187,12 +188,13 @@ export default class EffectInterface {
       return;
     }
 
-    if (effect.nestedEffects.length > 0) {
+    if (this.hasNestedEffects(effect) > 0) {
       effect = await this._getNestedEffectSelection(effect);
+      if (!effect) return; // dialog closed without selecting one
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effectName: effect.name,
+      effect: { ...effect },
       uuid,
       origin,
       overlay,
@@ -210,8 +212,7 @@ export default class EffectInterface {
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
   async addEffectWith({ effectData, uuid, origin, overlay }) {
-    let effect = new Effect(effectData);
-
+    let effect = createActiveEffect({ ...effectData, origin });
     const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
@@ -219,34 +220,24 @@ export default class EffectInterface {
       return;
     }
 
-    if (effect.nestedEffects.length > 0) {
-      let nestedEffect = await this._getNestedEffectSelection(effect);
-      let newEffectData = mergeObject(
-        effectData,
-        nestedEffect.convertToObject()
-      );
-
-      return this._socket.executeAsGM('addEffect', {
-        effectData: newEffectData,
-        uuid,
-        origin,
-        overlay,
-      });
-    } else {
-      return this._socket.executeAsGM('addEffect', {
-        effectData,
-        uuid,
-        origin,
-        overlay,
-      });
+    if (this.hasNestedEffects(effect)) {
+      effect = await this._getNestedEffectSelection(effect);
+      if (!effect) return; // dialog closed without selecting one
     }
+
+    return this._socket.executeAsGM('addEffect', {
+      effect: { ...effect },
+      uuid,
+      origin,
+      overlay,
+    });
   }
 
   /**
    * Creates new custom effects with the provided active effect data.
    *
    * @param {object} params - the params for adding an effect
-   * @param {object[]} params.activeEffects - array of active effects to add
+   * @param {ActiveEffect[]} params.activeEffects - array of active effects to add
    * @returns {Promise} a promise that resolves when the active effects have finished being added
    */
   createNewCustomEffectsWith({ activeEffects }) {
@@ -255,14 +246,33 @@ export default class EffectInterface {
     });
   }
 
+  /**
+   * Checks if the given effect has nested effects
+   *
+   * @param {ActiveEffect} effect - the active effect to check the nested effets on
+   * @returns
+   */
+  hasNestedEffects(effect) {
+    const nestedEffects =
+      effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS) ?? [];
+
+    return nestedEffects.length > 0;
+  }
+
   async _getNestedEffectSelection(effect) {
+    const nestedEffects = effect
+      .getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS)
+      .map((nestedEffect) =>
+        game.dfreds.effectInterface.findEffectByName(nestedEffect)
+      );
+
     const content = await renderTemplate(
       'modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs',
-      { parentEffect: effect }
+      { parentEffect: effect, nestedEffects }
     );
     const choice = await Dialog.prompt(
       {
-        title: effect.name,
+        title: effect.label,
         content: content,
         label: 'Select Effect',
         callback: (html) => {
@@ -274,9 +284,7 @@ export default class EffectInterface {
       { width: 300 }
     );
 
-    return effect.nestedEffects.find(
-      (nestedEffect) => nestedEffect.name == choice
-    );
+    return nestedEffects.find((nestedEffect) => nestedEffect.label == choice);
   }
 
   /**

@@ -234,7 +234,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
 });
 
 /**
- * Handle adding a form item for effect description to custom effects
+ * Handle changing the rendered active effect config
  */
 Hooks.on(
   'renderActiveEffectConfig',
@@ -276,7 +276,7 @@ Hooks.on('dropActorSheetData', (actor, _actorSheetCharacter, data) => {
   const effect = game.dfreds.effectInterface.findEffectByName(data.effectName);
 
   // core will handle the drop since we are not using a nested effect
-  if (!effect.nestedEffects.length) return;
+  if (!game.dfreds.effectInterface.hasNestedEffects(effect)) return;
 
   game.dfreds.effectInterface.addEffect({
     effectName: data.effectName,

@@ -13,13 +13,13 @@ export default class MacroHandler {
     if (!data.effectName) return;
 
     const effect = game.dfreds.effects.all.find(
-      (effect) => effect.name === data.effectName
+      (effect) => effect.label === data.effectName
     );
 
     if (!effect) return;
 
-    const name = `Toggle Convenient Effect - ${effect.name}`;
-    const command = `game.dfreds.effectInterface.toggleEffect("${effect.name}")`;
+    const name = `Toggle Convenient Effect - ${effect.label}`;
+    const command = `game.dfreds.effectInterface.toggleEffect("${effect.label}")`;
 
     let macro = game.macros.find(
       (macro) => macro.name === name && macro.command === command
