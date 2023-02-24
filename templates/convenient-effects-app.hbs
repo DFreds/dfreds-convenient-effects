@@ -77,42 +77,7 @@
                   {{effect.label}}
                 </a>
               </h4>
-              {{#if (hasNestedEffects effect)}}
-                <i
-                  class='fas fa-tree integration-icon'
-                  title='Nested Effects'
-                ></i>
-              {{/if}}
-              {{#if (isStatusEffect effect)}}
-                <i
-                  class='fas fa-street-view integration-icon'
-                  title='Token Status Effect'
-                ></i>
-              {{/if}}
-              {{#if (hasMidiQoLChanges effect)}}
-                <i
-                  class='fas fa-dice-d20 integration-icon'
-                  title='Midi-QoL Effects'
-                ></i>
-              {{/if}}
-              {{#if (hasWireChanges effect)}}
-                <i
-                  class='fas fa-plug integration-icon'
-                  title='Wire Effects'
-                ></i>
-              {{/if}}
-              {{#if (hasAtlChanges effect)}}
-                <i
-                  class='fas fa-lightbulb integration-icon'
-                  title='Active Token Lighting Effects'
-                ></i>
-              {{/if}}
-              {{#if (hasTokenMagicChanges effect)}}
-                <i
-                  class='fas fa-magic integration-icon'
-                  title='Token Magic Effects'
-                ></i>
-              {{/if}}
+              {{{convenientIcons effect}}}
             </li>
           {{/each}}
         </ol>
