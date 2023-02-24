@@ -32,3 +32,14 @@
   flex: none;
   align-self: center;
 }
+
+#nested-effects-config .title {
+  font-weight: bold;
+}
+
+#nested-effects-config button {
+  flex: 0 0 24px;
+  line-height: 24px;
+  margin: -1px 0 -1px 4px;
+  order: 99;
+} 

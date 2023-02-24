@@ -11,6 +11,7 @@ import StatusEffects from './status-effects.js';
 import { libWrapper } from './lib/shim.js';
 import TextEnrichers from './text-enrichers.js';
 import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
+import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -240,6 +241,13 @@ Hooks.on(
   'renderActiveEffectConfig',
   async (activeEffectConfig, $html, _data) => {
     addDescriptionToEffectConfig(activeEffectConfig, $html);
+
+    const settings = new Settings();
+
+    // Only add nested effects if the effect exists on the custom effect item
+    if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+      return;
+    addNestedEffectsToEffectConfig(activeEffectConfig, $html);
   }
 );
 

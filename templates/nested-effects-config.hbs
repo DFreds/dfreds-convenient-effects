@@ -1,0 +1,38 @@
+<div id='nested-effects-config'>
+  <label class='title' style='font-weight: bold;'>Nested Effects</label>
+  {{#each chosenEffects as |chosenEffect|}}
+    <div class='form-group chosen-effect'>
+      <label>Nested Effect {{inc @index}}</label>
+      <div class='form-fields'>
+        <button
+          type='button'
+          class='remove-nested-effect'
+          data-action='nested-effect-remove'
+          data-effect-name='{{chosenEffect}}'
+          title='Remove Nested Effect'
+        >
+          <i class='fas fa-trash fa-fw'></i>
+        </button>
+        <input type='text' value='{{chosenEffect}}' disabled />
+      </div>
+    </div>
+  {{/each}}
+  <div class='form-group'>
+    <label>Add new nested effect</label>
+    <div class='form-fields add-nested-effect'>
+      <button
+        type='button'
+        class='add-nested-effect'
+        data-action='nested-effect-add'
+        title='Add Nested Effect'
+      >
+        <i class='fas fa-plus fa-fw'></i>
+      </button>
+      <select class='nested-effects-selector'>
+        {{#each effects as |effect|}}
+          <option value='{{effect.label}}'>{{effect.label}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+</div>

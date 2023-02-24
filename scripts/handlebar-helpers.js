@@ -13,10 +13,17 @@ export default class HandlebarHelpers {
    * Registers the handlebar helpers
    */
   registerHelpers() {
+    this._registerIncHelper();
     this._registerIsGmHelper();
     this._registerCanCreateEffectsHelper();
     this._registerIfCustomFolderHelper();
     this._registerConvenientIconsHelper();
+  }
+
+  _registerIncHelper() {
+    Handlebars.registerHelper('inc', (value) => {
+      return parseInt(value) + 1;
+    });
   }
 
   _registerIsGmHelper() {
