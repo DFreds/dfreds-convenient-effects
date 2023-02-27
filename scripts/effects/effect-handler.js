@@ -124,7 +124,14 @@ export default class EffectHandler {
     if (origin) {
       effect.origin = origin;
     }
-    effect.flags.core.overlay = overlay;
+
+    let coreFlags = {
+      core: {
+        statusId: `Convenient Effect: ${effect.label}`,
+        overlay,
+      },
+    };
+    effect.flags = foundry.utils.mergeObject(effect.flags, coreFlags);
 
     if (effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.IS_DYNAMIC]) {
       await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
