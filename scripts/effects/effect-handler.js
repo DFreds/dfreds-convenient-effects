@@ -3,7 +3,7 @@ import DynamicEffectsAdder from './dynamic-effects-adder.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
-import { addOverlayAndOriginToEffect } from './effect-helpers.js';
+import { isConvenient } from './effect-helpers.js';
 
 /**
  * Handles toggling on and off effects on actors
@@ -47,10 +47,7 @@ export default class EffectHandler {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
     return actor?.effects?.some(
       (activeEffect) =>
-        activeEffect?.getFlag(
-          Constants.MODULE_ID,
-          Constants.FLAGS.IS_CONVENIENT
-        ) &&
+        isConvenient(activeEffect) &&
         activeEffect?.label == effectName &&
         !activeEffect?.disabled
     );
@@ -74,20 +71,14 @@ export default class EffectHandler {
     if (origin) {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
-          activeEffect?.getFlag(
-            Constants.MODULE_ID,
-            Constants.FLAGS.IS_CONVENIENT
-          ) &&
+          isConvenient(activeEffect) &&
           activeEffect?.label == effectName &&
           activeEffect?.origin == origin
       );
     } else {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
-          activeEffect?.getFlag(
-            Constants.MODULE_ID,
-            Constants.FLAGS.IS_CONVENIENT
-          ) && activeEffect?.label == effectName
+          isConvenient(activeEffect) && activeEffect?.label == effectName
       );
     }
 

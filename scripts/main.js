@@ -12,6 +12,7 @@ import { libWrapper } from './lib/shim.js';
 import TextEnrichers from './text-enrichers.js';
 import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
 import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
+import { isConvenient } from './effects/effect-helpers.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -125,13 +126,7 @@ Hooks.on('getSceneControlButtons', (controls) => {
  * Handle creating a chat message if an effect is added
  */
 Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
-  if (
-    !activeEffect?.getFlag(
-      Constants.MODULE_ID,
-      Constants.FLAGS.IS_CONVENIENT
-    ) ||
-    !(activeEffect?.parent instanceof Actor)
-  )
+  if (!isConvenient(activeEffect) || !(activeEffect?.parent instanceof Actor))
     return;
 
   const chatHandler = new ChatHandler();
@@ -144,23 +139,14 @@ Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
 });
 
 /**
- * Handle adding any actor data changes when an active effect is added to an actor
+ * Handle when an active effect is created
  */
 Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
   const settings = new Settings();
   if (activeEffect.parent.id == settings.customEffectsItemId) {
+    // Re-render the app if open and a new effect is added to the custom item
     const foundryHelpers = new FoundryHelpers();
     foundryHelpers.renderConvenientEffectsAppIfOpen();
-  }
-
-  if (
-    !activeEffect?.getFlag(
-      Constants.MODULE_ID,
-      Constants.FLAGS.IS_CONVENIENT
-    ) ||
-    !(activeEffect?.parent instanceof Actor)
-  ) {
-    return;
   }
 });
 
@@ -179,13 +165,7 @@ Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
  * Handle creating a chat message if an effect has expired or was removed
  */
 Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
-  if (
-    !activeEffect?.getFlag(
-      Constants.MODULE_ID,
-      Constants.FLAGS.IS_CONVENIENT
-    ) ||
-    !(activeEffect?.parent instanceof Actor)
-  )
+  if (!isConvenient(activeEffect) || !(activeEffect?.parent instanceof Actor))
     return;
 
   const isExpired =
@@ -211,13 +191,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
     foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
 
-  if (
-    !activeEffect?.getFlag(
-      Constants.MODULE_ID,
-      Constants.FLAGS.IS_CONVENIENT
-    ) ||
-    !(activeEffect?.parent instanceof Actor)
-  ) {
+  if (!isConvenient(activeEffect) || !(activeEffect?.parent instanceof Actor)) {
     return;
   }
 

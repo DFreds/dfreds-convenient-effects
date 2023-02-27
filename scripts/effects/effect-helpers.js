@@ -1,6 +1,16 @@
 import Constants from '../constants.js';
 import Settings from '../settings.js';
 
+export function isConvenient(activeEffect) {
+  const isConvenient =
+    activeEffect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_CONVENIENT) ??
+    false;
+
+  const isOldConvenient = activeEffect.flags.isConvenient;
+  const isOldCustomConvenient = activeEffect.flags.isCustomConvenient;
+
+  return isConvenient || isOldConvenient || isOldCustomConvenient;
+}
 
 export function getDescription(activeEffect) {
   const description = activeEffect.getFlag(
@@ -71,13 +81,4 @@ export function createActiveEffect({
   });
 
   return effect;
-}
-
-export function addOverlayAndOriginToEffect(effect, origin, overlay) {
-  let newEffect = { ...effect };
-  newEffect.flags.core.overlay = overlay;
-  if (origin) {
-    newEffect.origin = origin;
-  }
-  return newEffect;
 }

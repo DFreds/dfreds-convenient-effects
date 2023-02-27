@@ -1,5 +1,5 @@
-import Constants from '../constants.js';
 import FoundryHelpers from '../foundry-helpers.js';
+import { isConvenient } from './effect-helpers.js';
 
 /**
  * Handles the removal of specific effects via a dialog
@@ -33,20 +33,14 @@ export default class RemoveEffectsHandler {
     return canvas.tokens.controlled
       .filter((token) => {
         const effects = token.actor.effects.filter((activeEffect) =>
-          activeEffect?.getFlag(
-            Constants.MODULE_ID,
-            Constants.FLAGS.IS_CONVENIENT
-          )
+          isConvenient(activeEffect)
         );
         return effects.length > 0;
       })
       .map((token) => {
         const actor = token.actor;
         const effects = token.actor.effects.filter((activeEffect) =>
-          activeEffect?.getFlag(
-            Constants.MODULE_ID,
-            Constants.FLAGS.IS_CONVENIENT
-          )
+          isConvenient(activeEffect)
         );
 
         return { actor, effects };
