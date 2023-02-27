@@ -74,7 +74,8 @@ export default class CustomEffectsHandler {
    * @param {object[]} params.activeEffects - array of active effects to add
    * @returns {Promise} a promise that resolves when the active effects have finished being added
    */
-  async createNewCustomEffectsWith({ activeEffects }) {
+  async createNewCustomEffectsWith(activeEffects) {
+    if (!activeEffects.length) activeEffects = [activeEffects];
     const item = await this._findOrCreateCustomEffectsItem();
     const customEffects = activeEffects.map((activeEffect) => {
       if (!activeEffect.origin) {

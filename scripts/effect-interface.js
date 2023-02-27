@@ -240,10 +240,8 @@ export default class EffectInterface {
    * @param {ActiveEffect[]} params.activeEffects - array of active effects to add
    * @returns {Promise} a promise that resolves when the active effects have finished being added
    */
-  createNewCustomEffectsWith({ activeEffects }) {
-    return this._customEffectsHandler.createNewCustomEffectsWith({
-      activeEffects,
-    });
+  createNewCustomEffectsWith(activeEffects) {
+    return this._customEffectsHandler.createNewCustomEffectsWith( activeEffects );
   }
 
   /**
