@@ -1,13 +1,10 @@
-import Constants from '../constants.js';
+import { getDescription } from '../effects/effect-helpers.js';
 
 export async function addDescriptionToEffectConfig(activeEffectConfig, $html) {
   const descriptionTemplate =
     'modules/dfreds-convenient-effects/templates/effect-description-config.hbs';
 
-  const description = activeEffectConfig.object.getFlag(
-    Constants.MODULE_ID,
-    Constants.FLAGS.DESCRIPTION
-  );
+  const description = getDescription(activeEffectConfig.object);
 
   const descriptionHtml = await renderTemplate(descriptionTemplate, {
     description,

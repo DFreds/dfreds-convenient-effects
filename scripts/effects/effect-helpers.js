@@ -1,6 +1,16 @@
 import Constants from '../constants.js';
 import Settings from '../settings.js';
 
+
+export function getDescription(activeEffect) {
+  const description = activeEffect.getFlag(
+    Constants.MODULE_ID,
+    Constants.FLAGS.DESCRIPTION
+  );
+
+  return description ?? activeEffect.flags.convenientDescription;
+}
+
 export function createActiveEffect({
   label,
   description = '',

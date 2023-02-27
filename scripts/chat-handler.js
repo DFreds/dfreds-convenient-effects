@@ -1,4 +1,4 @@
-import Constants from './constants.js';
+import { getDescription } from './effects/effect-helpers.js';
 import Settings from './settings.js';
 
 /**
@@ -70,8 +70,9 @@ export default class ChatHandler {
   }
 
   _getDescription(effect) {
-    if (effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION)) {
-      return effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.DESCRIPTION);
+    const description = getDescription(effect);
+    if (description) {
+      return description;
     } else {
       return 'No description';
     }
