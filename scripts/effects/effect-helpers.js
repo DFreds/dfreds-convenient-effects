@@ -1,6 +1,12 @@
 import Constants from '../constants.js';
 import Settings from '../settings.js';
 
+/**
+ * Gets the `isConvenient` flag on the active effect if it exists
+ *
+ * @param {ActiveEffect} activeEffect - the active effect
+ * @returns {boolean} true if it is a convenient effect and false otherweise
+ */
 export function isConvenient(activeEffect) {
   const isConvenient =
     activeEffect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_CONVENIENT) ??
@@ -12,6 +18,12 @@ export function isConvenient(activeEffect) {
   return isConvenient || isOldConvenient || isOldCustomConvenient;
 }
 
+/**
+ * Gets the description attached to the active effect
+ *
+ * @param {ActiveEffect} activeEffect - the active effect
+ * @returns {string} The description for the effect
+ */
 export function getDescription(activeEffect) {
   const description = activeEffect.getFlag(
     Constants.MODULE_ID,
