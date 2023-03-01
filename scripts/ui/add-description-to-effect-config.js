@@ -1,10 +1,11 @@
-import { getDescription } from '../effects/effect-helpers.js';
+import EffectHelpers from '../effects/effect-helpers.js';
 
 export async function addDescriptionToEffectConfig(activeEffectConfig, $html) {
   const descriptionTemplate =
     'modules/dfreds-convenient-effects/templates/effect-description-config.hbs';
 
-  const description = getDescription(activeEffectConfig.object);
+  const effectHelpers = new EffectHelpers();
+  const description = effectHelpers.getDescription(activeEffectConfig.object);
 
   const descriptionHtml = await renderTemplate(descriptionTemplate, {
     description,

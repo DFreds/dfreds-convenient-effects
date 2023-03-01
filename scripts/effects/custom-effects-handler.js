@@ -1,13 +1,14 @@
+import EffectHelpers from './effect-helpers.js';
+import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
-import FoundryHelpers from '../foundry-helpers.js';
-import { createActiveEffect } from './effect-helpers.js';
 
 /**
  * Handles initializing, creating, editing, and deleting custom effects.
  */
 export default class CustomEffectsHandler {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
   }
@@ -55,7 +56,7 @@ export default class CustomEffectsHandler {
    */
   async createNewCustomEffect() {
     const item = await this._findOrCreateCustomEffectsItem();
-    const newEffect = createActiveEffect({
+    const newEffect = this._effectHelpers.createActiveEffect({
       label: 'New Effect',
       origin: item.uuid,
     });
@@ -80,7 +81,7 @@ export default class CustomEffectsHandler {
       if (!activeEffect.origin) {
         activeEffect.origin = item.uuid;
       }
-      return createActiveEffect({ ...activeEffect });
+      return this._effectHelpers.createActiveEffect({ ...activeEffect });
     });
     return item.createEmbeddedDocuments('ActiveEffect', customEffects);
   }

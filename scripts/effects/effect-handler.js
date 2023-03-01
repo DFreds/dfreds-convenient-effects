@@ -1,15 +1,16 @@
 import Constants from '../constants.js';
 import DynamicEffectsAdder from './dynamic-effects-adder.js';
+import EffectHelpers from './effect-helpers.js';
 import FoundryHelpers from '../foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
-import { isConvenient } from './effect-helpers.js';
 
 /**
  * Handles toggling on and off effects on actors
  */
 export default class EffectHandler {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._foundryHelpers = new FoundryHelpers();
     this._dynamicEffectsAdder = new DynamicEffectsAdder();
     this._settings = new Settings();
@@ -47,7 +48,7 @@ export default class EffectHandler {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
     return actor?.effects?.some(
       (activeEffect) =>
-        isConvenient(activeEffect) &&
+        this._effectHelpers.isConvenient(activeEffect) &&
         activeEffect?.label == effectName &&
         !activeEffect?.disabled
     );
@@ -71,14 +72,15 @@ export default class EffectHandler {
     if (origin) {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
-          isConvenient(activeEffect) &&
+          this._effectHelpers.isConvenient(activeEffect) &&
           activeEffect?.label == effectName &&
           activeEffect?.origin == origin
       );
     } else {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
-          isConvenient(activeEffect) && activeEffect?.label == effectName
+          this._effectHelpers.isConvenient(activeEffect) &&
+          activeEffect?.label == effectName
       );
     }
 

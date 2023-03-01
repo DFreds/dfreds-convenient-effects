@@ -1,4 +1,4 @@
-import { getDescription } from './effects/effect-helpers.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import Settings from './settings.js';
 
 /**
@@ -6,6 +6,7 @@ import Settings from './settings.js';
  */
 export default class ChatHandler {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
   }
 
@@ -70,7 +71,7 @@ export default class ChatHandler {
   }
 
   _getDescription(effect) {
-    const description = getDescription(effect);
+    const description = this._effectHelpers.getDescription(effect);
     if (description) {
       return description;
     } else {

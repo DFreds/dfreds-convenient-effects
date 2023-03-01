@@ -12,7 +12,7 @@ import { libWrapper } from './lib/shim.js';
 import TextEnrichers from './text-enrichers.js';
 import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
 import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
-import { isConvenient } from './effects/effect-helpers.js';
+import EffectHelpers from './effects/effect-helpers.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -126,7 +126,11 @@ Hooks.on('getSceneControlButtons', (controls) => {
  * Handle creating a chat message if an effect is added
  */
 Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
-  if (!isConvenient(activeEffect) || !(activeEffect?.parent instanceof Actor))
+  const effectHelpers = new EffectHelpers();
+  if (
+    !effectHelpers.isConvenient(activeEffect) ||
+    !(activeEffect?.parent instanceof Actor)
+  )
     return;
 
   const chatHandler = new ChatHandler();
@@ -165,7 +169,11 @@ Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
  * Handle creating a chat message if an effect has expired or was removed
  */
 Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
-  if (!isConvenient(activeEffect) || !(activeEffect?.parent instanceof Actor))
+  const effectHelpers = new EffectHelpers();
+  if (
+    !effectHelpers.isConvenient(activeEffect) ||
+    !(activeEffect?.parent instanceof Actor)
+  )
     return;
 
   const isExpired =
@@ -191,7 +199,11 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
     foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
 
-  if (!isConvenient(activeEffect) || !(activeEffect?.parent instanceof Actor)) {
+  const effectHelpers = new EffectHelpers();
+  if (
+    !effectHelpers.isConvenient(activeEffect) ||
+    !(activeEffect?.parent instanceof Actor)
+  ) {
     return;
   }
 

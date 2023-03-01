@@ -1,9 +1,9 @@
 import Constants from './constants.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectHandler from './effects/effect-handler.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import FoundryHelpers from './foundry-helpers.js';
 import Settings from './settings.js';
-import { createActiveEffect } from './effects/effect-helpers.js';
 
 /**
  * Interface for working with effects and executing them as a GM via sockets
@@ -12,6 +12,7 @@ export default class EffectInterface {
   constructor() {
     this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHandler = new EffectHandler();
+    this._effectHelpers = new EffectHelpers();
     this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
   }
@@ -212,7 +213,10 @@ export default class EffectInterface {
    * @returns {Promise} a promise that resolves when the GM socket function completes
    */
   async addEffectWith({ effectData, uuid, origin, overlay }) {
-    let effect = createActiveEffect({ ...effectData, origin });
+    let effect = this._effectHelpers.createActiveEffect({
+      ...effectData,
+      origin,
+    });
     const actor = this._foundryHelpers.getActorByUuid(uuid);
 
     if (!actor) {
