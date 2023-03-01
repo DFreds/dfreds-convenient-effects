@@ -15,6 +15,7 @@ export default class Settings {
   static REMOVE_CONTROLS_PERMISSION = 'removeControlsPermission';
   static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
+  static STATUS_EFFECTS_SORT_ORDER = 'statusEffectsSortOrder';
 
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
@@ -25,6 +26,11 @@ export default class Settings {
    * Register all the settings for the module
    */
   registerSettings() {
+    this._registerConfigSettings();
+    this._registerNonConfigSettings();
+  }
+
+  _registerConfigSettings() {
     const userRoles = {};
     userRoles[CONST.USER_ROLES.PLAYER] = 'Player';
     userRoles[CONST.USER_ROLES.TRUSTED] = 'Trusted Player';
@@ -78,6 +84,61 @@ export default class Settings {
 
     game.settings.register(
       Constants.MODULE_ID,
+      Settings.MODIFY_STATUS_EFFECTS,
+      {
+        name: 'Modify Status Effects',
+        hint: 'This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.',
+        scope: 'world',
+        config: true,
+        default: 'none',
+        choices: {
+          none: 'None',
+          replace: 'Replace',
+          add: 'Add',
+        },
+        type: String,
+        requiresReload: true,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
+      {
+        name: 'Show Chat Message Effect Description',
+        hint: 'This is when effect descriptions are shown on chat messages.',
+        scope: 'world',
+        config: true,
+        default: 'onAddOrRemove',
+        choices: {
+          onAddOrRemove: 'On Add or Remove',
+          onAddOnly: 'On Add Only',
+          never: 'Never',
+        },
+        type: String,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.STATUS_EFFECTS_SORT_ORDER,
+      {
+        name: 'Status Effects Sort Order',
+        hint: 'This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.',
+        scope: 'world',
+        config: true,
+        default: 'none',
+        choices: {
+          byOrderAdded: 'By Order Added',
+          alphabetical: 'Alphabetical',
+        },
+        type: String,
+        requiresReload: true,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
       Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
       {
         name: 'Allow Player Custom Effects',
@@ -120,25 +181,6 @@ export default class Settings {
       }
     );
 
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.MODIFY_STATUS_EFFECTS,
-      {
-        name: 'Modify Status Effects',
-        hint: 'This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.',
-        scope: 'world',
-        config: true,
-        default: 'none',
-        choices: {
-          none: 'None',
-          replace: 'Replace',
-          add: 'Add',
-        },
-        type: String,
-        requiresReload: true,
-      }
-    );
-
     game.settings.register(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS, {
       name: 'Prioritize Targets',
       hint: 'If enabled, effects will be applied to any targeted tokens instead of selected tokens.',
@@ -148,25 +190,6 @@ export default class Settings {
       type: Boolean,
     });
 
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
-      {
-        name: 'Show Chat Message Effect Description',
-        hint: 'This is when effect descriptions are shown on chat messages.',
-        scope: 'world',
-        config: true,
-        default: true,
-        default: 'onAddOrRemove',
-        choices: {
-          onAddOrRemove: 'On Add or Remove',
-          onAddOnly: 'On Add Only',
-          never: 'Never',
-        },
-        type: String,
-      }
-    );
-
     game.settings.register(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS, {
       name: 'Show Nested Effects',
       hint: 'If enabled, nested effects will be shown in the application.',
@@ -175,7 +198,9 @@ export default class Settings {
       default: false,
       type: Boolean,
     });
+  }
 
+  _registerNonConfigSettings() {
     game.settings.register(
       Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
@@ -352,6 +377,18 @@ export default class Settings {
    */
   get showNestedEffects() {
     return game.settings.get(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS);
+  }
+
+  /**
+   * Returns the game setting for the status effects sort order
+   *
+   * @returns {string} a string representing the chosen status effects sort order
+   */
+  get statusEffectsSortOrder() {
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.STATUS_EFFECTS_SORT_ORDER
+    );
   }
 
   /**

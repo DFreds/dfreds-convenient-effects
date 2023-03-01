@@ -43,8 +43,9 @@ export default class StatusEffects {
   }
 
   _fetchStatusEffects() {
-    return this._settings.statusEffectNames
+    let statusEffects = this._settings.statusEffectNames
       .map((name) => {
+        // Prioritize custom effects over built-in effects
         const effect = this._customEffectsHandler
           .getCustomEffects()
           .find((effect) => effect.label == name);
@@ -60,6 +61,19 @@ export default class StatusEffects {
           ...effect,
         };
       });
+
+    if (this._settings.statusEffectsSortOrder === 'alphabetical') {
+      return statusEffects.sort((a, b) => {
+        let nameA = a.label.toLowerCase();
+        let nameB = b.label.toLowerCase();
+
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+    } else {
+      return statusEffects;
+    }
   }
 
   /**
