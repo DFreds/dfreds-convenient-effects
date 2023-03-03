@@ -24,7 +24,7 @@ Hooks.once('init', () => {
 });
 
 /**
- * Handle initializing the API when socket lib is ready
+ * Handle setting up the API when socket lib is ready
  */
 Hooks.once('socketlib.ready', () => {
   game.dfreds = game.dfreds || {};
@@ -32,12 +32,10 @@ Hooks.once('socketlib.ready', () => {
   game.dfreds.effects = new EffectDefinitions();
   game.dfreds.effectInterface = new EffectInterface();
   game.dfreds.statusEffects = new StatusEffects();
-
-  game.dfreds.effectInterface.initialize();
 });
 
 /**
- * Handle initializing the status and custom effects
+ * Handle creating the custom effects ID on ready
  */
 Hooks.once('ready', async () => {
   const settings = new Settings();
@@ -55,7 +53,12 @@ Hooks.once('ready', async () => {
   Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
 });
 
+/**
+ * Handle initializing everything
+ */
 Hooks.once(`${Constants.MODULE_ID}.initialize`, async () => {
+  game.dfreds.effectInterface.initialize();
+  game.dfreds.effects.initialize();
   game.dfreds.statusEffects.initialize();
 
   Hooks.callAll(`${Constants.MODULE_ID}.ready`);

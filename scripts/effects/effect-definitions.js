@@ -1,5 +1,4 @@
 import Constants from '../constants.js';
-import CustomEffectsHandler from './custom-effects-handler.js';
 import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
 
@@ -8,7 +7,6 @@ import Settings from '../settings.js';
  */
 export default class EffectDefinitions {
   constructor() {
-    this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
 
@@ -18,20 +16,29 @@ export default class EffectDefinitions {
     }
   }
 
+  initialize() {
+    this._conditions = this.conditions;
+    this._spells = this.spells;
+    this._classFeatures = this.classFeatures;
+    this._equipment = this.equipment;
+    this._other = this.other;
+
+    this._all = [
+      ...this._conditions,
+      ...this._spells,
+      ...this._classFeatures,
+      ...this._equipment,
+      ...this._other,
+    ];
+  }
+
   /**
    * Get all effects
    *
    * @returns {ActiveEffect[]} all the effects
    */
   get all() {
-    return [
-      ...this.conditions,
-      ...this.customEffects,
-      ...this.spells,
-      ...this.classFeatures,
-      ...this.equipment,
-      ...this.other,
-    ];
+    return this._all;
   }
 
   /**
@@ -40,39 +47,32 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the condition effects
    */
   get conditions() {
-    return [
-      this._blinded,
-      this._charmed,
-      this._concentrating,
-      this._dead,
-      this._deafened,
-      this._exhaustion1,
-      this._exhaustion2,
-      this._exhaustion3,
-      this._exhaustion4,
-      this._exhaustion5,
-      this._frightened,
-      this._grappled,
-      this._incapacitated,
-      this._invisible,
-      this._paralyzed,
-      this._petrified,
-      this._poisoned,
-      this._prone,
-      this._restrained,
-      this._stunned,
-      this._unconscious,
-      this._wounded,
-    ];
-  }
-
-  /**
-   * Get all the custom effects
-   *
-   * @returns {ActiveEffect[]} all the custom effects
-   */
-  get customEffects() {
-    return this._customEffectsHandler.getCustomEffects();
+    return (
+      this._conditions ?? [
+        this._blinded,
+        this._charmed,
+        this._concentrating,
+        this._dead,
+        this._deafened,
+        this._exhaustion1,
+        this._exhaustion2,
+        this._exhaustion3,
+        this._exhaustion4,
+        this._exhaustion5,
+        this._frightened,
+        this._grappled,
+        this._incapacitated,
+        this._invisible,
+        this._paralyzed,
+        this._petrified,
+        this._poisoned,
+        this._prone,
+        this._restrained,
+        this._stunned,
+        this._unconscious,
+        this._wounded,
+      ]
+    );
   }
 
   /**
@@ -81,107 +81,109 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the spell effects
    */
   get spells() {
-    return [
-      this._acidArrow,
-      this._aid,
-      this._alterSelf,
-      this._antilifeShell,
-      this._arcaneHand,
-      this._bane,
-      this._barkskin,
-      this._beaconOfHope,
-      this._blackTentacles,
-      this._bless,
-      this._blindnessDeafness,
-      this._blindnessDeafnessBlindness,
-      this._blindnessDeafnessDeafness,
-      this._blur,
-      this._charmPerson,
-      this._command,
-      this._comprehendLanguages,
-      this._contagion,
-      this._contagionBlindingSickness,
-      this._contagionFilthFever,
-      this._contagionFleshRot,
-      this._contagionMindfire,
-      this._contagionSeizure,
-      this._contagionSlimyDoom,
-      this._darkvision,
-      this._disguiseSelf,
-      this._divineFavor,
-      this._divineWord,
-      this._enlargeReduce,
-      this._enlargeReduceEnlarge,
-      this._enlargeReduceReduce,
-      this._enhanceAbility,
-      this._enhanceAbilityBearsEndurance,
-      this._enhanceAbilityBullsStrength,
-      this._enhanceAbilityCatsGrace,
-      this._enhanceAbilityEaglesSplendor,
-      this._enhanceAbilityFoxsCunning,
-      this._enhanceAbilityOwlsWisdom,
-      this._faerieFire,
-      this._falseLife,
-      this._featherFall,
-      this._feeblemind,
-      this._fireShield,
-      this._fireShieldColdResistance,
-      this._fireShieldFireResistance,
-      this._findThePath,
-      this._fly,
-      this._foresight,
-      this._freedomOfMovement,
-      this._globeOfInvulnerability,
-      this._greaterInvisibility,
-      this._guidance,
-      this._guidingBolt,
-      this._haste,
-      this._heroesFeast,
-      this._heroism,
-      this._hideousLaughter,
-      this._holdMonster,
-      this._holdPerson,
-      this._holyAura,
-      this._huntersMark,
-      this._invisibility,
-      this._irresistibleDance,
-      this._jump,
-      this._light,
-      this._longstrider,
-      this._mageArmor,
-      this._mindBlank,
-      this._mirrorImage,
-      this._passWithoutTrace,
-      this._protectionFromEnergy,
-      this._protectionFromEnergyAcid,
-      this._protectionFromEnergyCold,
-      this._protectionFromEnergyFire,
-      this._protectionFromEnergyLightning,
-      this._protectionFromEnergyThunder,
-      this._protectionFromPoison,
-      this._protectionFromEvilAndGood,
-      this._rayOfFrost,
-      this._regenerate,
-      this._resilientSphere,
-      this._resistance,
-      this._shield,
-      this._shieldOfFaith,
-      this._slow,
-      this._speakWithAnimals,
-      this._speakWithDead,
-      this._speakWithPlants,
-      this._spiderClimb,
-      this._spiritGuardians,
-      this._spiritualWeapon,
-      this._stoneskin,
-      this._suggestion,
-      this._telekinesis,
-      this._trueStrike,
-      this._viciousMockery,
-      this._wardingBond,
-      this._waterBreathing,
-      this._waterWalk,
-    ];
+    return (
+      this._spells ?? [
+        this._acidArrow,
+        this._aid,
+        this._alterSelf,
+        this._antilifeShell,
+        this._arcaneHand,
+        this._bane,
+        this._barkskin,
+        this._beaconOfHope,
+        this._blackTentacles,
+        this._bless,
+        this._blindnessDeafness,
+        this._blindnessDeafnessBlindness,
+        this._blindnessDeafnessDeafness,
+        this._blur,
+        this._charmPerson,
+        this._command,
+        this._comprehendLanguages,
+        this._contagion,
+        this._contagionBlindingSickness,
+        this._contagionFilthFever,
+        this._contagionFleshRot,
+        this._contagionMindfire,
+        this._contagionSeizure,
+        this._contagionSlimyDoom,
+        this._darkvision,
+        this._disguiseSelf,
+        this._divineFavor,
+        this._divineWord,
+        this._enlargeReduce,
+        this._enlargeReduceEnlarge,
+        this._enlargeReduceReduce,
+        this._enhanceAbility,
+        this._enhanceAbilityBearsEndurance,
+        this._enhanceAbilityBullsStrength,
+        this._enhanceAbilityCatsGrace,
+        this._enhanceAbilityEaglesSplendor,
+        this._enhanceAbilityFoxsCunning,
+        this._enhanceAbilityOwlsWisdom,
+        this._faerieFire,
+        this._falseLife,
+        this._featherFall,
+        this._feeblemind,
+        this._fireShield,
+        this._fireShieldColdResistance,
+        this._fireShieldFireResistance,
+        this._findThePath,
+        this._fly,
+        this._foresight,
+        this._freedomOfMovement,
+        this._globeOfInvulnerability,
+        this._greaterInvisibility,
+        this._guidance,
+        this._guidingBolt,
+        this._haste,
+        this._heroesFeast,
+        this._heroism,
+        this._hideousLaughter,
+        this._holdMonster,
+        this._holdPerson,
+        this._holyAura,
+        this._huntersMark,
+        this._invisibility,
+        this._irresistibleDance,
+        this._jump,
+        this._light,
+        this._longstrider,
+        this._mageArmor,
+        this._mindBlank,
+        this._mirrorImage,
+        this._passWithoutTrace,
+        this._protectionFromEnergy,
+        this._protectionFromEnergyAcid,
+        this._protectionFromEnergyCold,
+        this._protectionFromEnergyFire,
+        this._protectionFromEnergyLightning,
+        this._protectionFromEnergyThunder,
+        this._protectionFromPoison,
+        this._protectionFromEvilAndGood,
+        this._rayOfFrost,
+        this._regenerate,
+        this._resilientSphere,
+        this._resistance,
+        this._shield,
+        this._shieldOfFaith,
+        this._slow,
+        this._speakWithAnimals,
+        this._speakWithDead,
+        this._speakWithPlants,
+        this._spiderClimb,
+        this._spiritGuardians,
+        this._spiritualWeapon,
+        this._stoneskin,
+        this._suggestion,
+        this._telekinesis,
+        this._trueStrike,
+        this._viciousMockery,
+        this._wardingBond,
+        this._waterBreathing,
+        this._waterWalk,
+      ]
+    );
   }
 
   /**
@@ -190,20 +192,22 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the class feature effects
    */
   get classFeatures() {
-    return [
-      this._bardicInspiration,
-      this._bardicInspirationD6,
-      this._bardicInspirationD8,
-      this._bardicInspirationD10,
-      this._bardicInspirationD12,
-      this._channelDivinitySacredWeapon,
-      this._channelDivinityTurnTheUnholy,
-      this._channelDivinityTurnUndead,
-      this._kiEmptyBody,
-      this._kiPatientDefense,
-      this._rage,
-      this._recklessAttack,
-    ];
+    return (
+      this._classFeatures ?? [
+        this._bardicInspiration,
+        this._bardicInspirationD6,
+        this._bardicInspirationD8,
+        this._bardicInspirationD10,
+        this._bardicInspirationD12,
+        this._channelDivinitySacredWeapon,
+        this._channelDivinityTurnTheUnholy,
+        this._channelDivinityTurnUndead,
+        this._kiEmptyBody,
+        this._kiPatientDefense,
+        this._rage,
+        this._recklessAttack,
+      ]
+    );
   }
 
   /**
@@ -212,13 +216,15 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the equipment effects
    */
   get equipment() {
-    return [
-      this._bullseyeLantern,
-      this._candle,
-      this._hoodedLantern,
-      this._lantern,
-      this._torch,
-    ];
+    return (
+      this._equipment ?? [
+        this._bullseyeLantern,
+        this._candle,
+        this._hoodedLantern,
+        this._lantern,
+        this._torch,
+      ]
+    );
   }
 
   /**
@@ -227,22 +233,24 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the other effects
    */
   get other() {
-    return [
-      this._bonusAction,
-      this._coverHalf,
-      this._coverThreeQuarters,
-      this._encumbered,
-      this._dodge,
-      this._flanked,
-      this._flanking,
-      this._greatWeaponMaster,
-      this._heavilyEncumbered,
-      this._inspiration,
-      this._rangedDisadvantage,
-      this._reaction,
-      this._ready,
-      this._sharpshooter,
-    ];
+    return (
+      this._other ?? [
+        this._bonusAction,
+        this._coverHalf,
+        this._coverThreeQuarters,
+        this._encumbered,
+        this._dodge,
+        this._flanked,
+        this._flanking,
+        this._greatWeaponMaster,
+        this._heavilyEncumbered,
+        this._inspiration,
+        this._rangedDisadvantage,
+        this._reaction,
+        this._ready,
+        this._sharpshooter,
+      ]
+    );
   }
 
   /* Condition Effects */
