@@ -10,6 +10,7 @@ export default class EffectHelpers {
     label,
     description = '',
     icon = 'icons/svg/aura.svg',
+    duration = {},
     seconds = null,
     rounds = null,
     turns = null,
@@ -44,18 +45,21 @@ export default class EffectHelpers {
     flags[Constants.MODULE_ID][Constants.FLAGS.NESTED_EFFECTS] = nestedEffects;
     flags[Constants.MODULE_ID][Constants.FLAGS.SUB_EFFECTS] = subEffects;
 
-    let duration = {
-      rounds: rounds ?? seconds / CONFIG.time.roundTime,
-      seconds,
-      startRound: game.combat?.round,
-      startTime: game.time.worldTime,
-      startTurn: game.combat?.turn,
-      turns,
-    };
+    let effectDuration = isEmpty(duration)
+      ? {
+          rounds,
+          seconds,
+          startRound: game.combat?.round,
+          startTime: game.time.worldTime,
+          startTurn: game.combat?.turn,
+          turns,
+        }
+      : duration;
+
     let effect = new CONFIG.ActiveEffect.documentClass({
       changes,
       disabled: false,
-      duration,
+      duration: effectDuration,
       flags,
       icon,
       label,
