@@ -8,7 +8,7 @@
     "DFREDSCE.AllowPlayerCustomEffects": "Permitir efectos personalizados del jugador",
     "DFREDSCE.AllowPlayerCustomEffectsHint": "Si se activa, los jugadores podrán crear, duplicar, editar y eliminar todos los efectos personalizados.",
     "DFREDSCE.IntegratewithATE": "Integrar con ATE",
-    "DFREDSCE.IntegratewithATEHint": "Si se activan, algunos efectos también cambiarán la luz emitida por las fichas o el tamaño de una ficha a través de Efectos de ficha activos',",
+    "DFREDSCE.IntegratewithATEHint": "Si se activan, algunos efectos también cambiarán la luz emitida por las fichas o el tamaño de una ficha a través de Efectos de ficha activos.",
     "DFREDSCE.IntegratewithTokenMagic": "Integrar con Token Magic",
     "DFREDSCE.IntegratewithTokenMagicHint": "Si se activa, algunos efectos también aplicarán un filtro mágico a los tokens a través de Token Magic.",
     "DFREDSCE.PrioritizeTargets": "Priorizar objetivos",
