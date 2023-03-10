@@ -1,4 +1,5 @@
 import Constants from '../constants.js';
+import CustomEffectsHandler from './custom-effects-handler.js';
 import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
 
@@ -7,6 +8,7 @@ import Settings from '../settings.js';
  */
 export default class EffectDefinitions {
   constructor() {
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
 
@@ -38,7 +40,8 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the effects
    */
   get all() {
-    return this._all;
+    const customEffects = this._customEffectsHandler.getCustomEffects();
+    return [...customEffects, ...this._all];
   }
 
   /**
