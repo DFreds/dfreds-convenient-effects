@@ -5,12 +5,6 @@
     "DFREDSCE.AppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
     "DFREDSCE.RemoveControlsPermission": "Remove Controls Permission",
     "DFREDSCE.RemoveControlsPermissionHint": "This defines the minimum permission level to remove Convenient Effects through the button on the token controls. Setting this to None will disable the button entirely.",
-    "DFREDSCE.ModifyStatusEffects": "Modify Status Effects",
-    "DFREDSCE.ModifyStatusEffectsHint": "This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.",
-    "DFREDSCE.ShowChatMessageEffectDescription": "Show Chat Message Effect Description",
-    "DFREDSCE.ShowChatMessageEffectDescriptionHint": "This is when effect descriptions are shown on chat messages.",
-    "DFREDSCE.StatusEffectsSortOrder": "Status Effects Sort Order",
-    "DFREDSCE.StatusEffectsSortOrderHint": "This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.",
     "DFREDSCE.AllowPlayerCustomEffects": "Allow Player Custom Effects",
     "DFREDSCE.AllowPlayerCustomEffectsHint": "If enabled, players will be allowed to create, duplicate, edit, and delete all custom effects.",
     "DFREDSCE.IntegratewithATE": "Integrate with ATE",
@@ -25,6 +19,7 @@
     "DFREDSCE.StatusEffectNames": "Status Effect Names",
     "DFREDSCE.ExpandedFolders": "Expanded Folders",
     "DFREDSCE.CustomEffectsItemID": "Custom Effects Item ID",
+    
     "DFREDSCE.Blinded": "Blinded",
     "DFREDSCE.Charmed": "Charmed",
     "DFREDSCE.Concentrating": "Concentrating",
@@ -45,5 +40,30 @@
     "DFREDSCE.Prone": "Prone",
     "DFREDSCE.Restrained": "Restrained",
     "DFREDSCE.Stunned": "Stunned",
-    "DFREDSCE.Unconscious": "Unconscious"
+    "DFREDSCE.Unconscious": "Unconscious",
+
+    "DFREDSCE.ModifyStatusEffects": "Modify Status Effects",
+    "DFREDSCE.ModifyStatusEffectsHint": "This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.",
+    "DFREDSCE.ModifyStatusEffects.None": "None",
+    "DFREDSCE.ModifyStatusEffects.Replace": "Replace",
+    "DFREDSCE.ModifyStatusEffects.Add": "Add",
+
+    "DFREDSCE.ShowChatMessageEffectDescription": "Show Chat Message Effect Description",
+    "DFREDSCE.ShowChatMessageEffectDescriptionHint": "This is when effect descriptions are shown on chat messages.",
+    "DFREDSCE.ShowChatMessageEffectDescription.OnAddorRemove": "On Add or Remove",
+    "DFREDSCE.ShowChatMessageEffectDescription.OnAddOnly": "On Add Only",
+    "DFREDSCE.ShowChatMessageEffectDescription.Never": "Never",
+
+    "DFREDSCE.StatusEffectsSortOrder": "Status Effects Sort Order",
+    "DFREDSCE.StatusEffectsSortOrderHint": "This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.",
+    "DFREDSCE.StatusEffectsSortOrder.None": "None",
+    "DFREDSCE.StatusEffectsSortOrder.ByOrderAdded": "By Order Added",
+    "DFREDSCE.StatusEffectsSortOrder.Alphabetical": "Alphabetical",
+
+    "DFREDSCE.UserRoles.None": "None",
+    "DFREDSCE.UserRoles.Player": "Player",
+    "DFREDSCE.UserRoles.TrustedPlayer": "Trusted Player",
+    "DFREDSCE.UserRoles.AssistantGM": "Assistant GM",
+    "DFREDSCE.UserRoles.GameMaster": "Game Master"
+
 }

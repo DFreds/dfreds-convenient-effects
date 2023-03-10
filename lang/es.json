@@ -5,12 +5,6 @@
     "DFREDSCE.AppControlsPermissionHint": "Define el nivel mínimo de permiso para ver y aplicar Convenient Effects a través de la aplicación mediante el botón de los controles de token. Si se establece en Ninguno, el botón se desactivará por completo.",
     "DFREDSCE.RemoveControlsPermission": "Permiso para eliminar controles",
     "DFREDSCE.RemoveControlsPermissionHint": "Define el nivel mínimo de permiso para eliminar Convenient Effects a través del botón en los controles de token. Si se establece en Ninguno, el botón se desactivará por completo.",
-    "DFREDSCE.ModifyStatusEffects": "Modificar efectos de estado",
-    "DFREDSCE.ModifyStatusEffectsHint": "Así es como se modificarán los efectos de estado en el token HUD. Sustituirlos significa que todos los demás efectos de estado serán eliminados en favor de las condiciones proporcionadas por los Convenient Effects. Añadirlos significa que se añaden al final de los efectos de estado existentes. Requiere una recarga de Foundry al cambiar.",
-    "DFREDSCE.ShowChatMessageEffectDescription": "Mostrar descripción del efecto del mensaje de chat",
-    "DFREDSCE.ShowChatMessageEffectDescriptionHint": "Esta opción permite mostrar descripciones de efectos en los mensajes de chat.",
-    "DFREDSCE.StatusEffectsSortOrder": "Orden de los efectos de estado",
-    "DFREDSCE.StatusEffectsSortOrderHint": "Así se ordenan los efectos de estado en el HUD de fichas. Requiere una recarga de Foundry para cambiarlo.",
     "DFREDSCE.AllowPlayerCustomEffects": "Permitir efectos personalizados del jugador",
     "DFREDSCE.AllowPlayerCustomEffectsHint": "Si se activa, los jugadores podrán crear, duplicar, editar y eliminar todos los efectos personalizados.",
     "DFREDSCE.IntegratewithATE": "Integrar con ATE",
@@ -25,6 +19,7 @@
     "DFREDSCE.StatusEffectNames": "Nombres de efectos de estado",
     "DFREDSCE.ExpandedFolders": "Carpetas expandidas",
     "DFREDSCE.CustomEffectsItemID": "Efectos personalizados ID de elemento",
+    
     "DFREDSCE.Blinded": "Cegado",
     "DFREDSCE.Charmed": "Hechizado",
     "DFREDSCE.Concentrating": "Concentrándose",
@@ -45,5 +40,30 @@
     "DFREDSCE.Prone": "Derribado",
     "DFREDSCE.Restrained": "Apresado",
     "DFREDSCE.Stunned": "Aturdido",
-    "DFREDSCE.Unconscious": "Inconsciente"
+    "DFREDSCE.Unconscious": "Inconsciente",
+
+    "DFREDSCE.ModifyStatusEffects": "Modificar efectos de estado",
+    "DFREDSCE.ModifyStatusEffectsHint": "Así es como se modificarán los efectos de estado en el token HUD. Sustituirlos significa que todos los demás efectos de estado serán eliminados en favor de las condiciones proporcionadas por los Convenient Effects. Añadirlos significa que se añaden al final de los efectos de estado existentes. Requiere una recarga de Foundry al cambiar.",
+    "DFREDSCE.ModifyStatusEffects.None": "Ninguno",
+    "DFREDSCE.ModifyStatusEffects.Replace": "Reemplazar",
+    "DFREDSCE.ModifyStatusEffects.Add": "Agregar",
+
+    "DFREDSCE.ShowChatMessageEffectDescription": "Mostrar descripción del efecto del mensaje de chat",
+    "DFREDSCE.ShowChatMessageEffectDescriptionHint": "Esta opción permite mostrar descripciones de efectos en los mensajes de chat.",
+    "DFREDSCE.ShowChatMessageEffectDescription.OnAddorRemove": "Al agregar o eliminar",
+    "DFREDSCE.ShowChatMessageEffectDescription.OnAddOnly": "Solo al agregar",
+    "DFREDSCE.ShowChatMessageEffectDescription.Never": "Nunca",
+
+    "DFREDSCE.StatusEffectsSortOrder": "Orden de los efectos de estado",
+    "DFREDSCE.StatusEffectsSortOrderHint": "Así se ordenan los efectos de estado en el HUD de fichas. Requiere una recarga de Foundry para cambiarlo.",
+    "DFREDSCE.StatusEffectsSortOrder.None": "Ninguno",
+    "DFREDSCE.StatusEffectsSortOrder.ByOrderAdded": "Por antiguedad",
+    "DFREDSCE.StatusEffectsSortOrder.Alphabetical": "Alfabéticamente",
+
+    "DFREDSCE.UserRoles.None": "Ninguno",
+    "DFREDSCE.UserRoles.Player": "Jugador",
+    "DFREDSCE.UserRoles.TrustedPlayer": "Confianza",
+    "DFREDSCE.UserRoles.AssistantGM": "Asistente",
+    "DFREDSCE.UserRoles.GameMaster": "Gamemaster"
+
 }

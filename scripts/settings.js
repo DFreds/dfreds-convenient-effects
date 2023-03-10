@@ -32,11 +32,11 @@ export default class Settings {
 
   _registerConfigSettings() {
     const userRoles = {};
-    userRoles[CONST.USER_ROLES.PLAYER] = 'Player';
-    userRoles[CONST.USER_ROLES.TRUSTED] = 'Trusted Player';
-    userRoles[CONST.USER_ROLES.ASSISTANT] = 'Assistant GM';
-    userRoles[CONST.USER_ROLES.GAMEMASTER] = 'Game Master';
-    userRoles[5] = 'None';
+    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize("DFREDSCE.UserRoles.Player");
+    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("DFREDSCE.UserRoles.TrustedPlayer");
+    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("DFREDSCE.UserRoles.AssistantGM");
+    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("DFREDSCE.UserRoles.GameMaster");
+    userRoles[5] = game.i18n.localize("DFREDSCE.UserRoles.None");
 
     game.settings.register(
       Constants.MODULE_ID,
@@ -90,11 +90,11 @@ export default class Settings {
         hint: game.i18n.localize("DFREDSCE.ModifyStatusEffectsHint"),
         scope: 'world',
         config: true,
-        default: 'none',
+        default: game.i18n.localize("DFREDSCE.ModifyStatusEffects.None"),
         choices: {
-          none: 'None',
-          replace: 'Replace',
-          add: 'Add',
+          none: game.i18n.localize("DFREDSCE.ModifyStatusEffects.None"),
+          replace: game.i18n.localize("DFREDSCE.ModifyStatusEffects.Replace"),
+          add: game.i18n.localize("DFREDSCE.ModifyStatusEffects.Add"),
         },
         type: String,
         requiresReload: true,
@@ -109,11 +109,11 @@ export default class Settings {
         hint: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription"),
         scope: 'world',
         config: true,
-        default: 'onAddOrRemove',
+        default: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription.OnAddorRemove"),
         choices: {
-          onAddOrRemove: 'On Add or Remove',
-          onAddOnly: 'On Add Only',
-          never: 'Never',
+          onAddOrRemove: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOn.AddorRemove"),
+          onAddOnly: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription.OnAddOnly"),
+          never: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription.Never"),
         },
         type: String,
       }
@@ -127,10 +127,10 @@ export default class Settings {
         hint: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderHint"),
         scope: 'world',
         config: true,
-        default: 'none',
+        default: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder.None"),
         choices: {
-          byOrderAdded: 'By Order Added',
-          alphabetical: 'Alphabetical',
+          byOrderAdded: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder.ByOrderAdded"),
+          alphabetical: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder.Alphabetical"),
         },
         type: String,
         requiresReload: true,
@@ -214,7 +214,7 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
-      name: game.i18n.localize("DFREDSCE.StatusEffectNames"),
+      name: game.i18n.localize("DFREDSCE.SETTINGS.StatusEffectNames"),
       scope: 'world',
       config: false,
       default: this._defaultStatusEffectNames,
@@ -222,7 +222,7 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
-      name: game.i18n.localize("DFREDSCE.ExpandedFolders"),
+      name: game.i18n.localize("DFREDSCE.SETTINGS.ExpandedFolders"),
       scope: 'client',
       config: false,
       default: 'Favorites',
@@ -244,27 +244,27 @@ export default class Settings {
 
   get _defaultStatusEffectNames() {
     return [
-      'Blinded',
-      'Charmed',
-      'Concentrating',
-      'Dead',
-      'Deafened',
-      'Exhaustion 1',
-      'Exhaustion 2',
-      'Exhaustion 3',
-      'Exhaustion 4',
-      'Exhaustion 5',
-      'Frightened',
-      'Grappled',
-      'Incapacitated',
-      'Invisible',
-      'Paralyzed',
-      'Petrified',
-      'Poisoned',
-      'Prone',
-      'Restrained',
-      'Stunned',
-      'Unconscious',
+      game.i18n.localize("DFREDSCE.Blinded"),
+      game.i18n.localize("DFREDSCE.Charmed"),
+      game.i18n.localize("DFREDSCE.Concentrating"),
+      game.i18n.localize("DFREDSCE.Dead"),
+      game.i18n.localize("DFREDSCE.Deafened"),
+      game.i18n.localize("DFREDSCE.Exhaustion1"),
+      game.i18n.localize("DFREDSCE.Exhaustion2"),
+      game.i18n.localize("DFREDSCE.Exhaustion3"),
+      game.i18n.localize("DFREDSCE.Exhaustion4"),
+      game.i18n.localize("DFREDSCE.Exhaustion5"),
+      game.i18n.localize("DFREDSCE.Frightened"),
+      game.i18n.localize("DFREDSCE.Grappled"),
+      game.i18n.localize("DFREDSCE.Incapacitated"),
+      game.i18n.localize("DFREDSCE.Invisible"),
+      game.i18n.localize("DFREDSCE.Paralyzed"),
+      game.i18n.localize("DFREDSCE.Petrified"),
+      game.i18n.localize("DFREDSCE.Poisoned"),
+      game.i18n.localize("DFREDSCE.Prone"),
+      game.i18n.localize("DFREDSCE.Restrained"),
+      game.i18n.localize("DFREDSCE.Stunned"),
+      game.i18n.localize("DFREDSCE.Unconscious"),
     ];
   }
 
