@@ -44,26 +44,26 @@
 
     "DFREDSCE.ModifyStatusEffects": "Modify Status Effects",
     "DFREDSCE.ModifyStatusEffectsHint": "This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.",
-    "DFREDSCE.ModifyStatusEffects.None": "None",
-    "DFREDSCE.ModifyStatusEffects.Replace": "Replace",
-    "DFREDSCE.ModifyStatusEffects.Add": "Add",
+    "DFREDSCE.ModifyStatusEffectsNone": "None",
+    "DFREDSCE.ModifyStatusEffectsReplace": "Replace",
+    "DFREDSCE.ModifyStatusEffectsAdd": "Add",
 
     "DFREDSCE.ShowChatMessageEffectDescription": "Show Chat Message Effect Description",
     "DFREDSCE.ShowChatMessageEffectDescriptionHint": "This is when effect descriptions are shown on chat messages.",
-    "DFREDSCE.ShowChatMessageEffectDescription.OnAddorRemove": "On Add or Remove",
-    "DFREDSCE.ShowChatMessageEffectDescription.OnAddOnly": "On Add Only",
-    "DFREDSCE.ShowChatMessageEffectDescription.Never": "Never",
+    "DFREDSCE.ShowChatMessageEffectDescriptionOnAddorRemove": "On Add or Remove",
+    "DFREDSCE.ShowChatMessageEffectDescriptionOnAddOnly": "On Add Only",
+    "DFREDSCE.ShowChatMessageEffectDescriptionNever": "Never",
 
     "DFREDSCE.StatusEffectsSortOrder": "Status Effects Sort Order",
     "DFREDSCE.StatusEffectsSortOrderHint": "This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.",
-    "DFREDSCE.StatusEffectsSortOrder.None": "None",
-    "DFREDSCE.StatusEffectsSortOrder.ByOrderAdded": "By Order Added",
-    "DFREDSCE.StatusEffectsSortOrder.Alphabetical": "Alphabetical",
+    "DFREDSCE.StatusEffectsSortOrderNone": "None",
+    "DFREDSCE.StatusEffectsSortOrderByOrderAdded": "By Order Added",
+    "DFREDSCE.StatusEffectsSortOrderAlphabetical": "Alphabetical",
 
-    "DFREDSCE.UserRoles.None": "None",
-    "DFREDSCE.UserRoles.Player": "Player",
-    "DFREDSCE.UserRoles.TrustedPlayer": "Trusted Player",
-    "DFREDSCE.UserRoles.AssistantGM": "Assistant GM",
-    "DFREDSCE.UserRoles.GameMaster": "Game Master"
+    "DFREDSCE.UserRolesNone": "None",
+    "DFREDSCE.UserRolesPlayer": "Player",
+    "DFREDSCE.UserRolesTrustedPlayer": "Trusted Player",
+    "DFREDSCE.UserRolesAssistantGM": "Assistant GM",
+    "DFREDSCE.UserRolesGameMaster": "Game Master"
 
 }

@@ -32,10 +32,10 @@ export default class Settings {
 
   _registerConfigSettings() {
     const userRoles = {};
-    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize("DFREDSCE.UserRoles.Player");
-    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("DFREDSCE.UserRoles.TrustedPlayer");
-    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("DFREDSCE.UserRoles.AssistantGM");
-    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("DFREDSCE.UserRoles.GameMaster");
+    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize("DFREDSCE.UserRolesPlayer");
+    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("DFREDSCE.UserRolesTrustedPlayer");
+    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("DFREDSCE.UserRolesAssistantGM");
+    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("DFREDSCE.UserRolesGameMaster");
     userRoles[5] = game.i18n.localize("DFREDSCE.UserRoles.None");
 
     game.settings.register(
@@ -90,11 +90,11 @@ export default class Settings {
         hint: game.i18n.localize("DFREDSCE.ModifyStatusEffectsHint"),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("DFREDSCE.ModifyStatusEffects.None"),
+        default: game.i18n.localize("DFREDSCE.ModifyStatusEffectsNone"),
         choices: {
-          none: game.i18n.localize("DFREDSCE.ModifyStatusEffects.None"),
-          replace: game.i18n.localize("DFREDSCE.ModifyStatusEffects.Replace"),
-          add: game.i18n.localize("DFREDSCE.ModifyStatusEffects.Add"),
+          none: game.i18n.localize("DFREDSCE.ModifyStatusEffectsNone"),
+          replace: game.i18n.localize("DFREDSCE.ModifyStatusEffectsReplace"),
+          add: game.i18n.localize("DFREDSCE.ModifyStatusEffectsAdd"),
         },
         type: String,
         requiresReload: true,
@@ -109,11 +109,11 @@ export default class Settings {
         hint: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription"),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription.OnAddorRemove"),
+        default: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOnAddorRemove"),
         choices: {
-          onAddOrRemove: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOn.AddorRemove"),
-          onAddOnly: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription.OnAddOnly"),
-          never: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription.Never"),
+          onAddOrRemove: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOnAddorRemove"),
+          onAddOnly: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOnAddOnly"),
+          never: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionNever"),
         },
         type: String,
       }
@@ -127,10 +127,10 @@ export default class Settings {
         hint: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderHint"),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder.None"),
+        default: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderNone"),
         choices: {
-          byOrderAdded: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder.ByOrderAdded"),
-          alphabetical: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder.Alphabetical"),
+          byOrderAdded: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderByOrderAdded"),
+          alphabetical: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderAlphabetical"),
         },
         type: String,
         requiresReload: true,
