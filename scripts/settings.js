@@ -36,7 +36,7 @@ export default class Settings {
     userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("DFREDSCE.UserRolesTrustedPlayer");
     userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("DFREDSCE.UserRolesAssistantGM");
     userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("DFREDSCE.UserRolesGameMaster");
-    userRoles[5] = game.i18n.localize("DFREDSCE.UserRoles.None");
+    userRoles[5] = game.i18n.localize("DFREDSCE.UserRolesNone");
 
     game.settings.register(
       Constants.MODULE_ID,
