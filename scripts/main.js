@@ -2,17 +2,18 @@ import ChatHandler from './chat-handler.js';
 import Constants from './constants.js';
 import Controls from './controls.js';
 import EffectDefinitions from './effects/effect-definitions.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import EffectInterface from './effect-interface.js';
 import FoundryHelpers from './foundry-helpers.js';
 import HandlebarHelpers from './handlebar-helpers.js';
 import MacroHandler from './macro-handler.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
-import { libWrapper } from './lib/shim.js';
 import TextEnrichers from './text-enrichers.js';
 import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
 import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
-import EffectHelpers from './effects/effect-helpers.js';
+import { libWrapper } from './lib/shim.js';
+import { removeCustomItemFromSidebar } from './ui/remove-custom-item-from-sidebar.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -106,16 +107,11 @@ Hooks.once('setup', () => {
 });
 
 Hooks.on('changeSidebarTab', (directory) => {
-  if (!(directory instanceof ItemDirectory)) return;
+  removeCustomItemFromSidebar(directory);
+});
 
-  const settings = new Settings();
-  const customEffectsItemId = settings.customEffectsItemId;
-
-  if (!customEffectsItemId) return;
-
-  const html = directory.element;
-  const li = html.find(`li[data-document-id="${customEffectsItemId}"]`);
-  li.remove();
+Hooks.on('renderItemDirectory', (directory) => {
+  removeCustomItemFromSidebar(directory);
 });
 
 /**
