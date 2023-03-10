@@ -42,8 +42,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.CHAT_MESSAGE_PERMISSION,
       {
-        name: 'Chat Message Permission',
-        hint: 'This defines the minimum permission level to see chat messages when effects are applied, removed, or expire. Setting this to None will never show chat messages.',
+        name: game.i18n.localize("DFREDSCE.ChatMessagePermissionName"),
+        hint: game.i18n.localize("DFREDSCE.ChatMessagePermissionHint"),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -56,8 +56,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.APP_CONTROLS_PERMISSION,
       {
-        name: 'App Controls Permission',
-        hint: 'This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.',
+        name: game.i18n.localize("DFREDSCE.AppControlsPermission"),
+        hint: game.i18n.localize("DFREDSCE.AppControlsPermissionHint"),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -71,8 +71,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.REMOVE_CONTROLS_PERMISSION,
       {
-        name: 'Remove Controls Permission',
-        hint: 'This defines the minimum permission level to remove Convenient Effects through the button on the token controls. Setting this to None will disable the button entirely.',
+        name: game.i18n.localize("DFREDSCE.RemoveControlsPermission"),
+        hint: game.i18n.localize("DFREDSCE.RemoveControlsPermissionHint"),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -86,8 +86,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.MODIFY_STATUS_EFFECTS,
       {
-        name: 'Modify Status Effects',
-        hint: 'This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.',
+        name: game.i18n.localize("DFREDSCE.ModifyStatusEffects"),
+        hint: game.i18n.localize("DFREDSCE.ModifyStatusEffectsHint"),
         scope: 'world',
         config: true,
         default: 'none',
@@ -105,8 +105,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
       {
-        name: 'Show Chat Message Effect Description',
-        hint: 'This is when effect descriptions are shown on chat messages.',
+        name: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription"),
+        hint: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription"),
         scope: 'world',
         config: true,
         default: 'onAddOrRemove',
@@ -123,8 +123,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.STATUS_EFFECTS_SORT_ORDER,
       {
-        name: 'Status Effects Sort Order',
-        hint: 'This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.',
+        name: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder"),
+        hint: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderHint"),
         scope: 'world',
         config: true,
         default: 'none',
@@ -141,8 +141,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
       {
-        name: 'Allow Player Custom Effects',
-        hint: 'If enabled, players will be allowed to create, duplicate, edit, and delete all custom effects.',
+        name: game.i18n.localize("DFREDSCE.AllowPlayerCustomEffects"),
+        hint: game.i18n.localize("DFREDSCE.AllowPlayerCustomEffectsHint"),
         scope: 'world',
         config: true,
         default: false,
@@ -160,8 +160,8 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.INTEGRATE_WITH_ATE, {
-      name: 'Integrate with ATE',
-      hint: 'If enabled, certain effects will also change light emitted from tokens or the size of a token via Active Token Effects.',
+      name: game.i18n.localize("DFREDSCE.IntegratewithATE"),
+      hint: game.i18n.localize("DFREDSCE.IntegratewithATEHint"),
       scope: 'world',
       config: true,
       default: true,
@@ -172,8 +172,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.INTEGRATE_WITH_TOKEN_MAGIC,
       {
-        name: 'Integrate with Token Magic',
-        hint: 'If enabled, certain effects will also apply a token magic filter to tokens via Token Magic.',
+        name: game.i18n.localize("DFREDSCE.IntegratewithTokenMagic"),
+        hint: game.i18n.localize("DFREDSCE.IntegratewithTokenMagic"),
         scope: 'world',
         config: true,
         default: true,
@@ -182,8 +182,8 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS, {
-      name: 'Prioritize Targets',
-      hint: 'If enabled, effects will be applied to any targeted tokens instead of selected tokens.',
+      name: game.i18n.localize("DFREDSCE.PrioritizeTargets"),
+      hint: game.i18n.localize("DFREDSCE.PrioritizeTargetsHint"),
       scope: 'client',
       config: true,
       default: false,
@@ -191,8 +191,8 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS, {
-      name: 'Show Nested Effects',
-      hint: 'If enabled, nested effects will be shown in the application.',
+      name: game.i18n.localize("DFREDSCE.ShowNestedEffects"),
+      hint: game.i18n.localize("DFREDSCE.ShowNestedEffectsHint"),
       scope: 'client',
       config: true,
       default: false,
@@ -205,7 +205,7 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
       {
-        name: 'Favorite Effect Names',
+        name: game.i18n.localize("DFREDSCE.FavoriteEffectNames"),
         scope: 'client',
         config: false,
         default: '',
@@ -214,7 +214,7 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
-      name: 'Status Effect Names',
+      name: game.i18n.localize("DFREDSCE.StatusEffectNames"),
       scope: 'world',
       config: false,
       default: this._defaultStatusEffectNames,
@@ -222,7 +222,7 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
-      name: 'Expanded Folders',
+      name: game.i18n.localize("DFREDSCE.ExpandedFolders"),
       scope: 'client',
       config: false,
       default: 'Favorites',
@@ -233,7 +233,7 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.CUSTOM_EFFECTS_ITEM_ID,
       {
-        name: 'Custom Effects Item ID',
+        name: game.i18n.localize("DFREDSCE.CustomEffectsItemID"),
         scope: 'world',
         config: false,
         default: '',
