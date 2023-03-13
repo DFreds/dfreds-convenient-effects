@@ -32,18 +32,18 @@ export default class Settings {
 
   _registerConfigSettings() {
     const userRoles = {};
-    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize("DFREDSCE.UserRolesPlayer");
-    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("DFREDSCE.UserRolesTrustedPlayer");
-    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("DFREDSCE.UserRolesAssistantGM");
-    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("DFREDSCE.UserRolesGameMaster");
-    userRoles[5] = game.i18n.localize("DFREDSCE.UserRolesNone");
+    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize("Settings.UserRolesPlayer");
+    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("Settings.UserRolesTrustedPlayer");
+    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("Settings.UserRolesAssistantGM");
+    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("Settings.UserRolesGameMaster");
+    userRoles[5] = game.i18n.localize("Settings.UserRolesNone");
 
     game.settings.register(
       Constants.MODULE_ID,
       Settings.CHAT_MESSAGE_PERMISSION,
       {
-        name: game.i18n.localize("DFREDSCE.ChatMessagePermissionName"),
-        hint: game.i18n.localize("DFREDSCE.ChatMessagePermissionHint"),
+        name: game.i18n.localize("Settings.ChatMessagePermissionName"),
+        hint: game.i18n.localize("Settings.ChatMessagePermissionHint"),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -56,8 +56,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.APP_CONTROLS_PERMISSION,
       {
-        name: game.i18n.localize("DFREDSCE.AppControlsPermission"),
-        hint: game.i18n.localize("DFREDSCE.AppControlsPermissionHint"),
+        name: game.i18n.localize("Settings.AppControlsPermission"),
+        hint: game.i18n.localize("Settings.AppControlsPermissionHint"),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -71,8 +71,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.REMOVE_CONTROLS_PERMISSION,
       {
-        name: game.i18n.localize("DFREDSCE.RemoveControlsPermission"),
-        hint: game.i18n.localize("DFREDSCE.RemoveControlsPermissionHint"),
+        name: game.i18n.localize("Settings.RemoveControlsPermission"),
+        hint: game.i18n.localize("Settings.RemoveControlsPermissionHint"),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -86,15 +86,15 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.MODIFY_STATUS_EFFECTS,
       {
-        name: game.i18n.localize("DFREDSCE.ModifyStatusEffects"),
-        hint: game.i18n.localize("DFREDSCE.ModifyStatusEffectsHint"),
+        name: game.i18n.localize("Settings.ModifyStatusEffects"),
+        hint: game.i18n.localize("Settings.ModifyStatusEffectsHint"),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("DFREDSCE.ModifyStatusEffectsNone"),
+        default: game.i18n.localize("Settings.ModifyStatusEffectsNone"),
         choices: {
-          none: game.i18n.localize("DFREDSCE.ModifyStatusEffectsNone"),
-          replace: game.i18n.localize("DFREDSCE.ModifyStatusEffectsReplace"),
-          add: game.i18n.localize("DFREDSCE.ModifyStatusEffectsAdd"),
+          none: game.i18n.localize("Settings.ModifyStatusEffectsNone"),
+          replace: game.i18n.localize("Settings.ModifyStatusEffectsReplace"),
+          add: game.i18n.localize("Settings.ModifyStatusEffectsAdd"),
         },
         type: String,
         requiresReload: true,
@@ -105,15 +105,15 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
       {
-        name: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription"),
-        hint: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescription"),
+        name: game.i18n.localize("Settings.ShowChatMessageEffectDescription"),
+        hint: game.i18n.localize("Settings.ShowChatMessageEffectDescription"),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOnAddorRemove"),
+        default: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionOnAddorRemove"),
         choices: {
-          onAddOrRemove: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOnAddorRemove"),
-          onAddOnly: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionOnAddOnly"),
-          never: game.i18n.localize("DFREDSCE.ShowChatMessageEffectDescriptionNever"),
+          onAddOrRemove: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionOnAddorRemove"),
+          onAddOnly: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionOnAddOnly"),
+          never: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionNever"),
         },
         type: String,
       }
@@ -123,14 +123,14 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.STATUS_EFFECTS_SORT_ORDER,
       {
-        name: game.i18n.localize("DFREDSCE.StatusEffectsSortOrder"),
-        hint: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderHint"),
+        name: game.i18n.localize("Settings.StatusEffectsSortOrder"),
+        hint: game.i18n.localize("Settings.StatusEffectsSortOrderHint"),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderNone"),
+        default: game.i18n.localize("Settings.StatusEffectsSortOrderNone"),
         choices: {
-          byOrderAdded: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderByOrderAdded"),
-          alphabetical: game.i18n.localize("DFREDSCE.StatusEffectsSortOrderAlphabetical"),
+          byOrderAdded: game.i18n.localize("Settings.StatusEffectsSortOrderByOrderAdded"),
+          alphabetical: game.i18n.localize("Settings.StatusEffectsSortOrderAlphabetical"),
         },
         type: String,
         requiresReload: true,
@@ -141,8 +141,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
       {
-        name: game.i18n.localize("DFREDSCE.AllowPlayerCustomEffects"),
-        hint: game.i18n.localize("DFREDSCE.AllowPlayerCustomEffectsHint"),
+        name: game.i18n.localize("Settings.AllowPlayerCustomEffects"),
+        hint: game.i18n.localize("Settings.AllowPlayerCustomEffectsHint"),
         scope: 'world',
         config: true,
         default: false,
@@ -160,8 +160,8 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.INTEGRATE_WITH_ATE, {
-      name: game.i18n.localize("DFREDSCE.IntegratewithATE"),
-      hint: game.i18n.localize("DFREDSCE.IntegratewithATEHint"),
+      name: game.i18n.localize("Settings.IntegratewithATE"),
+      hint: game.i18n.localize("Settings.IntegratewithATEHint"),
       scope: 'world',
       config: true,
       default: true,
@@ -172,8 +172,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.INTEGRATE_WITH_TOKEN_MAGIC,
       {
-        name: game.i18n.localize("DFREDSCE.IntegratewithTokenMagic"),
-        hint: game.i18n.localize("DFREDSCE.IntegratewithTokenMagic"),
+        name: game.i18n.localize("Settings.IntegratewithTokenMagic"),
+        hint: game.i18n.localize("Settings.IntegratewithTokenMagic"),
         scope: 'world',
         config: true,
         default: true,
@@ -182,8 +182,8 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS, {
-      name: game.i18n.localize("DFREDSCE.PrioritizeTargets"),
-      hint: game.i18n.localize("DFREDSCE.PrioritizeTargetsHint"),
+      name: game.i18n.localize("Settings.PrioritizeTargets"),
+      hint: game.i18n.localize("Settings.PrioritizeTargetsHint"),
       scope: 'client',
       config: true,
       default: false,
@@ -191,8 +191,8 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS, {
-      name: game.i18n.localize("DFREDSCE.ShowNestedEffects"),
-      hint: game.i18n.localize("DFREDSCE.ShowNestedEffectsHint"),
+      name: game.i18n.localize("Settings.ShowNestedEffects"),
+      hint: game.i18n.localize("Settings.ShowNestedEffectsHint"),
       scope: 'client',
       config: true,
       default: false,
@@ -205,7 +205,7 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
       {
-        name: game.i18n.localize("DFREDSCE.FavoriteEffectNames"),
+        name: game.i18n.localize("Settings.FavoriteEffectNames"),
         scope: 'client',
         config: false,
         default: '',
@@ -214,7 +214,7 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
-      name: game.i18n.localize("DFREDSCE.StatusEffectNames"),
+      name: game.i18n.localize("Settings.StatusEffectNames"),
       scope: 'world',
       config: false,
       default: this._defaultStatusEffectNames,
@@ -222,7 +222,7 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
-      name: game.i18n.localize("DFREDSCE.ExpandedFolders"),
+      name: game.i18n.localize("Settings.ExpandedFolders"),
       scope: 'client',
       config: false,
       default: 'Favorites',
@@ -233,7 +233,7 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.CUSTOM_EFFECTS_ITEM_ID,
       {
-        name: game.i18n.localize("DFREDSCE.CustomEffectsItemID"),
+        name: game.i18n.localize("Settings.CustomEffectsItemID"),
         scope: 'world',
         config: false,
         default: '',
@@ -244,27 +244,27 @@ export default class Settings {
 
   get _defaultStatusEffectNames() {
     return [
-      game.i18n.localize("DFREDSCE.Blinded"),
-      game.i18n.localize("DFREDSCE.Charmed"),
-      game.i18n.localize("DFREDSCE.Concentrating"),
-      game.i18n.localize("DFREDSCE.Dead"),
-      game.i18n.localize("DFREDSCE.Deafened"),
-      game.i18n.localize("DFREDSCE.Exhaustion1"),
-      game.i18n.localize("DFREDSCE.Exhaustion2"),
-      game.i18n.localize("DFREDSCE.Exhaustion3"),
-      game.i18n.localize("DFREDSCE.Exhaustion4"),
-      game.i18n.localize("DFREDSCE.Exhaustion5"),
-      game.i18n.localize("DFREDSCE.Frightened"),
-      game.i18n.localize("DFREDSCE.Grappled"),
-      game.i18n.localize("DFREDSCE.Incapacitated"),
-      game.i18n.localize("DFREDSCE.Invisible"),
-      game.i18n.localize("DFREDSCE.Paralyzed"),
-      game.i18n.localize("DFREDSCE.Petrified"),
-      game.i18n.localize("DFREDSCE.Poisoned"),
-      game.i18n.localize("DFREDSCE.Prone"),
-      game.i18n.localize("DFREDSCE.Restrained"),
-      game.i18n.localize("DFREDSCE.Stunned"),
-      game.i18n.localize("DFREDSCE.Unconscious"),
+      game.i18n.localize("Settings.Blinded"),
+      game.i18n.localize("Settings.Charmed"),
+      game.i18n.localize("Settings.Concentrating"),
+      game.i18n.localize("Settings.Dead"),
+      game.i18n.localize("Settings.Deafened"),
+      game.i18n.localize("Settings.Exhaustion1"),
+      game.i18n.localize("Settings.Exhaustion2"),
+      game.i18n.localize("Settings.Exhaustion3"),
+      game.i18n.localize("Settings.Exhaustion4"),
+      game.i18n.localize("Settings.Exhaustion5"),
+      game.i18n.localize("Settings.Frightened"),
+      game.i18n.localize("Settings.Grappled"),
+      game.i18n.localize("Settings.Incapacitated"),
+      game.i18n.localize("Settings.Invisible"),
+      game.i18n.localize("Settings.Paralyzed"),
+      game.i18n.localize("Settings.Petrified"),
+      game.i18n.localize("Settings.Poisoned"),
+      game.i18n.localize("Settings.Prone"),
+      game.i18n.localize("Settings.Restrained"),
+      game.i18n.localize("Settings.Stunned"),
+      game.i18n.localize("Settings.Unconscious"),
     ];
   }
 

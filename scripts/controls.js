@@ -27,8 +27,8 @@ export default class Controls {
 
   get _convenientEffectsAppButton() {
     return {
-      name: 'convenient-effects',
-      title: 'Add Convenient Effects',
+      name: game.i18n.localize("Controls.convenienteffects"),
+      title: game.i18n.localize("Controls.AddConvenientEffects"),
       icon: 'fas fa-hand-sparkles',
       button: true,
       visible: game.user.role >= this._settings.appControlsPermission,
@@ -42,8 +42,8 @@ export default class Controls {
 
   get _removeEffectsButton() {
     return {
-      name: 'remove-convenient-effects',
-      title: 'Remove Convenient Effects',
+      name: game.i18n.localize("Controls.removeconvenienteffects"),
+      title: game.i18n.localize("Controls.RemoveConvenientEffects"),
       icon: 'fas fa-trash-alt',
       button: true,
       visible: game.user.role >= this._settings.removeControlsPermission,
