@@ -32,37 +32,37 @@ export default class ConvenientEffectsController {
       folders: [
         {
           id: 'favorites',
-          label: 'Favorites',
+          label: game.i18n.localize("ConvenientEffectsControllerFavorites"),
           effects: this._fetchFavorites(),
         },
         {
           id: 'custom',
-          label: 'Custom',
+          label: game.i18n.localize("ConvenientEffectsControllerCustom"),
           effects: this._fetchUnfavoritedCustomEffects(),
         },
         {
           id: 'conditions',
-          label: 'Conditions',
+          label: game.i18n.localize("ConvenientEffectsControllerConditions"),
           effects: this._fetchUnfavoritedConditions(),
         },
         {
           id: 'spells',
-          label: 'Spells',
+          label: game.i18n.localize("ConvenientEffectsControllerSpells"),
           effects: this._fetchUnfavoritedSpells(),
         },
         {
           id: 'class-features',
-          label: 'Class Features',
+          label: game.i18n.localize("ConvenientEffectsControllerClassFeatures"),
           effects: this._fetchUnfavoritedClassFeatures(),
         },
         {
           id: 'equipment',
-          label: 'Equipment',
+          label: game.i18n.localize("ConvenientEffectsControllerEquipment"),
           effects: this._fetchUnfavoritedEquipment(),
         },
         {
           id: 'other',
-          label: 'Other',
+          label: game.i18n.localize("ConvenientEffectsControllerOther"),
           effects: this._fetchUnfavoritedOther(),
         },
       ],
@@ -210,9 +210,8 @@ export default class ConvenientEffectsController {
    */
   async onResetStatusEffectsClick(event) {
     return Dialog.confirm({
-      title: 'Reset Status Effects',
-      content:
-        '<h4>Are You Sure?</h4><p>This will reset all configured status effects to the module defaults and reload Foundry.',
+      title: game.i18n.localize("ConvenientEffectsControllerResetStatusEffects"),
+      content: game.i18n.localize("ConvenientEffectsControllerResetStatusEffectsDialog"),
       yes: async () => {
         await this._settings.resetStatusEffects();
         window.location.reload();

@@ -384,6 +384,17 @@
 
     "Main.AppliedTo": "Applied to",
     "Main.ExpiredFrom": "Expired from",
-    "Main.RemovedFrom": "Removed from"
+    "Main.RemovedFrom": "Removed from",
+
+    "ConvenientEffectsControllerFavorites": "Favorites",
+    "ConvenientEffectsControllerCustom": "Custom",
+    "ConvenientEffectsControllerConditions": "Conditions",
+    "ConvenientEffectsControllerSpells": "Spells",
+    "ConvenientEffectsControllerClassFeatures": "Class Features",
+    "ConvenientEffectsControllerEquipment": "Equipment",
+    "ConvenientEffectsControllerOther": "Other",
+
+    "ConvenientEffectsControllerResetStatusEffects": "Reset Status Effects",
+    "ConvenientEffectsControllerResetStatusEffectsDialog": "<h4>Are You Sure?</h4><p>This will reset all configured status effects to the module defaults and reload Foundry."
 
 }

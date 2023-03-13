@@ -384,5 +384,16 @@
 
     "Main.AppliedTo": "Aplicado a",
     "Main.ExpiredFrom": "Agotado en",
-    "Main.RemovedFrom": "Eliminado de"
+    "Main.RemovedFrom": "Eliminado de",
+
+    "ConvenientEffectsControllerFavorites": "Favoritos",
+    "ConvenientEffectsControllerCustom": "Personalizado",
+    "ConvenientEffectsControllerConditions": "Condiciones",
+    "ConvenientEffectsControllerSpells": "Conjuros",
+    "ConvenientEffectsControllerClassFeatures": "Rasgos de Clase",
+    "ConvenientEffectsControllerEquipment": "Equipamiento",
+    "ConvenientEffectsControllerOther": "Otros",
+
+    "ConvenientEffectsControllerResetStatusEffects": "Reiniciar efectos de estado",
+    "ConvenientEffectsControllerResetStatusEffectsDialog": "<h4>¿Estás seguro?</h4><p>Esto reiniciará todos los efectos de estado a los predefinidos por el módulo y recargará Foundry."
 }
