@@ -139,7 +139,7 @@ Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
     effectName: activeEffect?.label,
-    reason: 'Applied to',
+    reason: game.i18n.localize("Main.AppliedTo"),
     actor: activeEffect?.parent,
     isCreateActiveEffect: true,
   });
@@ -186,7 +186,7 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
     effectName: activeEffect?.label,
-    reason: isExpired ? 'Expired from' : 'Removed from',
+    reason: isExpired ? game.i18n.localize("Main.ExpiredFrom") : game.i18n.localize("Main.RemovedFrom"),
     actor: activeEffect?.parent,
     isCreateActiveEffect: false,
   });

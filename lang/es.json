@@ -380,5 +380,9 @@
     "Controls.convenienteffectsname": "convenient-effects",
     "Controls.AddConvenientEffectstittle": "Add Convenient Effects",
     "Controls.removeconvenienteffectsname": "remove-convenient-effects",
-    "Controls.RemoveConvenientEffectstittle": "Remove Convenient Effects"
+    "Controls.RemoveConvenientEffectstittle": "Remove Convenient Effects",
+
+    "Main.AppliedTo": "Aplicado a",
+    "Main.ExpiredFrom": "Agotado en",
+    "Main.RemovedFrom": "Eliminado de"
 }
