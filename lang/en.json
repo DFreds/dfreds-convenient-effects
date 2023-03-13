@@ -76,7 +76,7 @@
     "Effects.Charmed": "Charmed",
     "Effects.CharmedDescription": "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature.",
     "Effects.Concentrating":"Concentrating",
-    "Effects.ConcentratingDescription": "'Some Spells require you to maintain Concentration in order to keep their magic active. If you lose Concentration, such a spell ends.",
+    "Effects.ConcentratingDescription": "Some Spells require you to maintain Concentration in order to keep their magic active. If you lose Concentration, such a spell ends.",
     "Effects.Dead": "Dead",
     "Effects.DeadDescription": "No active effects",
     "Effects.Deafened": "Deafened",
