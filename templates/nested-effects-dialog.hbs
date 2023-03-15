@@ -1,12 +1,14 @@
 <form id='convenient-effects-dialog' onsubmit='event.preventDefault();'>
   <p>{{parentEffect.flags.dfreds-convenient-effects.description}}</p>
   <div class='form-group'>
-    <label>Chosen Effect</label>
+    <label>game.i18n.localize("NestedEffectsDialog.ChosenEffect")</label>
     <div class='form-fields'>
       <select name='effect-choice'>
         {{#select effectChoice}}
           {{#each nestedEffects as |nestedEffect|}}
-            <option value='{{nestedEffect.label}}'>{{nestedEffect.label}}</option>
+            <option
+              value='{{nestedEffect.label}}'
+            >{{nestedEffect.label}}</option>
           {{/each}}
         {{/select}}
       </select>

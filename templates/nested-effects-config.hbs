@@ -1,8 +1,12 @@
 <div id='nested-effects-config'>
-  <label class='title' style='font-weight: bold;'>Nested Effects</label>
+  <label
+    class='title'
+    style='font-weight: bold;'
+  >game.i18n.localize("NestedEffectsConfig.NestedEffects")</label>
   {{#each chosenEffects as |chosenEffect|}}
     <div class='form-group chosen-effect'>
-      <label>Nested Effect {{inc @index}}</label>
+      <label>game.i18n.localize("NestedEffectsConfig.NestedEffect")
+        {{inc @index}}</label>
       <div class='form-fields'>
         <button
           type='button'
@@ -18,7 +22,7 @@
     </div>
   {{/each}}
   <div class='form-group'>
-    <label>Add new nested effect</label>
+    <label>game.i18n.localize("NestedEffectsConfig.AddNewNestedEffect")</label>
     <div class='form-fields add-nested-effect'>
       <button
         type='button'

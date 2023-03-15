@@ -386,5 +386,13 @@
   "ConvenientEffectsControllerOther": "Other",
 
   "ConvenientEffectsControllerResetStatusEffects": "Reset Status Effects",
-  "ConvenientEffectsControllerResetStatusEffectsDialog": "<h4>Are You Sure?</h4><p>This will reset all configured status effects to the module defaults and reload Foundry."
+  "ConvenientEffectsControllerResetStatusEffectsDialog": "<h4>Are You Sure?</h4><p>This will reset all configured status effects to the module defaults and reload Foundry.",
+
+  "NestedEffectsDialog.ChosenEffect": "Chosen Effect",
+
+  "NestedEffectsConfig.NestedEffects": "Nested Effects",
+  "NestedEffectsConfig.NestedEffect": "Nested Effect",
+  "NestedEffectsConfig.AddNewNestedEffect": "Add new nested effect",
+
+  "EffectDescription": "Effect Description"
 }

@@ -391,5 +391,13 @@
   "ConvenientEffectsControllerOther": "Otros",
 
   "ConvenientEffectsControllerResetStatusEffects": "Reiniciar efectos de estado",
-  "ConvenientEffectsControllerResetStatusEffectsDialog": "<h4>¿Estás seguro?</h4><p>Esto reiniciará todos los efectos de estado a los predefinidos por el módulo y recargará Foundry."
+  "ConvenientEffectsControllerResetStatusEffectsDialog": "<h4>¿Estás seguro?</h4><p>Esto reiniciará todos los efectos de estado a los predefinidos por el módulo y recargará Foundry.",
+
+  "NestedEffectsDialog.ChosenEffect": "Efecto elegido",
+
+  "NestedEffectsConfig.NestedEffects": "Efectos anidados",
+  "NestedEffectsConfig.NestedEffect": "Efecto anidado",
+  "NestedEffectsConfig.AddNewNestedEffect": "Agregar nuevo efecto anidado",
+
+  "EffectDescription": "Descripción del efecto"
 }
