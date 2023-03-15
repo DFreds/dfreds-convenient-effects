@@ -332,7 +332,7 @@
   "Effects.PatientDefenseDescription": "Otorga desventaja a todos los atacantes y ventaja a todas las tiradas de salvación hasta el siguiente turno",
   "Effects.Rage": "Furia",
   "Effects.RageDescription": "Otorga ventaja en las pruebas y tiradas de salvación de fuerza, agrega un bono al daño cuerpo a cuerpo según el nivel de bárbaro y otorga resistencia al daño perforante, contundente y cortante durante 1 minuto. También aplica (si es necesario) las resistencias de la senda del guerrero totémico.",
-  "Effects.Ataque temerario": "Ataque temerario",
+  "Effects.RecklessAttack": "Ataque temerario",
   "Effects.RecklessAttackDescription": "Ventaja en los ataques cuerpo a cuerpo durante 1 turno, y otorga ventaja a los atacantes durante 1 turno",
   "Effects.BullseyeLantern": "Linterna de ojo de buey Lantern",
   "Effects.BullseyeLanternDescription": "Agrega una luz de linterna en un cono de 60 grados que dura 6 horas (requiere ATL)",
