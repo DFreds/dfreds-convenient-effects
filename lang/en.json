@@ -334,6 +334,8 @@
   "Effects.RageDescription": "Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.",
   "Effects.RecklessAttack": "Reckless Attack",
   "Effects.RecklessAttackDescription": "Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round",
+  "Effects.RecklessAttackAdvantageOnAttacks": "Reckless Attack (advantage on attacks)",
+  "Effects.RecklessAttackAdvantageToAttackers": "Reckless Attack (grant advantage to those who attack)",
   "Effects.BullseyeLantern": "Bullseye Lantern",
   "Effects.BullseyeLanternDescription": "Adds lantern light in a 60 degree cone for 6 hours (requires ATL)",
   "Effects.Candle": "Candle",
@@ -394,5 +396,7 @@
   "NestedEffectsConfig.NestedEffect": "Nested Effect",
   "NestedEffectsConfig.AddNewNestedEffect": "Add new nested effect",
 
-  "EffectDescription": "Effect Description"
+  "EffectDescription": "Effect Description",
+
+  "Interface.PleaseSelect": "Please select or target a token to toggle the effect"
 }

@@ -89,9 +89,7 @@ export default class EffectInterface {
     }
 
     if (uuids.length == 0) {
-      ui.notifications.error(
-        `Please select or target a token to toggle ${effectName}`
-      );
+      ui.notifications.error(game.i18n.localize('Interface.PleaseSelect'));
       return;
     }
 

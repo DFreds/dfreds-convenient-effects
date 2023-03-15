@@ -3053,7 +3053,7 @@ export default class EffectDefinitions {
       seconds: CONFIG.time.roundTime,
       subEffects: [
         this._effectHelpers.createActiveEffect({
-          label: 'Reckless Attack (advantage on attacks)',
+          label: game.i18n.localize("Effects.RecklessAttackAdvantageOnAttacks"),
           description: 'Advantage on melee attacks until end of turn',
           icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
           turns: 1,
@@ -3066,7 +3066,7 @@ export default class EffectDefinitions {
           ],
         }),
         this._effectHelpers.createActiveEffect({
-          label: 'Reckless Attack (grant advantage to those who attack)',
+          label: game.i18n.localize("Effects.RecklessAttackAdvantageToAttackers"),
           description: 'Grant advantage to those who attack until next turn',
           icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
           changes: [
