@@ -405,6 +405,8 @@
 
   "Interface.PleaseSelect": "Por favor, selecciona un token objetivo con quien usar el efecto",
 
+  "ConvenientEffectsApp.EditEffect": "Editar efecto",
+  "ConvenientEffectsApp.DeleteEffect": "Borrar efecto",
   "ConvenientEffectsApp.AddFavorite": "Agregar como favorito",
   "ConvenientEffectsApp.RemoveFavorite": "Quitar de favoritos",
   "ConvenientEffectsApp.ToggleAsOverlay": "Usar como capa superpuesta",

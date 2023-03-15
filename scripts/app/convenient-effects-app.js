@@ -129,7 +129,7 @@ export default class ConvenientEffectsApp extends Application {
   _initContextMenus() {
     new ContextMenu(this._allDirectories, '.entity', [
       {
-        name: 'Edit Effect',
+        name: game.i18n.localize('ConvenientEffectsApp.EditEffect'),
         icon: '<i class="fas fa-edit fa-fw"></i>',
         condition: (effectItem) => {
           return (
@@ -140,7 +140,7 @@ export default class ConvenientEffectsApp extends Application {
         callback: this._controller.onEditEffectClick.bind(this._controller),
       },
       {
-        name: 'Delete Effect',
+        name: game.i18n.localize('ConvenientEffectsApp.DeleteEffect'),
         icon: '<i class="fas fa-trash fa-fw"></i>',
         condition: (effectItem) => {
           return (

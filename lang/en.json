@@ -400,6 +400,8 @@
 
   "Interface.PleaseSelect": "Please select or target a token to toggle the effect",
 
+  "ConvenientEffectsApp.EditEffect": "Edit Effect",
+  "ConvenientEffectsApp.DeleteEffect": "Delete Effect",
   "ConvenientEffectsApp.AddFavorite": "Add Favorite",
   "ConvenientEffectsApp.RemoveFavorite": "Remove Favorite",
   "ConvenientEffectsApp.ToggleAsOverlay": "Toggle as Overlay",
