@@ -151,7 +151,7 @@ export default class ConvenientEffectsApp extends Application {
         callback: this._controller.onDeleteEffectClick.bind(this._controller),
       },
       {
-        name: 'Add Favorite',
+        name: game.i18n.localize('ConvenientEffectsApp.AddFavorite'),
         icon: '<i class="fas fa-star fa-fw"></i>',
         condition: (effectItem) => {
           return !this._controller.isFavoritedEffect(effectItem);
@@ -159,7 +159,7 @@ export default class ConvenientEffectsApp extends Application {
         callback: this._controller.onAddFavorite.bind(this._controller),
       },
       {
-        name: 'Remove Favorite',
+        name: game.i18n.localize('ConvenientEffectsApp.RemoveFavorite'),
         icon: '<i class="far fa-star fa-fw"></i>',
         condition: (effectItem) => {
           return this._controller.isFavoritedEffect(effectItem);
@@ -167,12 +167,12 @@ export default class ConvenientEffectsApp extends Application {
         callback: this._controller.onRemoveFavorite.bind(this._controller),
       },
       {
-        name: 'Toggle as Overlay',
+        name: game.i18n.localize('ConvenientEffectsApp.ToggleAsOverlay'),
         icon: '<i class="far fa-dot-circle fa-fw"></i>',
         callback: this._controller.onToggleOverlay.bind(this._controller),
       },
       {
-        name: 'Toggle Status Effect',
+        name: game.i18n.localize('ConvenientEffectsApp.ToggleStatusEffect'),
         icon: '<i class="fas fa-street-view fa-fw"></i>',
         condition: () => {
           return game.user.isGM;
@@ -180,7 +180,7 @@ export default class ConvenientEffectsApp extends Application {
         callback: this._controller.onToggleStatusEffect.bind(this._controller),
       },
       {
-        name: 'Duplicate as Custom',
+        name: game.i18n.localize('ConvenientEffectsApp.DuplicateAsCustom'),
         icon: '<i class="far fa-copy fa-fw"></i>',
         condition: () => {
           return (

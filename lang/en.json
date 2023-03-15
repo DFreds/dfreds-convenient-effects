@@ -398,5 +398,11 @@
 
   "EffectDescription": "Effect Description",
 
-  "Interface.PleaseSelect": "Please select or target a token to toggle the effect"
+  "Interface.PleaseSelect": "Please select or target a token to toggle the effect",
+
+  "ConvenientEffectsApp.AddFavorite": "Add Favorite",
+  "ConvenientEffectsApp.RemoveFavorite": "Remove Favorite",
+  "ConvenientEffectsApp.ToggleAsOverlay": "Toggle as Overlay",
+  "ConvenientEffectsApp.ToggleStatusEffect": "Toggle Status Effect",
+  "ConvenientEffectsApp.DuplicateAsCustom": "Duplicate as Custom"
 }

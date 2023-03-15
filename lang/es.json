@@ -336,7 +336,7 @@
   "Effects.RecklessAttackDescription": "Ventaja en los ataques cuerpo a cuerpo usando la fuerza durante 1 turno, y otorga ventaja a los atacantes durante 1 turno",
   "Effects.RecklessAttackAdvantageOnAttacks": "Ataque temerario (ventaja al atacar)",
   "Effects.RecklessAttackAdvantageToAttackers": "Ataque temerario (ventaja a los atacantes)",
-  "Effects.BullseyeLantern": "Linterna de ojo de buey Lantern",
+  "Effects.BullseyeLantern": "Linterna de ojo de buey",
   "Effects.BullseyeLanternDescription": "Agrega una luz de linterna en un cono de 60 grados que dura 6 horas (requiere ATL)",
   "Effects.Candle": "Vela",
   "Effects.CandleDescription": "Agrega una luz de vela que dura 1 hora (requiere ATL)",
@@ -403,5 +403,11 @@
 
   "EffectDescription": "Descripción del efecto",
 
-  "Interface.PleaseSelect": "Por favor, selecciona un token objetivo con quien usar el efecto"
+  "Interface.PleaseSelect": "Por favor, selecciona un token objetivo con quien usar el efecto",
+
+  "ConvenientEffectsApp.AddFavorite": "Agregar como favorito",
+  "ConvenientEffectsApp.RemoveFavorite": "Quitar de favoritos",
+  "ConvenientEffectsApp.ToggleAsOverlay": "Usar como capa superpuesta",
+  "ConvenientEffectsApp.ToggleStatusEffect": "Usar como estado alterado",
+  "ConvenientEffectsApp.DuplicateAsCustom": "Duplicar como personalizado"
 }
