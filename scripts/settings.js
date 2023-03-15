@@ -32,18 +32,26 @@ export default class Settings {
 
   _registerConfigSettings() {
     const userRoles = {};
-    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize("Settings.UserRolesPlayer");
-    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize("Settings.UserRolesTrustedPlayer");
-    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize("Settings.UserRolesAssistantGM");
-    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize("Settings.UserRolesGameMaster");
-    userRoles[5] = game.i18n.localize("Settings.UserRolesNone");
+    userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
+      'Settings.UserRolesPlayer'
+    );
+    userRoles[CONST.USER_ROLES.TRUSTED] = game.i18n.localize(
+      'Settings.UserRolesTrustedPlayer'
+    );
+    userRoles[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize(
+      'Settings.UserRolesAssistantGM'
+    );
+    userRoles[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize(
+      'Settings.UserRolesGameMaster'
+    );
+    userRoles[5] = game.i18n.localize('Settings.UserRolesNone');
 
     game.settings.register(
       Constants.MODULE_ID,
       Settings.CHAT_MESSAGE_PERMISSION,
       {
-        name: game.i18n.localize("Settings.ChatMessagePermissionName"),
-        hint: game.i18n.localize("Settings.ChatMessagePermissionHint"),
+        name: game.i18n.localize('Settings.ChatMessagePermissionName'),
+        hint: game.i18n.localize('Settings.ChatMessagePermissionHint'),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -56,8 +64,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.APP_CONTROLS_PERMISSION,
       {
-        name: game.i18n.localize("Settings.AppControlsPermission"),
-        hint: game.i18n.localize("Settings.AppControlsPermissionHint"),
+        name: game.i18n.localize('Settings.AppControlsPermission'),
+        hint: game.i18n.localize('Settings.AppControlsPermissionHint'),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -71,8 +79,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.REMOVE_CONTROLS_PERMISSION,
       {
-        name: game.i18n.localize("Settings.RemoveControlsPermission"),
-        hint: game.i18n.localize("Settings.RemoveControlsPermissionHint"),
+        name: game.i18n.localize('Settings.RemoveControlsPermission'),
+        hint: game.i18n.localize('Settings.RemoveControlsPermissionHint'),
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -86,15 +94,15 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.MODIFY_STATUS_EFFECTS,
       {
-        name: game.i18n.localize("Settings.ModifyStatusEffects"),
-        hint: game.i18n.localize("Settings.ModifyStatusEffectsHint"),
+        name: game.i18n.localize('Settings.ModifyStatusEffects'),
+        hint: game.i18n.localize('Settings.ModifyStatusEffectsHint'),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("Settings.ModifyStatusEffectsNone"),
+        default: 'none',
         choices: {
-          none: game.i18n.localize("Settings.ModifyStatusEffectsNone"),
-          replace: game.i18n.localize("Settings.ModifyStatusEffectsReplace"),
-          add: game.i18n.localize("Settings.ModifyStatusEffectsAdd"),
+          none: game.i18n.localize('Settings.ModifyStatusEffectsNone'),
+          replace: game.i18n.localize('Settings.ModifyStatusEffectsReplace'),
+          add: game.i18n.localize('Settings.ModifyStatusEffectsAdd'),
         },
         type: String,
         requiresReload: true,
@@ -105,15 +113,21 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
       {
-        name: game.i18n.localize("Settings.ShowChatMessageEffectDescription"),
-        hint: game.i18n.localize("Settings.ShowChatMessageEffectDescription"),
+        name: game.i18n.localize('Settings.ShowChatMessageEffectDescription'),
+        hint: game.i18n.localize('Settings.ShowChatMessageEffectDescription'),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionOnAddorRemove"),
+        default: 'onAddOrRemove',
         choices: {
-          onAddOrRemove: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionOnAddorRemove"),
-          onAddOnly: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionOnAddOnly"),
-          never: game.i18n.localize("Settings.ShowChatMessageEffectDescriptionNever"),
+          onAddOrRemove: game.i18n.localize(
+            'Settings.ShowChatMessageEffectDescriptionOnAddorRemove'
+          ),
+          onAddOnly: game.i18n.localize(
+            'Settings.ShowChatMessageEffectDescriptionOnAddOnly'
+          ),
+          never: game.i18n.localize(
+            'Settings.ShowChatMessageEffectDescriptionNever'
+          ),
         },
         type: String,
       }
@@ -123,14 +137,18 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.STATUS_EFFECTS_SORT_ORDER,
       {
-        name: game.i18n.localize("Settings.StatusEffectsSortOrder"),
-        hint: game.i18n.localize("Settings.StatusEffectsSortOrderHint"),
+        name: game.i18n.localize('Settings.StatusEffectsSortOrder'),
+        hint: game.i18n.localize('Settings.StatusEffectsSortOrderHint'),
         scope: 'world',
         config: true,
-        default: game.i18n.localize("Settings.StatusEffectsSortOrderNone"),
+        default: 'byOrderAdded',
         choices: {
-          byOrderAdded: game.i18n.localize("Settings.StatusEffectsSortOrderByOrderAdded"),
-          alphabetical: game.i18n.localize("Settings.StatusEffectsSortOrderAlphabetical"),
+          byOrderAdded: game.i18n.localize(
+            'Settings.StatusEffectsSortOrderByOrderAdded'
+          ),
+          alphabetical: game.i18n.localize(
+            'Settings.StatusEffectsSortOrderAlphabetical'
+          ),
         },
         type: String,
         requiresReload: true,
@@ -141,8 +159,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
       {
-        name: game.i18n.localize("Settings.AllowPlayerCustomEffects"),
-        hint: game.i18n.localize("Settings.AllowPlayerCustomEffectsHint"),
+        name: game.i18n.localize('Settings.AllowPlayerCustomEffects'),
+        hint: game.i18n.localize('Settings.AllowPlayerCustomEffectsHint'),
         scope: 'world',
         config: true,
         default: false,
@@ -160,8 +178,8 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.INTEGRATE_WITH_ATE, {
-      name: game.i18n.localize("Settings.IntegratewithATE"),
-      hint: game.i18n.localize("Settings.IntegratewithATEHint"),
+      name: game.i18n.localize('Settings.IntegratewithATE'),
+      hint: game.i18n.localize('Settings.IntegratewithATEHint'),
       scope: 'world',
       config: true,
       default: true,
@@ -172,8 +190,8 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.INTEGRATE_WITH_TOKEN_MAGIC,
       {
-        name: game.i18n.localize("Settings.IntegratewithTokenMagic"),
-        hint: game.i18n.localize("Settings.IntegratewithTokenMagic"),
+        name: game.i18n.localize('Settings.IntegratewithTokenMagic'),
+        hint: game.i18n.localize('Settings.IntegratewithTokenMagic'),
         scope: 'world',
         config: true,
         default: true,
@@ -182,8 +200,8 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS, {
-      name: game.i18n.localize("Settings.PrioritizeTargets"),
-      hint: game.i18n.localize("Settings.PrioritizeTargetsHint"),
+      name: game.i18n.localize('Settings.PrioritizeTargets'),
+      hint: game.i18n.localize('Settings.PrioritizeTargetsHint'),
       scope: 'client',
       config: true,
       default: false,
@@ -191,8 +209,8 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.SHOW_NESTED_EFFECTS, {
-      name: game.i18n.localize("Settings.ShowNestedEffects"),
-      hint: game.i18n.localize("Settings.ShowNestedEffectsHint"),
+      name: game.i18n.localize('Settings.ShowNestedEffects'),
+      hint: game.i18n.localize('Settings.ShowNestedEffectsHint'),
       scope: 'client',
       config: true,
       default: false,
@@ -205,7 +223,7 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.FAVORITE_EFFECT_NAMES,
       {
-        name: game.i18n.localize("Settings.FavoriteEffectNames"),
+        name: 'Favorite Effect Names',
         scope: 'client',
         config: false,
         default: '',
@@ -214,7 +232,7 @@ export default class Settings {
     );
 
     game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
-      name: game.i18n.localize("Settings.StatusEffectNames"),
+      name: 'Status Effect Names',
       scope: 'world',
       config: false,
       default: this._defaultStatusEffectNames,
@@ -222,7 +240,7 @@ export default class Settings {
     });
 
     game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
-      name: game.i18n.localize("Settings.ExpandedFolders"),
+      name: 'Expanded Folders',
       scope: 'client',
       config: false,
       default: 'Favorites',
@@ -233,7 +251,7 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.CUSTOM_EFFECTS_ITEM_ID,
       {
-        name: game.i18n.localize("Settings.CustomEffectsItemID"),
+        name: 'Custom Effects Item ID',
         scope: 'world',
         config: false,
         default: '',
@@ -244,27 +262,27 @@ export default class Settings {
 
   get _defaultStatusEffectNames() {
     return [
-      game.i18n.localize("Settings.Blinded"),
-      game.i18n.localize("Settings.Charmed"),
-      game.i18n.localize("Settings.Concentrating"),
-      game.i18n.localize("Settings.Dead"),
-      game.i18n.localize("Settings.Deafened"),
-      game.i18n.localize("Settings.Exhaustion1"),
-      game.i18n.localize("Settings.Exhaustion2"),
-      game.i18n.localize("Settings.Exhaustion3"),
-      game.i18n.localize("Settings.Exhaustion4"),
-      game.i18n.localize("Settings.Exhaustion5"),
-      game.i18n.localize("Settings.Frightened"),
-      game.i18n.localize("Settings.Grappled"),
-      game.i18n.localize("Settings.Incapacitated"),
-      game.i18n.localize("Settings.Invisible"),
-      game.i18n.localize("Settings.Paralyzed"),
-      game.i18n.localize("Settings.Petrified"),
-      game.i18n.localize("Settings.Poisoned"),
-      game.i18n.localize("Settings.Prone"),
-      game.i18n.localize("Settings.Restrained"),
-      game.i18n.localize("Settings.Stunned"),
-      game.i18n.localize("Settings.Unconscious"),
+      game.i18n.localize('Settings.Blinded'),
+      game.i18n.localize('Settings.Charmed'),
+      game.i18n.localize('Settings.Concentrating'),
+      game.i18n.localize('Settings.Dead'),
+      game.i18n.localize('Settings.Deafened'),
+      game.i18n.localize('Settings.Exhaustion1'),
+      game.i18n.localize('Settings.Exhaustion2'),
+      game.i18n.localize('Settings.Exhaustion3'),
+      game.i18n.localize('Settings.Exhaustion4'),
+      game.i18n.localize('Settings.Exhaustion5'),
+      game.i18n.localize('Settings.Frightened'),
+      game.i18n.localize('Settings.Grappled'),
+      game.i18n.localize('Settings.Incapacitated'),
+      game.i18n.localize('Settings.Invisible'),
+      game.i18n.localize('Settings.Paralyzed'),
+      game.i18n.localize('Settings.Petrified'),
+      game.i18n.localize('Settings.Poisoned'),
+      game.i18n.localize('Settings.Prone'),
+      game.i18n.localize('Settings.Restrained'),
+      game.i18n.localize('Settings.Stunned'),
+      game.i18n.localize('Settings.Unconscious'),
     ];
   }
 
