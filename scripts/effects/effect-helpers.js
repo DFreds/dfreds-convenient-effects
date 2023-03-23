@@ -11,6 +11,7 @@ export default class EffectHelpers {
     description = '',
     icon = 'icons/svg/aura.svg',
     duration = {},
+    tint = null,
     seconds = null,
     rounds = null,
     turns = null,
@@ -64,6 +65,7 @@ export default class EffectHelpers {
       icon,
       label,
       origin,
+      tint,
       transfer: false,
     });
 
