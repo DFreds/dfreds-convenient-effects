@@ -3109,7 +3109,11 @@ export default class EffectDefinitions {
       description:
         'Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round',
       icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
-      seconds: CONFIG.time.roundTime,
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
       changes: [
         {
           key: `flags.${this._flagPrefix}.grants.advantage.attack.all`,
