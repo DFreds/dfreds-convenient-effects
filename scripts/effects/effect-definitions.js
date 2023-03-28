@@ -3110,6 +3110,13 @@ export default class EffectDefinitions {
         'Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round',
       icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
       seconds: CONFIG.time.roundTime,
+      changes: [
+        {
+          key: `flags.${this._flagPrefix}.grants.advantage.attack.all`,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
       subEffects: [
         this._effectHelpers.createActiveEffect({
           label: 'Reckless Attack (advantage on attacks)',
@@ -3119,18 +3126,6 @@ export default class EffectDefinitions {
           changes: [
             {
               key: `flags.${this._flagPrefix}.advantage.attack.mwak`,
-              mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-              value: '1',
-            },
-          ],
-        }),
-        this._effectHelpers.createActiveEffect({
-          label: 'Reckless Attack (grant advantage to those who attack)',
-          description: 'Grant advantage to those who attack until next turn',
-          icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
-          changes: [
-            {
-              key: `flags.${this._flagPrefix}.grants.advantage.attack.all`,
               mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
               value: '1',
             },
