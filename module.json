@@ -31,6 +31,10 @@
       {
         "id": "dnd5e",
         "type": "system"
+      },
+      {
+        "id": "sw5e",
+        "type": "system"
       }
     ],
     "requires": [
