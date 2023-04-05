@@ -62,9 +62,11 @@ export default class HandlebarHelpers {
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS) ??
         [];
 
-      const nestedEffects = nestedEffectNames.map((nestedEffect) =>
-        game.dfreds.effectInterface.findEffectByName(nestedEffect)
-      );
+      const nestedEffects = nestedEffectNames
+        .map((nestedEffect) =>
+          game.dfreds.effectInterface.findEffectByName(nestedEffect)
+        )
+        .filter((effect) => effect !== undefined);
 
       const subChanges = nestedEffects.flatMap(
         (nestedEffect) => nestedEffect.changes
