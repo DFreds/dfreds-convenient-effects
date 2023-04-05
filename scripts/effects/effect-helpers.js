@@ -33,18 +33,20 @@ export default class EffectHelpers {
       changes.push(...tokenMagicChanges);
     }
 
-    if (!flags.core) {
-      flags.core = {};
-    }
-    flags.core.statusId = `Convenient Effect: ${label}`;
+    let ceFlags = {
+      core: {
+        statusId: `Convenient Effect: ${label}`,
+      },
+    };
 
-    flags[Constants.MODULE_ID] = {};
-    flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] = description;
-    flags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
-    flags[Constants.MODULE_ID][Constants.FLAGS.IS_DYNAMIC] = isDynamic;
-    flags[Constants.MODULE_ID][Constants.FLAGS.IS_VIEWABLE] = isViewable;
-    flags[Constants.MODULE_ID][Constants.FLAGS.NESTED_EFFECTS] = nestedEffects;
-    flags[Constants.MODULE_ID][Constants.FLAGS.SUB_EFFECTS] = subEffects;
+    ceFlags[Constants.MODULE_ID] = {};
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] = description;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_DYNAMIC] = isDynamic;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_VIEWABLE] = isViewable;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.NESTED_EFFECTS] =
+      nestedEffects;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.SUB_EFFECTS] = subEffects;
 
     let effectDuration = isEmpty(duration)
       ? {
@@ -61,7 +63,7 @@ export default class EffectHelpers {
       changes,
       disabled: false,
       duration: effectDuration,
-      flags,
+      flags: foundry.utils.mergeObject(ceFlags, flags),
       icon,
       label,
       origin,
