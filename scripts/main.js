@@ -230,7 +230,7 @@ Hooks.on(
     const settings = new Settings();
 
     // Only add nested effects if the effect exists on the custom effect item
-    if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+    if (!activeEffectConfig.object.parent || activeEffectConfig.object.parent.id != settings.customEffectsItemId)
       return;
     addNestedEffectsToEffectConfig(activeEffectConfig, $html);
   }
