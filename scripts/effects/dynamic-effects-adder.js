@@ -16,7 +16,7 @@ export default class DynamicEffectsAdder {
    * @param {Actor} actor - the affected actor
    */
   async addDynamicEffects(effect, actor) {
-    switch (effect.label.toLowerCase()) {
+    switch (effect.name.toLowerCase()) {
       case 'divine word':
         await this._addDivineWordEffects(effect, actor);
         break;
@@ -50,17 +50,17 @@ export default class DynamicEffectsAdder {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin: `Convenient Effect: ${effect.name}`,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin: `Convenient Effect: ${effect.name}`,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Stunned',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin: `Convenient Effect: ${effect.name}`,
       });
       effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
         'Blinded, deafened, and stunned for 1 hour';
@@ -69,12 +69,12 @@ export default class DynamicEffectsAdder {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin: `Convenient Effect: ${effect.name}`,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin: `Convenient Effect: ${effect.name}`,
       });
       effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
         'Deafened and blinded for 10 minutes';
@@ -83,7 +83,7 @@ export default class DynamicEffectsAdder {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin: `Convenient Effect: ${effect.name}`,
       });
       effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
         'Deafened for 1 minute';

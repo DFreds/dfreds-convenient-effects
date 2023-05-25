@@ -7,7 +7,7 @@ export default class EffectHelpers {
   }
 
   createActiveEffect({
-    label,
+    name,
     description = '',
     icon = 'icons/svg/aura.svg',
     duration = {},
@@ -35,7 +35,7 @@ export default class EffectHelpers {
 
     let ceFlags = {
       core: {
-        statusId: `Convenient Effect: ${label}`,
+        statusId: `Convenient Effect: ${name}`,
       },
     };
 
@@ -65,7 +65,7 @@ export default class EffectHelpers {
       duration: effectDuration,
       flags: foundry.utils.mergeObject(ceFlags, flags),
       icon,
-      label,
+      name,
       origin,
       tint,
       transfer: false,

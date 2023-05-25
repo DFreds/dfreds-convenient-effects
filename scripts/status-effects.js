@@ -48,24 +48,24 @@ export default class StatusEffects {
         // Prioritize custom effects over built-in effects
         const effect = this._customEffectsHandler
           .getCustomEffects()
-          .find((effect) => effect.label == name);
+          .find((effect) => effect.name == name);
 
         if (effect) return effect;
 
-        return game.dfreds.effects.all.find((effect) => effect.label == name);
+        return game.dfreds.effects.all.find((effect) => effect.name == name);
       })
       .filter((effect) => effect)
       .map((effect) => {
         return {
-          id: `Convenient Effect: ${effect.label}`,
+          id: `Convenient Effect: ${effect.name}`,
           ...effect,
         };
       });
 
     if (this._settings.statusEffectsSortOrder === 'alphabetical') {
       return statusEffects.sort((a, b) => {
-        let nameA = a.label.toLowerCase();
-        let nameB = b.label.toLowerCase();
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
 
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;

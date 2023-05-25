@@ -6,7 +6,7 @@
       <select name='effect-choice'>
         {{#select effectChoice}}
           {{#each nestedEffects as |nestedEffect|}}
-            <option value='{{nestedEffect.label}}'>{{nestedEffect.label}}</option>
+            <option value='{{nestedEffect.name}}'>{{nestedEffect.name}}</option>
           {{/each}}
         {{/select}}
       </select>
@@ -15,7 +15,7 @@
 
   <div id='nested-effect-descriptions'>
     {{#each nestedEffects as |nestedEffect|}}
-      <p><strong>{{nestedEffect.label}}.</strong>
+      <p><strong>{{nestedEffect.name}}.</strong>
         {{nestedEffect.flags.dfreds-convenient-effects.description}}</p>
     {{/each}}
   </div>
