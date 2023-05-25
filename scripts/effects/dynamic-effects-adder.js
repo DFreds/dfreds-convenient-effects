@@ -44,8 +44,7 @@ export default class DynamicEffectsAdder {
         uuid: actor.uuid,
         overlay: true,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Killed instantly';
+      effect.description = 'Killed instantly';
     } else if (remainingHp <= 30) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
@@ -62,8 +61,7 @@ export default class DynamicEffectsAdder {
         uuid: actor.uuid,
         origin: `Convenient Effect: ${effect.name}`,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Blinded, deafened, and stunned for 1 hour';
+      effect.description = 'Blinded, deafened, and stunned for 1 hour';
       effect.duration.seconds = Constants.SECONDS.IN_ONE_HOUR;
     } else if (remainingHp <= 40) {
       await game.dfreds.effectInterface.addEffect({
@@ -76,8 +74,7 @@ export default class DynamicEffectsAdder {
         uuid: actor.uuid,
         origin: `Convenient Effect: ${effect.name}`,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Deafened and blinded for 10 minutes';
+      effect.description = 'Deafened and blinded for 10 minutes';
       effect.duration.seconds = Constants.SECONDS.IN_TEN_MINUTES;
     } else if (remainingHp <= 50) {
       await game.dfreds.effectInterface.addEffect({
@@ -85,8 +82,7 @@ export default class DynamicEffectsAdder {
         uuid: actor.uuid,
         origin: `Convenient Effect: ${effect.name}`,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Deafened for 1 minute';
+      effect.description = 'Deafened for 1 minute';
       effect.duration.seconds = Constants.SECONDS.IN_ONE_MINUTE;
     }
   }
