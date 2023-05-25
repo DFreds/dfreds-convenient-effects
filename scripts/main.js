@@ -10,7 +10,6 @@ import MacroHandler from './macro-handler.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import TextEnrichers from './text-enrichers.js';
-import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
 import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
 import { libWrapper } from './lib/shim.js';
 import { removeCustomItemFromSidebar } from './ui/remove-custom-item-from-sidebar.js';
@@ -225,8 +224,6 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
 Hooks.on(
   'renderActiveEffectConfig',
   async (activeEffectConfig, $html, _data) => {
-    addDescriptionToEffectConfig(activeEffectConfig, $html);
-
     const settings = new Settings();
 
     // Only add nested effects if the effect exists on the custom effect item
