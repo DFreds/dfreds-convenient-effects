@@ -1001,7 +1001,7 @@ export default class EffectDefinitions {
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [...this._blinded.changes],
+      subEffects: [this._blinded],
     });
   }
 
@@ -1012,7 +1012,7 @@ export default class EffectDefinitions {
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [...this._deafened.changes],
+      subEffects: [this._deafened],
     });
   }
 
