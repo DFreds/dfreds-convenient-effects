@@ -87,7 +87,7 @@ export default class HandlebarHelpers {
 
   _getStatusEffectIcon(effect) {
     return this._settings.modifyStatusEffects !== 'none' &&
-      this._settings.isStatusEffect(effect.label)
+      this._settings.isStatusEffect(effect.name)
       ? "<i class='fas fa-street-view integration-icon' title='Token Status Effect'></i>"
       : '';
   }

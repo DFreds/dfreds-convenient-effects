@@ -51,7 +51,7 @@ export default class ChatHandler {
   }
 
   _getChatContent({ effect, reason, actorName, isCreateActiveEffect }) {
-    let message = `<p><strong>${effect.label}</strong> - ${reason} ${actorName}</p>`;
+    let message = `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>`;
     if (
       this._settings.showChatMessageEffectDescription === 'onAddOrRemove' ||
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&

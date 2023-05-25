@@ -134,7 +134,7 @@ Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
 
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
-    effectName: activeEffect?.label,
+    effectName: activeEffect?.name,
     reason: 'Applied to',
     actor: activeEffect?.parent,
     isCreateActiveEffect: true,
@@ -181,7 +181,7 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
 
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
-    effectName: activeEffect?.label,
+    effectName: activeEffect?.name,
     reason: isExpired ? 'Expired from' : 'Removed from',
     actor: activeEffect?.parent,
     isCreateActiveEffect: false,
@@ -210,7 +210,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   const actor = activeEffect.parent;
   const effectIdsFromThisEffect = actor.effects
     .filter(
-      (effect) => effect.origin === `Convenient Effect: ${activeEffect.label}`
+      (effect) => effect.origin === `Convenient Effect: ${activeEffect.name}`
     )
     .map((effect) => effect.id);
 
@@ -230,7 +230,10 @@ Hooks.on(
     const settings = new Settings();
 
     // Only add nested effects if the effect exists on the custom effect item
-    if (!activeEffectConfig.object.parent || activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+    if (
+      !activeEffectConfig.object.parent ||
+      activeEffectConfig.object.parent.id != settings.customEffectsItemId
+    )
       return;
     addNestedEffectsToEffectConfig(activeEffectConfig, $html);
   }
