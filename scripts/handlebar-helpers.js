@@ -1,4 +1,5 @@
 import Constants from './constants.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import Settings from './settings.js';
 
 /**
@@ -6,6 +7,7 @@ import Settings from './settings.js';
  */
 export default class HandlebarHelpers {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
   }
 
@@ -18,6 +20,7 @@ export default class HandlebarHelpers {
     this._registerCanCreateEffectsHelper();
     this._registerIfCustomFolderHelper();
     this._registerConvenientIconsHelper();
+    this._registerEffectDescriptionHelper();
   }
 
   _registerIncHelper() {
@@ -82,6 +85,12 @@ export default class HandlebarHelpers {
       icons += this._getTokenMagicIcon(allChanges);
 
       return icons;
+    });
+  }
+
+  _registerEffectDescriptionHelper() {
+    Handlebars.registerHelper('effectDescription', (effect) => {
+      return this._effectHelpers.getDescription(effect);
     });
   }
 
