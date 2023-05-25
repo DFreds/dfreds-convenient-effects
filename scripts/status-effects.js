@@ -123,13 +123,9 @@ export default class StatusEffects {
     // Get statuses which are active for the token actor
     const actor = token.actor || null;
     const statuses = actor
-      ? actor.effects.reduce((obj, e) => {
-          const id = e.getFlag('core', 'statusId');
-          if (id) {
-            obj[id] = {
-              id: id,
-              overlay: !!e.getFlag('core', 'overlay'),
-            };
+      ? actor.effects.reduce((obj, effect) => {
+          for (const id of effect.statuses) {
+            obj[id] = { id, overlay: !!effect.getFlag('core', 'overlay') };
           }
           return obj;
         }, {})
