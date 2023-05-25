@@ -40,7 +40,6 @@ export default class EffectHelpers {
     };
 
     ceFlags[Constants.MODULE_ID] = {};
-    ceFlags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] = description;
     ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
     ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_DYNAMIC] = isDynamic;
     ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_VIEWABLE] = isViewable;
@@ -61,6 +60,7 @@ export default class EffectHelpers {
 
     let effect = new CONFIG.ActiveEffect.documentClass({
       changes,
+      description,
       disabled: false,
       duration: effectDuration,
       flags: foundry.utils.mergeObject(ceFlags, flags),
@@ -81,12 +81,14 @@ export default class EffectHelpers {
    * @returns {string} The description for the effect
    */
   getDescription(activeEffect) {
-    const description = activeEffect.getFlag(
+    const effectDescription = activeEffect.description;
+    const flagDescription = activeEffect.getFlag(
       Constants.MODULE_ID,
       Constants.FLAGS.DESCRIPTION
     );
+    const legacyDescription = activeEffect.flags.convenientDescription;
 
-    return description ?? activeEffect.flags.convenientDescription;
+    return effectDescription || flagDescription || legacyDescription;
   }
 
   /**
