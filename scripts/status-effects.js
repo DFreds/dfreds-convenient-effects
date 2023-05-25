@@ -45,14 +45,7 @@ export default class StatusEffects {
   _fetchStatusEffects() {
     let statusEffects = this._settings.statusEffectNames
       .map((name) => {
-        // Prioritize custom effects over built-in effects
-        const effect = this._customEffectsHandler
-          .getCustomEffects()
-          .find((effect) => effect.name == name);
-
-        if (effect) return effect;
-
-        return game.dfreds.effects.all.find((effect) => effect.name == name);
+        return game.dfreds.effectInterface.findEffectByName(name);
       })
       .filter((effect) => effect)
       .map((effect) => {
