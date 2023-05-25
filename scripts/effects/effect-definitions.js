@@ -1797,18 +1797,6 @@ export default class EffectDefinitions {
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
       icon: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [
-        {
-          key: `flags.${this._flagPrefix}.advantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-        {
-          key: `flags.${this._flagPrefix}.grants.disadvantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-      ],
       subEffects: [this._invisible],
     });
   }
@@ -2048,18 +2036,6 @@ export default class EffectDefinitions {
           specialDuration: ['1Attack', '1Spell'],
         },
       },
-      changes: [
-        {
-          key: `flags.${this._flagPrefix}.advantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-        {
-          key: `flags.${this._flagPrefix}.grants.disadvantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-      ],
       subEffects: [this._invisible],
     });
   }
