@@ -16,10 +16,10 @@
   "bugs": "https://github.com/DFreds/dfreds-convenient-effects/issues",
   "changelog": "https://github.com/DFreds/dfreds-convenient-effects/releases",
   "flags": {},
-  "version": "4.2.0",
+  "version": "5.0.0",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.299",
+    "verified": "11.300",
     "maximum": 11
   },
   "scripts": [],
