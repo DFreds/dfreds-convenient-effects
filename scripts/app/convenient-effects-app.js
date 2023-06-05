@@ -6,16 +6,27 @@ import ConvenientEffectsController from './convenient-effects-controller.js';
 export default class ConvenientEffectsApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      id: 'convenient-effects',
-      classes: ['sidebar-popout'],
-      title: 'Convenient Effects',
-      popOut: true,
       width: 300,
       height: 600,
-      minimizable: true,
-      resizable: true,
       top: 75,
       left: 125,
+      popOut: true,
+      minimizable: true,
+      resizable: true,
+      id: 'convenient-effects',
+      classes: ['sidebar-popout'],
+      dragDrop: [
+        {
+          dragSelector: '.convenient-effect',
+        },
+      ],
+      filters: [
+        {
+          inputSelector: 'input[name="search"]',
+          contentSelector: '.directory-list',
+        },
+      ],
+      title: 'Convenient Effects',
       template:
         'modules/dfreds-convenient-effects/templates/convenient-effects-app.hbs',
       scrollY: ['ol.directory-list'],
@@ -41,10 +52,18 @@ export default class ConvenientEffectsApp extends Application {
 
     this._initClickListeners();
     this._initContextMenus();
-    this._initDragDrop();
-    this._initSearchFilters();
 
     this._controller.expandSavedFolders();
+  }
+
+  /** @override */
+  _onSearchFilter(event, query, regex, html) {
+    this._controller.onSearchTextChange(event, query, regex, html);
+  }
+
+  /** @override */
+  _onDragStart(event) {
+    this._controller.onEffectDragStart(event);
   }
 
   /**
@@ -127,7 +146,7 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initContextMenus() {
-    ContextMenu.create(this, this._rootView, '.convenient-effect', [
+    new ContextMenu(this._rootView, '.convenient-effect', [
       {
         name: 'Edit Effect',
         icon: '<i class="fas fa-edit fa-fw"></i>',
@@ -192,26 +211,6 @@ export default class ConvenientEffectsApp extends Application {
     ]);
   }
 
-  _initDragDrop() {
-    const dragDrop = new DragDrop({
-      dragSelector: '.entity',
-      callbacks: {
-        dragstart: this._controller.onEffectDragStart.bind(this._controller),
-      },
-    });
-    dragDrop.bind(this._rootView[0]);
-  }
-
-  _initSearchFilters() {
-    const searchFilter = new SearchFilter({
-      inputSelector: 'input[name="search"]',
-      contentSelector: '.directory-list',
-      callback: this._controller.onSearchTextChange.bind(this._controller),
-    });
-
-    searchFilter.bind(this._rootView[0]);
-  }
-
   get _allDirectories() {
     return this._rootView.find('.folder');
   }
@@ -225,7 +224,7 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   get _effectListItems() {
-    return this._rootView.find('.entity');
+    return this._rootView.find('.convenient-effect');
   }
 
   get _exportCustomEffectsButton() {
