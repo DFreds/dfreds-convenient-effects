@@ -464,21 +464,4 @@ export default class ConvenientEffectsController {
       folderIds,
     };
   }
-
-  // Fixes bug when dragging over any item onto the convenient effects
-  _isValidEffect(event) {
-    try {
-      const data = JSON.parse(event.dataTransfer.getData('text/plain'));
-      return game.dfreds.effects.all.some(
-        (effect) => effect.name === data.effectName
-      );
-    } catch (err) {
-      return false;
-    }
-  }
-
-  // TODO delete
-  _isEventTargetFavorites(event) {
-    return event.currentTarget.dataset.folderId === 'favorites';
-  }
 }
