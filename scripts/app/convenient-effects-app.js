@@ -127,7 +127,7 @@ export default class ConvenientEffectsApp extends Application {
   }
 
   _initContextMenus() {
-    new ContextMenu(this._allDirectories, '.entity', [
+    ContextMenu.create(this, this._rootView, '.convenient-effect', [
       {
         name: 'Edit Effect',
         icon: '<i class="fas fa-edit fa-fw"></i>',
