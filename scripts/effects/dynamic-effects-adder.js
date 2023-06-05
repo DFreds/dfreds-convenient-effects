@@ -1,4 +1,5 @@
 import Constants from '../constants.js';
+import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
 
 /**
@@ -6,6 +7,7 @@ import Settings from '../settings.js';
  */
 export default class DynamicEffectsAdder {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
   }
 
@@ -34,6 +36,7 @@ export default class DynamicEffectsAdder {
 
   async _addDivineWordEffects(effect, actor) {
     const remainingHp = actor.system.attributes.hp.value;
+    const origin = this._effectHelpers.getId(effect.name);
 
     if (remainingHp <= 20) {
       await actor.update({
@@ -49,17 +52,17 @@ export default class DynamicEffectsAdder {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Stunned',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin,
       });
       effect.description = 'Blinded, deafened, and stunned for 1 hour';
       effect.duration.seconds = Constants.SECONDS.IN_ONE_HOUR;
@@ -67,12 +70,12 @@ export default class DynamicEffectsAdder {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin,
       });
       effect.description = 'Deafened and blinded for 10 minutes';
       effect.duration.seconds = Constants.SECONDS.IN_TEN_MINUTES;
@@ -80,7 +83,7 @@ export default class DynamicEffectsAdder {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.name}`,
+        origin,
       });
       effect.description = 'Deafened for 1 minute';
       effect.duration.seconds = Constants.SECONDS.IN_ONE_MINUTE;

@@ -195,7 +195,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effect: { ...effect },
+      effect: effect.toObject(),
       uuid,
       origin,
       overlay,
@@ -230,7 +230,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effect: { ...effect },
+      effect: effect.toObject(),
       uuid,
       origin,
       overlay,

@@ -30,7 +30,7 @@ export default class EffectHandler {
         await this.removeEffect({ effectName, uuid });
       } else {
         let effect = game.dfreds.effectInterface.findEffectByName(effectName);
-        await this.addEffect({ effect: { ...effect }, uuid, overlay });
+        await this.addEffect({ effect: effect.toObject(), uuid, overlay });
       }
     }
   }
@@ -120,7 +120,6 @@ export default class EffectHandler {
 
     let coreFlags = {
       core: {
-        statusId: `Convenient Effect: ${effect.name}`,
         overlay,
       },
     };
@@ -141,7 +140,7 @@ export default class EffectHandler {
         await game.dfreds.effectInterface.addEffectWith({
           effectData: subEffect,
           uuid,
-          origin: `Convenient Effect: ${effect.name}`,
+          origin: this._effectHelpers.getId(effect.name),
         });
       }
     }
