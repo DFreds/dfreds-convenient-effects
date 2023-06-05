@@ -19,6 +19,7 @@ export default class EffectHelpers {
     isViewable = true,
     flags = {},
     origin = null,
+    statuses = [],
     changes = [],
     atlChanges = [],
     tokenMagicChanges = [],
@@ -33,11 +34,7 @@ export default class EffectHelpers {
       changes.push(...tokenMagicChanges);
     }
 
-    let ceFlags = {
-      core: {
-        statusId: `Convenient Effect: ${name}`,
-      },
-    };
+    let ceFlags = {};
 
     ceFlags[Constants.MODULE_ID] = {};
     ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
@@ -58,6 +55,8 @@ export default class EffectHelpers {
         }
       : duration;
 
+    statuses.push(this.getId(name));
+
     let effect = new CONFIG.ActiveEffect.documentClass({
       changes,
       description,
@@ -69,6 +68,7 @@ export default class EffectHelpers {
       origin,
       tint,
       transfer: false,
+      statuses,
     });
 
     return effect;
@@ -89,6 +89,16 @@ export default class EffectHelpers {
     const legacyDescription = activeEffect.flags.convenientDescription;
 
     return effectDescription || flagDescription || legacyDescription;
+  }
+
+  /**
+   * Gets the ID for a convenient effect using its name
+   *
+   * @param {string} name - the name of the effect
+   * @returns The ID for the effect
+   */
+  getId(name) {
+    return `Convenient Effect: ${name}`;
   }
 
   /**

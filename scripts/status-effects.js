@@ -1,4 +1,5 @@
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import Settings from './settings.js';
 
 /**
@@ -7,6 +8,7 @@ import Settings from './settings.js';
 export default class StatusEffects {
   constructor() {
     this._customEffectsHandler = new CustomEffectsHandler();
+    this._effectsHelper = new EffectHelpers();
     this._settings = new Settings();
   }
 
@@ -17,26 +19,26 @@ export default class StatusEffects {
     const modifyStatusEffects = this._settings.modifyStatusEffects;
 
     if (modifyStatusEffects === 'replace') {
-      CONFIG.Combat.defeatedStatusId = 'Convenient Effect: Dead';
+      CONFIG.Combat.defeatedStatusId = this._effectsHelper.getId('Dead');
       CONFIG.statusEffects = this._fetchStatusEffects();
 
       if (CONFIG.specialStatusEffects) {
         CONFIG.specialStatusEffects = {
-          DEFEATED: 'Convenient Effect: Dead',
-          INVISIBLE: 'Convenient Effect: Invisible',
-          BLIND: 'Convenient Effect: Blinded',
+          DEFEATED: this._effectsHelper.getId('Dead'),
+          INVISIBLE: this._effectsHelper.getId('Invisible'),
+          BLIND: this._effectsHelper.getId('Blinded'),
         };
       }
     } else if (modifyStatusEffects === 'add') {
-      CONFIG.Combat.defeatedStatusId = 'Convenient Effect: Dead';
+      CONFIG.Combat.defeatedStatusId = this._effectsHelper.getId('Dead');
       CONFIG.statusEffects = CONFIG.statusEffects.concat(
         this._fetchStatusEffects()
       );
       if (CONFIG.specialStatusEffects) {
         CONFIG.specialStatusEffects = {
-          DEFEATED: 'Convenient Effect: Dead',
-          INVISIBLE: 'Convenient Effect: Invisible',
-          BLIND: 'Convenient Effect: Blinded',
+          DEFEATED: this._effectsHelper.getId('Dead'),
+          INVISIBLE: this._effectsHelper.getId('Invisible'),
+          BLIND: this._effectsHelper.getId('Blinded'),
         };
       }
     }
@@ -50,8 +52,8 @@ export default class StatusEffects {
       .filter((effect) => effect)
       .map((effect) => {
         return {
-          id: `Convenient Effect: ${effect.name}`,
-          ...effect,
+          id: this._effectsHelper.getId(effect.name),
+          ...effect.toObject(),
         };
       });
 

@@ -209,7 +209,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   const actor = activeEffect.parent;
   const effectIdsFromThisEffect = actor.effects
     .filter(
-      (effect) => effect.origin === `Convenient Effect: ${activeEffect.name}`
+      (effect) => effect.origin === effectHelpers.getId(activeEffect.name)
     )
     .map((effect) => effect.id);
 
