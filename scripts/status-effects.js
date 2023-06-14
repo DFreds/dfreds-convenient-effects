@@ -22,26 +22,24 @@ export default class StatusEffects {
       CONFIG.Combat.defeatedStatusId = this._effectsHelper.getId('Dead');
       CONFIG.statusEffects = this._fetchStatusEffects();
 
-      if (CONFIG.specialStatusEffects) {
-        CONFIG.specialStatusEffects = {
-          DEFEATED: this._effectsHelper.getId('Dead'),
-          INVISIBLE: this._effectsHelper.getId('Invisible'),
-          BLIND: this._effectsHelper.getId('Blinded'),
-        };
-      }
+      this._setSpecialStatusEffects();
     } else if (modifyStatusEffects === 'add') {
       CONFIG.Combat.defeatedStatusId = this._effectsHelper.getId('Dead');
       CONFIG.statusEffects = CONFIG.statusEffects.concat(
         this._fetchStatusEffects()
       );
-      if (CONFIG.specialStatusEffects) {
-        CONFIG.specialStatusEffects = {
-          DEFEATED: this._effectsHelper.getId('Dead'),
-          INVISIBLE: this._effectsHelper.getId('Invisible'),
-          BLIND: this._effectsHelper.getId('Blinded'),
-        };
-      }
+
+      this._setSpecialStatusEffects();
     }
+  }
+
+  _setSpecialStatusEffects() {
+    if (!CONFIG.specialStatusEffects) return;
+
+    CONFIG.specialStatusEffects.DEFEATED = this._effectsHelper.getId('Dead');
+    CONFIG.specialStatusEffects.INVISIBLE =
+      this._effectsHelper.getId('Invisible');
+    CONFIG.specialStatusEffects.BLIND = this._effectsHelper.getId('Blinded');
   }
 
   _fetchStatusEffects() {
