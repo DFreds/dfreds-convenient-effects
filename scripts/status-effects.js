@@ -51,16 +51,15 @@ export default class StatusEffects {
       .map((effect) => {
         return {
           id: this._effectsHelper.getId(effect.name),
+          name: effect.name,
           icon: effect.icon,
-          label: effect.name,
         };
       });
 
     if (this._settings.statusEffectsSortOrder === 'alphabetical') {
       return statusEffects.sort((a, b) => {
-        // label because this is what default foundry uses for some reason
-        let nameA = a.label.toLowerCase();
-        let nameB = b.label.toLowerCase();
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
 
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
@@ -141,7 +140,7 @@ export default class StatusEffects {
       // NOTE: changed key from src to id
       obj[id] = {
         id: e.id ?? '',
-        title: e.label ? game.i18n.localize(e.label) : null,
+        title: e.name ? game.i18n.localize(e.name) : null,
         src,
         isActive,
         isOverlay,
