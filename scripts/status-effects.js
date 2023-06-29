@@ -19,10 +19,8 @@ export default class StatusEffects {
     const modifyStatusEffects = this._settings.modifyStatusEffects;
 
     if (modifyStatusEffects === 'replace') {
-      CONFIG.Combat.defeatedStatusId = this._effectsHelper.getId('Dead');
       CONFIG.statusEffects = this._fetchStatusEffects();
     } else if (modifyStatusEffects === 'add') {
-      CONFIG.Combat.defeatedStatusId = this._effectsHelper.getId('Dead');
       CONFIG.statusEffects = CONFIG.statusEffects.concat(
         this._fetchStatusEffects()
       );
