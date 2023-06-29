@@ -36,8 +36,7 @@ export default class StatusEffects {
       .map((effect) => {
         return {
           id: this._effectsHelper.getId(effect.name),
-          name: effect.name,
-          icon: effect.icon,
+          ...effect.toObject(),
         };
       });
 
