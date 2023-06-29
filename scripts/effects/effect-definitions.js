@@ -263,6 +263,7 @@ export default class EffectDefinitions {
       description:
         "- A blinded creature can't see and automatically fails any ability check that requires sight.<br/>- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.",
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
+      statuses: ['blind'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.attack.all`,
@@ -299,6 +300,7 @@ export default class EffectDefinitions {
   get _dead() {
     return this._effectHelpers.createActiveEffect({
       name: 'Dead',
+      statuses: ['dead'],
       description: 'No active effects',
       icon: 'icons/svg/skull.svg',
     });
@@ -310,6 +312,7 @@ export default class EffectDefinitions {
       description:
         "- A deafened creature can't hear and automatically fails any ability check that requires hearing.",
       icon: 'modules/dfreds-convenient-effects/images/deafened.svg',
+      statuses: ['deaf'],
     });
   }
 
@@ -513,6 +516,7 @@ export default class EffectDefinitions {
       description:
         "- A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.<br/>- The creature can't willingly move closer to the source of its fear.",
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
+      statuses: ['fear'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.attack.all`,
@@ -534,6 +538,7 @@ export default class EffectDefinitions {
       description:
         "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br/>- The condition ends if the grappler is incapacitated.<br/>- The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect.",
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
+      statuses: ['restrained'],
       changes: [
         {
           key: 'system.attributes.movement.all',
@@ -560,6 +565,7 @@ export default class EffectDefinitions {
       description:
         "- An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature's location can be detected by any noise it makes or any tracks it leaves.<br/>- Attack rolls against the creature have disadvantage, and the creature's attack rolls have advantage.",
       icon: 'modules/dfreds-convenient-effects/images/invisible.svg',
+      statuses: ['invisible'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.advantage.attack.all`,
@@ -581,6 +587,7 @@ export default class EffectDefinitions {
       description:
         "- A paralyzed creature is incapacitated (see the condition) and can't move or speak.<br/>- The creature automatically fails Strength and Dexterity saving throws. Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
+      statuses: ['paralysis'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.fail.ability.save.dex`,
@@ -665,6 +672,7 @@ export default class EffectDefinitions {
       description:
         '- A poisoned creature has disadvantage on attack rolls and ability checks.',
       icon: 'modules/dfreds-convenient-effects/images/poisoned.svg',
+      statuses: ['poison'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.attack.all`,
@@ -686,6 +694,7 @@ export default class EffectDefinitions {
       description:
         "- A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.<br/>- The creature has disadvantage on attack rolls.<br/>- An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage.",
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
+      statuses: ['prone'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.grants.advantage.attack.mwak`,
@@ -760,6 +769,7 @@ export default class EffectDefinitions {
       description:
         "- A stunned creature is incapacitated (see the condition), can't move, and can speak only falteringly.<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.",
       icon: 'modules/dfreds-convenient-effects/images/stunned.svg',
+      statuses: ['stun'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.fail.ability.save.dex`,
@@ -786,6 +796,7 @@ export default class EffectDefinitions {
       description:
         "- An unconscious creature is incapacitated (See the condition) can't move or speak, and is unaware of its surroundings.<br/>- The creature drops whatever its holding and falls prone (See the condition).<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
       icon: 'icons/svg/unconscious.svg',
+      statuses: ['unconscious'],
       changes: [...this._paralyzed.changes],
     });
   }
@@ -1717,6 +1728,7 @@ export default class EffectDefinitions {
       description: 'Upgrade flying speed to 60 ft. for 10 minutes',
       icon: 'icons/magic/control/energy-stream-link-white.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      statuses: ['fly'],
       changes: [
         {
           key: 'system.attributes.movement.fly',
@@ -1797,6 +1809,7 @@ export default class EffectDefinitions {
         'Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute',
       icon: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
+      statuses: ['invisible'],
       subEffects: [this._invisible],
     });
   }
@@ -2036,6 +2049,7 @@ export default class EffectDefinitions {
           specialDuration: ['1Attack', '1Spell'],
         },
       },
+      statuses: ['invisible'],
       subEffects: [this._invisible],
     });
   }

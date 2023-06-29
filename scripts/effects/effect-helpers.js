@@ -55,7 +55,7 @@ export default class EffectHelpers {
         }
       : duration;
 
-    statuses.push(this.getId(name));
+    statuses.unshift(this.getId(name));
 
     let effect = new CONFIG.ActiveEffect.documentClass({
       changes,
