@@ -99,9 +99,7 @@ Hooks.once('setup', () => {
     function (wrapper, ...args) {
       const tokenHud = this;
       game.dfreds.statusEffects.refreshStatusIcons(tokenHud);
-      wrapper(...args);
-    },
-    'WRAPPER'
+    }
   );
 });
 
