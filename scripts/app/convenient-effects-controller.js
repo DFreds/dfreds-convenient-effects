@@ -405,6 +405,10 @@ export default class ConvenientEffectsController {
     );
   }
 
+  canDragStart() {
+    return game.user.role >= this._settings.appControlsPermission;
+  }
+
   /**
    * Handles search text changes
    *

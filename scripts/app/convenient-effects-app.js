@@ -66,6 +66,11 @@ export default class ConvenientEffectsApp extends Application {
     this._controller.onEffectDragStart(event);
   }
 
+  /** @override */
+  _canDragStart(selector) {
+    return this._controller.canDragStart();
+  }
+
   /**
    * Checks if the folder is collapsed
    *
