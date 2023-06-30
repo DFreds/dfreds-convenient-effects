@@ -119,4 +119,28 @@ export default class EffectHelpers {
 
     return isConvenient || isOldConvenient || isOldCustomConvenient;
   }
+
+  /**
+   * Updates the convenient effect status ID with the value of the active
+   * effect name
+   *
+   * @param {ActiveEffect} activeEffect - the active effect
+   */
+  async updateStatusId(activeEffect) {
+    const statusId = this.getId(activeEffect.name);
+    let statusesSet = activeEffect.statuses;
+
+    if (statusesSet.has(statusId)) {
+      return;
+    }
+
+    let statusesArray = Array.from(statusesSet).filter(
+      (status) => !status.startsWith('Convenient Effect: ')
+    );
+
+    statusesArray.unshift(statusId);
+    let newStatusesSet = new Set(statusesArray);
+
+    return activeEffect.update({ statuses: statusesArray });
+  }
 }

@@ -156,6 +156,9 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
 Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
   const settings = new Settings();
   if (activeEffect.parent.id == settings.customEffectsItemId) {
+    const effectHelpers = new EffectHelpers();
+    effectHelpers.updateStatusId(activeEffect);
+
     const foundryHelpers = new FoundryHelpers();
     foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
