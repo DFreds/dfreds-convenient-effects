@@ -17,6 +17,7 @@ export default class Settings {
   static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
   static STATUS_EFFECTS_SORT_ORDER = 'statusEffectsSortOrder';
+  static ADD_CHAT_BUTTON = 'addChatButton';
 
   // Non-config setting keys
   static CUSTOM_EFFECTS_ITEM_ID = 'customEffectsItemId';
@@ -145,6 +146,19 @@ export default class Settings {
       {
         name: 'Send Chat to Actor Owner',
         hint: 'If enabled, this will also send effect chat messages to the users that own the affected actor.',
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.ADD_CHAT_BUTTON,
+      {
+        name: 'Add Button to Chat',
+        hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
         scope: 'world',
         config: true,
         default: false,
@@ -304,6 +318,16 @@ export default class Settings {
       Constants.MODULE_ID,
       Settings.SEND_CHAT_TO_ACTOR_OWNER
     );
+  }
+
+  /**
+   * Returns the game setting for adding a button to chat messages to apply the
+   * matching convenient effect.
+   * 
+   * @returns {boolean} true if the button should be added
+   */
+  get addChatButton() {
+    return game.settings.get(Constants.MODULE_ID, Settings.ADD_CHAT_BUTTON);
   }
 
   /**

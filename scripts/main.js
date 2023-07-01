@@ -277,3 +277,25 @@ Hooks.on('dropActorSheetData', (actor, _actorSheetCharacter, data) => {
     uuid: actor.uuid,
   });
 });
+
+/**
+ * Handle adding a button to item cards.
+ */
+Hooks.on('renderChatMessage', (message, html) => {
+  const settings = new Settings();
+
+  // only add button on item cards if configured
+  const itemCard = html[0].querySelector('.item-card');
+  if (itemCard && settings.addChatButton) {
+    // check if this item has a Convenient Effect
+    const name = itemCard.querySelector('.item-name')?.textContent;
+    if (game.dfreds.effectInterface.findEffectByName(name)) {
+      // build a button
+      const button = document.createElement('button');
+      button.textContent = 'Add Convenient Effect';
+      button.onclick = () => game.dfreds.effectInterface.toggleEffect(name);
+      // add button to end of card-buttons
+      itemCard.querySelector('.card-buttons').append(button);
+    }
+  }
+});
