@@ -49,8 +49,6 @@ Hooks.once('ready', async () => {
 
     await settings.setCustomEffectsItemId(item.id);
   }
-
-  Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
 });
 
 /**
@@ -101,6 +99,8 @@ Hooks.once('setup', () => {
       game.dfreds.statusEffects.refreshStatusIcons(tokenHud);
     }
   );
+
+  Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
 });
 
 Hooks.on('changeSidebarTab', (directory) => {
