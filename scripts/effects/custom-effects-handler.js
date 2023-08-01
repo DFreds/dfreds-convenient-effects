@@ -33,10 +33,10 @@ export default class CustomEffectsHandler {
     const item = this._findCustomEffectsItem();
     if (!item) return [];
 
-    let customEffects = Array(...item.effects).map(effect => {
-      effect.duration.srartTime = null;
+    let customEffects = Array(...item.effects).map((effect) => {
+      effect.duration.startTime = null;
       effect.duration.startRound = null;
-      effect.duration.startTurn = null
+      effect.duration.startTurn = null;
       return effect;
     });
     customEffects.sort((a, b) => {
