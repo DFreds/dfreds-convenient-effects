@@ -48,9 +48,6 @@ export default class EffectHelpers {
       ? {
           rounds,
           seconds,
-          startRound: game.combat?.round,
-          startTime: game.time.worldTime,
-          startTurn: game.combat?.turn,
           turns,
         }
       : duration;
