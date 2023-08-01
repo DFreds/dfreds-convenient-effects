@@ -538,7 +538,6 @@ export default class EffectDefinitions {
       description:
         "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br/>- The condition ends if the grappler is incapacitated.<br/>- The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect.",
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
-      statuses: ['restrained'],
       changes: [
         {
           key: 'system.attributes.movement.all',
@@ -737,6 +736,7 @@ export default class EffectDefinitions {
       description:
         "- A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br/>- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.<br/>- The creature has disadvantage on Dexterity saving throws.",
       icon: 'modules/dfreds-convenient-effects/images/restrained.svg',
+      statuses: ['restrain'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.ability.save.dex`,
