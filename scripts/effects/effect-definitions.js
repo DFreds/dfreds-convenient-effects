@@ -241,6 +241,7 @@ export default class EffectDefinitions {
         this._bonusAction,
         this._coverHalf,
         this._coverThreeQuarters,
+        this._coverTotal,
         this._encumbered,
         this._dodge,
         this._flanked,
@@ -3335,6 +3336,7 @@ export default class EffectDefinitions {
       name: 'Cover (Half)',
       description: 'Adds 2 to AC and dexterity saving throws',
       icon: 'modules/dfreds-convenient-effects/images/broken-wall.svg',
+      tint: '#dae34f',
       changes: [
         {
           key: 'system.attributes.ac.cover',
@@ -3365,6 +3367,21 @@ export default class EffectDefinitions {
           key: 'system.abilities.dex.bonuses.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
+        },
+      ],
+    });
+  }
+
+  get _coverTotal() {
+    return this._effectHelpers.createActiveEffect({
+      name: 'Cover (Total)',
+      description: 'Causes all attacks to fail automatically',
+      icon: 'modules/dfreds-convenient-effects/images/castle.svg',
+      changes: [
+        {
+          key: `flags.${this._flagPrefix}.grants.attack.fail.all`,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
         },
       ],
     });
