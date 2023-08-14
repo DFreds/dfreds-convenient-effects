@@ -32,37 +32,37 @@ export default class ConvenientEffectsController {
       folders: [
         {
           id: 'favorites',
-          label: game.i18n.localize('ConvenientEffectsControllerFavorites'),
+          name: game.i18n.localize('ConvenientEffectsControllerFavorites'),
           effects: this._fetchFavorites(),
         },
         {
           id: 'custom',
-          label: game.i18n.localize('ConvenientEffectsControllerCustom'),
+          name: game.i18n.localize('ConvenientEffectsControllerCustom'),
           effects: this._fetchUnfavoritedCustomEffects(),
         },
         {
           id: 'conditions',
-          label: game.i18n.localize('ConvenientEffectsControllerConditions'),
+          name: game.i18n.localize('ConvenientEffectsControllerConditions'),
           effects: this._fetchUnfavoritedConditions(),
         },
         {
           id: 'spells',
-          label: game.i18n.localize('ConvenientEffectsControllerSpells'),
+          name: game.i18n.localize('ConvenientEffectsControllerSpells'),
           effects: this._fetchUnfavoritedSpells(),
         },
         {
           id: 'class-features',
-          label: game.i18n.localize('ConvenientEffectsControllerClassFeatures'),
+          name: game.i18n.localize('ConvenientEffectsControllerClassFeatures'),
           effects: this._fetchUnfavoritedClassFeatures(),
         },
         {
           id: 'equipment',
-          label: game.i18n.localize('ConvenientEffectsControllerEquipment'),
+          name: game.i18n.localize('ConvenientEffectsControllerEquipment'),
           effects: this._fetchUnfavoritedEquipment(),
         },
         {
           id: 'other',
-          label: game.i18n.localize('ConvenientEffectsControllerOther'),
+          name: game.i18n.localize('ConvenientEffectsControllerOther'),
           effects: this._fetchUnfavoritedOther(),
         },
       ],
