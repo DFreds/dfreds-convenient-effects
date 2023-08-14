@@ -260,7 +260,7 @@ export default class EffectDefinitions {
   /* Condition Effects */
   get _blinded() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Blinded"),
+      name: game.i18n.localize("Effects.Blinded"),
       description: game.i18n.localize("Effects.BlindedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
       statuses: ['blind'],
@@ -281,7 +281,7 @@ export default class EffectDefinitions {
 
   get _charmed() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Charmed"),
+      name: game.i18n.localize("Effects.Charmed"),
       description: game.i18n.localize("Effects.CharmedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/charmed.svg',
     });
@@ -289,7 +289,7 @@ export default class EffectDefinitions {
 
   get _concentrating() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Concentrating"),
+      name: game.i18n.localize("Effects.Concentrating"),
       description: game.i18n.localize("Effects.ConcentratingDescription"),
       icon: 'modules/dfreds-convenient-effects/images/concentrating.svg',
     });
@@ -297,7 +297,7 @@ export default class EffectDefinitions {
 
   get _dead() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Dead"),
+      name: game.i18n.localize("Effects.Dead"),
       description: game.i18n.localize("Effects.DeadDescription"),
       icon: 'icons/svg/skull.svg',
     });
@@ -305,7 +305,7 @@ export default class EffectDefinitions {
 
   get _deafened() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Deafened"),
+      name: game.i18n.localize("Effects.Deafened"),
       description: game.i18n.localize("Effects.DeafenedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/deafened.svg',
       statuses: ['deaf'],
@@ -314,7 +314,7 @@ export default class EffectDefinitions {
 
   get _exhaustion1() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Exhaustion1"),
+      name: game.i18n.localize("Effects.Exhaustion1"),
       description: game.i18n.localize("Effects.Exhaustion1Descrtiption"),
       icon: 'modules/dfreds-convenient-effects/images/exhaustion1.svg',
       changes: [
@@ -339,7 +339,7 @@ export default class EffectDefinitions {
 
   get _exhaustion2() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Exhaustion2"),
+      name: game.i18n.localize("Effects.Exhaustion2"),
       description: game.i18n.localize("Effects.Exhaustion2Description"),
       icon: 'modules/dfreds-convenient-effects/images/exhaustion2.svg',
       changes: [
@@ -370,7 +370,7 @@ export default class EffectDefinitions {
 
   get _exhaustion3() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Exhaustion3"),
+      name: game.i18n.localize("Effects.Exhaustion3"),
       description: game.i18n.localize("Effects.Exhaustion3Description"),
       icon: 'modules/dfreds-convenient-effects/images/exhaustion3.svg',
       changes: [
@@ -411,7 +411,7 @@ export default class EffectDefinitions {
 
   get _exhaustion4() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Exhaustion4"),
+      name: game.i18n.localize("Effects.Exhaustion4"),
       description: game.i18n.localize("Effects.Exhaustion4Description"),
       icon: 'modules/dfreds-convenient-effects/images/exhaustion4.svg',
       changes: [
@@ -458,7 +458,7 @@ export default class EffectDefinitions {
 
   get _exhaustion5() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Exhaustion5"),
+      name: game.i18n.localize("Effects.Exhaustion5"),
       description: game.i18n.localize("Effects.Exhaustion5Description"),
       icon: 'modules/dfreds-convenient-effects/images/exhaustion5.svg',
       changes: [
@@ -505,7 +505,7 @@ export default class EffectDefinitions {
 
   get _frightened() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Frightened"),
+      name: game.i18n.localize("Effects.Frightened"),
       description: game.i18n.localize("Effects.FrightenedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
       statuses: ['fear'],
@@ -526,7 +526,7 @@ export default class EffectDefinitions {
 
   get _grappled() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Grappled"),
+      name: game.i18n.localize("Effects.Grappled"),
       description: game.i18n.localize("Effects.GrappledDescription"),
       icon: 'modules/dfreds-convenient-effects/images/grappled.svg',
       changes: [
@@ -542,7 +542,7 @@ export default class EffectDefinitions {
 
   get _incapacitated() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Incapacitated"),
+      name: game.i18n.localize("Effects.Incapacitated"),
       description: game.i18n.localize("Effects.IncapacitatedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/incapacitated.svg',
     });
@@ -550,7 +550,7 @@ export default class EffectDefinitions {
 
   get _invisible() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Invisible"),
+      name: game.i18n.localize("Effects.Invisible"),
       description: game.i18n.localize("Effects.InvisibleDescription"),
       icon: 'modules/dfreds-convenient-effects/images/invisible.svg',
       statuses: ['invisible'],
@@ -571,7 +571,7 @@ export default class EffectDefinitions {
 
   get _paralyzed() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Paralyzed"),
+      name: game.i18n.localize("Effects.Paralyzed"),
       description: game.i18n.localize("Effects.ParalyzedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
       statuses: ['paralysis'],
@@ -608,7 +608,7 @@ export default class EffectDefinitions {
 
   get _petrified() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Petrified"),
+      name: game.i18n.localize("Effects.Petrified"),
       description: game.i18n.localize("Effects.PetrifiedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/petrified.svg',
       changes: [
@@ -654,7 +654,7 @@ export default class EffectDefinitions {
 
   get _poisoned() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Poisoned"),
+      name: game.i18n.localize("Effects.Poisoned"),
       description: game.i18n.localize("Effects.PoisonedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/poisoned.svg',
       statuses: ['poison'],
@@ -675,7 +675,7 @@ export default class EffectDefinitions {
 
   get _prone() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Prone"),
+      name: game.i18n.localize("Effects.Prone"),
       description: game.i18n.localize("Effects.Prone"),
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
       statuses: ['prone'],
@@ -717,7 +717,7 @@ export default class EffectDefinitions {
 
   get _restrained() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Restrained"),
+      name: game.i18n.localize("Effects.Restrained"),
       description: game.i18n.localize("Effects.RestrainedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/restrained.svg',
       statuses: ['restrain'],
@@ -749,7 +749,7 @@ export default class EffectDefinitions {
 
   get _stunned() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Stunned"),
+      name: game.i18n.localize("Effects.Stunned"),
       description: game.i18n.localize("Effects.StunnedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/stunned.svg',
       statuses: ['stun'],
@@ -775,7 +775,7 @@ export default class EffectDefinitions {
 
   get _unconscious() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Unconscious"),
+      name: game.i18n.localize("Effects.Unconscious"),
       description: game.i18n.localize("Effects.UnconsciousDescription"),
       icon: 'icons/svg/unconscious.svg',
       statuses: ['unconscious'],
@@ -785,7 +785,7 @@ export default class EffectDefinitions {
 
   get _wounded() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Wounded"),
+      name: game.i18n.localize("Effects.Wounded"),
       description: game.i18n.localize("Effects.WoundedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/wounded.svg',
     });
@@ -794,7 +794,7 @@ export default class EffectDefinitions {
   /* Spell Effects */
   get _acidArrow() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.AcidArrow"),
+      name: game.i18n.localize("Effects.AcidArrow"),
       description: game.i18n.localize("Effects.AcidArrowDescription"),
       icon: 'icons/magic/acid/projectile-bolts-salvo-green.webp',
       changes: [
@@ -810,7 +810,7 @@ export default class EffectDefinitions {
 
   get _aid() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Aid"),
+      name: game.i18n.localize("Effects.Aid"),
       description: game.i18n.localize("Effects.AidDescription"),
       icon: 'icons/magic/life/heart-cross-blue.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -819,7 +819,7 @@ export default class EffectDefinitions {
 
   get _alterSelf() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.AlterSelf"),
+      name: game.i18n.localize("Effects.AlterSelf"),
       description: game.i18n.localize("Effects.AlterSelfDescription"),
       icon: 'icons/magic/control/debuff-energy-hold-green.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -828,7 +828,7 @@ export default class EffectDefinitions {
 
   get _antilifeShell() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.AntilifeShell"),
+      name: game.i18n.localize("Effects.AntilifeShell"),
       description: game.i18n.localize("Effects.AntilifeShellDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -837,7 +837,7 @@ export default class EffectDefinitions {
 
   get _arcaneHand() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ArcaneHand"),
+      name: game.i18n.localize("Effects.ArcaneHand"),
       description: game.i18n.localize("Effects.ArcaneHandDescription"),
       icon: 'icons/magic/fire/projectile-fireball-smoke-strong-teal.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -846,7 +846,7 @@ export default class EffectDefinitions {
 
   get _bane() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Bane"),
+      name: game.i18n.localize("Effects.Bane"),
       description: game.i18n.localize("Effects.BaneDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-red-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -883,7 +883,7 @@ export default class EffectDefinitions {
   get _barkskin() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Barkskin"),
+      name: game.i18n.localize("Effects.Barkskin"),
       description: game.i18n.localize("Effects.BarkskinDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -900,7 +900,7 @@ export default class EffectDefinitions {
 
   get _beaconOfHope() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BeaconofHope"),
+      name: game.i18n.localize("Effects.BeaconofHope"),
       description: game.i18n.localize("Effects.BeaconofHopeDescription"),
       icon: 'icons/magic/light/explosion-star-large-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -921,7 +921,7 @@ export default class EffectDefinitions {
 
   get _blackTentacles() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BlackTentacles"),
+      name: game.i18n.localize("Effects.BlackTentacles"),
       description: game.i18n.localize("Effects.BlackTentaclesDescription"),
       icon: 'icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -931,7 +931,7 @@ export default class EffectDefinitions {
 
   get _bless() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Bless"),
+      name: game.i18n.localize("Effects.Bless"),
       description: game.i18n.localize("Effects.BlessDescription"),
       icon: 'icons/magic/control/buff-flight-wings-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -974,7 +974,7 @@ export default class EffectDefinitions {
 
   get _blindnessDeafness() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BlindnessDeafness"),
+      name: game.i18n.localize("Effects.BlindnessDeafness"),
       description: game.i18n.localize("Effects.BlindnessDeafnessDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       nestedEffects: [
@@ -986,7 +986,7 @@ export default class EffectDefinitions {
 
   get _blindnessDeafnessBlindness() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Blindness"),
+      name: game.i18n.localize("Effects.Blindness"),
       description: game.i18n.localize("Effects.BlindnessDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       isViewable: this._settings.showNestedEffects,
@@ -997,7 +997,7 @@ export default class EffectDefinitions {
 
   get _blindnessDeafnessDeafness() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Deafness"),
+      name: game.i18n.localize("Effects.Deafness"),
       description: game.i18n.localize("Effects.DeafnessDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1008,7 +1008,7 @@ export default class EffectDefinitions {
 
   get _blur() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Blur"),
+      name: game.i18n.localize("Effects.Blur"),
       description: game.i18n.localize("Effects.BlurDescription"),
       icon: 'icons/magic/air/air-burst-spiral-blue-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1031,7 +1031,7 @@ export default class EffectDefinitions {
 
   get _charmPerson() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.CharmPerson"),
+      name: game.i18n.localize("Effects.CharmPerson"),
       description: game.i18n.localize("Effects.CharmPersonDescription"),
       icon: 'icons/magic/fire/explosion-fireball-medium-purple-pink.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1041,7 +1041,7 @@ export default class EffectDefinitions {
 
   get _command() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Command"),
+      name: game.i18n.localize("Effects.Command"),
       description: game.i18n.localize("Effects.CommandDescription"),
       icon: 'icons/magic/fire/explosion-fireball-small-purple.webp',
       seconds: CONFIG.time.roundTime,
@@ -1051,7 +1051,7 @@ export default class EffectDefinitions {
 
   get _comprehendLanguages() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ComprehendLanguages"),
+      name: game.i18n.localize("Effects.ComprehendLanguages"),
       description: game.i18n.localize("Effects.ComprehendLanguagesDescription"),
       icon: 'icons/magic/symbols/runes-triangle-orange-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1067,7 +1067,7 @@ export default class EffectDefinitions {
 
   get _contagion() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Contagion"),
+      name: game.i18n.localize("Effects.Contagion"),
       description: game.i18n.localize("Effects.ContagionDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       nestedEffects: [
@@ -1083,7 +1083,7 @@ export default class EffectDefinitions {
 
   get _contagionBlindingSickness() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BlindingSickness"),
+      name: game.i18n.localize("Effects.BlindingSickness"),
       description: game.i18n.localize("Effects.BlindingSicknessDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1106,7 +1106,7 @@ export default class EffectDefinitions {
 
   get _contagionFilthFever() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FilthFever"),
+      name: game.i18n.localize("Effects.FilthFever"),
       description: game.i18n.localize("Effects.FilthFeverDescriptrion"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1133,7 +1133,7 @@ export default class EffectDefinitions {
 
   get _contagionFleshRot() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FleshRot"),
+      name: game.i18n.localize("Effects.FleshRot"),
       description: game.i18n.localize("Effects.FleshRotDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1155,7 +1155,7 @@ export default class EffectDefinitions {
 
   get _contagionMindfire() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Mindfire"),
+      name: game.i18n.localize("Effects.Mindfire"),
       description: game.i18n.localize("Effects.MindfireDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1177,7 +1177,7 @@ export default class EffectDefinitions {
 
   get _contagionSeizure() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Seizure"),
+      name: game.i18n.localize("Effects.Seizure"),
       description: game.i18n.localize("Effects.SeizureDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1204,7 +1204,7 @@ export default class EffectDefinitions {
 
   get _contagionSlimyDoom() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SlimyDoom"),
+      name: game.i18n.localize("Effects.SlimyDoom"),
       description: game.i18n.localize("Effects.SlimyDoomDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1226,7 +1226,7 @@ export default class EffectDefinitions {
 
   get _darkvision() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Darkvision"),
+      name: game.i18n.localize("Effects.Darkvision"),
       description: game.i18n.localize("Effects.DarkvisionDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-small-red.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -1257,7 +1257,7 @@ export default class EffectDefinitions {
 
   get _disguiseSelf() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.DisguiseSelf"),
+      name: game.i18n.localize("Effects.DisguiseSelf"),
       description: game.i18n.localize("Effects.DisguiseSelfDescription"),
       icon: 'icons/magic/control/debuff-energy-hold-teal-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1266,7 +1266,7 @@ export default class EffectDefinitions {
 
   get _divineFavor() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.DivineFavor"),
+      name: game.i18n.localize("Effects.DivineFavor"),
       description: game.i18n.localize("Effects.DivineFavorDescription"),
       icon: 'icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1282,7 +1282,7 @@ export default class EffectDefinitions {
 
   get _divineWord() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.DivineWord"),
+      name: game.i18n.localize("Effects.DivineWord"),
       description: game.i18n.localize("Effects.DivineWordDescription"),
       icon: 'icons/magic/light/explosion-star-large-orange-purple.webp',
       isDynamic: true,
@@ -1291,7 +1291,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbility() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.EnhanceAbility"),
+      name: game.i18n.localize("Effects.EnhanceAbility"),
       description: game.i18n.localize("Effects.EnhanceAbilityDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       nestedEffects: [
@@ -1307,7 +1307,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityBearsEndurance() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BearsEndurance"),
+      name: game.i18n.localize("Effects.BearsEndurance"),
       description: game.i18n.localize("Effects.BearsEnduranceDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1324,7 +1324,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityBullsStrength() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BullsStrength"),
+      name: game.i18n.localize("Effects.BullsStrength"),
       description: game.i18n.localize("Effects.BullsStrengthDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1347,7 +1347,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityCatsGrace() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.CatsGrace"),
+      name: game.i18n.localize("Effects.CatsGrace"),
       description: game.i18n.localize("Effects.CatsGraceDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1364,7 +1364,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityEaglesSplendor() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.EaglesSplendor"),
+      name: game.i18n.localize("Effects.EaglesSplendor"),
       description: game.i18n.localize("Effects.EaglesSplenderoDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1381,7 +1381,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityFoxsCunning() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FoxsCunning"),
+      name: game.i18n.localize("Effects.FoxsCunning"),
       description: game.i18n.localize("Effects.FoxsCunningDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1398,7 +1398,7 @@ export default class EffectDefinitions {
 
   get _enhanceAbilityOwlsWisdom() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.OwlsWisdom"),
+      name: game.i18n.localize("Effects.OwlsWisdom"),
       description: game.i18n.localize("Effects.OwlsWisdomDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1415,7 +1415,7 @@ export default class EffectDefinitions {
 
   get _enlargeReduce() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.EnlargeReduce"),
+      name: game.i18n.localize("Effects.EnlargeReduce"),
       description: game.i18n.localize("Effects.EnlargeReduceDescription"),
       icon: 'icons/magic/control/energy-stream-link-large-blue.webp',
       nestedEffects: [
@@ -1427,7 +1427,7 @@ export default class EffectDefinitions {
 
   get _enlargeReduceEnlarge() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Enlarge"),
+      name: game.i18n.localize("Effects.Enlarge"),
       description: game.i18n.localize("Effects.EnlargeDescription"),
       icon: 'icons/magic/control/energy-stream-link-large-blue.webp',
       isDynamic: true,
@@ -1455,7 +1455,7 @@ export default class EffectDefinitions {
 
   get _enlargeReduceReduce() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Reduce"),
+      name: game.i18n.localize("Effects.Reduce"),
       description: game.i18n.localize("Effects.ReduceDescription"),
       icon: 'icons/magic/control/energy-stream-link-large-blue.webp',
       isDynamic: true,
@@ -1483,7 +1483,7 @@ export default class EffectDefinitions {
 
   get _faerieFire() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FaerieFire"),
+      name: game.i18n.localize("Effects.FaerieFire"),
       description: game.i18n.localize("Effects.FaerieFireDescription"),
       icon: 'icons/magic/fire/projectile-meteor-salvo-strong-teal.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1528,7 +1528,7 @@ export default class EffectDefinitions {
 
   get _falseLife() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FalseLife"),
+      name: game.i18n.localize("Effects.FalseLife"),
       description: game.i18n.localize("Effects.FalseLifeDescription"),
       icon: 'icons/magic/life/heart-cross-purple-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1537,7 +1537,7 @@ export default class EffectDefinitions {
 
   get _featherFall() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FeatherFall"),
+      name: game.i18n.localize("Effects.FeatherFall"),
       description: game.i18n.localize("Effects.FeatherFallDescription"),
       icon: 'icons/magic/air/wind-swirl-pink-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1546,7 +1546,7 @@ export default class EffectDefinitions {
 
   get _feeblemind() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Feeblemind"),
+      name: game.i18n.localize("Effects.Feeblemind"),
       description: game.i18n.localize("Effects.FeeblemindDescription"),
       icon: 'icons/magic/light/explosion-star-large-teal-purple.webp',
       changes: [
@@ -1568,7 +1568,7 @@ export default class EffectDefinitions {
 
   get _fireShield() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FireShield"),
+      name: game.i18n.localize("Effects.FireShield"),
       description: game.i18n.localize("Effects.FireShieldDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp',
       nestedEffects: [
@@ -1580,7 +1580,7 @@ export default class EffectDefinitions {
 
   get _fireShieldColdResistance() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FireShieldColdResistance"),
+      name: game.i18n.localize("Effects.FireShieldColdResistance"),
       description: game.i18n.localize("Effects.FireShieldColdResistanceDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1631,7 +1631,7 @@ export default class EffectDefinitions {
 
   get _fireShieldFireResistance() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FireShieldFireResistance"),
+      name: game.i18n.localize("Effects.FireShieldFireResistance"),
       description: game.i18n.localize("Effects.FireShieldFireResistanceDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp',
       isViewable: this._settings.showNestedEffects,
@@ -1682,7 +1682,7 @@ export default class EffectDefinitions {
 
   get _findThePath() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FindthePath"),
+      name: game.i18n.localize("Effects.FindthePath"),
       description: game.i18n.localize("Effects.FindthePathDescription"),
       icon: 'icons/magic/light/explosion-star-teal.webp',
       seconds: Constants.SECONDS.IN_ONE_DAY,
@@ -1691,7 +1691,7 @@ export default class EffectDefinitions {
 
   get _fly() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Fly"),
+      name: game.i18n.localize("Effects.Fly"),
       description: game.i18n.localize("Effects.FlyDescription"),
       icon: 'icons/magic/control/energy-stream-link-white.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -1709,7 +1709,7 @@ export default class EffectDefinitions {
 
   get _foresight() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Foresight"),
+      name: game.i18n.localize("Effects.Foresight"),
       description: game.i18n.localize("Effects.ForesightDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-large-teal.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -1745,7 +1745,7 @@ export default class EffectDefinitions {
 
   get _freedomOfMovement() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.FreedomofMovement"),
+      name: game.i18n.localize("Effects.FreedomofMovement"),
       description: game.i18n.localize("Effects.FreedomofMovementDescription"),
       icon: 'icons/skills/melee/strike-blade-knife-white-red.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -1754,7 +1754,7 @@ export default class EffectDefinitions {
 
   get _globeOfInvulnerability() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.GlobeofInvulnerability"),
+      name: game.i18n.localize("Effects.GlobeofInvulnerability"),
       description: game.i18n.localize("Effects.GlobeofInvulnerabilityDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1770,7 +1770,7 @@ export default class EffectDefinitions {
 
   get _greaterInvisibility() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.GreaterInvisibility"),
+      name: game.i18n.localize("Effects.GreaterInvisibility"),
       description: game.i18n.localize("Effects.GreaterInvisibilityDescription"),
       icon: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1781,7 +1781,7 @@ export default class EffectDefinitions {
 
   get _guidance() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Guidance"),
+      name: game.i18n.localize("Effects.Guidance"),
       description: game.i18n.localize("Effects.GuidanceDescription"),
       icon: 'icons/magic/control/buff-flight-wings-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1807,7 +1807,7 @@ export default class EffectDefinitions {
 
   get _guidingBolt() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.GuidingBolt"),
+      name: game.i18n.localize("Effects.GuidingBolt"),
       description: game.i18n.localize("Effects.GuidingBoltDescription"),
       icon: 'icons/magic/fire/projectile-fireball-smoke-large-blue.webp',
       seconds: CONFIG.time.roundTime,
@@ -1829,7 +1829,7 @@ export default class EffectDefinitions {
 
   get _haste() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Haste"),
+      name: game.i18n.localize("Effects.Haste"),
       description: game.i18n.localize("Effects.HasteDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1856,7 +1856,7 @@ export default class EffectDefinitions {
 
   get _heroesFeast() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HeroesFeast"),
+      name: game.i18n.localize("Effects.HeroesFeast"),
       description: game.i18n.localize("Effects.HeroesFeastDescription"),
       icon: 'icons/magic/life/heart-cross-strong-flame-purple-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_DAY,
@@ -1882,7 +1882,7 @@ export default class EffectDefinitions {
 
   get _heroism() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Heroism"),
+      name: game.i18n.localize("Effects.Heroism"),
       description: game.i18n.localize("Effects.HeroismDescription"),
       icon: 'icons/magic/life/heart-cross-strong-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1898,7 +1898,7 @@ export default class EffectDefinitions {
 
   get _hideousLaughter() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HideousLaughter"),
+      name: game.i18n.localize("Effects.HideousLaughter"),
       description: game.i18n.localize("Effects.HideousLaughterDescription"),
       icon: 'icons/magic/fire/explosion-fireball-medium-purple-pink.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1908,7 +1908,7 @@ export default class EffectDefinitions {
 
   get _holdMonster() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HoldMonster"),
+      name: game.i18n.localize("Effects.HoldMonster"),
       description: game.i18n.localize("Effects.HoldMonsterDescription"),
       icon: 'icons/magic/control/debuff-chains-ropes-red.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1931,7 +1931,7 @@ export default class EffectDefinitions {
   // label=Hold Person
   get _holdPerson() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HoldPerson"),
+      name: game.i18n.localize("Effects.HoldPerson"),
       description: game.i18n.localize("Effects.HoldPersonDescription"),
       icon: 'icons/magic/control/debuff-chains-ropes-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1948,7 +1948,7 @@ export default class EffectDefinitions {
 
   get _holyAura() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HolyAura"),
+      name: game.i18n.localize("Effects.HolyAura"),
       description: game.i18n.localize("Effects.HolyAuraDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-blue-white.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -1991,7 +1991,7 @@ export default class EffectDefinitions {
 
   get _huntersMark() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HuntersMark"),
+      name: game.i18n.localize("Effects.HuntersMark"),
       description: game.i18n.localize("Effects.HuntersMarkDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-small-red.webp',
     });
@@ -1999,7 +1999,7 @@ export default class EffectDefinitions {
 
   get _invisibility() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Invisibility"),
+      name: game.i18n.localize("Effects.Invisibility"),
       description: game.i18n.localize("Effects.InvisibilityDescription"),
       icon: 'icons/magic/air/fog-gas-smoke-dense-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2015,7 +2015,7 @@ export default class EffectDefinitions {
 
   get _irresistibleDance() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.IrresistibleDance"),
+      name: game.i18n.localize("Effects.IrresistibleDance"),
       description: game.i18n.localize("Effects.IrresistibleDanceDescription"),
       icon: 'icons/magic/control/energy-stream-link-large-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2047,7 +2047,7 @@ export default class EffectDefinitions {
 
   get _jump() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Jump"),
+      name: game.i18n.localize("Effects.Jump"),
       description: game.i18n.localize("Effects.JumpDescription"),
       icon: 'icons/magic/control/debuff-energy-hold-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2056,7 +2056,7 @@ export default class EffectDefinitions {
 
   get _light() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Light"),
+      name: game.i18n.localize("Effects.Light"),
       description: game.i18n.localize("Effects.LightDescription"),
       icon: 'icons/magic/light/explosion-star-small-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2092,7 +2092,7 @@ export default class EffectDefinitions {
 
   get _longstrider() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Longstrider"),
+      name: game.i18n.localize("Effects.Longstrider"),
       description: game.i18n.localize("Effects.LongstriderDescription"),
       icon: 'icons/magic/air/wind-stream-blue-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2109,7 +2109,7 @@ export default class EffectDefinitions {
 
   get _mageArmor() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.MageArmor"),
+      name: game.i18n.localize("Effects.MageArmor"),
       description: game.i18n.localize("Effects.MageArmorDescription"),
       icon: 'icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -2126,7 +2126,7 @@ export default class EffectDefinitions {
 
   get _mindBlank() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.MindBlank"),
+      name: game.i18n.localize("Effects.MindBlank"),
       description: game.i18n.localize("Effects.MindBlankDescription"),
       icon: 'icons/magic/air/air-burst-spiral-large-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_DAY,
@@ -2142,7 +2142,7 @@ export default class EffectDefinitions {
 
   get _mirrorImage() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.MirrorImage"),
+      name: game.i18n.localize("Effects.MirrorImage"),
       description: game.i18n.localize("Effects.MirrorImageDescription"),
       icon: 'icons/magic/control/debuff-energy-hold-levitate-pink.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2159,7 +2159,7 @@ export default class EffectDefinitions {
   get _passWithoutTrace() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.PasswithoutTrace"),
+      name: game.i18n.localize("Effects.PasswithoutTrace"),
       description: game.i18n.localize("Effects.PasswithoutTraceDescription"),
       icon: 'icons/magic/air/fog-gas-smoke-brown.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2175,7 +2175,7 @@ export default class EffectDefinitions {
 
   get _protectionFromEnergy() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromEnergy"),
+      name: game.i18n.localize("Effects.ProtectionfromEnergy"),
       description: game.i18n.localize("Effects.ProtectionfromEnergyDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp',
       nestedEffects: [
@@ -2191,7 +2191,7 @@ export default class EffectDefinitions {
   get _protectionFromEnergyAcid() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromAcid"),
+      name: game.i18n.localize("Effects.ProtectionfromAcid"),
       description: game.i18n.localize("Effects.ProtectionfromAcidDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2209,7 +2209,7 @@ export default class EffectDefinitions {
   get _protectionFromEnergyCold() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Protection from Cold"),
+      name: game.i18n.localize("Effects.Protection from Cold"),
       description: game.i18n.localize("Effects.ProtectionfromColdDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2227,7 +2227,7 @@ export default class EffectDefinitions {
   get _protectionFromEnergyFire() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromFire"),
+      name: game.i18n.localize("Effects.ProtectionfromFire"),
       description: game.i18n.localize("Effects.ProtectionfromFireDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-red.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2245,7 +2245,7 @@ export default class EffectDefinitions {
   get _protectionFromEnergyLightning() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromLightning"),
+      name: game.i18n.localize("Effects.ProtectionfromLightning"),
       description: game.i18n.localize("Effects.ProtectionfromLightningDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2263,7 +2263,7 @@ export default class EffectDefinitions {
   get _protectionFromEnergyThunder() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromThunder"),
+      name: game.i18n.localize("Effects.ProtectionfromThunder"),
       description: game.i18n.localize("Effects.ProtectionfromThunderDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2281,7 +2281,7 @@ export default class EffectDefinitions {
   get _protectionFromPoison() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromPoison"),
+      name: game.i18n.localize("Effects.ProtectionfromPoison"),
       description: game.i18n.localize("Effects.ProtectionfromPoisonDescription"),
       icon: 'icons/magic/defensive/shield-barrier-glowing-triangle-green.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2297,7 +2297,7 @@ export default class EffectDefinitions {
 
   get _protectionFromEvilAndGood() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ProtectionfromEvilandGood"),
+      name: game.i18n.localize("Effects.ProtectionfromEvilandGood"),
       description: game.i18n.localize("Effects.ProtectionfromEvilandGoodDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2306,7 +2306,7 @@ export default class EffectDefinitions {
 
   get _rayOfFrost() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.RayofFrost"),
+      name: game.i18n.localize("Effects.RayofFrost"),
       description: game.i18n.localize("Effects.RayofFrostDescription"),
       icon: 'icons/magic/light/beam-rays-blue-small.webp',
       seconds: CONFIG.time.roundTime,
@@ -2323,7 +2323,7 @@ export default class EffectDefinitions {
 
   get _regenerate() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Regenerate"),
+      name: game.i18n.localize("Effects.Regenerate"),
       description: game.i18n.localize("Effects.RegenerateDescription"),
       icon: 'icons/magic/life/heart-cross-strong-flame-green.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2340,7 +2340,7 @@ export default class EffectDefinitions {
 
   get _resilientSphere() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ResilientSphere"),
+      name: game.i18n.localize("Effects.ResilientSphere"),
       description:  game.i18n.localize("Effects.ResilientSphereDescription"),
       icon: 'icons/magic/light/explosion-star-large-pink.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2362,7 +2362,7 @@ export default class EffectDefinitions {
 
   get _resistance() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Resistance"),
+      name: game.i18n.localize("Effects.Resistance"),
       description: game.i18n.localize("Effects.ResistanceDescription"),
       icon: 'icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2383,7 +2383,7 @@ export default class EffectDefinitions {
 
   get _shield() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Shield"),
+      name: game.i18n.localize("Effects.Shield"),
       description: game.i18n.localize("Effects.ShieldDescription"),
       icon: 'icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp',
       seconds: CONFIG.time.roundTime,
@@ -2412,7 +2412,7 @@ export default class EffectDefinitions {
 
   get _shieldOfFaith() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ShieldofFaith"),
+      name: game.i18n.localize("Effects.ShieldofFaith"),
       description: game.i18n.localize("Effects.ShieldofFaithDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2435,7 +2435,7 @@ export default class EffectDefinitions {
 
   get _slow() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Slow"),
+      name: game.i18n.localize("Effects.Slow"),
       description: game.i18n.localize("Effects.SlowDescription"),
       icon: 'icons/magic/air/fog-gas-smoke-dense-pink.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2462,7 +2462,7 @@ export default class EffectDefinitions {
 
   get _speakWithAnimals() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SpeakwithAnimals"),
+      name: game.i18n.localize("Effects.SpeakwithAnimals"),
       description: game.i18n.localize("Effects.SpeakwithAnimalsDescription"),
       icon: 'icons/magic/nature/wolf-paw-glow-small-teal-blue.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2471,7 +2471,7 @@ export default class EffectDefinitions {
 
   get _speakWithDead() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SpeakwithDead"),
+      name: game.i18n.localize("Effects.SpeakwithDead"),
       description: game.i18n.localize("Effects.SpeakwithDeadDescription"),
       icon: 'icons/magic/control/fear-fright-shadow-monster-green.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2480,7 +2480,7 @@ export default class EffectDefinitions {
 
   get _speakWithPlants() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SpeakwithPlants"),
+      name: game.i18n.localize("Effects.SpeakwithPlants"),
       description: game.i18n.localize("Effects.SpeakwithPlantsDescription"),
       icon: 'icons/magic/nature/leaf-glow-teal.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2489,7 +2489,7 @@ export default class EffectDefinitions {
 
   get _spiderClimb() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SpiderClimb"),
+      name: game.i18n.localize("Effects.SpiderClimb"),
       description: game.i18n.localize("Effects.SpiderClimbDescription"),
       icon: 'icons/magic/control/debuff-chains-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2506,7 +2506,7 @@ export default class EffectDefinitions {
 
   get _spiritGuardians() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SpiritGuardians"),
+      name: game.i18n.localize("Effects.SpiritGuardians"),
       description: game.i18n.localize("Effects.SpiritGuardiansDescription"),
       icon: 'icons/magic/light/projectile-bolts-salvo-white.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2515,7 +2515,7 @@ export default class EffectDefinitions {
 
   get _spiritualWeapon() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.SpiritualWeapon"),
+      name: game.i18n.localize("Effects.SpiritualWeapon"),
       description: game.i18n.localize("Effects.SpiritualWeaponDescription"),
       icon: 'icons/magic/fire/dagger-rune-enchant-flame-purple.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2525,7 +2525,7 @@ export default class EffectDefinitions {
   get _stoneskin() {
     // TODO token magic effects
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Stoneskin"),
+      name: game.i18n.localize("Effects.Stoneskin"),
       description: game.i18n.localize("Effects.StoneskinDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2541,7 +2541,7 @@ export default class EffectDefinitions {
 
   get _suggestion() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Suggestion"),
+      name: game.i18n.localize("Effects.Suggestion"),
       description: game.i18n.localize("Effects.SuggestionDescription"),
       icon: 'icons/magic/air/air-burst-spiral-pink.webp',
       seconds: Constants.SECONDS.IN_EIGHT_HOURS,
@@ -2550,7 +2550,7 @@ export default class EffectDefinitions {
 
   get _telekinesis() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Telekinesis"),
+      name: game.i18n.localize("Effects.Telekinesis"),
       description: game.i18n.localize("Effects.TelekinesisDescription"),
       icon: 'icons/magic/control/debuff-energy-hold-levitate-yellow.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2559,7 +2559,7 @@ export default class EffectDefinitions {
 
   get _trueStrike() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.TrueStrike"),
+      name: game.i18n.localize("Effects.TrueStrike"),
       description: game.i18n.localize("Effects.TrueStrikeDescription"),
       icon: 'icons/magic/fire/dagger-rune-enchant-blue-gray.webp',
       seconds: CONFIG.time.roundTime,
@@ -2581,7 +2581,7 @@ export default class EffectDefinitions {
 
   get _viciousMockery() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ViciousMockery"),
+      name: game.i18n.localize("Effects.ViciousMockery"),
       description: game.i18n.localize("Effects.ViciousMockeryDescription"),
       icon: 'icons/skills/toxins/cup-goblet-poisoned-spilled.webp',
       seconds: CONFIG.time.roundTime,
@@ -2603,7 +2603,7 @@ export default class EffectDefinitions {
 
   get _wardingBond() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.WardingBond"),
+      name: game.i18n.localize("Effects.WardingBond"),
       description: game.i18n.localize("Effects.WardingBondDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2634,7 +2634,7 @@ export default class EffectDefinitions {
 
   get _waterBreathing() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.WaterBreathing"),
+      name: game.i18n.localize("Effects.WaterBreathing"),
       description: game.i18n.localize("Effects.WaterBreathingDescription"),
       icon: 'icons/magic/water/pseudopod-swirl-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_DAY,
@@ -2643,7 +2643,7 @@ export default class EffectDefinitions {
 
   get _waterWalk() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.WaterWalk"),
+      name: game.i18n.localize("Effects.WaterWalk"),
       description: game.i18n.localize("Effects.WaterWalkDescription"),
       icon: 'icons/creatures/slimes/slime-movement-swirling-blue.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -2653,7 +2653,7 @@ export default class EffectDefinitions {
   /** Class specific */
   get _bardicInspiration() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BardicInspiration"),
+      name: game.i18n.localize("Effects.BardicInspiration"),
       description: game.i18n.localize("Effects.BardicInspirationDescription"),
       icon: 'icons/skills/melee/unarmed-punch-fist.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
@@ -2668,7 +2668,7 @@ export default class EffectDefinitions {
 
   get _bardicInspirationD6() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BardicInspirationD6"),
+      name: game.i18n.localize("Effects.BardicInspirationD6"),
       description: game.i18n.localize("Effects.BardicInspirationD6Description"),
       icon: 'icons/skills/melee/unarmed-punch-fist.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2700,7 +2700,7 @@ export default class EffectDefinitions {
 
   get _bardicInspirationD8() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BardicInspirationD8"),
+      name: game.i18n.localize("Effects.BardicInspirationD8"),
       description: game.i18n.localize("Effects.BardicInspirationD8Description"),
       icon: 'icons/skills/melee/unarmed-punch-fist.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2732,7 +2732,7 @@ export default class EffectDefinitions {
 
   get _bardicInspirationD10() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BardicInspirationD10"),
+      name: game.i18n.localize("Effects.BardicInspirationD10"),
       description: game.i18n.localize("Effects.BardicInspirationD10Description"),
       icon: 'icons/skills/melee/unarmed-punch-fist.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2764,7 +2764,7 @@ export default class EffectDefinitions {
 
   get _bardicInspirationD12() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BardicInspirationD12"),
+      name: game.i18n.localize("Effects.BardicInspirationD12"),
       description: game.i18n.localize("Effects.BardicInspirationD12Description"),
       icon: 'icons/skills/melee/unarmed-punch-fist.webp',
       isViewable: this._settings.showNestedEffects,
@@ -2796,7 +2796,7 @@ export default class EffectDefinitions {
 
   get _channelDivinitySacredWeapon() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ChannelDivinitySacredWeapon"),
+      name: game.i18n.localize("Effects.ChannelDivinitySacredWeapon"),
       description: game.i18n.localize("Effects.ChannelDivinitySacredWeaponDescription"),
       icon: 'icons/weapons/swords/sword-gold-holy.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2844,7 +2844,7 @@ export default class EffectDefinitions {
 
   get _channelDivinityTurnTheUnholy() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ChannelDivinityTurntheUnholy"),
+      name: game.i18n.localize("Effects.ChannelDivinityTurntheUnholy"),
       description: game.i18n.localize("Effects.ChannelDivinityTurntheUnholyDescription"),
       icon: 'icons/magic/fire/explosion-embers-evade-silhouette.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2858,7 +2858,7 @@ export default class EffectDefinitions {
 
   get _channelDivinityTurnUndead() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.ChannelDivinityTurnUndead"),
+      name: game.i18n.localize("Effects.ChannelDivinityTurnUndead"),
       description: game.i18n.localize("Effects.ChannelDivinityTurnUndeadDescription"),
       icon: 'icons/magic/fire/flame-burning-creature-skeleton.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2872,7 +2872,7 @@ export default class EffectDefinitions {
 
   get _kiEmptyBody() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.KiEmptyBody"),
+      name: game.i18n.localize("Effects.KiEmptyBody"),
       description: game.i18n.localize("Effects.KiEmptyBodyDescription"),
       icon: 'icons/magic/perception/silhouette-stealth-shadow.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -2968,7 +2968,7 @@ export default class EffectDefinitions {
 
   get _kiPatientDefense() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.PatientDefense"),
+      name: game.i18n.localize("Effects.PatientDefense"),
       description: game.i18n.localize("Effects.PatientDefenseDescription"),
       icon: 'icons/magic/defensive/shield-barrier-glowing-blue.webp',
       flags: {
@@ -2993,7 +2993,7 @@ export default class EffectDefinitions {
 
   get _rage() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Rage"),
+      name: game.i18n.localize("Effects.Rage"),
       description: game.i18n.localize("Effects.RageDescription"),
       icon: 'icons/creatures/abilities/mouth-teeth-human.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
@@ -3040,7 +3040,7 @@ export default class EffectDefinitions {
 
   get _recklessAttack() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.RecklessAttack"),
+      name: game.i18n.localize("Effects.RecklessAttack"),
       description: game.i18n.localize("Effects.RecklessAttackDescription"),
       icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
       flags: {
@@ -3057,7 +3057,7 @@ export default class EffectDefinitions {
       ],
       subEffects: [
         this._effectHelpers.createActiveEffect({
-          label: game.i18n.localize("Effects.RecklessAttackAdvantageOnAttacks"),
+          name: game.i18n.localize("Effects.RecklessAttackAdvantageOnAttacks"),
           description: 'Advantage on melee attacks until end of turn',
           icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
           turns: 1,
@@ -3076,7 +3076,7 @@ export default class EffectDefinitions {
   /* Equipment effects */
   get _bullseyeLantern() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BullseyeLantern"),
+      name: game.i18n.localize("Effects.BullseyeLantern"),
       description: game.i18n.localize("Effects.BullseyeLanternDescription"),
       icon: 'icons/sundries/lights/lantern-iron-yellow.webp',
       seconds: Constants.SECONDS.IN_SIX_HOURS,
@@ -3117,7 +3117,7 @@ export default class EffectDefinitions {
 
   get _candle() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Candle"),
+      name: game.i18n.localize("Effects.Candle"),
       description: game.i18n.localize("Effects.CandleDescription"),
       icon: 'icons/sundries/lights/candle-unlit-white.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -3153,7 +3153,7 @@ export default class EffectDefinitions {
 
   get _hoodedLantern() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HoodedLantern"),
+      name: game.i18n.localize("Effects.HoodedLantern"),
       description: game.i18n.localize("Effects.HoodedLanternDescription"),
       icon: 'icons/sundries/lights/lantern-iron-yellow.webp',
       seconds: Constants.SECONDS.IN_SIX_HOURS,
@@ -3189,7 +3189,7 @@ export default class EffectDefinitions {
 
   get _lantern() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Lantern"),
+      name: game.i18n.localize("Effects.Lantern"),
       description: game.i18n.localize("Effects.LanternDescription"),
       icon: 'icons/sundries/lights/lantern-iron-yellow.webp',
       seconds: Constants.SECONDS.IN_SIX_HOURS,
@@ -3225,7 +3225,7 @@ export default class EffectDefinitions {
 
   get _torch() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Torch"),
+      name: game.i18n.localize("Effects.Torch"),
       description: game.i18n.localize("Effects.TorchDescription"),
       icon: 'icons/sundries/lights/torch-black.webp',
       seconds: Constants.SECONDS.IN_ONE_HOUR,
@@ -3262,7 +3262,7 @@ export default class EffectDefinitions {
   /* Other effects */
   get _bonusAction() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.BonusAction"),
+      name: game.i18n.localize("Effects.BonusAction"),
       description: game.i18n.localize("Effects.BonusActionDescription"),
       icon: 'modules/dfreds-convenient-effects/images/bonus-action.svg',
       flags: {
@@ -3275,7 +3275,7 @@ export default class EffectDefinitions {
 
   get _coverHalf() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.CoverHalf"),
+      name: game.i18n.localize("Effects.CoverHalf"),
       description:  game.i18n.localize("Effects.CoverHalfDescription"),
       icon: 'modules/dfreds-convenient-effects/images/broken-wall.svg',
       tint: '#dae34f',
@@ -3296,7 +3296,7 @@ export default class EffectDefinitions {
 
   get _coverThreeQuarters() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.CoverThreeQuarters"),
+      name: game.i18n.localize("Effects.CoverThreeQuarters"),
       description: game.i18n.localize("Effects.CoverThreeQuartersDescription"),
       icon: 'modules/dfreds-convenient-effects/images/brick-wall.svg',
       changes: [
@@ -3331,7 +3331,7 @@ export default class EffectDefinitions {
 
   get _encumbered() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Encumbered"),
+      name: game.i18n.localize("Effects.Encumbered"),
       description: game.i18n.localize("Effects.EncumberedDescription"),
       icon: 'icons/svg/down.svg',
       changes: [
@@ -3347,7 +3347,7 @@ export default class EffectDefinitions {
 
   get _dodge() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Dodge"),
+      name: game.i18n.localize("Effects.Dodge"),
       description: game.i18n.localize("Effects.DodgeDescription"),
       icon: 'modules/dfreds-convenient-effects/images/dodging.svg',
       flags: {
@@ -3372,7 +3372,7 @@ export default class EffectDefinitions {
 
   get _flanked() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Flanked"),
+      name: game.i18n.localize("Effects.Flanked"),
       description: game.i18n.localize("Effects.FlankedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/encirclement.svg',
       changes: [
@@ -3392,7 +3392,7 @@ export default class EffectDefinitions {
 
   get _flanking() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Flanking"),
+      name: game.i18n.localize("Effects.Flanking"),
       description: game.i18n.localize("Effects.FlankingDescription"),
       icon: 'icons/svg/sword.svg',
       changes: [
@@ -3412,7 +3412,7 @@ export default class EffectDefinitions {
 
   get _greatWeaponMaster() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.GreatWeaponMaster"),
+      name: game.i18n.localize("Effects.GreatWeaponMaster"),
       description: game.i18n.localize("Effects.GreatWeaponMasterDescription"),
       icon: 'icons/skills/melee/hand-grip-staff-yellow-brown.webp',
       changes: [
@@ -3432,7 +3432,7 @@ export default class EffectDefinitions {
 
   get _heavilyEncumbered() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.HeavilyEncumbered"),
+      name: game.i18n.localize("Effects.HeavilyEncumbered"),
       description: game.i18n.localize("Effects.HeavilyEncumberedDescription"),
       icon: 'icons/svg/downgrade.svg',
       changes: [
@@ -3468,7 +3468,7 @@ export default class EffectDefinitions {
 
   get _inspiration() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Inspiration"),
+      name: game.i18n.localize("Effects.Inspiration"),
       description: game.i18n.localize("Effects.InspirationDescription"),
       icon: 'icons/magic/control/buff-luck-fortune-green.webp',
       flags: {
@@ -3488,7 +3488,7 @@ export default class EffectDefinitions {
 
   get _rangedDisadvantage() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.RangedDisadvantage"),
+      name: game.i18n.localize("Effects.RangedDisadvantage"),
       description: game.i18n.localize("Effects.RangedDisadvantageDescription"),
       icon: 'modules/dfreds-convenient-effects/images/broken-arrow.svg',
       changes: [
@@ -3508,7 +3508,7 @@ export default class EffectDefinitions {
 
   get _reaction() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Reaction"),
+      name: game.i18n.localize("Effects.Reaction"),
       description: game.i18n.localize("Effects.ReactionDescription"),
       icon: 'modules/dfreds-convenient-effects/images/reaction.svg',
       flags: {
@@ -3521,7 +3521,7 @@ export default class EffectDefinitions {
 
   get _ready() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Ready"),
+      name: game.i18n.localize("Effects.Ready"),
       description: game.i18n.localize("Effects.ReadyDescription"),
       icon: 'modules/dfreds-convenient-effects/images/ready.svg',
       flags: {
@@ -3534,7 +3534,7 @@ export default class EffectDefinitions {
 
   get _sharpshooter() {
     return this._effectHelpers.createActiveEffect({
-      label: game.i18n.localize("Effects.Sharpshooter"),
+      name: game.i18n.localize("Effects.Sharpshooter"),
       description: game.i18n.localize("Effects.SharpshooterDescription"),
       icon: 'icons/weapons/bows/shortbow-recurve-yellow.webp',
       changes: [
