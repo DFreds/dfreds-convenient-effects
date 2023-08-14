@@ -33,15 +33,15 @@ export default class RemoveEffectsHandler {
   get _effectsByActorMappings() {
     return canvas.tokens.controlled
       .filter((token) => {
-        const effects = token.actor.effects.filter((activeEffect) =>
-          this._effectHelpers.isConvenient(activeEffect)
+        const effects = token.actor.effects.filter(
+          (activeEffect) => activeEffect.isTemporary
         );
         return effects.length > 0;
       })
       .map((token) => {
         const actor = token.actor;
-        const effects = token.actor.effects.filter((activeEffect) =>
-          this._effectHelpers.isConvenient(activeEffect)
+        const effects = token.actor.effects.filter(
+          (activeEffect) => activeEffect.isTemporary
         );
 
         return { actor, effects };

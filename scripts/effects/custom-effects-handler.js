@@ -21,7 +21,7 @@ export default class CustomEffectsHandler {
    */
   isCustomEffect(effectName) {
     const item = this._findCustomEffectsItem();
-    return item && item.effects.find((effect) => effect.label == effectName);
+    return item && item.effects.find((effect) => effect.name == effectName);
   }
 
   /**
@@ -33,14 +33,19 @@ export default class CustomEffectsHandler {
     const item = this._findCustomEffectsItem();
     if (!item) return [];
 
-    let customEffects = Array(...item.effects);
+    let customEffects = Array(...item.effects).map((effect) => {
+      effect.duration.startTime = null;
+      effect.duration.startRound = null;
+      effect.duration.startTurn = null;
+      return effect;
+    });
     customEffects.sort((a, b) => {
-      let labelA = a.label.toUpperCase(); // ignore upper and lowercase
-      let labelB = b.label.toUpperCase(); // ignore upper and lowercase
-      if (labelA < labelB) {
+      let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
         return -1;
       }
-      if (labelA > labelB) {
+      if (nameA > nameB) {
         return 1;
       }
 
@@ -57,7 +62,7 @@ export default class CustomEffectsHandler {
   async createNewCustomEffect() {
     const item = await this._findOrCreateCustomEffectsItem();
     const newEffect = this._effectHelpers.createActiveEffect({
-      label: 'New Effect',
+      name: 'New Effect',
       origin: item.uuid,
     });
 

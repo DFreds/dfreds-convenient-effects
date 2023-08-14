@@ -15,7 +15,7 @@
     <div class='header-search flexrow'>
       <i class='fas fa-search'></i>
       <input
-        type='text'
+        type='search'
         name='search'
         value=''
         placeholder='Search Effects'
@@ -23,7 +23,7 @@
         autofocus
       />
       <a class='header-control collapse-all' title='Collapse All Folders'>
-        <i class='fas fa-sort-amount-up fa-fw'></i>
+        <i class='fas fa-duotone fa-folder-tree'></i>
       </a>
       {{#if (isGm)}}
         <a
@@ -46,7 +46,7 @@
         <header class='folder-header flexrow'>
           <h3 class='noborder'>
             <i class='fas fa-folder-open fa-fw'></i>
-            {{folder.label}}
+            {{folder.name}}
           </h3>
           {{#if (isCustomFolder folder.id)}}
             <a
@@ -67,14 +67,14 @@
           {{#each folder.effects as |effect|}}
             <li
               class='directory-item document entity flexrow convenient-effect'
-              data-effect-name='{{effect.label}}'
+              data-effect-name='{{effect.name}}'
               draggable='true'
               style='display: flex'
             >
-              <img title='{{effect.label}}' src='{{effect.icon}}' />
+              <img title='{{effect.name}}' src='{{effect.icon}}' />
               <h4 class='document-name entity-name'>
-                <a title='{{effect.flags.dfreds-convenient-effects.description}}'>
-                  {{effect.label}}
+                <a title='{{effectDescription effect}}'>
+                  {{effect.name}}
                 </a>
               </h4>
               {{{convenientIcons effect}}}

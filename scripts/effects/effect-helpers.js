@@ -7,10 +7,11 @@ export default class EffectHelpers {
   }
 
   createActiveEffect({
-    label,
+    name,
     description = '',
     icon = 'icons/svg/aura.svg',
     duration = {},
+    tint = null,
     seconds = null,
     rounds = null,
     turns = null,
@@ -18,6 +19,7 @@ export default class EffectHelpers {
     isViewable = true,
     flags = {},
     origin = null,
+    statuses = [],
     changes = [],
     atlChanges = [],
     tokenMagicChanges = [],
@@ -32,39 +34,38 @@ export default class EffectHelpers {
       changes.push(...tokenMagicChanges);
     }
 
-    if (!flags.core) {
-      flags.core = {};
-    }
-    flags.core.statusId = `Convenient Effect: ${label}`;
+    let ceFlags = {};
 
-    flags[Constants.MODULE_ID] = {};
-    flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] = description;
-    flags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
-    flags[Constants.MODULE_ID][Constants.FLAGS.IS_DYNAMIC] = isDynamic;
-    flags[Constants.MODULE_ID][Constants.FLAGS.IS_VIEWABLE] = isViewable;
-    flags[Constants.MODULE_ID][Constants.FLAGS.NESTED_EFFECTS] = nestedEffects;
-    flags[Constants.MODULE_ID][Constants.FLAGS.SUB_EFFECTS] = subEffects;
+    ceFlags[Constants.MODULE_ID] = {};
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_CONVENIENT] = true;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_DYNAMIC] = isDynamic;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.IS_VIEWABLE] = isViewable;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.NESTED_EFFECTS] =
+      nestedEffects;
+    ceFlags[Constants.MODULE_ID][Constants.FLAGS.SUB_EFFECTS] = subEffects;
 
     let effectDuration = isEmpty(duration)
       ? {
           rounds,
           seconds,
-          startRound: game.combat?.round,
-          startTime: game.time.worldTime,
-          startTurn: game.combat?.turn,
           turns,
         }
       : duration;
 
+    statuses.unshift(this.getId(name));
+
     let effect = new CONFIG.ActiveEffect.documentClass({
       changes,
+      description,
       disabled: false,
       duration: effectDuration,
-      flags,
+      flags: foundry.utils.mergeObject(ceFlags, flags),
       icon,
-      label,
+      name,
       origin,
+      tint,
       transfer: false,
+      statuses,
     });
 
     return effect;
@@ -77,12 +78,24 @@ export default class EffectHelpers {
    * @returns {string} The description for the effect
    */
   getDescription(activeEffect) {
-    const description = activeEffect.getFlag(
+    const effectDescription = activeEffect.description;
+    const flagDescription = activeEffect.getFlag(
       Constants.MODULE_ID,
       Constants.FLAGS.DESCRIPTION
     );
+    const legacyDescription = activeEffect.flags.convenientDescription;
 
-    return description ?? activeEffect.flags.convenientDescription;
+    return effectDescription || flagDescription || legacyDescription;
+  }
+
+  /**
+   * Gets the ID for a convenient effect using its name
+   *
+   * @param {string} name - the name of the effect
+   * @returns The ID for the effect
+   */
+  getId(name) {
+    return `Convenient Effect: ${name}`;
   }
 
   /**
@@ -102,5 +115,29 @@ export default class EffectHelpers {
     const isOldCustomConvenient = activeEffect.flags.isCustomConvenient;
 
     return isConvenient || isOldConvenient || isOldCustomConvenient;
+  }
+
+  /**
+   * Updates the convenient effect status ID with the value of the active
+   * effect name
+   *
+   * @param {ActiveEffect} activeEffect - the active effect
+   */
+  async updateStatusId(activeEffect) {
+    const statusId = this.getId(activeEffect.name);
+    let statusesSet = activeEffect.statuses;
+
+    if (statusesSet.has(statusId)) {
+      return;
+    }
+
+    let statusesArray = Array.from(statusesSet).filter(
+      (status) => !status.startsWith('Convenient Effect: ')
+    );
+
+    statusesArray.unshift(statusId);
+    let newStatusesSet = new Set(statusesArray);
+
+    return activeEffect.update({ statuses: statusesArray });
   }
 }

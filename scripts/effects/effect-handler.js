@@ -30,7 +30,7 @@ export default class EffectHandler {
         await this.removeEffect({ effectName, uuid });
       } else {
         let effect = game.dfreds.effectInterface.findEffectByName(effectName);
-        await this.addEffect({ effect: { ...effect }, uuid, overlay });
+        await this.addEffect({ effect: effect.toObject(), uuid, overlay });
       }
     }
   }
@@ -49,7 +49,7 @@ export default class EffectHandler {
     return actor?.effects?.some(
       (activeEffect) =>
         this._effectHelpers.isConvenient(activeEffect) &&
-        activeEffect?.label == effectName &&
+        activeEffect?.name == effectName &&
         !activeEffect?.disabled
     );
   }
@@ -73,14 +73,14 @@ export default class EffectHandler {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
           this._effectHelpers.isConvenient(activeEffect) &&
-          activeEffect?.label == effectName &&
+          activeEffect?.name == effectName &&
           activeEffect?.origin == origin
       );
     } else {
       effectToRemove = actor.effects.find(
         (activeEffect) =>
           this._effectHelpers.isConvenient(activeEffect) &&
-          activeEffect?.label == effectName
+          activeEffect?.name == effectName
       );
     }
 
@@ -106,11 +106,11 @@ export default class EffectHandler {
 
     activeEffectsToApply.push(effect);
 
-    if (effect.label.startsWith('Exhaustion')) {
+    if (effect.name.startsWith('Exhaustion')) {
       await this._removeAllExhaustionEffects(uuid);
     }
 
-    if (effect.label == 'Unconscious') {
+    if (effect.name == 'Unconscious') {
       activeEffectsToApply.push(this._getProneEffect());
     }
 
@@ -120,7 +120,6 @@ export default class EffectHandler {
 
     let coreFlags = {
       core: {
-        statusId: `Convenient Effect: ${effect.label}`,
         overlay,
       },
     };
@@ -131,7 +130,7 @@ export default class EffectHandler {
     }
 
     await actor.createEmbeddedDocuments('ActiveEffect', activeEffectsToApply);
-    log(`Added effect ${effect.label} to ${actor.name} - ${actor.id}`);
+    log(`Added effect ${effect.name} to ${actor.name} - ${actor.id}`);
 
     const subEffects =
       effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.SUB_EFFECTS];
@@ -141,7 +140,7 @@ export default class EffectHandler {
         await game.dfreds.effectInterface.addEffectWith({
           effectData: subEffect,
           uuid,
-          origin: `Convenient Effect: ${effect.label}`,
+          origin: this._effectHelpers.getId(effect.name),
         });
       }
     }

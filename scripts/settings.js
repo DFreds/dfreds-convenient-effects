@@ -4,23 +4,26 @@ import Constants from './constants.js';
  * Handle setting and fetching all settings in the module
  */
 export default class Settings {
-  // Settings keys
-  static CHAT_MESSAGE_PERMISSION = 'chatMessagePermission';
-  static APP_CONTROLS_PERMISSION = 'controlsPermission';
+  // Config setting keys
   static ALLOW_PLAYER_CUSTOM_EFFECTS = 'allowPlayerCustomEffects';
+  static APP_CONTROLS_PERMISSION = 'controlsPermission';
+  static CHAT_MESSAGE_PERMISSION = 'chatMessagePermission';
   static INTEGRATE_WITH_ATE = 'integrateWithAtl';
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
   static REMOVE_CONTROLS_PERMISSION = 'removeControlsPermission';
+  static SEND_CHAT_TO_ACTOR_OWNER = 'sendChatToActorOwner';
   static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
   static STATUS_EFFECTS_SORT_ORDER = 'statusEffectsSortOrder';
+  static ADD_CHAT_BUTTON = 'addChatButton';
 
+  // Non-config setting keys
+  static CUSTOM_EFFECTS_ITEM_ID = 'customEffectsItemId';
+  static EXPANDED_FOLDERS = 'expandedFolders';
   static FAVORITE_EFFECT_NAMES = 'favoriteEffectNames';
   static STATUS_EFFECT_NAMES = 'statusEffectNames';
-  static EXPANDED_FOLDERS = 'expandedFolders';
-  static CUSTOM_EFFECTS_ITEM_ID = 'customEffectsItemId';
 
   /**
    * Register all the settings for the module
@@ -45,20 +48,6 @@ export default class Settings {
       'Settings.UserRolesGameMaster'
     );
     userRoles[5] = game.i18n.localize('Settings.UserRolesNone');
-
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.CHAT_MESSAGE_PERMISSION,
-      {
-        name: game.i18n.localize('Settings.ChatMessagePermissionName'),
-        hint: game.i18n.localize('Settings.ChatMessagePermissionHint'),
-        scope: 'world',
-        config: true,
-        default: CONST.USER_ROLES.GAMEMASTER,
-        choices: userRoles,
-        type: String,
-      }
-    );
 
     game.settings.register(
       Constants.MODULE_ID,
@@ -111,6 +100,38 @@ export default class Settings {
 
     game.settings.register(
       Constants.MODULE_ID,
+      Settings.STATUS_EFFECTS_SORT_ORDER,
+      {
+        name: 'Status Effects Sort Order',
+        hint: 'This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.',
+        scope: 'world',
+        config: true,
+        default: 'none',
+        choices: {
+          byOrderAdded: 'By Order Added',
+          alphabetical: 'Alphabetical',
+        },
+        type: String,
+        requiresReload: true,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.CHAT_MESSAGE_PERMISSION,
+      {
+        name: 'Chat Message Permission',
+        hint: 'This defines the minimum permission level to see chat messages when effects are applied, removed, or expire. Setting this to None will never show chat messages.',
+        scope: 'world',
+        config: true,
+        default: CONST.USER_ROLES.GAMEMASTER,
+        choices: userRoles,
+        type: String,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
       Settings.SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION,
       {
         name: game.i18n.localize('Settings.ShowChatMessageEffectDescription'),
@@ -135,23 +156,27 @@ export default class Settings {
 
     game.settings.register(
       Constants.MODULE_ID,
-      Settings.STATUS_EFFECTS_SORT_ORDER,
+      Settings.SEND_CHAT_TO_ACTOR_OWNER,
       {
-        name: game.i18n.localize('Settings.StatusEffectsSortOrder'),
-        hint: game.i18n.localize('Settings.StatusEffectsSortOrderHint'),
+        name: 'Send Chat to Actor Owner',
+        hint: 'If enabled, this will also send effect chat messages to the users that own the affected actor.',
         scope: 'world',
         config: true,
-        default: 'byOrderAdded',
-        choices: {
-          byOrderAdded: game.i18n.localize(
-            'Settings.StatusEffectsSortOrderByOrderAdded'
-          ),
-          alphabetical: game.i18n.localize(
-            'Settings.StatusEffectsSortOrderAlphabetical'
-          ),
-        },
-        type: String,
-        requiresReload: true,
+        default: false,
+        type: Boolean,
+      }
+    );
+
+    game.settings.register(
+      Constants.MODULE_ID,
+      Settings.ADD_CHAT_BUTTON,
+      {
+        name: 'Add Button to Chat',
+        hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean,
       }
     );
 
@@ -295,6 +320,28 @@ export default class Settings {
     return parseInt(
       game.settings.get(Constants.MODULE_ID, Settings.CHAT_MESSAGE_PERMISSION)
     );
+  }
+
+  /**
+   * Returns the game setting for sending chats to the owner of the actor
+   *
+   * @returns {boolean} true if chat messages are sent to the owner of the actor
+   */
+  get sendChatToActorOwner() {
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.SEND_CHAT_TO_ACTOR_OWNER
+    );
+  }
+
+  /**
+   * Returns the game setting for adding a button to chat messages to apply the
+   * matching convenient effect.
+   * 
+   * @returns {boolean} true if the button should be added
+   */
+  get addChatButton() {
+    return game.settings.get(Constants.MODULE_ID, Settings.ADD_CHAT_BUTTON);
   }
 
   /**

@@ -51,7 +51,7 @@ export default class EffectInterface {
     const effect = this.findCustomEffectByName(effectName);
     if (effect) return effect;
 
-    return game.dfreds.effects.all.find((effect) => effect.label == effectName);
+    return game.dfreds.effects.all.find((effect) => effect.name == effectName);
   }
 
   /**
@@ -64,7 +64,7 @@ export default class EffectInterface {
   findCustomEffectByName(effectName) {
     const effect = this._customEffectsHandler
       .getCustomEffects()
-      .find((effect) => effect.label == effectName);
+      .find((effect) => effect.name == effectName);
 
     return effect;
   }
@@ -105,7 +105,7 @@ export default class EffectInterface {
       if (!effect) return; // dialog closed without selecting one
     }
 
-    return this._socket.executeAsGM('toggleEffect', effect.label, {
+    return this._socket.executeAsGM('toggleEffect', effect.name, {
       overlay,
       uuids,
     });
@@ -155,7 +155,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('removeEffect', {
-      effectName: effect.label,
+      effectName: effect.name,
       uuid,
       origin,
     });
@@ -193,7 +193,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effect: { ...effect },
+      effect: effect.toObject(),
       uuid,
       origin,
       overlay,
@@ -228,7 +228,7 @@ export default class EffectInterface {
     }
 
     return this._socket.executeAsGM('addEffect', {
-      effect: { ...effect },
+      effect: effect.toObject(),
       uuid,
       origin,
       overlay,
@@ -264,9 +264,11 @@ export default class EffectInterface {
   async _getNestedEffectSelection(effect) {
     const nestedEffectNames =
       effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS) ?? [];
-    const nestedEffects = nestedEffectNames.map((nestedEffect) =>
-      game.dfreds.effectInterface.findEffectByName(nestedEffect)
-    );
+    const nestedEffects = nestedEffectNames
+      .map((nestedEffect) =>
+        game.dfreds.effectInterface.findEffectByName(nestedEffect)
+      )
+      .filter((effect) => effect !== undefined);
 
     const content = await renderTemplate(
       'modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs',
@@ -274,7 +276,7 @@ export default class EffectInterface {
     );
     const choice = await Dialog.prompt(
       {
-        title: effect.label,
+        title: effect.name,
         content: content,
         label: 'Select Effect',
         callback: (html) => {
@@ -286,7 +288,7 @@ export default class EffectInterface {
       { width: 300 }
     );
 
-    return nestedEffects.find((nestedEffect) => nestedEffect.label == choice);
+    return nestedEffects.find((nestedEffect) => nestedEffect.name == choice);
   }
 
   /**

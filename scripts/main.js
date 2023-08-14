@@ -2,17 +2,17 @@ import ChatHandler from './chat-handler.js';
 import Constants from './constants.js';
 import Controls from './controls.js';
 import EffectDefinitions from './effects/effect-definitions.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import EffectInterface from './effect-interface.js';
 import FoundryHelpers from './foundry-helpers.js';
 import HandlebarHelpers from './handlebar-helpers.js';
 import MacroHandler from './macro-handler.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
-import { libWrapper } from './lib/shim.js';
 import TextEnrichers from './text-enrichers.js';
-import { addDescriptionToEffectConfig } from './ui/add-description-to-effect-config.js';
 import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
-import EffectHelpers from './effects/effect-helpers.js';
+import { libWrapper } from './lib/shim.js';
+import { removeCustomItemFromSidebar } from './ui/remove-custom-item-from-sidebar.js';
 
 /**
  * Initialize the settings and handlebar helpers
@@ -49,8 +49,6 @@ Hooks.once('ready', async () => {
 
     await settings.setCustomEffectsItemId(item.id);
   }
-
-  Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
 });
 
 /**
@@ -99,23 +97,18 @@ Hooks.once('setup', () => {
     function (wrapper, ...args) {
       const tokenHud = this;
       game.dfreds.statusEffects.refreshStatusIcons(tokenHud);
-      wrapper(...args);
-    },
-    'WRAPPER'
+    }
   );
+
+  Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
 });
 
 Hooks.on('changeSidebarTab', (directory) => {
-  if (!(directory instanceof ItemDirectory)) return;
+  removeCustomItemFromSidebar(directory);
+});
 
-  const settings = new Settings();
-  const customEffectsItemId = settings.customEffectsItemId;
-
-  if (!customEffectsItemId) return;
-
-  const html = directory.element;
-  const li = html.find(`li[data-document-id="${customEffectsItemId}"]`);
-  li.remove();
+Hooks.on('renderItemDirectory', (directory) => {
+  removeCustomItemFromSidebar(directory);
 });
 
 /**
@@ -138,7 +131,7 @@ Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
 
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
-    effectName: activeEffect?.label,
+    effectName: activeEffect?.name,
     reason: game.i18n.localize('Main.AppliedTo'),
     actor: activeEffect?.parent,
     isCreateActiveEffect: true,
@@ -163,6 +156,9 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
 Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
   const settings = new Settings();
   if (activeEffect.parent.id == settings.customEffectsItemId) {
+    const effectHelpers = new EffectHelpers();
+    effectHelpers.updateStatusId(activeEffect);
+
     const foundryHelpers = new FoundryHelpers();
     foundryHelpers.renderConvenientEffectsAppIfOpen();
   }
@@ -185,7 +181,7 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
 
   const chatHandler = new ChatHandler();
   chatHandler.createChatForEffect({
-    effectName: activeEffect?.label,
+    effectName: activeEffect?.name,
     reason: isExpired
       ? game.i18n.localize('Main.ExpiredFrom')
       : game.i18n.localize('Main.RemovedFrom'),
@@ -216,7 +212,7 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
   const actor = activeEffect.parent;
   const effectIdsFromThisEffect = actor.effects
     .filter(
-      (effect) => effect.origin === `Convenient Effect: ${activeEffect.label}`
+      (effect) => effect.origin === effectHelpers.getId(activeEffect.name)
     )
     .map((effect) => effect.id);
 
@@ -231,12 +227,13 @@ Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
 Hooks.on(
   'renderActiveEffectConfig',
   async (activeEffectConfig, $html, _data) => {
-    addDescriptionToEffectConfig(activeEffectConfig, $html);
-
     const settings = new Settings();
 
     // Only add nested effects if the effect exists on the custom effect item
-    if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+    if (
+      !activeEffectConfig.object.parent ||
+      activeEffectConfig.object.parent.id != settings.customEffectsItemId
+    )
       return;
     addNestedEffectsToEffectConfig(activeEffectConfig, $html);
   }
@@ -281,4 +278,26 @@ Hooks.on('dropActorSheetData', (actor, _actorSheetCharacter, data) => {
     effectName: data.effectName,
     uuid: actor.uuid,
   });
+});
+
+/**
+ * Handle adding a button to item cards.
+ */
+Hooks.on('renderChatMessage', (message, html) => {
+  const settings = new Settings();
+
+  // only add button on item cards if configured
+  const itemCard = html[0].querySelector('.item-card');
+  if (itemCard && settings.addChatButton) {
+    // check if this item has a Convenient Effect
+    const name = itemCard.querySelector('.item-name')?.textContent;
+    if (game.dfreds.effectInterface.findEffectByName(name)) {
+      // build a button
+      const button = document.createElement('button');
+      button.textContent = 'Add Convenient Effect';
+      button.onclick = () => game.dfreds.effectInterface.toggleEffect(name);
+      // add button to end of card-buttons
+      itemCard.querySelector('.card-buttons').append(button);
+    }
+  }
 });

@@ -1,4 +1,5 @@
 import Constants from '../constants.js';
+import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
 
 /**
@@ -6,6 +7,7 @@ import Settings from '../settings.js';
  */
 export default class DynamicEffectsAdder {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
   }
 
@@ -16,7 +18,7 @@ export default class DynamicEffectsAdder {
    * @param {Actor} actor - the affected actor
    */
   async addDynamicEffects(effect, actor) {
-    switch (effect.label.toLowerCase()) {
+    switch (effect.name.toLowerCase()) {
       case 'divine word':
         await this._addDivineWordEffects(effect, actor);
         break;
@@ -34,6 +36,7 @@ export default class DynamicEffectsAdder {
 
   async _addDivineWordEffects(effect, actor) {
     const remainingHp = actor.system.attributes.hp.value;
+    const origin = this._effectHelpers.getId(effect.name);
 
     if (remainingHp <= 20) {
       await actor.update({
@@ -44,49 +47,45 @@ export default class DynamicEffectsAdder {
         uuid: actor.uuid,
         overlay: true,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Killed instantly';
+      effect.description = 'Killed instantly';
     } else if (remainingHp <= 30) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Stunned',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Blinded, deafened, and stunned for 1 hour';
+      effect.description = 'Blinded, deafened, and stunned for 1 hour';
       effect.duration.seconds = Constants.SECONDS.IN_ONE_HOUR;
     } else if (remainingHp <= 40) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Blinded',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin,
       });
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Deafened and blinded for 10 minutes';
+      effect.description = 'Deafened and blinded for 10 minutes';
       effect.duration.seconds = Constants.SECONDS.IN_TEN_MINUTES;
     } else if (remainingHp <= 50) {
       await game.dfreds.effectInterface.addEffect({
         effectName: 'Deafened',
         uuid: actor.uuid,
-        origin: `Convenient Effect: ${effect.label}`,
+        origin,
       });
-      effect.flags[Constants.MODULE_ID][Constants.FLAGS.DESCRIPTION] =
-        'Deafened for 1 minute';
+      effect.description = 'Deafened for 1 minute';
       effect.duration.seconds = Constants.SECONDS.IN_ONE_MINUTE;
     }
   }

@@ -1,4 +1,5 @@
 import Constants from '../constants.js';
+import CustomEffectsHandler from './custom-effects-handler.js';
 import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
 
@@ -7,6 +8,7 @@ import Settings from '../settings.js';
  */
 export default class EffectDefinitions {
   constructor() {
+    this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
 
@@ -38,7 +40,8 @@ export default class EffectDefinitions {
    * @returns {ActiveEffect[]} all the effects
    */
   get all() {
-    return this._all;
+    const customEffects = this._customEffectsHandler.getCustomEffects();
+    return [...customEffects, ...this._all];
   }
 
   /**
@@ -238,6 +241,7 @@ export default class EffectDefinitions {
         this._bonusAction,
         this._coverHalf,
         this._coverThreeQuarters,
+        this._coverTotal,
         this._encumbered,
         this._dodge,
         this._flanked,
@@ -259,6 +263,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Blinded"),
       description: game.i18n.localize("Effects.BlindedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/blinded.svg',
+      statuses: ['blind'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.attack.all`,
@@ -303,6 +308,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Deafened"),
       description: game.i18n.localize("Effects.DeafenedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/deafened.svg',
+      statuses: ['deaf'],
     });
   }
 
@@ -502,6 +508,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Frightened"),
       description: game.i18n.localize("Effects.FrightenedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/frightened.svg',
+      statuses: ['fear'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.attack.all`,
@@ -546,6 +553,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Invisible"),
       description: game.i18n.localize("Effects.InvisibleDescription"),
       icon: 'modules/dfreds-convenient-effects/images/invisible.svg',
+      statuses: ['invisible'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.advantage.attack.all`,
@@ -566,6 +574,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Paralyzed"),
       description: game.i18n.localize("Effects.ParalyzedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/paralyzed.svg',
+      statuses: ['paralysis'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.fail.ability.save.dex`,
@@ -648,6 +657,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Poisoned"),
       description: game.i18n.localize("Effects.PoisonedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/poisoned.svg',
+      statuses: ['poison'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.attack.all`,
@@ -668,6 +678,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Prone"),
       description: game.i18n.localize("Effects.Prone"),
       icon: 'modules/dfreds-convenient-effects/images/prone.svg',
+      statuses: ['prone'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.grants.advantage.attack.mwak`,
@@ -709,6 +720,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Restrained"),
       description: game.i18n.localize("Effects.RestrainedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/restrained.svg',
+      statuses: ['restrain'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.disadvantage.ability.save.dex`,
@@ -740,6 +752,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Stunned"),
       description: game.i18n.localize("Effects.StunnedDescription"),
       icon: 'modules/dfreds-convenient-effects/images/stunned.svg',
+      statuses: ['stun'],
       changes: [
         {
           key: `flags.${this._flagPrefix}.fail.ability.save.dex`,
@@ -765,6 +778,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.Unconscious"),
       description: game.i18n.localize("Effects.UnconsciousDescription"),
       icon: 'icons/svg/unconscious.svg',
+      statuses: ['unconscious'],
       changes: [...this._paralyzed.changes],
     });
   }
@@ -964,8 +978,8 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.BlindnessDeafnessDescription"),
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       nestedEffects: [
-        this._blindnessDeafnessBlindness.label,
-        this._blindnessDeafnessDeafness.label,
+        this._blindnessDeafnessBlindness.name,
+        this._blindnessDeafnessDeafness.name,
       ],
     });
   }
@@ -977,7 +991,7 @@ export default class EffectDefinitions {
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [...this._blinded.changes],
+      subEffects: [this._blinded],
     });
   }
 
@@ -988,7 +1002,7 @@ export default class EffectDefinitions {
       icon: 'icons/magic/perception/eye-ringed-glow-angry-red.webp',
       isViewable: this._settings.showNestedEffects,
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [...this._deafened.changes],
+      subEffects: [this._deafened],
     });
   }
 
@@ -1057,12 +1071,12 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.ContagionDescription"),
       icon: 'icons/magic/unholy/strike-beam-blood-large-red-purple.webp',
       nestedEffects: [
-        this._contagionBlindingSickness.label,
-        this._contagionFilthFever.label,
-        this._contagionFleshRot.label,
-        this._contagionMindfire.label,
-        this._contagionSeizure.label,
-        this._contagionSlimyDoom.label,
+        this._contagionBlindingSickness.name,
+        this._contagionFilthFever.name,
+        this._contagionFleshRot.name,
+        this._contagionMindfire.name,
+        this._contagionSeizure.name,
+        this._contagionSlimyDoom.name,
       ],
     });
   }
@@ -1281,12 +1295,12 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.EnhanceAbilityDescription"),
       icon: 'icons/magic/control/buff-flight-wings-runes-purple.webp',
       nestedEffects: [
-        this._enhanceAbilityBearsEndurance.label,
-        this._enhanceAbilityBullsStrength.label,
-        this._enhanceAbilityCatsGrace.label,
-        this._enhanceAbilityEaglesSplendor.label,
-        this._enhanceAbilityFoxsCunning.label,
-        this._enhanceAbilityOwlsWisdom.label,
+        this._enhanceAbilityBearsEndurance.name,
+        this._enhanceAbilityBullsStrength.name,
+        this._enhanceAbilityCatsGrace.name,
+        this._enhanceAbilityEaglesSplendor.name,
+        this._enhanceAbilityFoxsCunning.name,
+        this._enhanceAbilityOwlsWisdom.name,
       ],
     });
   }
@@ -1405,8 +1419,8 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.EnlargeReduceDescription"),
       icon: 'icons/magic/control/energy-stream-link-large-blue.webp',
       nestedEffects: [
-        this._enlargeReduceEnlarge.label,
-        this._enlargeReduceReduce.label,
+        this._enlargeReduceEnlarge.name,
+        this._enlargeReduceReduce.name,
       ],
     });
   }
@@ -1558,8 +1572,8 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.FireShieldDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp',
       nestedEffects: [
-        this._fireShieldColdResistance.label,
-        this._fireShieldFireResistance.label,
+        this._fireShieldColdResistance.name,
+        this._fireShieldFireResistance.name,
       ],
     });
   }
@@ -1681,6 +1695,7 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.FlyDescription"),
       icon: 'icons/magic/control/energy-stream-link-white.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
+      statuses: ['fly'],
       changes: [
         {
           key: 'system.attributes.movement.fly',
@@ -1759,18 +1774,7 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.GreaterInvisibilityDescription"),
       icon: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
       seconds: Constants.SECONDS.IN_ONE_MINUTE,
-      changes: [
-        {
-          key: `flags.${this._flagPrefix}.advantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-        {
-          key: `flags.${this._flagPrefix}.grants.disadvantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-      ],
+      statuses: ['invisible'],
       subEffects: [this._invisible],
     });
   }
@@ -2004,18 +2008,7 @@ export default class EffectDefinitions {
           specialDuration: ['1Attack', '1Spell'],
         },
       },
-      changes: [
-        {
-          key: `flags.${this._flagPrefix}.advantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-        {
-          key: `flags.${this._flagPrefix}.grants.disadvantage.attack.all`,
-          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '1',
-        },
-      ],
+      statuses: ['invisible'],
       subEffects: [this._invisible],
     });
   }
@@ -2186,11 +2179,11 @@ export default class EffectDefinitions {
       description: game.i18n.localize("Effects.ProtectionfromEnergyDescription"),
       icon: 'icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp',
       nestedEffects: [
-        this._protectionFromEnergyAcid.label,
-        this._protectionFromEnergyCold.label,
-        this._protectionFromEnergyFire.label,
-        this._protectionFromEnergyLightning.label,
-        this._protectionFromEnergyThunder.label,
+        this._protectionFromEnergyAcid.name,
+        this._protectionFromEnergyCold.name,
+        this._protectionFromEnergyFire.name,
+        this._protectionFromEnergyLightning.name,
+        this._protectionFromEnergyThunder.name,
       ],
     });
   }
@@ -2665,10 +2658,10 @@ export default class EffectDefinitions {
       icon: 'icons/skills/melee/unarmed-punch-fist.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
       nestedEffects: [
-        this._bardicInspirationD6.label,
-        this._bardicInspirationD8.label,
-        this._bardicInspirationD10.label,
-        this._bardicInspirationD12.label,
+        this._bardicInspirationD6.name,
+        this._bardicInspirationD8.name,
+        this._bardicInspirationD10.name,
+        this._bardicInspirationD12.name,
       ],
     });
   }
@@ -3034,7 +3027,7 @@ export default class EffectDefinitions {
         {
           key: 'system.bonuses.mwak.damage',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: '+ @scale.barbarian.rage-damage',
+          value: '+ @scale.barbarian.rage',
         },
         {
           key: 'macro.tokenMagic',
@@ -3050,7 +3043,18 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.RecklessAttack"),
       description: game.i18n.localize("Effects.RecklessAttackDescription"),
       icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
-      seconds: CONFIG.time.roundTime,
+      flags: {
+        dae: {
+          specialDuration: ['turnStart'],
+        },
+      },
+      changes: [
+        {
+          key: `flags.${this._flagPrefix}.grants.advantage.attack.all`,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
+        },
+      ],
       subEffects: [
         this._effectHelpers.createActiveEffect({
           label: game.i18n.localize("Effects.RecklessAttackAdvantageOnAttacks"),
@@ -3060,18 +3064,6 @@ export default class EffectDefinitions {
           changes: [
             {
               key: `flags.${this._flagPrefix}.advantage.attack.mwak`,
-              mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-              value: '1',
-            },
-          ],
-        }),
-        this._effectHelpers.createActiveEffect({
-          label: game.i18n.localize("Effects.RecklessAttackAdvantageToAttackers"),
-          description: 'Grant advantage to those who attack until next turn',
-          icon: 'icons/skills/melee/blade-tips-triple-bent-white.webp',
-          changes: [
-            {
-              key: `flags.${this._flagPrefix}.grants.advantage.attack.all`,
               mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
               value: '1',
             },
@@ -3286,6 +3278,7 @@ export default class EffectDefinitions {
       label: game.i18n.localize("Effects.CoverHalf"),
       description:  game.i18n.localize("Effects.CoverHalfDescription"),
       icon: 'modules/dfreds-convenient-effects/images/broken-wall.svg',
+      tint: '#dae34f',
       changes: [
         {
           key: 'system.attributes.ac.cover',
@@ -3316,6 +3309,21 @@ export default class EffectDefinitions {
           key: 'system.abilities.dex.bonuses.save',
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
           value: '+5',
+        },
+      ],
+    });
+  }
+
+  get _coverTotal() {
+    return this._effectHelpers.createActiveEffect({
+      name: 'Cover (Total)',
+      description: 'Causes all attacks to fail automatically',
+      icon: 'modules/dfreds-convenient-effects/images/castle.svg',
+      changes: [
+        {
+          key: `flags.${this._flagPrefix}.grants.attack.fail.all`,
+          mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+          value: '1',
         },
       ],
     });

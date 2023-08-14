@@ -1,4 +1,5 @@
 import Constants from './constants.js';
+import EffectHelpers from './effects/effect-helpers.js';
 import Settings from './settings.js';
 
 /**
@@ -6,6 +7,7 @@ import Settings from './settings.js';
  */
 export default class HandlebarHelpers {
   constructor() {
+    this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();
   }
 
@@ -18,6 +20,7 @@ export default class HandlebarHelpers {
     this._registerCanCreateEffectsHelper();
     this._registerIfCustomFolderHelper();
     this._registerConvenientIconsHelper();
+    this._registerEffectDescriptionHelper();
   }
 
   _registerIncHelper() {
@@ -62,9 +65,11 @@ export default class HandlebarHelpers {
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.NESTED_EFFECTS) ??
         [];
 
-      const nestedEffects = nestedEffectNames.map((nestedEffect) =>
-        game.dfreds.effectInterface.findEffectByName(nestedEffect)
-      );
+      const nestedEffects = nestedEffectNames
+        .map((nestedEffect) =>
+          game.dfreds.effectInterface.findEffectByName(nestedEffect)
+        )
+        .filter((effect) => effect !== undefined);
 
       const subChanges = nestedEffects.flatMap(
         (nestedEffect) => nestedEffect.changes
@@ -83,9 +88,15 @@ export default class HandlebarHelpers {
     });
   }
 
+  _registerEffectDescriptionHelper() {
+    Handlebars.registerHelper('effectDescription', (effect) => {
+      return this._effectHelpers.getDescription(effect);
+    });
+  }
+
   _getStatusEffectIcon(effect) {
     return this._settings.modifyStatusEffects !== 'none' &&
-      this._settings.isStatusEffect(effect.label)
+      this._settings.isStatusEffect(effect.name)
       ? "<i class='fas fa-street-view integration-icon' title='Token Status Effect'></i>"
       : '';
   }

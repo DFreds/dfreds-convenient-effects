@@ -16,20 +16,20 @@ export default class FoundryHelpers {
    * @returns {string[]} actor uuids for selected or targeted tokens
    */
   getActorUuids() {
-    if (
-      canvas.tokens.controlled.length == 0 &&
-      game.user.targets.size == 0 &&
-      game.user.character == undefined
-    ) {
-      return [];
-    }
-
     if (this._settings.prioritizeTargets && game.user.targets.size !== 0) {
+      // Start with targets if prioritized
       return Array.from(game.user.targets).map((token) => token.actor.uuid);
     } else if (canvas.tokens.controlled.length !== 0) {
+      // Use controlled tokens if targets aren't prioritized
       return canvas.tokens.controlled.map((token) => token.actor.uuid);
-    } else {
+    } else if (game.user.targets.size !== 0) {
+      // Use targets if not prioritized and no controlled tokens
+      return Array.from(game.user.targets).map((token) => token.actor.uuid);
+    } else if (game.user.character) {
+      // Use the default character for the user
       return [game.user.character.uuid];
+    } else {
+      return [];
     }
   }
 

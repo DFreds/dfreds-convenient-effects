@@ -72,12 +72,12 @@ export default class ConvenientEffectsController {
   _fetchFavorites() {
     return this._settings.favoriteEffectNames
       .map((name) => {
-        return game.dfreds.effects.all.find((effect) => effect.label == name);
+        return game.dfreds.effects.all.find((effect) => effect.name == name);
       })
       .filter((effect) => effect)
       .sort((a, b) => {
-        let nameA = a.label.toLowerCase();
-        let nameB = b.label.toLowerCase();
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
 
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
@@ -88,14 +88,14 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedCustomEffects() {
     return this._customEffectsHandler
       .getCustomEffects()
-      .filter((effect) => !this._settings.isFavoritedEffect(effect.label));
+      .filter((effect) => !this._settings.isFavoritedEffect(effect.name));
   }
 
   _fetchUnfavoritedConditions() {
     const effects = game.dfreds.effects;
     return effects.conditions.filter(
       (effect) =>
-        !this._settings.isFavoritedEffect(effect.label) &&
+        !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
     );
   }
@@ -104,7 +104,7 @@ export default class ConvenientEffectsController {
     const effects = game.dfreds.effects;
     return effects.spells.filter(
       (effect) =>
-        !this._settings.isFavoritedEffect(effect.label) &&
+        !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
     );
   }
@@ -113,7 +113,7 @@ export default class ConvenientEffectsController {
     const effects = game.dfreds.effects;
     return effects.classFeatures.filter(
       (effect) =>
-        !this._settings.isFavoritedEffect(effect.label) &&
+        !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
     );
   }
@@ -122,7 +122,7 @@ export default class ConvenientEffectsController {
     const effects = game.dfreds.effects;
     return effects.equipment.filter(
       (effect) =>
-        !this._settings.isFavoritedEffect(effect.label) &&
+        !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
     );
   }
@@ -131,7 +131,7 @@ export default class ConvenientEffectsController {
     const effects = game.dfreds.effects;
     return effects.other.filter(
       (effect) =>
-        !this._settings.isFavoritedEffect(effect.label) &&
+        !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
     );
   }
@@ -163,7 +163,7 @@ export default class ConvenientEffectsController {
     const effectName = effectItem.data().effectName;
     const customEffect = this._customEffectsHandler
       .getCustomEffects()
-      .find((effect) => effect.label == effectName);
+      .find((effect) => effect.name == effectName);
 
     await this._customEffectsHandler.editCustomEffect(customEffect);
   }
@@ -177,7 +177,7 @@ export default class ConvenientEffectsController {
     const effectName = effectItem.data().effectName;
     const customEffect = this._customEffectsHandler
       .getCustomEffects()
-      .find((effect) => effect.label == effectName);
+      .find((effect) => effect.name == effectName);
 
     await this._customEffectsHandler.deleteCustomEffect(customEffect);
     this._viewMvc.render();
@@ -347,7 +347,7 @@ export default class ConvenientEffectsController {
     const effectName = effectItem.data().effectName;
 
     const effect = game.dfreds.effects.all.find(
-      (effect) => effect.label === effectName
+      (effect) => effect.name === effectName
     );
 
     await this._customEffectsHandler.duplicateExistingEffect(effect);
@@ -408,6 +408,10 @@ export default class ConvenientEffectsController {
     );
   }
 
+  canDragStart() {
+    return game.user.role >= this._settings.appControlsPermission;
+  }
+
   /**
    * Handles search text changes
    *
@@ -455,8 +459,8 @@ export default class ConvenientEffectsController {
 
     for (let folder of this.data.folders) {
       for (let effect of folder.effects) {
-        if (regex.test(SearchFilter.cleanQuery(effect.label))) {
-          effectNames.add(effect.label);
+        if (regex.test(SearchFilter.cleanQuery(effect.name))) {
+          effectNames.add(effect.name);
           folderIds.add(folder.id);
         }
       }
@@ -466,22 +470,5 @@ export default class ConvenientEffectsController {
       effectNames,
       folderIds,
     };
-  }
-
-  // Fixes bug when dragging over any item onto the convenient effects
-  _isValidEffect(event) {
-    try {
-      const data = JSON.parse(event.dataTransfer.getData('text/plain'));
-      return game.dfreds.effects.all.some(
-        (effect) => effect.label === data.effectName
-      );
-    } catch (err) {
-      return false;
-    }
-  }
-
-  // TODO delete
-  _isEventTargetFavorites(event) {
-    return event.currentTarget.dataset.folderId === 'favorites';
   }
 }
