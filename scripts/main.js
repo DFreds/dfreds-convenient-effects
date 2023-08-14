@@ -55,6 +55,7 @@ Hooks.once('ready', async () => {
  * Handle initializing everything
  */
 Hooks.once(`${Constants.MODULE_ID}.initialize`, async () => {
+  new Settings().registerStatusEffectNameSettings();
   game.dfreds.effectInterface.initialize();
   game.dfreds.effects.initialize();
   game.dfreds.statusEffects.initialize();

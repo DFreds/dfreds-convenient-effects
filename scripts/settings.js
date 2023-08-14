@@ -33,6 +33,13 @@ export default class Settings {
     this._registerNonConfigSettings();
   }
 
+  /**
+   * Register the default effect name after i18n is ready
+   */
+  registerStatusEffectNameSettings(){
+    this._registerStatusEffectNames();
+  }
+
   _registerConfigSettings() {
     const userRoles = {};
     userRoles[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
@@ -256,14 +263,6 @@ export default class Settings {
       }
     );
 
-    game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
-      name: 'Status Effect Names',
-      scope: 'world',
-      config: false,
-      default: this._defaultStatusEffectNames,
-      type: Array,
-    });
-
     game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
       name: 'Expanded Folders',
       scope: 'client',
@@ -283,6 +282,16 @@ export default class Settings {
         type: String,
       }
     );
+  }
+
+  _registerStatusEffectNames(){
+    game.settings.register(Constants.MODULE_ID, Settings.STATUS_EFFECT_NAMES, {
+      name: 'Status Effect Names',
+      scope: 'world',
+      config: false,
+      default: this._defaultStatusEffectNames,
+      type: Array,
+    });
   }
 
   get _defaultStatusEffectNames() {
