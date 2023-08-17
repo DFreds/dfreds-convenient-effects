@@ -72,7 +72,7 @@ export default class RemoveEffectsHandler {
         content: content,
         buttons: {
           remove: {
-            icon: '<i class="fas fa-check"></i>',
+            icon: '<i class="fas fa-trash"></i>',
             label: 'Remove',
             callback: (html) => {
               const checkedData = html
