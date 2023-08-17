@@ -365,7 +365,7 @@ export default class Settings {
   /**
    * Returns the game setting for unified app controls button
    *
-   * @returns {boolen} true if the button should be unified
+   * @returns {string} returns a string representing the option selected
    */
   get unifiedAppButton() {
     return game.settings.get(
