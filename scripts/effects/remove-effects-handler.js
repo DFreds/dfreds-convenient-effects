@@ -24,10 +24,16 @@ export default class RemoveEffectsHandler {
     }
 
     const selections = await this._getSelectionsFromDialog();
-    selections?.forEach(async (effectIds, actorUuid) => {
+    const {effectData,todo} = selections;
+    for (const [actorUuid,effectIds] of effectData) {
       const actor = this._foundryHelpers.getActorByUuid(actorUuid);
-      await actor.deleteEmbeddedDocuments('ActiveEffect', effectIds);
-    });
+      if (selections?.todo === 'toggle') {
+        const updates = effectIds.map((id)=>{return {_id:id,disabled:!actor.effects.get(id).disabled}});
+        await actor.updateEmbeddedDocuments('ActiveEffect',updates);
+      }
+      else if (selections?.todo === 'remove')
+        await actor.deleteEmbeddedDocuments('ActiveEffect', effectIds);
+    }
   }
 
   get _effectsByActorMappings() {
@@ -89,7 +95,34 @@ export default class RemoveEffectsHandler {
                   return result;
                 }, {});
 
-              resolve(new Map(Object.entries(checkedData)));
+              resolve({effectData:new Map(Object.entries(checkedData)),todo:'remove'});
+            },
+          },
+          toggle: {
+            icon: '<i class="fas fa-recycle"></i>',
+            label: 'Toggle',
+            callback: (html) => {
+              const checkedData = html
+                .find('input:checked')
+                .map((idx, ele) => {
+                  const data = $(ele).data();
+                  return {
+                    actorUuid: data?.actorUuid,
+                    effectId: data?.effectId,
+                  };
+                })
+                .get()
+                .reduce((result, currentValue) => {
+                  // If an array already present for key, push it to the array. Else create an array and push the object
+                  (result[currentValue['actorUuid']] =
+                    result[currentValue['actorUuid']] || []).push(
+                    currentValue.effectId
+                  );
+                  // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+                  return result;
+                }, {});
+
+              resolve({effectData:new Map(Object.entries(checkedData)),todo:'toggle'});
             },
           },
           cancel: {
