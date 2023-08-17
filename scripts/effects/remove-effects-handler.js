@@ -135,7 +135,7 @@ export default class RemoveEffectsHandler {
         },
         default: 'cancel',
       },
-      { width: 300 }
+      { width: 300, id:'DFredsCE-removeEffects',height: "auto", resizable: true }
     );
   }
 }
