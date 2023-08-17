@@ -62,9 +62,15 @@ export default class RemoveEffectsHandler {
   }
 
   async _getDialog(resolve, _reject) {
+    const effectsByActorMappings = this._effectsByActorMappings;
+    for (const i of effectsByActorMappings) {
+      for (const e of i.effects) {
+        if (!!e.disabled && !e.name.includes('(Disabled')) e.name = `${e.name} (Disabled)`;
+      }
+    }
     const content = await renderTemplate(
       'modules/dfreds-convenient-effects/templates/remove-effects-dialog.hbs',
-      { effectsByActorMappings: this._effectsByActorMappings }
+      { effectsByActorMappings }
     );
     return new Dialog(
       {
