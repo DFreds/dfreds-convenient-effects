@@ -22,17 +22,28 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsAppButton);
-    tokenButton.tools.push(this._removeEffectsButton);
+    if (this._settings.unifiedAppButton === 'none') tokenButton.tools.push(this._removeEffectsButton);
   }
 
   get _convenientEffectsAppButton() {
+    const title = this._settings.unifiedAppButton !== 'none' && game.user.role >= this._settings.removeControlsPermission
+      ? `<center><b>DFreds CE Apps</b></center><hl>
+        <p style="text-align:center"><u>Left mouse click</u>: Opens Add CE</p>
+        <hl><u>${this._settings.unifiedAppButton}+Left mouse click</u>: Opens Update CE`
+      : `Add Convenient Effects`;
     return {
       name: 'convenient-effects',
-      title: 'Add Convenient Effects',
+      title,
       icon: 'fas fa-hand-sparkles',
       button: true,
       visible: game.user.role >= this._settings.appControlsPermission,
-      onClick: this._handleConvenientEffectsClick,
+      onClick: () => {
+        if (this._settings.unifiedAppButton !== 'none' && game.user.role >= this._settings.removeControlsPermission) {
+          if (!event[this._settings.unifiedAppButton]) this._handleConvenientEffectsClick()
+          else this._handleRemoveEffectsClick()  
+        }
+        else this._handleConvenientEffectsClick()  
+      },
     };
   }
 
