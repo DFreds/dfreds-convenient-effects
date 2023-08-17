@@ -74,7 +74,7 @@ export default class RemoveEffectsHandler {
     );
     return new Dialog(
       {
-        title: 'Remove Effects',
+        title: 'Update Effects',
         content: content,
         buttons: {
           remove: {
