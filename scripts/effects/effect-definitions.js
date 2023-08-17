@@ -3619,7 +3619,7 @@ export default class EffectDefinitions {
     return this._effectHelpers.createActiveEffect({
       name: 'Underwater Combat',
       description:
-        `- Disadvantage on melee weapon attacks, if a creature doesn't have a swimming speed (either natural or granted by magic), unless the weapon is a dagger, javelin, shortsword, spear, or trident.<br>- Disadvantage on ranged weapon attacks, unless the weapon is a crossbow, a net, or a weapon that is thrown like a javelin (including a spear, trident, or dart). <br>- A ranged weapon attack automatically misses a target beyond the weapon's normal range.<br>- Creatures and objects that are fully immersed in water have resistance to fire damage.`,
+        `- Disadvantage on melee weapon attacks, if a creature doesn't have a swimming speed (either natural or granted by magic), unless the weapon is a dagger, javelin, shortsword, spear, or trident.<br>- Disadvantage on ranged weapon attacks, unless the weapon is a crossbow, a net, or a weapon that is thrown like a javelin (including a spear, trident, or dart). <br>- A ranged weapon attack automatically misses a target beyond the weapon's normal range.<br>- Creatures have resistance to fire damage.`,
       icon: 'icons/magic/water/wave-water-rolling-blue.webp',
       changes: [
         {
