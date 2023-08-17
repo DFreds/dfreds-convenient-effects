@@ -99,7 +99,7 @@ export default class RemoveEffectsHandler {
             },
           },
           toggle: {
-            icon: '<i class="fas fa-recycle"></i>',
+            icon: '<i class="fas fa-rotate"></i>',
             label: 'Toggle',
             callback: (html) => {
               const checkedData = html
