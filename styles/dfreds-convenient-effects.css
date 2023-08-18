@@ -37,6 +37,26 @@
   font-weight: bold;
 }
 
+.convenienteffect-chat-header {
+  margin-bottom: 1px !important;
+  margin-top: 5px !important;
+}
+.convenienteffect-chat-description {
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  text-size-adjust: 80%;
+}
+
+.convenienteffect-chat-hr { 
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+}
+
+
 #nested-effects-config button {
   flex: 0 0 24px;
   line-height: 24px;
