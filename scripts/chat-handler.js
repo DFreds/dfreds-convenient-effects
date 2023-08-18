@@ -51,7 +51,7 @@ export default class ChatHandler {
   }
 
   _getChatContent({ effect, reason, actorName, isCreateActiveEffect }) {
-    let message = `<div class="convenienteffects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
+    let message = `<div class="convenient-effects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
     if (
       this._settings.showChatMessageEffectDescription === 'onAddOrRemove' ||
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
@@ -59,7 +59,7 @@ export default class ChatHandler {
     ) {
       let description = this._getDescription(effect);
       description = description.replace('<p>','').replace('</p>','');    //not sure where that second <p> in the description comes from. I guess Foundry.
-      message += `<hr class="convenienteffects-chat-hr"><div class="convenienteffects-chat-description">${description}</div>`;
+      message += `<hr class="convenient-effects-chat-hr"><div class="convenient-effects-chat-description">${description}</div>`;
     }
 
     return message;
