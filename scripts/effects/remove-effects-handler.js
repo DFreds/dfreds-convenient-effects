@@ -24,14 +24,16 @@ export default class RemoveEffectsHandler {
     }
 
     const selections = await this._getSelectionsFromDialog();
-    const {effectData,todo} = selections;
-    for (const [actorUuid,effectIds] of effectData) {
+    const { effectData, operation } = selections;
+
+    for (const [actorUuid, effectIds] of effectData) {
       const actor = this._foundryHelpers.getActorByUuid(actorUuid);
-      if (selections?.todo === 'toggle') {
-        const updates = effectIds.map((id)=>{return {_id:id,disabled:!actor.effects.get(id).disabled}});
-        await actor.updateEmbeddedDocuments('ActiveEffect',updates);
-      }
-      else if (selections?.todo === 'remove')
+      if (operation === 'toggle') {
+        const updates = effectIds.map((id) => {
+          return { _id: id, disabled: !actor.effects.get(id).disabled };
+        });
+        await actor.updateEmbeddedDocuments('ActiveEffect', updates);
+      } else if (operation === 'remove')
         await actor.deleteEmbeddedDocuments('ActiveEffect', effectIds);
     }
   }
@@ -61,11 +63,12 @@ export default class RemoveEffectsHandler {
     });
   }
 
-  async _getDialog(resolve, _reject) {
+  async _getDialog(resolve, reject) {
     const effectsByActorMappings = this._effectsByActorMappings;
     for (const i of effectsByActorMappings) {
       for (const e of i.effects) {
-        if (!!e.disabled && !e.name.includes('(Disabled')) e.name = `${e.name} (Disabled)`;
+        if (!!e.disabled && !e.name.includes('(Disabled'))
+          e.name = `${e.name} (Disabled)`;
       }
     }
     const content = await renderTemplate(
@@ -101,7 +104,10 @@ export default class RemoveEffectsHandler {
                   return result;
                 }, {});
 
-              resolve({effectData:new Map(Object.entries(checkedData)),todo:'remove'});
+              resolve({
+                effectData: new Map(Object.entries(checkedData)),
+                operation: 'remove',
+              });
             },
           },
           toggle: {
@@ -128,20 +134,31 @@ export default class RemoveEffectsHandler {
                   return result;
                 }, {});
 
-              resolve({effectData:new Map(Object.entries(checkedData)),todo:'toggle'});
+              resolve({
+                effectData: new Map(Object.entries(checkedData)),
+                operation: 'toggle',
+              });
             },
           },
           cancel: {
             icon: '<i class="fas fa-times"></i>',
             label: 'Cancel',
             callback: (html) => {
-              resolve(null);
+              resolve({
+                effectData: new Map(),
+                operation: 'cancel',
+              });
             },
           },
         },
         default: 'cancel',
       },
-      { width: 300, id:'DFredsCE-removeEffects',height: "auto", resizable: true }
+      {
+        width: 300,
+        id: 'convenient-effects-remove-or-toggle-effects',
+        height: 'auto',
+        resizable: true,
+      }
     );
   }
 }
