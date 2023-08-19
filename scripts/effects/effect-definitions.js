@@ -24,9 +24,14 @@ export default class EffectDefinitions {
     this._classFeatures = this.classFeatures;
     this._equipment = this.equipment;
     this._other = this.other;
-    this._midiSpecific = game.modules.get('midi-qol')?.active
-      ? this.midiSpecific
-      : {};
+    this._midiSpecific =
+      game.modules.get('midi-qol')?.active &&
+      foundry.utils.isNewerVersion(
+        game.modules.get('midi-qol')?.version,
+        '11.0.10'
+      )
+        ? this.midiSpecific
+        : {};
 
     this._all = [
       ...this._conditions,
