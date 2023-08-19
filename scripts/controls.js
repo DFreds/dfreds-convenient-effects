@@ -26,13 +26,11 @@ export default class Controls {
   }
 
   get _convenientEffectsAppButton() {
-    const title =
-      this._settings.unifiedAppButton !== 'none' &&
-      game.user.role >= this._settings.removeControlsPermission
-        ? `<center><b>Convenient Effects Apps</b></center><hl>
+    const title = this._showUnifiedRemoval
+      ? `<center><b>Convenient Effects Apps</b></center><hl>
         <p style="text-align:center"><u>Left mouse click</u>: Opens main CE app</p>
         <hl><u>Shift+Left mouse click</u>: Opens update CE dialog`
-        : `Add Convenient Effects`;
+      : `Add Convenient Effects`;
     return {
       name: 'convenient-effects',
       title,
@@ -40,7 +38,7 @@ export default class Controls {
       button: true,
       visible: this._userAppControlsPermission,
       onClick: () => {
-        if (this._unifiedButton && this._userRemoveControlsPermission) {
+        if (this._showUnifiedRemoval) {
           if (!event.shiftKey) this._handleConvenientEffectsClick();
           else this._handleRemoveEffectsClick();
         } else this._handleConvenientEffectsClick();
@@ -78,5 +76,9 @@ export default class Controls {
 
   get _userRemoveControlsPermission() {
     return game.user.role >= this._settings.removeControlsPermission;
+  }
+
+  get _showUnifiedRemoval() {
+    return this._unifiedButton && this._userRemoveControlsPermission;
   }
 }
