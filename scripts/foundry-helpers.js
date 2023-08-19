@@ -60,13 +60,17 @@ export default class FoundryHelpers {
   }
 
   /**
-   * Checks if MidiQOL is active and if yes returns the module version
+   * Checks if the module provided is active and if yes and a version is provided, compares against its currect version
    *
-   * @returns {string} the version of MidiQOL or '0' if not active
+   * @param {string} key - the module id
+   * @param {string} version - the module version
+   * @returns {Boolean} true if module.active+version > version OR true if module.active+!version
    */
-  getVersionMidiQOL() {
-    const midi = game.modules.get('midi-qol');
-    if (midi?.active) return midi.version;
-    else return '0';
+  moduleActiveVersionCheck(key, version) {
+    const module = game.modules.get(key);
+    if (module && !version) return module.active;
+    else if (!module) return false;
+    else if (module.active && version)
+      return foundry.utils.isNewerVersion(module.version, version);
   }
 }
