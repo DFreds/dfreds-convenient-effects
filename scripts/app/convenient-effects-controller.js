@@ -65,6 +65,11 @@ export default class ConvenientEffectsController {
           name: 'Other',
           effects: this._fetchUnfavoritedOther(),
         },
+        {
+          id: 'midiqol-specific',
+          name: 'MidiQOL specific',
+          effects: this._fetchUnfavoritedMidiqolSpecific(),
+        },
       ],
     };
   }
@@ -130,6 +135,15 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedOther() {
     const effects = game.dfreds.effects;
     return effects.other.filter(
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) &&
+        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
+    );
+  }
+
+  _fetchUnfavoritedMidiqolSpecific() {
+    const effects = game.dfreds.effects;
+    return effects.midiSpecific.filter(
       (effect) =>
         !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
