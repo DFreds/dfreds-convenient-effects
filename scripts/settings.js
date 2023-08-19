@@ -72,15 +72,19 @@ export default class Settings {
       }
     );
 
-    game.settings.register(Constants.MODULE_ID, Settings.ADD_UNIFIED_BUTTON, {
-      name: 'Unified App Button',
-      hint: 'Note: This setting will have no effect if the Remove controls permission is not enough for the individual client accessing the buttons. Otherwise, this defines whether there is a single button on the token controls for both the apply and remove DFreds applications.',
-      scope: 'world',
-      config: true,
-      default: false,
-      type: Boolean,
-      requiresReload: true,
-    });
+    game.settings.register(
+    Constants.MODULE_ID,
+    Settings.ADD_UNIFIED_BUTTON,
+      {
+        name: 'Unified App Button',
+        hint: 'Note: This setting will have no effect if the Remove controls permission is not enough for the individual client accessing the buttons. Otherwise, this defines whether there is a single button on the token controls for both the apply and remove DFreds applications.',
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean,
+        requiresReload: true,
+      }
+    );
 
     game.settings.register(
       Constants.MODULE_ID,
@@ -164,14 +168,18 @@ export default class Settings {
       }
     );
 
-    game.settings.register(Constants.MODULE_ID, Settings.ADD_CHAT_BUTTON, {
-      name: 'Add Button to Chat',
-      hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
-      scope: 'world',
-      config: true,
-      default: false,
-      type: Boolean,
-    });
+    game.settings.register(
+      Constants.MODULE_ID, 
+      Settings.ADD_CHAT_BUTTON, 
+      {
+        name: 'Add Button to Chat',
+        hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean,
+      }
+    );
 
     game.settings.register(
       Constants.MODULE_ID,
