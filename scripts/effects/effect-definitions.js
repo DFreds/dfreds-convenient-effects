@@ -2,7 +2,7 @@ import Constants from '../constants.js';
 import CustomEffectsHandler from './custom-effects-handler.js';
 import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
-import * as foundryHelpers from '../foundry-helpers.js';
+import FoundryHelpers from '../foundry-helpers.js';
 
 /**
  * Defines all of the effect definitions
@@ -11,6 +11,7 @@ export default class EffectDefinitions {
   constructor() {
     this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHelpers = new EffectHelpers();
+    this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
 
     this._flagPrefix = 'midi-qol';
@@ -25,8 +26,8 @@ export default class EffectDefinitions {
     this._classFeatures = this.classFeatures;
     this._equipment = this.equipment;
     this._other = this.other;
-    this._midiSpecific = foundry.utils.isNewerVersion(
-      foundryHelpers.getVersionMidiQOL,
+    this._midiSpecific = this._foundryHelpers.moduleActiveVersionCheck(
+      'midi-qol',
       '11.0.10.99'
     )
       ? this.midiSpecific
