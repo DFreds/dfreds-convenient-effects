@@ -359,10 +359,13 @@ export default class Settings {
   /**
    * Returns the game setting for unified app controls button
    *
-   * @returns {string} returns a string representing the option selected
+   * @returns {boolean} true if the unified button is enabled
    */
   get unifiedAppButton() {
-    return game.settings.get(Constants.MODULE_ID, Settings.ADD_UNIFIED_BUTTON);
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.ADD_UNIFIED_BUTTON
+    );
   }
 
   /**
