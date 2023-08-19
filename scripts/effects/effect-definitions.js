@@ -28,7 +28,7 @@ export default class EffectDefinitions {
       game.modules.get('midi-qol')?.active &&
       foundry.utils.isNewerVersion(
         game.modules.get('midi-qol')?.version,
-        '11.0.10'
+        '11.0.10.9'
       )
         ? this.midiSpecific
         : {};
