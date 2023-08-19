@@ -244,7 +244,7 @@ Hooks.on('closeActiveEffectConfig', (activeEffectConfig, _html) => {
   const settings = new Settings();
 
   // Only re-render if the effect exists on the custom effect
-  if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
+  if (activeEffectConfig.object.parent?.id != settings.customEffectsItemId)
     return;
 
   const foundryHelpers = new FoundryHelpers();
