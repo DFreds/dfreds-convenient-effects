@@ -2,6 +2,7 @@ import Constants from '../constants.js';
 import CustomEffectsHandler from './custom-effects-handler.js';
 import EffectHelpers from './effect-helpers.js';
 import Settings from '../settings.js';
+import * as foundryHelpers from '../foundry-helpers.js';
 
 /**
  * Defines all of the effect definitions
@@ -24,14 +25,12 @@ export default class EffectDefinitions {
     this._classFeatures = this.classFeatures;
     this._equipment = this.equipment;
     this._other = this.other;
-    this._midiSpecific =
-      game.modules.get('midi-qol')?.active &&
-      foundry.utils.isNewerVersion(
-        game.modules.get('midi-qol')?.version,
-        '11.0.10.9'
-      )
-        ? this.midiSpecific
-        : [];
+    this._midiSpecific = foundry.utils.isNewerVersion(
+      foundryHelpers.getVersionMidiQOL,
+      '11.0.10.99'
+    )
+      ? this.midiSpecific
+      : [];
 
     this._all = [
       ...this._conditions,
