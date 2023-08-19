@@ -30,8 +30,8 @@ export default class Controls {
       this._settings.unifiedAppButton !== 'none' &&
       game.user.role >= this._settings.removeControlsPermission
         ? `<center><b>Convenient Effects Apps</b></center><hl>
-        <p style="text-align:center"><u>Left mouse click</u>: Opens Add CE</p>
-        <hl><u>Shift+Left mouse click</u>: Opens Update CE`
+        <p style="text-align:center"><u>Left mouse click</u>: Opens main CE app</p>
+        <hl><u>Shift+Left mouse click</u>: Opens update CE dialog`
         : `Add Convenient Effects`;
     return {
       name: 'convenient-effects',
