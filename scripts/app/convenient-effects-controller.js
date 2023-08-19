@@ -66,10 +66,7 @@ export default class ConvenientEffectsController {
       },
     ];
     if (
-      foundry.utils.isNewerVersion(
-        this._foundryHelpers.getVersionMidiQOL(),
-        '11.0.10.99'
-      )
+      this._foundryHelpers.moduleActiveVersionCheck('midi-qol', '11.0.10.99')
     ) {
       const midiFolder = {
         id: 'midiqol-specific',
