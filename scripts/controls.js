@@ -59,8 +59,8 @@ export default class Controls {
 
   get _removeEffectsButton() {
     return {
-      name: 'remove-convenient-effects',
-      title: 'Remove Convenient Effects',
+      name: 'remove-or-toggle-effects',
+      title: 'Remove or Toggle Effects',
       icon: 'fas fa-trash-alt',
       button: true,
       visible: this._userRemoveControlsPermission,
