@@ -1,5 +1,5 @@
-import EffectHelpers from "./effects/effect-helpers.js";
-import Settings from "./settings.js";
+import EffectHelpers from './effects/effect-helpers.js';
+import Settings from './settings.js';
 
 /**
  * Handles creating chats for applied and removed effects
@@ -53,12 +53,12 @@ export default class ChatHandler {
   _getChatContent({ effect, reason, actorName, isCreateActiveEffect }) {
     let message = `<div class="convenient-effects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
     if (
-      this._settings.showChatMessageEffectDescription === "onAddOrRemove" ||
-      (this._settings.showChatMessageEffectDescription === "onAddOnly" &&
+      this._settings.showChatMessageEffectDescription === 'onAddOrRemove' ||
+      (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
         isCreateActiveEffect)
     ) {
       let description = this._getDescription(effect);
-      description = description.replace("<p>", "").replace("</p>", "");
+      description = description.replace('<p>', '').replace('</p>', '');
       message += `<hr class="convenient-effects-chat-hr"><div class="convenient-effects-chat-description">${description}</div>`;
     }
 
@@ -90,7 +90,7 @@ export default class ChatHandler {
     if (description) {
       return description;
     } else {
-      return "No description";
+      return 'No description';
     }
   }
 }
