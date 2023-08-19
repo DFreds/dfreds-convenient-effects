@@ -77,7 +77,7 @@ export default class Settings {
     Settings.ADD_UNIFIED_BUTTON,
       {
         name: 'Unified App Button',
-        hint: 'Note: This setting will have no effect if the Remove controls permission is not enough for the individual client accessing the buttons. Otherwise, this defines whether there is a single button on the token controls for both the apply and remove DFreds applications.',
+        hint: 'Note: This setting will have no effect if the Remove controls permission is not enough for the individual client accessing the buttons. Otherwise, this defines whether there is a single button on the token controls for both the apply (Left Click) and remove/toggle (Shift + Left Click) DFreds applications.',
         scope: 'world',
         config: true,
         default: false,
