@@ -58,4 +58,15 @@ export default class FoundryHelpers {
       convenientEffectsApp.render();
     }
   }
+
+  /**
+   * Checks if MidiQOL is active and if yes returns the module version
+   *
+   * @returns {string} the version of MidiQOL or '0' if not active
+   */
+  getVersionMidiQOL() {
+    const midi = game.modules.get('midi-qol');
+    if (midi?.active) return midi.version;
+    else return '0';
+  }
 }
