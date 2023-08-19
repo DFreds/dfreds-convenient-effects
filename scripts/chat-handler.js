@@ -57,9 +57,9 @@ export default class ChatHandler {
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
         isCreateActiveEffect)
     ) {
-      let description = this._getDescription(effect);
-      description = description.replace('<p>', '').replace('</p>', '');
-      message += `<hr class="convenient-effects-chat-hr"><div class="convenient-effects-chat-description">${description}</div>`;
+      message += `<hr class="convenient-effects-chat-hr"><div class="convenient-effects-chat-description">${this._getDescription(
+        effect
+      )}</div>`;
     }
 
     return message;
@@ -88,7 +88,7 @@ export default class ChatHandler {
   _getDescription(effect) {
     const description = this._effectHelpers.getDescription(effect);
     if (description) {
-      return description;
+      return description.replace('<p>', '').replace('</p>', '');
     } else {
       return 'No description';
     }
