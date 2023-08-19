@@ -31,7 +31,7 @@ export default class EffectDefinitions {
         '11.0.10.9'
       )
         ? this.midiSpecific
-        : {};
+        : [];
 
     this._all = [
       ...this._conditions,
