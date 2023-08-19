@@ -69,8 +69,8 @@ export default class FoundryHelpers {
   moduleActiveVersionCheck(key, version) {
     const module = game.modules.get(key);
     if (module && !version) return module.active;
-    else if (!module) return false;
-    else if (module.active && version)
+    else if (module?.active && version)
       return foundry.utils.isNewerVersion(module.version, version);
+    else return false;    
   }
 }
