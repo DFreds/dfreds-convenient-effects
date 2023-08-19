@@ -24,6 +24,9 @@ export default class EffectDefinitions {
     this._classFeatures = this.classFeatures;
     this._equipment = this.equipment;
     this._other = this.other;
+    this._midiSpecific = game.modules.get('midi-qol')?.active
+      ? this.midiSpecific
+      : {};
 
     this._all = [
       ...this._conditions,
@@ -31,6 +34,7 @@ export default class EffectDefinitions {
       ...this._classFeatures,
       ...this._equipment,
       ...this._other,
+      ...this._midiSpecific,
     ];
   }
 
@@ -253,9 +257,17 @@ export default class EffectDefinitions {
         this._reaction,
         this._ready,
         this._sharpshooter,
-        this._underwaterCombat,
       ]
     );
+  }
+
+  /**
+   * Get all the MidiQOL specific effects
+   *
+   * @returns {ActiveEffect[]} all the MidiQOL specific effects
+   */
+  get midiSpecific() {
+    return this._midiSpecific ?? [this._underwaterCombat];
   }
 
   /* Condition Effects */
@@ -3618,24 +3630,26 @@ export default class EffectDefinitions {
   get _underwaterCombat() {
     return this._effectHelpers.createActiveEffect({
       name: 'Underwater Combat',
-      description:
-        `- Disadvantage on melee weapon attacks, if a creature doesn't have a swimming speed (either natural or granted by magic), unless the weapon is a dagger, javelin, shortsword, spear, or trident.<br>- Disadvantage on ranged weapon attacks, unless the weapon is a crossbow, a net, or a weapon that is thrown like a javelin (including a spear, trident, or dart). <br>- A ranged weapon attack automatically misses a target beyond the weapon's normal range.<br>- Creatures have resistance to fire damage.`,
+      description: `- Disadvantage on melee weapon attacks, if a creature doesn't have a swimming speed (either natural or granted by magic), unless the weapon is a dagger, javelin, shortsword, spear, or trident.<br>- Disadvantage on ranged weapon attacks, unless the weapon is a crossbow, a net, or a weapon that is thrown like a javelin (including a spear, trident, or dart). <br>- A ranged weapon attack automatically misses a target beyond the weapon's normal range.<br>- Creatures have resistance to fire damage.`,
       icon: 'icons/magic/water/wave-water-rolling-blue.webp',
       changes: [
         {
           key: 'flags.midi-qol.disadvantage.attack.rwak',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '!["lightcrossbow","handcrossbow","heavycrossbow","net"].includes(item.baseItem) && !item.properties.thr',
+          value:
+            '!["lightcrossbow","handcrossbow","heavycrossbow","net"].includes(item.baseItem) && !item.properties.thr',
         },
         {
           key: 'flags.midi-qol.disadvantage.attack.mwak',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: '!["dagger","javelin","shortsword","trident"].includes(item.baseItem) && !attributes.movement.swim',
+          value:
+            '!["dagger","javelin","shortsword","trident"].includes(item.baseItem) && !attributes.movement.swim',
         },
         {
           key: 'flags.midi-qol.fail.attack.rwak',
           mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-          value: 'MidiQOL.getDistance(workflow.token,workflow.targets.first()) > item.range.value',
+          value:
+            'MidiQOL.getDistance(workflow.token,workflow.targets.first()) > item.range.value',
         },
         {
           key: 'system.traits.dr.value',
