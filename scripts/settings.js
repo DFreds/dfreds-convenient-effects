@@ -169,8 +169,8 @@ export default class Settings {
     );
 
     game.settings.register(
-      Constants.MODULE_ID, 
-      Settings.ADD_CHAT_BUTTON, 
+      Constants.MODULE_ID,
+      Settings.ADD_CHAT_BUTTON,
       {
         name: 'Add Button to Chat',
         hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
