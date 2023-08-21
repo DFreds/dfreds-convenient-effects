@@ -57,7 +57,7 @@ export default class ChatHandler {
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
         isCreateActiveEffect)
     ) {
-      message += `<hr class="convenient-effects-chat-hr"><div class="convenient-effects-chat-description">${this._getDescription(
+      message += `<hr class="convenient-effects-fancy-hr"><div class="convenient-effects-chat-description">${this._getDescription(
         effect
       )}</div>`;
     }
