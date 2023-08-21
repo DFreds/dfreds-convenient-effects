@@ -1,5 +1,5 @@
 <form id='remove-effects-dialog'>
-  <p>Select the effects to remove.</p>
+  <p>Select the effects to remove or toggle.</p>
 
   {{#each effectsByActorMappings as |effectByActorMapping|}}
     <div class='remove-effects-actor-group'>
@@ -11,7 +11,6 @@
             data-actor-uuid='{{effectByActorMapping.actor.uuid}}'
             data-effect-id='{{effect.id}}'
             type='checkbox'
-            checked
           />
         </div>
       {{/each}}
