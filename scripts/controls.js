@@ -27,10 +27,21 @@ export default class Controls {
 
   get _convenientEffectsAppButton() {
     const title = this._showUnifiedRemoval
-      ? `<center><b>Convenient Effects Apps</b></center><hl>
-        <p style="text-align:center"><u>Left mouse click</u>: Opens main CE app</p>
-        <hl><u>Shift+Left mouse click</u>: Opens update CE dialog`
-      : `Add Convenient Effects`;
+      ? `<div class='toolclip'>
+      <h4>DFreds Convenient Effects</h4>
+        <hr class="convenient-effects-fancy-hr">
+        <p>
+          <strong>Convenient Effects:</strong>
+          <span class='reference'>Click</span>
+        </p>
+        <p>
+          <strong>Update Effects:</strong>
+          <span class='reference'>SHIFT + Click</span>
+        </p>
+        <hr class="convenient-effects-fancy-hr">
+        <p class='faint'>Unified Button CE setting</p>
+      </div>`
+      : 'Add Convenient Effects';
     return {
       name: 'convenient-effects',
       title,
