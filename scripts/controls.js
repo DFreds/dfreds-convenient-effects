@@ -39,7 +39,7 @@ export default class Controls {
           <span class='reference'>SHIFT + Click</span>
         </p>
         <hr class="convenient-effects-fancy-hr">
-        <p class='faint'>Unified Button CE setting</p>
+        <p class='faint-convenient-effects'>Unified Button CE setting</p>
       </div>`
       : 'Add Convenient Effects';
     return {
