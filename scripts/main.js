@@ -39,16 +39,24 @@ Hooks.once('socketlib.ready', () => {
  */
 Hooks.once('ready', async () => {
   const settings = new Settings();
-
-  if (!settings.customEffectsItemId) {
+  const effectHelpers = new EffectHelpers();
+  let { customEffectsItemId } = settings;
+  if (!customEffectsItemId) {
     const item = await CONFIG.Item.documentClass.create({
       name: 'Custom Convenient Effects',
       img: 'modules/dfreds-convenient-effects/images/magic-palm.svg',
       type: 'consumable',
     });
 
-    await settings.setCustomEffectsItemId(item.id);
+    customEffectsItemId = await settings.setCustomEffectsItemId(item.id);
   }
+  /**
+   * Migrate the effect descriptions from legacy CEs to the description field of Active Effects and clear up flags.
+   */
+  await effectHelpers._migrateCustomEffectsItemEffectDescriptions(
+    customEffectsItemId,
+    Constants.MIGRATION
+  );
 });
 
 /**
@@ -244,7 +252,7 @@ Hooks.on('closeActiveEffectConfig', (activeEffectConfig, _html) => {
   const settings = new Settings();
 
   // Only re-render if the effect exists on the custom effect
-  if (activeEffectConfig.object.parent?.id != settings.customEffectsItemId)
+  if (activeEffectConfig.object.parent.id != settings.customEffectsItemId)
     return;
 
   const foundryHelpers = new FoundryHelpers();
