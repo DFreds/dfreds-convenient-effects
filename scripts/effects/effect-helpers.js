@@ -195,7 +195,7 @@ export default class EffectHelpers {
     if (!updates.length) return true;
     const results = await item.updateEmbeddedDocuments('ActiveEffect', updates);
     return console.warn(
-      `${Constants.MODULE_NAME} || Migrated Custom Effects: || ${results.map(
+      `${Constants.MODULE_NAME} || Migrated Custom Effects (${Constants.MIGRATION}): || ${results.map(
         (r) => r.name
       )}`
     );
