@@ -18,6 +18,7 @@ export default class Settings {
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
   static STATUS_EFFECTS_SORT_ORDER = 'statusEffectsSortOrder';
   static ADD_CHAT_BUTTON = 'addChatButton';
+  static ADD_UNIFIED_BUTTON = 'addUnifiedButton';
 
   // Non-config setting keys
   static CUSTOM_EFFECTS_ITEM_ID = 'customEffectsItemId';
@@ -67,6 +68,20 @@ export default class Settings {
         default: CONST.USER_ROLES.GAMEMASTER,
         choices: userRoles,
         type: String,
+        requiresReload: true,
+      }
+    );
+
+    game.settings.register(
+    Constants.MODULE_ID,
+    Settings.ADD_UNIFIED_BUTTON,
+      {
+        name: 'Unified App Button',
+        hint: 'Note: This setting will have no effect if the Remove controls permission is not enough for the individual client accessing the buttons. Otherwise, this defines whether there is a single button on the token controls for both the apply (Left Click) and remove/toggle (Shift + Left Click) DFreds applications.',
+        scope: 'world',
+        config: true,
+        default: false,
+        type: Boolean,
         requiresReload: true,
       }
     );
@@ -323,7 +338,7 @@ export default class Settings {
   /**
    * Returns the game setting for adding a button to chat messages to apply the
    * matching convenient effect.
-   * 
+   *
    * @returns {boolean} true if the button should be added
    */
   get addChatButton() {
@@ -338,6 +353,18 @@ export default class Settings {
   get appControlsPermission() {
     return parseInt(
       game.settings.get(Constants.MODULE_ID, Settings.APP_CONTROLS_PERMISSION)
+    );
+  }
+
+  /**
+   * Returns the game setting for unified app controls button
+   *
+   * @returns {boolean} true if the unified button is enabled
+   */
+  get unifiedAppButton() {
+    return game.settings.get(
+      Constants.MODULE_ID,
+      Settings.ADD_UNIFIED_BUTTON
     );
   }
 

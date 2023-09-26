@@ -22,22 +22,48 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsAppButton);
-    tokenButton.tools.push(this._removeEffectsButton);
+    if (!this._unifiedButton) tokenButton.tools.push(this._removeEffectsButton);
   }
 
   get _convenientEffectsAppButton() {
+    const title = this._showUnifiedRemoval
+      ? `<div class='toolclip'>
+      <h4>DFreds Convenient Effects</h4>
+        <hr class="convenient-effects-fancy-hr">
+        <p>
+          <strong>Convenient Effects:</strong>
+          <span class='reference'>Click</span>
+        </p>
+        <p>
+          <strong>Update Effects:</strong>
+          <span class='reference'>SHIFT + Click</span>
+        </p>
+        <hr class="convenient-effects-fancy-hr">
+        <p class='faint-convenient-effects'>Unified Button CE setting</p>
+      </div>`
+      : 'Add Convenient Effects';
     return {
       name: 'convenient-effects',
-      title: 'Add Convenient Effects',
+      title,
       icon: 'fas fa-hand-sparkles',
       button: true,
-      visible: game.user.role >= this._settings.appControlsPermission,
-      onClick: this._handleConvenientEffectsClick,
+      visible: this._userAppControlsPermission,
+      onClick: () => {
+        if (this._showUnifiedRemoval) {
+          if (!event.shiftKey) this._handleConvenientEffectsClick();
+          else this._handleRemoveEffectsClick();
+        } else this._handleConvenientEffectsClick();
+      },
     };
   }
 
   _handleConvenientEffectsClick() {
     new ConvenientEffectsApp().render(true);
+  }
+
+  async _handleRemoveEffectsClick() {
+    const removeEffectsHandler = new RemoveEffectsHandler();
+    return removeEffectsHandler.handle();
   }
 
   get _removeEffectsButton() {
@@ -46,13 +72,24 @@ export default class Controls {
       title: 'Remove or Toggle Effects',
       icon: 'fas fa-trash-alt',
       button: true,
-      visible: game.user.role >= this._settings.removeControlsPermission,
+      visible: this._userRemoveControlsPermission,
       onClick: this._handleRemoveEffectsClick,
     };
   }
 
-  async _handleRemoveEffectsClick() {
-    const removeEffectsHandler = new RemoveEffectsHandler();
-    return removeEffectsHandler.handle();
+  get _unifiedButton() {
+    return this._settings.unifiedAppButton;
+  }
+
+  get _userAppControlsPermission() {
+    return game.user.role >= this._settings.appControlsPermission;
+  }
+
+  get _userRemoveControlsPermission() {
+    return game.user.role >= this._settings.removeControlsPermission;
+  }
+
+  get _showUnifiedRemoval() {
+    return this._unifiedButton && this._userRemoveControlsPermission;
   }
 }
