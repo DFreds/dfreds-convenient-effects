@@ -39,8 +39,22 @@ export default class Controls {
       </div>`;
     return {
       name: 'convenient-effects',
-      title,
+      title: 'DFreds Convenient Effects',
       icon: 'fas fa-hand-sparkles',
+      toolclip: {
+        src: 'modules/dfreds-convenient-effects/images/toolclip-ce.webm',
+        heading: 'DFreds Convenient Effects',
+        items: [
+          {
+            heading: 'Convenient Effects',
+            reference: 'CONTROLS.Click',
+          },
+          {
+            heading: 'Update Effects',
+            reference: 'CONTROLS.ShiftClick',
+          },
+        ],
+      },
       button: true,
       visible: this._userAppControlsPermission,
       onClick: () => {
