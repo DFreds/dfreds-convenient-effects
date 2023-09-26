@@ -22,14 +22,12 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsAppButton);
-    if (!this._unifiedButton) tokenButton.tools.push(this._updateEffectsButton);
   }
 
   get _convenientEffectsAppButton() {
-    const title = this._showUnifiedRemoval
-      ? `<div class='toolclip'>
+    const title = `<div class='toolclip'>
       <h4>DFreds Convenient Effects</h4>
-        <hr class="convenient-effects-fancy-hr">
+        <video src="toolclips/tools/token-measure.webm"></video>
         <p>
           <strong>Convenient Effects:</strong>
           <span class='reference'>Click</span>
@@ -38,10 +36,7 @@ export default class Controls {
           <strong>Update Effects:</strong>
           <span class='reference'>SHIFT + Click</span>
         </p>
-        <hr class="convenient-effects-fancy-hr">
-        <p class='faint-convenient-effects'>Unified Button CE setting</p>
-      </div>`
-      : 'Add Convenient Effects';
+      </div>`;
     return {
       name: 'convenient-effects',
       title,
@@ -49,10 +44,11 @@ export default class Controls {
       button: true,
       visible: this._userAppControlsPermission,
       onClick: () => {
-        if (this._showUnifiedRemoval) {
-          if (!event.shiftKey) this._handleConvenientEffectsClick();
-          else this._handleUpdateEffectsClick();
-        } else this._handleConvenientEffectsClick();
+        if (!event.shiftKey) {
+          this._handleConvenientEffectsClick();
+        } else {
+          this._handleUpdateEffectsClick();
+        }
       },
     };
   }
@@ -66,30 +62,7 @@ export default class Controls {
     return updateEffectsHandler.handle();
   }
 
-  get _updateEffectsButton() {
-    return {
-      name: 'update-effects',
-      title: 'Remove or Toggle Effects',
-      icon: 'fas fa-trash-alt',
-      button: true,
-      visible: this._userUpdateControlsPermission,
-      onClick: this._handleUpdateEffectsClick,
-    };
-  }
-
-  get _unifiedButton() {
-    return this._settings.unifiedAppButton;
-  }
-
   get _userAppControlsPermission() {
     return game.user.role >= this._settings.appControlsPermission;
-  }
-
-  get _userUpdateControlsPermission() {
-    return game.user.role >= this._settings.removeControlsPermission;
-  }
-
-  get _showUnifiedRemoval() {
-    return this._unifiedButton && this._userUpdateControlsPermission;
   }
 }

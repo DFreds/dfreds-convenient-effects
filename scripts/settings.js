@@ -12,13 +12,11 @@ export default class Settings {
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
-  static REMOVE_CONTROLS_PERMISSION = 'removeControlsPermission';
   static SEND_CHAT_TO_ACTOR_OWNER = 'sendChatToActorOwner';
   static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
   static STATUS_EFFECTS_SORT_ORDER = 'statusEffectsSortOrder';
   static ADD_CHAT_BUTTON = 'addChatButton';
-  static ADD_UNIFIED_BUTTON = 'addUnifiedButton';
 
   // Non-config setting keys
   static CUSTOM_EFFECTS_ITEM_ID = 'customEffectsItemId';
@@ -53,35 +51,6 @@ export default class Settings {
         default: CONST.USER_ROLES.GAMEMASTER,
         choices: userRoles,
         type: String,
-        requiresReload: true,
-      }
-    );
-
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.REMOVE_CONTROLS_PERMISSION,
-      {
-        name: 'Remove Controls Permission',
-        hint: 'This defines the minimum permission level to remove Convenient Effects through the button on the token controls. Setting this to None will disable the button entirely.',
-        scope: 'world',
-        config: true,
-        default: CONST.USER_ROLES.GAMEMASTER,
-        choices: userRoles,
-        type: String,
-        requiresReload: true,
-      }
-    );
-
-    game.settings.register(
-    Constants.MODULE_ID,
-    Settings.ADD_UNIFIED_BUTTON,
-      {
-        name: 'Unified App Button',
-        hint: 'Note: This setting will have no effect if the Remove controls permission is not enough for the individual client accessing the buttons. Otherwise, this defines whether there is a single button on the token controls for both the apply (Left Click) and remove/toggle (Shift + Left Click) DFreds applications.',
-        scope: 'world',
-        config: true,
-        default: false,
-        type: Boolean,
         requiresReload: true,
       }
     );
@@ -168,18 +137,14 @@ export default class Settings {
       }
     );
 
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.ADD_CHAT_BUTTON,
-      {
-        name: 'Add Button to Chat',
-        hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
-        scope: 'world',
-        config: true,
-        default: false,
-        type: Boolean,
-      }
-    );
+    game.settings.register(Constants.MODULE_ID, Settings.ADD_CHAT_BUTTON, {
+      name: 'Add Button to Chat',
+      hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
+      scope: 'world',
+      config: true,
+      default: false,
+      type: Boolean,
+    });
 
     game.settings.register(
       Constants.MODULE_ID,
@@ -357,18 +322,6 @@ export default class Settings {
   }
 
   /**
-   * Returns the game setting for unified app controls button
-   *
-   * @returns {boolean} true if the unified button is enabled
-   */
-  get unifiedAppButton() {
-    return game.settings.get(
-      Constants.MODULE_ID,
-      Settings.ADD_UNIFIED_BUTTON
-    );
-  }
-
-  /**
    * Returns the game setting for allowing players to manipulate custom effects.
    *
    * @returns {boolean} true if players can manipulate custom effects
@@ -420,20 +373,6 @@ export default class Settings {
    */
   get prioritizeTargets() {
     return game.settings.get(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS);
-  }
-
-  /**
-   * Returns the game setting for remove controls permission
-   *
-   * @returns {number} a number representing the chosen role
-   */
-  get removeControlsPermission() {
-    return parseInt(
-      game.settings.get(
-        Constants.MODULE_ID,
-        Settings.REMOVE_CONTROLS_PERMISSION
-      )
-    );
   }
 
   /**
