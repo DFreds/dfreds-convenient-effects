@@ -51,13 +51,15 @@ export default class ChatHandler {
   }
 
   _getChatContent({ effect, reason, actorName, isCreateActiveEffect }) {
-    let message = `<p><strong>${effect.name}</strong> - ${reason} ${actorName}</p>`;
+    let message = `<div class="convenient-effects-chat-header"><strong>${effect.name}</strong> - ${reason} ${actorName}</div>`;
     if (
       this._settings.showChatMessageEffectDescription === 'onAddOrRemove' ||
       (this._settings.showChatMessageEffectDescription === 'onAddOnly' &&
         isCreateActiveEffect)
     ) {
-      message += `<p>${this._getDescription(effect)}</p>`;
+      message += `<hr class="convenient-effects-fancy-hr"><div class="convenient-effects-chat-description">${this._getDescription(
+        effect
+      )}</div>`;
     }
 
     return message;
@@ -86,7 +88,7 @@ export default class ChatHandler {
   _getDescription(effect) {
     const description = this._effectHelpers.getDescription(effect);
     if (description) {
-      return description;
+      return description.replace('<p>', '').replace('</p>', '');
     } else {
       return 'No description';
     }
