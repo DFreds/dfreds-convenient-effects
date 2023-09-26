@@ -70,11 +70,3 @@
   font-size: 10px;
   color: var(--color-text-light-heading);
 }
-
-/*Slightly adjusting the Foundry the p.faint tooltip text size*/
-#tooltip .toolclip p.faint,
-.locked-tooltip .toolclip p.faint {
-  text-align: center;
-  font-size: 10px;
-  color: var(--color-text-light-heading);
-}

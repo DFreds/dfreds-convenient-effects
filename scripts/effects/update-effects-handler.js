@@ -2,23 +2,23 @@ import EffectHelpers from './effect-helpers.js';
 import FoundryHelpers from '../foundry-helpers.js';
 
 /**
- * Handles the removal of specific effects via a dialog
+ * Handles the updating of specific effects via a dialog
  */
-export default class RemoveEffectsHandler {
+export default class UpdateEffectsHandler {
   constructor() {
     this._effectHelpers = new EffectHelpers();
     this._foundryHelpers = new FoundryHelpers();
   }
 
   /**
-   * Handler function for when a user clicks the remove effects button
+   * Handler function for when a user clicks the update effects button
    */
   async handle() {
     const effectsByActorMappings = this._effectsByActorMappings;
 
     if (effectsByActorMappings.length === 0) {
       ui.notifications.warn(
-        'A token with an active convenient effect must be selected to remove effects'
+        'A token with an active effect must be selected to update effects'
       );
       return;
     }
@@ -72,7 +72,7 @@ export default class RemoveEffectsHandler {
       }
     }
     const content = await renderTemplate(
-      'modules/dfreds-convenient-effects/templates/remove-effects-dialog.hbs',
+      'modules/dfreds-convenient-effects/templates/update-effects-dialog.hbs',
       { effectsByActorMappings }
     );
     return new Dialog(
@@ -155,7 +155,7 @@ export default class RemoveEffectsHandler {
       },
       {
         width: 300,
-        id: 'convenient-effects-remove-or-toggle-effects',
+        id: 'convenient-effects-update-effects',
         height: 'auto',
         resizable: true,
       }

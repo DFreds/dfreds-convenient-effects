@@ -1,5 +1,5 @@
 import ConvenientEffectsApp from './app/convenient-effects-app.js';
-import RemoveEffectsHandler from './effects/remove-effects-handler.js';
+import UpdateEffectsHandler from './effects/update-effects-handler.js';
 import Settings from './settings.js';
 
 /**
@@ -22,7 +22,7 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsAppButton);
-    if (!this._unifiedButton) tokenButton.tools.push(this._removeEffectsButton);
+    if (!this._unifiedButton) tokenButton.tools.push(this._updateEffectsButton);
   }
 
   get _convenientEffectsAppButton() {
@@ -51,7 +51,7 @@ export default class Controls {
       onClick: () => {
         if (this._showUnifiedRemoval) {
           if (!event.shiftKey) this._handleConvenientEffectsClick();
-          else this._handleRemoveEffectsClick();
+          else this._handleUpdateEffectsClick();
         } else this._handleConvenientEffectsClick();
       },
     };
@@ -61,19 +61,19 @@ export default class Controls {
     new ConvenientEffectsApp().render(true);
   }
 
-  async _handleRemoveEffectsClick() {
-    const removeEffectsHandler = new RemoveEffectsHandler();
-    return removeEffectsHandler.handle();
+  async _handleUpdateEffectsClick() {
+    const updateEffectsHandler = new UpdateEffectsHandler();
+    return updateEffectsHandler.handle();
   }
 
-  get _removeEffectsButton() {
+  get _updateEffectsButton() {
     return {
-      name: 'remove-or-toggle-effects',
+      name: 'update-effects',
       title: 'Remove or Toggle Effects',
       icon: 'fas fa-trash-alt',
       button: true,
-      visible: this._userRemoveControlsPermission,
-      onClick: this._handleRemoveEffectsClick,
+      visible: this._userUpdateControlsPermission,
+      onClick: this._handleUpdateEffectsClick,
     };
   }
 
@@ -85,11 +85,11 @@ export default class Controls {
     return game.user.role >= this._settings.appControlsPermission;
   }
 
-  get _userRemoveControlsPermission() {
+  get _userUpdateControlsPermission() {
     return game.user.role >= this._settings.removeControlsPermission;
   }
 
   get _showUnifiedRemoval() {
-    return this._unifiedButton && this._userRemoveControlsPermission;
+    return this._unifiedButton && this._userUpdateControlsPermission;
   }
 }
