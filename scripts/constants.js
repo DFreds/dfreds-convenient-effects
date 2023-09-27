@@ -32,5 +32,5 @@ export default class Constants {
 
   static SIZES_ORDERED = ['tiny', 'sm', 'med', 'lg', 'huge', 'grg'];
 
-  static MIGRATION = '5.2.0'; //add the module version of the latest migration
+  static MIGRATION_EFFECTS_DESCRIPTIONS = '6.0.0'; //add the module version of the latest migration
 }
