@@ -58,7 +58,8 @@ export default class Migrations {
 				['flags.-=isCustomConvenient']: null,
 				['flags.-=convenientDescription']: null,
 				['flags.-=customEffectDescription']: null,
-				[`flags.${Constants.MODULE_ID}.-=${Constants.FLAGS.DESCRIPTION}`]: null,    //removes the 'flags.dfreds-convenient-effects.description'
+				[`flags.${Constants.MODULE_ID}.-=${Constants.FLAGS.DESCRIPTION}`]: 
+					null,                     //removes the 'flags.dfreds-convenient-effects.description'
 			});
 		}
         if (!updates.length) return true;
