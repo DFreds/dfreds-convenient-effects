@@ -52,7 +52,9 @@ export default class EffectHelpers {
         }
       : duration;
 
-    statuses.unshift(this.getId(name));
+    // Fixes an issue where statuses would be a set instead of an array
+    let statusesArray = Array.from(statuses);
+    statusesArray.unshift(this.getId(name));
 
     let effect = new CONFIG.ActiveEffect.documentClass({
       changes,
@@ -65,7 +67,7 @@ export default class EffectHelpers {
       origin,
       tint,
       transfer: false,
-      statuses,
+      statuses: statusesArray,
     });
 
     return effect;
