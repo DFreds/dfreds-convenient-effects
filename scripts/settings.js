@@ -12,7 +12,6 @@ export default class Settings {
   static INTEGRATE_WITH_TOKEN_MAGIC = 'integrateWithTokenMagic';
   static MODIFY_STATUS_EFFECTS = 'modifyStatusEffects';
   static PRIORITIZE_TARGETS = 'prioritizeTargets';
-  static REMOVE_CONTROLS_PERMISSION = 'removeControlsPermission';
   static SEND_CHAT_TO_ACTOR_OWNER = 'sendChatToActorOwner';
   static SHOW_CHAT_MESSAGE_EFFECT_DESCRIPTION = 'chatMessageEffectDescription';
   static SHOW_NESTED_EFFECTS = 'showNestedEffects';
@@ -47,21 +46,6 @@ export default class Settings {
       {
         name: 'App Controls Permission',
         hint: 'This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.',
-        scope: 'world',
-        config: true,
-        default: CONST.USER_ROLES.GAMEMASTER,
-        choices: userRoles,
-        type: String,
-        requiresReload: true,
-      }
-    );
-
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.REMOVE_CONTROLS_PERMISSION,
-      {
-        name: 'Remove Controls Permission',
-        hint: 'This defines the minimum permission level to remove Convenient Effects through the button on the token controls. Setting this to None will disable the button entirely.',
         scope: 'world',
         config: true,
         default: CONST.USER_ROLES.GAMEMASTER,
@@ -153,18 +137,14 @@ export default class Settings {
       }
     );
 
-    game.settings.register(
-      Constants.MODULE_ID,
-      Settings.ADD_CHAT_BUTTON,
-      {
-        name: 'Add Button to Chat',
-        hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
-        scope: 'world',
-        config: true,
-        default: false,
-        type: Boolean,
-      }
-    );
+    game.settings.register(Constants.MODULE_ID, Settings.ADD_CHAT_BUTTON, {
+      name: 'Add Button to Chat',
+      hint: 'If enabled, add a button to item chat cards to add the matching convenient effect by name.',
+      scope: 'world',
+      config: true,
+      default: false,
+      type: Boolean,
+    });
 
     game.settings.register(
       Constants.MODULE_ID,
@@ -323,7 +303,7 @@ export default class Settings {
   /**
    * Returns the game setting for adding a button to chat messages to apply the
    * matching convenient effect.
-   * 
+   *
    * @returns {boolean} true if the button should be added
    */
   get addChatButton() {
@@ -393,20 +373,6 @@ export default class Settings {
    */
   get prioritizeTargets() {
     return game.settings.get(Constants.MODULE_ID, Settings.PRIORITIZE_TARGETS);
-  }
-
-  /**
-   * Returns the game setting for remove controls permission
-   *
-   * @returns {number} a number representing the chosen role
-   */
-  get removeControlsPermission() {
-    return parseInt(
-      game.settings.get(
-        Constants.MODULE_ID,
-        Settings.REMOVE_CONTROLS_PERMISSION
-      )
-    );
   }
 
   /**

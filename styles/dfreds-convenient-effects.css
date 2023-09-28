@@ -42,4 +42,31 @@
   line-height: 24px;
   margin: -1px 0 -1px 4px;
   order: 99;
-} 
+}
+
+.convenient-effects-chat-header {
+  margin-bottom: 1px !important;
+  margin-top: 5px !important;
+}
+
+.convenient-effects-chat-description {
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  text-size-adjust: 80%;
+}
+
+.convenient-effects-fancy-hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+#tooltip .toolclip p.faint-convenient-effects,
+.locked-tooltip .toolclip p.faint-convenient-effects {
+  text-align: center;
+  font-size: 10px;
+  color: var(--color-text-light-heading);
+}

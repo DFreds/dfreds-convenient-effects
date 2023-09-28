@@ -1,5 +1,5 @@
 import ConvenientEffectsApp from './app/convenient-effects-app.js';
-import RemoveEffectsHandler from './effects/remove-effects-handler.js';
+import UpdateEffectsHandler from './effects/update-effects-handler.js';
 import Settings from './settings.js';
 
 /**
@@ -22,17 +22,48 @@ export default class Controls {
     if (!tokenButton) return;
 
     tokenButton.tools.push(this._convenientEffectsAppButton);
-    tokenButton.tools.push(this._removeEffectsButton);
   }
 
   get _convenientEffectsAppButton() {
+    const title = `<div class='toolclip'>
+      <h4>DFreds Convenient Effects</h4>
+        <video src="toolclips/tools/token-measure.webm"></video>
+        <p>
+          <strong>Convenient Effects:</strong>
+          <span class='reference'>Click</span>
+        </p>
+        <p>
+          <strong>Update Effects:</strong>
+          <span class='reference'>SHIFT + Click</span>
+        </p>
+      </div>`;
     return {
       name: 'convenient-effects',
-      title: 'Add Convenient Effects',
+      title: 'DFreds Convenient Effects',
       icon: 'fas fa-hand-sparkles',
+      toolclip: {
+        src: 'modules/dfreds-convenient-effects/images/toolclip-ce.webm',
+        heading: 'DFreds Convenient Effects',
+        items: [
+          {
+            heading: 'Convenient Effects',
+            reference: 'CONTROLS.Click',
+          },
+          {
+            heading: 'Update Effects',
+            reference: 'CONTROLS.ShiftClick',
+          },
+        ],
+      },
       button: true,
-      visible: game.user.role >= this._settings.appControlsPermission,
-      onClick: this._handleConvenientEffectsClick,
+      visible: this._userAppControlsPermission,
+      onClick: () => {
+        if (!event.shiftKey) {
+          this._handleConvenientEffectsClick();
+        } else {
+          this._handleUpdateEffectsClick();
+        }
+      },
     };
   }
 
@@ -40,19 +71,12 @@ export default class Controls {
     new ConvenientEffectsApp().render(true);
   }
 
-  get _removeEffectsButton() {
-    return {
-      name: 'remove-or-toggle-effects',
-      title: 'Remove or Toggle Effects',
-      icon: 'fas fa-trash-alt',
-      button: true,
-      visible: game.user.role >= this._settings.removeControlsPermission,
-      onClick: this._handleRemoveEffectsClick,
-    };
+  async _handleUpdateEffectsClick() {
+    const updateEffectsHandler = new UpdateEffectsHandler();
+    return updateEffectsHandler.handle();
   }
 
-  async _handleRemoveEffectsClick() {
-    const removeEffectsHandler = new RemoveEffectsHandler();
-    return removeEffectsHandler.handle();
+  get _userAppControlsPermission() {
+    return game.user.role >= this._settings.appControlsPermission;
   }
 }
