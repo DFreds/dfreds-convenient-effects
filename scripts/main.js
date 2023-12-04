@@ -294,6 +294,16 @@ Hooks.on('renderChatMessage', (message, html) => {
       const button = document.createElement('button');
       button.textContent = 'Add Convenient Effect';
       button.onclick = () => game.dfreds.effectInterface.toggleEffect(name);
+
+      // construct empty card-buttons if it doesn't exist (e.g. quick-roll from Ready Set Roll)
+      if (!itemCard.querySelector('.card-buttons')) {  
+          const div = document.createElement('div');
+          div.classList.add('card-buttons');
+      
+          let cardContent = itemCard.querySelector('.card-content');
+          cardContent.insertAdjacentElement('afterend', div);
+      }
+
       // add button to end of card-buttons
       itemCard.querySelector('.card-buttons').append(button);
     }
