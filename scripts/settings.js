@@ -274,6 +274,7 @@ export default class Settings {
       'Restrained',
       'Stunned',
       'Unconscious',
+      'Wounded',
     ];
   }
 
