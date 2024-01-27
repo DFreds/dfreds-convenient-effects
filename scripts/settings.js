@@ -1,4 +1,9 @@
 import Constants from './constants.js';
+import SETTINGS from './constants/settings.js';
+import EffectDefinitions from './effects/effect-definitions.js';
+import EffectDefinitionsDnd5e from './systems/dnd5e/effect-definitions-dnd5e.js';
+import EffectDefinitionsGeneric from './systems/generic/effect-definitions-generic.js';
+import EffectDefinitionsSw5e from './systems/sw5e/effect-definitions-sw5e.js';
 
 /**
  * Handle setting and fetching all settings in the module
@@ -28,6 +33,10 @@ export default class Settings {
    * Register all the settings for the module
    */
   registerSettings() {
+    for (let [name, data] of Object.entries(SETTINGS.GET_DEFAULT())) {
+      game.settings.register(Constants.MODULE_ID, name, data);
+    }
+
     this._registerConfigSettings();
     this._registerNonConfigSettings();
   }
@@ -252,30 +261,30 @@ export default class Settings {
   }
 
   get _defaultStatusEffectNames() {
-    return [
-      'Blinded',
-      'Charmed',
-      'Concentrating',
-      'Dead',
-      'Deafened',
-      'Exhaustion 1',
-      'Exhaustion 2',
-      'Exhaustion 3',
-      'Exhaustion 4',
-      'Exhaustion 5',
-      'Frightened',
-      'Grappled',
-      'Incapacitated',
-      'Invisible',
-      'Paralyzed',
-      'Petrified',
-      'Poisoned',
-      'Prone',
-      'Restrained',
-      'Stunned',
-      'Unconscious',
-      'Wounded',
-    ];
+    return game.settings.get(
+      Constants.MODULE_ID,
+      SETTINGS.DEFAULT_STATUS_EFFECT_NAMES
+    );
+  }
+
+  get defaultEffectDefinitions() {
+    // TODO sadly i cannot pass the parameters 'flagPrefix' and 'showNestedEffects' on the initial hook... maybe someone more expert than me can do the job right
+    // return game.settings.get(Constants.MODULE_ID, SETTINGS.DEFAULT_EFFECT_DEFINITIONS);
+    let flagPrefix = 'midi-qol';
+    if (game.modules.get('wire')?.active) {
+      flagPrefix = 'wire';
+    }
+    let effectDefinitionsAbstract;
+    if (game.system.id === 'dnd5e') {
+      effectDefinitionsAbstract = new EffectDefinitionsDnd5e();
+    } else if (game.system.id === 'sw5e') {
+      effectDefinitionsAbstract = new EffectDefinitionsSw5e();
+    } else {
+      effectDefinitionsAbstract = new EffectDefinitionsGeneric();
+    }
+
+    effectDefinitionsAbstract.initialize(this.showNestedEffects, flagPrefix);
+    return effectDefinitionsAbstract;
   }
 
   /**
@@ -632,4 +641,108 @@ export default class Settings {
   _findCustomEffectsItem() {
     return game.items.get(this.customEffectsItemId);
   }
+}
+
+export async function applyDefaultSettings() {
+  const settings = SETTINGS.GET_SYSTEM_DEFAULTS();
+  for (const [name, data] of Object.entries(settings)) {
+    await game.settings.set(Constants.MODULE_ID, name, data.default);
+  }
+  await game.settings.set(
+    Constants.MODULE_ID,
+    SETTINGS.SYSTEM_VERSION,
+    SYSTEMS.DATA.VERSION
+  );
+}
+
+export function applySystemSpecificStyles(data = false) {
+  // do something
+}
+
+export async function checkSystem() {
+  if (!SYSTEMS.HAS_SYSTEM_SUPPORT) {
+    if (
+      game.settings.get(
+        Constants.MODULE_ID,
+        SETTINGS.SYSTEM_NOT_FOUND_WARNING_SHOWN
+      )
+    )
+      return;
+
+    let settingsValid = true;
+    for (const [name, data] of Object.entries(SETTINGS.GET_DEFAULT())) {
+      settingsValid =
+        settingsValid &&
+        game.settings.get(Constants.MODULE_ID, name).length !==
+          new data.type().length;
+    }
+
+    if (settingsValid) return;
+
+    new Dialog({
+      title: game.i18n.localize(
+        `${Constants.MODULE_ID}.Dialog.systemfound.title`
+      ),
+      content: warn(
+        game.i18n.localize(`${Constants.MODULE_ID}.Dialog.systemfound.content`),
+        true
+      ),
+      buttons: {
+        confirm: {
+          icon: '<i class="fas fa-check"></i>',
+          label: game.i18n.localize(
+            `${Constants.MODULE_ID}.Dialog.systemfound.confirm`
+          ),
+          callback: () => {
+            applyDefaultSettings();
+          },
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize('No'),
+        },
+      },
+      default: 'cancel',
+    }).render(true);
+
+    return game.settings.set(
+      Constants.MODULE_ID,
+      SETTINGS.SYSTEM_NOT_FOUND_WARNING_SHOWN,
+      true
+    );
+  }
+
+  if (
+    game.settings.get(Constants.MODULE_ID, SETTINGS.SYSTEM_FOUND) ||
+    SYSTEMS.DATA.INTEGRATION
+  ) {
+    const currentVersion = game.settings.get(
+      Constants.MODULE_ID,
+      SETTINGS.SYSTEM_VERSION
+    );
+    const newVersion = SYSTEMS.DATA.VERSION;
+    debug(
+      `Comparing system version - Current: ${currentVersion} - New: ${newVersion}`
+    );
+    if (foundry.utils.isNewerVersion(newVersion, currentVersion)) {
+      debug(`Applying system settings for ${game.system.title}`);
+      await applyDefaultSettings();
+    }
+    return;
+  }
+
+  await game.settings.set(Constants.MODULE_ID, SETTINGS.SYSTEM_FOUND, true);
+
+  if (
+    game.settings.get(
+      Constants.MODULE_ID,
+      SETTINGS.SYSTEM_NOT_FOUND_WARNING_SHOWN
+    )
+  ) {
+    dialogWarning(
+      game.i18n.localize(`${Constants.MODULE_ID}.Dialog.nosystemfound.content`)
+    );
+  }
+
+  return applyDefaultSettings();
 }

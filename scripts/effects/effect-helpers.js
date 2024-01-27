@@ -142,4 +142,19 @@ export default class EffectHelpers {
 
     return activeEffect.update({ statuses: statusesArray });
   }
+
+  createActiveEffects(effects) {
+    const effectsArr = Array.isArray(effects) ? effects : [effects];
+    const activeEffects = [];
+    for (const effect of effectsArr) {
+      let activeEffect = effect;
+      if (effect.subEffects?.length > 0) {
+        let subEffects = this.createActiveEffects(effect.subEffects);
+        activeEffect.subEffects = subEffects;
+      }
+      activeEffect = this.createActiveEffect(activeEffect);
+      activeEffects.push(activeEffect);
+    }
+    return activeEffects;
+  }
 }
