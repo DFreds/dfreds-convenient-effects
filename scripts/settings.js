@@ -1,9 +1,6 @@
 import Constants from './constants.js';
 import SETTINGS from './constants/settings.js';
-import EffectDefinitions from './effects/effect-definitions.js';
-import EffectDefinitionsDnd5e from './systems/dnd5e/effect-definitions-dnd5e.js';
-import EffectDefinitionsGeneric from './systems/generic/effect-definitions-generic.js';
-import EffectDefinitionsSw5e from './systems/sw5e/effect-definitions-sw5e.js';
+import SystemHandler from './systems/system-handler.js';
 
 /**
  * Handle setting and fetching all settings in the module
@@ -270,20 +267,7 @@ export default class Settings {
   get defaultEffectDefinitions() {
     // TODO sadly i cannot pass the parameters 'flagPrefix' and 'showNestedEffects' on the initial hook... maybe someone more expert than me can do the job right
     // return game.settings.get(Constants.MODULE_ID, SETTINGS.DEFAULT_EFFECT_DEFINITIONS);
-    let flagPrefix = 'midi-qol';
-    if (game.modules.get('wire')?.active) {
-      flagPrefix = 'wire';
-    }
-    let effectDefinitionsAbstract;
-    if (game.system.id === 'dnd5e') {
-      effectDefinitionsAbstract = new EffectDefinitionsDnd5e();
-    } else if (game.system.id === 'sw5e') {
-      effectDefinitionsAbstract = new EffectDefinitionsSw5e();
-    } else {
-      effectDefinitionsAbstract = new EffectDefinitionsGeneric();
-    }
-
-    effectDefinitionsAbstract.initialize(this.showNestedEffects, flagPrefix);
+    let effectDefinitionsAbstract = SystemHandler.retrieveEffectDefinitions(this.showNestedEffects);
     return effectDefinitionsAbstract;
   }
 
