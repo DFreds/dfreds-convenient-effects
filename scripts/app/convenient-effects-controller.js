@@ -370,6 +370,7 @@ export default class ConvenientEffectsController {
   async onImportCustomEffectsClick(event) {
     event.stopPropagation();
     await this._customEffectsHandler.importCustomEffectsFromJson();
+    this._viewMvc.render();
   }
 
   /**
