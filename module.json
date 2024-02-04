@@ -30,12 +30,7 @@
     "systems": [
       {
         "id": "dnd5e",
-        "type": "system",
-        "compatibility": {
-          "minimum": "2.2.0",
-          "verified": "2.4.1",
-          "maximum": "2.4.1"
-        }
+        "type": "system"
       },
       {
         "id": "sw5e",
