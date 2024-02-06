@@ -7,21 +7,29 @@ assignees: DFreds
 
 ---
 
-**Describe the bug**
+### Describe the Bug
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+### Context
+
+- Screenshots and demonstrating the problem if applicable.
+- Any errors in the console; access it by pressing F12
+- Whether you ran [Find the Culprit](https://foundryvtt.com/packages/find-the-culprit/) and if it was caused by an interaction with another module
+- Foundry version (i.e. 11.315)
+- System and version (i.e. D&D 5e 2.4.1)
+- Module version (include all modules involved)
+- Browser and hosting service
+
+### To Reproduce
+
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+### Expected Behavior
+
 A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Additional context**
-Add any other context about the problem here.
