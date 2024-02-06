@@ -1,7 +1,7 @@
 import Constants from '../constants.js';
 import CustomEffectsHandler from '../effects/custom-effects-handler.js';
-import DynamicEffectsAdder from '../effects/dynamic-effects-adder.js';
-import FoundryHelpers from '../foundry-helpers.js';
+import DynamicEffectsAdderDelegate from '../systems/dynamic-effects-adder-delegate.js';
+import FoundryHelpers from '../util/foundry-helpers.js';
 import Settings from '../settings.js';
 
 /**
@@ -17,7 +17,7 @@ export default class ConvenientEffectsController {
     this._viewMvc = viewMvc;
 
     this._customEffectsHandler = new CustomEffectsHandler();
-    this._dynamicEffectsAdder = new DynamicEffectsAdder();
+    this._dynamicEffectsAdderDelegate = new DynamicEffectsAdderDelegate();
     this._foundryHelpers = new FoundryHelpers();
     this._settings = new Settings();
   }
@@ -28,6 +28,23 @@ export default class ConvenientEffectsController {
    * @returns {Object} the data to pass to the template
    */
   get data() {
+    const effects = game.dfreds.effects;
+    const foldersWithoutFavorites = effects.folderStructure.map(
+      (folderData) => {
+        const unfavoritedEffects = folderData.effects.filter((effect) => {
+          return (
+            !this._settings.isFavoritedEffect(effect.name) &&
+            effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
+          );
+        });
+        return {
+          id: folderData.id,
+          name: folderData.name,
+          effects: unfavoritedEffects,
+        };
+      }
+    );
+
     return {
       folders: [
         {
@@ -40,31 +57,7 @@ export default class ConvenientEffectsController {
           name: 'Custom',
           effects: this._fetchUnfavoritedCustomEffects(),
         },
-        {
-          id: 'conditions',
-          name: 'Conditions',
-          effects: this._fetchUnfavoritedConditions(),
-        },
-        {
-          id: 'spells',
-          name: 'Spells',
-          effects: this._fetchUnfavoritedSpells(),
-        },
-        {
-          id: 'class-features',
-          name: 'Class Features',
-          effects: this._fetchUnfavoritedClassFeatures(),
-        },
-        {
-          id: 'equipment',
-          name: 'Equipment',
-          effects: this._fetchUnfavoritedEquipment(),
-        },
-        {
-          id: 'other',
-          name: 'Other',
-          effects: this._fetchUnfavoritedOther(),
-        },
+        ...foldersWithoutFavorites,
       ],
     };
   }
@@ -89,51 +82,6 @@ export default class ConvenientEffectsController {
     return this._customEffectsHandler
       .getCustomEffects()
       .filter((effect) => !this._settings.isFavoritedEffect(effect.name));
-  }
-
-  _fetchUnfavoritedConditions() {
-    const effects = game.dfreds.effects;
-    return effects.conditions.filter(
-      (effect) =>
-        !this._settings.isFavoritedEffect(effect.name) &&
-        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
-    );
-  }
-
-  _fetchUnfavoritedSpells() {
-    const effects = game.dfreds.effects;
-    return effects.spells.filter(
-      (effect) =>
-        !this._settings.isFavoritedEffect(effect.name) &&
-        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
-    );
-  }
-
-  _fetchUnfavoritedClassFeatures() {
-    const effects = game.dfreds.effects;
-    return effects.classFeatures.filter(
-      (effect) =>
-        !this._settings.isFavoritedEffect(effect.name) &&
-        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
-    );
-  }
-
-  _fetchUnfavoritedEquipment() {
-    const effects = game.dfreds.effects;
-    return effects.equipment.filter(
-      (effect) =>
-        !this._settings.isFavoritedEffect(effect.name) &&
-        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
-    );
-  }
-
-  _fetchUnfavoritedOther() {
-    const effects = game.dfreds.effects;
-    return effects.other.filter(
-      (effect) =>
-        !this._settings.isFavoritedEffect(effect.name) &&
-        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
-    );
   }
 
   /**

@@ -1,20 +1,69 @@
-import EffectHelpers from './effect-helpers.js';
-import FoundryHelpers from '../foundry-helpers.js';
+import ConvenientEffectsApp from '../app/convenient-effects-app.js';
+import EffectHelpers from '../effects/effect-helpers.js';
+import FoundryHelpers from '../util/foundry-helpers.js';
+import Settings from '../settings.js';
 
 /**
- * Handles the updating of specific effects via a dialog
+ * Handles setting up the controls for the module
  */
-export default class UpdateEffectsHandler {
+export default class Controls {
   constructor() {
     this._effectHelpers = new EffectHelpers();
     this._foundryHelpers = new FoundryHelpers();
+    this._settings = new Settings();
   }
 
   /**
-   * Handler function for when a user clicks the update effects button
+   * Adds the convenient effect buttons to the token controls
+   *
+   * @param {Object[]} controls - the default controls provided by foundry
+   * @returns
    */
-  async handle() {
-    const effectsByActorMappings = this._effectsByActorMappings;
+  initializeControls(controls) {
+    const tokenButton = controls.find((control) => control.name === 'token');
+
+    if (!tokenButton) return;
+
+    tokenButton.tools.push(this._convenientEffectsAppButton);
+  }
+
+  get _convenientEffectsAppButton() {
+    return {
+      name: 'convenient-effects',
+      title: 'DFreds Convenient Effects',
+      icon: 'fas fa-hand-sparkles',
+      toolclip: {
+        src: 'modules/dfreds-convenient-effects/images/toolclip-ce.webm',
+        heading: 'DFreds Convenient Effects',
+        items: [
+          {
+            heading: 'Convenient Effects',
+            reference: 'CONTROLS.Click',
+          },
+          {
+            heading: 'Update Effects',
+            reference: 'CONTROLS.ShiftClick',
+          },
+        ],
+      },
+      button: true,
+      visible: this._userAppControlsPermission,
+      onClick: () => {
+        if (!event.shiftKey) {
+          this._handleConvenientEffectsClick();
+        } else {
+          this._handleUpdateEffectsClick();
+        }
+      },
+    };
+  }
+
+  _handleConvenientEffectsClick() {
+    new ConvenientEffectsApp().render(true);
+  }
+
+  async _handleUpdateEffectsClick() {
+    const effectsByActorMappings = this._effectHelpers.effectsByActorMappings;
 
     if (effectsByActorMappings.length === 0) {
       ui.notifications.warn(
@@ -23,7 +72,7 @@ export default class UpdateEffectsHandler {
       return;
     }
 
-    const selections = await this._getSelectionsFromDialog();
+    const selections = await this._getSelectionsFromUpdateDialog();
     const { effectData, operation } = selections;
 
     for (const [actorUuid, effectIds] of effectData) {
@@ -38,33 +87,15 @@ export default class UpdateEffectsHandler {
     }
   }
 
-  get _effectsByActorMappings() {
-    return canvas.tokens.controlled
-      .filter((token) => {
-        const effects = token.actor.effects.filter(
-          (activeEffect) => activeEffect.isTemporary
-        );
-        return effects.length > 0;
-      })
-      .map((token) => {
-        const actor = token.actor;
-        const effects = token.actor.effects.filter(
-          (activeEffect) => activeEffect.isTemporary
-        );
-
-        return { actor, effects };
-      });
-  }
-
-  _getSelectionsFromDialog() {
+  _getSelectionsFromUpdateDialog() {
     return new Promise(async (resolve, reject) => {
-      const dialog = await this._getDialog(resolve, reject);
+      const dialog = await this._getUpdateDialog(resolve, reject);
       dialog.render(true);
     });
   }
 
-  async _getDialog(resolve, reject) {
-    const effectsByActorMappings = this._effectsByActorMappings;
+  async _getUpdateDialog(resolve, reject) {
+    const effectsByActorMappings = this._effectHelpers.effectsByActorMappings;
     for (const i of effectsByActorMappings) {
       for (const e of i.effects) {
         if (!!e.disabled && !e.name.includes('(Disabled'))
@@ -160,5 +191,9 @@ export default class UpdateEffectsHandler {
         resizable: true,
       }
     );
+  }
+
+  get _userAppControlsPermission() {
+    return game.user.role >= this._settings.appControlsPermission;
   }
 }

@@ -1,6 +1,6 @@
-import Constants from './constants.js';
-import EffectHelpers from './effects/effect-helpers.js';
-import Settings from './settings.js';
+import Constants from '../constants.js';
+import EffectHelpers from '../effects/effect-helpers.js';
+import Settings from '../settings.js';
 
 /**
  * Handles setting up all handlebar helpers

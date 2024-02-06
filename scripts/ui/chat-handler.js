@@ -1,5 +1,5 @@
-import EffectHelpers from './effects/effect-helpers.js';
-import Settings from './settings.js';
+import EffectHelpers from '../effects/effect-helpers.js';
+import Settings from '../settings.js';
 
 /**
  * Handles creating chats for applied and removed effects

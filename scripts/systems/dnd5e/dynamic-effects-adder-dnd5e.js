@@ -1,11 +1,11 @@
-import Constants from '../constants.js';
-import EffectHelpers from './effect-helpers.js';
-import Settings from '../settings.js';
+import Constants from '../../constants.js';
+import EffectHelpers from '../../effects/effect-helpers.js';
+import Settings from '../../settings.js';
 
 /**
  * Handles adding dynamic effects for certain effects
  */
-export default class DynamicEffectsAdder {
+export default class DynamicEffectsAdderDnd5e {
   constructor() {
     this._effectHelpers = new EffectHelpers();
     this._settings = new Settings();

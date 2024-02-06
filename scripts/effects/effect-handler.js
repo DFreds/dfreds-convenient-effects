@@ -1,7 +1,7 @@
 import Constants from '../constants.js';
-import DynamicEffectsAdder from './dynamic-effects-adder.js';
+import DynamicEffectsAdderDelegate from '../systems/dynamic-effects-adder-delegate.js';
 import EffectHelpers from './effect-helpers.js';
-import FoundryHelpers from '../foundry-helpers.js';
+import FoundryHelpers from '../util/foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
 
@@ -12,7 +12,7 @@ export default class EffectHandler {
   constructor() {
     this._effectHelpers = new EffectHelpers();
     this._foundryHelpers = new FoundryHelpers();
-    this._dynamicEffectsAdder = new DynamicEffectsAdder();
+    this._dynamicEffectsAdderDelegate = new DynamicEffectsAdderDelegate();
     this._settings = new Settings();
   }
 
@@ -126,7 +126,7 @@ export default class EffectHandler {
     effect.flags = foundry.utils.mergeObject(effect.flags, coreFlags);
 
     if (effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.IS_DYNAMIC]) {
-      await this._dynamicEffectsAdder.addDynamicEffects(effect, actor);
+      await this._dynamicEffectsAdderDelegate.addDynamicEffects(effect, actor);
     }
 
     await actor.createEmbeddedDocuments('ActiveEffect', activeEffectsToApply);

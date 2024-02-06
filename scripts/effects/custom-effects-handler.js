@@ -1,5 +1,5 @@
 import EffectHelpers from './effect-helpers.js';
-import FoundryHelpers from '../foundry-helpers.js';
+import FoundryHelpers from '../util/foundry-helpers.js';
 import Settings from '../settings.js';
 import log from '../logger.js';
 
@@ -210,7 +210,7 @@ export default class CustomEffectsHandler {
     const item = await CONFIG.Item.documentClass.create({
       name: 'Custom Convenient Effects',
       img: 'modules/dfreds-convenient-effects/images/magic-palm.svg',
-      type: 'consumable',
+      type: 'base',
     });
 
     log(`Creating custom item with ${item.id}`);

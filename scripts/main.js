@@ -1,15 +1,15 @@
-import ChatHandler from './chat-handler.js';
+import ChatHandler from './ui/chat-handler.js';
 import Constants from './constants.js';
-import Controls from './controls.js';
-import EffectDefinitions from './effects/effect-definitions.js';
+import Controls from './ui/controls.js';
+import EffectDefinitionsDelegate from './systems/effect-definitions-delegate.js';
 import EffectHelpers from './effects/effect-helpers.js';
 import EffectInterface from './effect-interface.js';
-import FoundryHelpers from './foundry-helpers.js';
-import HandlebarHelpers from './handlebar-helpers.js';
-import MacroHandler from './macro-handler.js';
+import FoundryHelpers from './util/foundry-helpers.js';
+import HandlebarHelpers from './ui/handlebar-helpers.js';
+import MacroHandler from './ui/macro-handler.js';
 import Settings from './settings.js';
-import StatusEffects from './status-effects.js';
-import TextEnrichers from './text-enrichers.js';
+import StatusEffects from './effects/status-effects.js';
+import TextEnrichers from './ui/text-enrichers.js';
 import { addNestedEffectsToEffectConfig } from './ui/add-nested-effects-to-effect-config.js';
 import { libWrapper } from './lib/shim.js';
 import { removeCustomItemFromSidebar } from './ui/remove-custom-item-from-sidebar.js';
@@ -29,7 +29,7 @@ Hooks.once('init', () => {
 Hooks.once('socketlib.ready', () => {
   game.dfreds = game.dfreds || {};
 
-  game.dfreds.effects = new EffectDefinitions();
+  game.dfreds.effects = new EffectDefinitionsDelegate();
   game.dfreds.effectInterface = new EffectInterface();
   game.dfreds.statusEffects = new StatusEffects();
 });
@@ -296,12 +296,12 @@ Hooks.on('renderChatMessage', (message, html) => {
       button.onclick = () => game.dfreds.effectInterface.toggleEffect(name);
 
       // construct empty card-buttons if it doesn't exist (e.g. quick-roll from Ready Set Roll)
-      if (!itemCard.querySelector('.card-buttons')) {  
-          const div = document.createElement('div');
-          div.classList.add('card-buttons');
-      
-          let cardContent = itemCard.querySelector('.card-content');
-          cardContent.insertAdjacentElement('afterend', div);
+      if (!itemCard.querySelector('.card-buttons')) {
+        const div = document.createElement('div');
+        div.classList.add('card-buttons');
+
+        let cardContent = itemCard.querySelector('.card-content');
+        cardContent.insertAdjacentElement('afterend', div);
       }
 
       // add button to end of card-buttons

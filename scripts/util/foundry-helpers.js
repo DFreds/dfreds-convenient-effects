@@ -1,5 +1,5 @@
-import ConvenientEffectsApp from './app/convenient-effects-app.js';
-import Settings from './settings.js';
+import ConvenientEffectsApp from '../app/convenient-effects-app.js';
+import Settings from '../settings.js';
 
 /**
  * Simple helpers for querying aspects of foundry

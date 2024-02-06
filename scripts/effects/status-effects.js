@@ -1,6 +1,6 @@
-import CustomEffectsHandler from './effects/custom-effects-handler.js';
-import EffectHelpers from './effects/effect-helpers.js';
-import Settings from './settings.js';
+import CustomEffectsHandler from './custom-effects-handler.js';
+import EffectHelpers from './effect-helpers.js';
+import Settings from '../settings.js';
 
 /**
  * Handles the status effects present on the token HUD

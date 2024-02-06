@@ -1,12 +1,12 @@
-import Constants from '../constants.js';
-import CustomEffectsHandler from './custom-effects-handler.js';
-import EffectHelpers from './effect-helpers.js';
-import Settings from '../settings.js';
+import Constants from '../../constants.js';
+import CustomEffectsHandler from '../../effects/custom-effects-handler.js';
+import EffectHelpers from '../../effects/effect-helpers.js';
+import Settings from '../../settings.js';
 
 /**
  * Defines all of the effect definitions
  */
-export default class EffectDefinitions {
+export default class EffectDefinitionsDnd5e {
   constructor() {
     this._customEffectsHandler = new CustomEffectsHandler();
     this._effectHelpers = new EffectHelpers();
@@ -19,12 +19,12 @@ export default class EffectDefinitions {
   }
 
   initialize() {
+    // Enables caching since this class is initialized a single time
     this._conditions = this.conditions;
     this._spells = this.spells;
     this._classFeatures = this.classFeatures;
     this._equipment = this.equipment;
     this._other = this.other;
-
     this._all = [
       ...this._conditions,
       ...this._spells,
@@ -42,6 +42,36 @@ export default class EffectDefinitions {
   get all() {
     const customEffects = this._customEffectsHandler.getCustomEffects();
     return [...customEffects, ...this._all];
+  }
+
+  get folderStructure() {
+    return [
+      {
+        id: 'conditions',
+        name: 'Conditions',
+        effects: this.conditions,
+      },
+      {
+        id: 'spells',
+        name: 'Spells',
+        effects: this.spells,
+      },
+      {
+        id: 'class-features',
+        name: 'Class Features',
+        effects: this.classFeatures,
+      },
+      {
+        id: 'equipment',
+        name: 'Equipment',
+        effects: this.equipment,
+      },
+      {
+        id: 'other',
+        name: 'Other',
+        effects: this.other,
+      },
+    ];
   }
 
   /**

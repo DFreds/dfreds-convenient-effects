@@ -27,16 +27,7 @@
   "styles": ["./styles/dfreds-convenient-effects.css"],
   "languages": [],
   "relationships": {
-    "systems": [
-      {
-        "id": "dnd5e",
-        "type": "system"
-      },
-      {
-        "id": "sw5e",
-        "type": "system"
-      }
-    ],
+    "systems": [],
     "requires": [
       {
         "id": "socketlib",

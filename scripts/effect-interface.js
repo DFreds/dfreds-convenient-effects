@@ -2,7 +2,7 @@ import Constants from './constants.js';
 import CustomEffectsHandler from './effects/custom-effects-handler.js';
 import EffectHandler from './effects/effect-handler.js';
 import EffectHelpers from './effects/effect-helpers.js';
-import FoundryHelpers from './foundry-helpers.js';
+import FoundryHelpers from './util/foundry-helpers.js';
 import Settings from './settings.js';
 
 /**

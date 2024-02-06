@@ -1,5 +1,5 @@
-import Constants from './constants.js';
-import FoundryHelpers from './foundry-helpers.js';
+import Constants from '../constants.js';
+import FoundryHelpers from '../util/foundry-helpers.js';
 
 export default class TextEnrichers {
   constructor() {
