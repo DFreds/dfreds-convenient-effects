@@ -58,4 +58,19 @@ export default class FoundryHelpers {
       convenientEffectsApp.render();
     }
   }
+
+  /**
+   * Checks if the module provided is active and if yes and a version is provided, compares against its currect version
+   *
+   * @param {string} key - the module id
+   * @param {string} version - the module version
+   * @returns {Boolean} true if module.active+version > version OR true if module.active+!version
+   */
+  moduleActiveVersionCheck(key, version) {
+    const module = game.modules.get(key);
+    if (module && !version) return module.active;
+    else if (module?.active && version)
+      return foundry.utils.isNewerVersion(module.version, version);
+    else return false;    
+  }
 }

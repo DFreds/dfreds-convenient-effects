@@ -28,45 +28,54 @@ export default class ConvenientEffectsController {
    * @returns {Object} the data to pass to the template
    */
   get data() {
-    return {
-      folders: [
-        {
-          id: 'favorites',
-          name: 'Favorites',
-          effects: this._fetchFavorites(),
-        },
-        {
-          id: 'custom',
-          name: 'Custom',
-          effects: this._fetchUnfavoritedCustomEffects(),
-        },
-        {
-          id: 'conditions',
-          name: 'Conditions',
-          effects: this._fetchUnfavoritedConditions(),
-        },
-        {
-          id: 'spells',
-          name: 'Spells',
-          effects: this._fetchUnfavoritedSpells(),
-        },
-        {
-          id: 'class-features',
-          name: 'Class Features',
-          effects: this._fetchUnfavoritedClassFeatures(),
-        },
-        {
-          id: 'equipment',
-          name: 'Equipment',
-          effects: this._fetchUnfavoritedEquipment(),
-        },
-        {
-          id: 'other',
-          name: 'Other',
-          effects: this._fetchUnfavoritedOther(),
-        },
-      ],
-    };
+    const folders = [
+      {
+        id: 'favorites',
+        name: 'Favorites',
+        effects: this._fetchFavorites(),
+      },
+      {
+        id: 'custom',
+        name: 'Custom',
+        effects: this._fetchUnfavoritedCustomEffects(),
+      },
+      {
+        id: 'conditions',
+        name: 'Conditions',
+        effects: this._fetchUnfavoritedConditions(),
+      },
+      {
+        id: 'spells',
+        name: 'Spells',
+        effects: this._fetchUnfavoritedSpells(),
+      },
+      {
+        id: 'class-features',
+        name: 'Class Features',
+        effects: this._fetchUnfavoritedClassFeatures(),
+      },
+      {
+        id: 'equipment',
+        name: 'Equipment',
+        effects: this._fetchUnfavoritedEquipment(),
+      },
+      {
+        id: 'other',
+        name: 'Other',
+        effects: this._fetchUnfavoritedOther(),
+      },
+    ];
+    if (
+      this._foundryHelpers.moduleActiveVersionCheck('midi-qol', '11.0.10.99')
+    ) {
+      const midiFolder = {
+        id: 'midiqol-specific',
+        name: 'MidiQOL specific',
+        effects: this._fetchUnfavoritedMidiqolSpecific(),
+      };
+      folders.push(midiFolder);
+      return { folders };
+    } else return { folders };
   }
 
   _fetchFavorites() {
@@ -130,6 +139,15 @@ export default class ConvenientEffectsController {
   _fetchUnfavoritedOther() {
     const effects = game.dfreds.effects;
     return effects.other.filter(
+      (effect) =>
+        !this._settings.isFavoritedEffect(effect.name) &&
+        effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
+    );
+  }
+
+  _fetchUnfavoritedMidiqolSpecific() {
+    const effects = game.dfreds.effects;
+    return effects.midiSpecific.filter(
       (effect) =>
         !this._settings.isFavoritedEffect(effect.name) &&
         effect.getFlag(Constants.MODULE_ID, Constants.FLAGS.IS_VIEWABLE)
