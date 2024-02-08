@@ -3,6 +3,7 @@
  */
 export default class Constants {
   static MODULE_ID = 'dfreds-convenient-effects';
+  static MODULE_NAME = 'DFreds Convenient Effects';
   static FLAGS = {
     DESCRIPTION: 'description',
     IS_CONVENIENT: 'isConvenient',
@@ -10,6 +11,7 @@ export default class Constants {
     IS_VIEWABLE: 'isViewable',
     NESTED_EFFECTS: 'nestedEffects',
     SUB_EFFECTS: 'subEffects',
+    HAS_MIGRATED: 'migrated',
   };
 
   static COLORS = {
@@ -29,4 +31,6 @@ export default class Constants {
   };
 
   static SIZES_ORDERED = ['tiny', 'sm', 'med', 'lg', 'huge', 'grg'];
+
+  static MIGRATION_EFFECTS_DESCRIPTIONS = '6.0.0'; //add the module version of the latest migration
 }

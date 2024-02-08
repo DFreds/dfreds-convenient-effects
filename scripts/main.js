@@ -7,6 +7,7 @@ import EffectInterface from './effect-interface.js';
 import FoundryHelpers from './foundry-helpers.js';
 import HandlebarHelpers from './handlebar-helpers.js';
 import MacroHandler from './macro-handler.js';
+import Migrations from './migrations.js';
 import Settings from './settings.js';
 import StatusEffects from './status-effects.js';
 import TextEnrichers from './text-enrichers.js';
@@ -39,7 +40,8 @@ Hooks.once('socketlib.ready', () => {
  */
 Hooks.once('ready', async () => {
   const settings = new Settings();
-
+  const effectHelpers = new EffectHelpers();
+  const migrations = new Migrations();
   if (!settings.customEffectsItemId) {
     const item = await CONFIG.Item.documentClass.create({
       name: 'Custom Convenient Effects',
@@ -49,6 +51,14 @@ Hooks.once('ready', async () => {
 
     await settings.setCustomEffectsItemId(item.id);
   }
+
+  /**
+   * Migrate the effect descriptions from legacy CEs to the description field of Active Effects and clear up flags.
+   */
+  await migrations._migrateCustomEffectsItemEffectDescriptions(
+    settings.customEffectsItemId,
+    Constants.MIGRATION_EFFECTS_DESCRIPTIONS
+  );
 });
 
 /**
