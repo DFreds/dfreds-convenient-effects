@@ -10,6 +10,7 @@
 ![Latest Release Download Count](https://img.shields.io/github/downloads/DFreds/dfreds-convenient-effects/latest/dfreds-convenient-effects.zip?color=2b82fc&label=LATEST%20DOWNLOADS&style=for-the-badge)
 ![Total Download Count](https://img.shields.io/github/downloads/DFreds/dfreds-convenient-effects/total?color=2b82fc&label=TOTAL%20DOWNLOADS&style=for-the-badge)
 
+__DFreds Convenient Effects__ is a FoundryVTT module that adds easy to use toggleable active effects for common use cases. Currently, the DND5e and SW5e systems have specific support, but any system can create custom effects.
 
 ## Let Me Sell You This
 
