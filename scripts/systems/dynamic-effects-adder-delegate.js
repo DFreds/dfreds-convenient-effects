@@ -20,7 +20,10 @@ export default class DynamicEffectsAdderDelegate {
   _retrieveDynamicEffectsAdder() {
     let dynamicEffectsAdder = new DynamicEffectsAdderGeneric();
 
-    if (game.system.id === dnd5e.SYSTEM_ID) {
+    if (
+      game.system.id === dnd5e.SYSTEM_ID ||
+      game.system.id === dnd5e.SW_5E_ID
+    ) {
       dynamicEffectsAdder = new DynamicEffectsAdderDnd5e();
     }
 

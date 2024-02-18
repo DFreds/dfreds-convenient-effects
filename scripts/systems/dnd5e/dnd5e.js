@@ -1,5 +1,6 @@
 export default {
   SYSTEM_ID: 'dnd5e',
+  SW_5E_ID: 'sw5e',
   DEFAULT_STATUS_EFFECT_NAMES: [
     'Blinded',
     'Charmed',

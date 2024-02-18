@@ -33,7 +33,10 @@ export default class EffectDefinitionsDelegate {
   _retrieveEffectDefinitions() {
     let effectDefinitions = new EffectDefintionsGeneric();
 
-    if (game.system.id === dnd5e.SYSTEM_ID) {
+    if (
+      game.system.id === dnd5e.SYSTEM_ID ||
+      game.system.id === dnd5e.SW_5E_ID
+    ) {
       effectDefinitions = new EffectDefinitionsDnd5e();
     }
 
