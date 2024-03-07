@@ -40,7 +40,7 @@ Hooks.once('socketlib.ready', () => {
 Hooks.once('ready', async () => {
   const settings = new Settings();
 
-  if (!settings.customEffectsItemId) {
+  if (game.user.isGM && !settings.customEffectsItemId) {
     const item = await CONFIG.Item.documentClass.create({
       name: 'Custom Convenient Effects',
       img: 'modules/dfreds-convenient-effects/images/magic-palm.svg',
