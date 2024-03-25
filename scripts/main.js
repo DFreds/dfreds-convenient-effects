@@ -121,7 +121,9 @@ Hooks.on('getSceneControlButtons', (controls) => {
 /**
  * Handle creating a chat message if an effect is added
  */
-Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
+Hooks.on('preCreateActiveEffect', (activeEffect, _config, userId) => {
+  if (game.user.id !== userId) return;
+
   const effectHelpers = new EffectHelpers();
   if (
     !effectHelpers.isConvenient(activeEffect) ||
@@ -141,7 +143,9 @@ Hooks.on('preCreateActiveEffect', (activeEffect, _config, _userId) => {
 /**
  * Handle when an active effect is created
  */
-Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
+Hooks.on('createActiveEffect', (activeEffect, _config, userId) => {
+  if (game.user.id !== userId) return;
+
   const settings = new Settings();
   if (activeEffect.parent.id == settings.customEffectsItemId) {
     // Re-render the app if open and a new effect is added to the custom item
@@ -153,7 +157,9 @@ Hooks.on('createActiveEffect', (activeEffect, _config, _userId) => {
 /**
  * Handle re-rendering the app if it is open and an update occurs
  */
-Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
+Hooks.on('updateActiveEffect', (activeEffect, _config, userId) => {
+  if (game.user.id !== userId) return;
+
   const settings = new Settings();
   if (activeEffect.parent.id == settings.customEffectsItemId) {
     const effectHelpers = new EffectHelpers();
@@ -167,7 +173,9 @@ Hooks.on('updateActiveEffect', (activeEffect, _config, _userId) => {
 /**
  * Handle creating a chat message if an effect has expired or was removed
  */
-Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
+Hooks.on('preDeleteActiveEffect', (activeEffect, _config, userId) => {
+  if (game.user.id !== userId) return;
+
   const effectHelpers = new EffectHelpers();
   if (
     !effectHelpers.isConvenient(activeEffect) ||
@@ -191,7 +199,9 @@ Hooks.on('preDeleteActiveEffect', (activeEffect, _config, _userId) => {
 /**
  * Handle removing any actor data changes when an active effect is deleted from an actor
  */
-Hooks.on('deleteActiveEffect', (activeEffect, _config, _userId) => {
+Hooks.on('deleteActiveEffect', (activeEffect, _config, userId) => {
+  if (game.user.id !== userId) return;
+
   const settings = new Settings();
   if (activeEffect.parent.id == settings.customEffectsItemId) {
     const foundryHelpers = new FoundryHelpers();
