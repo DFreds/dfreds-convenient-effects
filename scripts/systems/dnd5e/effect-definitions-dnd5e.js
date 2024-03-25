@@ -355,6 +355,11 @@ export default class EffectDefinitionsDnd5e {
       statuses: ['exhaustion'],
       description: 'Disadvantage on ability checks',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion1.svg',
+      flags: {
+        dnd5e: {
+          exhaustionLevel: 1,
+        },
+      },
       changes: [
         {
           key: 'system.attributes.exhaustion',
@@ -381,6 +386,11 @@ export default class EffectDefinitionsDnd5e {
       statuses: ['exhaustion'],
       description: 'Disadvantage on ability checks and speed halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion2.svg',
+      flags: {
+        dnd5e: {
+          exhaustionLevel: 2,
+        },
+      },
       changes: [
         {
           key: 'system.attributes.exhaustion',
@@ -414,6 +424,11 @@ export default class EffectDefinitionsDnd5e {
       description:
         'Disadvantage on ability checks, speed halved, and disadvantage on attacks and saving throws',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion3.svg',
+      flags: {
+        dnd5e: {
+          exhaustionLevel: 3,
+        },
+      },
       changes: [
         {
           key: 'system.attributes.exhaustion',
@@ -457,6 +472,11 @@ export default class EffectDefinitionsDnd5e {
       description:
         'Disadvantage on ability checks, speed halved, disadvantage on attacks and saving throws, and hit point maximum halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion4.svg',
+      flags: {
+        dnd5e: {
+          exhaustionLevel: 4,
+        },
+      },
       changes: [
         {
           key: 'system.attributes.exhaustion',
@@ -506,6 +526,11 @@ export default class EffectDefinitionsDnd5e {
       description:
         'Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved',
       icon: 'modules/dfreds-convenient-effects/images/exhaustion5.svg',
+      flags: {
+        dnd5e: {
+          exhaustionLevel: 5,
+        },
+      },
       changes: [
         {
           key: 'system.attributes.exhaustion',
