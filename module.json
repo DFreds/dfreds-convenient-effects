@@ -16,7 +16,7 @@
   "bugs": "https://github.com/DFreds/dfreds-convenient-effects/issues",
   "changelog": "https://github.com/DFreds/dfreds-convenient-effects/releases",
   "flags": {},
-  "version": "5.0.0",
+  "version": "6.0.3",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315",
