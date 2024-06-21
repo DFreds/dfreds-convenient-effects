@@ -1,0 +1,11 @@
+{
+    "name": "lib-wrapper",
+    "private": true,
+    "type": "module",
+    "types": "./index.d.ts",
+    "devDependencies": {
+        "typescript": "^5.3.3"
+    },
+    "license": "LGPL-3.0-or-later",
+    "homepage": "https://github.com/ruipin/fvtt-lib-wrapper#readme"
+}

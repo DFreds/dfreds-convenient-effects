@@ -1,0 +1,52 @@
+{
+    "name": "dfreds-convenient-effects",
+    "version": "1.0.0",
+    "description": "Adds easy to use toggleable active effects for common use cases",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tsc && vite build",
+        "dev": "tsc && tsx ./build/clean.ts && vite build --mode development",
+        "clean": "tsx ./build/clean.ts",
+        "hot": "vite serve",
+        "rename-module": "tsx ./build/rename-module.ts",
+        "watch": "npm run clean && vite build --watch --mode development",
+        "link": "tsx ./build/link-foundry.ts",
+        "update-types": "tsx ./build/update-pf2e-types.ts && tsx ./build/copy-pf2e-types.ts",
+        "lint": "npm run lint:ts && npm run lint:json && npm run prettier:scss",
+        "lint:ts": "eslint ./src ./types --ext .ts",
+        "prettier:scss": "prettier --check src/styles",
+        "lint:json": "eslint ./static --ext .json --no-eslintrc --plugin json --rule \"json/*: error\" --rule \"linebreak-style: error\"",
+        "lint:fix": "eslint ./src ./types --ext .ts --fix && prettier --write src/styles"
+    },
+    "author": "DFreds (https://github.com/DFreds)",
+    "license": "MIT",
+    "dependencies": {
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^11.0.4",
+        "@types/jquery": "^3.5.29",
+        "@types/node": "^20.11.14",
+        "@types/prompts": "^2.4.9",
+        "@typescript-eslint/eslint-plugin": "^6.20.0",
+        "@typescript-eslint/parser": "^6.20.0",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-json": "^3.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "fs-extra": "^11.2.0",
+        "handlebars": "^4.7.8",
+        "prettier": "^3.2.4",
+        "prompts": "^2.4.2",
+        "sass": "^1.70.0",
+        "socket.io": "^4.7.4",
+        "socket.io-client": "^4.7.4",
+        "tsx": "^4.7.0",
+        "typescript": "^5.3.3",
+        "vite": "^5.0.12",
+        "vite-plugin-checker": "^0.6.3",
+        "vite-plugin-static-copy": "^1.0.1",
+        "vite-tsconfig-paths": "^4.3.1"
+    }
+}

@@ -1,49 +1,62 @@
 name: Release Creation
 
-on: 
+on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: 'recursive'
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    # get part of the tag after the `v`
-    - name: Extract tag version number
-      id: get_version
-      uses: battila7/get-version-action@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
 
-    - name: Echo tag output
-      run: echo ${{ steps.get_version.outputs.version-without-v }}
+      - name: Install dependencies
+        run: npm ci
 
-    # Substitute the Manifest and Download URLs in the module.json
-    - name: Substitute Manifest and Download Links For Versioned Ones
-      id: sub_manifest_link_version
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: 'module.json'
-      env:
-        version: ${{steps.get_version.outputs.version-without-v}}
-        manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
-        download: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/dfreds-convenient-effects.zip
+      - name: Build production
+        run: npm run build
 
-    # Create a zip file with all files required by the module to add to the release
-    - run: zip -r ./dfreds-convenient-effects.zip module.json scripts/ templates/ styles/ images/ packs/
+      - name: Extract tag version number
+        id: get_version
+        uses: battila7/get-version-action@v2
 
-    # Create a release for this specific version
-    - name: Update Release with Files
-      id: create_version_release
-      uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true # Set this to false if you want to prevent updating existing releases
-        name: ${{ github.event.release.name }}
-        draft: true
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './module.json, ./dfreds-convenient-effects.zip'
-        tag: ${{ github.event.release.tag_name }}
-        body: ${{ github.event.release.body }}
+      - name: Substitute Manifest and Download Links For Versioned Ones
+        id: sub_manifest_link_version
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: "dist/module.json"
+        env:
+          version: ${{steps.get_version.outputs.version-without-v}}
+          manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
+          download: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/dfreds-convenient-effects.zip
+
+      - name: Zip files
+        working-directory: ./dist
+        run: zip -r ./dfreds-convenient-effects.zip ./*
+
+      - name: Get changes between tags
+        id: changes
+        uses: simbo/changes-between-tags-action@v1
+
+      - name: Create versioned release
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true # Set this to false if you want to prevent updating existing releases
+          artifacts: "./dist/module.json, ./dist/dfreds-convenient-effects.zip"
+          body: "${{ steps.changes.outputs.changes }} \n ${{ github.event.release.body }}"
+          draft: true
+          generateReleaseNotes: true
+          name: ${{ github.event.release.name }}
+          tag: ${{ github.event.release.tag_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
