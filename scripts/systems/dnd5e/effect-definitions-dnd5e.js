@@ -1826,7 +1826,7 @@ export default class EffectDefinitionsDnd5e {
       description: 'Upgrade flying speed to 60 ft. for 10 minutes',
       icon: 'icons/magic/control/energy-stream-link-white.webp',
       seconds: Constants.SECONDS.IN_TEN_MINUTES,
-      statuses: ['fly'],
+      statuses: ['flying'],
       changes: [
         {
           key: 'system.attributes.movement.fly',
