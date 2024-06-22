@@ -45,12 +45,29 @@ export default class EffectHandler {
    * @returns {boolean} true if the effect is applied, false otherwise
    */
   hasEffectApplied(effectName, uuid) {
+    return this._hasEffect(effectName, uuid, (effect) => !effect?.disabled);
+  }
+
+  /**
+   * Checks to see if any of the effects attached to the actor
+   * with the given UUID match the effect, and are a convenient effect, and
+   * pass an optional additional test.
+   *
+   * @param {string} effectName - the name of the effect to check
+   * @param {string} uuid - the uuid of the actor to see if the effect is
+   * applied to
+   * @param {function} test - an optional additional test function to apply
+   * to each effect.  Takes the effect, and returns true or false.
+   * @returns {boolean} true if the effect exists and meets the condition, false otherwise
+   */
+  _hasEffect(effectName, uuid, test) {
     const actor = this._foundryHelpers.getActorByUuid(uuid);
+    const testFn = test || ((effect) => true);
     return actor?.effects?.some(
       (activeEffect) =>
         this._effectHelpers.isConvenient(activeEffect) &&
         activeEffect?.name == effectName &&
-        !activeEffect?.disabled
+        testFn(activeEffect)
     );
   }
 
@@ -111,7 +128,10 @@ export default class EffectHandler {
     }
 
     if (effect.name == 'Unconscious') {
-      activeEffectsToApply.push(this._getProneEffect());
+      const prone = this._getProneEffect();
+      if (!this._hasEffect(prone.name, uuid)) {
+        activeEffectsToApply.push(prone);
+      }
     }
 
     if (origin) {
