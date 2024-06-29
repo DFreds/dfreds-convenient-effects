@@ -44,17 +44,6 @@
   order: 99;
 }
 
-.convenient-effects-chat-header {
-  margin-bottom: 1px !important;
-  margin-top: 5px !important;
-}
-
-.convenient-effects-chat-description {
-  margin-bottom: 5px !important;
-  margin-top: 5px !important;
-  text-size-adjust: 80%;
-}
-
 .convenient-effects-fancy-hr {
   border: 0;
   height: 1px;
