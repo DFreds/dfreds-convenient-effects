@@ -1,14 +1,14 @@
-import Settings from '../settings.js';
+import Settings from "../settings.js";
 
 export function removeCustomItemFromSidebar(directory) {
-  if (!(directory instanceof ItemDirectory)) return;
+    if (!(directory instanceof ItemDirectory)) return;
 
-  const settings = new Settings();
-  const customEffectsItemId = settings.customEffectsItemId;
+    const settings = new Settings();
+    const customEffectsItemId = settings.customEffectsItemId;
 
-  if (!customEffectsItemId) return;
+    if (!customEffectsItemId) return;
 
-  const html = directory.element;
-  const li = html.find(`li[data-document-id="${customEffectsItemId}"]`);
-  li.remove();
+    const html = directory.element;
+    const li = html.find(`li[data-document-id="${customEffectsItemId}"]`);
+    li.remove();
 }
