@@ -1,3 +1,4 @@
+import { ConvenientEffectsApp } from "../app/convenient-effects-app.ts";
 import { Settings } from "../settings.ts";
 
 class Controls {

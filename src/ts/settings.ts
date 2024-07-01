@@ -6,6 +6,7 @@ class Settings {
 
     // Non-config setting keys
     #EFFECTS_ITEM_ID = "customEffectsItemId"; // legacy key name
+    #EFFECTS_VERSION = "hasInitializedEffects";
 
     registerSettings(): void {
         this.#registerConfigSettings();
@@ -47,6 +48,19 @@ class Settings {
 
     async setEffectsItemId(itemId: string): Promise<unknown> {
         return game.settings.set(MODULE_ID, this.#EFFECTS_ITEM_ID, itemId);
+    }
+
+    get effectsVersion(): number {
+        const hasInitializedEffects = game.settings.get(
+            MODULE_ID,
+            this.#EFFECTS_VERSION,
+        ) as number | undefined;
+
+        return hasInitializedEffects ?? -1;
+    }
+
+    async setEffectsVersion(value: number): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#EFFECTS_VERSION, value);
     }
 }
 

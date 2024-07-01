@@ -1,3 +1,4 @@
+import { id as MODULE_ID } from "@static/module.json";
 import { Listener } from "./index.ts";
 import { Settings } from "../settings.ts";
 import { ItemSource } from "types/foundry/common/documents/item.js";
@@ -12,6 +13,7 @@ const Ready: Listener = {
             if (settings.effectsItemId) return; // Only do this one time
             if (!game.user.isGM) return; // Only allow GMs to do this
 
+            // TODO extract?
             const ceData: Omit<
                 DeepPartial<ItemSource>,
                 "_id" | "name" | "type"
@@ -22,7 +24,9 @@ const Ready: Listener = {
             };
             const item = await Item.create([ceData]);
 
-            settings.setEffectsItemId(item[0].id);
+            await settings.setEffectsItemId(item[0].id);
+
+            Hooks.callAll(`${MODULE_ID}.createEffects`);
         });
     },
 };
