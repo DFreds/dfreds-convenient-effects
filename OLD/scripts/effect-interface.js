@@ -41,37 +41,6 @@ export default class EffectInterface {
     }
 
     /**
-     * Searches through the list of available effects and returns one matching the
-     * effect name. Prioritizes finding custom effects first.
-     *
-     * @param {string} effectName - the effect name to search for
-     * @returns {ActiveEffect} the found effect
-     */
-    findEffectByName(effectName) {
-        const effect = this.findCustomEffectByName(effectName);
-        if (effect) return effect;
-
-        return game.dfreds.effects.all.find(
-            (effect) => effect.name == effectName,
-        );
-    }
-
-    /**
-     * Searches through the list of available custom effects and returns one matching the
-     * effect name.
-     *
-     * @param {string} effectName - the effect name to search for
-     * @returns {ActiveEffect} the found effect
-     */
-    findCustomEffectByName(effectName) {
-        const effect = this._customEffectsHandler
-            .getCustomEffects()
-            .find((effect) => effect.name == effectName);
-
-        return effect;
-    }
-
-    /**
      * Toggles the effect on the provided actor UUIDS as the GM via sockets. If no actor
      * UUIDs are provided, it finds one of these in this priority:
      *
@@ -250,59 +219,6 @@ export default class EffectInterface {
         return this._customEffectsHandler.createNewCustomEffectsWith({
             activeEffects,
         });
-    }
-
-    /**
-     * Checks if the given effect has nested effects
-     *
-     * @param {ActiveEffect} effect - the active effect to check the nested effets on
-     * @returns
-     */
-    hasNestedEffects(effect) {
-        const nestedEffects =
-            effect.getFlag(
-                Constants.MODULE_ID,
-                Constants.FLAGS.NESTED_EFFECTS,
-            ) ?? [];
-
-        return nestedEffects.length > 0;
-    }
-
-    async _getNestedEffectSelection(effect) {
-        const nestedEffectNames =
-            effect.getFlag(
-                Constants.MODULE_ID,
-                Constants.FLAGS.NESTED_EFFECTS,
-            ) ?? [];
-        const nestedEffects = nestedEffectNames
-            .map((nestedEffect) =>
-                game.dfreds.effectInterface.findEffectByName(nestedEffect),
-            )
-            .filter((effect) => effect !== undefined);
-
-        const content = await renderTemplate(
-            "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
-            { parentEffect: effect, nestedEffects },
-        );
-        const choice = await Dialog.prompt(
-            {
-                title: effect.name,
-                content: content,
-                label: "Select Effect",
-                callback: (html) => {
-                    const htmlChoice = html
-                        .find('select[name="effect-choice"]')
-                        .val();
-                    return htmlChoice;
-                },
-                rejectClose: false,
-            },
-            { width: 300 },
-        );
-
-        return nestedEffects.find(
-            (nestedEffect) => nestedEffect.name == choice,
-        );
     }
 
     /**
