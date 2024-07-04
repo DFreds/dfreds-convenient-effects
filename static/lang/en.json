@@ -3,5 +3,8 @@
     "ConvenientEffects.SettingTrustedPlayer": "Trusted Player",
     "ConvenientEffects.SettingAssistantGM": "Assistant GM",
     "ConvenientEffects.SettingGameMaster": "Game Master",
-    "ConvenientEffects.SettingNone": "None"
+    "ConvenientEffects.SettingNone": "None",
+
+    "ConvenientEffects.SettingAppControlsPermissionName": "App Controls Permission",
+    "ConvenientEffects.SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely."
 }

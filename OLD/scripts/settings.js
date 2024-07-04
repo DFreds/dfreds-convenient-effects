@@ -38,21 +38,6 @@ export default class Settings {
 
         game.settings.register(
             Constants.MODULE_ID,
-            Settings.APP_CONTROLS_PERMISSION,
-            {
-                name: "App Controls Permission",
-                hint: "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
-                scope: "world",
-                config: true,
-                default: CONST.USER_ROLES.GAMEMASTER,
-                choices: userRoles,
-                type: String,
-                requiresReload: true,
-            },
-        );
-
-        game.settings.register(
-            Constants.MODULE_ID,
             Settings.MODIFY_STATUS_EFFECTS,
             {
                 name: "Modify Status Effects",
@@ -235,20 +220,6 @@ export default class Settings {
             "Unconscious",
             "Wounded",
         ];
-    }
-
-    /**
-     * Returns the game setting for app controls permission
-     *
-     * @returns {number} a number representing the chosen role
-     */
-    get appControlsPermission() {
-        return parseInt(
-            game.settings.get(
-                Constants.MODULE_ID,
-                Settings.APP_CONTROLS_PERMISSION,
-            ),
-        );
     }
 
     /**
