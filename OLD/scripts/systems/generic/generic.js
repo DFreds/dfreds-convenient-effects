@@ -1,4 +1,4 @@
 export default {
-  SYSTEM_ID: '',
-  DEFAULT_STATUS_EFFECT_NAMES: [],
+    SYSTEM_ID: "",
+    DEFAULT_STATUS_EFFECT_NAMES: [],
 };
