@@ -74,23 +74,6 @@ export default class EffectHelpers {
     }
 
     /**
-     * Gets the description attached to the active effect
-     *
-     * @param {ActiveEffect} activeEffect - the active effect
-     * @returns {string} The description for the effect
-     */
-    getDescription(activeEffect) {
-        const effectDescription = activeEffect.description;
-        const flagDescription = activeEffect.getFlag(
-            Constants.MODULE_ID,
-            Constants.FLAGS.DESCRIPTION,
-        );
-        const legacyDescription = activeEffect.flags.convenientDescription;
-
-        return effectDescription || flagDescription || legacyDescription;
-    }
-
-    /**
      * Gets the ID for a convenient effect using its name
      *
      * @param {string} name - the name of the effect
@@ -98,25 +81,6 @@ export default class EffectHelpers {
      */
     getId(name) {
         return `Convenient Effect: ${name}`;
-    }
-
-    /**
-     * Gets the `isConvenient` flag on the active effect if it exists
-     *
-     * @param {ActiveEffect} activeEffect - the active effect
-     * @returns {boolean} true if it is a convenient effect and false otherweise
-     */
-    isConvenient(activeEffect) {
-        const isConvenient =
-            activeEffect.getFlag(
-                Constants.MODULE_ID,
-                Constants.FLAGS.IS_CONVENIENT,
-            ) ?? false;
-
-        const isOldConvenient = activeEffect.flags.isConvenient;
-        const isOldCustomConvenient = activeEffect.flags.isCustomConvenient;
-
-        return isConvenient || isOldConvenient || isOldCustomConvenient;
     }
 
     /**
