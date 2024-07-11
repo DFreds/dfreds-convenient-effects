@@ -80,12 +80,13 @@ class Settings {
             this.#EFFECTS_VERSION,
         ) as number | undefined;
 
-        return hasInitializedEffects ?? -1;
+        return hasInitializedEffects ?? 0;
     }
 
     async setEffectsVersion(value: number): Promise<unknown> {
         return game.settings.set(MODULE_ID, this.#EFFECTS_VERSION, value);
     }
+    /* endregion */
 }
 
 export { Settings };

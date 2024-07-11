@@ -10,17 +10,18 @@ import {
     isEffectConvenient,
 } from "./helpers.ts";
 import { FLAGS } from "./constants.ts";
+import { SocketMessage } from "./sockets/socket.ts";
 
 interface IFindEffect {
     /**
      * The effect ID
      */
-    effectId?: string;
+    effectId?: string | null;
 
     /**
      * The effect name
      */
-    effectName?: string;
+    effectName?: string | null;
 }
 
 interface IHasEffectApplied {
@@ -195,14 +196,25 @@ class EffectInterface {
             return;
         }
 
+        // TODO determine how much of this should be in effect-interface vs socket vs effect-handler
+        // NOTE: once you're in socket, it's as the GM
+
         const effect = this.findEffect({ effectId, effectName });
 
         // TODO more descriptive error?
         if (!effect) {
             ui.notifications.error("Cannot find effect");
+            return;
         }
 
         // TODO handle nested effects
+
+        game.socket.emit(MODULE_ID, {
+            request: "toggleEffect",
+            effectData: effect.toObject(),
+            overlay,
+            uuids,
+        } satisfies SocketMessage);
     }
 
     // TODO needs socket through GM probably
@@ -237,6 +249,19 @@ class EffectInterface {
             effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
 
         return nestedEffects.length > 0;
+    }
+
+    async resetMigrations(): Promise<void> {
+        if (!game.user.isGM) return;
+
+        const item = findEffectsItem();
+        await ActiveEffect.deleteDocuments([], {
+            deleteAll: true,
+            parent: item,
+            render: true,
+            noHook: true,
+        });
+        await this.#settings.setEffectsVersion(0);
     }
 
     async #getNestedEffectSelection(effect: ActiveEffect<any>) {

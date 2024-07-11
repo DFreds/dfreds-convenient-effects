@@ -20,7 +20,7 @@ const Ready: Listener = {
             > & { _id?: Maybe<string>; name: string; type: string } = {
                 name: "Convenient Effects Holder",
                 img: "modules/dfreds-convenient-effects/images/magic-palm.svg",
-                type: CONFIG.Item.typeLabels[0] ?? "consumable",
+                type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
             };
             const item = await Item.create([ceData]);
 

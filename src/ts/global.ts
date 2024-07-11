@@ -1,3 +1,5 @@
+import { EffectInterface } from "./effect-interface.ts";
+
 declare global {
     namespace globalThis {
         let CONFIG: Config<
@@ -25,16 +27,7 @@ declare global {
             EffectsCanvasGroup
         >;
         let canvas: Canvas;
-        let game: Game<
-            Actor<null>,
-            Actors<Actor<null>>,
-            ChatMessage,
-            Combat,
-            Item<null>,
-            Macro,
-            Scene,
-            User
-        >;
+        let game: GameDFreds;
         let ui: FoundryUI<
             ActorDirectory<Actor<null>>,
             ItemDirectory<Item<null>>,
@@ -46,4 +39,20 @@ declare global {
     }
 
     type AnyFunction = (...args: any) => any;
+
+    interface GameDFreds
+        extends Game<
+            Actor<null>,
+            Actors<Actor<null>>,
+            ChatMessage,
+            Combat,
+            Item<null>,
+            Macro,
+            Scene,
+            User
+        > {
+        dfreds: {
+            effectInterface: EffectInterface;
+        };
+    }
 }
