@@ -5,12 +5,13 @@ import BaseActiveEffect, {
 import { Settings } from "./settings.ts";
 import {
     findActorByUuid,
-    findEffectsItem,
+    findEffectFolderItems,
     getActorUuids,
     isEffectConvenient,
 } from "./helpers.ts";
 import { FLAGS } from "./constants.ts";
 import { SocketMessage } from "./sockets/socket.ts";
+import { log } from "./logger.ts";
 
 interface IFindEffect {
     /**
@@ -124,11 +125,11 @@ interface ICreateNewEffects {
 
 class EffectInterface {
     #settings: Settings;
-    #effectsItem: Item<null> | null;
+    #effectItems: Item<null>[];
 
     constructor() {
         this.#settings = new Settings();
-        this.#effectsItem = findEffectsItem();
+        this.#effectItems = findEffectFolderItems();
     }
 
     // TODO needs socket through GM probably
@@ -143,10 +144,22 @@ class EffectInterface {
         effectId,
         effectName,
     }: IFindEffect): BaseActiveEffect<Item<null>> | undefined {
-        if (!this.#effectsItem) return undefined;
-        return Array(...this.#effectsItem.effects).find(
-            (effect) => effect.id === effectId || effect.name === effectName,
-        );
+        if (!this.#effectItems) return undefined;
+
+        const matchingEffects = this.#effectItems
+            .flatMap((effectItem) => Array(...effectItem.effects))
+            .filter(
+                (effect) =>
+                    effect.id === effectId || effect.name === effectName,
+            );
+
+        if (matchingEffects.length > 1) {
+            log(
+                `Found more than one matching effect for effectId: ${effectId} and effectName: ${effectName}`,
+            );
+        }
+
+        return matchingEffects[0];
     }
 
     // TODO needs socket through GM probably
@@ -218,24 +231,24 @@ class EffectInterface {
     }
 
     // TODO needs socket through GM probably
-    async addEffect({
-        effectId,
-        effectName,
-        effectData,
-        uuid,
-        origin,
-        overlay = false,
-    }: IAddEffect): Promise<void> {}
+    // async addEffect({
+    //     effectId,
+    //     effectName,
+    //     effectData,
+    //     uuid,
+    //     origin,
+    //     overlay = false,
+    // }: IAddEffect): Promise<void> {}
 
-    // TODO needs socket through GM probably
-    async removeEffect({
-        effectId,
-        effectName,
-        origin,
-    }: IRemoveEffect): Promise<void> {}
+    // // TODO needs socket through GM probably
+    // async removeEffect({
+    //     effectId,
+    //     effectName,
+    //     origin,
+    // }: IRemoveEffect): Promise<void> {}
 
     // TODO needs socket through GM probably?
-    async createNewEffects({ effects }: ICreateNewEffects): Promise<void> {}
+    // async createNewEffects({ effects }: ICreateNewEffects): Promise<void> {}
 
     // TODO
     /**
@@ -244,59 +257,57 @@ class EffectInterface {
      * @param effect - the active effect to check the nested effects on
      * @returns true if the effect has a nested effect
      */
-    hasNestedEffects(effect: ActiveEffect<Item<null>>): boolean {
-        const nestedEffects =
-            effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
+    // hasNestedEffects(effect: ActiveEffect<Item<null>>): boolean {
+    //     const nestedEffects =
+    //         effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
 
-        return nestedEffects.length > 0;
-    }
+    //     return nestedEffects.length > 0;
+    // }
 
     async resetMigrations(): Promise<void> {
         if (!game.user.isGM) return;
 
-        const item = findEffectsItem();
-        await ActiveEffect.deleteDocuments([], {
-            deleteAll: true,
-            parent: item,
-            render: true,
-            noHook: true,
-        });
+        const items = findEffectFolderItems();
+        await Item.deleteDocuments(items.map((item) => item.id));
+
+        // TODO how do we tell it to recreate the items?
+
         await this.#settings.setEffectsVersion(0);
     }
 
-    async #getNestedEffectSelection(effect: ActiveEffect<any>) {
-        const nestedEffectNames =
-            effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
-        const nestedEffects = nestedEffectNames
-            .map((nestedEffect) =>
-                game.dfreds.effectInterface.findEffectByName(nestedEffect),
-            )
-            .filter((effect) => effect !== undefined);
+    // async #getNestedEffectSelection(effect: ActiveEffect<any>) {
+    //     const nestedEffectNames =
+    //         effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
+    //     const nestedEffects = nestedEffectNames
+    //         .map((nestedEffect) =>
+    //             game.dfreds.effectInterface.findEffectByName(nestedEffect),
+    //         )
+    //         .filter((effect) => effect !== undefined);
 
-        const content = await renderTemplate(
-            "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
-            { parentEffect: effect, nestedEffects },
-        );
-        const choice = await Dialog.prompt(
-            {
-                title: effect.name,
-                content: content,
-                label: "Select Effect",
-                callback: (html) => {
-                    const htmlChoice = html
-                        .find('select[name="effect-choice"]')
-                        .val();
-                    return htmlChoice;
-                },
-                rejectClose: false,
-            },
-            { width: 300 },
-        );
+    //     const content = await renderTemplate(
+    //         "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
+    //         { parentEffect: effect, nestedEffects },
+    //     );
+    //     const choice = await Dialog.prompt(
+    //         {
+    //             title: effect.name,
+    //             content: content,
+    //             label: "Select Effect",
+    //             callback: (html) => {
+    //                 const htmlChoice = html
+    //                     .find('select[name="effect-choice"]')
+    //                     .val();
+    //                 return htmlChoice;
+    //             },
+    //             rejectClose: false,
+    //         },
+    //         { width: 300 },
+    //     );
 
-        return nestedEffects.find(
-            (nestedEffect) => nestedEffect.name === choice,
-        );
-    }
+    //     return nestedEffects.find(
+    //         (nestedEffect) => nestedEffect.name === choice,
+    //     );
+    // }
 }
 
 export { EffectInterface };

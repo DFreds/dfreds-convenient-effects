@@ -8,25 +8,24 @@ import {
 } from "types/foundry/common/documents/active-effect.js";
 
 interface ICreateEffectAddOns {
-    isDynamic: boolean; // TODO can we remove this??
-    isViewable: boolean;
+    effect: PreCreate<ActiveEffectSource>;
+    isDynamic?: boolean; // TODO can we remove this??
+    isViewable?: boolean;
     atlChanges?: DeepPartial<EffectChangeData>[];
-    tokenMagicChanges: DeepPartial<EffectChangeData>[];
-    nestedEffects: DeepPartial<ActiveEffectSource>[]; // TODO just ids? not sure this would work... effects might not be created yet
-    subEffects: DeepPartial<ActiveEffectSource>[]; // TODO just ids?
+    tokenMagicChanges?: DeepPartial<EffectChangeData>[];
+    nestedEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids? not sure this would work... effects might not be created yet
+    subEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids?
 }
 
-async function addToEffectData(
-    effect: PreCreate<ActiveEffectSource>,
-    {
-        isDynamic = false,
-        isViewable = true,
-        atlChanges = [],
-        tokenMagicChanges = [],
-        nestedEffects = [],
-        subEffects = [],
-    }: ICreateEffectAddOns,
-): Promise<void> {
+function createConvenientEffect({
+    effect,
+    isDynamic = false,
+    isViewable = true,
+    atlChanges = [],
+    tokenMagicChanges = [],
+    nestedEffects = [],
+    subEffects = [],
+}: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     const effectFlags = effect.flags ?? {};
     const ceFlags: DeepPartial<DocumentFlags> = {};
 
@@ -47,6 +46,8 @@ async function addToEffectData(
     // if (settings.integrateWithTokenMagic) {
     effect.changes?.push(...tokenMagicChanges);
     // }
+
+    return effect;
 }
 
 /**
@@ -71,21 +72,10 @@ function findActorByUuid(
     return undefined;
 }
 
-/**
- * Finds the effect item
- *
- * @returns Returns the item for effects or null
- */
-function findEffectsItem(): Item<any> | null {
-    const settings = new Settings();
-
-    const effectsItemId = settings.effectsItemId;
-    if (!effectsItemId) return null;
-
-    const effectsItem = game.items.get(effectsItemId);
-    if (!effectsItem) return null;
-
-    return effectsItem;
+function findEffectFolderItems(): Item<any>[] {
+    return game.items.filter((item) => {
+        return item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) === true;
+    });
 }
 
 /**
@@ -140,9 +130,9 @@ function renderConvenientEffectsAppIfOpen(): void {
 }
 
 export {
-    addToEffectData,
+    createConvenientEffect,
     findActorByUuid,
-    findEffectsItem,
+    findEffectFolderItems,
     getActorUuids,
     isEffectConvenient,
     renderConvenientEffectsAppIfOpen,

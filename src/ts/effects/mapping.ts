@@ -1,8 +1,9 @@
-import { DND5E_EFFECTS } from "./dnd5e.ts";
+import { EffectDefinition } from "./effect-definition.ts";
+import { EffectDefinitionDnd5e } from "./effect-definition-dnd5e.ts";
 
-const EFFECTS_MAP: Record<string, Record<number, ActiveEffect<null>[]>> = {
-    dnd5e: DND5E_EFFECTS,
-    sw5e: DND5E_EFFECTS,
+const SYSTEM_DEFINITION_MAP: Record<string, EffectDefinition> = {
+    dnd5e: new EffectDefinitionDnd5e(),
+    sw5e: new EffectDefinitionDnd5e(),
 };
 
-export { EFFECTS_MAP };
+export { SYSTEM_DEFINITION_MAP };

@@ -39,6 +39,7 @@ declare global {
     }
 
     type AnyFunction = (...args: any) => any;
+    type AnyAsyncFunction = (...args: any) => Promise<any>;
 
     interface GameDFreds
         extends Game<
