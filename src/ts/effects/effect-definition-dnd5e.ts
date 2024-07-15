@@ -1,8 +1,5 @@
-import {
-    ActiveEffectSchema,
-    ActiveEffectSource,
-} from "types/foundry/common/documents/active-effect.js";
-import { EffectDefinition } from "./effect-definition.ts";
+import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
+import { EffectDefinition, MigrationType } from "./effect-definition.ts";
 import { log } from "../logger.ts";
 import { createConvenientEffect } from "../helpers.ts";
 
@@ -11,7 +8,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     override get initialEffects(): Record<
         string,
-        DeepPartial<SourceFromSchema<ActiveEffectSchema>>[]
+        DeepPartial<ActiveEffectSource>[]
     > {
         return {
             Conditions: [
@@ -40,12 +37,16 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         };
     }
 
-    override get migrations(): Record<number, AnyAsyncFunction> {
-        return {
-            0: async () => {
-                log("Sample migration running");
+    override get migrations(): MigrationType[] {
+        return [
+            {
+                key: "2024-07-15-sample-migration",
+                date: new Date("2024-07-15"),
+                func: async () => {
+                    log("Sample migration running");
+                },
             },
-        };
+        ];
     }
 }
 

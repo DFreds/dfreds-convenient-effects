@@ -9,7 +9,7 @@ class Settings {
 
     // Non-config setting keys
     #EFFECT_ITEM_IDs = "effectItemIds";
-    #EFFECTS_VERSION = "effectsVersion";
+    #RAN_MIGRATIONS = "ranMigrations";
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
@@ -105,17 +105,27 @@ class Settings {
         ]);
     }
 
-    get effectsVersion(): number {
-        const hasInitializedEffects = game.settings.get(
+    get ranMigrations(): string[] {
+        const effectVersionsRun = game.settings.get(
             MODULE_ID,
-            this.#EFFECTS_VERSION,
-        ) as number | undefined;
+            this.#RAN_MIGRATIONS,
+        ) as string[] | undefined;
 
-        return hasInitializedEffects ?? 0;
+        return effectVersionsRun ?? [];
     }
 
-    async setEffectsVersion(value: number): Promise<unknown> {
-        return game.settings.set(MODULE_ID, this.#EFFECTS_VERSION, value);
+    async addRanMigrationVersion(version: string): Promise<unknown> {
+        let ranMigrations = this.ranMigrations;
+
+        ranMigrations.push(version);
+
+        ranMigrations = [...new Set(ranMigrations)]; // remove duplicates
+
+        return game.settings.set(
+            MODULE_ID,
+            this.#RAN_MIGRATIONS,
+            ranMigrations,
+        );
     }
 }
 

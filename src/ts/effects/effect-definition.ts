@@ -28,7 +28,7 @@ abstract class EffectDefinition {
         PreCreate<ActiveEffectSource>[]
     >;
 
-    abstract get migrations(): Record<number, AnyAsyncFunction>;
+    abstract get migrations(): MigrationType[];
 
     protected async createInitialFolderItems(): Promise<void> {
         const folderItemNames = Object.keys(this.initialEffects);
@@ -74,35 +74,49 @@ abstract class EffectDefinition {
 
     protected async runMigrations(): Promise<void> {
         try {
-            // TODO improve this logic
+            const migrationsRun = this.settings.ranMigrations;
+            const sortedMigrations = this.migrations.sort(
+                (a: MigrationType, b: MigrationType) => {
+                    return a.date.getTime() - b.date.getTime();
+                },
+            );
 
-            const lastEffectRan = this.settings.effectsVersion;
+            for (const migration of sortedMigrations) {
+                if (migrationsRun.includes(migration.key)) continue; // Don't run a migration that already ran
 
-            const allVersions = Object.keys(this.migrations)
-                .map((versionKey) => parseInt(versionKey))
-                .sort();
-
-            // Determine what to run
-            const versionsToRun = allVersions.splice(lastEffectRan);
-
-            log(`Running versions ${versionsToRun}`);
-
-            for (const version of versionsToRun) {
                 log(
-                    `Running version ${version} migration for ${this.systemId}`,
+                    `Running version ${migration.key} migration for ${this.systemId}`,
                 );
-                const migrationForVersion = this.migrations[version];
 
-                await migrationForVersion();
+                await migration.func();
 
                 // Save each successful migration so that if something fails
                 // before the end, it picks up at the right spot
-                await this.settings.setEffectsVersion(version);
+                await this.settings.addRanMigrationVersion(migration.key);
             }
         } catch (e: any) {
-            log(`Something went wrong while initializing effects: ${e}`);
+            log(`Something went wrong while running migrations: ${e}`);
         }
     }
 }
 
+type MigrationType = {
+    /**
+     * The identifier for the migration. Successfully run migrations are saved
+     * using this key
+     */
+    key: string;
+
+    /**
+     * The date of the migration. Migrations run from oldest to newest in order
+     */
+    date: Date;
+
+    /**
+     * The migration function
+     */
+    func: AnyAsyncFunction;
+};
+
 export { EffectDefinition };
+export type { MigrationType };
