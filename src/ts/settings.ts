@@ -8,8 +8,8 @@ class Settings {
     #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
 
     // Non-config setting keys
-    #EFFECTS_ITEM_ID = "customEffectsItemId"; // legacy key name
-    #EFFECTS_VERSION = "hasInitializedEffects";
+    #EFFECT_ITEM_IDs = "effectItemIds";
+    #EFFECTS_VERSION = "effectsVersion";
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
@@ -50,7 +50,6 @@ class Settings {
         });
     }
 
-    /* region Settings getters and setters */
     get appControlsPermission(): number {
         // TODO do we need to parseInt here?
         return parseInt(
@@ -61,17 +60,49 @@ class Settings {
         );
     }
 
-    get effectsItemId(): string | undefined {
-        const itemId = game.settings.get(MODULE_ID, this.#EFFECTS_ITEM_ID);
-        if (itemId) {
-            return itemId as string;
+    get effectItemIds(): string[] | undefined {
+        const itemIds = game.settings.get(MODULE_ID, this.#EFFECT_ITEM_IDs);
+        if (itemIds) {
+            return itemIds as string[];
         } else {
             return undefined;
         }
     }
 
-    async setEffectsItemId(itemId: string): Promise<unknown> {
-        return game.settings.set(MODULE_ID, this.#EFFECTS_ITEM_ID, itemId);
+    async addEffectItemId(itemId: string): Promise<unknown> {
+        let effectItemIds = this.effectItemIds;
+
+        if (!effectItemIds) return;
+
+        effectItemIds.push(itemId);
+
+        effectItemIds = [...new Set(effectItemIds)]; // remove duplicates
+
+        return game.settings.set(
+            MODULE_ID,
+            this.#EFFECT_ITEM_IDs,
+            effectItemIds,
+        );
+    }
+
+    async removeEffectItemId(itemId: string): Promise<unknown> {
+        const effectItemIds = this.effectItemIds?.filter(
+            (expandedFolder) => expandedFolder !== itemId,
+        );
+
+        if (!effectItemIds) return;
+
+        return game.settings.set(
+            MODULE_ID,
+            this.#EFFECT_ITEM_IDs,
+            effectItemIds,
+        );
+    }
+
+    async setEffectItemIds(effectItemIds: string[]): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#EFFECT_ITEM_IDs, [
+            ...new Set(effectItemIds),
+        ]);
     }
 
     get effectsVersion(): number {
@@ -86,7 +117,6 @@ class Settings {
     async setEffectsVersion(value: number): Promise<unknown> {
         return game.settings.set(MODULE_ID, this.#EFFECTS_VERSION, value);
     }
-    /* endregion */
 }
 
 export { Settings };

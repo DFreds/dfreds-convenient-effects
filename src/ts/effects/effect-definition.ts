@@ -38,17 +38,20 @@ abstract class EffectDefinition {
         ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true;
 
         const itemPromises = folderItemNames.map((folderItemName) => {
-            return Item.create([
-                {
-                    name: folderItemName,
-                    img: "modules/dfreds-convenient-effects/images/magic-palm.svg",
-                    type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
-                    flags: ceFlags,
-                },
-            ]);
+            return Item.create({
+                name: folderItemName,
+                img: "modules/dfreds-convenient-effects/images/magic-palm.svg",
+                type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
+                flags: ceFlags,
+            });
         });
 
-        await Promise.all(itemPromises);
+        const folderItems = await Promise.all(itemPromises);
+        const folderItemIds = folderItems
+            .filter((folderItem) => !!folderItem)
+            .map((folderItem) => folderItem.id);
+
+        await this.settings.setEffectItemIds(folderItemIds);
     }
 
     protected async createInitialEffects(): Promise<void> {
