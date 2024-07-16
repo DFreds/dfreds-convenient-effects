@@ -15,64 +15,46 @@ abstract class EffectDefinition {
     }
 
     async initialize(): Promise<void> {
-        // TODO do this only once
-        await this.createInitialFolderItems();
-        await this.createInitialEffects();
+        // TODO should we create backup items that can't be modified here? With additional flag perhaps
 
-        // TODO do every time to check for new ones
-        await this.runMigrations();
+        await this.#createItemsAndEffects(); // TODO do this only once
+        await this.#runMigrations();
     }
 
-    abstract get initialEffects(): Record<
-        string,
-        PreCreate<ActiveEffectSource>[]
-    >;
+    abstract get initialItemEffects(): ItemEffects[];
 
     abstract get migrations(): MigrationType[];
 
-    protected async createInitialFolderItems(): Promise<void> {
-        const folderItemNames = Object.keys(this.initialEffects);
-
+    async #createItemsAndEffects(): Promise<void> {
         const ceFlags: DeepPartial<ItemFlags> = {};
         ceFlags[MODULE_ID] = {};
-        ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true;
+        ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true; // TODO use to filter from item directory
+        ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true; // TODO use to hide in app
 
-        const itemPromises = folderItemNames.map((folderItemName) => {
-            return Item.create({
-                name: folderItemName,
-                img: "modules/dfreds-convenient-effects/images/magic-palm.svg",
-                type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
-                flags: ceFlags,
-            });
-        });
+        const effectPromises = this.initialItemEffects.map(
+            async (itemEffect) => {
+                const item = await Item.create({
+                    name: itemEffect.itemData.name,
+                    img: "modules/dfreds-convenient-effects/images/magic-palm.svg",
+                    type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
+                    flags: ceFlags,
+                });
 
-        const folderItems = await Promise.all(itemPromises);
-        const folderItemIds = folderItems
-            .filter((folderItem) => !!folderItem)
-            .map((folderItem) => folderItem.id);
+                if (!item) return; // type safety, shouldn't occur
 
-        await this.settings.setEffectItemIds(folderItemIds);
-    }
+                await this.settings.addEffectItemId(item.id);
 
-    protected async createInitialEffects(): Promise<void> {
-        const folderItemNames = Object.keys(this.initialEffects);
-
-        const effectPromises = folderItemNames.map(async (folderItemName) => {
-            const folderItem = game.items.find(
-                (item) => item.name === folderItemName,
-            );
-            const effectsForFolder = this.initialEffects[folderItemName];
-
-            return folderItem?.createEmbeddedDocuments(
-                "ActiveEffect",
-                effectsForFolder,
-            );
-        });
+                return item.createEmbeddedDocuments(
+                    "ActiveEffect",
+                    itemEffect.effects,
+                );
+            },
+        );
 
         await Promise.all(effectPromises);
     }
 
-    protected async runMigrations(): Promise<void> {
+    async #runMigrations(): Promise<void> {
         try {
             const migrationsRun = this.settings.ranMigrations;
             const sortedMigrations = this.migrations.sort(
@@ -92,13 +74,29 @@ abstract class EffectDefinition {
 
                 // Save each successful migration so that if something fails
                 // before the end, it picks up at the right spot
-                await this.settings.addRanMigrationVersion(migration.key);
+                await this.settings.addRanMigration(migration.key);
             }
         } catch (e: any) {
             log(`Something went wrong while running migrations: ${e}`);
         }
     }
 }
+
+type ItemData = {
+    name: string;
+};
+
+type ItemEffects = {
+    /**
+     * The item data for the item that will contain the effects
+     */
+    itemData: ItemData;
+
+    /**
+     * The effects that belong to the item
+     */
+    effects: PreCreate<ActiveEffectSource>[];
+};
 
 type MigrationType = {
     /**
@@ -119,4 +117,4 @@ type MigrationType = {
 };
 
 export { EffectDefinition };
-export type { MigrationType };
+export type { ItemData, ItemEffects, MigrationType };
