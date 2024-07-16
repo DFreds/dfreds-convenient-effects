@@ -114,10 +114,10 @@ class Settings {
         return effectVersionsRun ?? [];
     }
 
-    async addRanMigrationVersion(version: string): Promise<unknown> {
+    async addRanMigration(migrationKey: string): Promise<unknown> {
         let ranMigrations = this.ranMigrations;
 
-        ranMigrations.push(version);
+        ranMigrations.push(migrationKey);
 
         ranMigrations = [...new Set(ranMigrations)]; // remove duplicates
 
@@ -126,6 +126,10 @@ class Settings {
             this.#RAN_MIGRATIONS,
             ranMigrations,
         );
+    }
+
+    async clearRanMigrations(): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#RAN_MIGRATIONS, []);
     }
 }
 
