@@ -6,6 +6,12 @@ import {
     ActiveEffectSource,
     EffectChangeData,
 } from "types/foundry/common/documents/active-effect.js";
+import { ItemFlags, ItemSource } from "types/foundry/common/documents/item.js";
+
+interface ICreateItemAddOns {
+    item: PreCreate<ItemSource>;
+    backupId?: string;
+}
 
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
@@ -15,6 +21,29 @@ interface ICreateEffectAddOns {
     tokenMagicChanges?: DeepPartial<EffectChangeData>[];
     nestedEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids? not sure this would work... effects might not be created yet
     subEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids?
+    otherEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids? this is for effects that should not be tied to the initial effect (i.e. prone being applied when unconscious)
+}
+
+function createConvenientItem({
+    item,
+    backupId,
+}: ICreateItemAddOns): PreCreate<ItemSource> {
+    const itemFlags = item.flags ?? {};
+    const ceFlags: DeepPartial<ItemFlags> = {};
+
+    ceFlags[MODULE_ID] = {};
+    ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true; // TODO use to filter from item directory
+    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true; // TODO use to hide in app
+
+    if (backupId) {
+        ceFlags[MODULE_ID]![FLAGS.BACKUP_ID] = backupId; // TODO use to backup originals
+    }
+
+    item.flags = foundry.utils.mergeObject(ceFlags, itemFlags);
+    item.img =
+        item.img ?? "modules/dfreds-convenient-effects/images/magic-palm.svg";
+
+    return item;
 }
 
 function createConvenientEffect({
@@ -130,6 +159,7 @@ function renderConvenientEffectsAppIfOpen(): void {
 }
 
 export {
+    createConvenientItem,
     createConvenientEffect,
     findActorByUuid,
     findEffectFolderItems,
