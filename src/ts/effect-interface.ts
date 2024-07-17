@@ -9,7 +9,6 @@ import {
     getActorUuids,
     isEffectConvenient,
 } from "./helpers.ts";
-import { FLAGS } from "./constants.ts";
 import { SocketMessage } from "./sockets/socket.ts";
 import { log } from "./logger.ts";
 
@@ -54,14 +53,20 @@ interface IToggleEffect {
     effectName?: string;
 
     /**
+     * The UUIDs of the actors. Set to an empty array by default
+     */
+    uuids: string[];
+
+    /**
      * Applies the effect as an overlay or not. Set to false by default
      */
     overlay: boolean;
 
     /**
-     * The UUIDs of the actors. Set to an empty array by default
+     * The origin of the effect. If toggling off, it will only remove the effect
+     * if the origin matches.
      */
-    uuids: string[];
+    origin?: ActiveEffectOrigin | null;
 }
 
 interface IAddEffect {
@@ -89,14 +94,14 @@ interface IAddEffect {
     uuid: string;
 
     /**
-     * The origin of the effect
-     */
-    origin?: string;
-
-    /**
      * Applies the effect as an overlay or not. Set to false by default.
      */
     overlay: boolean;
+
+    /**
+     * The origin of the effect
+     */
+    origin?: ActiveEffectOrigin | null;
 }
 
 interface IRemoveEffect {
@@ -111,9 +116,15 @@ interface IRemoveEffect {
     effectName?: string;
 
     /**
-     * If defined, only removes the effect if the origin matches
+     * The UUID of the actor
      */
-    origin?: string;
+    uuid: string;
+
+    /**
+     * The origin of the effect. If defined, only removes the effect if the
+     * origin matches
+     */
+    origin?: ActiveEffectOrigin | null;
 }
 
 interface ICreateNewEffects {
@@ -125,11 +136,9 @@ interface ICreateNewEffects {
 
 class EffectInterface {
     #settings: Settings;
-    #effectItems: Item<null>[];
 
     constructor() {
         this.#settings = new Settings();
-        this.#effectItems = findEffectFolderItems();
     }
 
     // TODO needs socket through GM probably
@@ -144,9 +153,11 @@ class EffectInterface {
         effectId,
         effectName,
     }: IFindEffect): BaseActiveEffect<Item<null>> | undefined {
-        if (!this.#effectItems) return undefined;
+        const effectItems = findEffectFolderItems();
 
-        const matchingEffects = this.#effectItems
+        if (!effectItems) return undefined;
+
+        const matchingEffects = effectItems
             .flatMap((effectItem) => Array(...effectItem.effects))
             .filter(
                 (effect) =>
@@ -162,7 +173,6 @@ class EffectInterface {
         return matchingEffects[0];
     }
 
-    // TODO needs socket through GM probably
     /**
      * Checks to see if any of the current active effects applied to the actor
      * with the given UUID match the effect ID or name and are a convenient
@@ -189,12 +199,23 @@ class EffectInterface {
         );
     }
 
-    // TODO needs socket through GM probably
+    /**
+     * Toggles the effect on the provided actor UUIDS as the GM via sockets. If
+     * no actor UUIDs are provided, it finds one of these in this priority:
+     *
+     * 1. The targeted tokens (if prioritize targets is enabled)
+     * 2. The currently selected tokens on the canvas
+     * 3. The user configured character
+     *
+     * @param options - the options for toggling an effect
+     * @returns A promise that resolves when all effects are added
+     */
     async toggleEffect({
         effectId,
         effectName,
-        overlay = false,
         uuids = [],
+        overlay = false,
+        origin,
     }: IToggleEffect): Promise<void> {
         let actorUuids = uuids;
         if (actorUuids.length === 0) {
@@ -209,43 +230,112 @@ class EffectInterface {
             return;
         }
 
-        // TODO determine how much of this should be in effect-interface vs socket vs effect-handler
-        // NOTE: once you're in socket, it's as the GM
+        // TODO use promise.all?
+        for (const uuid of actorUuids) {
+            if (this.hasEffectApplied({ effectId, effectName, uuid })) {
+                await this.removeEffect({ effectId, effectName, uuid, origin });
+            } else {
+                await this.addEffect({
+                    effectId,
+                    effectName,
+                    uuid,
+                    overlay,
+                    origin,
+                });
+            }
+        }
+    }
 
+    /**
+     * Adds an effect matching the given params to the actor of the given UUID.
+     * The effect adding is sent via a socket.
+     *
+     * @param options - the options for adding an effect
+     * @returns A promise that resolves when the effect is sent via the socket
+     */
+    async addEffect({
+        effectId,
+        effectName,
+        effectData,
+        uuid,
+        overlay = false,
+        origin,
+    }: IAddEffect): Promise<void> {
         const effect = this.findEffect({ effectId, effectName });
+        const effectDataToSend = effect?.toObject() ?? effectData;
 
-        // TODO more descriptive error?
-        if (!effect) {
-            ui.notifications.error("Cannot find effect");
+        if (!effectDataToSend) {
+            ui.notifications.error("Cannot find effect to add");
             return;
         }
 
-        // TODO handle nested effects
+        if (!findActorByUuid(uuid)) {
+            ui.notifications.error(`Actor ${uuid} could not be found`);
+            return;
+        }
+
+        // if (this.hasNestedEffects(effect) > 0) {
+        //     effect = await this._getNestedEffectSelection(effect);
+        //     if (!effect) return; // dialog closed without selecting one
+        // }
+
+        const coreFlags: DocumentFlags = {
+            core: {
+                overlay,
+            },
+        };
+        effectDataToSend.flags = foundry.utils.mergeObject(
+            effectDataToSend.flags ?? {},
+            coreFlags,
+        );
+
+        if (origin) {
+            effectDataToSend.origin = origin;
+        }
+
+        // TODO this needs to do any nested effects. Nested effects are handled by client
 
         game.socket.emit(MODULE_ID, {
-            request: "toggleEffect",
-            effectData: effect.toObject(),
-            overlay,
-            uuids,
+            request: "addEffect",
+            effectData: effectDataToSend,
+            uuid,
         } satisfies SocketMessage);
     }
 
-    // TODO needs socket through GM probably
-    // async addEffect({
-    //     effectId,
-    //     effectName,
-    //     effectData,
-    //     uuid,
-    //     origin,
-    //     overlay = false,
-    // }: IAddEffect): Promise<void> {}
+    /**
+     * Removes an effect matching the given params from an actor of the given
+     * UUID. The effect removal is sent via a socket.
+     *
+     * @param options - the options for removing an effect
+     * @returns A promise that resolves when the removal request is sent via the
+     * socket
+     */
+    async removeEffect({
+        effectId,
+        effectName,
+        uuid,
+        origin,
+    }: IRemoveEffect): Promise<void> {
+        if (!effectId && !effectName) {
+            ui.notifications.error("Cannot find effect to remove");
+            return;
+        }
 
-    // // TODO needs socket through GM probably
-    // async removeEffect({
-    //     effectId,
-    //     effectName,
-    //     origin,
-    // }: IRemoveEffect): Promise<void> {}
+        if (!findActorByUuid(uuid)) {
+            ui.notifications.error(`Actor ${uuid} could not be found`);
+            return;
+        }
+
+        // TODO this needs to do any nested effects
+
+        game.socket.emit(MODULE_ID, {
+            request: "removeEffect",
+            effectId,
+            effectName,
+            uuid,
+            origin,
+        } satisfies SocketMessage);
+    }
 
     // TODO needs socket through GM probably?
     // async createNewEffects({ effects }: ICreateNewEffects): Promise<void> {}
@@ -264,6 +354,7 @@ class EffectInterface {
     //     return nestedEffects.length > 0;
     // }
 
+    // TODO should this be exposed in the interface?
     async resetMigrations(): Promise<void> {
         if (!game.user.isGM) return;
 
@@ -272,7 +363,7 @@ class EffectInterface {
 
         // TODO how do we tell it to recreate the items?
 
-        await this.#settings.setEffectsVersion(0);
+        await this.#settings.clearRanMigrations();
     }
 
     // async #getNestedEffectSelection(effect: ActiveEffect<any>) {

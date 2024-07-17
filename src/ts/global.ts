@@ -1,3 +1,4 @@
+import { fields } from "types/foundry/common/data/module.js";
 import { EffectInterface } from "./effect-interface.ts";
 
 declare global {
@@ -40,6 +41,13 @@ declare global {
 
     type AnyFunction = (...args: any) => any;
     type AnyAsyncFunction = (...args: any) => Promise<any>;
+
+    type ActiveEffectOrigin =
+        | `Actor.${string}`
+        | `Scene.${string}.Token.${string}.Actor.${string}`
+        | `Compendium.${string}.Actor.${string}`
+        | `Item.${string}`
+        | `Compendium.${string}.Item.${string}`;
 
     interface GameDFreds
         extends Game<

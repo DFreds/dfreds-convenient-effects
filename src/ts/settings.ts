@@ -5,7 +5,7 @@ class Settings {
 
     // Settings keys
     #APP_CONTROLS_PERMISSION = "controlsPermission";
-    #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
+    // #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
 
     // Non-config setting keys
     #EFFECT_ITEM_IDs = "effectItemIds";

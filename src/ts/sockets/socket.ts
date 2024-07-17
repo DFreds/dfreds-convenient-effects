@@ -1,14 +1,10 @@
 import { id as MODULE_ID } from "@static/module.json";
-import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
-import { EffectHandler } from "../effects/effect-handler.ts";
+import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
+import { SocketEffectHandler } from "./socket-effect-handler.ts";
 import { log } from "../logger.ts";
 
-const SOCKET_REQUESTS = {
-    TOGGLE_EFFECT: "toggleEffect",
-};
-
 function activateSocketListener(): void {
-    const effectHandler = new EffectHandler();
+    const socketEffectHandler = new SocketEffectHandler();
 
     game.socket.on(
         MODULE_ID,
@@ -21,11 +17,19 @@ function activateSocketListener(): void {
             if (!receiver.isGM) return; // Sender can be anyone, receiver should only execute as GM
 
             switch (message.request) {
-                case SOCKET_REQUESTS.TOGGLE_EFFECT: {
-                    await effectHandler.toggleEffect({
+                case "addEffect": {
+                    await socketEffectHandler.addEffect({
                         effectData: message.effectData,
-                        overlay: message.overlay,
-                        uuids: message.uuids,
+                        uuid: message.uuid,
+                    });
+                    break;
+                }
+                case "removeEffect": {
+                    await socketEffectHandler.removeEffect({
+                        effectId: message.effectId,
+                        effectName: message.effectName,
+                        uuid: message.uuid,
+                        origin: message.origin,
                     });
                     break;
                 }
@@ -39,14 +43,24 @@ function activateSocketListener(): void {
     );
 }
 
-interface ToggleEffectMessage {
-    request: "toggleEffect";
-    effectData: SourceFromSchema<ActiveEffectSchema>;
-    overlay: boolean;
-    uuids: string[];
+interface AddEffectMessage {
+    request: "addEffect";
+    effectData: DeepPartial<ActiveEffectSource>;
+    uuid: string;
 }
 
-type SocketMessage = ToggleEffectMessage | { request?: never };
+interface RemoveEffectMessage {
+    request: "removeEffect";
+    effectId?: string;
+    effectName?: string;
+    uuid: string;
+    origin?: ActiveEffectOrigin | null;
+}
+
+type SocketMessage =
+    | AddEffectMessage
+    | RemoveEffectMessage
+    | { request?: never };
 type SocketEventParams = [message: SocketMessage, userId: string];
 
-export { activateSocketListener, SOCKET_REQUESTS, type SocketMessage };
+export { activateSocketListener, type SocketMessage };

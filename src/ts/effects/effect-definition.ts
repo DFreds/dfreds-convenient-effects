@@ -4,6 +4,7 @@ import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
 import { FLAGS } from "../constants.ts";
 import { ItemFlags } from "types/foundry/common/documents/item.js";
+import { createConvenientItem } from "../helpers.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -18,6 +19,7 @@ abstract class EffectDefinition {
         // TODO should we create backup items that can't be modified here? With additional flag perhaps
 
         await this.#createItemsAndEffects(); // TODO do this only once
+        await this.#createBackupItemsAndEffects(); // TODO do this only once
         await this.#runMigrations();
     }
 
@@ -26,19 +28,16 @@ abstract class EffectDefinition {
     abstract get migrations(): MigrationType[];
 
     async #createItemsAndEffects(): Promise<void> {
-        const ceFlags: DeepPartial<ItemFlags> = {};
-        ceFlags[MODULE_ID] = {};
-        ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true; // TODO use to filter from item directory
-        ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true; // TODO use to hide in app
-
         const effectPromises = this.initialItemEffects.map(
             async (itemEffect) => {
-                const item = await Item.create({
-                    name: itemEffect.itemData.name,
-                    img: "modules/dfreds-convenient-effects/images/magic-palm.svg",
-                    type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
-                    flags: ceFlags,
-                });
+                const item = await Item.create(
+                    createConvenientItem({
+                        item: {
+                            name: itemEffect.itemData.name,
+                            type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
+                        },
+                    }),
+                );
 
                 if (!item) return; // type safety, shouldn't occur
 
@@ -52,6 +51,24 @@ abstract class EffectDefinition {
         );
 
         await Promise.all(effectPromises);
+    }
+
+    async #createBackupItemsAndEffects(): Promise<void> {
+        const itemIds = this.settings.effectItemIds;
+        if (!itemIds) return;
+
+        for (const itemId of itemIds) {
+            const item = game.items.get(itemId);
+
+            const itemFlags = item?.flags ?? {};
+            const backupFlags: DeepPartial<ItemFlags> = {};
+            backupFlags[MODULE_ID]![FLAGS.BACKUP_ID] = itemId;
+
+            await item?.clone(
+                { flags: foundry.utils.mergeObject(backupFlags, itemFlags) },
+                { save: true },
+            );
+        }
     }
 
     async #runMigrations(): Promise<void> {

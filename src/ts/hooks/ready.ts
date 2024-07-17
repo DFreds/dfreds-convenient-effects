@@ -1,5 +1,6 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { Listener } from "./index.ts";
+import { activateSocketListener } from "../sockets/socket.ts";
 
 /**
  * Handle creating the Item that will hold the effects
@@ -7,7 +8,7 @@ import { Listener } from "./index.ts";
 const Ready: Listener = {
     listen(): void {
         Hooks.once("ready", async () => {
-            // TODO anything else here?
+            activateSocketListener();
 
             Hooks.callAll(`${MODULE_ID}.createEffects`);
         });
