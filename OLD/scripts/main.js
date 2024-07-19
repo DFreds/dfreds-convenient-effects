@@ -85,20 +85,6 @@ Hooks.on("renderItemDirectory", (directory) => {
 });
 
 /**
- * Handle when an active effect is created
- */
-Hooks.on("createActiveEffect", (activeEffect, _config, userId) => {
-    if (game.user.id !== userId) return;
-
-    const settings = new Settings();
-    if (activeEffect.parent.id == settings.customEffectsItemId) {
-        // Re-render the app if open and a new effect is added to the custom item
-        const foundryHelpers = new FoundryHelpers();
-        foundryHelpers.renderConvenientEffectsAppIfOpen();
-    }
-});
-
-/**
  * Handle re-rendering the app if it is open and an update occurs
  */
 Hooks.on("updateActiveEffect", (activeEffect, _config, userId) => {

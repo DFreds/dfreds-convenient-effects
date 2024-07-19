@@ -1,3 +1,4 @@
+import { CreateActiveEffect } from "./createActiveEffect.ts";
 import { CreateEffects } from "./createEffects.ts";
 import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
 import { Init } from "./init.ts";
@@ -14,6 +15,7 @@ const HooksCE = {
             Ready,
             CreateEffects,
             GetSceneControlButtons,
+            CreateActiveEffect,
         ];
 
         for (const listener of listeners) {
