@@ -1,4 +1,5 @@
 import { CreateEffects } from "./createEffects.ts";
+import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
 import { Init } from "./init.ts";
 import { Ready } from "./ready.ts";
 
@@ -8,7 +9,12 @@ interface Listener {
 
 const HooksCE = {
     listen(): void {
-        const listeners: Listener[] = [Init, Ready, CreateEffects];
+        const listeners: Listener[] = [
+            Init,
+            Ready,
+            CreateEffects,
+            GetSceneControlButtons,
+        ];
 
         for (const listener of listeners) {
             listener.listen();

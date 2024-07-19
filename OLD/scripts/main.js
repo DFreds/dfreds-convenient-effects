@@ -85,13 +85,6 @@ Hooks.on("renderItemDirectory", (directory) => {
 });
 
 /**
- * Handle adding new controls
- */
-Hooks.on("getSceneControlButtons", (controls) => {
-    new Controls().initializeControls(controls);
-});
-
-/**
  * Handle when an active effect is created
  */
 Hooks.on("createActiveEffect", (activeEffect, _config, userId) => {
