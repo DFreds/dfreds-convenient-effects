@@ -1,4 +1,3 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import {
     EffectDefinition,
@@ -7,8 +6,6 @@ import {
 } from "../effect-definition.ts";
 import { log } from "../../logger.ts";
 import { createConvenientEffect } from "../../helpers.ts";
-import { Settings } from "src/ts/settings.ts";
-import { FLAGS } from "src/ts/constants.ts";
 
 // TODO special: unconscious should apply prone with otherEffects
 // TODO special: what to do with exhaustion?
@@ -25,18 +22,18 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 key: "2024-07-15-sample-migration",
                 date: new Date("2024-07-15"),
                 func: async () => {
-                    const settings = new Settings();
-                    const itemIds = settings.effectItemIds;
-                    const backupItemIds = game.items
-                        .filter((item) => {
-                            const backupItemId = item.getFlag(
-                                MODULE_ID,
-                                FLAGS.BACKUP_ID,
-                            ) as string | undefined;
+                    // const settings = new Settings();
+                    // const itemIds = settings.effectItemIds;
+                    // const backupItemIds = game.items
+                    //     .filter((item) => {
+                    //         const backupItemId = item.getFlag(
+                    //             MODULE_ID,
+                    //             FLAGS.BACKUP_ID,
+                    //         ) as string | undefined;
 
-                            return backupItemId !== undefined;
-                        })
-                        .map((backupItem) => backupItem.id);
+                    //         return backupItemId !== undefined;
+                    //     })
+                    //     .map((backupItem) => backupItem.id);
                     log("Sample migration running");
                 },
             },

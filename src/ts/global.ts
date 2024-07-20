@@ -1,4 +1,3 @@
-import { fields } from "types/foundry/common/data/module.js";
 import { EffectInterface } from "./effect-interface.ts";
 
 declare global {

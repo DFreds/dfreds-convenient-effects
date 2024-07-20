@@ -127,12 +127,13 @@ interface IRemoveEffect {
     origin?: ActiveEffectOrigin | null;
 }
 
-interface ICreateNewEffects {
-    /**
-     * The effects to create
-     */
-    effects: PreCreate<ActiveEffectSource>[];
-}
+// TODO
+// interface ICreateNewEffects {
+//     /**
+//      * The effects to create
+//      */
+//     effects: PreCreate<ActiveEffectSource>[];
+// }
 
 class EffectInterface {
     #settings: Settings;

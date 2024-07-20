@@ -1,6 +1,5 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { ConvenientEffectsApp } from "./app/convenient-effects-app.ts";
-import { Settings } from "./settings.ts";
 import { FLAGS } from "./constants.ts";
 import {
     ActiveEffectSource,
@@ -67,7 +66,7 @@ function createConvenientEffect({
 
     effect.flags = foundry.utils.mergeObject(ceFlags, effectFlags);
 
-    const settings = new Settings();
+    // const settings = new Settings();
     // if (settings.integrateWithAte) {
     effect.changes?.push(...atlChanges);
     // }
