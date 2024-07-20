@@ -1,42 +1,53 @@
 {
     "exclude": ["build/**/*"],
     "compilerOptions": {
-        "allowImportingTsExtensions": true,
-        "allowUnusedLabels": false,
-        "baseUrl": ".",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "isolatedModules": true,
-        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "target": "ES2022",
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable"
+        ],
         "noEmit": true,
-        "noErrorTruncation": true,
+        "strict": true,
         "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,
-        "noUnusedLocals": false,
+        "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "allowImportingTsExtensions": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "isolatedModules": true,
+        "baseUrl": ".",
+        "rootDir": ".",
         "outDir": "dist",
+        "allowUnusedLabels": false,
+        "removeComments": false,
+        "resolveJsonModule": true,
+        "useDefineForClassFields": true,
+        "noErrorTruncation": true,
         "paths": {
             "@static/*": ["static/*"],
         },
-        "removeComments": false,
-        "resolveJsonModule": true,
-        "rootDir": ".",
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "strict": true,
-        "target": "ES2022",
+        "types": [
+            "jest",
+            "jquery",
+            "node",
+        ],
         "typeRoots": [
             "node_modules/@types",
             "types/foundry",
-            "types/libWrapper",
-        ],
-        "types": ["jquery", "node"],
-        "useDefineForClassFields": true,
+            "types/libWrapper"
+        ]
     },
     "watchOptions": {
-        "excludeDirectories": ["packs/", "static/packs/"],
-    },
+        "excludeDirectories": [
+            "packs/",
+            "static/packs/"
+        ]
+    }
 }
