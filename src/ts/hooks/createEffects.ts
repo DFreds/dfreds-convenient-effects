@@ -8,7 +8,9 @@ import { DEBUG, FLAGS } from "../constants.ts";
 const CreateEffects: Listener = {
     listen(): void {
         Hooks.once(`${MODULE_ID}.createEffects`, async () => {
-            if (!game.user.isGM) return; // Only allow connected GMs to do this
+            // Ensure only a single GM will run initialization and migration if
+            // multiple are logged in
+            if (game.user !== game.users.activeGM) return;
 
             // TODO extract to actual API function to reset?
             if (DEBUG) {

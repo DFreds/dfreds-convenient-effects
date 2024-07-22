@@ -9,11 +9,11 @@ import { EffectInterface } from "../effect-interface.ts";
 const Ready: Listener = {
     listen(): void {
         Hooks.once("ready", async () => {
-            activateSocketListener();
-
             game.dfreds = {
                 effectInterface: new EffectInterface(),
             };
+
+            activateSocketListener();
 
             Hooks.callAll(`${MODULE_ID}.createEffects`);
         });

@@ -1,14 +1,10 @@
-import { id as MODULE_ID } from "@static/module.json";
-import { FLAGS, DEBUG } from "../constants.ts";
+import { DEBUG } from "../constants.ts";
+import { findAllEffectFolderItems } from "../helpers.ts";
 
 function removeConvenientItemsFromSidebar(
     directory: ItemDirectory<Item<null>>,
 ): void {
-    const convenientItemIds = game.items
-        .filter((item) => {
-            return item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) as boolean;
-        })
-        .map((item) => item.id);
+    const convenientItemIds = findAllEffectFolderItems().map((item) => item.id);
 
     if (!convenientItemIds) return;
     if (DEBUG) return;

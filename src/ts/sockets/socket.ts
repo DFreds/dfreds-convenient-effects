@@ -4,11 +4,10 @@ import { SocketEffectHandler } from "./socket-effect-handler.ts";
 import { log } from "../logger.ts";
 
 function activateSocketListener(): void {
-    const socketEffectHandler = new SocketEffectHandler();
-
     game.socket.on(
         MODULE_ID,
         async (...[message, userId]: SocketEventParams) => {
+            const socketEffectHandler = new SocketEffectHandler();
             const sender = game.users.get(userId, { strict: true });
             const receiver = game.user;
 

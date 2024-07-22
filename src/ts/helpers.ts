@@ -100,9 +100,22 @@ function findActorByUuid(
     return undefined;
 }
 
-function findEffectFolderItems(): Item<any>[] {
+function findAllEffectFolderItems(): Item<any>[] {
     return game.items.filter((item) => {
-        return item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) === true;
+        const isConvenient =
+            item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) === true;
+
+        return isConvenient;
+    });
+}
+
+function findEffectFolderItems(): Item<any>[] {
+    return findAllEffectFolderItems().filter((item) => {
+        const isConvenient =
+            item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) === true;
+        const isBackup = !!item.getFlag(MODULE_ID, FLAGS.BACKUP_ID) === true;
+
+        return isConvenient && !isBackup;
     });
 }
 
@@ -161,6 +174,7 @@ export {
     createConvenientItem,
     createConvenientEffect,
     findActorByUuid,
+    findAllEffectFolderItems,
     findEffectFolderItems,
     getActorUuids,
     isEffectConvenient,
