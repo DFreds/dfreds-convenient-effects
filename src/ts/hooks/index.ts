@@ -1,10 +1,12 @@
 import { ChangeSidebarTab } from "./changeSidebarTab.ts";
 import { CreateActiveEffect } from "./createActiveEffect.ts";
 import { CreateEffects } from "./createEffects.ts";
+import { DeleteActiveEffect } from "./deleteActiveEffect.ts";
 import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
 import { Init } from "./init.ts";
 import { Ready } from "./ready.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
+import { UpdateActiveEffect } from "./updateActiveEffect.ts";
 
 interface Listener {
     listen(): void;
@@ -18,6 +20,8 @@ const HooksCE = {
             CreateEffects,
             GetSceneControlButtons,
             CreateActiveEffect,
+            UpdateActiveEffect,
+            DeleteActiveEffect,
             RenderItemDirectory,
             ChangeSidebarTab,
         ];

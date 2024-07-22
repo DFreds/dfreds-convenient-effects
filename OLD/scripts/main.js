@@ -66,56 +66,6 @@ Hooks.once("setup", () => {
 });
 
 /**
- * Handle re-rendering the app if it is open and an update occurs
- */
-Hooks.on("updateActiveEffect", (activeEffect, _config, userId) => {
-    if (game.user.id !== userId) return;
-
-    const settings = new Settings();
-    if (activeEffect.parent.id == settings.customEffectsItemId) {
-        const effectHelpers = new EffectHelpers();
-        effectHelpers.updateStatusId(activeEffect);
-
-        const foundryHelpers = new FoundryHelpers();
-        foundryHelpers.renderConvenientEffectsAppIfOpen();
-    }
-});
-
-/**
- * Handle removing any actor data changes when an active effect is deleted from an actor
- */
-Hooks.on("deleteActiveEffect", (activeEffect, _config, userId) => {
-    if (game.user.id !== userId) return;
-
-    const settings = new Settings();
-    if (activeEffect.parent.id == settings.customEffectsItemId) {
-        const foundryHelpers = new FoundryHelpers();
-        foundryHelpers.renderConvenientEffectsAppIfOpen();
-    }
-
-    const effectHelpers = new EffectHelpers();
-    if (
-        !effectHelpers.isConvenient(activeEffect) ||
-        !(activeEffect?.parent instanceof Actor)
-    ) {
-        return;
-    }
-
-    // Remove effects that were added due to this effect
-    const actor = activeEffect.parent;
-    const effectIdsFromThisEffect = actor.effects
-        .filter(
-            (effect) =>
-                effect.origin === effectHelpers.getId(activeEffect.name),
-        )
-        .map((effect) => effect.id);
-
-    if (effectIdsFromThisEffect) {
-        actor.deleteEmbeddedDocuments("ActiveEffect", effectIdsFromThisEffect);
-    }
-});
-
-/**
  * Handle changing the rendered active effect config
  */
 Hooks.on(
