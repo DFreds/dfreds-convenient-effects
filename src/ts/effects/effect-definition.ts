@@ -55,17 +55,23 @@ abstract class EffectDefinition {
 
     async #createBackupItemsAndEffects(): Promise<void> {
         const itemIds = this.settings.effectItemIds;
+
         if (!itemIds) return;
 
         for (const itemId of itemIds) {
             const item = game.items.get(itemId);
+            if (!item) continue;
 
-            const itemFlags = item?.flags ?? {};
+            const itemFlags = item.flags ?? {};
             const backupFlags: DeepPartial<ItemFlags> = {};
+            backupFlags[MODULE_ID] = {};
             backupFlags[MODULE_ID]![FLAGS.BACKUP_ID] = itemId;
 
-            await item?.clone(
-                { flags: foundry.utils.mergeObject(backupFlags, itemFlags) },
+            await item.clone(
+                {
+                    name: `${item.name} - Backup`,
+                    flags: foundry.utils.mergeObject(backupFlags, itemFlags),
+                },
                 { save: true },
             );
         }
