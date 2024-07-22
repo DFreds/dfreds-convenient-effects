@@ -31,10 +31,16 @@ class Settings {
 
     registerSettings(): void {
         this.#registerConfigSettings();
+        this.#registerNonConfigSettings();
     }
 
     #registerConfigSettings() {
         this.#registerAppControlsPermission();
+    }
+
+    #registerNonConfigSettings(): void {
+        this.#registerEffectItemIds();
+        this.#registerRanMigrations();
     }
 
     #registerAppControlsPermission() {
@@ -47,6 +53,26 @@ class Settings {
             choices: this.#USER_ROLES,
             type: String,
             requiresReload: true,
+        });
+    }
+
+    #registerEffectItemIds(): void {
+        game.settings.register(MODULE_ID, this.#EFFECT_ITEM_IDs, {
+            name: "Effect Item IDs",
+            scope: "world",
+            config: false,
+            default: [],
+            type: Array,
+        });
+    }
+
+    #registerRanMigrations(): void {
+        game.settings.register(MODULE_ID, this.#RAN_MIGRATIONS, {
+            name: "Ran Migrations",
+            scope: "world",
+            config: false,
+            default: [],
+            type: Array,
         });
     }
 
