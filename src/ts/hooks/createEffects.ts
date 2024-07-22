@@ -3,16 +3,15 @@ import { Listener } from "./index.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
 import { Settings } from "../settings.ts";
-import { FLAGS } from "../constants.ts";
+import { DEBUG, FLAGS } from "../constants.ts";
 
 const CreateEffects: Listener = {
     listen(): void {
-        Hooks.on(`${MODULE_ID}.createEffects`, async () => {
+        Hooks.once(`${MODULE_ID}.createEffects`, async () => {
             if (!game.user.isGM) return; // Only allow connected GMs to do this
 
             // TODO extract to actual API function to reset?
-            const debug = true;
-            if (debug) {
+            if (DEBUG) {
                 const settings = new Settings();
                 const oldEffectItemIds = settings.effectItemIds ?? [];
                 const oldBackupItemIds = game.items

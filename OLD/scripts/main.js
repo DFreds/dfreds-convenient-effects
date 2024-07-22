@@ -17,22 +17,8 @@ import { removeCustomItemFromSidebar } from "./ui/remove-custom-item-from-sideba
  * Handle setting up the API when socket lib is ready
  */
 Hooks.once("socketlib.ready", () => {
-    game.dfreds = game.dfreds || {};
-
     game.dfreds.effects = new EffectDefinitionsDelegate();
-    game.dfreds.effectInterface = new EffectInterface();
     game.dfreds.statusEffects = new StatusEffects();
-});
-
-/**
- * Handle initializing everything
- */
-Hooks.once(`${Constants.MODULE_ID}.initialize`, async () => {
-    game.dfreds.effectInterface.initialize();
-    game.dfreds.effects.initialize();
-    game.dfreds.statusEffects.initialize();
-
-    Hooks.callAll(`${Constants.MODULE_ID}.ready`);
 });
 
 /**
@@ -73,15 +59,10 @@ Hooks.once("setup", () => {
         },
     );
 
-    Hooks.callAll(`${Constants.MODULE_ID}.initialize`);
-});
+    game.dfreds.effects.initialize();
+    game.dfreds.statusEffects.initialize();
 
-Hooks.on("changeSidebarTab", (directory) => {
-    removeCustomItemFromSidebar(directory);
-});
-
-Hooks.on("renderItemDirectory", (directory) => {
-    removeCustomItemFromSidebar(directory);
+    Hooks.callAll(`${Constants.MODULE_ID}.ready`);
 });
 
 /**
