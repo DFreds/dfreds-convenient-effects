@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import process from "process";
 import prompts from "prompts";
-// @ts-expect-error Expect error when the `foundryconfig.example.json` was not copied
 import { dataPath } from "../foundryconfig.json";
 import { id as MODULE_ID } from "../static/module.json";
 

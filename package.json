@@ -6,11 +6,10 @@
     "type": "module",
     "scripts": {
         "build": "tsc && vite build",
-        "dev": "tsc && tsx ./build/clean.ts && vite build --mode development",
+        "dev": "tsc && npm run clean && vite build --mode development",
         "clean": "tsx ./build/clean.ts",
         "hot": "vite serve",
-        "rename-module": "tsx ./build/rename-module.ts",
-        "watch": "npm run clean && vite build --watch --mode development",
+        "watch": "tsc && npm run clean && vite build --watch --mode development",
         "link": "tsx ./build/link-foundry.ts",
         "update-types": "tsx ./build/update-pf2e-types.ts && tsx ./build/copy-pf2e-types.ts",
         "test": "jest",
