@@ -1,68 +1,16 @@
 import Constants from "./constants.js";
-import Controls from "./ui/controls.js";
 import EffectDefinitionsDelegate from "./systems/effect-definitions-delegate.js";
-import EffectHelpers from "./effects/effect-helpers.js";
-import EffectInterface from "./effect-interface.js";
 import FoundryHelpers from "./util/foundry-helpers.js";
-import HandlebarHelpers from "./ui/handlebar-helpers.js";
 import MacroHandler from "./ui/macro-handler.js";
 import Settings from "./settings.js";
-import StatusEffects from "./effects/status-effects.js";
-import TextEnrichers from "./ui/text-enrichers.js";
 import { addNestedEffectsToEffectConfig } from "./ui/add-nested-effects-to-effect-config.js";
 import { libWrapper } from "./lib/shim.js";
-import { removeCustomItemFromSidebar } from "./ui/remove-custom-item-from-sidebar.js";
 
 /**
  * Handle setting up the API when socket lib is ready
  */
 Hooks.once("socketlib.ready", () => {
     game.dfreds.effects = new EffectDefinitionsDelegate();
-    game.dfreds.statusEffects = new StatusEffects();
-});
-
-/**
- * Handle setting up the lib wrapper overrides
- */
-Hooks.once("setup", () => {
-    libWrapper.register(
-        Constants.MODULE_ID,
-        "TokenHUD.prototype._onToggleEffect",
-        function (wrapper, ...args) {
-            game.dfreds.statusEffects.onToggleEffect({
-                token: this.object,
-                wrapper,
-                args,
-            });
-        },
-    );
-
-    libWrapper.register(
-        Constants.MODULE_ID,
-        "TokenHUD.prototype._getStatusEffectChoices",
-        function (wrapper, ...args) {
-            const token = this.object;
-            return game.dfreds.statusEffects.getStatusEffectChoices({
-                token,
-                wrapper,
-                args,
-            });
-        },
-    );
-
-    libWrapper.register(
-        Constants.MODULE_ID,
-        "TokenHUD.prototype.refreshStatusIcons",
-        function (wrapper, ...args) {
-            const tokenHud = this;
-            game.dfreds.statusEffects.refreshStatusIcons(tokenHud);
-        },
-    );
-
-    game.dfreds.effects.initialize();
-    game.dfreds.statusEffects.initialize();
-
-    Hooks.callAll(`${Constants.MODULE_ID}.ready`);
 });
 
 /**

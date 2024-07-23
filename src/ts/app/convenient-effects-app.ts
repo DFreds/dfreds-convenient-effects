@@ -126,10 +126,6 @@ class ConvenientEffectsApp extends Application {
         //     "click",
         //     this._controller.onImportCustomEffectsClick.bind(this._controller),
         // );
-        // this._resetStatusEffectsButton.on(
-        //     "click",
-        //     this._controller.onResetStatusEffectsClick.bind(this._controller),
-        // );
     }
 
     #initContextMenus(): void {
@@ -188,16 +184,6 @@ class ConvenientEffectsApp extends Application {
         //         ),
         //     },
         //     {
-        //         name: "Toggle Status Effect",
-        //         icon: '<i class="fas fa-street-view fa-fw"></i>',
-        //         condition: () => {
-        //             return game.user.isGM;
-        //         },
-        //         callback: this._controller.onToggleStatusEffect.bind(
-        //             this._controller,
-        //         ),
-        //     },
-        //     {
         //         name: "Duplicate as Custom",
         //         icon: '<i class="far fa-copy fa-fw"></i>',
         //         condition: () => {
@@ -243,10 +229,6 @@ class ConvenientEffectsApp extends Application {
 
     // get _importCustomEffectsButton() {
     //     return this._rootView.find(".import-custom-effects");
-    // }
-
-    // get _resetStatusEffectsButton() {
-    //     return this._rootView.find(".reset-status-effects");
     // }
 }
 

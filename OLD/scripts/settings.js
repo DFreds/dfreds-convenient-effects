@@ -9,16 +9,13 @@ export default class Settings {
     static APP_CONTROLS_PERMISSION = "controlsPermission";
     static INTEGRATE_WITH_ATE = "integrateWithAtl";
     static INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
-    static MODIFY_STATUS_EFFECTS = "modifyStatusEffects";
     static PRIORITIZE_TARGETS = "prioritizeTargets";
     static SHOW_NESTED_EFFECTS = "showNestedEffects";
-    static STATUS_EFFECTS_SORT_ORDER = "statusEffectsSortOrder";
 
     // Non-config setting keys
     static CUSTOM_EFFECTS_ITEM_ID = "customEffectsItemId";
     static EXPANDED_FOLDERS = "expandedFolders";
     static FAVORITE_EFFECT_NAMES = "favoriteEffectNames";
-    static STATUS_EFFECT_NAMES = "statusEffectNames";
 
     /**
      * Register all the settings for the module
@@ -35,43 +32,6 @@ export default class Settings {
         userRoles[CONST.USER_ROLES.ASSISTANT] = "Assistant GM";
         userRoles[CONST.USER_ROLES.GAMEMASTER] = "Game Master";
         userRoles[5] = "None";
-
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.MODIFY_STATUS_EFFECTS,
-            {
-                name: "Modify Status Effects",
-                hint: "This is how status effects on the token HUD will be modified. Replacing them means all other status effects will be removed in favor of the conditions provided by Convenient Effects. Adding them means they are appended to the end of the existing status effects. Requires a Foundry reload on change.",
-                scope: "world",
-                config: true,
-                default: "none",
-                choices: {
-                    none: "None",
-                    replace: "Replace",
-                    add: "Add",
-                },
-                type: String,
-                requiresReload: true,
-            },
-        );
-
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECTS_SORT_ORDER,
-            {
-                name: "Status Effects Sort Order",
-                hint: "This is how status effects are sorted in the token HUD. Requires a Foundry reload on change.",
-                scope: "world",
-                config: true,
-                default: "none",
-                choices: {
-                    byOrderAdded: "By Order Added",
-                    alphabetical: "Alphabetical",
-                },
-                type: String,
-                requiresReload: true,
-            },
-        );
 
         game.settings.register(
             Constants.MODULE_ID,
@@ -162,18 +122,6 @@ export default class Settings {
             },
         );
 
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECT_NAMES,
-            {
-                name: "Status Effect Names",
-                scope: "world",
-                config: false,
-                default: this._defaultStatusEffectNames,
-                type: Array,
-            },
-        );
-
         game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
             name: "Expanded Folders",
             scope: "client",
@@ -193,33 +141,6 @@ export default class Settings {
                 type: String,
             },
         );
-    }
-
-    get _defaultStatusEffectNames() {
-        return [
-            "Blinded",
-            "Charmed",
-            "Concentrating",
-            "Dead",
-            "Deafened",
-            "Exhaustion 1",
-            "Exhaustion 2",
-            "Exhaustion 3",
-            "Exhaustion 4",
-            "Exhaustion 5",
-            "Frightened",
-            "Grappled",
-            "Incapacitated",
-            "Invisible",
-            "Paralyzed",
-            "Petrified",
-            "Poisoned",
-            "Prone",
-            "Restrained",
-            "Stunned",
-            "Unconscious",
-            "Wounded",
-        ];
     }
 
     /**
@@ -259,18 +180,6 @@ export default class Settings {
     }
 
     /**
-     * Returns the game setting for status effect type
-     *
-     * @returns {string} a string representing the chosen status effect type
-     */
-    get modifyStatusEffects() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.MODIFY_STATUS_EFFECTS,
-        );
-    }
-
-    /**
      * Returns the game setting for prioritizing targets
      *
      * @returns {boolean} true if targets should take first priority
@@ -291,18 +200,6 @@ export default class Settings {
         return game.settings.get(
             Constants.MODULE_ID,
             Settings.SHOW_NESTED_EFFECTS,
-        );
-    }
-
-    /**
-     * Returns the game setting for the status effects sort order
-     *
-     * @returns {string} a string representing the chosen status effects sort order
-     */
-    get statusEffectsSortOrder() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECTS_SORT_ORDER,
         );
     }
 
@@ -362,77 +259,6 @@ export default class Settings {
      */
     isFavoritedEffect(name) {
         return this.favoriteEffectNames.includes(name);
-    }
-
-    /**
-     * Returns the game setting for the status effect names
-     *
-     * @returns {String[]} the names of all the status effects
-     */
-    get statusEffectNames() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECT_NAMES,
-        );
-    }
-
-    /**
-     * Adds a given effect name to the saved status effect settings
-     *
-     * @param {string} name - the name of the effect to add to status effects
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async addStatusEffect(name) {
-        let statusEffectsArray = this.statusEffectNames;
-        statusEffectsArray.push(name);
-
-        statusEffectsArray = [...new Set(statusEffectsArray)]; // remove duplicates
-
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECT_NAMES,
-            statusEffectsArray,
-        );
-    }
-
-    /**
-     * Removes a given effect name from the saved status effect settings
-     *
-     * @param {string} name - the name of the effect to remove from status effects
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async removeStatusEffect(name) {
-        let statusEffectsArray = this.statusEffectNames.filter(
-            (statusEffect) => statusEffect !== name,
-        );
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECT_NAMES,
-            statusEffectsArray,
-        );
-    }
-
-    /**
-     * Reset status effects back to the original defaults
-     *
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async resetStatusEffects() {
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.STATUS_EFFECT_NAMES,
-            this._defaultStatusEffectNames,
-        );
-    }
-
-    /**
-     * Checks if the given effect name is a status effect
-     *
-     * @param {string} name - the effect name to search for
-     * @returns {boolean} true if the effect is a status effect, false otherwise
-     */
-    isStatusEffect(name) {
-        return this.statusEffectNames.includes(name);
     }
 
     /**

@@ -75,7 +75,6 @@ class HandlebarHelpers {
 
                 const allChanges = [...effect.changes, ...subChanges];
 
-                // icons += this.#getStatusEffectIcon(effect);
                 // icons += this.#getNestedEffectsIcon(nestedEffects);
                 icons += this.#getMidiIcon(allChanges);
                 icons += this.#getWireIcon(allChanges);
@@ -86,14 +85,6 @@ class HandlebarHelpers {
             },
         );
     }
-
-    // #getStatusEffectIcon(effect: ActiveEffect<any>): string {
-    // return "";
-    // return this._settings.modifyStatusEffects !== "none" &&
-    //     this._settings.isStatusEffect(effect.name)
-    //     ? "<i class='fas fa-street-view integration-icon' title='Token Status Effect'></i>"
-    //     : "";
-    // }
 
     // #getNestedEffectsIcon(
     //     nestedEffects: BaseActiveEffect<Item<null>>[],

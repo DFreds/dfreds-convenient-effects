@@ -99,23 +99,6 @@ export default class ConvenientEffectsController {
     }
 
     /**
-     * Handles clicks on the reset status effects button
-     *
-     * @param {MouseEvent} event
-     */
-    async onResetStatusEffectsClick(event) {
-        return Dialog.confirm({
-            title: "Reset Status Effects",
-            content:
-                "<h4>Are You Sure?</h4><p>This will reset all configured status effects to the module defaults and reload Foundry.",
-            yes: async () => {
-                await this._settings.resetStatusEffects();
-                window.location.reload();
-            },
-        });
-    }
-
-    /**
      * Handles clicks on effect items by toggling them on or off on selected tokens
      *
      * @param {MouseEvent} event - event that corresponds to clicking an effect item
@@ -179,24 +162,6 @@ export default class ConvenientEffectsController {
         await game.dfreds.effectInterface.toggleEffect(effectName, {
             overlay: true,
         });
-    }
-
-    /**
-     * Handle adding/removing the effect from the to/from the status effect settings
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onToggleStatusEffect(effectItem) {
-        const effectName = effectItem.data().effectName;
-
-        if (this._settings.isStatusEffect(effectName)) {
-            await this._settings.removeStatusEffect(effectName);
-        } else {
-            await this._settings.addStatusEffect(effectName);
-        }
-
-        this._viewMvc.showReloadRequired();
-        this._viewMvc.render();
     }
 
     /**
