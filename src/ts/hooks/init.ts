@@ -1,3 +1,4 @@
+import { HandlebarHelpers } from "../handlebar-helpers.ts";
 import { Settings } from "../settings.ts";
 import { Listener } from "./index.ts";
 
@@ -7,8 +8,8 @@ import { Listener } from "./index.ts";
 const Init: Listener = {
     listen(): void {
         Hooks.once("init", () => {
-            new Settings().registerSettings();
-            // new HandlebarHelpers().registerHelpers(); // TODO
+            new Settings().register();
+            new HandlebarHelpers().register();
             // new TextEnrichers().initialize(); // TODO
         });
     },

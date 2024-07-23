@@ -29,7 +29,7 @@ class Settings {
         );
     }
 
-    registerSettings(): void {
+    register(): void {
         this.#registerConfigSettings();
         this.#registerNonConfigSettings();
     }
