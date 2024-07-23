@@ -22,51 +22,6 @@ export default class ConvenientEffectsController {
         this._settings = new Settings();
     }
 
-    /**
-     * Configures and returns the data that the app will send to the template
-     *
-     * @returns {Object} the data to pass to the template
-     */
-    get data() {
-        const effects = game.dfreds.effects;
-        const foldersWithoutFavorites = effects.folderStructure.map(
-            (folderData) => {
-                const unfavoritedEffects = folderData.effects.filter(
-                    (effect) => {
-                        return (
-                            !this._settings.isFavoritedEffect(effect.name) &&
-                            effect.getFlag(
-                                Constants.MODULE_ID,
-                                Constants.FLAGS.IS_VIEWABLE,
-                            )
-                        );
-                    },
-                );
-                return {
-                    id: folderData.id,
-                    name: folderData.name,
-                    effects: unfavoritedEffects,
-                };
-            },
-        );
-
-        return {
-            folders: [
-                {
-                    id: "favorites",
-                    name: "Favorites",
-                    effects: this._fetchFavorites(),
-                },
-                {
-                    id: "custom",
-                    name: "Custom",
-                    effects: this._fetchUnfavoritedCustomEffects(),
-                },
-                ...foldersWithoutFavorites,
-            ],
-        };
-    }
-
     _fetchFavorites() {
         return this._settings.favoriteEffectNames
             .map((name) => {
@@ -83,21 +38,6 @@ export default class ConvenientEffectsController {
                 if (nameA > nameB) return 1;
                 return 0;
             });
-    }
-
-    _fetchUnfavoritedCustomEffects() {
-        return this._customEffectsHandler
-            .getCustomEffects()
-            .filter((effect) => !this._settings.isFavoritedEffect(effect.name));
-    }
-
-    /**
-     * Remove the collapsed class from all saved, expanded folders
-     */
-    expandSavedFolders() {
-        this._settings.expandedFolders.forEach((folderId) => {
-            this._viewMvc.expandFolder(folderId);
-        });
     }
 
     /**
@@ -173,37 +113,6 @@ export default class ConvenientEffectsController {
                 window.location.reload();
             },
         });
-    }
-
-    /**
-     * Handles clicks on the collapse all button
-     *
-     * @param {MouseEvent} event - event that corresponds to clicking the collapse all
-     */
-    async onCollapseAllClick(event) {
-        this._viewMvc.collapseAllFolders();
-        await this._settings.clearExpandedFolders();
-    }
-
-    /**
-     * Handles clicks on folders by collapsing or expanding them
-     *
-     * @param {MouseEvent} event - event that corresponds to clicking on the folder
-     */
-    async onFolderClick(event) {
-        let folderId = event.currentTarget.parentElement.dataset.folderId;
-
-        if (this._viewMvc.isFolderCollapsed(folderId)) {
-            this._viewMvc.expandFolder(folderId);
-        } else {
-            this._viewMvc.collapseFolder(folderId);
-        }
-
-        if (this._settings.isFolderExpanded(folderId)) {
-            await this._settings.removeExpandedFolder(folderId);
-        } else {
-            await this._settings.addExpandedFolder(folderId);
-        }
     }
 
     /**
@@ -359,10 +268,6 @@ export default class ConvenientEffectsController {
                 data: effect,
             }),
         );
-    }
-
-    canDragStart() {
-        return game.user.role >= this._settings.appControlsPermission;
     }
 
     /**
