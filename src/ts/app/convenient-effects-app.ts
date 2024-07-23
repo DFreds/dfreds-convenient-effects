@@ -54,13 +54,13 @@ class ConvenientEffectsApp extends Application {
         this.#controller.expandSavedFolders();
     }
 
-    protected override _onSearchFilter(
+    protected override async _onSearchFilter(
         event: KeyboardEvent,
         query: string,
         rgx: RegExp,
         html: HTMLElement | null,
-    ): void {
-        this.#controller.onSearchTextChange(event, query, rgx, html);
+    ): Promise<void> {
+        return this.#controller.onSearchTextChange(event, query, rgx, html);
     }
 
     protected override _canDragStart(_selector: string): boolean {

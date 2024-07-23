@@ -6,6 +6,11 @@ interface ViewData {
     folders: Item<any>[];
 }
 
+interface SearchResults {
+    effectIds?: Set<string>;
+    folderIds?: Set<string>;
+}
+
 class ConvenientEffectsController {
     #viewMvc: ConvenientEffectsApp;
     #settings: Settings;
@@ -24,39 +29,69 @@ class ConvenientEffectsController {
         };
     }
 
-    onSearchTextChange(
+    /**
+     * Handles search text changes
+     *
+     * @param _event - event that corresponds to the key press
+     * @param query - string representation of the entered search text
+     * @param rgx - the regex representation of the entered search text
+     * @param html - the html the SearchFilter is being applied to
+     */
+    async onSearchTextChange(
         _event: KeyboardEvent,
-        _query: string,
-        _rgx: RegExp,
-        _html: HTMLElement | null,
-    ): void {
-        // const isSearch = !!query;
-        // let matchingItems = {};
-        // if (isSearch) {
-        //     matchingItems = this._getMatchingItems(rgx);
-        // }
-        // for (let el of html.querySelectorAll(".directory-item")) {
-        //     let isEntity = el.classList.contains("entity");
-        //     let isFolder = el.classList.contains("folder");
-        //     if (isEntity) {
-        //         let match =
-        //             isSearch &&
-        //             matchingItems.effectNames.has(el.dataset.effectName);
-        //         el.style.display = !isSearch || match ? "flex" : "none";
-        //     } else if (isFolder) {
-        //         let match =
-        //             isSearch &&
-        //             matchingItems.folderIds.has(el.dataset.folderId);
-        //         el.style.display = !isSearch || match ? "flex" : "none";
-        //         // Expand folders with matches
-        //         if (match) el.classList.remove("collapsed");
-        //         else
-        //             el.classList.toggle(
-        //                 "collapsed",
-        //                 !this._settings.isFolderExpanded(el.dataset.folderId),
-        //             );
-        //     }
-        // }
+        query: string,
+        rgx: RegExp,
+        html: HTMLElement | null,
+    ): Promise<void> {
+        const isSearch = !!query;
+        let matchingItems: SearchResults = {};
+        if (isSearch) {
+            matchingItems = await this.#findMatchingItems(rgx);
+        }
+
+        if (!html) return;
+
+        const directoryItems = html.querySelectorAll(".directory-item");
+
+        for (const dirItem of directoryItems) {
+            const $directoryItem = $(dirItem);
+            const isDocument = $directoryItem.hasClass("document");
+            const isFolder = $directoryItem.hasClass("folder");
+
+            if (isDocument) {
+                const match =
+                    isSearch &&
+                    matchingItems.effectIds?.has(
+                        $directoryItem.data("document-id"),
+                    );
+                $directoryItem.css(
+                    "display",
+                    !isSearch || match ? "flex" : "none",
+                );
+            } else if (isFolder) {
+                const match =
+                    isSearch &&
+                    matchingItems.folderIds?.has(
+                        $directoryItem.data("folder-id"),
+                    );
+                $directoryItem.css(
+                    "display",
+                    !isSearch || match ? "flex" : "none",
+                );
+
+                // Expand folders with matches
+                if (match) {
+                    $directoryItem.removeClass("collapsed");
+                } else {
+                    dirItem.classList.toggle(
+                        "collapsed",
+                        !this.#settings.isFolderExpanded(
+                            $directoryItem.data("folder-id"),
+                        ),
+                    );
+                }
+            }
+        }
     }
 
     canDragStart(): boolean {
@@ -104,6 +139,26 @@ class ConvenientEffectsController {
         } else {
             await this.#settings.addExpandedFolder(folderId);
         }
+    }
+
+    async #findMatchingItems(rgx: RegExp): Promise<SearchResults> {
+        const effectIds = new Set<string>();
+        const folderIds = new Set<string>();
+
+        const data = await this.getData();
+        for (const folder of data.folders) {
+            for (const effect of folder.effects) {
+                if (rgx.test(SearchFilter.cleanQuery(effect.name))) {
+                    effectIds.add(effect.id);
+                    folderIds.add(folder.id);
+                }
+            }
+        }
+
+        return {
+            effectIds,
+            folderIds,
+        };
     }
 }
 
