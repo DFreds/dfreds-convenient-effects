@@ -56,46 +56,52 @@ class HandlebarHelpers {
             (effect: ActiveEffect<any>) => {
                 let icons = "";
 
-                const nestedEffectNames =
-                    effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
+                const nestedEffectIds = (effect.getFlag(
+                    MODULE_ID,
+                    FLAGS.NESTED_EFFECTS,
+                ) ?? []) as string[];
 
-                // const nestedEffects = nestedEffectNames
-                //     .map((nestedEffect) =>
-                //         game.dfreds.effectInterface.findEffectByName(nestedEffect),
-                //     )
-                //     .filter((effect) => effect !== undefined);
+                const nestedEffects = nestedEffectIds
+                    .map((id) => {
+                        return game.dfreds.effectInterface.findEffect({
+                            effectId: id,
+                        });
+                    })
+                    .filter((effect) => effect !== undefined);
 
-                // const subChanges = nestedEffects.flatMap(
-                //     (nestedEffect) => nestedEffect.changes,
-                // );
+                const subChanges = nestedEffects.flatMap(
+                    (nestedEffect) => nestedEffect!.changes,
+                );
 
-                // const allChanges = [...effect.changes, ...subChanges];
+                const allChanges = [...effect.changes, ...subChanges];
 
-                icons += this.#getStatusEffectIcon(effect);
+                // icons += this.#getStatusEffectIcon(effect);
                 // icons += this.#getNestedEffectsIcon(nestedEffects);
-                // icons += this.#getMidiIcon(allChanges);
-                // icons += this.#getWireIcon(allChanges);
-                // icons += this.#getAtlIcon(allChanges);
-                // icons += this.#getTokenMagicIcon(allChanges);
+                icons += this.#getMidiIcon(allChanges);
+                icons += this.#getWireIcon(allChanges);
+                icons += this.#getAtlIcon(allChanges);
+                icons += this.#getTokenMagicIcon(allChanges);
 
                 return icons;
             },
         );
     }
 
-    #getStatusEffectIcon(effect: ActiveEffect<any>): string {
-        return "";
-        // return this._settings.modifyStatusEffects !== "none" &&
-        //     this._settings.isStatusEffect(effect.name)
-        //     ? "<i class='fas fa-street-view integration-icon' title='Token Status Effect'></i>"
-        //     : "";
-    }
+    // #getStatusEffectIcon(effect: ActiveEffect<any>): string {
+    // return "";
+    // return this._settings.modifyStatusEffects !== "none" &&
+    //     this._settings.isStatusEffect(effect.name)
+    //     ? "<i class='fas fa-street-view integration-icon' title='Token Status Effect'></i>"
+    //     : "";
+    // }
 
-    #getNestedEffectsIcon(nestedEffects: ActiveEffect<any>[]): string {
-        return nestedEffects.length > 0
-            ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
-            : "";
-    }
+    // #getNestedEffectsIcon(
+    //     nestedEffects: BaseActiveEffect<Item<null>>[],
+    // ): string {
+    //     return nestedEffects.length > 0
+    //         ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
+    //         : "";
+    // }
 
     #getMidiIcon(changes: EffectChangeData[]): string {
         return changes.some((change) => change.key.startsWith("flags.midi-qol"))
