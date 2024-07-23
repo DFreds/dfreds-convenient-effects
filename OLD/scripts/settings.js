@@ -15,7 +15,6 @@ export default class Settings {
     // Non-config setting keys
     static CUSTOM_EFFECTS_ITEM_ID = "customEffectsItemId";
     static EXPANDED_FOLDERS = "expandedFolders";
-    static FAVORITE_EFFECT_NAMES = "favoriteEffectNames";
 
     /**
      * Register all the settings for the module
@@ -112,26 +111,6 @@ export default class Settings {
     _registerNonConfigSettings() {
         game.settings.register(
             Constants.MODULE_ID,
-            Settings.FAVORITE_EFFECT_NAMES,
-            {
-                name: "Favorite Effect Names",
-                scope: "client",
-                config: false,
-                default: "",
-                type: Array,
-            },
-        );
-
-        game.settings.register(Constants.MODULE_ID, Settings.EXPANDED_FOLDERS, {
-            name: "Expanded Folders",
-            scope: "client",
-            config: false,
-            default: "Favorites",
-            type: Array,
-        });
-
-        game.settings.register(
-            Constants.MODULE_ID,
             Settings.CUSTOM_EFFECTS_ITEM_ID,
             {
                 name: "Custom Effects Item ID",
@@ -201,135 +180,6 @@ export default class Settings {
             Constants.MODULE_ID,
             Settings.SHOW_NESTED_EFFECTS,
         );
-    }
-
-    /**
-     * Returns the game setting for the favorite effect names
-     *
-     * @returns {String[]} the names of all the favorite effects
-     */
-    get favoriteEffectNames() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.FAVORITE_EFFECT_NAMES,
-        );
-    }
-
-    /**
-     * Adds a given effect name to the saved favorite settings
-     *
-     * @param {string} name - the name of the effect to add to favorites
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async addFavoriteEffect(name) {
-        let favoriteEffectsArray = this.favoriteEffectNames;
-        favoriteEffectsArray.push(name);
-
-        favoriteEffectsArray = [...new Set(favoriteEffectsArray)]; // remove duplicates
-
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.FAVORITE_EFFECT_NAMES,
-            favoriteEffectsArray,
-        );
-    }
-
-    /**
-     * Removes a given effect name from the saved favorite settings
-     *
-     * @param {string} name - the name of the effect to remove from favorites
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async removeFavoriteEffect(name) {
-        let favoriteEffectsArray = this.favoriteEffectNames.filter(
-            (favoriteEffect) => favoriteEffect !== name,
-        );
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.FAVORITE_EFFECT_NAMES,
-            favoriteEffectsArray,
-        );
-    }
-
-    /**
-     * Checks if the given effect name is favorited
-     *
-     * @param {string} name - the effect name to search for
-     * @returns {boolean} true if the effect is favorited, false otherwise
-     */
-    isFavoritedEffect(name) {
-        return this.favoriteEffectNames.includes(name);
-    }
-
-    /**
-     * Returns the game setting for the saved expanded folder names
-     *
-     * @returns {String[]} the IDs of all of the saved expanded folders
-     */
-    get expandedFolders() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.EXPANDED_FOLDERS,
-        );
-    }
-
-    /**
-     * Adds a given folder ID to the saved expanded folders
-     *
-     * @param {string} id - the ID of the folder to add to the saved expanded folders
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async addExpandedFolder(id) {
-        let expandedFolderArray = this.expandedFolders;
-        expandedFolderArray.push(id);
-
-        expandedFolderArray = [...new Set(expandedFolderArray)]; // remove duplicates
-
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.EXPANDED_FOLDERS,
-            expandedFolderArray,
-        );
-    }
-
-    /**
-     * Removes a given folder name from the saved expanded folders
-     *
-     * @param {string} id - the ID of the folder to remove from the saved expanded folders
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async removeExpandedFolder(id) {
-        let expandedFolderArray = this.expandedFolders.filter(
-            (expandedFolder) => expandedFolder !== id,
-        );
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.EXPANDED_FOLDERS,
-            expandedFolderArray,
-        );
-    }
-
-    /**
-     * Removes all saved expanded folders
-     *
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async clearExpandedFolders() {
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.EXPANDED_FOLDERS,
-            [],
-        );
-    }
-
-    /**
-     * Checks if the given folder name is expanded
-     *
-     * @param {string} id - the folder ID to search for
-     * @returns {boolean} true if the folder is in the saved expanded folders, false otherwise
-     */
-    isFolderExpanded(id) {
-        return this.expandedFolders.includes(id);
     }
 
     /**

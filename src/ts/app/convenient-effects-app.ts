@@ -159,24 +159,6 @@ class ConvenientEffectsApp extends Application {
         //         ),
         //     },
         //     {
-        //         name: "Add Favorite",
-        //         icon: '<i class="fas fa-star fa-fw"></i>',
-        //         condition: (effectItem) => {
-        //             return !this._controller.isFavoritedEffect(effectItem);
-        //         },
-        //         callback: this._controller.onAddFavorite.bind(this._controller),
-        //     },
-        //     {
-        //         name: "Remove Favorite",
-        //         icon: '<i class="far fa-star fa-fw"></i>',
-        //         condition: (effectItem) => {
-        //             return this._controller.isFavoritedEffect(effectItem);
-        //         },
-        //         callback: this._controller.onRemoveFavorite.bind(
-        //             this._controller,
-        //         ),
-        //     },
-        //     {
         //         name: "Toggle as Overlay",
         //         icon: '<i class="far fa-dot-circle fa-fw"></i>',
         //         callback: this._controller.onToggleOverlay.bind(

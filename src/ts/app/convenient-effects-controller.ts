@@ -22,8 +22,6 @@ class ConvenientEffectsController {
 
     async getData(): Promise<ViewData> {
         // TODO don't show nested effects
-        // TODO do we still do favorites?
-
         return {
             folders: findEffectFolderItems(),
         };

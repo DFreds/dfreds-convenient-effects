@@ -22,24 +22,6 @@ export default class ConvenientEffectsController {
         this._settings = new Settings();
     }
 
-    _fetchFavorites() {
-        return this._settings.favoriteEffectNames
-            .map((name) => {
-                return game.dfreds.effects.all.find(
-                    (effect) => effect.name == name,
-                );
-            })
-            .filter((effect) => effect)
-            .sort((a, b) => {
-                let nameA = a.name.toLowerCase();
-                let nameB = b.name.toLowerCase();
-
-                if (nameA < nameB) return -1;
-                if (nameA > nameB) return 1;
-                return 0;
-            });
-    }
-
     /**
      * Handles clicks on the create effect button
      *
@@ -112,44 +94,6 @@ export default class ConvenientEffectsController {
         return $(event.target)
             .closest("[data-effect-name], .convenient-effect")
             .data()?.effectName;
-    }
-
-    /**
-     * Handle adding the effect to the favorites settings and to the favorites folder
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onAddFavorite(effectItem) {
-        const effectName = effectItem.data().effectName;
-
-        // Don't add favorites twice
-        if (this._settings.isFavoritedEffect(effectName)) return;
-
-        await this._settings.addFavoriteEffect(effectName);
-        this._viewMvc.render();
-    }
-
-    /**
-     * Handle removing the effect from the favorites settings and from the favorites folder
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onRemoveFavorite(effectItem) {
-        const effectName = effectItem.data().effectName;
-
-        await this._settings.removeFavoriteEffect(effectName);
-        this._viewMvc.render();
-    }
-
-    /**
-     * Checks if the provided effect is favorited
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     * @returns true if the effect is favorited
-     */
-    isFavoritedEffect(effectItem) {
-        const effectName = effectItem.data().effectName;
-        return this._settings.isFavoritedEffect(effectName);
     }
 
     /**
