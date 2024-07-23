@@ -101,18 +101,12 @@ function findActorByUuid(
 }
 
 function findAllEffectFolderItems(): Item<any>[] {
-    return game.items.filter((item) => {
-        const isConvenient =
-            item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) === true;
-
-        return isConvenient;
-    });
+    return game.items.filter((item) => isItemConvenient(item));
 }
 
 function findEffectFolderItems(): Item<any>[] {
     return findAllEffectFolderItems().filter((item) => {
-        const isConvenient =
-            item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) === true;
+        const isConvenient = isItemConvenient(item);
         const isBackup = !!item.getFlag(MODULE_ID, FLAGS.BACKUP_ID) === true;
 
         return isConvenient && !isBackup;
@@ -158,6 +152,10 @@ function isEffectConvenient(activeEffect: ActiveEffect<any>): boolean {
     );
 }
 
+function isItemConvenient(item: Item<any>): boolean {
+    return (item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) as boolean) ?? false;
+}
+
 /**
  * Re-renders the Convenient Effects application if it's open
  */
@@ -178,5 +176,6 @@ export {
     findEffectFolderItems,
     getActorUuids,
     isEffectConvenient,
+    isItemConvenient,
     renderConvenientEffectsAppIfOpen,
 };

@@ -7,8 +7,6 @@ class Settings {
     #APP_CONTROLS_PERMISSION = "controlsPermission";
     // #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
 
-    // Non-config setting keys
-    #EFFECT_ITEM_IDs = "effectItemIds";
     #RAN_MIGRATIONS = "ranMigrations";
 
     constructor() {
@@ -34,16 +32,15 @@ class Settings {
         this.#registerNonConfigSettings();
     }
 
-    #registerConfigSettings() {
+    #registerConfigSettings(): void {
         this.#registerAppControlsPermission();
     }
 
     #registerNonConfigSettings(): void {
-        this.#registerEffectItemIds();
         this.#registerRanMigrations();
     }
 
-    #registerAppControlsPermission() {
+    #registerAppControlsPermission(): void {
         game.settings.register(MODULE_ID, this.#APP_CONTROLS_PERMISSION, {
             name: "ConvenientEffects.SettingAppControlsPermissionName",
             hint: "ConvenientEffects.SettingAppControlsPermissionHint",
@@ -53,16 +50,6 @@ class Settings {
             choices: this.#USER_ROLES,
             type: String,
             requiresReload: true,
-        });
-    }
-
-    #registerEffectItemIds(): void {
-        game.settings.register(MODULE_ID, this.#EFFECT_ITEM_IDs, {
-            name: "Effect Item IDs",
-            scope: "world",
-            config: false,
-            default: [],
-            type: Array,
         });
     }
 
@@ -84,51 +71,6 @@ class Settings {
                 this.#APP_CONTROLS_PERMISSION,
             )! as string,
         );
-    }
-
-    get effectItemIds(): string[] | undefined {
-        const itemIds = game.settings.get(MODULE_ID, this.#EFFECT_ITEM_IDs);
-        if (itemIds) {
-            return itemIds as string[];
-        } else {
-            return undefined;
-        }
-    }
-
-    async addEffectItemId(itemId: string): Promise<unknown> {
-        let effectItemIds = this.effectItemIds;
-
-        if (!effectItemIds) return;
-
-        effectItemIds.push(itemId);
-
-        effectItemIds = [...new Set(effectItemIds)]; // remove duplicates
-
-        return game.settings.set(
-            MODULE_ID,
-            this.#EFFECT_ITEM_IDs,
-            effectItemIds,
-        );
-    }
-
-    async removeEffectItemId(itemId: string): Promise<unknown> {
-        const effectItemIds = this.effectItemIds?.filter(
-            (expandedFolder) => expandedFolder !== itemId,
-        );
-
-        if (!effectItemIds) return;
-
-        return game.settings.set(
-            MODULE_ID,
-            this.#EFFECT_ITEM_IDs,
-            effectItemIds,
-        );
-    }
-
-    async setEffectItemIds(effectItemIds: string[]): Promise<unknown> {
-        return game.settings.set(MODULE_ID, this.#EFFECT_ITEM_IDs, [
-            ...new Set(effectItemIds),
-        ]);
     }
 
     get ranMigrations(): string[] {

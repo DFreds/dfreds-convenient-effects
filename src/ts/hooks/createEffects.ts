@@ -3,7 +3,8 @@ import { Listener } from "./index.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
 import { Settings } from "../settings.ts";
-import { DEBUG, FLAGS } from "../constants.ts";
+import { DEBUG } from "../constants.ts";
+import { findAllEffectFolderItems } from "../helpers.ts";
 
 const CreateEffects: Listener = {
     listen(): void {
@@ -15,23 +16,11 @@ const CreateEffects: Listener = {
             // TODO extract to actual API function to reset?
             if (DEBUG) {
                 const settings = new Settings();
-                const oldEffectItemIds = settings.effectItemIds ?? [];
-                const oldBackupItemIds = game.items
-                    .filter((item) => {
-                        const backupId = item.getFlag(
-                            MODULE_ID,
-                            FLAGS.BACKUP_ID,
-                        ) as string | undefined;
+                const oldItemIds = findAllEffectFolderItems().map(
+                    (item) => item.id,
+                );
 
-                        if (!backupId) return false;
-
-                        return oldEffectItemIds.includes(backupId);
-                    })
-                    .map((item) => item.id);
-
-                await Item.deleteDocuments(oldEffectItemIds);
-                await Item.deleteDocuments(oldBackupItemIds);
-                await settings.setEffectItemIds([]);
+                await Item.deleteDocuments(oldItemIds);
                 await settings.clearRanMigrations();
             }
 

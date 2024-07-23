@@ -1,5 +1,7 @@
-import { renderConvenientEffectsAppIfOpen } from "../helpers.ts";
-import { Settings } from "../settings.ts";
+import {
+    isItemConvenient,
+    renderConvenientEffectsAppIfOpen,
+} from "../helpers.ts";
 import { Listener } from "./index.ts";
 
 /**
@@ -11,8 +13,10 @@ const CreateActiveEffect: Listener = {
             if (game.user.id !== userId) return;
 
             const effect = activeEffect as ActiveEffect<any>;
-            const settings = new Settings();
-            if (settings.effectItemIds?.includes(effect.parent.id)) {
+            const parent = effect.parent;
+
+            // TODO why parent and not just effect?
+            if (parent instanceof Item && isItemConvenient(parent)) {
                 renderConvenientEffectsAppIfOpen();
             }
         });

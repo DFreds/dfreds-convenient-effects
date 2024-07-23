@@ -4,7 +4,7 @@ import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
 import { FLAGS } from "../constants.ts";
 import { ItemFlags } from "types/foundry/common/documents/item.js";
-import { createConvenientItem } from "../helpers.ts";
+import { createConvenientItem, findEffectFolderItems } from "../helpers.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -41,8 +41,6 @@ abstract class EffectDefinition {
 
                 if (!item) return; // type safety, shouldn't occur
 
-                await this.settings.addEffectItemId(item.id);
-
                 return item.createEmbeddedDocuments(
                     "ActiveEffect",
                     itemEffect.effects,
@@ -54,7 +52,7 @@ abstract class EffectDefinition {
     }
 
     async #createBackupItemsAndEffects(): Promise<void> {
-        const itemIds = this.settings.effectItemIds;
+        const itemIds = findEffectFolderItems().map((item) => item.id);
 
         if (!itemIds) return;
 
