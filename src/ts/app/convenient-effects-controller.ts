@@ -97,6 +97,19 @@ class ConvenientEffectsController {
     }
 
     /**
+     * Handles clicks on effect items by toggling them on or off on selected tokens
+     *
+     * @param event - event that corresponds to clicking an effect item
+     */
+    async onEffectClick(event: Event): Promise<void> {
+        const effectId = this.#findNearestEffectId(event);
+
+        if (!effectId) return;
+
+        await game.dfreds.effectInterface.toggleEffect({ effectId });
+    }
+
+    /**
      * Remove the collapsed class from all saved, expanded folders
      */
     expandSavedFolders(): void {
@@ -137,6 +150,14 @@ class ConvenientEffectsController {
         } else {
             await this.#settings.addExpandedFolder(folderId);
         }
+    }
+
+    #findNearestEffectId(event: Event): string | undefined {
+        if (!event.target) return;
+
+        return $(event.target)
+            .closest("[data-document-id], .convenient-effect")
+            .data("document-id");
     }
 
     async #findMatchingItems(rgx: RegExp): Promise<SearchResults> {

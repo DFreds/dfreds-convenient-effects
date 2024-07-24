@@ -1,6 +1,7 @@
 import { DEBUG } from "../constants.ts";
 import { HandlebarHelpers } from "../handlebar-helpers.ts";
 import { Settings } from "../settings.ts";
+import { activateSocketListener } from "../sockets/socket.ts";
 import { Listener } from "./index.ts";
 
 /**
@@ -12,6 +13,7 @@ const Init: Listener = {
             CONFIG.debug.hooks = DEBUG;
             new Settings().register();
             new HandlebarHelpers().register();
+            activateSocketListener();
             // new TextEnrichers().initialize(); // TODO
         });
     },

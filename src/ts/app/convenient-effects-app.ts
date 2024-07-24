@@ -110,10 +110,10 @@ class ConvenientEffectsApp extends Application {
         //     "click",
         //     this._controller.onCreateEffectClick.bind(this._controller),
         // );
-        // this._effectListItems.on(
-        //     "click",
-        //     this._controller.onEffectClick.bind(this._controller),
-        // );
+        this.#effectListItems.on(
+            "click",
+            this.#controller.onEffectClick.bind(this.#controller),
+        );
         // this._exportCustomEffectsButton.on(
         //     "click",
         //     this._controller.onExportCustomEffectsClick.bind(this._controller),
@@ -197,9 +197,9 @@ class ConvenientEffectsApp extends Application {
     //     return this._rootView.find(".create-effect");
     // }
 
-    // get _effectListItems() {
-    //     return this._rootView.find(".convenient-effect");
-    // }
+    get #effectListItems(): JQuery<HTMLElement> {
+        return this.#rootView.find(".convenient-effect");
+    }
 
     // get _exportCustomEffectsButton() {
     //     return this._rootView.find(".export-custom-effects");

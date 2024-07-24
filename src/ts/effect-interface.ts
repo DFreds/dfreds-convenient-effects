@@ -56,12 +56,12 @@ interface IToggleEffect {
     /**
      * The UUIDs of the actors. Set to an empty array by default
      */
-    uuids: string[];
+    uuids?: string[];
 
     /**
      * Applies the effect as an overlay or not. Set to false by default
      */
-    overlay: boolean;
+    overlay?: boolean;
 
     /**
      * The origin of the effect. If toggling off, it will only remove the effect

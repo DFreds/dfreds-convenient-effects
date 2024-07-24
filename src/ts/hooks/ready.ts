@@ -1,6 +1,5 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { Listener } from "./index.ts";
-import { activateSocketListener } from "../sockets/socket.ts";
 import { EffectInterface } from "../effect-interface.ts";
 
 /**
@@ -12,8 +11,6 @@ const Ready: Listener = {
             game.dfreds = {
                 effectInterface: new EffectInterface(),
             };
-
-            activateSocketListener();
 
             Hooks.callAll(`${MODULE_ID}.createEffects`);
         });

@@ -80,16 +80,6 @@ export default class ConvenientEffectsController {
         return this._settings.allowPlayerCustomEffects;
     }
 
-    /**
-     * Handles clicks on effect items by toggling them on or off on selected tokens
-     *
-     * @param {MouseEvent} event - event that corresponds to clicking an effect item
-     */
-    async onEffectClick(event) {
-        const effectName = this._findNearestEffectName(event);
-        await game.dfreds.effectInterface.toggleEffect(effectName);
-    }
-
     _findNearestEffectName(event) {
         return $(event.target)
             .closest("[data-effect-name], .convenient-effect")
