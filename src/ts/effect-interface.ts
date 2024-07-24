@@ -1,4 +1,3 @@
-import { id as MODULE_ID } from "@static/module.json";
 import BaseActiveEffect, {
     ActiveEffectSource,
 } from "types/foundry/common/documents/active-effect.js";
@@ -12,6 +11,7 @@ import {
 } from "./helpers.ts";
 import { SocketMessage } from "./sockets/socket.ts";
 import { log } from "./logger.ts";
+import { SocketEffectHandler } from "./sockets/socket-effect-handler.ts";
 
 interface IFindEffect {
     /**
@@ -297,13 +297,14 @@ class EffectInterface {
 
         // TODO this needs to do any nested effects. Nested effects are handled by client
 
-        game.socket.emit(MODULE_ID, {
+        game.socket.emit(SocketEffectHandler.IDENTIFIER, {
             request: "addEffect",
             effectData: effectDataToSend,
             uuid,
         } satisfies SocketMessage);
     }
 
+    // TODO is adding/removing effect by effect every viable?
     /**
      * Removes an effect matching the given params from an actor of the given
      * UUID. The effect removal is sent via a socket.
@@ -330,7 +331,7 @@ class EffectInterface {
 
         // TODO this needs to do any nested effects
 
-        game.socket.emit(MODULE_ID, {
+        game.socket.emit(SocketEffectHandler.IDENTIFIER, {
             request: "removeEffect",
             effectId,
             effectName,

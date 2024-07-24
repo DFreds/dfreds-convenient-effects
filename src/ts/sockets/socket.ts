@@ -1,11 +1,10 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { SocketEffectHandler } from "./socket-effect-handler.ts";
 import { log } from "../logger.ts";
 
 function activateSocketListener(): void {
     game.socket.on(
-        MODULE_ID,
+        SocketEffectHandler.IDENTIFIER,
         async (...[message, userId]: SocketEventParams) => {
             const socketEffectHandler = new SocketEffectHandler();
             const sender = game.users.get(userId, { strict: true });

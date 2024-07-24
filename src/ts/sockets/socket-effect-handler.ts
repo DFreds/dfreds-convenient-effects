@@ -1,3 +1,4 @@
+import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { findActorByUuid, isEffectConvenient } from "../helpers.ts";
 import { log } from "../logger.ts";
@@ -41,6 +42,7 @@ interface IRemoveEffect {
  * Handler for effects sent via socket emissions
  */
 class SocketEffectHandler {
+    static IDENTIFIER = `module.${MODULE_ID}`;
     /**
      * Adds the provided effect to an actor matching the provided UUID
      *

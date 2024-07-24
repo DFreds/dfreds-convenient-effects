@@ -102,11 +102,11 @@ class ConvenientEffectsController {
      * @param event - event that corresponds to clicking an effect item
      */
     async onEffectClick(event: Event): Promise<void> {
-        const effectId = this.#findNearestEffectId(event);
+        const effectName = this.#findNearestEffectName(event);
 
-        if (!effectId) return;
+        if (!effectName) return;
 
-        await game.dfreds.effectInterface.toggleEffect({ effectId });
+        await game.dfreds.effectInterface.toggleEffect({ effectName });
     }
 
     /**
@@ -152,12 +152,12 @@ class ConvenientEffectsController {
         }
     }
 
-    #findNearestEffectId(event: Event): string | undefined {
+    #findNearestEffectName(event: Event): string | undefined {
         if (!event.target) return;
 
         return $(event.target)
-            .closest("[data-document-id], .convenient-effect")
-            .data("document-id");
+            .closest("[data-document-name], .convenient-effect")
+            .data("document-name");
     }
 
     async #findMatchingItems(rgx: RegExp): Promise<SearchResults> {
