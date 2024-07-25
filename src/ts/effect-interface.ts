@@ -9,9 +9,8 @@ import {
     getActorUuids,
     isEffectConvenient,
 } from "./helpers.ts";
-import { SocketMessage } from "./sockets/socket.ts";
 import { log } from "./logger.ts";
-import { SocketEffectHandler } from "./sockets/socket-effect-handler.ts";
+import { SocketMessage } from "./sockets/sockets.ts";
 
 interface IFindEffect {
     /**
@@ -297,14 +296,16 @@ class EffectInterface {
 
         // TODO this needs to do any nested effects. Nested effects are handled by client
 
-        game.socket.emit(SocketEffectHandler.IDENTIFIER, {
+        game.dfreds.sockets.emitAddEffect({
             request: "addEffect",
-            effectData: effectDataToSend,
-            uuid,
+            data: {
+                effectData: effectDataToSend,
+                uuid,
+            },
         } satisfies SocketMessage);
     }
 
-    // TODO is adding/removing effect by effect every viable?
+    // TODO is adding/removing effect by effect ID viable?
     /**
      * Removes an effect matching the given params from an actor of the given
      * UUID. The effect removal is sent via a socket.
@@ -331,12 +332,14 @@ class EffectInterface {
 
         // TODO this needs to do any nested effects
 
-        game.socket.emit(SocketEffectHandler.IDENTIFIER, {
+        game.dfreds.sockets.emitRemoveEffect({
             request: "removeEffect",
-            effectId,
-            effectName,
-            uuid,
-            origin,
+            data: {
+                effectId,
+                effectName,
+                uuid,
+                origin,
+            },
         } satisfies SocketMessage);
     }
 

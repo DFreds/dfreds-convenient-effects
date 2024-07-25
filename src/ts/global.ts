@@ -1,4 +1,5 @@
 import { EffectInterface } from "./effect-interface.ts";
+import { Sockets } from "./sockets/sockets.ts";
 
 declare global {
     namespace globalThis {
@@ -61,6 +62,7 @@ declare global {
         > {
         dfreds: {
             effectInterface: EffectInterface;
+            sockets: Sockets;
         };
     }
 }

@@ -3,7 +3,23 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { findActorByUuid, isEffectConvenient } from "../helpers.ts";
 import { log } from "../logger.ts";
 
-interface IAddEffect {
+interface AddEffectMessage {
+    request: "addEffect";
+    data: AddEffectMessageData;
+}
+
+interface RemoveEffectMessage {
+    request: "removeEffect";
+    data: RemoveEffectMessageData;
+}
+
+type SocketMessage =
+    | AddEffectMessage
+    | RemoveEffectMessage
+    | { request?: never };
+type SocketEventParams = [message: SocketMessage, userId: string];
+
+interface AddEffectMessageData {
     /**
      * The effect data to add
      */
@@ -15,7 +31,7 @@ interface IAddEffect {
     uuid: string;
 }
 
-interface IRemoveEffect {
+interface RemoveEffectMessageData {
     /**
      * The ID of the effect to remove
      */
@@ -38,18 +54,75 @@ interface IRemoveEffect {
     origin?: ActiveEffectOrigin | null;
 }
 
-/**
- * Handler for effects sent via socket emissions
- */
-class SocketEffectHandler {
-    static IDENTIFIER = `module.${MODULE_ID}`;
-    /**
-     * Adds the provided effect to an actor matching the provided UUID
-     *
-     * @param options - The options to add an effect
-     * @returns A promise that resolves when the effect is added
-     */
-    async addEffect({ effectData, uuid }: IAddEffect): Promise<void> {
+class Sockets {
+    #identifier: string;
+
+    constructor() {
+        this.#identifier = `module.${MODULE_ID}`;
+        this.#activateSocketListener();
+    }
+
+    #activateSocketListener(): void {
+        game.socket.on(
+            this.#identifier,
+            async (...[message, userId]: SocketEventParams) => {
+                const sender = game.users.get(userId, { strict: true });
+                const receiver = game.user;
+
+                log(
+                    `Sender is ${sender.name} and receiver is ${receiver.name}`,
+                );
+
+                if (!receiver.isGM) return; // Sender can be anyone, receiver should only execute as GM
+
+                switch (message.request) {
+                    case "addEffect": {
+                        await this.#onAddEffect(message.data);
+                        break;
+                    }
+                    case "removeEffect": {
+                        await this.#onRemoveEffect(message.data);
+                        break;
+                    }
+                    default: {
+                        throw Error(
+                            `Received unrecognized socket emission: ${message.request}`,
+                        );
+                    }
+                }
+            },
+        );
+    }
+
+    #emitAsGm({
+        message,
+        handler,
+    }: {
+        message: SocketMessage;
+        handler: () => void | Promise<void>;
+    }): void {
+        if (game.user.isGM) {
+            handler(); // execute locally
+        } else {
+            if (!game.users.activeGM) {
+                throw Error();
+            }
+
+            game.socket.emit(this.#identifier, message);
+        }
+    }
+
+    emitAddEffect(message: AddEffectMessage): void {
+        this.#emitAsGm({
+            message,
+            handler: this.#onAddEffect.bind(this, message.data),
+        });
+    }
+
+    async #onAddEffect({
+        effectData,
+        uuid,
+    }: AddEffectMessageData): Promise<void> {
         const actor = findActorByUuid(uuid);
         const activeEffectsToApply = [effectData];
 
@@ -85,19 +158,19 @@ class SocketEffectHandler {
         log(`Added effect ${effectData.name} to ${actor.name} - ${actor.id}`);
     }
 
-    /**
-     * Removes the effect with the provided name from an actor matching the
-     * provided UUID
-     *
-     * @param options - The options to remove an effect
-     * @returns A promise that resolves when the effect is removed
-     */
-    async removeEffect({
+    emitRemoveEffect(message: RemoveEffectMessage): void {
+        this.#emitAsGm({
+            message,
+            handler: this.#onRemoveEffect.bind(this, message.data),
+        });
+    }
+
+    async #onRemoveEffect({
         effectId,
         effectName,
         uuid,
         origin,
-    }: IRemoveEffect): Promise<void> {
+    }: RemoveEffectMessageData): Promise<void> {
         const actor = findActorByUuid(uuid);
 
         if (!actor) return; // This should already be checked for before the socket
@@ -133,4 +206,5 @@ class SocketEffectHandler {
     }
 }
 
-export { SocketEffectHandler };
+export { Sockets };
+export type { SocketMessage };
