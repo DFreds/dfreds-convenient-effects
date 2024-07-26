@@ -57,23 +57,6 @@ export default class CustomEffectsHandler {
     }
 
     /**
-     * Creates a new custom effect on the custom effect item and renders its sheet
-     */
-    async createNewCustomEffect() {
-        const item = await this._findOrCreateCustomEffectsItem();
-        const newEffect = this._effectHelpers.createActiveEffect({
-            name: "New Effect",
-            origin: item.uuid,
-        });
-
-        const effects = await item.createEmbeddedDocuments("ActiveEffect", [
-            newEffect,
-        ]);
-
-        effects[0].sheet.render(true);
-    }
-
-    /**
      * Creates a new custom effect on the custom effect
      *
      * @param {object} params - the params for adding an effect
@@ -89,44 +72,6 @@ export default class CustomEffectsHandler {
             return this._effectHelpers.createActiveEffect({ ...activeEffect });
         });
         return item.createEmbeddedDocuments("ActiveEffect", customEffects);
-    }
-
-    /**
-     * Opens the configuration sheet for the custom effect corresponding with the custom ID
-     *
-     * @param {ActiveEffect} effect - the effect to edit
-     */
-    async editCustomEffect(effect) {
-        const item = await this._findCustomEffectsItem();
-        const activeEffect = item.effects.find(
-            (activeEffect) => activeEffect.id === effect.id,
-        );
-        activeEffect.sheet.render(true);
-    }
-
-    /**
-     * Deletes the custom effect corresponding with the custom ID
-     *
-     * @param {ActiveEffect} effect - the effect to delete
-     * @returns {Promise} resolves when the active effect is deleted
-     */
-    async deleteCustomEffect(effect) {
-        const item = await this._findCustomEffectsItem();
-        return item.deleteEmbeddedDocuments("ActiveEffect", [effect.id]);
-    }
-
-    /**
-     * Duplicates an exisiting effect
-     *
-     * @param {ActiveEffect} effect - the effect to duplicate
-     */
-    async duplicateExistingEffect(effect) {
-        const item = await this._findOrCreateCustomEffectsItem();
-        const effects = await item.createEmbeddedDocuments("ActiveEffect", [
-            effect,
-        ]);
-
-        effects[0].sheet.render(true);
     }
 
     /**

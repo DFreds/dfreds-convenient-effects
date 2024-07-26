@@ -4,22 +4,11 @@ import DynamicEffectsAdderDelegate from "../systems/dynamic-effects-adder-delega
 import FoundryHelpers from "../util/foundry-helpers.js";
 import Settings from "../settings.js";
 
-/**
- * Controller class that handles events from the app and manipulating the underlying Foundry data
- */
 export default class ConvenientEffectsController {
-    /**
-     * Initializes the controller and its dependencies
-     *
-     * @param {ConvenientEffectsApp} viewMvc - the app that the controller can interact with
-     */
     constructor(viewMvc) {
-        this._viewMvc = viewMvc;
-
         this._customEffectsHandler = new CustomEffectsHandler();
         this._dynamicEffectsAdderDelegate = new DynamicEffectsAdderDelegate();
         this._foundryHelpers = new FoundryHelpers();
-        this._settings = new Settings();
     }
 
     /**
@@ -29,90 +18,6 @@ export default class ConvenientEffectsController {
      */
     async onCreateEffectClick(event) {
         await this._customEffectsHandler.createNewCustomEffect();
-    }
-
-    /**
-     * Handle editing the custom effect
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onEditEffectClick(effectItem) {
-        const effectName = effectItem.data().effectName;
-        const customEffect = this._customEffectsHandler
-            .getCustomEffects()
-            .find((effect) => effect.name == effectName);
-
-        await this._customEffectsHandler.editCustomEffect(customEffect);
-    }
-
-    /**
-     * Handle deleting the custom effect
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onDeleteEffectClick(effectItem) {
-        const effectName = effectItem.data().effectName;
-        const customEffect = this._customEffectsHandler
-            .getCustomEffects()
-            .find((effect) => effect.name == effectName);
-
-        await this._customEffectsHandler.deleteCustomEffect(customEffect);
-        this._viewMvc.render();
-    }
-
-    /**
-     * Checks if the provided effect is custom
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     * @returns true if the effect is custom
-     */
-    isCustomEffect(effectItem) {
-        const effectName = effectItem.data().effectName;
-        return this._customEffectsHandler.isCustomEffect(effectName);
-    }
-
-    /**
-     * Checks if the player is allowed to change custom effects
-     *
-     * @returns true if the player is allowed to change custom effects
-     */
-    get isPlayerAllowedCustomEffects() {
-        return this._settings.allowPlayerCustomEffects;
-    }
-
-    _findNearestEffectName(event) {
-        return $(event.target)
-            .closest("[data-effect-name], .convenient-effect")
-            .data()?.effectName;
-    }
-
-    /**
-     * Handle toggling effects as overlays
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onToggleOverlay(effectItem) {
-        const effectName = effectItem.data().effectName;
-        await game.dfreds.effectInterface.toggleEffect(effectName, {
-            overlay: true,
-        });
-    }
-
-    /**
-     * Handle duplicating an effect and adding as a custom effect
-     *
-     * @param {jQuery} effectItem - jQuery element representing the effect list item
-     */
-    async onDuplicateAsCustom(effectItem) {
-        const effectName = effectItem.data().effectName;
-
-        const effect = game.dfreds.effects.all.find(
-            (effect) => effect.name === effectName,
-        );
-
-        await this._customEffectsHandler.duplicateExistingEffect(effect);
-
-        this._viewMvc.render();
     }
 
     /**

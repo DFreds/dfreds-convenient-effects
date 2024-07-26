@@ -1,6 +1,8 @@
 import { ConvenientEffectsController } from "./convenient-effects-controller.ts";
 
 class ConvenientEffectsApp extends Application {
+    // TODO drag and drop between folders should transfer active effect from one item to another
+
     #controller: ConvenientEffectsController;
     #rootView: JQuery<HTMLElement>;
 
@@ -104,15 +106,19 @@ class ConvenientEffectsApp extends Application {
     #initClickListeners(): void {
         this.#collapseAllButton.on(
             "click",
-            this.#controller.onCollapseAllClick.bind(this.#controller),
+            this.#controller.onCollapseAll.bind(this.#controller),
         );
-        // this._createEffectButton.on(
-        //     "click",
-        //     this._controller.onCreateEffectClick.bind(this._controller),
-        // );
+        this.#createFolderButton.on(
+            "click",
+            this.#controller.onCreateFolder.bind(this.#controller),
+        );
+        this.#createEffectButton.on(
+            "click",
+            this.#controller.onCreateEffect.bind(this.#controller),
+        );
         this.#effectListItems.on(
             "click",
-            this.#controller.onEffectClick.bind(this.#controller),
+            this.#controller.onToggleEffect.bind(this.#controller),
         );
         // this._exportCustomEffectsButton.on(
         //     "click",
@@ -120,7 +126,7 @@ class ConvenientEffectsApp extends Application {
         // );
         this.#folderHeaders.on(
             "click",
-            this.#controller.onFolderClick.bind(this.#controller),
+            this.#controller.onToggleFolder.bind(this.#controller),
         );
         // this._importCustomEffectsButton.on(
         //     "click",
@@ -129,56 +135,64 @@ class ConvenientEffectsApp extends Application {
     }
 
     #initContextMenus(): void {
-        // new ContextMenu(this.#rootView, ".convenient-effect", [
-        //     {
-        //         name: "Edit Effect",
-        //         icon: '<i class="fas fa-edit fa-fw"></i>',
-        //         condition: (effectItem) => {
-        //             return (
-        //                 this._controller.isCustomEffect(effectItem) &&
-        //                 (game.user.isGM ||
-        //                     this._controller.isPlayerAllowedCustomEffects)
-        //             );
-        //         },
-        //         callback: this._controller.onEditEffectClick.bind(
-        //             this._controller,
-        //         ),
-        //     },
-        //     {
-        //         name: "Delete Effect",
-        //         icon: '<i class="fas fa-trash fa-fw"></i>',
-        //         condition: (effectItem) => {
-        //             return (
-        //                 this._controller.isCustomEffect(effectItem) &&
-        //                 (game.user.isGM ||
-        //                     this._controller.isPlayerAllowedCustomEffects)
-        //             );
-        //         },
-        //         callback: this._controller.onDeleteEffectClick.bind(
-        //             this._controller,
-        //         ),
-        //     },
-        //     {
-        //         name: "Toggle as Overlay",
-        //         icon: '<i class="far fa-dot-circle fa-fw"></i>',
-        //         callback: this._controller.onToggleOverlay.bind(
-        //             this._controller,
-        //         ),
-        //     },
-        //     {
-        //         name: "Duplicate as Custom",
-        //         icon: '<i class="far fa-copy fa-fw"></i>',
-        //         condition: () => {
-        //             return (
-        //                 game.user.isGM ||
-        //                 this._controller.isPlayerAllowedCustomEffects
-        //             );
-        //         },
-        //         callback: this._controller.onDuplicateAsCustom.bind(
-        //             this._controller,
-        //         ),
-        //     },
-        // ]);
+        new ContextMenu(this.#rootView, ".convenient-folder", [
+            {
+                name: "Edit Folder",
+                icon: '<i class="fas fa-edit fa-fw"></i>',
+                condition: (_target) =>
+                    game.user.isGM || this.#controller.canUserModifyEffects,
+                callback: this.#controller.onEditFolder,
+            },
+            {
+                name: "Delete All",
+                icon: '<i class="fas fa-dumpster fa-fw"></i>',
+                condition: (_target) =>
+                    game.user.isGM || this.#controller.canUserModifyEffects,
+                callback: this.#controller.onDeleteAllFolder,
+            },
+        ]);
+
+        new ContextMenu(this.#rootView, ".convenient-effect", [
+            {
+                name: "Edit Effect", // TODO localize
+                icon: '<i class="fas fa-edit fa-fw"></i>',
+                condition: (_target) =>
+                    game.user.isGM || this.#controller.canUserModifyEffects,
+                callback: this.#controller.onEditEffect.bind(this.#controller),
+            },
+            {
+                name: "Delete Effect",
+                icon: '<i class="fas fa-trash fa-fw"></i>',
+                condition: (_target) => {
+                    return (
+                        game.user.isGM || this.#controller.canUserModifyEffects
+                    );
+                },
+                callback: this.#controller.onDeleteEffect.bind(
+                    this.#controller,
+                ),
+            },
+            // TODO a restore or undo button?
+            {
+                name: "Toggle as Overlay",
+                icon: '<i class="far fa-dot-circle fa-fw"></i>',
+                callback: this.#controller.onToggleOverlay.bind(
+                    this.#controller,
+                ),
+            },
+            {
+                name: "Duplicate",
+                icon: '<i class="far fa-copy fa-fw"></i>',
+                condition: () => {
+                    return (
+                        game.user.isGM || this.#controller.canUserModifyEffects
+                    );
+                },
+                callback: this.#controller.onDuplicateEffect.bind(
+                    this.#controller,
+                ),
+            },
+        ]);
     }
 
     #findFolderById(folderId: string): JQuery<HTMLElement> {
@@ -193,9 +207,13 @@ class ConvenientEffectsApp extends Application {
         return this.#rootView.find(".collapse-all");
     }
 
-    // get _createEffectButton() {
-    //     return this._rootView.find(".create-effect");
-    // }
+    get #createFolderButton() {
+        return this.#rootView.find(".create-folder");
+    }
+
+    get #createEffectButton() {
+        return this.#rootView.find(".create-button");
+    }
 
     get #effectListItems(): JQuery<HTMLElement> {
         return this.#rootView.find(".convenient-effect");
