@@ -14,6 +14,7 @@ interface ICreateItemAddOns {
 
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
+    isTemporary?: boolean; // TODO determines if we add our own status
     isDynamic?: boolean; // TODO can we remove this??
     isViewable?: boolean;
     atlChanges?: DeepPartial<EffectChangeData>[];
@@ -47,6 +48,7 @@ function createConvenientItem({
 
 function createConvenientEffect({
     effect,
+    isTemporary = true,
     isDynamic = false,
     isViewable = true,
     atlChanges = [],
@@ -65,6 +67,12 @@ function createConvenientEffect({
     ceFlags[MODULE_ID]![FLAGS.SUB_EFFECTS] = subEffects;
 
     effect.flags = foundry.utils.mergeObject(ceFlags, effectFlags);
+
+    const statusesArray = Array.from(effect.statuses ?? []);
+    if (isTemporary) {
+        statusesArray.unshift(`convenient-effect-${effect.name}`.slugify());
+    }
+    effect.statuses = statusesArray;
 
     // const settings = new Settings();
     // if (settings.integrateWithAte) {
