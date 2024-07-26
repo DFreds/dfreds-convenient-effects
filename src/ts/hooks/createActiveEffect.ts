@@ -9,17 +9,20 @@ import { Listener } from "./index.ts";
  */
 const CreateActiveEffect: Listener = {
     listen(): void {
-        Hooks.on("createActiveEffect", (activeEffect: any, _config, userId) => {
-            if (game.user.id !== userId) return;
+        Hooks.on(
+            "createActiveEffect",
+            (activeEffect: any, _metadata, userId) => {
+                if (game.user.id !== userId) return;
 
-            const effect = activeEffect as ActiveEffect<any>;
-            const parent = effect.parent;
+                const effect = activeEffect as ActiveEffect<any>;
+                const parent = effect.parent;
 
-            // TODO why parent and not just effect?
-            if (parent instanceof Item && isItemConvenient(parent)) {
-                renderConvenientEffectsAppIfOpen();
-            }
-        });
+                // TODO why parent and not just effect?
+                if (parent instanceof Item && isItemConvenient(parent)) {
+                    renderConvenientEffectsAppIfOpen();
+                }
+            },
+        );
     },
 };
 
