@@ -14,9 +14,6 @@ async function getInputFromDialog({
 }: {
     folder?: Item<null> | null;
 }): Promise<FolderResolve> {
-    const safeColor = folder?.id
-        ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
-        : "#000000";
     const color = folder?.id
         ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
         : "";
@@ -24,7 +21,6 @@ async function getInputFromDialog({
         "modules/dfreds-convenient-effects/templates/create-edit-folder-dialog.hbs",
         {
             name: folder?.id ? folder.name : "",
-            safeColor,
             color,
             newName: "Folder",
         },
