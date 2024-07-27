@@ -9,6 +9,7 @@ import {
 import { log } from "../logger.ts";
 import { FLAGS } from "../constants.ts";
 import { ItemFlags } from "types/foundry/common/documents/item.js";
+import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 
 interface ViewData {
     /**
@@ -20,14 +21,6 @@ interface ViewData {
 interface SearchResults {
     effectIds?: Set<string>;
     folderIds?: Set<string>;
-}
-
-interface FolderResolve {
-    data: {
-        name: string;
-        color: string;
-    };
-    operation: "create" | "update" | "close";
 }
 
 /**
@@ -102,7 +95,7 @@ class ConvenientEffectsController {
     }
 
     async onCreateFolder(_event: Event): Promise<void> {
-        const result = await this.#getInputFromDialog({});
+        const result = await getInputFromDialog({});
 
         if (result.operation === "create") {
             const flags: DeepPartial<ItemFlags> = {};
@@ -174,7 +167,7 @@ class ConvenientEffectsController {
         const folder = game.items.get(folderId);
         if (!folder) return;
 
-        const result = await this.#getInputFromDialog({ folder });
+        const result = await getInputFromDialog({ folder });
 
         if (result.operation === "update") {
             await folder.setFlag(
@@ -373,95 +366,6 @@ class ConvenientEffectsController {
             effectIds,
             folderIds,
         };
-    }
-
-    async #getInputFromDialog({
-        folder,
-    }: {
-        folder?: Item<null> | null;
-    }): Promise<FolderResolve> {
-        const safeColor = folder?.id
-            ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
-            : "#000000";
-        const color = folder?.id
-            ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
-            : "";
-        const content = await renderTemplate(
-            "modules/dfreds-convenient-effects/templates/folder-edit.hbs",
-            {
-                name: folder?.id ? folder.name : "",
-                safeColor,
-                color,
-                newName: "Folder",
-            },
-        );
-
-        return new Promise((resolve, _reject) => {
-            const dialog = this.#getFolderDialog({
-                resolve,
-                folder,
-                content,
-            });
-            dialog.render(true);
-        });
-    }
-
-    #getFolderDialog({
-        resolve,
-        folder,
-        content,
-    }: {
-        resolve: (value: FolderResolve | PromiseLike<FolderResolve>) => void;
-        folder?: Item<null> | null;
-        content: string;
-    }): Dialog {
-        return new Dialog(
-            {
-                title: folder?.id
-                    ? `${game.i18n.localize("FOLDER.Update")}: ${folder.name}`
-                    : game.i18n.localize("FOLDER.Create"),
-                content,
-                close: (_html) => {
-                    resolve({
-                        operation: "close",
-                        data: {
-                            name: "",
-                            color: "",
-                        },
-                    });
-                },
-                default: "ok",
-                buttons: {
-                    ok: {
-                        label: game.i18n.localize(
-                            folder?.id ? "FOLDER.Update" : "FOLDER.Create",
-                        ),
-                        icon: '<i class="fas fa-check"></i>',
-                        callback: (html) => {
-                            log(html);
-                            const folderName = html
-                                .find("input[name=name]")
-                                .val() as string;
-                            const color = html
-                                .find("color-picker")
-                                .val() as string;
-
-                            resolve({
-                                data: {
-                                    name: folderName || "Folder",
-                                    color: color || "#FFFFFF",
-                                },
-                                operation: folder?.id ? "update" : "create",
-                            });
-                        },
-                    },
-                },
-            },
-            {
-                //     classes: ["sheet", "folder-edit"],
-                width: 360,
-            },
-        );
     }
 }
 
