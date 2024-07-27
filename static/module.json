@@ -5,7 +5,7 @@
     "version": "6.0.3",
     "compatibility": {
         "minimum": 12,
-        "verified": "12.327",
+        "verified": "12.330",
         "maximum": 12
     },
     "esmodules": ["dfreds-convenient-effects.mjs"],
