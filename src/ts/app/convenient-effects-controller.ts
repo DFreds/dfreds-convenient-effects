@@ -1,7 +1,14 @@
+import { id as MODULE_ID } from "@static/module.json";
 import { ConvenientEffectsApp } from "./convenient-effects-app.ts";
 import { Settings } from "../settings.ts";
-import { createConvenientEffect, findEffectFolderItems } from "../helpers.ts";
+import {
+    createConvenientEffect,
+    createConvenientItem,
+    findEffectFolderItems,
+} from "../helpers.ts";
 import { log } from "../logger.ts";
+import { FLAGS } from "../constants.ts";
+import { ItemFlags } from "types/foundry/common/documents/item.js";
 
 interface ViewData {
     /**
@@ -13,6 +20,14 @@ interface ViewData {
 interface SearchResults {
     effectIds?: Set<string>;
     folderIds?: Set<string>;
+}
+
+interface FolderResolve {
+    data: {
+        name: string;
+        color: string;
+    };
+    operation: "create" | "update" | "close";
 }
 
 /**
@@ -86,9 +101,26 @@ class ConvenientEffectsController {
         });
     }
 
-    async onCreateFolder(event: Event): Promise<void> {
-        // TODO
-        log(event);
+    async onCreateFolder(_event: Event): Promise<void> {
+        const result = await this.#getInputFromDialog({});
+
+        if (result.operation === "create") {
+            const flags: DeepPartial<ItemFlags> = {};
+            flags[MODULE_ID] = {};
+            flags[MODULE_ID]![FLAGS.FOLDER_COLOR] = result.data.color;
+
+            const item = await Item.create(
+                createConvenientItem({
+                    item: {
+                        name: result.data.name,
+                        type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
+                        flags,
+                    },
+                }),
+            );
+
+            log(`Created item ${item?.id}`);
+        }
     }
 
     async onCreateEffect(event: Event): Promise<void> {
@@ -118,7 +150,7 @@ class ConvenientEffectsController {
 
     async onDuplicateEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
-        const effectId = this.#findClosestEffectId(target);
+        const effectId = this.#findClosestEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
@@ -136,12 +168,31 @@ class ConvenientEffectsController {
 
     // TODO do we display the folder config menu? like editing color and name only
     async onEditFolder(target: JQuery<HTMLElement>): Promise<void> {
-        log(target);
+        const folderId = this.#findClosestFolderIdByElement(target);
+        if (!folderId) return;
+
+        const folder = game.items.get(folderId);
+        if (!folder) return;
+
+        const result = await this.#getInputFromDialog({ folder });
+
+        if (result.operation === "update") {
+            await folder.setFlag(
+                MODULE_ID,
+                FLAGS.FOLDER_COLOR,
+                result.data.color,
+            );
+            await folder.update({
+                name: result.data.name,
+            });
+
+            log(`Updated item ${folder.id}`);
+        }
     }
 
     async onEditEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
-        const effectId = this.#findClosestEffectId(target);
+        const effectId = this.#findClosestEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
@@ -158,7 +209,7 @@ class ConvenientEffectsController {
 
     async onDeleteEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
-        const effectId = this.#findClosestEffectId(target);
+        const effectId = this.#findClosestEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
@@ -264,7 +315,9 @@ class ConvenientEffectsController {
         await this.#settings.clearExpandedFolders();
     }
 
-    #findClosestEffectId(element: JQuery<HTMLElement>): string | undefined {
+    #findClosestEffectIdByElement(
+        element: JQuery<HTMLElement>,
+    ): string | undefined {
         return element
             .closest("[data-document-id], .convenient-effect")
             .data("document-id");
@@ -320,6 +373,95 @@ class ConvenientEffectsController {
             effectIds,
             folderIds,
         };
+    }
+
+    async #getInputFromDialog({
+        folder,
+    }: {
+        folder?: Item<null> | null;
+    }): Promise<FolderResolve> {
+        const safeColor = folder?.id
+            ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
+            : "#000000";
+        const color = folder?.id
+            ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
+            : "";
+        const content = await renderTemplate(
+            "modules/dfreds-convenient-effects/templates/folder-edit.hbs",
+            {
+                name: folder?.id ? folder.name : "",
+                safeColor,
+                color,
+                newName: "Folder",
+            },
+        );
+
+        return new Promise((resolve, _reject) => {
+            const dialog = this.#getFolderDialog({
+                resolve,
+                folder,
+                content,
+            });
+            dialog.render(true);
+        });
+    }
+
+    #getFolderDialog({
+        resolve,
+        folder,
+        content,
+    }: {
+        resolve: (value: FolderResolve | PromiseLike<FolderResolve>) => void;
+        folder?: Item<null> | null;
+        content: string;
+    }): Dialog {
+        return new Dialog(
+            {
+                title: folder?.id
+                    ? `${game.i18n.localize("FOLDER.Update")}: ${folder.name}`
+                    : game.i18n.localize("FOLDER.Create"),
+                content,
+                close: (_html) => {
+                    resolve({
+                        operation: "close",
+                        data: {
+                            name: "",
+                            color: "",
+                        },
+                    });
+                },
+                default: "ok",
+                buttons: {
+                    ok: {
+                        label: game.i18n.localize(
+                            folder?.id ? "FOLDER.Update" : "FOLDER.Create",
+                        ),
+                        icon: '<i class="fas fa-check"></i>',
+                        callback: (html) => {
+                            log(html);
+                            const folderName = html
+                                .find("input[name=name]")
+                                .val() as string;
+                            const color = html
+                                .find("color-picker")
+                                .val() as string;
+
+                            resolve({
+                                data: {
+                                    name: folderName || "Folder",
+                                    color: color || "#FFFFFF",
+                                },
+                                operation: folder?.id ? "update" : "create",
+                            });
+                        },
+                    },
+                },
+            },
+            {
+                //     classes: ["sheet", "folder-edit"],
+                width: 360,
+            },
+        );
     }
 }
 

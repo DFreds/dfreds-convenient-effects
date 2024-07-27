@@ -8,6 +8,7 @@ export const FLAGS = {
     IS_VIEWABLE: "isViewable",
     NESTED_EFFECTS: "nestedEffects",
     SUB_EFFECTS: "subEffects",
+    FOLDER_COLOR: "folderColor",
 };
 
 export const COLORS = {

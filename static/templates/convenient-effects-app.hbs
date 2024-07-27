@@ -3,12 +3,10 @@
     id="convenient-effects"
 >
 
+{{!-- TODO Hide create effect/folder buttons if not allowed --}}
     <!-- Directory Header -->
     <header class="directory-header">
         <div class="header-actions action-buttons flexrow">
-            {{! TODO do we create effect from here or only from folder? }}
-            {{! <button class="create-document create-entry"><i class="fas fa-hand-sparkles"></i>
-                Create Effect</button> }}
             <button class="create-folder"><i class="fas fa-folder"></i>
                 Create Folder</button>
         </div>
@@ -28,8 +26,6 @@
                 autocomplete="off"
                 autofocus
             />
-            {{! <a class="header-control toggle-sort" aria-label="Sort Alphabetically" role="button"
-                data-tooltip="Sort Alphabetically"><i class="fa-solid fa-arrow-down-a-z"></i></a> }}
             <a
                 class="header-control collapse-all"
                 aria-label="Collapse All Folders"
@@ -50,7 +46,7 @@
                 draggable="false"
                 {{! TODO? style="display: flex;" }}
             >
-                <header class="folder-header flexrow">
+                <header class="folder-header flexrow" style="background-color: {{folder.flags.dfreds-convenient-effects.folderColor}};">
                     <h3 class="noborder"><i
                             class="fas fa-folder-open fa-fw"
                         ></i>{{folder.name}}</h3>

@@ -141,14 +141,16 @@ class ConvenientEffectsApp extends Application {
                 icon: '<i class="fas fa-edit fa-fw"></i>',
                 condition: (_target) =>
                     game.user.isGM || this.#controller.canUserModifyEffects,
-                callback: this.#controller.onEditFolder,
+                callback: this.#controller.onEditFolder.bind(this.#controller),
             },
             {
                 name: "Delete All",
                 icon: '<i class="fas fa-dumpster fa-fw"></i>',
                 condition: (_target) =>
                     game.user.isGM || this.#controller.canUserModifyEffects,
-                callback: this.#controller.onDeleteAllFolder,
+                callback: this.#controller.onDeleteAllFolder.bind(
+                    this.#controller,
+                ),
             },
         ]);
 

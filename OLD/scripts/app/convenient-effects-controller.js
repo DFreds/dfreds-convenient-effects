@@ -1,23 +1,12 @@
-import Constants from "../constants.js";
 import CustomEffectsHandler from "../effects/custom-effects-handler.js";
 import DynamicEffectsAdderDelegate from "../systems/dynamic-effects-adder-delegate.js";
 import FoundryHelpers from "../util/foundry-helpers.js";
-import Settings from "../settings.js";
 
 export default class ConvenientEffectsController {
-    constructor(viewMvc) {
+    constructor() {
         this._customEffectsHandler = new CustomEffectsHandler();
         this._dynamicEffectsAdderDelegate = new DynamicEffectsAdderDelegate();
         this._foundryHelpers = new FoundryHelpers();
-    }
-
-    /**
-     * Handles clicks on the create effect button
-     *
-     * @param {MouseEvent} event
-     */
-    async onCreateEffectClick(event) {
-        await this._customEffectsHandler.createNewCustomEffect();
     }
 
     /**
