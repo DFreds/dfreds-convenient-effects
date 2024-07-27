@@ -1,5 +1,4 @@
 import { id as MODULE_ID } from "@static/module.json";
-import { log } from "../logger.ts";
 import { FLAGS } from "../constants.ts";
 
 interface FolderResolve {
@@ -22,7 +21,7 @@ async function getInputFromDialog({
         ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
         : "";
     const content = await renderTemplate(
-        "modules/dfreds-convenient-effects/templates/folder-edit.hbs",
+        "modules/dfreds-convenient-effects/templates/create-edit-folder-dialog.hbs",
         {
             name: folder?.id ? folder.name : "",
             safeColor,
@@ -73,7 +72,6 @@ function getFolderDialog({
                     ),
                     icon: '<i class="fas fa-check"></i>',
                     callback: (html) => {
-                        log(html);
                         const folderName = html
                             .find("input[name=name]")
                             .val() as string;
@@ -82,7 +80,7 @@ function getFolderDialog({
                         resolve({
                             data: {
                                 name: folderName || "Folder",
-                                color: color || "#FFFFFF",
+                                color,
                             },
                             operation: folder?.id ? "update" : "create",
                         });
