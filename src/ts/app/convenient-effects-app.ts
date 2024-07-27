@@ -135,32 +135,41 @@ class ConvenientEffectsApp extends Application {
     }
 
     #initContextMenus(): void {
-        new ContextMenu(this.#rootView, ".convenient-folder", [
-            {
-                name: "Edit Folder",
-                icon: '<i class="fas fa-edit fa-fw"></i>',
-                condition: (_target) =>
-                    game.user.isGM || this.#controller.canUserModifyEffects,
-                callback: this.#controller.onEditFolder.bind(this.#controller),
-            },
-            {
-                name: "Delete All",
-                icon: '<i class="fas fa-dumpster fa-fw"></i>',
-                condition: (_target) =>
-                    game.user.isGM || this.#controller.canUserModifyEffects,
-                callback: this.#controller.onDeleteAllFolder.bind(
-                    this.#controller,
-                ),
-            },
-        ]);
+        ContextMenu.create(
+            this,
+            this.#rootView,
+            ".convenient-folder .folder-header",
+            [
+                {
+                    name: "Edit Folder",
+                    icon: '<i class="fas fa-edit fa-fw"></i>',
+                    condition: (_target) =>
+                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    callback: this.#controller.onEditFolder.bind(
+                        this.#controller,
+                    ),
+                },
+                {
+                    name: "Delete All",
+                    icon: '<i class="fas fa-dumpster fa-fw"></i>',
+                    condition: (_target) =>
+                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    callback: this.#controller.onDeleteAllFolder.bind(
+                        this.#controller,
+                    ),
+                },
+            ],
+        );
 
-        new ContextMenu(this.#rootView, ".convenient-effect", [
+        ContextMenu.create(this, this.#rootView, ".convenient-effect", [
             {
                 name: "Edit Effect", // TODO localize
                 icon: '<i class="fas fa-edit fa-fw"></i>',
                 condition: (_target) =>
                     game.user.isGM || this.#controller.canUserModifyEffects,
-                callback: this.#controller.onEditEffect.bind(this.#controller),
+                callback: (target) => {
+                    this.#controller.onEditEffect(target);
+                },
             },
             {
                 name: "Delete Effect",
@@ -198,11 +207,13 @@ class ConvenientEffectsApp extends Application {
     }
 
     #findFolderById(folderId: string): JQuery<HTMLElement> {
-        return this.#rootView.find(`.folder[data-folder-id="${folderId}"]`);
+        return this.#rootView.find(
+            `.convenient-folder[data-folder-id="${folderId}"]`,
+        );
     }
 
     get #allDirectories(): JQuery<HTMLElement> {
-        return this.#rootView.find(".folder");
+        return this.#rootView.find(".convenient-folder");
     }
 
     get #collapseAllButton(): JQuery<HTMLElement> {
