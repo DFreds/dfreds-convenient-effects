@@ -8,6 +8,7 @@ import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
 import { Init } from "./init.ts";
 import { Ready } from "./ready.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
+import { Setup } from "./setup.ts";
 import { UpdateActiveEffect } from "./updateActiveEffect.ts";
 import { UpdateItem } from "./updateItem.ts";
 
@@ -19,6 +20,7 @@ const HooksCE = {
     listen(): void {
         const listeners: Listener[] = [
             Init,
+            Setup,
             Ready,
             CreateEffects,
             GetSceneControlButtons,

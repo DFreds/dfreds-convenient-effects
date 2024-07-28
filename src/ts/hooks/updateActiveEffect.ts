@@ -1,6 +1,6 @@
 import { Listener } from "./index.ts";
 import {
-    isItemConvenient,
+    isEffectConvenient,
     renderConvenientEffectsAppIfOpen,
 } from "../helpers.ts";
 
@@ -15,12 +15,17 @@ const UpdateActiveEffect: Listener = {
                 if (game.user.id !== userId) return;
 
                 const effect = activeEffect as ActiveEffect<any>;
-                const parent = effect.parent;
 
-                // TODO why parent and not just effect?
-                if (parent instanceof Item && isItemConvenient(parent)) {
-                    renderConvenientEffectsAppIfOpen();
-                }
+                if (!isEffectConvenient(effect)) return;
+
+                renderConvenientEffectsAppIfOpen();
+                // const statusesArray = Array.from(effect.statuses ?? []);
+                // if (isTemporary) {
+                //     statusesArray.unshift(
+                //         `convenient-effect-${effect.name}`.slugify(),
+                //     );
+                // }
+                // effect.statuses = statusesArray;
             },
         );
     },
