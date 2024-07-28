@@ -113,12 +113,27 @@ function findAllEffectFolderItems(): Item<any>[] {
 }
 
 function findEffectFolderItems(): Item<any>[] {
-    return findAllEffectFolderItems().filter((item) => {
-        const isConvenient = isItemConvenient(item);
-        const isBackup = !!item.getFlag(MODULE_ID, FLAGS.BACKUP_ID) === true;
+    return game.items
+        .filter((item) => {
+            const isConvenient = isItemConvenient(item);
+            const isBackup =
+                !!item.getFlag(MODULE_ID, FLAGS.BACKUP_ID) === true;
 
-        return isConvenient && !isBackup;
-    });
+            return isConvenient && !isBackup;
+        })
+        .sort((itemA, itemB) => {
+            const nameA = itemA.name.toUpperCase(); // ignore upper and lowercase
+            const nameB = itemB.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
+        });
 }
 
 /**
