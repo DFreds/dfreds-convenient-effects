@@ -296,6 +296,27 @@ class ConvenientEffectsController {
         }
     }
 
+    onEffectDragStart(event: DragEvent): void {
+        const effectId = this.#findClosestEffectIdByEvent(event);
+        const effect = game.dfreds.effectInterface.findEffect({ effectId });
+
+        if (!effect) return;
+
+        // // special handling for nested effects
+        // if (game.dfreds.effectInterface.hasNestedEffects(effect)) {
+        //     event.dataTransfer.setData(
+        //         "text/plain",
+        //         JSON.stringify({
+        //             effectName,
+        //         }),
+        //     );
+        //     return;
+        // }
+
+        const dragData = effect.toDragData();
+        event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
+    }
+
     canDragStart(): boolean {
         return game.user.role >= this.#settings.appControlsPermission;
     }
@@ -333,6 +354,14 @@ class ConvenientEffectsController {
         return element
             .closest("[data-document-name], .convenient-effect")
             .data("document-name");
+    }
+
+    #findClosestEffectIdByEvent(event: Event): string | undefined {
+        if (!event.target) return;
+
+        return $(event.target)
+            .closest("[data-document-id], .convenient-effect")
+            .data("document-id");
     }
 
     #findClosestEffectNameByEvent(event: Event): string | undefined {

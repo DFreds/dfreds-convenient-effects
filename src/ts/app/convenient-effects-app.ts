@@ -65,6 +65,10 @@ class ConvenientEffectsApp extends Application {
         return this.#controller.onSearchTextChange(event, query, rgx, html);
     }
 
+    protected override _onDragStart(event: DragEvent): void {
+        this.#controller.onEffectDragStart(event);
+    }
+
     protected override _canDragStart(_selector: string): boolean {
         return this.#controller.canDragStart();
     }
