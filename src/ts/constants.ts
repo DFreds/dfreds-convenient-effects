@@ -1,7 +1,6 @@
 export const DEBUG = true;
 
 export const FLAGS = {
-    BACKUP_ID: "backupId",
     DESCRIPTION: "description",
     IS_CONVENIENT: "isConvenient",
     IS_DYNAMIC: "isDynamic",

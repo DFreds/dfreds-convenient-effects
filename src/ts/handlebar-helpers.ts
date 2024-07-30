@@ -15,7 +15,6 @@ class HandlebarHelpers {
         this.#registerIsGmHelper();
         this.#registerCanCreateEffectsHelper();
         this.#registerHasNestedEffectsHelper();
-        this.#registerHasBackup();
         this.#registerConvenientIconsHelper();
     }
 
@@ -44,10 +43,6 @@ class HandlebarHelpers {
 
             return nestedEffects.length > 0;
         });
-    }
-
-    #registerHasBackup(): void {
-        // TODO
     }
 
     #registerConvenientIconsHelper() {

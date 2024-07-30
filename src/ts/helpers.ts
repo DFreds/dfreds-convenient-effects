@@ -9,7 +9,6 @@ import { ItemFlags, ItemSource } from "types/foundry/common/documents/item.js";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
-    backupId?: string;
 }
 
 interface ICreateEffectAddOns {
@@ -26,7 +25,6 @@ interface ICreateEffectAddOns {
 
 function createConvenientItem({
     item,
-    backupId,
 }: ICreateItemAddOns): PreCreate<ItemSource> {
     const itemFlags = item.flags ?? {};
     const ceFlags: DeepPartial<ItemFlags> = {};
@@ -34,10 +32,6 @@ function createConvenientItem({
     ceFlags[MODULE_ID] = {};
     ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true; // TODO use to filter from item directory
     ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true; // TODO use to hide in app
-
-    if (backupId) {
-        ceFlags[MODULE_ID]![FLAGS.BACKUP_ID] = backupId; // TODO use to backup originals
-    }
 
     item.flags = foundry.utils.mergeObject(ceFlags, itemFlags);
     item.img =
@@ -116,10 +110,7 @@ function findEffectFolderItems(): Item<any>[] {
     return game.items
         .filter((item) => {
             const isConvenient = isItemConvenient(item);
-            const isBackup =
-                !!item.getFlag(MODULE_ID, FLAGS.BACKUP_ID) === true;
-
-            return isConvenient && !isBackup;
+            return isConvenient;
         })
         .sort((itemA, itemB) => {
             const nameA = itemA.name.toUpperCase(); // ignore upper and lowercase

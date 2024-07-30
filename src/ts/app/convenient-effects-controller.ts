@@ -210,11 +210,6 @@ class ConvenientEffectsController {
         await item?.deleteEmbeddedDocuments("ActiveEffect", [effectId]);
     }
 
-    // TODO
-    hasBackup(): boolean {
-        return true;
-    }
-
     // TODO separate this into various permissions
     get canUserModifyEffects(): boolean {
         return true;

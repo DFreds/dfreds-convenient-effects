@@ -1,10 +1,7 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
-import { FLAGS } from "../constants.ts";
-import { ItemFlags } from "types/foundry/common/documents/item.js";
-import { createConvenientItem, findEffectFolderItems } from "../helpers.ts";
+import { createConvenientItem } from "../helpers.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -19,7 +16,6 @@ abstract class EffectDefinition {
         // TODO should we create backup items that can't be modified here? With additional flag perhaps
 
         await this.#createItemsAndEffects(); // TODO do this only once
-        await this.#createBackupItemsAndEffects(); // TODO do this only once
         await this.#runMigrations();
     }
 
@@ -49,30 +45,6 @@ abstract class EffectDefinition {
         );
 
         await Promise.all(effectPromises);
-    }
-
-    async #createBackupItemsAndEffects(): Promise<void> {
-        const itemIds = findEffectFolderItems().map((item) => item.id);
-
-        if (!itemIds) return;
-
-        for (const itemId of itemIds) {
-            const item = game.items.get(itemId);
-            if (!item) continue;
-
-            const itemFlags = item.flags ?? {};
-            const backupFlags: DeepPartial<ItemFlags> = {};
-            backupFlags[MODULE_ID] = {};
-            backupFlags[MODULE_ID]![FLAGS.BACKUP_ID] = itemId;
-
-            await item.clone(
-                {
-                    name: `${item.name} - Backup`,
-                    flags: foundry.utils.mergeObject(backupFlags, itemFlags),
-                },
-                { save: true },
-            );
-        }
     }
 
     async #runMigrations(): Promise<void> {
