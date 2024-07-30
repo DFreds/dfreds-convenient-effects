@@ -9,10 +9,8 @@ import { Sockets } from "../sockets/sockets.ts";
 const Ready: Listener = {
     listen(): void {
         Hooks.once("ready", async () => {
-            game.dfreds = {
-                effectInterface: new EffectInterface(),
-                sockets: new Sockets(),
-            };
+            game.dfreds.effectInterface = new EffectInterface();
+            game.dfreds.sockets = new Sockets();
 
             Hooks.callAll(`${MODULE_ID}.createEffects`);
         });

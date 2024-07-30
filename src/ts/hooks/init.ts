@@ -13,6 +13,8 @@ const Init: Listener = {
             new Settings().register();
             new HandlebarHelpers().register();
             // new TextEnrichers().initialize(); // TODO
+
+            game.dfreds = game.dfreds || {};
         });
     },
 };
