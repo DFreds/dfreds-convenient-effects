@@ -1,6 +1,4 @@
-import BaseActiveEffect, {
-    ActiveEffectSource,
-} from "types/foundry/common/documents/active-effect.js";
+import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "./settings.ts";
 import {
     findActorByUuid,
@@ -12,6 +10,11 @@ import { log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
 
 interface IFindEffect {
+    /**
+     * The folder ID. If included, it will only search this folder
+     */
+    folderId?: string | null;
+
     /**
      * The effect ID
      */
@@ -150,15 +153,21 @@ class EffectInterface {
      * @returns The active effect or undefined if it can't be found
      */
     findEffect({
+        folderId,
         effectId,
         effectName,
-    }: IFindEffect): BaseActiveEffect<Item<null>> | undefined {
+    }: IFindEffect): ActiveEffect<Item<null>> | undefined {
         const effectItems = findEffectFolderItems();
 
         if (!effectItems) return undefined;
 
         const matchingEffects = effectItems
+            .filter((effectItem) =>
+                // If folderId is included, filter all but that ID
+                folderId ? effectItem.id === folderId : true,
+            )
             .flatMap((effectItem) => Array(...effectItem.effects))
+            .map((effect) => effect as ActiveEffect<Item<null>>)
             .filter(
                 (effect) =>
                     effect.id === effectId || effect.name === effectName,

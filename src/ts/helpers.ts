@@ -102,7 +102,7 @@ function findActorByUuid(
     return undefined;
 }
 
-function findEffectFolderItems(): Item<any>[] {
+function findEffectFolderItems(): Item<null>[] {
     return game.items
         .filter((item) => {
             const isConvenient = isItemConvenient(item);

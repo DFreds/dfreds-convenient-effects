@@ -148,7 +148,12 @@ class ConvenientEffectsController {
         if (!folderId || !effectId) return;
 
         const item = game.items.get(folderId);
-        const effect = item?.effects.get(effectId) as ActiveEffect<Item<null>>;
+        const effect = game.dfreds.effectInterface.findEffect({
+            folderId,
+            effectId,
+        });
+
+        if (!effect) return;
 
         const effects = await item?.createEmbeddedDocuments("ActiveEffect", [
             effect,
@@ -182,14 +187,18 @@ class ConvenientEffectsController {
         }
     }
 
+    // TODO import/export items and folder
+
     async onEditEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
         const effectId = this.#findClosestEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
-        const item = game.items.get(folderId);
-        const effect = item?.effects.get(effectId) as ActiveEffect<Item<null>>;
+        const effect = game.dfreds.effectInterface.findEffect({
+            folderId,
+            effectId,
+        });
 
         effect?.sheet.render(true);
     }
@@ -209,9 +218,12 @@ class ConvenientEffectsController {
 
         if (!folderId || !effectId) return;
 
-        const item = game.items.get(folderId);
-        const effect = item?.effects.get(effectId);
-        await (effect as ActiveEffect<Item<null>>).deleteDialog();
+        const effect = game.dfreds.effectInterface.findEffect({
+            folderId,
+            effectId,
+        });
+
+        await effect?.deleteDialog();
     }
 
     // TODO separate this into various permissions
