@@ -159,7 +159,6 @@ class ConvenientEffectsController {
         (effects[0] as ActiveEffect<Item<null>>).sheet.render(true);
     }
 
-    // TODO do we display the folder config menu? like editing color and name only
     async onEditFolder(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
@@ -195,9 +194,13 @@ class ConvenientEffectsController {
         effect?.sheet.render(true);
     }
 
-    // TODO confirm?
     async onDeleteAllFolder(target: JQuery<HTMLElement>): Promise<void> {
-        log(target);
+        const folderId = this.#findClosestFolderIdByElement(target);
+
+        if (!folderId) return;
+
+        const item = game.items.get(folderId);
+        await item?.deleteDialog();
     }
 
     async onDeleteEffect(target: JQuery<HTMLElement>): Promise<void> {
@@ -207,7 +210,8 @@ class ConvenientEffectsController {
         if (!folderId || !effectId) return;
 
         const item = game.items.get(folderId);
-        await item?.deleteEmbeddedDocuments("ActiveEffect", [effectId]);
+        const effect = item?.effects.get(effectId);
+        await (effect as ActiveEffect<Item<null>>).deleteDialog();
     }
 
     // TODO separate this into various permissions
