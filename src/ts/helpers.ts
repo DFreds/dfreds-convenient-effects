@@ -102,10 +102,6 @@ function findActorByUuid(
     return undefined;
 }
 
-function findAllEffectFolderItems(): Item<any>[] {
-    return game.items.filter((item) => isItemConvenient(item));
-}
-
 function findEffectFolderItems(): Item<any>[] {
     return game.items
         .filter((item) => {
@@ -186,7 +182,6 @@ export {
     createConvenientItem,
     createConvenientEffect,
     findActorByUuid,
-    findAllEffectFolderItems,
     findEffectFolderItems,
     getActorUuids,
     isEffectConvenient,

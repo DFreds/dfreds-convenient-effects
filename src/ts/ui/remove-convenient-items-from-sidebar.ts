@@ -1,10 +1,10 @@
 import { DEBUG } from "../constants.ts";
-import { findAllEffectFolderItems } from "../helpers.ts";
+import { findEffectFolderItems } from "../helpers.ts";
 
 function removeConvenientItemsFromSidebar(
     directory: ItemDirectory<Item<null>>,
 ): void {
-    const convenientItemIds = findAllEffectFolderItems().map((item) => item.id);
+    const convenientItemIds = findEffectFolderItems().map((item) => item.id);
 
     if (!convenientItemIds) return;
     if (DEBUG) return;

@@ -4,7 +4,7 @@ import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
 import { Settings } from "../settings.ts";
 import { DEBUG } from "../constants.ts";
-import { findAllEffectFolderItems } from "../helpers.ts";
+import { findEffectFolderItems } from "../helpers.ts";
 
 const CreateEffects: Listener = {
     listen(): void {
@@ -16,7 +16,7 @@ const CreateEffects: Listener = {
             // TODO extract to actual API function to reset?
             if (DEBUG) {
                 const settings = new Settings();
-                const oldItemIds = findAllEffectFolderItems().map(
+                const oldItemIds = findEffectFolderItems().map(
                     (item) => item.id,
                 );
 

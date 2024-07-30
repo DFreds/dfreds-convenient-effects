@@ -4,7 +4,6 @@ import BaseActiveEffect, {
 import { Settings } from "./settings.ts";
 import {
     findActorByUuid,
-    findAllEffectFolderItems,
     findEffectFolderItems,
     getActorUuids,
     isEffectConvenient,
@@ -364,7 +363,7 @@ class EffectInterface {
     async resetMigrations(): Promise<void> {
         if (!game.user.isGM) return;
 
-        const items = findAllEffectFolderItems();
+        const items = findEffectFolderItems();
         await Item.deleteDocuments(items.map((item) => item.id));
 
         // TODO how do we tell it to recreate the items?
