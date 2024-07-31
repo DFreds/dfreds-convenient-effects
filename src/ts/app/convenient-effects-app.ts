@@ -27,6 +27,7 @@ class ConvenientEffectsApp extends Application {
             dragDrop: [
                 {
                     dragSelector: ".convenient-effect",
+                    dropSelector: ".convenient-folder",
                 },
             ],
             filters: [
@@ -53,7 +54,41 @@ class ConvenientEffectsApp extends Application {
         this.#initClickListeners();
         this.#initContextMenus();
 
+        const dh = this.#onDragHighlight.bind(this);
+
+        // @ts-expect-error Not recognizing handler for some reason
+        html.find(".folder").on("dragenter", dh).on("dragleave", dh);
+
         this.#controller.expandSavedFolders();
+    }
+
+    // NOTE: taken from foundry.js DirectoryApplicationMixin
+    #onDragHighlight(event: DragEvent) {
+        const li = event.currentTarget as any;
+        if (!li.classList.contains("folder")) return;
+        event.stopPropagation(); // Don't bubble to parent folders
+
+        // Remove existing drop targets
+        if (event.type === "dragenter") {
+            for (const t of li
+                .closest(".directory-list")
+                .querySelectorAll(".droptarget")) {
+                t.classList.remove("droptarget");
+            }
+        }
+
+        // Remove current drop target
+        if (event.type === "dragleave") {
+            const el = document.elementFromPoint(
+                event.clientX,
+                event.clientY,
+            ) as any;
+            const parent = el.closest(".folder");
+            if (parent === li) return;
+        }
+
+        // Add new drop target
+        li.classList.toggle("droptarget", event.type === "dragenter");
     }
 
     protected override async _onSearchFilter(
@@ -69,8 +104,16 @@ class ConvenientEffectsApp extends Application {
         this.#controller.onEffectDragStart(event);
     }
 
+    protected override async _onDrop(event: DragEvent): Promise<void> {
+        await this.#controller.onEffectDrop(event);
+    }
+
     protected override _canDragStart(_selector: string): boolean {
         return this.#controller.canDragStart();
+    }
+
+    protected override _canDragDrop(_selector: string): boolean {
+        return this.#controller.canDragStart(); // TODO its own handler?
     }
 
     /**
@@ -124,21 +167,13 @@ class ConvenientEffectsApp extends Application {
             "click",
             this.#controller.onToggleEffect.bind(this.#controller),
         );
-        // this._exportCustomEffectsButton.on(
-        //     "click",
-        //     this._controller.onExportCustomEffectsClick.bind(this._controller),
-        // );
         this.#folderHeaders.on(
             "click",
             this.#controller.onToggleFolder.bind(this.#controller),
         );
-        // this._importCustomEffectsButton.on(
-        //     "click",
-        //     this._controller.onImportCustomEffectsClick.bind(this._controller),
-        // );
     }
 
-    // TODO localize
+    // TODO use configure ownership default foundry behavior?
     #initContextMenus(): void {
         ContextMenu.create(
             this,
@@ -186,7 +221,7 @@ class ConvenientEffectsApp extends Application {
 
         ContextMenu.create(this, this.#rootView, ".convenient-effect", [
             {
-                name: "Edit Effect", // TODO localize
+                name: "ConvenientEffects.EditEffect",
                 icon: '<i class="fas fa-edit fa-fw"></i>',
                 condition: (_target) =>
                     game.user.isGM || this.#controller.canUserModifyEffects,
@@ -195,7 +230,7 @@ class ConvenientEffectsApp extends Application {
                 },
             },
             {
-                name: "Delete Effect",
+                name: "ConvenientEffects.DeleteEffect",
                 icon: '<i class="fas fa-trash fa-fw"></i>',
                 condition: (_target) => {
                     return (
@@ -208,14 +243,14 @@ class ConvenientEffectsApp extends Application {
             },
             // TODO a restore or undo button?
             {
-                name: "Toggle as Overlay",
+                name: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="far fa-dot-circle fa-fw"></i>',
                 callback: this.#controller.onToggleOverlay.bind(
                     this.#controller,
                 ),
             },
             {
-                name: "Duplicate",
+                name: "SIDEBAR.Duplicate",
                 icon: '<i class="far fa-copy fa-fw"></i>',
                 condition: () => {
                     return (
@@ -255,17 +290,9 @@ class ConvenientEffectsApp extends Application {
         return this.#rootView.find(".convenient-effect");
     }
 
-    // get _exportCustomEffectsButton() {
-    //     return this._rootView.find(".export-custom-effects");
-    // }
-
     get #folderHeaders() {
         return this.#rootView.find(".directory-list .folder-header");
     }
-
-    // get _importCustomEffectsButton() {
-    //     return this._rootView.find(".import-custom-effects");
-    // }
 }
 
 export { ConvenientEffectsApp };

@@ -316,8 +316,15 @@ class ConvenientEffectsController {
     }
 
     onEffectDragStart(event: DragEvent): void {
+        const folderId = this.#findClosestFolderIdByEvent(event);
         const effectId = this.#findClosestEffectIdByEvent(event);
-        const effect = game.dfreds.effectInterface.findEffect({ effectId });
+
+        if (!folderId || !effectId) return;
+
+        const effect = game.dfreds.effectInterface.findEffect({
+            folderId,
+            effectId,
+        });
 
         if (!effect) return;
 
@@ -334,6 +341,24 @@ class ConvenientEffectsController {
 
         const dragData = effect.toDragData();
         event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
+    }
+
+    async onEffectDrop(event: DragEvent): Promise<void> {
+        const effectString = event.dataTransfer?.getData("text/plain");
+        const folderId = this.#findClosestFolderIdByEvent(event);
+
+        if (!effectString || !folderId) return;
+
+        const effectData = JSON.parse(effectString);
+        const effect = fromUuidSync(effectData.uuid) as ActiveEffect<
+            Item<null>
+        >;
+
+        // const originalItem = game.items.get(effect.parent.id);
+        const newItem = game.items.get(folderId);
+
+        await newItem?.createEmbeddedDocuments("ActiveEffect", [effect]);
+        await effect.delete();
     }
 
     canDragStart(): boolean {

@@ -8,5 +8,9 @@
     "ConvenientEffects.SettingNone": "None",
 
     "ConvenientEffects.SettingAppControlsPermissionName": "App Controls Permission",
-    "ConvenientEffects.SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely."
+    "ConvenientEffects.SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
+
+    "ConvenientEffects.EditEffect": "Edit Effect",
+    "ConvenientEffects.DeleteEffect": "Delete Effect",
+    "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay"
 }
