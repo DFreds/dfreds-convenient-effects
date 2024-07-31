@@ -183,8 +183,9 @@ class ConvenientEffectsApp extends Application {
                 {
                     name: "FOLDER.Edit",
                     icon: '<i class="fas fa-edit fa-fw"></i>',
-                    condition: (_target) =>
-                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    condition: this.#controller.isUserFolderOwner.bind(
+                        this.#controller,
+                    ),
                     callback: this.#controller.onEditFolder.bind(
                         this.#controller,
                     ),
@@ -192,17 +193,27 @@ class ConvenientEffectsApp extends Application {
                 {
                     name: "FOLDER.Delete",
                     icon: '<i class="fas fa-dumpster fa-fw"></i>',
-                    condition: (_target) =>
-                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    condition: this.#controller.isUserFolderOwner.bind(
+                        this.#controller,
+                    ),
                     callback: this.#controller.onDeleteAllFolder.bind(
+                        this.#controller,
+                    ),
+                },
+                {
+                    name: "OWNERSHIP.Configure",
+                    icon: '<i class="fas fa-lock"></i>',
+                    condition: () => game.user.isGM,
+                    callback: this.#controller.onConfigureFolderOwnership.bind(
                         this.#controller,
                     ),
                 },
                 {
                     name: "SIDEBAR.Export",
                     icon: '<i class="fas fa-file-export fa-fw"></i>',
-                    condition: (_target) =>
-                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    condition: this.#controller.isUserFolderOwner.bind(
+                        this.#controller,
+                    ),
                     callback: this.#controller.onExportFolder.bind(
                         this.#controller,
                     ),
@@ -210,8 +221,9 @@ class ConvenientEffectsApp extends Application {
                 {
                     name: "SIDEBAR.Import",
                     icon: '<i class="fas fa-file-import fa-fw"></i>',
-                    condition: (_target) =>
-                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    condition: this.#controller.isUserFolderOwner.bind(
+                        this.#controller,
+                    ),
                     callback: this.#controller.onImportFolder.bind(
                         this.#controller,
                     ),
@@ -223,8 +235,9 @@ class ConvenientEffectsApp extends Application {
             {
                 name: "ConvenientEffects.EditEffect",
                 icon: '<i class="fas fa-edit fa-fw"></i>',
-                condition: (_target) =>
-                    game.user.isGM || this.#controller.canUserModifyEffects,
+                condition: this.#controller.isUserFolderOwner.bind(
+                    this.#controller,
+                ),
                 callback: (target) => {
                     this.#controller.onEditEffect(target);
                 },
@@ -232,11 +245,9 @@ class ConvenientEffectsApp extends Application {
             {
                 name: "ConvenientEffects.DeleteEffect",
                 icon: '<i class="fas fa-trash fa-fw"></i>',
-                condition: (_target) => {
-                    return (
-                        game.user.isGM || this.#controller.canUserModifyEffects
-                    );
-                },
+                condition: this.#controller.isUserFolderOwner.bind(
+                    this.#controller,
+                ),
                 callback: this.#controller.onDeleteEffect.bind(
                     this.#controller,
                 ),
@@ -252,11 +263,9 @@ class ConvenientEffectsApp extends Application {
             {
                 name: "SIDEBAR.Duplicate",
                 icon: '<i class="far fa-copy fa-fw"></i>',
-                condition: () => {
-                    return (
-                        game.user.isGM || this.#controller.canUserModifyEffects
-                    );
-                },
+                condition: this.#controller.isUserFolderOwner.bind(
+                    this.#controller,
+                ),
                 callback: this.#controller.onDuplicateEffect.bind(
                     this.#controller,
                 ),

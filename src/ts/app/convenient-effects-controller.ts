@@ -49,6 +49,15 @@ class ConvenientEffectsController {
         };
     }
 
+    isUserFolderOwner(target: JQuery<HTMLElement>): boolean {
+        const folderId = this.#findClosestFolderIdByElement(target);
+        if (!folderId) return false;
+
+        const item = game.items.get(folderId);
+
+        return item?.isOwner ?? false;
+    }
+
     /**
      * Handles clicks on folders by collapsing or expanding them
      *
@@ -226,6 +235,22 @@ class ConvenientEffectsController {
         });
 
         await effect?.deleteDialog();
+    }
+
+    onConfigureFolderOwnership(target: JQuery<HTMLElement>): void {
+        const folderId = this.#findClosestFolderIdByElement(target);
+        if (!folderId) return;
+
+        const item = game.items.get(folderId);
+        if (!item) return;
+
+        const offsetTop = target.offset()?.top;
+
+        // @ts-expect-error Not type defined in pf2e
+        new DocumentOwnershipConfig(item, {
+            top: Math.min(offsetTop ?? 0, window.innerHeight - 350),
+            left: window.innerWidth - 720,
+        }).render(true);
     }
 
     onExportFolder(target: JQuery<HTMLElement>): void {
