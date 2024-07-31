@@ -1,7 +1,7 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
-import { createConvenientItem } from "../helpers.ts";
+import { createConvenientItem, getBaseType } from "../helpers.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -30,7 +30,7 @@ abstract class EffectDefinition {
                     createConvenientItem({
                         item: {
                             name: itemEffect.itemData.name,
-                            type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
+                            type: getBaseType(),
                         },
                     }),
                 );

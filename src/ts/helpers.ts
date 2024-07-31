@@ -149,6 +149,11 @@ function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
     }
 }
 
+function getBaseType(): string {
+    const types = Object.keys(CONFIG.Item.typeLabels);
+    return types[0] ?? "";
+}
+
 /**
  * Checks if the effect is flagged as convenient
  *
@@ -184,6 +189,7 @@ export {
     findActorByUuid,
     findEffectFolderItems,
     getActorUuids,
+    getBaseType,
     isEffectConvenient,
     isItemConvenient,
     renderConvenientEffectsAppIfOpen,

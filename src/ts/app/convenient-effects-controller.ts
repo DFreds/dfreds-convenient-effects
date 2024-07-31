@@ -5,6 +5,7 @@ import {
     createConvenientEffect,
     createConvenientItem,
     findEffectFolderItems,
+    getBaseType,
 } from "../helpers.ts";
 import { log } from "../logger.ts";
 import { FLAGS } from "../constants.ts";
@@ -106,7 +107,7 @@ class ConvenientEffectsController {
                 createConvenientItem({
                     item: {
                         name: result.data.name,
-                        type: CONFIG.Item.typeLabels[0] ?? "consumable", // TODO when undefined... do what?
+                        type: getBaseType(),
                         flags,
                     },
                 }),
