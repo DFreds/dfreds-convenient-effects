@@ -11,9 +11,7 @@ const DeleteActiveEffect: Listener = {
     listen(): void {
         Hooks.on(
             "deleteActiveEffect",
-            (activeEffect: any, _metadata, userId) => {
-                if (game.user.id !== userId) return;
-
+            (activeEffect: any, _metadata, _userId) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
                 // TODO why parent and not just effect?

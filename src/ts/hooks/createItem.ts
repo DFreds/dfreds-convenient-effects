@@ -9,9 +9,7 @@ import { Listener } from "./index.ts";
  */
 const CreateItem: Listener = {
     listen(): void {
-        Hooks.on("createItem", (item: any, _metadata, userId) => {
-            if (game.user.id !== userId) return;
-
+        Hooks.on("createItem", (item: any, _metadata, _userId) => {
             const itemType = item as Item<any>;
 
             if (isItemConvenient(itemType)) {

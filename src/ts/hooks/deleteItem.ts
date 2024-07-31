@@ -9,9 +9,7 @@ import { Listener } from "./index.ts";
  */
 const DeleteItem: Listener = {
     listen(): void {
-        Hooks.on("deleteItem", (item: any, _metadata, userId) => {
-            if (game.user.id !== userId) return;
-
+        Hooks.on("deleteItem", (item: any, _metadata, _userId) => {
             const itemType = item as Item<any>;
 
             if (isItemConvenient(itemType)) {
