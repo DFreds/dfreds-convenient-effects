@@ -138,6 +138,7 @@ class ConvenientEffectsApp extends Application {
         // );
     }
 
+    // TODO localize
     #initContextMenus(): void {
         ContextMenu.create(
             this,
@@ -145,7 +146,7 @@ class ConvenientEffectsApp extends Application {
             ".convenient-folder .folder-header",
             [
                 {
-                    name: "Edit Folder",
+                    name: "FOLDER.Edit",
                     icon: '<i class="fas fa-edit fa-fw"></i>',
                     condition: (_target) =>
                         game.user.isGM || this.#controller.canUserModifyEffects,
@@ -154,11 +155,29 @@ class ConvenientEffectsApp extends Application {
                     ),
                 },
                 {
-                    name: "Delete All",
+                    name: "FOLDER.Delete",
                     icon: '<i class="fas fa-dumpster fa-fw"></i>',
                     condition: (_target) =>
                         game.user.isGM || this.#controller.canUserModifyEffects,
                     callback: this.#controller.onDeleteAllFolder.bind(
+                        this.#controller,
+                    ),
+                },
+                {
+                    name: "SIDEBAR.Export",
+                    icon: '<i class="fas fa-file-export fa-fw"></i>',
+                    condition: (_target) =>
+                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    callback: this.#controller.onExportFolder.bind(
+                        this.#controller,
+                    ),
+                },
+                {
+                    name: "SIDEBAR.Import",
+                    icon: '<i class="fas fa-file-import fa-fw"></i>',
+                    condition: (_target) =>
+                        game.user.isGM || this.#controller.canUserModifyEffects,
+                    callback: this.#controller.onImportFolder.bind(
                         this.#controller,
                     ),
                 },

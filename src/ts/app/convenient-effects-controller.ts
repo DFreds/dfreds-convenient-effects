@@ -12,6 +12,7 @@ import { FLAGS } from "../constants.ts";
 import { ItemFlags } from "types/foundry/common/documents/item.js";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 
+// TODO effects in the folders aren't sorted, need to rethink view data
 interface ViewData {
     /**
      * The items that contain the effects
@@ -225,6 +226,23 @@ class ConvenientEffectsController {
         });
 
         await effect?.deleteDialog();
+    }
+
+    onExportFolder(target: JQuery<HTMLElement>): void {
+        const folderId = this.#findClosestFolderIdByElement(target);
+        if (!folderId) return;
+
+        const item = game.items.get(folderId);
+        item?.exportToJSON();
+    }
+
+    // TODO combine existing and new or keep total replace? example in old custom-effects-handler
+    async onImportFolder(target: JQuery<HTMLElement>): Promise<void> {
+        const folderId = this.#findClosestFolderIdByElement(target);
+        if (!folderId) return;
+
+        const item = game.items.get(folderId);
+        await item?.importFromJSONDialog();
     }
 
     // TODO separate this into various permissions
