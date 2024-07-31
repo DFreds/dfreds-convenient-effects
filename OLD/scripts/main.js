@@ -7,13 +7,6 @@ import { addNestedEffectsToEffectConfig } from "./ui/add-nested-effects-to-effec
 import { libWrapper } from "./lib/shim.js";
 
 /**
- * Handle setting up the API when socket lib is ready
- */
-Hooks.once("socketlib.ready", () => {
-    game.dfreds.effects = new EffectDefinitionsDelegate();
-});
-
-/**
  * Handle changing the rendered active effect config
  */
 Hooks.on(
@@ -30,20 +23,6 @@ Hooks.on(
         addNestedEffectsToEffectConfig(activeEffectConfig, $html);
     },
 );
-
-/**
- * Handle re-rendering the ConvenientEffectsApp if it is open and a custom convenient active effect sheet is closed
- */
-Hooks.on("closeActiveEffectConfig", (activeEffectConfig, _html) => {
-    const settings = new Settings();
-
-    // Only re-render if the effect exists on the custom effect
-    if (activeEffectConfig.object.parent?.id != settings.customEffectsItemId)
-        return;
-
-    const foundryHelpers = new FoundryHelpers();
-    foundryHelpers.renderConvenientEffectsAppIfOpen();
-});
 
 /**
  * Handle dropping an effect onto the hotbar
