@@ -1,7 +1,7 @@
 import { id as MODULE_ID } from "@static/module.json";
-import { FLAGS } from "./constants.ts";
+import { FLAGS } from "../constants.ts";
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
-import { Settings } from "./settings.ts";
+import { Settings } from "../settings.ts";
 
 class HandlebarHelpers {
     #settings: Settings;
