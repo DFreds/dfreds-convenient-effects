@@ -14,7 +14,6 @@ const DeleteActiveEffect: Listener = {
             (activeEffect: any, _metadata, _userId) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
-                // TODO why parent and not just effect?
                 if (!isEffectConvenient(effect)) return;
 
                 renderConvenientEffectsAppIfOpen();

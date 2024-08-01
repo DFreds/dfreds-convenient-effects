@@ -198,8 +198,6 @@ class ConvenientEffectsController {
         }
     }
 
-    // TODO import/export items and folder
-
     async onEditEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
         const effectId = this.#findClosestEffectIdByElement(target);
@@ -268,11 +266,6 @@ class ConvenientEffectsController {
 
         const item = game.items.get(folderId);
         await item?.importFromJSONDialog();
-    }
-
-    // TODO separate this into various permissions
-    get canUserModifyEffects(): boolean {
-        return true;
     }
 
     /**
