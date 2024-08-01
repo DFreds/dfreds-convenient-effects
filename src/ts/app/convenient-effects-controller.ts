@@ -379,11 +379,27 @@ class ConvenientEffectsController {
             Item<null>
         >;
 
-        // const originalItem = game.items.get(effect.parent.id);
+        const originalItem = game.items.get(effect.parent.id);
         const newItem = game.items.get(folderId);
 
-        await newItem?.createEmbeddedDocuments("ActiveEffect", [effect]);
-        await effect.delete();
+        if (newItem?.isOwner) {
+            await newItem.createEmbeddedDocuments("ActiveEffect", [effect]);
+
+            if (originalItem?.isOwner) {
+                await effect.delete();
+            } else {
+                ui.notifications.warn(
+                    `You do not have permission to remove the effect
+                    ${effect.name} from ${originalItem?.name}. Duplicated effect
+                    onto ${newItem.name}`,
+                );
+            }
+        } else {
+            ui.notifications.warn(
+                `You do not have permission to add effect ${effect.name} to
+                folder ${newItem?.name}`,
+            );
+        }
     }
 
     canDragStart(): boolean {
