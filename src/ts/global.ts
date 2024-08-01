@@ -58,11 +58,17 @@ declare global {
             Item<null>,
             Macro,
             Scene,
-            User
+            MyUser
         > {
         dfreds: {
             effectInterface: EffectInterface;
             sockets: Sockets;
         };
+    }
+
+    // NOTE: Fixes issue with pf2e types. UserPermission is not actually a valid
+    // thing to pass in here
+    interface MyUser extends User<Actor<null>> {
+        hasPermission(permission: string | UserPermission): boolean;
     }
 }

@@ -4,7 +4,8 @@ class Settings {
     #USER_ROLES: Record<number, string> = {};
 
     // Config keys
-    #APP_CONTROLS_PERMISSION = "controlsPermission";
+    #APP_CONTROLS_PERMISSION = "appControlsPermission";
+    #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
     // #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
 
     // Non-config keys
@@ -36,6 +37,7 @@ class Settings {
 
     #registerConfigSettings(): void {
         this.#registerAppControlsPermission();
+        this.#registerCreateFoldersPermission();
     }
 
     #registerNonConfigSettings(): void {
@@ -53,6 +55,19 @@ class Settings {
             choices: this.#USER_ROLES,
             type: String,
             requiresReload: true,
+        });
+    }
+
+    #registerCreateFoldersPermission(): void {
+        game.settings.register(MODULE_ID, this.#CREATE_FOLDERS_PERMISSION, {
+            name: "ConvenientEffects.SettingCreateFoldersPermissionName",
+            hint: "ConvenientEffects.SettingCreateFoldersPermissionHint",
+            scope: "world",
+            config: true,
+            default: CONST.USER_ROLES.GAMEMASTER,
+            choices: this.#USER_ROLES,
+            type: String,
+            requiresReload: false,
         });
     }
 
@@ -77,13 +92,17 @@ class Settings {
     }
 
     get appControlsPermission(): number {
-        // TODO do we need to parseInt here?
-        return parseInt(
-            game.settings.get(
-                MODULE_ID,
-                this.#APP_CONTROLS_PERMISSION,
-            )! as string,
-        );
+        return game.settings.get(
+            MODULE_ID,
+            this.#APP_CONTROLS_PERMISSION,
+        ) as number;
+    }
+
+    get createFoldersPermission(): number {
+        return game.settings.get(
+            MODULE_ID,
+            this.#CREATE_FOLDERS_PERMISSION,
+        ) as number;
     }
 
     /**

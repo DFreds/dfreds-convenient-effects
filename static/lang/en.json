@@ -10,6 +10,9 @@
     "ConvenientEffects.SettingAppControlsPermissionName": "App Controls Permission",
     "ConvenientEffects.SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
 
+    "ConvenientEffects.SettingCreateFoldersPermissionName": "Create Folders Permission",
+    "ConvenientEffects.SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
+
     "ConvenientEffects.EditEffect": "Edit Effect",
     "ConvenientEffects.DeleteEffect": "Delete Effect",
     "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay"

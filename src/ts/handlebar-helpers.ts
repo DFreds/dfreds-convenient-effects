@@ -1,19 +1,19 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { FLAGS } from "./constants.ts";
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
-// import { Settings } from "./settings.ts";
+import { Settings } from "./settings.ts";
 
 class HandlebarHelpers {
-    // #settings: Settings;
+    #settings: Settings;
 
     constructor() {
-        // this.#settings = new Settings();
+        this.#settings = new Settings();
     }
 
     register(): void {
         this.#registerIncHelper();
         this.#registerIsGmHelper();
-        this.#registerCanCreateEffectsHelper();
+        this.#registerCanCreateFoldersHelper();
         this.#registerHasNestedEffectsHelper();
         this.#registerConvenientIconsHelper();
     }
@@ -30,9 +30,13 @@ class HandlebarHelpers {
         });
     }
 
-    #registerCanCreateEffectsHelper() {
-        Handlebars.registerHelper("canCreateEffects", () => {
-            return game.user.isGM; // || this.#settings.allowPlayerCustomEffects;
+    #registerCanCreateFoldersHelper() {
+        Handlebars.registerHelper("canCreateFolders", () => {
+            const canCreateItems = game.user.hasPermission("ITEM_CREATE");
+            const settingEnabled =
+                game.user.role >= this.#settings.createFoldersPermission;
+
+            return canCreateItems && settingEnabled;
         });
     }
 

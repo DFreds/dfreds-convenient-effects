@@ -5,10 +5,12 @@
 
     <!-- Directory Header -->
     <header class="directory-header">
+        {{#if (canCreateFolders)}}
         <div class="header-actions action-buttons flexrow">
             <button class="create-folder"><i class="fas fa-folder"></i>
                 Create Folder</button>
         </div>
+        {{/if}}
         <div class="header-search flexrow">
             <a
                 class="header-control toggle-search-mode"

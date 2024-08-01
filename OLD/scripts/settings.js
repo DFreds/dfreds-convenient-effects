@@ -5,8 +5,6 @@ import Constants from "./constants.js";
  */
 export default class Settings {
     // Config setting keys
-    static ALLOW_PLAYER_CUSTOM_EFFECTS = "allowPlayerCustomEffects";
-    static APP_CONTROLS_PERMISSION = "controlsPermission";
     static INTEGRATE_WITH_ATE = "integrateWithAtl";
     static INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
     static PRIORITIZE_TARGETS = "prioritizeTargets";
@@ -21,40 +19,9 @@ export default class Settings {
      */
     registerSettings() {
         this._registerConfigSettings();
-        this._registerNonConfigSettings();
     }
 
     _registerConfigSettings() {
-        const userRoles = {};
-        userRoles[CONST.USER_ROLES.PLAYER] = "Player";
-        userRoles[CONST.USER_ROLES.TRUSTED] = "Trusted Player";
-        userRoles[CONST.USER_ROLES.ASSISTANT] = "Assistant GM";
-        userRoles[CONST.USER_ROLES.GAMEMASTER] = "Game Master";
-        userRoles[5] = "None";
-
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
-            {
-                name: "Allow Player Custom Effects",
-                hint: "If enabled, players will be allowed to create, duplicate, edit, and delete all custom effects.",
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: async (value) => {
-                    const customEffectsItem =
-                        await this._findCustomEffectsItem();
-
-                    if (!customEffectsItem) return;
-
-                    let newOwnership = duplicate(customEffectsItem.ownership);
-                    newOwnership.default = value ? 3 : 0;
-                    await customEffectsItem.update({ ownership: newOwnership });
-                },
-            },
-        );
-
         game.settings.register(
             Constants.MODULE_ID,
             Settings.INTEGRATE_WITH_ATE,
@@ -108,32 +75,6 @@ export default class Settings {
         );
     }
 
-    _registerNonConfigSettings() {
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.CUSTOM_EFFECTS_ITEM_ID,
-            {
-                name: "Custom Effects Item ID",
-                scope: "world",
-                config: false,
-                default: "",
-                type: String,
-            },
-        );
-    }
-
-    /**
-     * Returns the game setting for allowing players to manipulate custom effects.
-     *
-     * @returns {boolean} true if players can manipulate custom effects
-     */
-    get allowPlayerCustomEffects() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.ALLOW_PLAYER_CUSTOM_EFFECTS,
-        );
-    }
-
     /**
      * Returns the game setting for integrating with ATE
      *
@@ -180,35 +121,5 @@ export default class Settings {
             Constants.MODULE_ID,
             Settings.SHOW_NESTED_EFFECTS,
         );
-    }
-
-    /**
-     * Returns the game setting for the custom effects item ID
-     *
-     * @returns {string} the ID of the custom effects item
-     */
-    get customEffectsItemId() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.CUSTOM_EFFECTS_ITEM_ID,
-        );
-    }
-
-    /**
-     * Sets the custom effects item ID
-     *
-     * @param {string} id - the ID of the custom effects item
-     * @returns {Promise} a promise that resolves when the settings update is complete
-     */
-    async setCustomEffectsItemId(id) {
-        return game.settings.set(
-            Constants.MODULE_ID,
-            Settings.CUSTOM_EFFECTS_ITEM_ID,
-            id,
-        );
-    }
-
-    _findCustomEffectsItem() {
-        return game.items.get(this.customEffectsItemId);
     }
 }
