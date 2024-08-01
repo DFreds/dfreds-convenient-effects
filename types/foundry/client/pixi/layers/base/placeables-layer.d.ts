@@ -9,12 +9,13 @@ declare global {
     abstract class PlaceablesLayer<
         TObject extends PlaceableObject = PlaceableObject,
     > extends InteractionLayer {
-        constructor();
+        /** Sort order for placeables belonging to this layer. */
+        static SORT_ORDER: number;
 
-        objects: PIXI.Container | null;
+        objects: PIXI.Container<TObject> | null;
 
         /** Preview Object Placement */
-        preview: PIXI.Container;
+        preview: PIXI.Container<TObject>;
 
         /** Keep track of history so that CTRL+Z can undo changes */
         history: CanvasHistory<TObject>[];
@@ -128,6 +129,9 @@ declare global {
         override activate(): this;
 
         override deactivate(): this;
+
+        /** Clear the contents of the preview container, restoring visibility of original (non-preview) objects. */
+        clearPreviewContainer(): void;
 
         /**
          * Get a PlaceableObject contained in this layer by it's ID
@@ -409,7 +413,7 @@ interface PlaceableInteractionData<TObject extends PlaceableObject> {
     preview?: TObject | null;
     clones?: TObject[];
     dragHandle?: unknown;
-    object: PIXI.Container | PIXI.Mesh;
+    object: TObject;
     origin: Point;
     destination: Point;
 }

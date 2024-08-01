@@ -36,7 +36,7 @@ export abstract class AbstractFormInputElement<
     protected _value: TInternalValue;
 
     /** Return the value of the input element which should be submitted to the form. */
-    protected _getValue(): TInputValue;
+    protected _getValue(): TInternalValue;
 
     /**
      * Translate user-provided input value into the format that should be stored.
@@ -73,6 +73,12 @@ export abstract class AbstractFormInputElement<
 
     /** Refresh the active state of the custom element. */
     protected _refresh(): void;
+
+    /**
+     * Apply key attributes on the containing custom HTML element to input elements contained within it.
+     * @internal
+     */
+    _applyInputAttributes(input: HTMLInputElement): void;
 
     /** Activate event listeners which add dynamic behavior to the custom element. */
     _activateListeners(): void;

@@ -3,7 +3,7 @@ import type {
     DocumentSheetV2,
 } from "../../../client-esm/applications/api/module.d.ts";
 
-declare class ClientBaseAmbientLight<
+export declare class ClientBaseAmbientLight<
     TParent extends ClientBaseScene | null,
 > extends foundry.documents.BaseAmbientLight<TParent> {
     protected _sheet: DocumentSheet<this> | null;

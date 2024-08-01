@@ -32,13 +32,10 @@ export class HexagonalGrid extends BaseGrid {
 
     override getShiftedOffset(
         coords: HexagonalGridCoordinates,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
+        direction: MovementDirection,
     ): GridOffset;
 
-    override getShiftedPoint(
-        point: Point,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
-    ): Point;
+    override getShiftedPoint(point: Point, direction: MovementDirection): Point;
 
     /**
      * Returns the cube coordinates of the grid space corresponding to the given coordinates.
@@ -57,12 +54,12 @@ export class HexagonalGrid extends BaseGrid {
     /**
      * Returns the cube coordinates of the grid space corresponding to the given coordinates
      * shifted by one grid space in the given direction.
-     * @param  coords     The coordinates
-     * @param  direction  The direction (see {@link CONST.MOVEMENT_DIRECTIONS})
+     * @param  coords    The coordinates
+     * @param  direction The direction (see {@link CONST.MOVEMENT_DIRECTIONS})
      */
     getShiftedCube(
         coords: HexagonalGridCoordinates,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
+        direction: MovementDirection,
     ): HexagonalGridCube;
 
     override getTopLeftPoint(coords: HexagonalGridCoordinates): Point;

@@ -32,13 +32,10 @@ export class GridlessGrid extends BaseGrid {
 
     override getShiftedOffset(
         coords: GridCoordinates,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
+        direction: MovementDirection,
     ): GridOffset;
 
-    override getShiftedPoint(
-        point: Point,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
-    ): Point;
+    override getShiftedPoint(point: Point, direction: MovementDirection): Point;
 
     override getTopLeftPoint(coords: GridCoordinates): Point;
 

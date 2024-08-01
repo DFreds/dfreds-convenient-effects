@@ -6,7 +6,7 @@ import type { AbstractFormInputElement } from "./form-element.d.ts";
  * Different implementations may provide different experiences around how inputs are presented to the user.
  */
 export abstract class AbstractMultiSelectElement extends AbstractFormInputElement<
-    Set<string>,
+    string[],
     string[]
 > {
     /** Predefined <option> and <optgroup> elements which were defined in the original HTML. */

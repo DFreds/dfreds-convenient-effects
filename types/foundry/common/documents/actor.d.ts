@@ -70,6 +70,8 @@ export default interface BaseActor<
     prototypeToken: foundry.data.PrototypeToken<this>;
 
     get documentName(): ActorMetadata["name"];
+
+    get folder(): Folder<Actor<null>> | null;
 }
 
 export interface ActorMetadata extends abstract.DocumentMetadata {

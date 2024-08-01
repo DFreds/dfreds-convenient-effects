@@ -204,7 +204,7 @@ declare global {
         createEmbeddedDocuments(
             embeddedName: "Region",
             data: PreCreate<RegionSource>[],
-            context?: SceneEmbeddedModificationContext<this>,
+            context?: DatabaseCreateOperation<this>,
         ): Promise<CollectionValue<this["regions"]>[]>;
         createEmbeddedDocuments(
             embeddedName: SceneEmbeddedName,
@@ -250,7 +250,7 @@ declare global {
         updateEmbeddedDocuments(
             embeddedName: "Region",
             updateData: EmbeddedDocumentUpdateData[],
-            context?: SceneEmbeddedModificationContext<this>,
+            operation?: Partial<DatabaseCreateOperation<this>>,
         ): Promise<CollectionValue<this["regions"]>[]>;
         updateEmbeddedDocuments(
             embeddedName: "Tile",
@@ -292,12 +292,12 @@ declare global {
         extends DatabaseUpdateOperation<TParent> {
         /** Is the operation undoing a previous operation, only used by embedded Documents within a Scene */
         isUndo?: boolean;
-        animation?: TokenAnimationOptions<Token>;
+        animation?: TokenAnimationOptions;
     }
 
     type SceneTokenOperation<TParent extends Scene> =
         SceneEmbeddedOperation<TParent> & {
-            animation?: TokenAnimationOptions<Token>;
+            animation?: TokenAnimationOptions;
         };
 
     interface SceneDimensions {

@@ -3,7 +3,7 @@ export {};
 declare global {
     /** The Ruler - used to measure distances and trigger movements */
     class Ruler<
-        TToken extends Token | null,
+        TToken extends Token | null = Token | null,
         TUser extends User = User,
     > extends PIXI.Container {
         /** The possible Ruler measurement states. */
@@ -74,7 +74,7 @@ declare global {
         get highlightLayer(): GridHighlight;
 
         /** The Token that is moved by the Ruler. */
-        get token(): TToken | null;
+        get token(): TToken;
 
         /* -------------------------------------------- */
         /*  Ruler Methods                               */
@@ -99,9 +99,9 @@ declare global {
 
         /**
          * Get the measurement origin.
-         * @param point                  The waypoint
-         * @param [options]              Additional options
-         * @param [options.snap=true]    Snap the waypoint?
+         * @param point     The waypoint
+         * @param [options] Additional options
+         * @param [options.snap=true] Snap the waypoint?
          */
         protected _getMeasurementOrigin(
             point: Point,
@@ -118,7 +118,7 @@ declare global {
         protected _getMeasurementDestination(
             point: Point,
             options?: { snap?: boolean },
-        ): void;
+        ): Point;
 
         /**
          * Translate the waypoints and destination point of the Ruler into an array of Ray segments.
@@ -277,49 +277,58 @@ declare global {
         /**
          * Handle the beginning of a new Ruler measurement workflow
          * @see {Canvas.#onDragLeftStart}
-         * @param event   The drag start event
+         * @param event The drag start event
          * @internal
          */
-        protected _onDragStart(event: PIXI.FederatedEvent): void;
+        _onDragStart(
+            event: PlaceablesLayerPointerEvent<NonNullable<TToken>>,
+        ): void;
 
         /**
          * Handle left-click events on the Canvas during Ruler measurement.
          * @see {Canvas._onClickLeft}
-         * @param event   The pointer-down event
+         * @param event The pointer-down event
          * @internal
          */
-        protected _onClickLeft(event: PIXI.FederatedEvent): void;
+        _onClickLeft(
+            event: PlaceablesLayerPointerEvent<NonNullable<TToken>>,
+        ): void;
 
         /**
          * Handle right-click events on the Canvas during Ruler measurement.
          * @see {Canvas._onClickRight}
-         * @param event   The pointer-down event
+         * @param event The pointer-down event
          * @internal
          */
-        protected _onClickRight(event: PIXI.FederatedEvent): void;
+        _onClickRight(
+            event: PlaceablesLayerPointerEvent<NonNullable<TToken>>,
+        ): void;
 
         /**
          * Continue a Ruler measurement workflow for left-mouse movements on the Canvas.
          * @see {Canvas.#onDragLeftMove}
-         * @param event   The mouse move event
+         * @param event The mouse move event
          * @internal
          */
-        protected _onMouseMove(event: PIXI.FederatedEvent): void;
+        _onMouseMove(
+            event: PlaceablesLayerPointerEvent<NonNullable<TToken>>,
+        ): void;
 
         /**
          * Conclude a Ruler measurement workflow by releasing the left-mouse button.
          * @see {Canvas.#onDragLeftDrop}
-         * @param event   The pointer-up event
+         * @param event The pointer-up event
          * @internal
          */
-        protected _onMouseUp(event: PIXI.FederatedEvent): void;
+        _onMouseUp(
+            event: PlaceablesLayerPointerEvent<NonNullable<TToken>>,
+        ): void;
 
         /**
          * Move the Token along the measured path when the move key is pressed.
-         * @param context
          * @internal
          */
-        protected _onMoveKeyDown(context: KeyboardEventContext): void;
+        _onMoveKeyDown(context: KeyboardEventContext): void;
     }
 
     interface RulerMeasurementSegment {

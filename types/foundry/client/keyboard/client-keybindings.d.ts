@@ -231,7 +231,7 @@ declare global {
          */
         private _onPan(
             context: KeyboardEventContext,
-            movementDirections: MovementDirection[],
+            movementDirections: PanningDirection[],
         ): boolean;
 
         /**
@@ -278,5 +278,5 @@ declare global {
         ): boolean;
     }
 
-    type MovementDirection = "up" | "right" | "down" | "left";
+    type PanningDirection = "up" | "right" | "down" | "left";
 }

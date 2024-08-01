@@ -909,6 +909,8 @@ declare global {
     type FileExtension = keyof typeof UPLOADABLE_FILE_EXTENSIONS;
     type FolderDocumentType = (typeof FOLDER_DOCUMENT_TYPES)[number];
     type GridType = (typeof GRID_TYPES)[keyof typeof GRID_TYPES];
+    type GridSnappingMode =
+        (typeof GRID_SNAPPING_MODES)[keyof typeof GRID_SNAPPING_MODES];
     type ImageFileExtension = keyof typeof IMAGE_FILE_EXTENSIONS;
     type JournalEntryPageFormat =
         (typeof JOURNAL_ENTRY_PAGE_FORMATS)[keyof typeof JOURNAL_ENTRY_PAGE_FORMATS];
@@ -916,6 +918,8 @@ declare global {
     type MacroType = (typeof MACRO_TYPES)[keyof typeof MACRO_TYPES];
     type MeasuredTemplateType =
         (typeof MEASURED_TEMPLATE_TYPES)[keyof typeof MEASURED_TEMPLATE_TYPES];
+    type MovementDirection =
+        (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS];
     type PackageAvailabilityCode =
         (typeof PACKAGE_AVAILABILITY_CODES)[keyof typeof PACKAGE_AVAILABILITY_CODES];
     type PackageType = (typeof PACKAGE_TYPES)[number];

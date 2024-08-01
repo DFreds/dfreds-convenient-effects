@@ -8,11 +8,10 @@ declare global {
     > extends RenderFlagsContainer<TDocument> {
         constructor(document: TDocument);
 
-        static override RENDER_FLAGS: {
-            redraw: { propagate: string[] };
-            refresh: { propagate: string[]; alias: boolean };
-            refreshState: {};
-        };
+        static override RENDER_FLAGS: Record<
+            string,
+            { propagate?: string[]; alias?: boolean }
+        >;
 
         /** The object that this object is a preview of if this object is a preview. */
         get _original(): this | undefined;
@@ -95,6 +94,8 @@ declare global {
 
         /** An indicator for whether the object is currently a hover target */
         get hover(): boolean;
+
+        set hover(state: Maybe<boolean>);
 
         /** Is the HUD display active for this Placeable? */
         get hasActiveHUD(): boolean;
@@ -452,6 +453,13 @@ declare global {
         extends RenderFlagsContainer<TDocument> {
         hitArea: PIXI.Rectangle;
     }
+
+    type PlaceableShape =
+        | PIXI.Circle
+        | PIXI.Ellipse
+        | PIXI.Polygon
+        | PIXI.Rectangle
+        | PIXI.RoundedRectangle;
 }
 
 export class RenderFlagsContainer<

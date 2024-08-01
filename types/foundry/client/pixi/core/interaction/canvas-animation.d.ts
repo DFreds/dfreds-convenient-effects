@@ -19,7 +19,7 @@ interface CanvasAnimationOptions<
     /** A DisplayObject which defines context to the PIXI.Ticker function */
     context?: TObject;
     /** A unique name which can be used to reference the in-progress animation */
-    name?: string;
+    name?: string | symbol | null;
     /** A duration in milliseconds over which the animation should occur */
     duration?: number;
     /**
@@ -33,7 +33,9 @@ interface CanvasAnimationOptions<
      */
     easing?: Function | string;
     /** A callback function which fires after every frame */
-    ontick?: (frame: number, data: CanvasAnimationData) => void;
+    ontick?: string | ((frame: number, data: CanvasAnimationData) => void);
+    /** The animation isn't started until this promise resolves */
+    wait?: Promise<unknown>;
 }
 
 interface CanvasAnimationData extends CanvasAnimationOptions {

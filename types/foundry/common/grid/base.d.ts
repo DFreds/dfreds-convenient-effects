@@ -34,7 +34,7 @@ export abstract class BaseGrid {
     constructor(config: GridConfiguration);
 
     /** The grid type (see {@link CONST.GRID_TYPES}). */
-    type: (typeof CONST.GRID_TYPES)[keyof typeof CONST.GRID_TYPES];
+    type: GridType;
 
     /** Is this a gridless grid? */
     get isGridless(): boolean;
@@ -117,13 +117,13 @@ export abstract class BaseGrid {
      * shifted by one grid space in the given direction.
      * In square grids with illegal diagonals the offset of the given coordinates is returned
      * if the direction is diagonal.
-     * @param      coords     The coordinates
-     * @param      direction  The direction (see {@link CONST.MOVEMENT_DIRECTIONS})
-     * @returns               The offset
+     * @param coords The coordinates
+     * @param direction The direction (see {@link CONST.MOVEMENT_DIRECTIONS})
+     * @returns The offset
      */
     abstract getShiftedOffset(
         coords: GridCoordinates,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
+        direction: MovementDirection,
     ): GridOffset;
 
     /**
@@ -131,21 +131,18 @@ export abstract class BaseGrid {
      * and the shifted grid space in the given direction.
      * In square grids with illegal diagonals the point is not shifted if the direction is diagonal.
      * In gridless grids the point coordinates are shifted by the grid size.
-     * @param  point        The point that is to be shifted
-     * @param  direction    The direction (see {@link CONST.MOVEMENT_DIRECTIONS})
-     * @returns             The shifted point
+     * @param  point     The point that is to be shifted
+     * @param  direction The direction (see {@link CONST.MOVEMENT_DIRECTIONS})
+     * @returns The shifted point
      */
-    abstract getShiftedPoint(
-        point: Point,
-        direction: (typeof CONST.MOVEMENT_DIRECTIONS)[keyof typeof CONST.MOVEMENT_DIRECTIONS],
-    ): Point;
+    abstract getShiftedPoint(point: Point, direction: MovementDirection): Point;
 
     /**
      * Returns the top-left point of the grid space corresponding to the given coordinates.
      * If given a point, the top-left point of the grid space that contains it is returned.
      * In gridless grids a point with the same coordinates as the given point is returned.
-     * @param    coords    The coordinates
-     * @returns            The top-left point
+     * @param coords The coordinates
+     * @returns The top-left point
      */
     abstract getTopLeftPoint(coords: GridCoordinates): Point;
 
@@ -153,8 +150,8 @@ export abstract class BaseGrid {
      * Returns the center point of the grid space corresponding to the given coordinates.
      * If given a point, the center point of the grid space that contains it is returned.
      * In gridless grids a point with the same coordinates as the given point is returned.
-     * @param   coords    The coordinates
-     * @returns           The center point
+     * @param coords The coordinates
+     * @returns The center point
      */
     abstract getCenterPoint(coords: GridCoordinates): Point;
 
@@ -179,9 +176,9 @@ export abstract class BaseGrid {
 
     /**
      * Snaps the given point to the grid.
-     * @param   point       The point that is to be snapped
-     * @param   behavior    The snapping behavior
-     * @returns             The snapped point
+     * @param   point    The point that is to be snapped
+     * @param   behavior The snapping behavior
+     * @returns The snapped point
      */
     abstract getSnappedPoint(
         point: Point,
@@ -218,8 +215,8 @@ export abstract class BaseGrid {
 
     /**
      * Returns the sequence of grid offsets of a shortest, direct path passing through the given waypoints.
-     * @param   waypoints    The waypoints the path must pass through
-     * @returns              The sequence of grid offsets of a shortest, direct path
+     * @param waypoints The waypoints the path must pass through
+     * @returns The sequence of grid offsets of a shortest, direct path
      */
     abstract getDirectPath(waypoints: GridMeasurePathWaypoint[]): GridOffset[];
 
@@ -301,9 +298,7 @@ declare global {
         resolution?: number;
     }
 
-    type GridMeasurePathWaypoint =
-        | GridCoordinates
-        | (GridCoordinates & { teleport: boolean });
+    type GridMeasurePathWaypoint = GridCoordinates & { teleport?: boolean };
 
     /** The measurements of a waypoint. */
     interface GridMeasurePathResultWaypoint {

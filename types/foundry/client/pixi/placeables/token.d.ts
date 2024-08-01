@@ -4,6 +4,7 @@ import type {
     PointVisionSource,
 } from "../../../client-esm/canvas/sources/module.d.ts";
 import type { VisionSourceData } from "../../../client-esm/canvas/sources/point-vision-source.d.ts";
+import type { PrimarySpriteMesh } from "./primary-canvas-objects/primary-sprite-mesh.d.ts";
 
 declare global {
     /** A Token is an implementation of PlaceableObject that represents an Actor within a viewed Scene on the game canvas. */
@@ -73,7 +74,7 @@ declare global {
         };
 
         /** The shape of this token. */
-        shape: PIXI.Rectangle | PIXI.Polygon | PIXI.Circle;
+        shape: TokenShape;
 
         /** Defines the filter to use for detection. */
         detectionFilter: PIXI.Filter | null;
@@ -99,12 +100,8 @@ declare global {
         /** Track the set of User documents which are currently targeting this Token */
         targeted: Set<User>;
 
-        /**
-         * A reference to the SpriteMesh which displays this Token in the PrimaryCanvasGroup.
-         * todo: Replace with correct type
-         * @type {PrimarySpriteMesh}
-         */
-        mesh: TokenMesh;
+        /** A reference to the SpriteMesh which displays this Token in the PrimaryCanvasGroup. */
+        mesh: PrimarySpriteMesh | undefined;
 
         /** Renders the mesh of this Token with ERASE blending in the Token. */
         voidMesh: PIXI.DisplayObject;
@@ -562,12 +559,12 @@ declare global {
 
         /**
          * Get the width and height of the Token in pixels.
-         * @returns    The size in pixels
+         * @returns The size in pixels
          */
         getSize(): { width: number; height: number };
 
         /** Get the shape of this Token. */
-        getShape(): PIXI.Rectangle | PIXI.Polygon | PIXI.Circle;
+        getShape(): TokenShape;
 
         /**
          * Get the center point for a given position or the current position.
@@ -577,6 +574,57 @@ declare global {
         getCenterPoint(position?: Point): Point;
 
         override getSnappedPosition(position?: Point): Point;
+
+        /**
+         * Test whether the Token is inside the Region.
+         * This function determines the state of {@link TokenDocument#regions} and {@link RegionDocument#tokens}.
+         *
+         * Implementations of this function are restricted in the following ways:
+         *   - If the bounds (given by {@link Token#getSize}) of the Token do not intersect the Region, then the Token is not
+         *     contained within the Region.
+         *   - If the Token is inside the Region a particular elevation, then the Token is inside the Region at any elevation
+         *     within the elevation range of the Region.
+         *
+         * If this function is overridden, then {@link Token#segmentizeRegionMovement} must be overridden too.
+         * @param region   The region.
+         * @param position The (x, y) and/or elevation to use instead of the current values.
+         * @returns Is the Token inside the Region?
+         */
+        testInsideRegion(
+            region: Region,
+            position:
+                | Point
+                | (Point & { elevation: number })
+                | { elevation: number },
+        ): boolean;
+
+        /**
+         * Split the Token movement through the waypoints into its segments.
+         *
+         * Implementations of this function are restricted in the following ways:
+         *   - The segments must go through the waypoints.
+         *   - The *from* position matches the *to* position of the succeeding segment.
+         *   - The Token must be contained (w.r.t. {@link Token#testInsideRegion}) within the Region
+         *     at the *from* and *to* of MOVE segments.
+         *   - The Token must be contained (w.r.t. {@link Token#testInsideRegion}) within the Region
+         *     at the *to* position of ENTER segments.
+         *   - The Token must be contained (w.r.t. {@link Token#testInsideRegion}) within the Region
+         *     at the *from* position of EXIT segments.
+         *   - The Token must not be contained (w.r.t. {@link Token#testInsideRegion}) within the Region
+         *     at the *from* position of ENTER segments.
+         *   - The Token must not be contained (w.r.t. {@link Token#testInsideRegion}) within the Region
+         *     at the *to* position of EXIT segments.
+         * @param region    The region.
+         * @param waypoints The waypoints of movement.
+         * @param [options] Additional options
+         * @param [options.teleport=false] Is it teleportation?
+         * @returns The movement split into its segments.
+         */
+        segmentizeRegionMovement(
+            region: Region,
+            waypoints: RegionMovementWaypoint[],
+            options?: { teleport?: boolean },
+        ): RegionMovementSegment[];
 
         /**
          * Set this Token as an active target for the current game User.
@@ -723,9 +771,7 @@ declare global {
             event: PIXI.FederatedPointerEvent,
         ): boolean | void;
 
-        protected override _onClickLeft(
-            event: PIXI.FederatedPointerEvent,
-        ): void;
+        protected override _onClickLeft(event: TokenPointerEvent<this>): void;
 
         protected override _propagateLeftClick(
             event: PIXI.FederatedPointerEvent,
@@ -740,7 +786,7 @@ declare global {
         ): void;
 
         protected override _onDragLeftStart(
-            event: PIXI.FederatedPointerEvent,
+            event: TokenPointerEvent<this>,
         ): void;
 
         protected override _prepareDragLeftDropUpdates(
@@ -759,6 +805,11 @@ declare global {
         get layer(): TokenLayer<this>;
     }
 
+    type TokenShape = Extract<
+        PlaceableShape,
+        PIXI.Circle | PIXI.Polygon | PIXI.Rectangle
+    >;
+
     interface TokenResourceData {
         attribute: string;
         type: "bar";
@@ -774,19 +825,12 @@ declare global {
         };
     }
 
-    interface TokenAnimationOptions {
-        /** The duration of the animation in milliseconds */
-        duration?: number;
+    interface TokenAnimationOptions
+        extends Omit<CanvasAnimationOptions, "context"> {
         /** A desired token movement speed in grid spaces per second */
         movementSpeed?: number;
         /** The desired texture transition type */
-        transition?: string;
-        /** The easing function of the animation */
-        easing?: Function | string;
-        /** The name of the animation, or null if nameless. The default is {@link Token#animationName}. */
-        name?: string | symbol | null;
-        /** A callback function which fires after every frame */
-        ontick?: (frame: number, data: CanvasAnimationData) => void;
+        transition?: TextureTransitionType;
     }
 
     interface ReticuleOptions {
@@ -822,7 +866,7 @@ declare global {
         /** The alpha value */
         alpha: number;
         /** The rotation in degrees */
-        rotaion: number;
+        rotation: number;
         /** The texture data */
         texture: {
             /** The texture file path */
@@ -837,6 +881,16 @@ declare global {
             scaleY: number;
             /** The texture tint */
             tint: Color;
+        };
+        /** The ring data */
+        ring: {
+            /** The ring subject data */
+            subject: {
+                /** The ring subject texture */
+                texture: string;
+                /** The ring subject scale */
+                scale: number;
+            };
         };
     }
 
