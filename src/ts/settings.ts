@@ -8,11 +8,11 @@ class Settings {
     #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
     #INTEGRATE_WITH_ATE = "integrateWithAtl";
     #INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
-    // #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
 
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
     #RAN_MIGRATIONS = "ranMigrations";
+    #PRIORITIZE_TARGETS = "prioritizeTargets";
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
@@ -46,6 +46,7 @@ class Settings {
 
     #registerNonConfigSettings(): void {
         this.#registerExpandedFolders();
+        this.#registerPrioritizeTargets();
         this.#registerRanMigrations();
     }
 
@@ -104,6 +105,16 @@ class Settings {
             config: false,
             default: [],
             type: Array,
+        });
+    }
+
+    #registerPrioritizeTargets(): void {
+        game.settings.register(MODULE_ID, this.#PRIORITIZE_TARGETS, {
+            name: "Prioritize Targets",
+            scope: "client",
+            config: false,
+            default: false,
+            type: Boolean,
         });
     }
 
@@ -207,6 +218,17 @@ class Settings {
      */
     isFolderExpanded(id: string): boolean {
         return this.expandedFolders.includes(id);
+    }
+
+    get prioritizeTargets(): boolean {
+        return game.settings.get(
+            MODULE_ID,
+            this.#PRIORITIZE_TARGETS,
+        ) as boolean;
+    }
+
+    async setPrioritizeTargets(value: boolean): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#PRIORITIZE_TARGETS, value);
     }
 
     /**

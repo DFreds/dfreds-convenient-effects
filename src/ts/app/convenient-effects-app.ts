@@ -60,6 +60,7 @@ class ConvenientEffectsApp extends Application {
         html.find(".folder").on("dragenter", dh).on("dragleave", dh);
 
         this.#controller.expandSavedFolders();
+        this.#controller.setPrioritizeTargetsState();
     }
 
     // NOTE: taken from foundry.js DirectoryApplicationMixin
@@ -150,6 +151,18 @@ class ConvenientEffectsApp extends Application {
         this.#allDirectories.addClass("collapsed");
     }
 
+    isPrioritizeTargetsActive(): boolean {
+        return this.#prioritizeTargetsButton.hasClass("active");
+    }
+
+    removeActivePrioritizeTargets(): void {
+        this.#prioritizeTargetsButton.removeClass("active");
+    }
+
+    addActivePrioritizeTargets(): void {
+        this.#prioritizeTargetsButton.addClass("active");
+    }
+
     #initClickListeners(): void {
         this.#collapseAllButton.on(
             "click",
@@ -170,6 +183,10 @@ class ConvenientEffectsApp extends Application {
         this.#folderHeaders.on(
             "click",
             this.#controller.onToggleFolder.bind(this.#controller),
+        );
+        this.#prioritizeTargetsButton.on(
+            "click",
+            this.#controller.onPrioritizeTargets.bind(this.#controller),
         );
     }
 
@@ -301,6 +318,10 @@ class ConvenientEffectsApp extends Application {
 
     get #folderHeaders() {
         return this.#rootView.find(".directory-list .folder-header");
+    }
+
+    get #prioritizeTargetsButton(): JQuery<HTMLElement> {
+        return this.#rootView.find(".prioritize-targets");
     }
 }
 

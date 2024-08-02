@@ -3,3 +3,11 @@
     flex: none;
     align-self: center;
 }
+
+.prioritize-targets {
+    color: var(--color-text-dark-5);
+}
+
+.prioritize-targets.active {
+    color: var(--color-text-light-1);
+}

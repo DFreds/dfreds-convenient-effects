@@ -65,6 +65,12 @@ interface IToggleEffect {
     overlay?: boolean;
 
     /**
+     * Toggles effects on targets over selected tokens if set to true. Set to
+     * false by default.
+     */
+    prioritizeTargets?: boolean;
+
+    /**
      * The origin of the effect. If toggling off, it will only remove the effect
      * if the origin matches.
      */
@@ -237,11 +243,12 @@ class EffectInterface {
         effectName,
         uuids = [],
         overlay = false,
+        prioritizeTargets = false,
         origin,
     }: IToggleEffect): Promise<void> {
         let actorUuids = uuids;
         if (actorUuids.length === 0) {
-            actorUuids = getActorUuids(false); // TODO use setting for prioritize targets;
+            actorUuids = getActorUuids(prioritizeTargets);
         }
 
         if (actorUuids.length === 0) {

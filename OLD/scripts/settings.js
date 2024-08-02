@@ -5,7 +5,6 @@ import Constants from "./constants.js";
  */
 export default class Settings {
     // Config setting keys
-    static PRIORITIZE_TARGETS = "prioritizeTargets";
     static SHOW_NESTED_EFFECTS = "showNestedEffects";
 
     // Non-config setting keys
@@ -18,19 +17,6 @@ export default class Settings {
     }
 
     _registerConfigSettings() {
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.PRIORITIZE_TARGETS,
-            {
-                name: "Prioritize Targets",
-                hint: "If enabled, effects will be applied to any targeted tokens instead of selected tokens.",
-                scope: "client",
-                config: true,
-                default: false,
-                type: Boolean,
-            },
-        );
-
         // TODO port over
         game.settings.register(
             Constants.MODULE_ID,
@@ -43,18 +29,6 @@ export default class Settings {
                 default: false,
                 type: Boolean,
             },
-        );
-    }
-
-    /**
-     * Returns the game setting for prioritizing targets
-     *
-     * @returns {boolean} true if targets should take first priority
-     */
-    get prioritizeTargets() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.PRIORITIZE_TARGETS,
         );
     }
 

@@ -91,7 +91,10 @@ class ConvenientEffectsController {
 
         if (!effectId) return;
 
-        await game.dfreds.effectInterface.toggleEffect({ effectId });
+        await game.dfreds.effectInterface.toggleEffect({
+            effectId,
+            prioritizeTargets: this.#settings.prioritizeTargets,
+        });
     }
 
     async onToggleOverlay(target: JQuery<HTMLElement>): Promise<void> {
@@ -102,6 +105,7 @@ class ConvenientEffectsController {
         await game.dfreds.effectInterface.toggleEffect({
             effectId,
             overlay: true,
+            prioritizeTargets: this.#settings.prioritizeTargets,
         });
     }
 
@@ -417,6 +421,25 @@ class ConvenientEffectsController {
     async onCollapseAll(_event: Event): Promise<void> {
         this.#viewMvc.collapseAllFolders();
         await this.#settings.clearExpandedFolders();
+    }
+
+    setPrioritizeTargetsState(): void {
+        const prioritizeTargets = this.#settings.prioritizeTargets;
+        if (prioritizeTargets) {
+            this.#viewMvc.addActivePrioritizeTargets();
+        } else {
+            this.#viewMvc.removeActivePrioritizeTargets();
+        }
+    }
+
+    async onPrioritizeTargets(_event: Event): Promise<void> {
+        if (this.#viewMvc.isPrioritizeTargetsActive()) {
+            this.#viewMvc.removeActivePrioritizeTargets();
+            await this.#settings.setPrioritizeTargets(false);
+        } else {
+            this.#viewMvc.addActivePrioritizeTargets();
+            await this.#settings.setPrioritizeTargets(true);
+        }
     }
 
     #findClosestEffectIdByElement(

@@ -6,10 +6,10 @@
     <!-- Directory Header -->
     <header class="directory-header">
         {{#if (canCreateFolders)}}
-        <div class="header-actions action-buttons flexrow">
-            <button class="create-folder"><i class="fas fa-folder"></i>
-                Create Folder</button>
-        </div>
+            <div class="header-actions action-buttons flexrow">
+                <button class="create-folder"><i class="fas fa-folder"></i>
+                    {{localize "ConvenientEffects.CreateFolder"}}</button>
+            </div>
         {{/if}}
         <div class="header-search flexrow">
             <a
@@ -33,6 +33,12 @@
                 role="button"
                 data-tooltip="FOLDER.Collapse"
             ><i class="fa-duotone fa-folder-tree"></i></a>
+            <a
+                class="header-control prioritize-targets"
+                aria-label="Prioritize Targets"
+                role="button"
+                data-tooltip="ConvenientEffects.PrioritizeTargets"
+            ><i class="fa-duotone fa-bullseye"></i></a>
         </div>
     </header>
 
@@ -46,7 +52,10 @@
                 data-folder-depth="1"
                 draggable="false"
             >
-                <header class="folder-header flexrow" style="background-color: {{folder.flags.dfreds-convenient-effects.folderColor}};">
+                <header
+                    class="folder-header flexrow"
+                    style="background-color: {{folder.flags.dfreds-convenient-effects.folderColor}};"
+                >
                     <h3 class="noborder"><i
                             class="fas fa-folder-open fa-fw"
                         ></i>{{folder.name}}</h3>
