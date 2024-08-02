@@ -1,4 +1,3 @@
-import MacroHandler from "./ui/macro-handler.js";
 import Settings from "./settings.js";
 import { addNestedEffectsToEffectConfig } from "./ui/add-nested-effects-to-effect-config.js";
 
@@ -19,16 +18,6 @@ Hooks.on(
         addNestedEffectsToEffectConfig(activeEffectConfig, $html);
     },
 );
-
-/**
- * Handle dropping an effect onto the hotbar
- */
-Hooks.on("hotbarDrop", (_bar, data, slot) => {
-    if (!data.effectName) return;
-    delete data.type; // This stops dnd5e from creating its own macro by obscuring that the drop data is an ActiveEffect
-    const macroHandler = new MacroHandler();
-    macroHandler.createMacro(data, slot);
-});
 
 /**
  * Handle dropping an effect onto an actor sheet
