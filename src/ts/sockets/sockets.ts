@@ -139,6 +139,10 @@ class Sockets {
         await actor.createEmbeddedDocuments(
             "ActiveEffect",
             activeEffectsToApply,
+            {
+                keepId: true,
+                keepEmbeddedIds: true,
+            },
         );
 
         // TODO this needs to do sub effects

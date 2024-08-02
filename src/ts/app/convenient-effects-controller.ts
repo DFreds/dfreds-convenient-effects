@@ -87,20 +87,20 @@ class ConvenientEffectsController {
      * @param event - event that corresponds to clicking an effect item
      */
     async onToggleEffect(event: Event): Promise<void> {
-        const effectName = this.#findClosestEffectNameByEvent(event);
+        const effectId = this.#findClosestEffectIdByEvent(event);
 
-        if (!effectName) return;
+        if (!effectId) return;
 
-        await game.dfreds.effectInterface.toggleEffect({ effectName });
+        await game.dfreds.effectInterface.toggleEffect({ effectId });
     }
 
     async onToggleOverlay(target: JQuery<HTMLElement>): Promise<void> {
-        const effectName = this.#findClosestEffectNameByElement(target);
+        const effectId = this.#findClosestEffectIdByElement(target);
 
-        if (!effectName) return;
+        if (!effectId) return;
 
         await game.dfreds.effectInterface.toggleEffect({
-            effectName,
+            effectId,
             overlay: true,
         });
     }
@@ -396,6 +396,7 @@ class ConvenientEffectsController {
     }
 
     canDragStart(): boolean {
+        // TODO remove this?
         return game.user.role >= this.#settings.appControlsPermission;
     }
 
@@ -426,28 +427,12 @@ class ConvenientEffectsController {
             .data("document-id");
     }
 
-    #findClosestEffectNameByElement(
-        element: JQuery<HTMLElement>,
-    ): string | undefined {
-        return element
-            .closest("[data-document-name], .convenient-effect")
-            .data("document-name");
-    }
-
     #findClosestEffectIdByEvent(event: Event): string | undefined {
         if (!event.target) return;
 
         return $(event.target)
             .closest("[data-document-id], .convenient-effect")
             .data("document-id");
-    }
-
-    #findClosestEffectNameByEvent(event: Event): string | undefined {
-        if (!event.target) return;
-
-        return $(event.target)
-            .closest("[data-document-name], .convenient-effect")
-            .data("document-name");
     }
 
     #findClosestFolderIdByElement(
