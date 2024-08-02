@@ -11,8 +11,6 @@ export default class Settings {
     static SHOW_NESTED_EFFECTS = "showNestedEffects";
 
     // Non-config setting keys
-    static CUSTOM_EFFECTS_ITEM_ID = "customEffectsItemId";
-    static EXPANDED_FOLDERS = "expandedFolders";
 
     /**
      * Register all the settings for the module
