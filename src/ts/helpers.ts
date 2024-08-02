@@ -6,6 +6,7 @@ import {
     EffectChangeData,
 } from "types/foundry/common/documents/active-effect.js";
 import { ItemFlags, ItemSource } from "types/foundry/common/documents/item.js";
+import { Settings } from "./settings.ts";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
@@ -68,14 +69,14 @@ function createConvenientEffect({
     }
     effect.statuses = statusesArray;
 
-    // const settings = new Settings();
-    // if (settings.integrateWithAte) {
-    effect.changes?.push(...atlChanges);
-    // }
+    const settings = new Settings();
+    if (settings.integrateWithAte) {
+        effect.changes?.push(...atlChanges);
+    }
 
-    // if (settings.integrateWithTokenMagic) {
-    effect.changes?.push(...tokenMagicChanges);
-    // }
+    if (settings.integrateWithTokenMagic) {
+        effect.changes?.push(...tokenMagicChanges);
+    }
 
     return effect;
 }

@@ -5,8 +5,6 @@ import Constants from "./constants.js";
  */
 export default class Settings {
     // Config setting keys
-    static INTEGRATE_WITH_ATE = "integrateWithAtl";
-    static INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
     static PRIORITIZE_TARGETS = "prioritizeTargets";
     static SHOW_NESTED_EFFECTS = "showNestedEffects";
 
@@ -22,32 +20,6 @@ export default class Settings {
     _registerConfigSettings() {
         game.settings.register(
             Constants.MODULE_ID,
-            Settings.INTEGRATE_WITH_ATE,
-            {
-                name: "Integrate with ATE",
-                hint: "If enabled, certain effects will also change light emitted from tokens or the size of a token via Active Token Effects.",
-                scope: "world",
-                config: true,
-                default: true,
-                type: Boolean,
-            },
-        );
-
-        game.settings.register(
-            Constants.MODULE_ID,
-            Settings.INTEGRATE_WITH_TOKEN_MAGIC,
-            {
-                name: "Integrate with Token Magic",
-                hint: "If enabled, certain effects will also apply a token magic filter to tokens via Token Magic.",
-                scope: "world",
-                config: true,
-                default: true,
-                type: Boolean,
-            },
-        );
-
-        game.settings.register(
-            Constants.MODULE_ID,
             Settings.PRIORITIZE_TARGETS,
             {
                 name: "Prioritize Targets",
@@ -59,6 +31,7 @@ export default class Settings {
             },
         );
 
+        // TODO port over
         game.settings.register(
             Constants.MODULE_ID,
             Settings.SHOW_NESTED_EFFECTS,
@@ -70,30 +43,6 @@ export default class Settings {
                 default: false,
                 type: Boolean,
             },
-        );
-    }
-
-    /**
-     * Returns the game setting for integrating with ATE
-     *
-     * @returns {boolean} true if integration with ATE is enabled
-     */
-    get integrateWithAte() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.INTEGRATE_WITH_ATE,
-        );
-    }
-
-    /**
-     * Returns the game setting for integrating with Token Magic
-     *
-     * @returns {boolean} true if integration with Token Magic is enabled
-     */
-    get integrateWithTokenMagic() {
-        return game.settings.get(
-            Constants.MODULE_ID,
-            Settings.INTEGRATE_WITH_TOKEN_MAGIC,
         );
     }
 

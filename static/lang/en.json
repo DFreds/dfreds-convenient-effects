@@ -13,6 +13,12 @@
     "ConvenientEffects.SettingCreateFoldersPermissionName": "Create Folders Permission",
     "ConvenientEffects.SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
 
+    "ConvenientEffects.SettingIntegrateWithAteName": "Integrate with ATE",
+    "ConvenientEffects.SettingIntegrateWithAteHint": "If enabled, certain effects will also change light emitted from tokens or the size of a token via Active Token Effects.",
+
+    "ConvenientEffects.SettingIntegrateWithTokenMagicName": "Integrate with Token Magic",
+    "ConvenientEffects.SettingIntegrateWithTokenMagicHint": "If enabled, certain effects will also apply a token magic filter to tokens via Token Magic.",
+
     "ConvenientEffects.EditEffect": "Edit Effect",
     "ConvenientEffects.DeleteEffect": "Delete Effect",
     "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay"

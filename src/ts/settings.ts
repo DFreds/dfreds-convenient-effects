@@ -6,6 +6,8 @@ class Settings {
     // Config keys
     #APP_CONTROLS_PERMISSION = "appControlsPermission";
     #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
+    #INTEGRATE_WITH_ATE = "integrateWithAtl";
+    #INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
     // #PRIORITIZE_TARGETS = "prioritizeTargets"; // TODO make this a checkbox in the app?
 
     // Non-config keys
@@ -38,6 +40,8 @@ class Settings {
     #registerConfigSettings(): void {
         this.#registerAppControlsPermission();
         this.#registerCreateFoldersPermission();
+        this.#registerIntegrateWithAte();
+        this.#registerIntegrateWithTokenMagic();
     }
 
     #registerNonConfigSettings(): void {
@@ -68,6 +72,28 @@ class Settings {
             choices: this.#USER_ROLES,
             type: String,
             requiresReload: false,
+        });
+    }
+
+    #registerIntegrateWithAte(): void {
+        game.settings.register(MODULE_ID, this.#INTEGRATE_WITH_ATE, {
+            name: "ConvenientEffects.SettingIntegrateWithAteName",
+            hint: "ConvenientEffects.SettingIntegrateWithAteHint",
+            scope: "world",
+            config: true,
+            default: true,
+            type: Boolean,
+        });
+    }
+
+    #registerIntegrateWithTokenMagic(): void {
+        game.settings.register(MODULE_ID, this.#INTEGRATE_WITH_TOKEN_MAGIC, {
+            name: "ConvenientEffects.SettingIntegrateWithTokenMagicName",
+            hint: "ConvenientEffects.SettingIntegrateWithTokenMagicHint",
+            scope: "world",
+            config: true,
+            default: true,
+            type: Boolean,
         });
     }
 
@@ -103,6 +129,20 @@ class Settings {
             MODULE_ID,
             this.#CREATE_FOLDERS_PERMISSION,
         ) as number;
+    }
+
+    get integrateWithAte(): boolean {
+        return game.settings.get(
+            MODULE_ID,
+            this.#INTEGRATE_WITH_ATE,
+        ) as boolean;
+    }
+
+    get integrateWithTokenMagic(): boolean {
+        return game.settings.get(
+            MODULE_ID,
+            this.#INTEGRATE_WITH_TOKEN_MAGIC,
+        ) as boolean;
     }
 
     /**
