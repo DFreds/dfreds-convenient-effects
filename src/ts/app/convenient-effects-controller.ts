@@ -140,7 +140,7 @@ class ConvenientEffectsController {
 
         const newEffect = createConvenientEffect({
             effect: {
-                name: "New Effect", // TODO localize
+                name: game.i18n.localize("ConvenientEffects.NewEffect"),
                 img: "icons/svg/aura.svg",
             },
         });
