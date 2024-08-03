@@ -5,6 +5,7 @@ import {
     createConvenientEffect,
     createConvenientItem,
     findEffectFolderItems,
+    findEffectsForItem,
     getBaseType,
 } from "../helpers.ts";
 import { log } from "../logger.ts";
@@ -12,12 +13,20 @@ import { FLAGS } from "../constants.ts";
 import { ItemFlags } from "types/foundry/common/documents/item.js";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 
-// TODO effects in the folders aren't sorted, need to rethink view data
 interface ViewData {
+    folderData: FolderData[];
+}
+
+interface FolderData {
     /**
-     * The items that contain the effects
+     * The item that contain the effects
      */
-    folders: Item<null>[];
+    folder: Item<null>;
+
+    /**
+     * The effects for the item
+     */
+    effects: ActiveEffect<Item<null>>[];
 }
 
 interface SearchResults {
@@ -42,10 +51,16 @@ class ConvenientEffectsController {
         this.#settings = new Settings();
     }
 
-    async getData(): Promise<ViewData> {
+    getData(): ViewData {
         // TODO don't show nested effects
+        const folders = findEffectFolderItems();
+        const folderData = folders.map((folder) => ({
+            folder,
+            effects: findEffectsForItem(folder.id),
+        }));
+
         return {
-            folders: findEffectFolderItems(),
+            folderData,
         };
     }
 
@@ -478,12 +493,12 @@ class ConvenientEffectsController {
         const effectIds = new Set<string>();
         const folderIds = new Set<string>();
 
-        const data = await this.getData();
-        for (const folder of data.folders) {
-            for (const effect of folder.effects) {
+        const viewData = this.getData();
+        for (const data of viewData.folderData) {
+            for (const effect of data.effects) {
                 if (rgx.test(SearchFilter.cleanQuery(effect.name))) {
                     effectIds.add(effect.id);
-                    folderIds.add(folder.id);
+                    folderIds.add(data.folder.id);
                 }
             }
         }

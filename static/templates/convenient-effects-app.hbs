@@ -44,21 +44,21 @@
 
     <!-- Directories List -->
     <ol class="directory-list">
-        {{#each folders as |folder|}}
+        {{#each folderData as |data|}}
             <li
                 class="directory-item folder flexcol collapsed convenient-folder"
-                data-folder-id="{{folder.id}}"
-                data-uuid="{{folder.uuid}}"
+                data-folder-id="{{data.folder.id}}"
+                data-uuid="{{data.folder.uuid}}"
                 data-folder-depth="1"
                 draggable="false"
             >
                 <header
                     class="folder-header flexrow"
-                    style="background-color: {{folder.flags.dfreds-convenient-effects.folderColor}};"
+                    style="background-color: {{data.folder.flags.dfreds-convenient-effects.folderColor}};"
                 >
                     <h3 class="noborder"><i
                             class="fas fa-folder-open fa-fw"
-                        ></i>{{folder.name}}</h3>
+                        ></i>{{data.folder.name}}</h3>
 
                     <a class="create-button create-entry">
                         <i class="fas fa-hand-sparkles"></i>
@@ -67,7 +67,7 @@
                 </header>
 
                 <ol class="subdirectory">
-                    {{#each folder.effects as |effect|}}
+                    {{#each data.effects as |effect|}}
                         <li
                             class="directory-item document flexrow convenient-effect"
                             data-entry-id="{{effect.id}}"

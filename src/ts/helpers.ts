@@ -124,6 +124,28 @@ function findEffectFolderItems(): Item<null>[] {
         });
 }
 
+function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
+    const item = game.items.get(itemId);
+
+    if (!item) return [];
+
+    return item.effects
+        .map((effect) => effect as ActiveEffect<Item<null>>)
+        .sort((effectA, effectB) => {
+            const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
+            const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
+        });
+}
+
 /**
  * Gets all UUIDs for selected or targeted tokens
  *
@@ -189,6 +211,7 @@ export {
     createConvenientEffect,
     findActorByUuid,
     findEffectFolderItems,
+    findEffectsForItem,
     getActorUuids,
     getBaseType,
     isEffectConvenient,

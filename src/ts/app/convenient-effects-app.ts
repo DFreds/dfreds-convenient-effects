@@ -40,9 +40,7 @@ class ConvenientEffectsApp extends Application {
         });
     }
 
-    override async getData(
-        _options?: Partial<ApplicationOptions>,
-    ): Promise<object> {
+    override getData(_options?: Partial<ApplicationOptions>): object {
         return this.#controller.getData();
     }
 
