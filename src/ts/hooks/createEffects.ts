@@ -24,21 +24,14 @@ const CreateEffects: Listener = {
                 await settings.clearRanMigrations();
             }
 
-            const systemId = game.system.id;
-            log(`System ID is ${systemId}`);
             const mapping = new Mapping();
-            const systemDefinition = mapping.fetchMappingForSystemId(systemId);
-
-            if (!systemDefinition) {
-                log(`No system definition available for system ${systemId}`);
-                return;
-            }
+            const systemDefinition = mapping.findMappingForSystemId();
 
             try {
-                await systemDefinition.initialize();
+                await systemDefinition?.initialize();
             } catch (e: any) {
                 log(
-                    `Something went wrong while initializing system ${systemId}: ${e}`,
+                    `Something went wrong while initializing system ${game.system.id}: ${e}`,
                 );
             }
         });

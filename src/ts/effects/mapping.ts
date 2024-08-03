@@ -8,9 +8,14 @@ class Mapping {
         sw5e: new EffectDefinitionDnd5e(),
     };
 
-    fetchMappingForSystemId(systemId: string): EffectDefinition | undefined {
-        const systemDefinition = this.#SYSTEM_DEFINITION_MAP[systemId];
-        log(systemDefinition);
+    findMappingForSystemId(): EffectDefinition | undefined {
+        log(`System ID is ${game.system.id}`);
+        const systemDefinition = this.#SYSTEM_DEFINITION_MAP[game.system.id];
+
+        if (!systemDefinition) {
+            log(`No system definition available for system ${game.system.id}`);
+            return;
+        }
 
         return systemDefinition;
     }
