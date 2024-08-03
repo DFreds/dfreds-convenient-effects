@@ -2,6 +2,7 @@ import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { findActorByUuid, isEffectConvenient } from "../helpers.ts";
 import { log } from "../logger.ts";
+import { FLAGS } from "../constants.ts";
 
 interface AddEffectMessage {
     request: "addEffect";
@@ -136,7 +137,7 @@ class Sockets {
         //     );
         // }
 
-        await actor.createEmbeddedDocuments(
+        const createdEffects = await actor.createEmbeddedDocuments(
             "ActiveEffect",
             activeEffectsToApply,
             {
@@ -145,19 +146,20 @@ class Sockets {
             },
         );
 
-        // TODO this needs to do sub effects
-        // const subEffects =
-        //     effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.SUB_EFFECTS];
-        // if (subEffects) {
-        //     // Apply all sub-effects with the original effect being the origin
-        //     for (const subEffect of subEffects) {
-        //         await game.dfreds.effectInterface.addEffectWith({
-        //             effectData: subEffect,
-        //             uuid,
-        //             origin: this._effectHelpers.getId(effect.name),
-        //         });
-        //     }
-        // }
+        const subEffects = effectData.flags?.[MODULE_ID]?.[
+            FLAGS.SUB_EFFECTS
+        ] as PreCreate<ActiveEffectSource>[];
+
+        if (subEffects) {
+            // Apply all sub-effects with the original effect being the origin
+            for (const subEffect of subEffects) {
+                await game.dfreds.effectInterface.addEffect({
+                    effectData: subEffect,
+                    uuid,
+                    origin: createdEffects[0].id as ActiveEffectOrigin,
+                });
+            }
+        }
 
         log(`Added effect ${effectData.name} to ${actor.name} - ${actor.id}`);
     }

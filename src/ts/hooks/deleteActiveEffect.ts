@@ -18,30 +18,22 @@ const DeleteActiveEffect: Listener = {
 
                 renderConvenientEffectsAppIfOpen();
 
-                // if (
-                //     !isEffectConvenient(effect) ||
-                //     !(effect?.parent instanceof Actor)
-                // ) {
-                //     return;
-                // }
+                if (!(effect?.parent instanceof Actor)) {
+                    return;
+                }
 
-                // TODO do this when doing sub effects
                 // Remove effects that were added due to this effect
-                // const actor = effect.parent as Actor;
-                // const effectIdsFromThisEffect = actor.effects
-                //     .filter(
-                //         (effect) =>
-                //             effect.origin ===
-                //             effectHelpers.getId(activeEffect.name),
-                //     )
-                //     .map((effect) => effect.id);
+                const actor = effect.parent as Actor;
+                const effectIdsFromThisEffect = actor.effects
+                    .filter((effect) => effect.origin === activeEffect.id)
+                    .map((effect) => effect.id);
 
-                // if (effectIdsFromThisEffect) {
-                //     actor.deleteEmbeddedDocuments(
-                //         "ActiveEffect",
-                //         effectIdsFromThisEffect,
-                //     );
-                // }
+                if (effectIdsFromThisEffect) {
+                    actor.deleteEmbeddedDocuments(
+                        "ActiveEffect",
+                        effectIdsFromThisEffect,
+                    );
+                }
             },
         );
     },

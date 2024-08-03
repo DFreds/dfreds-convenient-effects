@@ -104,7 +104,7 @@ interface IAddEffect {
     /**
      * Applies the effect as an overlay or not. Set to false by default.
      */
-    overlay: boolean;
+    overlay?: boolean;
 
     /**
      * The origin of the effect
