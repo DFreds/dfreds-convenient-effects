@@ -106,7 +106,7 @@ class Sockets {
             handler(); // execute locally
         } else {
             if (!game.users.activeGM) {
-                throw Error();
+                throw Error("No active GM, unable to socket through a GM");
             }
 
             game.socket.emit(this.#identifier, message);
