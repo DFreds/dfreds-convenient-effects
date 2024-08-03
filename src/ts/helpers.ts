@@ -20,9 +20,9 @@ interface ICreateEffectAddOns {
     isViewable?: boolean;
     atlChanges?: DeepPartial<EffectChangeData>[];
     tokenMagicChanges?: DeepPartial<EffectChangeData>[];
-    nestedEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids? not sure this would work... effects might not be created yet
+    nestedEffects?: PreCreate<ActiveEffectSource>[]; // TODO just ids? not sure this would work... effects might not be created yet
     subEffects?: PreCreate<ActiveEffectSource>[];
-    otherEffects?: DeepPartial<ActiveEffectSource>[]; // TODO just ids? this is for effects that should not be tied to the initial effect (i.e. prone being applied when unconscious)
+    otherEffects?: PreCreate<ActiveEffectSource>[]; // TODO just ids? this is for effects that should not be tied to the initial effect (i.e. prone being applied when unconscious)
 }
 
 function createConvenientItem({

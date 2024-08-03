@@ -1,42 +1,39 @@
-import Constants from "../../constants.js";
-import EffectHelpers from "../../effects/effect-helpers.js";
-import Settings from "../../settings.js";
+import { SECONDS, SIZES_ORDERED } from "src/ts/constants.ts";
+import { DynamicEffectsHandler } from "../dynamic-effects-handler.ts";
+import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 
-/**
- * Handles adding dynamic effects for certain effects
- */
-export default class DynamicEffectsAdderDnd5e {
-    constructor() {
-        this._effectHelpers = new EffectHelpers();
-        this._settings = new Settings();
-    }
+class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
+    override systemId: string = "dnd5e";
 
-    /**
-     * Adds dynamic effects for specific effects
-     *
-     * @param {object} effect - the object form of an ActiveEffect to handle
-     * @param {Actor} actor - the affected actor
-     */
-    async addDynamicEffects(effect, actor) {
+    override async handleDynamicEffects(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+    ): Promise<void> {
+        if (!effect.name) return;
+
         switch (effect.name.toLowerCase()) {
             case "divine word":
-                await this._addDivineWordEffects(effect, actor);
+                await this.#addDivineWordEffects(effect, actor);
                 break;
             case "enlarge":
-                this._addEnlargeEffects(effect, actor);
+                this.#addEnlargeEffects(effect, actor);
                 break;
             case "rage":
-                this._addRageEffects(effect, actor);
+                this.#addRageEffects(effect, actor);
                 break;
             case "reduce":
-                this._addReduceEffects(effect, actor);
+                this.#addReduceEffects(effect, actor);
                 break;
         }
     }
 
-    async _addDivineWordEffects(effect, actor) {
+    async #addDivineWordEffects(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+    ): Promise<void> {
+        // @ts-expect-error Attributes is defined
         const remainingHp = actor.system.attributes.hp.value;
-        const origin = this._effectHelpers.getId(effect.name);
+        const origin = effect._id as ActiveEffectOrigin;
 
         if (remainingHp <= 20) {
             await actor.update({
@@ -65,7 +62,8 @@ export default class DynamicEffectsAdderDnd5e {
                 origin,
             });
             effect.description = "Blinded, deafened, and stunned for 1 hour";
-            effect.duration.seconds = Constants.SECONDS.IN_ONE_HOUR;
+            effect.duration = effect.duration ?? {};
+            effect.duration.seconds = SECONDS.IN_ONE_HOUR;
         } else if (remainingHp <= 40) {
             await game.dfreds.effectInterface.addEffect({
                 effectName: "Blinded",
@@ -78,7 +76,8 @@ export default class DynamicEffectsAdderDnd5e {
                 origin,
             });
             effect.description = "Deafened and blinded for 10 minutes";
-            effect.duration.seconds = Constants.SECONDS.IN_TEN_MINUTES;
+            effect.duration = effect.duration ?? {};
+            effect.duration.seconds = SECONDS.IN_TEN_MINUTES;
         } else if (remainingHp <= 50) {
             await game.dfreds.effectInterface.addEffect({
                 effectName: "Deafened",
@@ -86,30 +85,42 @@ export default class DynamicEffectsAdderDnd5e {
                 origin,
             });
             effect.description = "Deafened for 1 minute";
-            effect.duration.seconds = Constants.SECONDS.IN_ONE_MINUTE;
+            effect.duration = effect.duration ?? {};
+            effect.duration.seconds = SECONDS.IN_ONE_MINUTE;
         }
     }
 
-    _addEnlargeEffects(effect, actor) {
-        const size = actor.system.traits.size;
-        const index = Constants.SIZES_ORDERED.indexOf(size);
+    #addEnlargeEffects(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+    ) {
+        const size = (actor.system as any).traits.size;
+        const index = SIZES_ORDERED.indexOf(size);
 
-        this._addSizeChangeEffects(
+        this.#addSizeChangeEffects(
             effect,
-            Math.min(Constants.SIZES_ORDERED.length - 1, index + 1),
+            Math.min(SIZES_ORDERED.length - 1, index + 1),
         );
     }
 
-    _addReduceEffects(effect, actor) {
-        const size = actor.system.traits.size;
-        const index = Constants.SIZES_ORDERED.indexOf(size);
+    #addReduceEffects(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+    ) {
+        const size = (actor.system as any).traits.size;
+        const index = SIZES_ORDERED.indexOf(size);
 
-        this._addSizeChangeEffects(effect, Math.max(0, index - 1));
+        this.#addSizeChangeEffects(effect, Math.max(0, index - 1));
     }
 
-    _addSizeChangeEffects(effect, sizeIndex) {
-        const size = Constants.SIZES_ORDERED[sizeIndex];
-        const tokenSize = game.dnd5e.config.tokenSizes[size];
+    #addSizeChangeEffects(
+        effect: PreCreate<ActiveEffectSource>,
+        sizeIndex: number,
+    ) {
+        const size = SIZES_ORDERED[sizeIndex];
+        const tokenSize = (CONFIG as any).DND5E.actorSizes[size];
+
+        effect.changes = effect.changes ?? [];
 
         effect.changes.push({
             key: "system.traits.size",
@@ -117,7 +128,7 @@ export default class DynamicEffectsAdderDnd5e {
             value: size,
         });
 
-        if (this._settings.integrateWithAte) {
+        if (this.settings.integrateWithAte) {
             effect.changes.push(
                 ...[
                     {
@@ -135,7 +146,7 @@ export default class DynamicEffectsAdderDnd5e {
         }
     }
 
-    _addRageEffects(effect, actor) {
+    #addRageEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
         const barbarianClass = actor.items.find(
             (item) => item.type === "class" && item.name === "Barbarian",
         );
@@ -145,19 +156,25 @@ export default class DynamicEffectsAdderDnd5e {
             return;
         }
 
-        this._addResistancesIfBearTotem(effect, actor, barbarianClass);
-        this._determineIfPersistantRage(effect, barbarianClass);
+        this.#addResistancesIfBearTotem(effect, actor, barbarianClass);
+        this.#determineIfPersistentRage(effect, barbarianClass);
     }
 
-    _addResistancesIfBearTotem(effect, actor, barbarianClass) {
+    #addResistancesIfBearTotem(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+        barbarianClass: Item<Actor<null>>,
+    ) {
         const isTotemWarrior =
-            barbarianClass.subclass?.identifier === "path-of-the-totem-warrior";
+            (barbarianClass as any).subclass?.identifier ===
+            "path-of-the-totem-warrior";
         const hasBearTotemSpirit = actor.items.find(
             (item) =>
                 item.type === "feat" && item.name === "Totem Spirit: Bear",
         );
 
         if (isTotemWarrior && hasBearTotemSpirit) {
+            effect.changes = effect.changes ?? [];
             effect.changes.push(
                 ...[
                     {
@@ -215,11 +232,17 @@ export default class DynamicEffectsAdderDnd5e {
         }
     }
 
-    _determineIfPersistantRage(effect, barbarianClass) {
-        if (barbarianClass.system.levels > 14) {
+    #determineIfPersistentRage(
+        effect: PreCreate<ActiveEffectSource>,
+        barbarianClass: Item<Actor<null>>,
+    ) {
+        if ((barbarianClass.system as any).levels > 14) {
+            effect.duration = effect.duration ?? {};
             effect.duration.seconds = null;
             effect.duration.rounds = null;
             effect.duration.turns = null;
         }
     }
 }
+
+export { DynamicEffectsHandlerDnd5e };

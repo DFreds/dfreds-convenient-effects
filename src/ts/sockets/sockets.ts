@@ -3,6 +3,7 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { findActorByUuid, isEffectConvenient } from "../helpers.ts";
 import { log } from "../logger.ts";
 import { FLAGS } from "../constants.ts";
+import { Mapping } from "../effects/mapping.ts";
 
 interface AddEffectMessage {
     request: "addEffect";
@@ -24,7 +25,7 @@ interface AddEffectMessageData {
     /**
      * The effect data to add
      */
-    effectData: DeepPartial<ActiveEffectSource>;
+    effectData: PreCreate<ActiveEffectSource>;
 
     /**
      * The UUID of the actor to add the effect to
@@ -129,13 +130,15 @@ class Sockets {
 
         if (!actor) return; // This should already be checked for before the socket
 
-        // TODO this needs to do dynamic effects
-        // if (effect.flags[Constants.MODULE_ID]?.[Constants.FLAGS.IS_DYNAMIC]) {
-        //     await this._dynamicEffectsAdderDelegate.addDynamicEffects(
-        //         effect,
-        //         actor,
-        //     );
-        // }
+        if (effectData.flags?.[MODULE_ID]?.[FLAGS.IS_DYNAMIC]) {
+            const mapping = new Mapping();
+            const systemDefinition = mapping.findSystemDefinitionForSystemId();
+
+            await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(
+                effectData,
+                actor,
+            );
+        }
 
         const createdEffects = await actor.createEmbeddedDocuments(
             "ActiveEffect",
@@ -146,11 +149,11 @@ class Sockets {
             },
         );
 
-        const subEffects = effectData.flags?.[MODULE_ID]?.[
-            FLAGS.SUB_EFFECTS
-        ] as PreCreate<ActiveEffectSource>[];
+        if (effectData.flags?.[MODULE_ID]?.[FLAGS.SUB_EFFECTS]) {
+            const subEffects = effectData.flags?.[MODULE_ID]?.[
+                FLAGS.SUB_EFFECTS
+            ] as PreCreate<ActiveEffectSource>[];
 
-        if (subEffects) {
             // Apply all sub-effects with the original effect being the origin
             for (const subEffect of subEffects) {
                 await game.dfreds.effectInterface.addEffect({

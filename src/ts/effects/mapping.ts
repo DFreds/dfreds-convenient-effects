@@ -1,14 +1,27 @@
+import { DynamicEffectsHandler } from "./dynamic-effects-handler.ts";
 import { EffectDefinition } from "./effect-definition.ts";
 import { EffectDefinitionDnd5e } from "./dnd5e/effect-definition-dnd5e.ts";
 import { log } from "../logger.ts";
+import { DynamicEffectsHandlerDnd5e } from "./dnd5e/dynamic-effects-handler-dnd5e.ts";
+
+interface SystemDefinition {
+    effectDefinition: EffectDefinition;
+    dynamicEffectsHandler?: DynamicEffectsHandler;
+}
 
 class Mapping {
-    #SYSTEM_DEFINITION_MAP: Record<string, EffectDefinition> = {
-        dnd5e: new EffectDefinitionDnd5e(),
-        sw5e: new EffectDefinitionDnd5e(),
+    #SYSTEM_DEFINITION_MAP: Record<string, SystemDefinition> = {
+        dnd5e: {
+            effectDefinition: new EffectDefinitionDnd5e(),
+            dynamicEffectsHandler: new DynamicEffectsHandlerDnd5e(),
+        },
+        sw5e: {
+            effectDefinition: new EffectDefinitionDnd5e(),
+            dynamicEffectsHandler: new DynamicEffectsHandlerDnd5e(),
+        },
     };
 
-    findMappingForSystemId(): EffectDefinition | undefined {
+    findSystemDefinitionForSystemId(): SystemDefinition | undefined {
         log(`System ID is ${game.system.id}`);
         const systemDefinition = this.#SYSTEM_DEFINITION_MAP[game.system.id];
 

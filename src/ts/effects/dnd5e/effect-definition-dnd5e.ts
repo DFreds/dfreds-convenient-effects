@@ -204,7 +204,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 //                 this._channelDivinityTurnUndead,
                 //                 this._kiEmptyBody,
                 //                 this._kiPatientDefense,
-                //                 this._rage,
+                this.#rage,
                 //                 this._recklessAttack,
             ],
         };
@@ -3162,53 +3162,57 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //         });
     //     }
 
-    //     get _rage() {
-    //         return this._effectHelpers.createActiveEffect({
-    //             name: "Rage",
-    //             description:
-    //                 "Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.",
-    //             img: "icons/creatures/abilities/mouth-teeth-human.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             isDynamic: true,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "slashing",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "piercing",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "bludgeoning",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.mwak.damage",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+ @scale.barbarian.rage",
-    //                 },
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "outline",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #rage() {
+        return createConvenientEffect({
+            effect: {
+                name: "Rage",
+                description:
+                    "Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.",
+                img: "icons/creatures/abilities/mouth-teeth-human.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "slashing",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "piercing",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "bludgeoning",
+                    },
+                    {
+                        key: "system.bonuses.mwak.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+ @scale.barbarian.rage-damage",
+                    },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "outline",
+                    },
+                ],
+            },
+            isDynamic: true,
+        });
+    }
 
     //     get _recklessAttack() {
     //         return this._effectHelpers.createActiveEffect({

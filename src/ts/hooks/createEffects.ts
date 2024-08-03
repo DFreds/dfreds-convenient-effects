@@ -25,10 +25,10 @@ const CreateEffects: Listener = {
             }
 
             const mapping = new Mapping();
-            const systemDefinition = mapping.findMappingForSystemId();
+            const systemDefinition = mapping.findSystemDefinitionForSystemId();
 
             try {
-                await systemDefinition?.initialize();
+                await systemDefinition?.effectDefinition?.initialize();
             } catch (e: any) {
                 log(
                     `Something went wrong while initializing system ${game.system.id}: ${e}`,
