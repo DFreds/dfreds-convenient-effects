@@ -1,8 +1,6 @@
 import { ConvenientEffectsController } from "./convenient-effects-controller.ts";
 
 class ConvenientEffectsApp extends Application {
-    // TODO drag and drop between folders should transfer active effect from one item to another
-
     #controller: ConvenientEffectsController;
     #rootView: JQuery<HTMLElement>;
 
