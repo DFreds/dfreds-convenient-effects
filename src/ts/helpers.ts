@@ -7,6 +7,7 @@ import {
 } from "types/foundry/common/documents/active-effect.js";
 import { ItemFlags, ItemSource } from "types/foundry/common/documents/item.js";
 import { Settings } from "./settings.ts";
+import { log } from "./logger.ts";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
@@ -63,11 +64,9 @@ function createConvenientEffect({
 
     effect.flags = foundry.utils.mergeObject(ceFlags, effectFlags);
 
-    const statusesArray = Array.from(effect.statuses ?? []);
     if (isTemporary) {
-        statusesArray.unshift(`convenient-effect-${effect.name}`.slugify());
+        log("isTemp"); // TODO remove or do something for making passive effects
     }
-    effect.statuses = statusesArray;
 
     const settings = new Settings();
     if (settings.integrateWithAte) {
