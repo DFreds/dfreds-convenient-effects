@@ -1,6 +1,9 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { FLAGS } from "../constants.ts";
-import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
+import {
+    ActiveEffectSource,
+    // EffectChangeData,
+} from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 
 class HandlebarHelpers {
@@ -55,28 +58,27 @@ class HandlebarHelpers {
             (effect: ActiveEffect<any>) => {
                 let icons = "";
 
-                const nestedEffectIds = (effect.getFlag(
+                const nestedEffects = (effect.getFlag(
                     MODULE_ID,
                     FLAGS.NESTED_EFFECTS,
-                ) ?? []) as string[];
+                ) ?? []) as PreCreate<ActiveEffectSource>[];
 
-                const nestedEffects = nestedEffectIds
-                    .map((id) => {
-                        return game.dfreds.effectInterface.findEffect({
-                            effectId: id,
-                        });
-                    })
-                    .filter((effect) => effect !== undefined);
+                // const nestedEffects: ActiveEffect<any>[] = nestedEffectData.map(
+                //     (data) => {
+                //         return game.dfreds.effectInterface.findEffect({
+                //             effectId: data.id,
+                //         });
+                //     },
+                // );
 
                 const subChanges = nestedEffects.flatMap(
-                    (nestedEffect) => nestedEffect!.changes,
+                    (nestedEffect) => nestedEffect.changes,
                 );
 
                 const allChanges = [...effect.changes, ...subChanges];
 
-                // icons += this.#getNestedEffectsIcon(nestedEffects);
+                icons += this.#getNestedEffectsIcon(nestedEffects);
                 icons += this.#getMidiIcon(allChanges);
-                icons += this.#getWireIcon(allChanges);
                 icons += this.#getAtlIcon(allChanges);
                 icons += this.#getTokenMagicIcon(allChanges);
 
@@ -85,33 +87,28 @@ class HandlebarHelpers {
         );
     }
 
-    // #getNestedEffectsIcon(
-    //     nestedEffects: BaseActiveEffect<Item<null>>[],
-    // ): string {
-    //     return nestedEffects.length > 0
-    //         ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
-    //         : "";
-    // }
+    #getNestedEffectsIcon(
+        nestedEffects: PreCreate<ActiveEffectSource>[],
+    ): string {
+        return nestedEffects.length > 0
+            ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
+            : "";
+    }
 
-    #getMidiIcon(changes: EffectChangeData[]): string {
+    #getMidiIcon(changes: any[]): string {
         return changes.some((change) => change.key.startsWith("flags.midi-qol"))
             ? "<i class='fas fa-dice-d20 integration-icon' title='Midi-QoL Effects'></i> "
             : "";
     }
 
-    #getWireIcon(changes: EffectChangeData[]): string {
-        return changes.some((change) => change.key.startsWith("flags.wire"))
-            ? "<i class='fas fa-plug integration-icon' title='Wire Effects'></i> "
-            : "";
-    }
-
-    #getAtlIcon(changes: EffectChangeData[]): string {
+    // TODO typing here
+    #getAtlIcon(changes: any[]): string {
         return changes.some((change) => change.key.startsWith("ATL"))
             ? "<i class='fas fa-lightbulb integration-icon' title='ATL Effects'></i> "
             : "";
     }
 
-    #getTokenMagicIcon(changes: EffectChangeData[]): string {
+    #getTokenMagicIcon(changes: any[]): string {
         return changes.some((change) =>
             change.key.startsWith("macro.tokenMagic"),
         )
