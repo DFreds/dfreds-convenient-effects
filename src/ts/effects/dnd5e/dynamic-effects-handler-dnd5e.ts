@@ -118,7 +118,8 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         sizeIndex: number,
     ) {
         const size = SIZES_ORDERED[sizeIndex];
-        const tokenSize = (CONFIG as any).DND5E.actorSizes[size];
+        const actorSizeObject = (CONFIG as any).DND5E.actorSizes[size];
+        const tokenSize = actorSizeObject.token ?? 1;
 
         effect.changes = effect.changes ?? [];
 

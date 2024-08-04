@@ -112,10 +112,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 //                 this._darkvision,
                 //                 this._disguiseSelf,
                 //                 this._divineFavor,
-                //                 this._divineWord,
+                this.#divineWord,
                 //                 this._enlargeReduce,
-                //                 this._enlargeReduceEnlarge,
-                //                 this._enlargeReduceReduce,
+                this.#enlargeReduceEnlarge,
+                this.#enlargeReduceReduce,
                 //                 this._enhanceAbility,
                 //                 this._enhanceAbilityBearsEndurance,
                 //                 this._enhanceAbilityBullsStrength,
@@ -1415,15 +1415,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //         });
     //     }
 
-    //     get _divineWord() {
-    //         return this._effectHelpers.createActiveEffect({
-    //             name: "Divine Word",
-    //             description:
-    //                 "Adds various effects based on the remaining hit points",
-    //             img: "icons/magic/light/explosion-star-large-orange-purple.webp",
-    //             isDynamic: true,
-    //         });
-    //     }
+    get #divineWord(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Divine Word",
+                description:
+                    "Adds various effects based on the remaining hit points",
+                img: "icons/magic/light/explosion-star-large-orange-purple.webp",
+            },
+            isDynamic: true,
+        });
+    }
 
     //     get _enhanceAbility() {
     //         return this._effectHelpers.createActiveEffect({
@@ -1564,63 +1566,71 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //         });
     //     }
 
-    //     get _enlargeReduceEnlarge() {
-    //         return this._effectHelpers.createActiveEffect({
-    //             name: "Enlarge",
-    //             description:
-    //                 "Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute",
-    //             img: "icons/magic/control/energy-stream-link-large-blue.webp",
-    //             isDynamic: true,
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.weapon.damage",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Enlarge",
+                description:
+                    "Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute",
+                img: "icons/magic/control/energy-stream-link-large-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.bonuses.weapon.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+            isDynamic: true,
+            // isViewable: this.#settings.showNestedEffects,
+        });
+    }
 
-    //     get _enlargeReduceReduce() {
-    //         return this._effectHelpers.createActiveEffect({
-    //             name: "Reduce",
-    //             description:
-    //                 "Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute",
-    //             img: "icons/magic/control/energy-stream-link-large-blue.webp",
-    //             isDynamic: true,
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.weapon.damage",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-1d4",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Reduce",
+                description:
+                    "Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute",
+                img: "icons/magic/control/energy-stream-link-large-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.bonuses.weapon.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-1d4",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+            isDynamic: true,
+            // isViewable: this._settings.showNestedEffects,
+        });
+    }
 
     //     get _faerieFire() {
     //         return this._effectHelpers.createActiveEffect({
@@ -3162,7 +3172,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //         });
     //     }
 
-    get #rage() {
+    get #rage(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
             effect: {
                 name: "Rage",
