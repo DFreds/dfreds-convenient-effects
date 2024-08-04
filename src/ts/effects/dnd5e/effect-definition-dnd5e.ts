@@ -915,7 +915,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     /* Spell Effects */
     //     get _acidArrow() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Acid Arrow",
     //             description: "Causes 2d4 acid damage at the end of next turn",
     //             img: "icons/magic/acid/projectile-bolts-salvo-green.webp",
@@ -930,7 +930,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _aid() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Aid",
     //             description: "Add to current and maximum hit points for 8 hours",
     //             img: "icons/magic/life/heart-cross-blue.webp",
@@ -939,7 +939,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _alterSelf() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Alter Self",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/control/debuff-energy-hold-green.webp",
@@ -948,7 +948,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _antilifeShell() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Antilife Shell",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
@@ -957,7 +957,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _arcaneHand() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Arcane Hand",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/fire/projectile-fireball-smoke-strong-teal.webp",
@@ -966,7 +966,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _bane() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bane",
     //             description:
     //                 "Subtract 1d4 from all saving throws and attack rolls for 1 minute",
@@ -1004,7 +1004,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _barkskin() {
     //         // TODO seems to not work in dnd 3.0.0
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Barkskin",
     //             description: "Upgrade AC to 16 for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
@@ -1021,7 +1021,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _beaconOfHope() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Beacon of Hope",
     //             description:
     //                 "Adds advantage to wisdom saving throws and death saving throws for 1 minute",
@@ -1043,7 +1043,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _blackTentacles() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Black Tentacles",
     //             description:
     //                 "Apply the effects of the restrained condition for 1 minute",
@@ -1054,7 +1054,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _bless() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bless",
     //             description:
     //                 "Add 1d4 to all saving throws and attack rolls for 1 minute",
@@ -1098,7 +1098,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _blindnessDeafness() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Blindness/Deafness",
     //             description: "Choose between blindness or deafness",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
@@ -1110,7 +1110,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _blindnessDeafnessBlindness() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Blindness",
     //             description:
     //                 "Disadvantage on attack rolls while granting advantage to all who attack for 1 minute",
@@ -1122,7 +1122,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _blindnessDeafnessDeafness() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Deafness",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
@@ -1133,7 +1133,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _blur() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Blur",
     //             description: "Grants disadvantage to all who attack for 1 minute",
     //             img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
@@ -1156,7 +1156,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _charmPerson() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Charm Person",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
@@ -1166,7 +1166,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _command() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Command",
     //             description:
     //                 "No active effects and lasts until the end of next turn",
@@ -1177,7 +1177,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _comprehendLanguages() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Comprehend Languages",
     //             description: "Adds all languages for 1 hour",
     //             img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
@@ -1193,7 +1193,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagion() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Contagion",
     //             description:
     //                 "Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom",
@@ -1210,7 +1210,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagionBlindingSickness() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Blinding Sickness",
     //             description:
     //                 "Disadvantage on wisdom checks and wisdom saving throws for 7 days",
@@ -1234,7 +1234,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagionFilthFever() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Filth Fever",
     //             description:
     //                 "Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days",
@@ -1262,7 +1262,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagionFleshRot() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Flesh Rot",
     //             description:
     //                 "Disadvantage on charisma checks and vulnerability to all damage",
@@ -1285,7 +1285,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagionMindfire() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Mindfire",
     //             description:
     //                 "Disadvantage on intelligence checks and intelligence saving throws for 7 days",
@@ -1308,7 +1308,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagionSeizure() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Seizure",
     //             description:
     //                 "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days",
@@ -1336,7 +1336,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _contagionSlimyDoom() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Slimy Doom",
     //             description:
     //                 "Disadvantage on constitution checks and constitution saving throws for 7 days",
@@ -1359,7 +1359,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _darkvision() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Darkvision",
     //             description: "Upgrade darkvision to 60 ft. for 8 hours",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
@@ -1390,7 +1390,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _disguiseSelf() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Disguise Self",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/control/debuff-energy-hold-teal-blue.webp",
@@ -1399,7 +1399,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _divineFavor() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Divine Favor",
     //             description:
     //                 "Add 1d4 radiant damage to weapon attacks for 1 minute",
@@ -1428,7 +1428,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     //     get _enhanceAbility() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Enhance Ability",
     //             description:
     //                 "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
@@ -1445,7 +1445,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _enhanceAbilityBearsEndurance() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bear's Endurance",
     //             description:
     //                 "Advantage on constitution checks and 2d6 temp hit points for 1 hour",
@@ -1463,7 +1463,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _enhanceAbilityBullsStrength() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bull's Strength",
     //             description:
     //                 "Advantage on strength checks and double maximum carrying capacity for 1 hour",
@@ -1487,7 +1487,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _enhanceAbilityCatsGrace() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Cat's Grace",
     //             description: "Advantage on dexterity checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
@@ -1504,7 +1504,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _enhanceAbilityEaglesSplendor() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Eagle's Splendor",
     //             description: "Advantage on charisma checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
@@ -1521,7 +1521,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _enhanceAbilityFoxsCunning() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Fox's Cunning",
     //             description: "Advantage on intelligence checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
@@ -1538,7 +1538,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _enhanceAbilityOwlsWisdom() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Owl's Wisdom",
     //             description: "Advantage on wisdom checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
@@ -1633,7 +1633,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     //     get _faerieFire() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Faerie Fire",
     //             description: "Grants advantage to all who attack for 1 minute",
     //             img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
@@ -1678,7 +1678,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _falseLife() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "False Life",
     //             description: "Add temporary hit points 1 hour",
     //             img: "icons/magic/life/heart-cross-purple-orange.webp",
@@ -1687,7 +1687,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _featherFall() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Feather Fall",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/air/wind-swirl-pink-purple.webp",
@@ -1696,7 +1696,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _feeblemind() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Feeblemind",
     //             description:
     //                 "Set intelligence and charisma scores to 1 until removed",
@@ -1719,7 +1719,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _fireShield() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Fire Shield",
     //             description: "Choose between cold or fire resistance",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
@@ -1731,7 +1731,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _fireShieldColdResistance() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Fire Shield (Cold Resistance)",
     //             description: "Add damage resistance to cold for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
@@ -1782,7 +1782,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _fireShieldFireResistance() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Fire Shield (Fire Resistance)",
     //             description: "Add damage resistance to fire for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
@@ -1833,7 +1833,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _findThePath() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Find the Path",
     //             description: "No active effects and lasts for 1 day",
     //             img: "icons/magic/light/explosion-star-teal.webp",
@@ -1842,7 +1842,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _fly() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Fly",
     //             description: "Upgrade flying speed to 60 ft. for 10 minutes",
     //             img: "icons/magic/control/energy-stream-link-white.webp",
@@ -1860,7 +1860,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _foresight() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Foresight",
     //             description:
     //                 "Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours",
@@ -1897,7 +1897,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _freedomOfMovement() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Freedom of Movement",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/skills/melee/strike-blade-knife-white-red.webp",
@@ -1906,7 +1906,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _globeOfInvulnerability() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Globe of Invulnerability",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
@@ -1938,7 +1938,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     //     get _guidance() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Guidance",
     //             description: "Adds 1d4 to one ability or skill check for 1 minute",
     //             img: "icons/magic/control/buff-flight-wings-blue.webp",
@@ -1964,7 +1964,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _guidingBolt() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Guiding Bolt",
     //             description:
     //                 "Grants advantage to next attacker or until the end of next turn",
@@ -1987,7 +1987,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _haste() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Haste",
     //             description:
     //                 "Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute",
@@ -2015,7 +2015,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _heroesFeast() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Heroes' Feast",
     //             description:
     //                 "Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours",
@@ -2042,7 +2042,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _heroism() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Heroism",
     //             description: "Immunity to frightened for 1 minute",
     //             img: "icons/magic/life/heart-cross-strong-blue.webp",
@@ -2058,7 +2058,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _hideousLaughter() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Hideous Laughter",
     //             description:
     //                 "Apply the effects of the prone and incapacitated conditions for 1 minute",
@@ -2069,7 +2069,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _holdMonster() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Hold Monster",
     //             description:
     //                 "Apply the effects of the paralyzed condition for 1 minute",
@@ -2093,7 +2093,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     // saveDC=30,
     //     // label=Hold Person
     //     get _holdPerson() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Hold Person",
     //             description:
     //                 "Apply the effects of the paralyzed condition for 1 minute",
@@ -2111,7 +2111,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _holyAura() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Holy Aura",
     //             description:
     //                 "Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute",
@@ -2155,7 +2155,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _huntersMark() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Hunter's Mark",
     //             description: "No active effects and lasts until removed (for now)",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
@@ -2163,7 +2163,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _invisibility() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Invisibility",
     //             description:
     //                 "Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.",
@@ -2180,7 +2180,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _irresistibleDance() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Irresistible Dance",
     //             description:
     //                 "Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute",
@@ -2213,7 +2213,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _jump() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Jump",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
@@ -2222,7 +2222,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _light() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Light",
     //             description: "Emits 20/40 light for 1 hour (requires ATL)",
     //             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
@@ -2258,7 +2258,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _longstrider() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Longstrider",
     //             description: "Increase all movement by 10 ft. for 1 hour",
     //             img: "icons/magic/air/wind-stream-blue-gray.webp",
@@ -2275,7 +2275,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _mageArmor() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Mage Armor",
     //             description: "Upgrades armor to 13 + dex modifier for 8 hours",
     //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
@@ -2292,7 +2292,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _mindBlank() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Mind Blank",
     //             description: "Adds immunity to psychic damage for 24 hours",
     //             img: "icons/magic/air/air-burst-spiral-large-blue.webp",
@@ -2308,7 +2308,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _mirrorImage() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Mirror Image",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
@@ -2325,7 +2325,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _passWithoutTrace() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Pass without Trace",
     //             description: "Add 10 to stealth checks for 1 hour",
     //             img: "icons/magic/air/fog-gas-smoke-brown.webp",
@@ -2341,7 +2341,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _protectionFromEnergy() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Energy",
     //             description:
     //                 "Choose between acid, cold, fire, lightning, or thunder resistance",
@@ -2358,7 +2358,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _protectionFromEnergyAcid() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Acid",
     //             description: "Adds damage resistance to acid for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
@@ -2376,7 +2376,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _protectionFromEnergyCold() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Cold",
     //             description: "Adds damage resistance to cold for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
@@ -2394,7 +2394,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _protectionFromEnergyFire() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Fire",
     //             description: "Adds damage resistance to fire for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
@@ -2412,7 +2412,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _protectionFromEnergyLightning() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Lightning",
     //             description: "Adds damage resistance to lightning for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -2430,7 +2430,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _protectionFromEnergyThunder() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Thunder",
     //             description: "Adds damage resistance to thunder for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
@@ -2448,7 +2448,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _protectionFromPoison() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Poison",
     //             description:
     //                 "Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)",
@@ -2465,7 +2465,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _protectionFromEvilAndGood() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Protection from Evil and Good",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -2474,7 +2474,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _rayOfFrost() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Ray of Frost",
     //             description: "Lowers movement by 10 ft",
     //             img: "icons/magic/light/beam-rays-blue-small.webp",
@@ -2491,7 +2491,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _regenerate() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Regenerate",
     //             description:
     //                 "Regain 1 hit point at the start of each turn for 1 hour",
@@ -2508,7 +2508,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _resilientSphere() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Resilient Sphere",
     //             description: "Adds total immunity to all damage and half movement",
     //             img: "icons/magic/light/explosion-star-large-pink.webp",
@@ -2530,7 +2530,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _resistance() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Resistance",
     //             description: "Add 1d4 to a single saving throw in the next minute",
     //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
@@ -2551,7 +2551,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _shield() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Shield",
     //             description: "Add 5 to AC until next turn",
     //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
@@ -2580,7 +2580,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _shieldOfFaith() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Shield of Faith",
     //             description: "Adds 2 to the AC for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
@@ -2603,7 +2603,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _slow() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Slow",
     //             description:
     //                 "Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute",
@@ -2631,7 +2631,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _speakWithAnimals() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Speak with Animals",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
@@ -2640,7 +2640,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _speakWithDead() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Speak with Dead",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/control/fear-fright-shadow-monster-green.webp",
@@ -2649,7 +2649,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _speakWithPlants() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Speak with Plants",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/nature/leaf-glow-teal.webp",
@@ -2658,7 +2658,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _spiderClimb() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Spider Climb",
     //             description:
     //                 "Grants climbing speed equal to walking speed for 1 hour",
@@ -2676,7 +2676,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _spiritGuardians() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Spirit Guardians",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/light/projectile-bolts-salvo-white.webp",
@@ -2685,7 +2685,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _spiritualWeapon() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Spiritual Weapon",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
@@ -2695,7 +2695,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     get _stoneskin() {
     //         // TODO token magic effects
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Stoneskin",
     //             description:
     //                 "Adds resistance to non-magical physical damage for 1 hour",
@@ -2712,7 +2712,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _suggestion() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Suggestion",
     //             description: "No active effects and lasts for 8 hours",
     //             img: "icons/magic/air/air-burst-spiral-pink.webp",
@@ -2721,7 +2721,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _telekinesis() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Telekinesis",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
@@ -2730,7 +2730,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _trueStrike() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "True Strike",
     //             description:
     //                 "Grants advantage on next attack or until the end of next turn",
@@ -2753,7 +2753,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _viciousMockery() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Vicious Mockery",
     //             description:
     //                 "Grants disadvantage on next attack or until the end of next turn",
@@ -2776,7 +2776,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _wardingBond() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Warding Bond",
     //             description:
     //                 "Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour",
@@ -2808,7 +2808,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _waterBreathing() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Water Breathing",
     //             description: "No active effects and lasts for 24 hours",
     //             img: "icons/magic/water/pseudopod-swirl-blue.webp",
@@ -2817,7 +2817,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _waterWalk() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Water Walk",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/creatures/slimes/slime-movement-swirling-blue.webp",
@@ -2827,7 +2827,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     /** Class specific */
     //     get _bardicInspiration() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bardic Inspiration",
     //             description:
     //                 "Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes",
@@ -2843,7 +2843,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _bardicInspirationD6() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bardic Inspiration (d6)",
     //             description: "For bards from level 1 to level 4",
     //             img: "icons/skills/melee/unarmed-punch-fist.webp",
@@ -2875,7 +2875,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _bardicInspirationD8() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bardic Inspiration (d8)",
     //             description: "For bards from level 5 to level 9",
     //             img: "icons/skills/melee/unarmed-punch-fist.webp",
@@ -2907,7 +2907,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _bardicInspirationD10() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bardic Inspiration (d10)",
     //             description: "For bards from level 10 to level 14",
     //             img: "icons/skills/melee/unarmed-punch-fist.webp",
@@ -2939,7 +2939,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _bardicInspirationD12() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bardic Inspiration (d12)",
     //             description: "For bards from level 15 to level 20",
     //             img: "icons/skills/melee/unarmed-punch-fist.webp",
@@ -2971,7 +2971,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _channelDivinitySacredWeapon() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Channel Divinity: Sacred Weapon",
     //             description:
     //                 "Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)",
@@ -3020,7 +3020,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _channelDivinityTurnTheUnholy() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Channel Divinity: Turn the Unholy",
     //             description:
     //                 "No active effects and lasts for 1 minute. Expires on taking damage.",
@@ -3035,7 +3035,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _channelDivinityTurnUndead() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Channel Divinity: Turn Undead",
     //             description:
     //                 "No active effects and lasts for 1 minute. Expires on taking damage.",
@@ -3050,7 +3050,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _kiEmptyBody() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Ki: Empty Body",
     //             description:
     //                 "Grants advantage on attack rolls, forces disadvantage to all who attack, and grants resistance to all damage except force for 1 minute",
@@ -3147,7 +3147,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _kiPatientDefense() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Ki: Patient Defense",
     //             description:
     //                 "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
@@ -3225,7 +3225,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     //     get _recklessAttack() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Reckless Attack",
     //             description:
     //                 "Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round",
@@ -3243,7 +3243,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 },
     //             ],
     //             subEffects: [
-    //                 this._effectHelpers.createActiveEffect({
+    //                 createConvenientEffect({
     //                     name: "Reckless Attack (advantage on attacks)",
     //                     description: "Advantage on melee attacks until end of turn",
     //                     img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
@@ -3262,7 +3262,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     /* Equipment effects */
     //     get _bullseyeLantern() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bullseye Lantern",
     //             description:
     //                 "Adds lantern light in a 60 degree cone for 6 hours (requires ATL)",
@@ -3304,7 +3304,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _candle() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Candle",
     //             description: "Adds candle light for 1 hour (requires ATL)",
     //             img: "icons/sundries/lights/candle-unlit-white.webp",
@@ -3340,7 +3340,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _hoodedLantern() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Hooded Lantern",
     //             description: "Adds hooded lantern light for 6 hours (requires ATL)",
     //             img: "icons/sundries/lights/lantern-iron-yellow.webp",
@@ -3376,7 +3376,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _lantern() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Lantern",
     //             description: "Adds lantern light for 6 hours (requires ATL)",
     //             img: "icons/sundries/lights/lantern-iron-yellow.webp",
@@ -3412,7 +3412,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _torch() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Torch",
     //             description: "Adds torch light for 1 hour (requires ATL)",
     //             img: "icons/sundries/lights/torch-black.webp",
@@ -3449,7 +3449,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     //     /* Other effects */
     //     get _bonusAction() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Bonus Action",
     //             description: "No active effects and expires on turn start",
     //             img: "modules/dfreds-convenient-effects/images/bonus-action.svg",
@@ -3462,7 +3462,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _coverHalf() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Cover (Half)",
     //             description: "Adds 2 to AC and dexterity saving throws",
     //             img: "modules/dfreds-convenient-effects/images/broken-wall.svg",
@@ -3483,7 +3483,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _coverThreeQuarters() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Cover (Three-Quarters)",
     //             description: "Adds 5 to AC and dexterity saving throws",
     //             img: "modules/dfreds-convenient-effects/images/brick-wall.svg",
@@ -3503,7 +3503,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _coverTotal() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Cover (Total)",
     //             description: "Causes all attacks to fail automatically",
     //             img: "modules/dfreds-convenient-effects/images/castle.svg",
@@ -3518,7 +3518,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _encumbered() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Encumbered",
     //             description: "Lowers movement by 10 ft.",
     //             img: "icons/svg/down.svg",
@@ -3534,7 +3534,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _dodge() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Dodge",
     //             description:
     //                 "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
@@ -3560,7 +3560,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _flanked() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Flanked",
     //             description: "Grants advantage to all who melee attack",
     //             img: "modules/dfreds-convenient-effects/images/encirclement.svg",
@@ -3580,7 +3580,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _flanking() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Flanking",
     //             description: "Grants advantage on melee attack rolls",
     //             img: "icons/svg/sword.svg",
@@ -3600,7 +3600,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _greatWeaponMaster() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Great Weapon Master",
     //             description:
     //                 "Subtracts 5 from melee attacks but adds 10 to melee damage",
@@ -3621,7 +3621,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _heavilyEncumbered() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Heavily Encumbered",
     //             description:
     //                 "Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves",
@@ -3658,7 +3658,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _inspiration() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Inspiration",
     //             description:
     //                 "Advantage on everything and expires after any action, save, check, or skill roll",
@@ -3684,7 +3684,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _rangedDisadvantage() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Ranged Disadvantage",
     //             description: "Disadvantage on ranged attack rolls",
     //             img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
@@ -3704,7 +3704,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _reaction() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Reaction",
     //             description: "No active effects and expires on turn start",
     //             img: "modules/dfreds-convenient-effects/images/reaction.svg",
@@ -3717,7 +3717,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _ready() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Ready",
     //             description: "No active effects and expires on turn start",
     //             img: "modules/dfreds-convenient-effects/images/ready.svg",
@@ -3730,7 +3730,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //     }
 
     //     get _sharpshooter() {
-    //         return this._effectHelpers.createActiveEffect({
+    //         return createConvenientEffect({
     //             name: "Sharpshooter",
     //             description:
     //                 "Subtracts 5 from ranged attacks but adds 10 to ranged damage",
