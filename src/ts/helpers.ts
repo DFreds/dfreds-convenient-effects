@@ -13,14 +13,14 @@ interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
 }
 
+// TODO method for hiding/showing individual effects/folder from players using IS_VIEWABLE
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
     isTemporary?: boolean; // TODO determines if we add our own status
-    isDynamic?: boolean; // TODO can we remove this??
-    isViewable?: boolean;
+    isDynamic?: boolean;
     atlChanges?: DeepPartial<EffectChangeData>[];
     tokenMagicChanges?: DeepPartial<EffectChangeData>[];
-    nestedEffects?: PreCreate<ActiveEffectSource>[]; // TODO just ids? not sure this would work... effects might not be created yet
+    nestedEffects?: PreCreate<ActiveEffectSource>[];
     subEffects?: PreCreate<ActiveEffectSource>[];
     otherEffects?: PreCreate<ActiveEffectSource>[]; // TODO just ids? this is for effects that should not be tied to the initial effect (i.e. prone being applied when unconscious)
 }
@@ -33,7 +33,7 @@ function createConvenientItem({
 
     ceFlags[MODULE_ID] = {};
     ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true; // TODO use to filter from item directory
-    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true; // TODO use to hide in app
+    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true;
 
     item.flags = foundry.utils.mergeObject(ceFlags, itemFlags);
     item.img =
@@ -46,7 +46,6 @@ function createConvenientEffect({
     effect,
     isTemporary = true,
     isDynamic = false,
-    isViewable = true,
     atlChanges = [],
     tokenMagicChanges = [],
     nestedEffects = [],
@@ -56,9 +55,11 @@ function createConvenientEffect({
     const ceFlags: DeepPartial<DocumentFlags> = {};
 
     ceFlags[MODULE_ID] = {};
+
     ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true;
+    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true;
+
     ceFlags[MODULE_ID]![FLAGS.IS_DYNAMIC] = isDynamic;
-    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = isViewable;
     ceFlags[MODULE_ID]![FLAGS.NESTED_EFFECTS] = nestedEffects;
     ceFlags[MODULE_ID]![FLAGS.SUB_EFFECTS] = subEffects;
 
@@ -128,21 +129,27 @@ function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
 
     if (!item) return [];
 
-    return item.effects
-        .map((effect) => effect as ActiveEffect<Item<null>>)
-        .sort((effectA, effectB) => {
-            const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
-            const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
-            if (nameA < nameB) {
-                return -1;
-            }
-            if (nameA > nameB) {
-                return 1;
-            }
+    return (
+        item.effects
+            .map((effect) => effect as ActiveEffect<Item<null>>)
+            // TODO rethink below - maybe based on permissions?
+            // .filter(
+            //     (effect) => effect.getFlag(MODULE_ID, FLAGS.IS_VIEWABLE) ?? true,
+            // )
+            .sort((effectA, effectB) => {
+                const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
+                const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
 
-            // names must be equal
-            return 0;
-        });
+                // names must be equal
+                return 0;
+            })
+    );
 }
 
 /**
