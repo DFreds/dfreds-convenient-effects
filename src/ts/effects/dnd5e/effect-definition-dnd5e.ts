@@ -85,105 +85,105 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Spells",
             },
             effects: [
-                //                 this._acidArrow,
-                //                 this._aid,
-                //                 this._alterSelf,
-                //                 this._antilifeShell,
-                //                 this._arcaneHand,
-                //                 this._bane,
-                //                 this._barkskin,
-                //                 this._beaconOfHope,
-                //                 this._blackTentacles,
-                //                 this._bless,
-                //                 this._blindnessDeafness,
-                //                 this._blindnessDeafnessBlindness,
-                //                 this._blindnessDeafnessDeafness,
-                //                 this._blur,
-                //                 this._charmPerson,
-                //                 this._command,
-                //                 this._comprehendLanguages,
-                //                 this._contagion,
-                //                 this._contagionBlindingSickness,
-                //                 this._contagionFilthFever,
-                //                 this._contagionFleshRot,
-                //                 this._contagionMindfire,
-                //                 this._contagionSeizure,
-                //                 this._contagionSlimyDoom,
-                //                 this._darkvision,
-                //                 this._disguiseSelf,
-                //                 this._divineFavor,
+                this.#acidArrow,
+                this.#aid,
+                this.#alterSelf,
+                this.#antilifeShell,
+                this.#arcaneHand,
+                this.#bane,
+                this.#barkskin,
+                this.#beaconOfHope,
+                this.#blackTentacles,
+                this.#bless,
+                this.#blindnessDeafness,
+                this.#blindnessDeafnessBlindness,
+                this.#blindnessDeafnessDeafness,
+                this.#blur,
+                this.#charmPerson,
+                this.#command,
+                this.#comprehendLanguages,
+                this.#contagion,
+                this.#contagionBlindingSickness,
+                this.#contagionFilthFever,
+                this.#contagionFleshRot,
+                this.#contagionMindfire,
+                this.#contagionSeizure,
+                this.#contagionSlimyDoom,
+                this.#darkvision,
+                this.#disguiseSelf,
+                this.#divineFavor,
                 this.#divineWord,
-                //                 this._enlargeReduce,
+                this.#enlargeReduce,
                 this.#enlargeReduceEnlarge,
                 this.#enlargeReduceReduce,
-                //                 this._enhanceAbility,
-                //                 this._enhanceAbilityBearsEndurance,
-                //                 this._enhanceAbilityBullsStrength,
-                //                 this._enhanceAbilityCatsGrace,
-                //                 this._enhanceAbilityEaglesSplendor,
-                //                 this._enhanceAbilityFoxsCunning,
-                //                 this._enhanceAbilityOwlsWisdom,
-                //                 this._faerieFire,
-                //                 this._falseLife,
-                //                 this._featherFall,
-                //                 this._feeblemind,
-                //                 this._fireShield,
-                //                 this._fireShieldColdResistance,
-                //                 this._fireShieldFireResistance,
-                //                 this._findThePath,
-                //                 this._fly,
-                //                 this._foresight,
-                //                 this._freedomOfMovement,
-                //                 this._globeOfInvulnerability,
+                this.#enhanceAbility,
+                this.#enhanceAbilityBearsEndurance,
+                this.#enhanceAbilityBullsStrength,
+                this.#enhanceAbilityCatsGrace,
+                this.#enhanceAbilityEaglesSplendor,
+                this.#enhanceAbilityFoxsCunning,
+                this.#enhanceAbilityOwlsWisdom,
+                this.#faerieFire,
+                this.#falseLife,
+                this.#featherFall,
+                this.#feeblemind,
+                this.#fireShield,
+                this.#fireShieldColdResistance,
+                this.#fireShieldFireResistance,
+                this.#findThePath,
+                this.#fly,
+                this.#foresight,
+                this.#freedomOfMovement,
+                this.#globeOfInvulnerability,
                 this.#greaterInvisibility,
-                //                 this._guidance,
-                //                 this._guidingBolt,
-                //                 this._haste,
-                //                 this._heroesFeast,
-                //                 this._heroism,
-                //                 this._hideousLaughter,
-                //                 this._holdMonster,
-                //                 this._holdPerson,
-                //                 this._holyAura,
-                //                 this._huntersMark,
-                //                 this._invisibility,
-                //                 this._irresistibleDance,
-                //                 this._jump,
-                //                 this._light,
-                //                 this._longstrider,
-                //                 this._mageArmor,
-                //                 this._mindBlank,
-                //                 this._mirrorImage,
-                //                 this._passWithoutTrace,
-                //                 this._protectionFromEnergy,
-                //                 this._protectionFromEnergyAcid,
-                //                 this._protectionFromEnergyCold,
-                //                 this._protectionFromEnergyFire,
-                //                 this._protectionFromEnergyLightning,
-                //                 this._protectionFromEnergyThunder,
-                //                 this._protectionFromPoison,
-                //                 this._protectionFromEvilAndGood,
-                //                 this._rayOfFrost,
-                //                 this._regenerate,
-                //                 this._resilientSphere,
-                //                 this._resistance,
-                //                 this._shield,
-                //                 this._shieldOfFaith,
-                //                 this._slow,
-                //                 this._speakWithAnimals,
-                //                 this._speakWithDead,
-                //                 this._speakWithPlants,
-                //                 this._spiderClimb,
-                //                 this._spiritGuardians,
-                //                 this._spiritualWeapon,
-                //                 this._stoneskin,
-                //                 this._suggestion,
-                //                 this._telekinesis,
-                //                 this._trueStrike,
-                //                 this._viciousMockery,
-                //                 this._wardingBond,
-                //                 this._waterBreathing,
-                //                 this._waterWalk,
+                this.#guidance,
+                this.#guidingBolt,
+                this.#haste,
+                this.#heroesFeast,
+                this.#heroism,
+                this.#hideousLaughter,
+                this.#holdMonster,
+                this.#holdPerson,
+                this.#holyAura,
+                this.#huntersMark,
+                this.#invisibility,
+                this.#irresistibleDance,
+                this.#jump,
+                this.#light,
+                this.#longstrider,
+                this.#mageArmor,
+                this.#mindBlank,
+                this.#mirrorImage,
+                this.#passWithoutTrace,
+                this.#protectionFromEnergy,
+                this.#protectionFromEnergyAcid,
+                this.#protectionFromEnergyCold,
+                this.#protectionFromEnergyFire,
+                this.#protectionFromEnergyLightning,
+                this.#protectionFromEnergyThunder,
+                this.#protectionFromPoison,
+                this.#protectionFromEvilAndGood,
+                this.#rayOfFrost,
+                this.#regenerate,
+                this.#resilientSphere,
+                this.#resistance,
+                this.#shield,
+                this.#shieldOfFaith,
+                this.#slow,
+                this.#speakWithAnimals,
+                this.#speakWithDead,
+                this.#speakWithPlants,
+                this.#spiderClimb,
+                this.#spiritGuardians,
+                this.#spiritualWeapon,
+                this.#stoneskin,
+                this.#suggestion,
+                this.#telekinesis,
+                this.#trueStrike,
+                this.#viciousMockery,
+                this.#wardingBond,
+                this.#waterBreathing,
+                this.#waterWalk,
             ],
         };
     }
@@ -913,507 +913,610 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
-    //     /* Spell Effects */
-    //     get _acidArrow() {
-    //         return createConvenientEffect({
-    //             name: "Acid Arrow",
-    //             description: "Causes 2d4 acid damage at the end of next turn",
-    //             img: "icons/magic/acid/projectile-bolts-salvo-green.webp",
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.OverTime`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "turn=end,removeCondition=true,damageRoll=2d4,damageType=acid,label=Acid Arrow",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #acidArrow(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Acid Arrow",
+                description: "Causes 2d4 acid damage at the end of next turn",
+                img: "icons/magic/acid/projectile-bolts-salvo-green.webp",
+                changes: [
+                    {
+                        key: `flags.midi-qol.OverTime`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "turn=end,removeCondition=true,damageRoll=2d4,damageType=acid,label=Acid Arrow",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _aid() {
-    //         return createConvenientEffect({
-    //             name: "Aid",
-    //             description: "Add to current and maximum hit points for 8 hours",
-    //             img: "icons/magic/life/heart-cross-blue.webp",
-    //             seconds: SECONDS.IN_EIGHT_HOURS,
-    //         });
-    //     }
+    get #aid(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Aid",
+                description:
+                    "Add to current and maximum hit points for 8 hours",
+                img: "icons/magic/life/heart-cross-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_EIGHT_HOURS,
+                },
+            },
+        });
+    }
 
-    //     get _alterSelf() {
-    //         return createConvenientEffect({
-    //             name: "Alter Self",
-    //             description: "No active effects and lasts for 1 hour",
-    //             img: "icons/magic/control/debuff-energy-hold-green.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //         });
-    //     }
+    get #alterSelf(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Alter Self",
+                description: "No active effects and lasts for 1 hour",
+                img: "icons/magic/control/debuff-energy-hold-green.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+        });
+    }
 
-    //     get _antilifeShell() {
-    //         return createConvenientEffect({
-    //             name: "Antilife Shell",
-    //             description: "No active effects and lasts for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //         });
-    //     }
+    get #antilifeShell(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Antilife Shell",
+                description: "No active effects and lasts for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+        });
+    }
 
-    //     get _arcaneHand() {
-    //         return createConvenientEffect({
-    //             name: "Arcane Hand",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/fire/projectile-fireball-smoke-strong-teal.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //         });
-    //     }
+    get #arcaneHand(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Arcane Hand",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/fire/projectile-fireball-smoke-strong-teal.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+        });
+    }
 
-    //     get _bane() {
-    //         return createConvenientEffect({
-    //             name: "Bane",
-    //             description:
-    //                 "Subtract 1d4 from all saving throws and attack rolls for 1 minute",
-    //             img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.abilities.save",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.msak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.mwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.rsak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.rwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-1d4",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bane(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bane",
+                description:
+                    "Subtract 1d4 from all saving throws and attack rolls for 1 minute",
+                img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.bonuses.abilities.save",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-1d4",
+                    },
+                    {
+                        key: "system.bonuses.msak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-1d4",
+                    },
+                    {
+                        key: "system.bonuses.mwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-1d4",
+                    },
+                    {
+                        key: "system.bonuses.rsak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-1d4",
+                    },
+                    {
+                        key: "system.bonuses.rwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-1d4",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _barkskin() {
-    //         // TODO seems to not work in dnd 3.0.0
-    //         return createConvenientEffect({
-    //             name: "Barkskin",
-    //             description: "Upgrade AC to 16 for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-    //                     value: "16",
-    //                     priority: 5,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #barkskin(): PreCreate<ActiveEffectSource> {
+        // TODO seems to not work in dnd 3.0.0
+        return createConvenientEffect({
+            effect: {
+                name: "Barkskin",
+                description: "Upgrade AC to 16 for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "16",
+                        priority: 5,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _beaconOfHope() {
-    //         return createConvenientEffect({
-    //             name: "Beacon of Hope",
-    //             description:
-    //                 "Adds advantage to wisdom saving throws and death saving throws for 1 minute",
-    //             img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.wis`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.deathSave`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #beaconOfHope(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Beacon of Hope",
+                description:
+                    "Adds advantage to wisdom saving throws and death saving throws for 1 minute",
+                img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.wis`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.deathSave`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _blackTentacles() {
-    //         return createConvenientEffect({
-    //             name: "Black Tentacles",
-    //             description:
-    //                 "Apply the effects of the restrained condition for 1 minute",
-    //             img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [...this._restrained.changes],
-    //         });
-    //     }
+    get #blackTentacles(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Black Tentacles",
+                description:
+                    "Apply the effects of the restrained condition for 1 minute",
+                img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: this.#restrained.changes,
+            },
+        });
+    }
 
-    //     get _bless() {
-    //         return createConvenientEffect({
-    //             name: "Bless",
-    //             description:
-    //                 "Add 1d4 to all saving throws and attack rolls for 1 minute",
-    //             img: "icons/magic/control/buff-flight-wings-blue.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.abilities.save",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.msak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.mwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.rsak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.rwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4",
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "bloom",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bless(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bless",
+                description:
+                    "Add 1d4 to all saving throws and attack rolls for 1 minute",
+                img: "icons/magic/control/buff-flight-wings-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.bonuses.abilities.save",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4",
+                    },
+                    {
+                        key: "system.bonuses.msak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4",
+                    },
+                    {
+                        key: "system.bonuses.mwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4",
+                    },
+                    {
+                        key: "system.bonuses.rsak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4",
+                    },
+                    {
+                        key: "system.bonuses.rwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4",
+                    },
+                ],
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "bloom",
+                },
+            ],
+        });
+    }
 
-    //     get _blindnessDeafness() {
-    //         return createConvenientEffect({
-    //             name: "Blindness/Deafness",
-    //             description: "Choose between blindness or deafness",
-    //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
-    //             nestedEffects: [
-    //                 this._blindnessDeafnessBlindness.name,
-    //                 this._blindnessDeafnessDeafness.name,
-    //             ],
-    //         });
-    //     }
+    get #blindnessDeafness(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Blindness/Deafness",
+                description: "Choose between blindness or deafness",
+                img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+            },
+            nestedEffects: [
+                this.#blindnessDeafnessBlindness,
+                this.#blindnessDeafnessDeafness,
+            ],
+        });
+    }
 
-    //     get _blindnessDeafnessBlindness() {
-    //         return createConvenientEffect({
-    //             name: "Blindness",
-    //             description:
-    //                 "Disadvantage on attack rolls while granting advantage to all who attack for 1 minute",
-    //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             subEffects: [this._blinded],
-    //         });
-    //     }
+    get #blindnessDeafnessBlindness(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Blindness",
+                description:
+                    "Disadvantage on attack rolls while granting advantage to all who attack for 1 minute",
+                img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+            // isViewable: this._settings.showNestedEffects,
+            subEffects: [this.#blinded],
+        });
+    }
 
-    //     get _blindnessDeafnessDeafness() {
-    //         return createConvenientEffect({
-    //             name: "Deafness",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             subEffects: [this._deafened],
-    //         });
-    //     }
+    get #blindnessDeafnessDeafness(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Deafness",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+            // isViewable: this._settings.showNestedEffects,
+            subEffects: [this.#deafened],
+        });
+    }
 
-    //     get _blur() {
-    //         return createConvenientEffect({
-    //             name: "Blur",
-    //             description: "Grants disadvantage to all who attack for 1 minute",
-    //             img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "blur",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #blur(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Blur",
+                description:
+                    "Grants disadvantage to all who attack for 1 minute",
+                img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "blur",
+                },
+            ],
+        });
+    }
 
-    //     get _charmPerson() {
-    //         return createConvenientEffect({
-    //             name: "Charm Person",
-    //             description: "No active effects and lasts for 1 hour",
-    //             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [...this._charmed.changes],
-    //         });
-    //     }
+    get #charmPerson(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Charm Person",
+                description: "No active effects and lasts for 1 hour",
+                img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: this.#charmed.changes,
+            },
+        });
+    }
 
-    //     get _command() {
-    //         return createConvenientEffect({
-    //             name: "Command",
-    //             description:
-    //                 "No active effects and lasts until the end of next turn",
-    //             img: "icons/magic/fire/explosion-fireball-small-purple.webp",
-    //             seconds: CONFIG.time.roundTime,
-    //             turns: 1,
-    //         });
-    //     }
+    get #command(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Command",
+                description:
+                    "No active effects and lasts until the end of next turn",
+                img: "icons/magic/fire/explosion-fireball-small-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_ROUND_DND5E,
+                    turns: 1,
+                },
+            },
+        });
+    }
 
-    //     get _comprehendLanguages() {
-    //         return createConvenientEffect({
-    //             name: "Comprehend Languages",
-    //             description: "Adds all languages for 1 hour",
-    //             img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.languages.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #comprehendLanguages(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Comprehend Languages",
+                description: "Adds all languages for 1 hour",
+                img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.languages.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _contagion() {
-    //         return createConvenientEffect({
-    //             name: "Contagion",
-    //             description:
-    //                 "Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             nestedEffects: [
-    //                 this._contagionBlindingSickness.name,
-    //                 this._contagionFilthFever.name,
-    //                 this._contagionFleshRot.name,
-    //                 this._contagionMindfire.name,
-    //                 this._contagionSeizure.name,
-    //                 this._contagionSlimyDoom.name,
-    //             ],
-    //         });
-    //     }
+    get #contagion(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Contagion",
+                description:
+                    "Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+            },
+            nestedEffects: [
+                this.#contagionBlindingSickness,
+                this.#contagionFilthFever,
+                this.#contagionFleshRot,
+                this.#contagionMindfire,
+                this.#contagionSeizure,
+                this.#contagionSlimyDoom,
+            ],
+        });
+    }
 
-    //     get _contagionBlindingSickness() {
-    //         return createConvenientEffect({
-    //             name: "Blinding Sickness",
-    //             description:
-    //                 "Disadvantage on wisdom checks and wisdom saving throws for 7 days",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_WEEK,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.wis`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.wis`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 ...this._blinded.changes,
-    //             ],
-    //         });
-    //     }
+    get #contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Blinding Sickness",
+                description:
+                    "Disadvantage on wisdom checks and wisdom saving throws for 7 days",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_WEEK,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.wis`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.wis`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    ...(this.#blinded?.changes ?? []),
+                ],
+            },
+        });
+    }
 
-    //     get _contagionFilthFever() {
-    //         return createConvenientEffect({
-    //             name: "Filth Fever",
-    //             description:
-    //                 "Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_WEEK,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #contagionFilthFever(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Filth Fever",
+                description:
+                    "Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_WEEK,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _contagionFleshRot() {
-    //         return createConvenientEffect({
-    //             name: "Flesh Rot",
-    //             description:
-    //                 "Disadvantage on charisma checks and vulnerability to all damage",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_WEEK,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.cha`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dv.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #contagionFleshRot(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Flesh Rot",
+                description:
+                    "Disadvantage on charisma checks and vulnerability to all damage",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_WEEK,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.cha`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: "system.traits.dv.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _contagionMindfire() {
-    //         return createConvenientEffect({
-    //             name: "Mindfire",
-    //             description:
-    //                 "Disadvantage on intelligence checks and intelligence saving throws for 7 days",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_WEEK,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.int`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.int`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #contagionMindfire(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Mindfire",
+                description:
+                    "Disadvantage on intelligence checks and intelligence saving throws for 7 days",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_WEEK,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.int`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.int`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _contagionSeizure() {
-    //         return createConvenientEffect({
-    //             name: "Seizure",
-    //             description:
-    //                 "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_WEEK,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #contagionSeizure(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Seizure",
+                description:
+                    "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_WEEK,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _contagionSlimyDoom() {
-    //         return createConvenientEffect({
-    //             name: "Slimy Doom",
-    //             description:
-    //                 "Disadvantage on constitution checks and constitution saving throws for 7 days",
-    //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_WEEK,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.con`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.check.con`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #contagionSlimyDoom(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Slimy Doom",
+                description:
+                    "Disadvantage on constitution checks and constitution saving throws for 7 days",
+                img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_WEEK,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.con`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.check.con`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _darkvision() {
-    //         return createConvenientEffect({
-    //             name: "Darkvision",
-    //             description: "Upgrade darkvision to 60 ft. for 8 hours",
-    //             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
-    //             seconds: SECONDS.IN_EIGHT_HOURS,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.senses.darkvision",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-    //                     value: "60",
-    //                     priority: 5,
-    //                 },
-    //             ],
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.sight.range",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-    //                     value: "60",
-    //                     priority: 5,
-    //                 },
-    //                 {
-    //                     key: "ATL.sight.visionMode",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "darkvision",
-    //                     priority: 5,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #darkvision(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Darkvision",
+                description: "Upgrade darkvision to 60 ft. for 8 hours",
+                img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
+                duration: {
+                    seconds: SECONDS.IN_EIGHT_HOURS,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.senses.darkvision",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "60",
+                        priority: 5,
+                    },
+                ],
+            },
+            atlChanges: [
+                {
+                    key: "ATL.sight.range",
+                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    value: "60",
+                    priority: 5,
+                },
+                {
+                    key: "ATL.sight.visionMode",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "darkvision",
+                    priority: 5,
+                },
+            ],
+        });
+    }
 
-    //     get _disguiseSelf() {
-    //         return createConvenientEffect({
-    //             name: "Disguise Self",
-    //             description: "No active effects and lasts for 1 hour",
-    //             img: "icons/magic/control/debuff-energy-hold-teal-blue.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //         });
-    //     }
+    get #disguiseSelf(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Disguise Self",
+                description: "No active effects and lasts for 1 hour",
+                img: "icons/magic/control/debuff-energy-hold-teal-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+        });
+    }
 
-    //     get _divineFavor() {
-    //         return createConvenientEffect({
-    //             name: "Divine Favor",
-    //             description:
-    //                 "Add 1d4 radiant damage to weapon attacks for 1 minute",
-    //             img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.weapon.damage",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1d4[radiant]",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #divineFavor(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Divine Favor",
+                description:
+                    "Add 1d4 radiant damage to weapon attacks for 1 minute",
+                img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.bonuses.weapon.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1d4[radiant]",
+                    },
+                ],
+            },
+        });
+    }
 
     get #divineWord(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
@@ -1427,144 +1530,172 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
-    //     get _enhanceAbility() {
-    //         return createConvenientEffect({
-    //             name: "Enhance Ability",
-    //             description:
-    //                 "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             nestedEffects: [
-    //                 this._enhanceAbilityBearsEndurance.name,
-    //                 this._enhanceAbilityBullsStrength.name,
-    //                 this._enhanceAbilityCatsGrace.name,
-    //                 this._enhanceAbilityEaglesSplendor.name,
-    //                 this._enhanceAbilityFoxsCunning.name,
-    //                 this._enhanceAbilityOwlsWisdom.name,
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbility(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Enhance Ability",
+                description:
+                    "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+            },
+            nestedEffects: [
+                this.#enhanceAbilityBearsEndurance,
+                this.#enhanceAbilityBullsStrength,
+                this.#enhanceAbilityCatsGrace,
+                this.#enhanceAbilityEaglesSplendor,
+                this.#enhanceAbilityFoxsCunning,
+                this.#enhanceAbilityOwlsWisdom,
+            ],
+        });
+    }
 
-    //     get _enhanceAbilityBearsEndurance() {
-    //         return createConvenientEffect({
-    //             name: "Bear's Endurance",
-    //             description:
-    //                 "Advantage on constitution checks and 2d6 temp hit points for 1 hour",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.con`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbilityBearsEndurance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bear's Endurance",
+                description:
+                    "Advantage on constitution checks and 2d6 temp hit points for 1 hour",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.con`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _enhanceAbilityBullsStrength() {
-    //         return createConvenientEffect({
-    //             name: "Bull's Strength",
-    //             description:
-    //                 "Advantage on strength checks and double maximum carrying capacity for 1 hour",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: "system.attributes.encumbrance.max",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-    //                     value: "2",
-    //                     priority: 5,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbilityBullsStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bull's Strength",
+                description:
+                    "Advantage on strength checks and double maximum carrying capacity for 1 hour",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: "system.attributes.encumbrance.max",
+                        mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+                        value: "2",
+                        priority: 5,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _enhanceAbilityCatsGrace() {
-    //         return createConvenientEffect({
-    //             name: "Cat's Grace",
-    //             description: "Advantage on dexterity checks for 1 hour",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbilityCatsGrace(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Cat's Grace",
+                description: "Advantage on dexterity checks for 1 hour",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _enhanceAbilityEaglesSplendor() {
-    //         return createConvenientEffect({
-    //             name: "Eagle's Splendor",
-    //             description: "Advantage on charisma checks for 1 hour",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.cha`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbilityEaglesSplendor(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Eagle's Splendor",
+                description: "Advantage on charisma checks for 1 hour",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.cha`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _enhanceAbilityFoxsCunning() {
-    //         return createConvenientEffect({
-    //             name: "Fox's Cunning",
-    //             description: "Advantage on intelligence checks for 1 hour",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.int`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbilityFoxsCunning() {
+        return createConvenientEffect({
+            effect: {
+                name: "Fox's Cunning",
+                description: "Advantage on intelligence checks for 1 hour",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.int`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _enhanceAbilityOwlsWisdom() {
-    //         return createConvenientEffect({
-    //             name: "Owl's Wisdom",
-    //             description: "Advantage on wisdom checks for 1 hour",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.check.wis`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #enhanceAbilityOwlsWisdom() {
+        return createConvenientEffect({
+            effect: {
+                name: "Owl's Wisdom",
+                description: "Advantage on wisdom checks for 1 hour",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.check.wis`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _enlargeReduce() {
-    //         return this._effectHelpers.createActiveEffect({
-    //             name: "Enlarge/Reduce",
-    //             description: "Choose between Enlarge or Reduce",
-    //             img: "icons/magic/control/energy-stream-link-large-blue.webp",
-    //             nestedEffects: [
-    //                 this._enlargeReduceEnlarge.name,
-    //                 this._enlargeReduceReduce.name,
-    //             ],
-    //         });
-    //     }
+    get #enlargeReduce(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Enlarge/Reduce",
+                description: "Choose between Enlarge or Reduce",
+                img: "icons/magic/control/energy-stream-link-large-blue.webp",
+            },
+            nestedEffects: [
+                this.#enlargeReduceEnlarge,
+                this.#enlargeReduceReduce,
+            ],
+        });
+    }
 
     get #enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
@@ -1632,294 +1763,338 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
-    //     get _faerieFire() {
-    //         return createConvenientEffect({
-    //             name: "Faerie Fire",
-    //             description: "Grants advantage to all who attack for 1 minute",
-    //             img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "10",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: COLORS.WHITE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.25,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "pulse","speed": 1,"intensity": 1}',
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "glow",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #faerieFire(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Faerie Fire",
+                description: "Grants advantage to all who attack for 1 minute",
+                img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "10",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.WHITE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.25",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "pulse","speed": 1,"intensity": 1}',
+                },
+            ],
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "glow",
+                },
+            ],
+        });
+    }
 
-    //     get _falseLife() {
-    //         return createConvenientEffect({
-    //             name: "False Life",
-    //             description: "Add temporary hit points 1 hour",
-    //             img: "icons/magic/life/heart-cross-purple-orange.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //         });
-    //     }
+    get #falseLife(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "False Life",
+                description: "Add temporary hit points 1 hour",
+                img: "icons/magic/life/heart-cross-purple-orange.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+        });
+    }
 
-    //     get _featherFall() {
-    //         return createConvenientEffect({
-    //             name: "Feather Fall",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/air/wind-swirl-pink-purple.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //         });
-    //     }
+    get #featherFall(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Feather Fall",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/air/wind-swirl-pink-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+        });
+    }
 
-    //     get _feeblemind() {
-    //         return createConvenientEffect({
-    //             name: "Feeblemind",
-    //             description:
-    //                 "Set intelligence and charisma scores to 1 until removed",
-    //             img: "icons/magic/light/explosion-star-large-teal-purple.webp",
-    //             changes: [
-    //                 {
-    //                     key: "system.abilities.int.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
-    //                     value: "1",
-    //                     priority: 25,
-    //                 },
-    //                 {
-    //                     key: "system.abilities.cha.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
-    //                     value: "1",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #feeblemind(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Feeblemind",
+                description:
+                    "Set intelligence and charisma scores to 1 until removed",
+                img: "icons/magic/light/explosion-star-large-teal-purple.webp",
+                changes: [
+                    {
+                        key: "system.abilities.int.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+                        value: "1",
+                        priority: 25,
+                    },
+                    {
+                        key: "system.abilities.cha.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+                        value: "1",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _fireShield() {
-    //         return createConvenientEffect({
-    //             name: "Fire Shield",
-    //             description: "Choose between cold or fire resistance",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-    //             nestedEffects: [
-    //                 this._fireShieldColdResistance.name,
-    //                 this._fireShieldFireResistance.name,
-    //             ],
-    //         });
-    //     }
+    get #fireShield(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Fire Shield",
+                description: "Choose between cold or fire resistance",
+                img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
+            },
+            nestedEffects: [
+                this.#fireShieldColdResistance,
+                this.#fireShieldFireResistance,
+            ],
+        });
+    }
 
-    //     get _fireShieldColdResistance() {
-    //         return createConvenientEffect({
-    //             name: "Fire Shield (Cold Resistance)",
-    //             description: "Add damage resistance to cold for 10 minutes",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "cold",
-    //                 },
-    //             ],
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "20",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "10",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: COLORS.FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.25,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch", "speed": 3, "intensity": 1}',
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "fire",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #fireShieldColdResistance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Fire Shield (Cold Resistance)",
+                description: "Add damage resistance to cold for 10 minutes",
+                img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "cold",
+                    },
+                ],
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "20",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "10",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.25",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch", "speed": 3, "intensity": 1}',
+                },
+            ],
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "fire",
+                },
+            ],
+        });
+    }
 
-    //     get _fireShieldFireResistance() {
-    //         return createConvenientEffect({
-    //             name: "Fire Shield (Fire Resistance)",
-    //             description: "Add damage resistance to fire for 10 minutes",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "fire",
-    //                 },
-    //             ],
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "20",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "10",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: COLORS.COLD_FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.25,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch", "speed": 3, "intensity": 1}',
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "Fire v2 (coldfire)",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #fireShieldFireResistance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Fire Shield (Fire Resistance)",
+                description: "Add damage resistance to fire for 10 minutes",
+                img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "fire",
+                    },
+                ],
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "20",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "10",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.COLD_FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.25",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch", "speed": 3, "intensity": 1}',
+                },
+            ],
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "Fire v2 (coldfire)",
+                },
+            ],
+        });
+    }
 
-    //     get _findThePath() {
-    //         return createConvenientEffect({
-    //             name: "Find the Path",
-    //             description: "No active effects and lasts for 1 day",
-    //             img: "icons/magic/light/explosion-star-teal.webp",
-    //             seconds: SECONDS.IN_ONE_DAY,
-    //         });
-    //     }
+    get #findThePath(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Find the Path",
+                description: "No active effects and lasts for 1 day",
+                img: "icons/magic/light/explosion-star-teal.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_DAY,
+                },
+            },
+        });
+    }
 
-    //     get _fly() {
-    //         return createConvenientEffect({
-    //             name: "Fly",
-    //             description: "Upgrade flying speed to 60 ft. for 10 minutes",
-    //             img: "icons/magic/control/energy-stream-link-white.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //             statuses: ["flying"],
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.fly",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-    //                     value: "60",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #fly(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Fly",
+                description: "Upgrade flying speed to 60 ft. for 10 minutes",
+                img: "icons/magic/control/energy-stream-link-white.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                statuses: ["flying"],
+                changes: [
+                    {
+                        key: "system.attributes.movement.fly",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "60",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _foresight() {
-    //         return createConvenientEffect({
-    //             name: "Foresight",
-    //             description:
-    //                 "Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours",
-    //             img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
-    //             seconds: SECONDS.IN_EIGHT_HOURS,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: "flags.dnd5e.initiativeAdv",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #foresight(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Foresight",
+                description:
+                    "Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours",
+                img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
+                duration: {
+                    seconds: SECONDS.IN_EIGHT_HOURS,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: "flags.dnd5e.initiativeAdv",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _freedomOfMovement() {
-    //         return createConvenientEffect({
-    //             name: "Freedom of Movement",
-    //             description: "No active effects and lasts for 1 hour",
-    //             img: "icons/skills/melee/strike-blade-knife-white-red.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //         });
-    //     }
+    get #freedomOfMovement(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Freedom of Movement",
+                description: "No active effects and lasts for 1 hour",
+                img: "icons/skills/melee/strike-blade-knife-white-red.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+        });
+    }
 
-    //     get _globeOfInvulnerability() {
-    //         return createConvenientEffect({
-    //             name: "Globe of Invulnerability",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "warp-field",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #globeOfInvulnerability(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Globe of Invulnerability",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "warp-field",
+                },
+            ],
+        });
+    }
 
     get #greaterInvisibility(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
@@ -1937,893 +2112,1088 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
-    //     get _guidance() {
-    //         return createConvenientEffect({
-    //             name: "Guidance",
-    //             description: "Adds 1d4 to one ability or skill check for 1 minute",
-    //             img: "icons/magic/control/buff-flight-wings-blue.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.optional.guidance.label`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "Guidance",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.guidance.check.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "+1d4",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.guidance.skill.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "+1d4",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #guidance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Guidance",
+                description:
+                    "Adds 1d4 to one ability or skill check for 1 minute",
+                img: "icons/magic/control/buff-flight-wings-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.optional.guidance.label`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "Guidance",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.guidance.check.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "+1d4",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.guidance.skill.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "+1d4",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _guidingBolt() {
-    //         return createConvenientEffect({
-    //             name: "Guiding Bolt",
-    //             description:
-    //                 "Grants advantage to next attacker or until the end of next turn",
-    //             img: "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
-    //             seconds: CONFIG.time.roundTime,
-    //             turns: 1,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["isAttacked"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #guidingBolt(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Guiding Bolt",
+                description:
+                    "Grants advantage to next attacker or until the end of next turn",
+                img: "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_ROUND_DND5E,
+                    turns: 1,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["isAttacked"],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _haste() {
-    //         return createConvenientEffect({
-    //             name: "Haste",
-    //             description:
-    //                 "Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute",
-    //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.bonus",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+2",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "*2",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #haste(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Haste",
+                description:
+                    "Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute",
+                img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.bonus",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+2",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "*2",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _heroesFeast() {
-    //         return createConvenientEffect({
-    //             name: "Heroes' Feast",
-    //             description:
-    //                 "Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours",
-    //             img: "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
-    //             seconds: SECONDS.IN_ONE_DAY,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.di.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "poison",
-    //                 },
-    //                 {
-    //                     key: "system.traits.ci.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "frightened",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.wis`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #heroesFeast(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Heroes' Feast",
+                description:
+                    "Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours",
+                img: "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_DAY,
+                },
+                changes: [
+                    {
+                        key: "system.traits.di.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "poison",
+                    },
+                    {
+                        key: "system.traits.ci.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "frightened",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.wis`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _heroism() {
-    //         return createConvenientEffect({
-    //             name: "Heroism",
-    //             description: "Immunity to frightened for 1 minute",
-    //             img: "icons/magic/life/heart-cross-strong-blue.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.ci.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "frightened",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #heroism(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Heroism",
+                description: "Immunity to frightened for 1 minute",
+                img: "icons/magic/life/heart-cross-strong-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.traits.ci.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "frightened",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _hideousLaughter() {
-    //         return createConvenientEffect({
-    //             name: "Hideous Laughter",
-    //             description:
-    //                 "Apply the effects of the prone and incapacitated conditions for 1 minute",
-    //             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [...this._incapacitated.changes, ...this._prone.changes],
-    //         });
-    //     }
+    get #hideousLaughter(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Hideous Laughter",
+                description:
+                    "Apply the effects of the prone and incapacitated conditions for 1 minute",
+                img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    ...(this.#incapacitated.changes ?? []),
+                    ...(this.#prone.changes ?? []),
+                ],
+            },
+        });
+    }
 
-    //     get _holdMonster() {
-    //         return createConvenientEffect({
-    //             name: "Hold Monster",
-    //             description:
-    //                 "Apply the effects of the paralyzed condition for 1 minute",
-    //             img: "icons/magic/control/debuff-chains-ropes-red.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [...this._paralyzed.changes],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "mantle-of-madness",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #holdMonster(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Hold Monster",
+                description:
+                    "Apply the effects of the paralyzed condition for 1 minute",
+                img: "icons/magic/control/debuff-chains-ropes-red.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: this.#paralyzed.changes,
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "mantle-of-madness",
+                },
+            ],
+        });
+    }
 
-    //     // TODO: potentially use overtime here if find a good way to do it
-    //     // flags.midi-qol.OverTime
-    //     // turn=end,
-    //     // saveAbility=wis,
-    //     // saveDC=30,
-    //     // label=Hold Person
-    //     get _holdPerson() {
-    //         return createConvenientEffect({
-    //             name: "Hold Person",
-    //             description:
-    //                 "Apply the effects of the paralyzed condition for 1 minute",
-    //             img: "icons/magic/control/debuff-chains-ropes-purple.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [...this._paralyzed.changes],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "mantle-of-madness",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    // TODO: potentially use overtime here if find a good way to do it
+    // flags.midi-qol.OverTime
+    // turn=end,
+    // saveAbility=wis,
+    // saveDC=30,
+    // label=Hold Person
+    get #holdPerson(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Hold Person",
+                description:
+                    "Apply the effects of the paralyzed condition for 1 minute",
+                img: "icons/magic/control/debuff-chains-ropes-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: this.#paralyzed.changes,
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "mantle-of-madness",
+                },
+            ],
+        });
+    }
 
-    //     get _holyAura() {
-    //         return createConvenientEffect({
-    //             name: "Holy Aura",
-    //             description:
-    //                 "Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute",
-    //             img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "5",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: COLORS.WHITE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.25,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #holyAura(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Holy Aura",
+                description:
+                    "Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute",
+                img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "5",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.WHITE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.25",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+                },
+            ],
+        });
+    }
 
-    //     get _huntersMark() {
-    //         return createConvenientEffect({
-    //             name: "Hunter's Mark",
-    //             description: "No active effects and lasts until removed (for now)",
-    //             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
-    //         });
-    //     }
+    get #huntersMark(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Hunter's Mark",
+                description:
+                    "No active effects and lasts until removed (for now)",
+                img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
+            },
+        });
+    }
 
-    //     get _invisibility() {
-    //         return createConvenientEffect({
-    //             name: "Invisibility",
-    //             description:
-    //                 "Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.",
-    //             img: "icons/magic/air/fog-gas-smoke-dense-gray.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["1Attack", "1Spell"],
-    //                 },
-    //             },
-    //             statuses: ["invisible"],
-    //             subEffects: [this._invisible],
-    //         });
-    //     }
+    get #invisibility(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Invisibility",
+                description:
+                    "Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.",
+                img: "icons/magic/air/fog-gas-smoke-dense-gray.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["1Attack", "1Spell"],
+                    },
+                },
+                statuses: ["invisible"],
+            },
+            subEffects: [this.#invisible],
+        });
+    }
 
-    //     get _irresistibleDance() {
-    //         return createConvenientEffect({
-    //             name: "Irresistible Dance",
-    //             description:
-    //                 "Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute",
-    //             img: "icons/magic/control/energy-stream-link-large-blue.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "0",
-    //                     priority: 25,
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.grants.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #irresistibleDance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Irresistible Dance",
+                description:
+                    "Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute",
+                img: "icons/magic/control/energy-stream-link-large-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "0",
+                        priority: 25,
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.grants.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _jump() {
-    //         return createConvenientEffect({
-    //             name: "Jump",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //         });
-    //     }
+    get #jump(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Jump",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+        });
+    }
 
-    //     get _light() {
-    //         return createConvenientEffect({
-    //             name: "Light",
-    //             description: "Emits 20/40 light for 1 hour (requires ATL)",
-    //             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "40",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "20",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: COLORS.WHITE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.25,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "pulse", "speed": 3,"intensity": 1}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #light(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Light",
+                description: "Emits 20/40 light for 1 hour (requires ATL)",
+                img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "40",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "20",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.WHITE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.25",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "pulse", "speed": 3,"intensity": 1}',
+                },
+            ],
+        });
+    }
 
-    //     get _longstrider() {
-    //         return createConvenientEffect({
-    //             name: "Longstrider",
-    //             description: "Increase all movement by 10 ft. for 1 hour",
-    //             img: "icons/magic/air/wind-stream-blue-gray.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "+10",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #longstrider(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Longstrider",
+                description: "Increase all movement by 10 ft. for 1 hour",
+                img: "icons/magic/air/wind-stream-blue-gray.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "+10",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _mageArmor() {
-    //         return createConvenientEffect({
-    //             name: "Mage Armor",
-    //             description: "Upgrades armor to 13 + dex modifier for 8 hours",
-    //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-    //             seconds: SECONDS.IN_EIGHT_HOURS,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.calc",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "mage",
-    //                     priority: 5,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #mageArmor(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Mage Armor",
+                description: "Upgrades armor to 13 + dex modifier for 8 hours",
+                img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_EIGHT_HOURS,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.calc",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "mage",
+                        priority: 5,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _mindBlank() {
-    //         return createConvenientEffect({
-    //             name: "Mind Blank",
-    //             description: "Adds immunity to psychic damage for 24 hours",
-    //             img: "icons/magic/air/air-burst-spiral-large-blue.webp",
-    //             seconds: SECONDS.IN_ONE_DAY,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.di.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "psychic",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #mindBlank(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Mind Blank",
+                description: "Adds immunity to psychic damage for 24 hours",
+                img: "icons/magic/air/air-burst-spiral-large-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_DAY,
+                },
+                changes: [
+                    {
+                        key: "system.traits.di.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "psychic",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _mirrorImage() {
-    //         return createConvenientEffect({
-    //             name: "Mirror Image",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "images",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #mirrorImage(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Mirror Image",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "images",
+                },
+            ],
+        });
+    }
 
-    //     get _passWithoutTrace() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Pass without Trace",
-    //             description: "Add 10 to stealth checks for 1 hour",
-    //             img: "icons/magic/air/fog-gas-smoke-brown.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.skills.ste.bonuses.check",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+10",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #passWithoutTrace(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Pass without Trace",
+                description: "Add 10 to stealth checks for 1 hour",
+                img: "icons/magic/air/fog-gas-smoke-brown.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.skills.ste.bonuses.check",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+10",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromEnergy() {
-    //         return createConvenientEffect({
-    //             name: "Protection from Energy",
-    //             description:
-    //                 "Choose between acid, cold, fire, lightning, or thunder resistance",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
-    //             nestedEffects: [
-    //                 this._protectionFromEnergyAcid.name,
-    //                 this._protectionFromEnergyCold.name,
-    //                 this._protectionFromEnergyFire.name,
-    //                 this._protectionFromEnergyLightning.name,
-    //                 this._protectionFromEnergyThunder.name,
-    //             ],
-    //         });
-    //     }
+    get #protectionFromEnergy(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Energy",
+                description:
+                    "Choose between acid, cold, fire, lightning, or thunder resistance",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
+            },
+            nestedEffects: [
+                this.#protectionFromEnergyAcid,
+                this.#protectionFromEnergyCold,
+                this.#protectionFromEnergyFire,
+                this.#protectionFromEnergyLightning,
+                this.#protectionFromEnergyThunder,
+            ],
+        });
+    }
 
-    //     get _protectionFromEnergyAcid() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Protection from Acid",
-    //             description: "Adds damage resistance to acid for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "acid",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #protectionFromEnergyAcid(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Acid",
+                description: "Adds damage resistance to acid for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "acid",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromEnergyCold() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Protection from Cold",
-    //             description: "Adds damage resistance to cold for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "cold",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #protectionFromEnergyCold(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Cold",
+                description: "Adds damage resistance to cold for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "cold",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromEnergyFire() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Protection from Fire",
-    //             description: "Adds damage resistance to fire for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "fire",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #protectionFromEnergyFire(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Fire",
+                description: "Adds damage resistance to fire for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "fire",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromEnergyLightning() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Protection from Lightning",
-    //             description: "Adds damage resistance to lightning for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "lightning",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #protectionFromEnergyLightning(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Lightning",
+                description: "Adds damage resistance to lightning for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "lightning",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromEnergyThunder() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Protection from Thunder",
-    //             description: "Adds damage resistance to thunder for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "thunder",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #protectionFromEnergyThunder(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Thunder",
+                description: "Adds damage resistance to thunder for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "thunder",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromPoison() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Protection from Poison",
-    //             description:
-    //                 "Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)",
-    //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "poison",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #protectionFromPoison(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Poison",
+                description:
+                    "Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)",
+                img: "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "poison",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _protectionFromEvilAndGood() {
-    //         return createConvenientEffect({
-    //             name: "Protection from Evil and Good",
-    //             description: "No active effects and lasts for 10 minutes",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //         });
-    //     }
+    get #protectionFromEvilAndGood(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Protection from Evil and Good",
+                description: "No active effects and lasts for 10 minutes",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+        });
+    }
 
-    //     get _rayOfFrost() {
-    //         return createConvenientEffect({
-    //             name: "Ray of Frost",
-    //             description: "Lowers movement by 10 ft",
-    //             img: "icons/magic/light/beam-rays-blue-small.webp",
-    //             seconds: CONFIG.time.roundTime,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "-10",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #rayOfFrost(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Ray of Frost",
+                description: "Lowers movement by 10 ft",
+                img: "icons/magic/light/beam-rays-blue-small.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_ROUND_DND5E,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "-10",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _regenerate() {
-    //         return createConvenientEffect({
-    //             name: "Regenerate",
-    //             description:
-    //                 "Regain 1 hit point at the start of each turn for 1 hour",
-    //             img: "icons/magic/life/heart-cross-strong-flame-green.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.OverTime.regenerate`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "label=Regenerate,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #regenerate(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Regenerate",
+                description:
+                    "Regain 1 hit point at the start of each turn for 1 hour",
+                img: "icons/magic/life/heart-cross-strong-flame-green.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.OverTime.regenerate`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "label=Regenerate,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _resilientSphere() {
-    //         return createConvenientEffect({
-    //             name: "Resilient Sphere",
-    //             description: "Adds total immunity to all damage and half movement",
-    //             img: "icons/magic/light/explosion-star-large-pink.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "*0.5",
-    //                     priority: 25,
-    //                 },
-    //                 {
-    //                     key: "system.traits.di.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #resilientSphere(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Resilient Sphere",
+                description:
+                    "Adds total immunity to all damage and half movement for 1 minute",
+                img: "icons/magic/light/explosion-star-large-pink.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "*0.5",
+                        priority: 25,
+                    },
+                    {
+                        key: "system.traits.di.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _resistance() {
-    //         return createConvenientEffect({
-    //             name: "Resistance",
-    //             description: "Add 1d4 to a single saving throw in the next minute",
-    //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.optional.resistance.label`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "Resistance",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.resistance.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "+1d4",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #resistance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Resistance",
+                description:
+                    "Add 1d4 to a single saving throw in the next minute",
+                img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.optional.resistance.label`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "Resistance",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.resistance.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "+1d4",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _shield() {
-    //         return createConvenientEffect({
-    //             name: "Shield",
-    //             description: "Add 5 to AC until next turn",
-    //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-    //             seconds: CONFIG.time.roundTime,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.bonus",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+5",
-    //                     priority: 5,
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "water-field",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #shield(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Shield",
+                description: "Add 5 to AC until next turn",
+                img: "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_ROUND_DND5E,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart"],
+                    },
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.bonus",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+5",
+                        priority: 5,
+                    },
+                ],
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "water-field",
+                },
+            ],
+        });
+    }
 
-    //     get _shieldOfFaith() {
-    //         return createConvenientEffect({
-    //             name: "Shield of Faith",
-    //             description: "Adds 2 to the AC for 10 minutes",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.bonus",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+2",
-    //                 },
-    //             ],
-    //             tokenMagicChanges: [
-    //                 {
-    //                     key: "macro.tokenMagic",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "bloom",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #shieldOfFaith(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Shield of Faith",
+                description: "Adds 2 to the AC for 10 minutes",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.bonus",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+2",
+                    },
+                ],
+            },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "bloom",
+                },
+            ],
+        });
+    }
 
-    //     get _slow() {
-    //         return createConvenientEffect({
-    //             name: "Slow",
-    //             description:
-    //                 "Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute",
-    //             img: "icons/magic/air/fog-gas-smoke-dense-pink.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.bonus",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-2",
-    //                 },
-    //                 {
-    //                     key: "system.abilities.dex.bonuses.save",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-2",
-    //                 },
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "*0.5",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #slow(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Slow",
+                description:
+                    "Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute",
+                img: "icons/magic/air/fog-gas-smoke-dense-pink.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.bonus",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-2",
+                    },
+                    {
+                        key: "system.abilities.dex.bonuses.save",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-2",
+                    },
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "*0.5",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _speakWithAnimals() {
-    //         return createConvenientEffect({
-    //             name: "Speak with Animals",
-    //             description: "No active effects and lasts for 10 minutes",
-    //             img: "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //         });
-    //     }
+    get #speakWithAnimals(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Speak with Animals",
+                description: "No active effects and lasts for 10 minutes",
+                img: "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+        });
+    }
 
-    //     get _speakWithDead() {
-    //         return createConvenientEffect({
-    //             name: "Speak with Dead",
-    //             description: "No active effects and lasts for 10 minutes",
-    //             img: "icons/magic/control/fear-fright-shadow-monster-green.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //         });
-    //     }
+    get #speakWithDead(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Speak with Dead",
+                description: "No active effects and lasts for 10 minutes",
+                img: "icons/magic/control/fear-fright-shadow-monster-green.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+        });
+    }
 
-    //     get _speakWithPlants() {
-    //         return createConvenientEffect({
-    //             name: "Speak with Plants",
-    //             description: "No active effects and lasts for 10 minutes",
-    //             img: "icons/magic/nature/leaf-glow-teal.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //         });
-    //     }
+    get #speakWithPlants(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Speak with Plants",
+                description: "No active effects and lasts for 10 minutes",
+                img: "icons/magic/nature/leaf-glow-teal.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+        });
+    }
 
-    //     get _spiderClimb() {
-    //         return createConvenientEffect({
-    //             name: "Spider Climb",
-    //             description:
-    //                 "Grants climbing speed equal to walking speed for 1 hour",
-    //             img: "icons/magic/control/debuff-chains-blue.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.climb",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-    //                     value: "@attributes.movement.walk",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #spiderClimb(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Spider Climb",
+                description:
+                    "Grants climbing speed equal to walking speed for 1 hour",
+                img: "icons/magic/control/debuff-chains-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.movement.climb",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "@attributes.movement.walk",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _spiritGuardians() {
-    //         return createConvenientEffect({
-    //             name: "Spirit Guardians",
-    //             description: "No active effects and lasts for 10 minutes",
-    //             img: "icons/magic/light/projectile-bolts-salvo-white.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //         });
-    //     }
+    get #spiritGuardians(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Spirit Guardians",
+                description: "No active effects and lasts for 10 minutes",
+                img: "icons/magic/light/projectile-bolts-salvo-white.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+        });
+    }
 
-    //     get _spiritualWeapon() {
-    //         return createConvenientEffect({
-    //             name: "Spiritual Weapon",
-    //             description: "No active effects and lasts for 1 minute",
-    //             img: "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
-    //             seconds: SECONDS.IN_ONE_MINUTE,
-    //         });
-    //     }
+    get #spiritualWeapon(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Spiritual Weapon",
+                description: "No active effects and lasts for 1 minute",
+                img: "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+            },
+        });
+    }
 
-    //     get _stoneskin() {
-    //         // TODO token magic effects
-    //         return createConvenientEffect({
-    //             name: "Stoneskin",
-    //             description:
-    //                 "Adds resistance to non-magical physical damage for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "physical",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #stoneskin(): PreCreate<ActiveEffectSource> {
+        // TODO token magic effects
+        return createConvenientEffect({
+            effect: {
+                name: "Stoneskin",
+                description:
+                    "Adds resistance to non-magical physical damage for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "physical",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _suggestion() {
-    //         return createConvenientEffect({
-    //             name: "Suggestion",
-    //             description: "No active effects and lasts for 8 hours",
-    //             img: "icons/magic/air/air-burst-spiral-pink.webp",
-    //             seconds: SECONDS.IN_EIGHT_HOURS,
-    //         });
-    //     }
+    get #suggestion(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Suggestion",
+                description: "No active effects and lasts for 8 hours",
+                img: "icons/magic/air/air-burst-spiral-pink.webp",
+                duration: {
+                    seconds: SECONDS.IN_EIGHT_HOURS,
+                },
+            },
+        });
+    }
 
-    //     get _telekinesis() {
-    //         return createConvenientEffect({
-    //             name: "Telekinesis",
-    //             description: "No active effects and lasts for 10 minutes",
-    //             img: "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
-    //             seconds: SECONDS.IN_TEN_MINUTES,
-    //         });
-    //     }
+    get #telekinesis(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Telekinesis",
+                description: "No active effects and lasts for 10 minutes",
+                img: "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+        });
+    }
 
-    //     get _trueStrike() {
-    //         return createConvenientEffect({
-    //             name: "True Strike",
-    //             description:
-    //                 "Grants advantage on next attack or until the end of next turn",
-    //             img: "icons/magic/fire/dagger-rune-enchant-blue-gray.webp",
-    //             seconds: CONFIG.time.roundTime,
-    //             turns: 1,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["1Attack"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #trueStrike(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "True Strike",
+                description:
+                    "Grants advantage on next attack or until the end of next turn",
+                img: "icons/magic/fire/dagger-rune-enchant-blue-gray.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_ROUND_DND5E,
+                    turns: 1,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["1Attack"],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _viciousMockery() {
-    //         return createConvenientEffect({
-    //             name: "Vicious Mockery",
-    //             description:
-    //                 "Grants disadvantage on next attack or until the end of next turn",
-    //             img: "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
-    //             seconds: CONFIG.time.roundTime,
-    //             turns: 1,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["1Attack"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #viciousMockery(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Vicious Mockery",
+                description:
+                    "Grants disadvantage on next attack or until the end of next turn",
+                img: "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_ROUND_DND5E,
+                    turns: 1,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["1Attack"],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _wardingBond() {
-    //         return createConvenientEffect({
-    //             name: "Warding Bond",
-    //             description:
-    //                 "Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour",
-    //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.bonus",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.abilities.save",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+1",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "physical",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "magical",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #wardingBond(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Warding Bond",
+                description:
+                    "Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour",
+                img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+                changes: [
+                    {
+                        key: "system.attributes.ac.bonus",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1",
+                    },
+                    {
+                        key: "system.bonuses.abilities.save",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+1",
+                    },
+                    {
+                        key: "system.traits.dr.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "physical",
+                    },
+                    {
+                        key: "system.traits.dr.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "magical",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _waterBreathing() {
-    //         return createConvenientEffect({
-    //             name: "Water Breathing",
-    //             description: "No active effects and lasts for 24 hours",
-    //             img: "icons/magic/water/pseudopod-swirl-blue.webp",
-    //             seconds: SECONDS.IN_ONE_DAY,
-    //         });
-    //     }
+    get #waterBreathing(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Water Breathing",
+                description: "No active effects and lasts for 24 hours",
+                img: "icons/magic/water/pseudopod-swirl-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_DAY,
+                },
+            },
+        });
+    }
 
-    //     get _waterWalk() {
-    //         return createConvenientEffect({
-    //             name: "Water Walk",
-    //             description: "No active effects and lasts for 1 hour",
-    //             img: "icons/creatures/slimes/slime-movement-swirling-blue.webp",
-    //             seconds: SECONDS.IN_ONE_HOUR,
-    //         });
-    //     }
+    get #waterWalk(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Water Walk",
+                description: "No active effects and lasts for 1 hour",
+                img: "icons/creatures/slimes/slime-movement-swirling-blue.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+        });
+    }
 
     get #bardicInspiration(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({

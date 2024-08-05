@@ -17,6 +17,7 @@ export const COLORS = {
 };
 
 export const SECONDS = {
+    IN_ONE_ROUND_DND5E: 6,
     IN_ONE_MINUTE: 60,
     IN_TEN_MINUTES: 600,
     IN_ONE_HOUR: 3600,
