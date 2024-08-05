@@ -194,18 +194,18 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Class Features",
             },
             effects: [
-                //                 this._bardicInspiration,
-                //                 this._bardicInspirationD6,
-                //                 this._bardicInspirationD8,
-                //                 this._bardicInspirationD10,
-                //                 this._bardicInspirationD12,
-                //                 this._channelDivinitySacredWeapon,
-                //                 this._channelDivinityTurnTheUnholy,
-                //                 this._channelDivinityTurnUndead,
-                //                 this._kiEmptyBody,
-                //                 this._kiPatientDefense,
+                this.#bardicInspiration,
+                this.#bardicInspirationD6,
+                this.#bardicInspirationD8,
+                this.#bardicInspirationD10,
+                this.#bardicInspirationD12,
+                this.#channelDivinitySacredWeapon,
+                this.#channelDivinityTurnTheUnholy,
+                this.#channelDivinityTurnUndead,
+                this.#kiEmptyBody,
+                this.#kiPatientDefense,
                 this.#rage,
-                //                 this._recklessAttack,
+                this.#recklessAttack,
             ],
         };
     }
@@ -934,7 +934,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Aid",
     //             description: "Add to current and maximum hit points for 8 hours",
     //             img: "icons/magic/life/heart-cross-blue.webp",
-    //             seconds: Constants.SECONDS.IN_EIGHT_HOURS,
+    //             seconds: SECONDS.IN_EIGHT_HOURS,
     //         });
     //     }
 
@@ -943,7 +943,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Alter Self",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/control/debuff-energy-hold-green.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //         });
     //     }
 
@@ -952,7 +952,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Antilife Shell",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //         });
     //     }
 
@@ -961,7 +961,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Arcane Hand",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/fire/projectile-fireball-smoke-strong-teal.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //         });
     //     }
 
@@ -971,7 +971,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Subtract 1d4 from all saving throws and attack rolls for 1 minute",
     //             img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.bonuses.abilities.save",
@@ -1008,7 +1008,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Barkskin",
     //             description: "Upgrade AC to 16 for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.attributes.ac.value",
@@ -1026,7 +1026,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Adds advantage to wisdom saving throws and death saving throws for 1 minute",
     //             img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.save.wis`,
@@ -1048,7 +1048,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Apply the effects of the restrained condition for 1 minute",
     //             img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [...this._restrained.changes],
     //         });
     //     }
@@ -1059,7 +1059,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Add 1d4 to all saving throws and attack rolls for 1 minute",
     //             img: "icons/magic/control/buff-flight-wings-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.bonuses.abilities.save",
@@ -1116,7 +1116,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on attack rolls while granting advantage to all who attack for 1 minute",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             subEffects: [this._blinded],
     //         });
     //     }
@@ -1127,7 +1127,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             subEffects: [this._deafened],
     //         });
     //     }
@@ -1137,7 +1137,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Blur",
     //             description: "Grants disadvantage to all who attack for 1 minute",
     //             img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
@@ -1160,7 +1160,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Charm Person",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [...this._charmed.changes],
     //         });
     //     }
@@ -1181,7 +1181,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Comprehend Languages",
     //             description: "Adds all languages for 1 hour",
     //             img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.languages.all",
@@ -1216,7 +1216,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on wisdom checks and wisdom saving throws for 7 days",
     //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_WEEK,
+    //             seconds: SECONDS.IN_ONE_WEEK,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.disadvantage.ability.save.wis`,
@@ -1240,7 +1240,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days",
     //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_WEEK,
+    //             seconds: SECONDS.IN_ONE_WEEK,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.disadvantage.ability.save.str`,
@@ -1268,7 +1268,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on charisma checks and vulnerability to all damage",
     //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_WEEK,
+    //             seconds: SECONDS.IN_ONE_WEEK,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.disadvantage.ability.check.cha`,
@@ -1291,7 +1291,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on intelligence checks and intelligence saving throws for 7 days",
     //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_WEEK,
+    //             seconds: SECONDS.IN_ONE_WEEK,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.disadvantage.ability.save.int`,
@@ -1314,7 +1314,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days",
     //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_WEEK,
+    //             seconds: SECONDS.IN_ONE_WEEK,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.disadvantage.ability.save.dex`,
@@ -1342,7 +1342,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Disadvantage on constitution checks and constitution saving throws for 7 days",
     //             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_WEEK,
+    //             seconds: SECONDS.IN_ONE_WEEK,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.disadvantage.ability.save.con`,
@@ -1363,7 +1363,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Darkvision",
     //             description: "Upgrade darkvision to 60 ft. for 8 hours",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
-    //             seconds: Constants.SECONDS.IN_EIGHT_HOURS,
+    //             seconds: SECONDS.IN_EIGHT_HOURS,
     //             changes: [
     //                 {
     //                     key: "system.attributes.senses.darkvision",
@@ -1394,7 +1394,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Disguise Self",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/magic/control/debuff-energy-hold-teal-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //         });
     //     }
 
@@ -1404,7 +1404,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Add 1d4 radiant damage to weapon attacks for 1 minute",
     //             img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.bonuses.weapon.damage",
@@ -1451,7 +1451,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Advantage on constitution checks and 2d6 temp hit points for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.check.con`,
@@ -1469,7 +1469,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 "Advantage on strength checks and double maximum carrying capacity for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.check.str`,
@@ -1492,7 +1492,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Advantage on dexterity checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.check.dex`,
@@ -1509,7 +1509,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Advantage on charisma checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.check.cha`,
@@ -1526,7 +1526,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Advantage on intelligence checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.check.int`,
@@ -1543,7 +1543,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Advantage on wisdom checks for 1 hour",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.check.wis`,
@@ -1637,7 +1637,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Faerie Fire",
     //             description: "Grants advantage to all who attack for 1 minute",
     //             img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.grants.advantage.attack.all`,
@@ -1654,7 +1654,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 {
     //                     key: "ATL.light.color",
     //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.WHITE,
+    //                     value: COLORS.WHITE,
     //                 },
     //                 {
     //                     key: "ATL.light.alpha",
@@ -1682,7 +1682,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "False Life",
     //             description: "Add temporary hit points 1 hour",
     //             img: "icons/magic/life/heart-cross-purple-orange.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //         });
     //     }
 
@@ -1691,7 +1691,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Feather Fall",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/air/wind-swirl-pink-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //         });
     //     }
 
@@ -1736,7 +1736,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Add damage resistance to cold for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -1758,7 +1758,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 {
     //                     key: "ATL.light.color",
     //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.FIRE,
+    //                     value: COLORS.FIRE,
     //                 },
     //                 {
     //                     key: "ATL.light.alpha",
@@ -1787,7 +1787,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Add damage resistance to fire for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -1809,7 +1809,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 {
     //                     key: "ATL.light.color",
     //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.COLD_FIRE,
+    //                     value: COLORS.COLD_FIRE,
     //                 },
     //                 {
     //                     key: "ATL.light.alpha",
@@ -1837,7 +1837,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Find the Path",
     //             description: "No active effects and lasts for 1 day",
     //             img: "icons/magic/light/explosion-star-teal.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_DAY,
+    //             seconds: SECONDS.IN_ONE_DAY,
     //         });
     //     }
 
@@ -1846,7 +1846,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Fly",
     //             description: "Upgrade flying speed to 60 ft. for 10 minutes",
     //             img: "icons/magic/control/energy-stream-link-white.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //             statuses: ["flying"],
     //             changes: [
     //                 {
@@ -1865,7 +1865,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours",
     //             img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
-    //             seconds: Constants.SECONDS.IN_EIGHT_HOURS,
+    //             seconds: SECONDS.IN_EIGHT_HOURS,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.attack.all`,
@@ -1901,7 +1901,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Freedom of Movement",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/skills/melee/strike-blade-knife-white-red.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //         });
     //     }
 
@@ -1910,7 +1910,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Globe of Invulnerability",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             tokenMagicChanges: [
     //                 {
     //                     key: "macro.tokenMagic",
@@ -1942,7 +1942,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Guidance",
     //             description: "Adds 1d4 to one ability or skill check for 1 minute",
     //             img: "icons/magic/control/buff-flight-wings-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.optional.guidance.label`,
@@ -1992,7 +1992,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute",
     //             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.attributes.ac.bonus",
@@ -2020,7 +2020,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours",
     //             img: "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_DAY,
+    //             seconds: SECONDS.IN_ONE_DAY,
     //             changes: [
     //                 {
     //                     key: "system.traits.di.value",
@@ -2046,7 +2046,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Heroism",
     //             description: "Immunity to frightened for 1 minute",
     //             img: "icons/magic/life/heart-cross-strong-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.traits.ci.value",
@@ -2063,7 +2063,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Apply the effects of the prone and incapacitated conditions for 1 minute",
     //             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [...this._incapacitated.changes, ...this._prone.changes],
     //         });
     //     }
@@ -2074,7 +2074,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Apply the effects of the paralyzed condition for 1 minute",
     //             img: "icons/magic/control/debuff-chains-ropes-red.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [...this._paralyzed.changes],
     //             tokenMagicChanges: [
     //                 {
@@ -2098,7 +2098,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Apply the effects of the paralyzed condition for 1 minute",
     //             img: "icons/magic/control/debuff-chains-ropes-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [...this._paralyzed.changes],
     //             tokenMagicChanges: [
     //                 {
@@ -2116,7 +2116,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute",
     //             img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.advantage.ability.save.all`,
@@ -2138,7 +2138,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 {
     //                     key: "ATL.light.color",
     //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.WHITE,
+    //                     value: COLORS.WHITE,
     //                 },
     //                 {
     //                     key: "ATL.light.alpha",
@@ -2168,7 +2168,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.",
     //             img: "icons/magic/air/fog-gas-smoke-dense-gray.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             flags: {
     //                 dae: {
     //                     specialDuration: ["1Attack", "1Spell"],
@@ -2185,7 +2185,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute",
     //             img: "icons/magic/control/energy-stream-link-large-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.attributes.movement.all",
@@ -2217,7 +2217,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Jump",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //         });
     //     }
 
@@ -2226,7 +2226,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Light",
     //             description: "Emits 20/40 light for 1 hour (requires ATL)",
     //             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             atlChanges: [
     //                 {
     //                     key: "ATL.light.dim",
@@ -2241,7 +2241,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //                 {
     //                     key: "ATL.light.color",
     //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.WHITE,
+    //                     value: COLORS.WHITE,
     //                 },
     //                 {
     //                     key: "ATL.light.alpha",
@@ -2262,7 +2262,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Longstrider",
     //             description: "Increase all movement by 10 ft. for 1 hour",
     //             img: "icons/magic/air/wind-stream-blue-gray.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.attributes.movement.all",
@@ -2279,7 +2279,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Mage Armor",
     //             description: "Upgrades armor to 13 + dex modifier for 8 hours",
     //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
-    //             seconds: Constants.SECONDS.IN_EIGHT_HOURS,
+    //             seconds: SECONDS.IN_EIGHT_HOURS,
     //             changes: [
     //                 {
     //                     key: "system.attributes.ac.calc",
@@ -2296,7 +2296,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Mind Blank",
     //             description: "Adds immunity to psychic damage for 24 hours",
     //             img: "icons/magic/air/air-burst-spiral-large-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_DAY,
+    //             seconds: SECONDS.IN_ONE_DAY,
     //             changes: [
     //                 {
     //                     key: "system.traits.di.value",
@@ -2312,7 +2312,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Mirror Image",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             tokenMagicChanges: [
     //                 {
     //                     key: "macro.tokenMagic",
@@ -2329,7 +2329,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Pass without Trace",
     //             description: "Add 10 to stealth checks for 1 hour",
     //             img: "icons/magic/air/fog-gas-smoke-brown.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.skills.ste.bonuses.check",
@@ -2363,7 +2363,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Adds damage resistance to acid for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2381,7 +2381,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Adds damage resistance to cold for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2399,7 +2399,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Adds damage resistance to fire for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2417,7 +2417,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Adds damage resistance to lightning for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2435,7 +2435,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description: "Adds damage resistance to thunder for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
     //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2453,7 +2453,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)",
     //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2469,7 +2469,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Protection from Evil and Good",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //         });
     //     }
 
@@ -2496,7 +2496,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Regain 1 hit point at the start of each turn for 1 hour",
     //             img: "icons/magic/life/heart-cross-strong-flame-green.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.OverTime.regenerate`,
@@ -2512,7 +2512,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Resilient Sphere",
     //             description: "Adds total immunity to all damage and half movement",
     //             img: "icons/magic/light/explosion-star-large-pink.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.attributes.movement.all",
@@ -2534,7 +2534,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Resistance",
     //             description: "Add 1d4 to a single saving throw in the next minute",
     //             img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: `flags.midi-qol.optional.resistance.label`,
@@ -2584,7 +2584,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Shield of Faith",
     //             description: "Adds 2 to the AC for 10 minutes",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //             changes: [
     //                 {
     //                     key: "system.attributes.ac.bonus",
@@ -2608,7 +2608,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute",
     //             img: "icons/magic/air/fog-gas-smoke-dense-pink.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //             changes: [
     //                 {
     //                     key: "system.attributes.ac.bonus",
@@ -2635,7 +2635,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Speak with Animals",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //         });
     //     }
 
@@ -2644,7 +2644,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Speak with Dead",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/control/fear-fright-shadow-monster-green.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //         });
     //     }
 
@@ -2653,7 +2653,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Speak with Plants",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/nature/leaf-glow-teal.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //         });
     //     }
 
@@ -2663,7 +2663,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Grants climbing speed equal to walking speed for 1 hour",
     //             img: "icons/magic/control/debuff-chains-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.attributes.movement.climb",
@@ -2680,7 +2680,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Spirit Guardians",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/light/projectile-bolts-salvo-white.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //         });
     //     }
 
@@ -2689,7 +2689,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Spiritual Weapon",
     //             description: "No active effects and lasts for 1 minute",
     //             img: "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
+    //             seconds: SECONDS.IN_ONE_MINUTE,
     //         });
     //     }
 
@@ -2700,7 +2700,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Adds resistance to non-magical physical damage for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.traits.dr.value",
@@ -2716,7 +2716,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Suggestion",
     //             description: "No active effects and lasts for 8 hours",
     //             img: "icons/magic/air/air-burst-spiral-pink.webp",
-    //             seconds: Constants.SECONDS.IN_EIGHT_HOURS,
+    //             seconds: SECONDS.IN_EIGHT_HOURS,
     //         });
     //     }
 
@@ -2725,7 +2725,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Telekinesis",
     //             description: "No active effects and lasts for 10 minutes",
     //             img: "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
+    //             seconds: SECONDS.IN_TEN_MINUTES,
     //         });
     //     }
 
@@ -2781,7 +2781,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             description:
     //                 "Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour",
     //             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //             changes: [
     //                 {
     //                     key: "system.attributes.ac.bonus",
@@ -2812,7 +2812,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Water Breathing",
     //             description: "No active effects and lasts for 24 hours",
     //             img: "icons/magic/water/pseudopod-swirl-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_DAY,
+    //             seconds: SECONDS.IN_ONE_DAY,
     //         });
     //     }
 
@@ -2821,356 +2821,393 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //             name: "Water Walk",
     //             description: "No active effects and lasts for 1 hour",
     //             img: "icons/creatures/slimes/slime-movement-swirling-blue.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
+    //             seconds: SECONDS.IN_ONE_HOUR,
     //         });
     //     }
 
-    //     /** Class specific */
-    //     get _bardicInspiration() {
-    //         return createConvenientEffect({
-    //             name: "Bardic Inspiration",
-    //             description:
-    //                 "Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes",
-    //             img: "icons/skills/melee/unarmed-punch-fist.webp",
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
-    //             nestedEffects: [
-    //                 this._bardicInspirationD6.name,
-    //                 this._bardicInspirationD8.name,
-    //                 this._bardicInspirationD10.name,
-    //                 this._bardicInspirationD12.name,
-    //             ],
-    //         });
-    //     }
+    get #bardicInspiration(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bardic Inspiration",
+                description:
+                    "Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes",
+                img: "icons/skills/melee/unarmed-punch-fist.webp",
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+            },
+            nestedEffects: [
+                this.#bardicInspirationD6,
+                this.#bardicInspirationD8,
+                this.#bardicInspirationD10,
+                this.#bardicInspirationD12,
+            ],
+        });
+    }
 
-    //     get _bardicInspirationD6() {
-    //         return createConvenientEffect({
-    //             name: "Bardic Inspiration (d6)",
-    //             description: "For bards from level 1 to level 4",
-    //             img: "icons/skills/melee/unarmed-punch-fist.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.label`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "Bardic Inspiration",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d6",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d6",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d6",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bardicInspirationD6(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bardic Inspiration (d6)",
+                description: "For bards from level 1 to level 4",
+                img: "icons/skills/melee/unarmed-punch-fist.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.label`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "Bardic Inspiration",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d6",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d6",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d6",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _bardicInspirationD8() {
-    //         return createConvenientEffect({
-    //             name: "Bardic Inspiration (d8)",
-    //             description: "For bards from level 5 to level 9",
-    //             img: "icons/skills/melee/unarmed-punch-fist.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.label`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "Bardic Inspiration",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d8",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d8",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d8",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bardicInspirationD8(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bardic Inspiration (d8)",
+                description: "For bards from level 5 to level 9",
+                img: "icons/skills/melee/unarmed-punch-fist.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.label`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "Bardic Inspiration",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d8",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d8",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d8",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _bardicInspirationD10() {
-    //         return createConvenientEffect({
-    //             name: "Bardic Inspiration (d10)",
-    //             description: "For bards from level 10 to level 14",
-    //             img: "icons/skills/melee/unarmed-punch-fist.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.label`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "Bardic Inspiration",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d10",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d10",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d10",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bardicInspirationD10(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bardic Inspiration (d10)",
+                description: "For bards from level 10 to level 14",
+                img: "icons/skills/melee/unarmed-punch-fist.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.label`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "Bardic Inspiration",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d10",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d10",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d10",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _bardicInspirationD12() {
-    //         return createConvenientEffect({
-    //             name: "Bardic Inspiration (d12)",
-    //             description: "For bards from level 15 to level 20",
-    //             img: "icons/skills/melee/unarmed-punch-fist.webp",
-    //             isViewable: this._settings.showNestedEffects,
-    //             seconds: Constants.SECONDS.IN_TEN_MINUTES,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.label`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "Bardic Inspiration",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d12",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d12",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "+1d12",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bardicInspirationD12(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bardic Inspiration (d12)",
+                description: "For bards from level 15 to level 20",
+                img: "icons/skills/melee/unarmed-punch-fist.webp",
+                // isViewable: this._settings.showNestedEffects,
+                duration: {
+                    seconds: SECONDS.IN_TEN_MINUTES,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.label`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "Bardic Inspiration",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d12",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d12",
+                    },
+                    {
+                        key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "+1d12",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _channelDivinitySacredWeapon() {
-    //         return createConvenientEffect({
-    //             name: "Channel Divinity: Sacred Weapon",
-    //             description:
-    //                 "Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)",
-    //             img: "icons/weapons/swords/sword-gold-holy.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.mwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+max(1, @abilities.cha.mod)",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.rwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+max(1, @abilities.cha.mod)",
-    //                 },
-    //             ],
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "40",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "20",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.WHITE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.25,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Channel Divinity: Sacred Weapon",
+                description:
+                    "Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)",
+                img: "icons/weapons/swords/sword-gold-holy.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: "system.bonuses.mwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+max(1, @abilities.cha.mod)",
+                    },
+                    {
+                        key: "system.bonuses.rwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+max(1, @abilities.cha.mod)",
+                    },
+                ],
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "40",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "20",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.WHITE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.25",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+                },
+            ],
+        });
+    }
 
-    //     get _channelDivinityTurnTheUnholy() {
-    //         return createConvenientEffect({
-    //             name: "Channel Divinity: Turn the Unholy",
-    //             description:
-    //                 "No active effects and lasts for 1 minute. Expires on taking damage.",
-    //             img: "icons/magic/fire/explosion-embers-evade-silhouette.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["isDamaged"],
-    //                 },
-    //             },
-    //         });
-    //     }
+    get #channelDivinityTurnTheUnholy(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Channel Divinity: Turn the Unholy",
+                description:
+                    "No active effects and lasts for 1 minute. Expires on taking damage.",
+                img: "icons/magic/fire/explosion-embers-evade-silhouette.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["isDamaged"],
+                    },
+                },
+            },
+        });
+    }
 
-    //     get _channelDivinityTurnUndead() {
-    //         return createConvenientEffect({
-    //             name: "Channel Divinity: Turn Undead",
-    //             description:
-    //                 "No active effects and lasts for 1 minute. Expires on taking damage.",
-    //             img: "icons/magic/fire/flame-burning-creature-skeleton.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["isDamaged"],
-    //                 },
-    //             },
-    //         });
-    //     }
+    get #channelDivinityTurnUndead(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Channel Divinity: Turn Undead",
+                description:
+                    "No active effects and lasts for 1 minute. Expires on taking damage.",
+                img: "icons/magic/fire/flame-burning-creature-skeleton.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                flags: {
+                    dae: {
+                        specialDuration: ["isDamaged"],
+                    },
+                },
+            },
+        });
+    }
 
-    //     get _kiEmptyBody() {
-    //         return createConvenientEffect({
-    //             name: "Ki: Empty Body",
-    //             description:
-    //                 "Grants advantage on attack rolls, forces disadvantage to all who attack, and grants resistance to all damage except force for 1 minute",
-    //             img: "icons/magic/perception/silhouette-stealth-shadow.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_MINUTE,
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "physical",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "bludgeoning",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "piercing",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "slashing",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "silver",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "adamant",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "acid",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "cold",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "fire",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "lightning",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "necrotic",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "poison",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "psychic",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "radiant",
-    //                 },
-    //                 {
-    //                     key: "system.traits.dr.value",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "thunder",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #kiEmptyBody(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Ki: Empty Body",
+                description:
+                    "Grants advantage on attack rolls, forces disadvantage to all who attack, and grants resistance to all damage except force for 1 minute",
+                img: "icons/magic/perception/silhouette-stealth-shadow.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_MINUTE,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "physical",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "bludgeoning",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "piercing",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "slashing",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "silver",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "adamant",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "acid",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "cold",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "fire",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "lightning",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "necrotic",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "poison",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "psychic",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "radiant",
+                    },
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "thunder",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _kiPatientDefense() {
-    //         return createConvenientEffect({
-    //             name: "Ki: Patient Defense",
-    //             description:
-    //                 "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
-    //             img: "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #kiPatientDefense(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Ki: Patient Defense",
+                description:
+                    "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
+                img: "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart"],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
     get #rage(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
@@ -3224,41 +3261,48 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
-    //     get _recklessAttack() {
-    //         return createConvenientEffect({
-    //             name: "Reckless Attack",
-    //             description:
-    //                 "Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round",
-    //             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.advantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //             subEffects: [
-    //                 createConvenientEffect({
-    //                     name: "Reckless Attack (advantage on attacks)",
-    //                     description: "Advantage on melee attacks until end of turn",
-    //                     img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
-    //                     turns: 1,
-    //                     changes: [
-    //                         {
-    //                             key: `flags.midi-qol.advantage.attack.mwak`,
-    //                             mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                             value: "1",
-    //                         },
-    //                     ],
-    //                 }),
-    //             ],
-    //         });
-    //     }
+    get #recklessAttack(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Reckless Attack",
+                description:
+                    "Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round",
+                img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart"],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.advantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+            subEffects: [
+                createConvenientEffect({
+                    effect: {
+                        name: "Reckless Attack (advantage on attacks)",
+                        description:
+                            "Advantage on melee attacks until end of turn",
+                        img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
+                        duration: {
+                            turns: 1,
+                        },
+                        changes: [
+                            {
+                                key: `flags.midi-qol.advantage.attack.mwak`,
+                                mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                                value: "1",
+                            },
+                        ],
+                    },
+                }),
+            ],
+        });
+    }
 
     get #bullseyeLantern(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
