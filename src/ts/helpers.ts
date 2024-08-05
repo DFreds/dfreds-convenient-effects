@@ -22,7 +22,7 @@ interface ICreateEffectAddOns {
     tokenMagicChanges?: DeepPartial<EffectChangeData>[];
     nestedEffects?: PreCreate<ActiveEffectSource>[];
     subEffects?: PreCreate<ActiveEffectSource>[];
-    otherEffects?: PreCreate<ActiveEffectSource>[]; // TODO just ids? this is for effects that should not be tied to the initial effect (i.e. prone being applied when unconscious)
+    otherEffects?: PreCreate<ActiveEffectSource>[];
 }
 
 function createConvenientItem({
@@ -50,6 +50,7 @@ function createConvenientEffect({
     tokenMagicChanges = [],
     nestedEffects = [],
     subEffects = [],
+    otherEffects = [],
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     const effectFlags = effect.flags ?? {};
     const ceFlags: DeepPartial<DocumentFlags> = {};
@@ -62,6 +63,7 @@ function createConvenientEffect({
     ceFlags[MODULE_ID]![FLAGS.IS_DYNAMIC] = isDynamic;
     ceFlags[MODULE_ID]![FLAGS.NESTED_EFFECTS] = nestedEffects;
     ceFlags[MODULE_ID]![FLAGS.SUB_EFFECTS] = subEffects;
+    ceFlags[MODULE_ID]![FLAGS.OTHER_EFFECTS] = otherEffects;
 
     effect.flags = foundry.utils.mergeObject(ceFlags, effectFlags);
 

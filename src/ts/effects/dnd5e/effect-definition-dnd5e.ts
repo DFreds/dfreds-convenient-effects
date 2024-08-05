@@ -4,7 +4,6 @@ import {
     ItemEffects,
     MigrationType,
 } from "../effect-definition.ts";
-import { log } from "../../logger.ts";
 import { createConvenientEffect } from "../../helpers.ts";
 import { COLORS, SECONDS } from "src/ts/constants.ts";
 
@@ -25,25 +24,24 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     override get migrations(): MigrationType[] {
         return [
-            {
-                key: "2024-07-15-sample-migration",
-                date: new Date("2024-07-15"),
-                func: async () => {
-                    // const settings = new Settings();
-                    // const itemIds = settings.effectItemIds;
-                    // const backupItemIds = game.items
-                    //     .filter((item) => {
-                    //         const backupItemId = item.getFlag(
-                    //             MODULE_ID,
-                    //             FLAGS.BACKUP_ID,
-                    //         ) as string | undefined;
-
-                    //         return backupItemId !== undefined;
-                    //     })
-                    //     .map((backupItem) => backupItem.id);
-                    log("Sample migration running");
-                },
-            },
+            // {
+            //     key: "2024-07-15-sample-migration",
+            //     date: new Date("2024-07-15"),
+            //     func: async () => {
+            // const settings = new Settings();
+            // const itemIds = settings.effectItemIds;
+            // const backupItemIds = game.items
+            //     .filter((item) => {
+            //         const backupItemId = item.getFlag(
+            //             MODULE_ID,
+            //             FLAGS.BACKUP_ID,
+            //         ) as string | undefined;
+            //         return backupItemId !== undefined;
+            //     })
+            //     .map((backupItem) => backupItem.id);
+            //         log("Sample migration running");
+            //     },
+            // },
         ];
     }
 
@@ -896,10 +894,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         value: "0",
                         priority: 25,
                     },
-                    ...(this.#incapacitated.changes ?? []),
-                    ...(this.#prone.changes ?? []),
                 ],
             },
+            subEffects: [this.#incapacitated],
+            otherEffects: [this.#prone],
         });
     }
 

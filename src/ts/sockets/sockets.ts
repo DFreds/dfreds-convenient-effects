@@ -150,9 +150,9 @@ class Sockets {
         );
 
         if (effectData.flags?.[MODULE_ID]?.[FLAGS.SUB_EFFECTS]) {
-            const subEffects = effectData.flags?.[MODULE_ID]?.[
+            const subEffects = (effectData.flags?.[MODULE_ID]?.[
                 FLAGS.SUB_EFFECTS
-            ] as PreCreate<ActiveEffectSource>[];
+            ] ?? []) as PreCreate<ActiveEffectSource>[];
 
             // Apply all sub-effects with the original effect being the origin
             for (const subEffect of subEffects) {
@@ -160,6 +160,20 @@ class Sockets {
                     effectData: subEffect,
                     uuid,
                     origin: createdEffects[0].id as ActiveEffectOrigin,
+                });
+            }
+        }
+
+        if (effectData.flags?.[MODULE_ID]?.[FLAGS.OTHER_EFFECTS]) {
+            const otherEffects = (effectData.flags?.[MODULE_ID]?.[
+                FLAGS.OTHER_EFFECTS
+            ] ?? []) as PreCreate<ActiveEffectSource>[];
+
+            // Apply all other effects with no origin
+            for (const otherEffect of otherEffects) {
+                await game.dfreds.effectInterface.addEffect({
+                    effectData: otherEffect,
+                    uuid,
                 });
             }
         }

@@ -7,6 +7,7 @@ export const FLAGS = {
     IS_VIEWABLE: "isViewable",
     NESTED_EFFECTS: "nestedEffects",
     SUB_EFFECTS: "subEffects",
+    OTHER_EFFECTS: "otherEffects",
     FOLDER_COLOR: "folderColor",
 };
 
