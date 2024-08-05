@@ -231,21 +231,21 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Other",
             },
             effects: [
-                //                 this._bonusAction,
-                //                 this._coverHalf,
-                //                 this._coverThreeQuarters,
-                //                 this._coverTotal,
-                //                 this._encumbered,
-                //                 this._dodge,
-                //                 this._flanked,
-                //                 this._flanking,
-                //                 this._greatWeaponMaster,
-                //                 this._heavilyEncumbered,
-                //                 this._inspiration,
-                //                 this._rangedDisadvantage,
-                //                 this._reaction,
-                //                 this._ready,
-                //                 this._sharpshooter,
+                this.#bonusAction,
+                this.#coverHalf,
+                this.#coverThreeQuarters,
+                this.#coverTotal,
+                this.#encumbered,
+                this.#dodge,
+                this.#flanked,
+                this.#flanking,
+                this.#greatWeaponMaster,
+                this.#heavilyEncumbered,
+                this.#inspiration,
+                this.#rangedDisadvantage,
+                this.#reaction,
+                this.#ready,
+                this.#sharpshooter,
             ],
         };
     }
@@ -3447,309 +3447,337 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //         });
     //     }
 
-    //     /* Other effects */
-    //     get _bonusAction() {
-    //         return createConvenientEffect({
-    //             name: "Bonus Action",
-    //             description: "No active effects and expires on turn start",
-    //             img: "modules/dfreds-convenient-effects/images/bonus-action.svg",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart", "shortRest", "longRest"],
-    //                 },
-    //             },
-    //         });
-    //     }
+    get #bonusAction(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bonus Action",
+                description: "No active effects and expires on turn start",
+                img: "modules/dfreds-convenient-effects/images/bonus-action.svg",
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart", "shortRest", "longRest"],
+                    },
+                },
+            },
+        });
+    }
 
-    //     get _coverHalf() {
-    //         return createConvenientEffect({
-    //             name: "Cover (Half)",
-    //             description: "Adds 2 to AC and dexterity saving throws",
-    //             img: "modules/dfreds-convenient-effects/images/broken-wall.svg",
-    //             tint: "#dae34f",
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.cover",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+2",
-    //                 },
-    //                 {
-    //                     key: "system.abilities.dex.bonuses.save",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+2",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #coverHalf(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Cover (Half)",
+                description: "Adds 2 to AC and dexterity saving throws",
+                img: "modules/dfreds-convenient-effects/images/broken-wall.svg",
+                tint: "#dae34f",
+                changes: [
+                    {
+                        key: "system.attributes.ac.cover",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+2",
+                    },
+                    {
+                        key: "system.abilities.dex.bonuses.save",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+2",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _coverThreeQuarters() {
-    //         return createConvenientEffect({
-    //             name: "Cover (Three-Quarters)",
-    //             description: "Adds 5 to AC and dexterity saving throws",
-    //             img: "modules/dfreds-convenient-effects/images/brick-wall.svg",
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.ac.cover",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+5",
-    //                 },
-    //                 {
-    //                     key: "system.abilities.dex.bonuses.save",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+5",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #coverThreeQuarters(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Cover (Three-Quarters)",
+                description: "Adds 5 to AC and dexterity saving throws",
+                img: "modules/dfreds-convenient-effects/images/brick-wall.svg",
+                changes: [
+                    {
+                        key: "system.attributes.ac.cover",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+5",
+                    },
+                    {
+                        key: "system.abilities.dex.bonuses.save",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+5",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _coverTotal() {
-    //         return createConvenientEffect({
-    //             name: "Cover (Total)",
-    //             description: "Causes all attacks to fail automatically",
-    //             img: "modules/dfreds-convenient-effects/images/castle.svg",
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.attack.fail.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #coverTotal(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Cover (Total)",
+                description: "Causes all attacks to fail automatically",
+                img: "modules/dfreds-convenient-effects/images/castle.svg",
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.attack.fail.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _encumbered() {
-    //         return createConvenientEffect({
-    //             name: "Encumbered",
-    //             description: "Lowers movement by 10 ft.",
-    //             img: "icons/svg/down.svg",
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "-10",
-    //                     priority: 25,
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #encumbered(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Encumbered",
+                description: "Lowers movement by 10 ft.",
+                img: "icons/svg/down.svg",
+                changes: [
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "-10",
+                        priority: 25,
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _dodge() {
-    //         return createConvenientEffect({
-    //             name: "Dodge",
-    //             description:
-    //                 "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
-    //             img: "modules/dfreds-convenient-effects/images/dodging.svg",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart"],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.ability.save.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #dodge(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Dodge",
+                description:
+                    "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
+                img: "modules/dfreds-convenient-effects/images/dodging.svg",
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart"],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.ability.save.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _flanked() {
-    //         return createConvenientEffect({
-    //             name: "Flanked",
-    //             description: "Grants advantage to all who melee attack",
-    //             img: "modules/dfreds-convenient-effects/images/encirclement.svg",
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.grants.advantage.attack.mwak`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.grants.advantage.attack.msak`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #flanked(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Flanked",
+                description: "Grants advantage to all who melee attack",
+                img: "modules/dfreds-convenient-effects/images/encirclement.svg",
+                changes: [
+                    {
+                        key: `flags.midi-qol.grants.advantage.attack.mwak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.grants.advantage.attack.msak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _flanking() {
-    //         return createConvenientEffect({
-    //             name: "Flanking",
-    //             description: "Grants advantage on melee attack rolls",
-    //             img: "icons/svg/sword.svg",
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.attack.mwak`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.advantage.attack.msak`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #flanking(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Flanking",
+                description: "Grants advantage on melee attack rolls",
+                img: "icons/svg/sword.svg",
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.attack.mwak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.advantage.attack.msak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _greatWeaponMaster() {
-    //         return createConvenientEffect({
-    //             name: "Great Weapon Master",
-    //             description:
-    //                 "Subtracts 5 from melee attacks but adds 10 to melee damage",
-    //             img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.mwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-5",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.mwak.damage",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+10",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #greatWeaponMaster(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Great Weapon Master",
+                description:
+                    "Subtracts 5 from melee attacks but adds 10 to melee damage",
+                img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
+                changes: [
+                    {
+                        key: "system.bonuses.mwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-5",
+                    },
+                    {
+                        key: "system.bonuses.mwak.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+10",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _heavilyEncumbered() {
-    //         return createConvenientEffect({
-    //             name: "Heavily Encumbered",
-    //             description:
-    //                 "Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves",
-    //             img: "icons/svg/downgrade.svg",
-    //             changes: [
-    //                 {
-    //                     key: "system.attributes.movement.all",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "-20",
-    //                     priority: 25,
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.str`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.dex`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.ability.save.con`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #heavilyEncumbered(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Heavily Encumbered",
+                description:
+                    "Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves",
+                img: "icons/svg/downgrade.svg",
+                changes: [
+                    {
+                        key: "system.attributes.movement.all",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "-20",
+                        priority: 25,
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.str`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.dex`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.ability.save.con`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _inspiration() {
-    //         return createConvenientEffect({
-    //             name: "Inspiration",
-    //             description:
-    //                 "Advantage on everything and expires after any action, save, check, or skill roll",
-    //             img: "icons/magic/control/buff-luck-fortune-green.webp",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: [
-    //                         "1Action",
-    //                         "isSave",
-    //                         "isCheck",
-    //                         "isSkill",
-    //                     ],
-    //                 },
-    //             },
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.advantage.all`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #inspiration(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Inspiration",
+                description:
+                    "Advantage on everything and expires after any action, save, check, or skill roll",
+                img: "icons/magic/control/buff-luck-fortune-green.webp",
+                flags: {
+                    dae: {
+                        specialDuration: [
+                            "1Action",
+                            "isSave",
+                            "isCheck",
+                            "isSkill",
+                        ],
+                    },
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.all`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _rangedDisadvantage() {
-    //         return createConvenientEffect({
-    //             name: "Ranged Disadvantage",
-    //             description: "Disadvantage on ranged attack rolls",
-    //             img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
-    //             changes: [
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.rwak`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //                 {
-    //                     key: `flags.midi-qol.disadvantage.attack.rsak`,
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-    //                     value: "1",
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #rangedDisadvantage(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Ranged Disadvantage",
+                description: "Disadvantage on ranged attack rolls",
+                img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
+                changes: [
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.rwak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                    {
+                        key: `flags.midi-qol.disadvantage.attack.rsak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
+                    },
+                ],
+            },
+        });
+    }
 
-    //     get _reaction() {
-    //         return createConvenientEffect({
-    //             name: "Reaction",
-    //             description: "No active effects and expires on turn start",
-    //             img: "modules/dfreds-convenient-effects/images/reaction.svg",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart", "shortRest", "longRest"],
-    //                 },
-    //             },
-    //         });
-    //     }
+    get #reaction(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Reaction",
+                description: "No active effects and expires on turn start",
+                img: "modules/dfreds-convenient-effects/images/reaction.svg",
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart", "shortRest", "longRest"],
+                    },
+                },
+            },
+        });
+    }
 
-    //     get _ready() {
-    //         return createConvenientEffect({
-    //             name: "Ready",
-    //             description: "No active effects and expires on turn start",
-    //             img: "modules/dfreds-convenient-effects/images/ready.svg",
-    //             flags: {
-    //                 dae: {
-    //                     specialDuration: ["turnStart"],
-    //                 },
-    //             },
-    //         });
-    //     }
+    get #ready(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Ready",
+                description: "No active effects and expires on turn start",
+                img: "modules/dfreds-convenient-effects/images/ready.svg",
+                flags: {
+                    dae: {
+                        specialDuration: ["turnStart"],
+                    },
+                },
+            },
+        });
+    }
 
-    //     get _sharpshooter() {
-    //         return createConvenientEffect({
-    //             name: "Sharpshooter",
-    //             description:
-    //                 "Subtracts 5 from ranged attacks but adds 10 to ranged damage",
-    //             img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
-    //             changes: [
-    //                 {
-    //                     key: "system.bonuses.rwak.attack",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "-5",
-    //                 },
-    //                 {
-    //                     key: "system.bonuses.rwak.damage",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    //                     value: "+10",
-    //                 },
-    //             ],
-    //         });
-    //     }
-    // }
+    get #sharpshooter(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Sharpshooter",
+                description:
+                    "Subtracts 5 from ranged attacks but adds 10 to ranged damage",
+                img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
+                changes: [
+                    {
+                        key: "system.bonuses.rwak.attack",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "-5",
+                    },
+                    {
+                        key: "system.bonuses.rwak.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "+10",
+                    },
+                ],
+            },
+        });
+    }
 }
 
 export { EffectDefinitionDnd5e };
