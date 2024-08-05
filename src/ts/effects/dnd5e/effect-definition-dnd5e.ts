@@ -6,7 +6,7 @@ import {
 } from "../effect-definition.ts";
 import { log } from "../../logger.ts";
 import { createConvenientEffect } from "../../helpers.ts";
-import { SECONDS } from "src/ts/constants.ts";
+import { COLORS, SECONDS } from "src/ts/constants.ts";
 
 // TODO special: unconscious should apply prone with otherEffects
 // TODO special: what to do with exhaustion?
@@ -216,11 +216,11 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Equipment",
             },
             effects: [
-                //                 this._bullseyeLantern,
-                //                 this._candle,
-                //                 this._hoodedLantern,
-                //                 this._lantern,
-                //                 this._torch,
+                this.#bullseyeLantern,
+                this.#candle,
+                this.#hoodedLantern,
+                this.#lantern,
+                this.#torch,
             ],
         };
     }
@@ -3260,192 +3260,212 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     //         });
     //     }
 
-    //     /* Equipment effects */
-    //     get _bullseyeLantern() {
-    //         return createConvenientEffect({
-    //             name: "Bullseye Lantern",
-    //             description:
-    //                 "Adds lantern light in a 60 degree cone for 6 hours (requires ATL)",
-    //             img: "icons/sundries/lights/lantern-iron-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_SIX_HOURS,
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.angle",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "60",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "120",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "60",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.4,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #bullseyeLantern(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Bullseye Lantern",
+                description:
+                    "Adds lantern light in a 60 degree cone for 6 hours (requires ATL)",
+                img: "icons/sundries/lights/lantern-iron-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_SIX_HOURS,
+                },
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.angle",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "60",
+                },
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "120",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "60",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.4",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                },
+            ],
+        });
+    }
 
-    //     get _candle() {
-    //         return createConvenientEffect({
-    //             name: "Candle",
-    //             description: "Adds candle light for 1 hour (requires ATL)",
-    //             img: "icons/sundries/lights/candle-unlit-white.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "10",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "5",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.2,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #candle(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Candle",
+                description: "Adds candle light for 1 hour (requires ATL)",
+                img: "icons/sundries/lights/candle-unlit-white.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "10",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "5",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.2",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                },
+            ],
+        });
+    }
 
-    //     get _hoodedLantern() {
-    //         return createConvenientEffect({
-    //             name: "Hooded Lantern",
-    //             description: "Adds hooded lantern light for 6 hours (requires ATL)",
-    //             img: "icons/sundries/lights/lantern-iron-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_SIX_HOURS,
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "5",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "0",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.4,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #hoodedLantern(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Hooded Lantern",
+                description:
+                    "Adds hooded lantern light for 6 hours (requires ATL)",
+                img: "icons/sundries/lights/lantern-iron-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_SIX_HOURS,
+                },
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "5",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.4",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                },
+            ],
+        });
+    }
 
-    //     get _lantern() {
-    //         return createConvenientEffect({
-    //             name: "Lantern",
-    //             description: "Adds lantern light for 6 hours (requires ATL)",
-    //             img: "icons/sundries/lights/lantern-iron-yellow.webp",
-    //             seconds: Constants.SECONDS.IN_SIX_HOURS,
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "60",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "30",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.4,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #lantern(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Lantern",
+                description: "Adds lantern light for 6 hours (requires ATL)",
+                img: "icons/sundries/lights/lantern-iron-yellow.webp",
+                duration: {
+                    seconds: SECONDS.IN_SIX_HOURS,
+                },
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "60",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "30",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.4",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                },
+            ],
+        });
+    }
 
-    //     get _torch() {
-    //         return createConvenientEffect({
-    //             name: "Torch",
-    //             description: "Adds torch light for 1 hour (requires ATL)",
-    //             img: "icons/sundries/lights/torch-black.webp",
-    //             seconds: Constants.SECONDS.IN_ONE_HOUR,
-    //             atlChanges: [
-    //                 {
-    //                     key: "ATL.light.dim",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "40",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.bright",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: "20",
-    //                 },
-    //                 {
-    //                     key: "ATL.light.color",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: Constants.COLORS.FIRE,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.alpha",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: 0.4,
-    //                 },
-    //                 {
-    //                     key: "ATL.light.animation",
-    //                     mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-    //                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-    //                 },
-    //             ],
-    //         });
-    //     }
+    get #torch(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Torch",
+                description: "Adds torch light for 1 hour (requires ATL)",
+                img: "icons/sundries/lights/torch-black.webp",
+                duration: {
+                    seconds: SECONDS.IN_ONE_HOUR,
+                },
+            },
+            atlChanges: [
+                {
+                    key: "ATL.light.dim",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "40",
+                },
+                {
+                    key: "ATL.light.bright",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "20",
+                },
+                {
+                    key: "ATL.light.color",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: COLORS.FIRE,
+                },
+                {
+                    key: "ATL.light.alpha",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: "0.4",
+                },
+                {
+                    key: "ATL.light.animation",
+                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                },
+            ],
+        });
+    }
 
     get #bonusAction(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
