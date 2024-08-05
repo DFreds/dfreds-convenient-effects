@@ -2,6 +2,7 @@ import { id as MODULE_ID } from "@static/module.json";
 import { FLAGS } from "../constants.ts";
 import {
     ActiveEffectSource,
+    EffectChangeData,
     // EffectChangeData,
 } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
@@ -71,11 +72,16 @@ class HandlebarHelpers {
                 //     },
                 // );
 
-                const subChanges = nestedEffects.flatMap(
-                    (nestedEffect) => nestedEffect.changes,
-                );
+                const effectChanges = (effect.changes ??
+                    []) as DeepPartial<EffectChangeData>[];
+                const subChanges = nestedEffects
+                    .flatMap((nestedEffect) => nestedEffect.changes)
+                    .filter((change) => change !== undefined);
 
-                const allChanges = [...effect.changes, ...subChanges];
+                const allChanges = [
+                    ...effectChanges,
+                    ...subChanges,
+                ] as DeepPartial<EffectChangeData>[];
 
                 icons += this.#getNestedEffectsIcon(nestedEffects);
                 icons += this.#getMidiIcon(allChanges);
@@ -95,22 +101,23 @@ class HandlebarHelpers {
             : "";
     }
 
-    #getMidiIcon(changes: any[]): string {
-        return changes.some((change) => change.key.startsWith("flags.midi-qol"))
+    #getMidiIcon(changes: DeepPartial<EffectChangeData>[]): string {
+        return changes.some((change) =>
+            change.key?.startsWith("flags.midi-qol"),
+        )
             ? "<i class='fas fa-dice-d20 integration-icon' title='Midi-QoL Effects'></i> "
             : "";
     }
 
-    // TODO typing here
-    #getAtlIcon(changes: any[]): string {
-        return changes.some((change) => change.key.startsWith("ATL"))
+    #getAtlIcon(changes: DeepPartial<EffectChangeData>[]): string {
+        return changes.some((change) => change.key?.startsWith("ATL"))
             ? "<i class='fas fa-lightbulb integration-icon' title='ATL Effects'></i> "
             : "";
     }
 
-    #getTokenMagicIcon(changes: any[]): string {
+    #getTokenMagicIcon(changes: DeepPartial<EffectChangeData>[]): string {
         return changes.some((change) =>
-            change.key.startsWith("macro.tokenMagic"),
+            change.key?.startsWith("macro.tokenMagic"),
         )
             ? "<i class='fas fa-magic integration-icon' title='Token Magic Effects'></i> "
             : "";
