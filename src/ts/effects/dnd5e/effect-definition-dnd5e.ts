@@ -897,7 +897,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ],
             },
             subEffects: [this.#incapacitated],
-            otherEffects: [this.#prone],
         });
     }
 
