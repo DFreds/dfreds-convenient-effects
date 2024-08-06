@@ -355,19 +355,20 @@ class ConvenientEffectsController {
 
         if (!effect) return;
 
-        // // special handling for nested effects
-        // if (game.dfreds.effectInterface.hasNestedEffects(effect)) {
-        //     event.dataTransfer.setData(
-        //         "text/plain",
-        //         JSON.stringify({
-        //             effectName,
-        //         }),
-        //     );
-        //     return;
-        // }
-
-        const dragData = effect.toDragData();
-        event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
+        if (Flags.getNestedEffects(effect)) {
+            // Specially handle nested effect drops to trigger the dialog
+            // See dropActorSheetData hook for details
+            event.dataTransfer?.setData(
+                "text/plain",
+                JSON.stringify({
+                    effectId: Flags.getCeEffectId(effect),
+                }),
+            );
+        } else {
+            // Let regular core handle drop
+            const dragData = effect.toDragData();
+            event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
+        }
     }
 
     async onEffectDrop(event: DragEvent): Promise<void> {

@@ -1,4 +1,3 @@
-import Settings from "./settings.js";
 import { addNestedEffectsToEffectConfig } from "./ui/add-nested-effects-to-effect-config.js";
 
 /**
@@ -18,22 +17,3 @@ Hooks.on(
         addNestedEffectsToEffectConfig(activeEffectConfig, $html);
     },
 );
-
-/**
- * Handle dropping an effect onto an actor sheet
- */
-Hooks.on("dropActorSheetData", (actor, _actorSheetCharacter, data) => {
-    if (!data.effectName) return;
-
-    const effect = game.dfreds.effectInterface.findEffectByName(
-        data.effectName,
-    );
-
-    // core will handle the drop since we are not using a nested effect
-    if (!game.dfreds.effectInterface.hasNestedEffects(effect)) return;
-
-    game.dfreds.effectInterface.addEffect({
-        effectName: data.effectName,
-        uuid: actor.uuid,
-    });
-});

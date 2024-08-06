@@ -5,6 +5,7 @@ import { CreateEffects } from "./createEffects.ts";
 import { CreateItem } from "./createItem.ts";
 import { DeleteActiveEffect } from "./deleteActiveEffect.ts";
 import { DeleteItem } from "./deleteItem.ts";
+import { DropActorSheetData } from "./dropActorSheetData.ts";
 import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
 import { HotbarDrop } from "./hotbarDrop.ts";
 import { Init } from "./init.ts";
@@ -38,6 +39,7 @@ const HooksCE = {
             ChangeSidebarTab,
             CloseActiveEffectConfig,
             HotbarDrop,
+            DropActorSheetData,
         ];
 
         for (const listener of listeners) {
