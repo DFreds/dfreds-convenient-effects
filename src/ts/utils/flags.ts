@@ -14,10 +14,19 @@ class Flags {
         FOLDER_COLOR: "folderColor",
     };
 
-    static getCeEffectId(effect: ActiveEffect<any>): string | undefined {
-        return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as
-            | string
-            | undefined;
+    static getCeEffectId(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
+    ): string | undefined {
+        if (effect instanceof ActiveEffect) {
+            return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as
+                | string
+                | undefined;
+        } else {
+            return foundry.utils.getProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`,
+            );
+        }
     }
 
     static setCeEffectId(effect: object, ceEffectId: string): boolean {
@@ -49,10 +58,17 @@ class Flags {
     }
 
     static getNestedEffects(
-        effect: ActiveEffect<any>,
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
     ): PreCreate<ActiveEffectSource>[] {
-        return (effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECTS) ??
-            []) as PreCreate<ActiveEffectSource>[];
+        if (effect instanceof ActiveEffect) {
+            return (effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECTS) ??
+                []) as PreCreate<ActiveEffectSource>[];
+        } else {
+            return (foundry.utils.getProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECTS}`,
+            ) ?? []) as PreCreate<ActiveEffectSource>[];
+        }
     }
 
     static setNestedEffects(
