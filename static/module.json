@@ -2,7 +2,7 @@
     "id": "dfreds-convenient-effects",
     "title": "DFreds Convenient Effects",
     "description": "Adds easy to use toggleable active effects for common use cases",
-    "version": "6.0.3",
+    "version": "7.0.0",
     "compatibility": {
         "minimum": 12,
         "verified": "12.330",
