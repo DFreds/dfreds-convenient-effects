@@ -1,12 +1,12 @@
-import { ConvenientEffectsApp } from "./app/convenient-effects-app.ts";
+import { ConvenientEffectsApp } from "../app/convenient-effects-app.ts";
 import {
     ActiveEffectSource,
     EffectChangeData,
 } from "types/foundry/common/documents/active-effect.js";
 import { ItemSource } from "types/foundry/common/documents/item.js";
-import { Settings } from "./settings.ts";
-import { log } from "./logger.ts";
-import { Flags } from "./utils/flags.ts";
+import { Settings } from "../settings.ts";
+import { log } from "../logger.ts";
+import { Flags } from "./flags.ts";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;

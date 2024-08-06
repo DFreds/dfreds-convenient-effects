@@ -4,7 +4,7 @@ import {
     ItemEffects,
     MigrationType,
 } from "../effect-definition.ts";
-import { createConvenientEffect } from "../../helpers.ts";
+import { createConvenientEffect } from "../../utils/helpers.ts";
 import { COLORS, SECONDS } from "src/ts/constants.ts";
 
 // TODO special: unconscious should apply prone with otherEffects

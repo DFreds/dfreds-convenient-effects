@@ -1,6 +1,6 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
-import { findActorByUuid } from "../helpers.ts";
+import { findActorByUuid } from "../utils/helpers.ts";
 import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";

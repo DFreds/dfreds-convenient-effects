@@ -6,7 +6,7 @@ import {
     findEffectFolderItems,
     findEffectsForItem,
     getBaseType,
-} from "../helpers.ts";
+} from "../utils/helpers.ts";
 import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 import { Flags } from "../utils/flags.ts";

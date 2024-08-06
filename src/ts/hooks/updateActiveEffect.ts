@@ -1,5 +1,5 @@
 import { Listener } from "./index.ts";
-import { renderConvenientEffectsAppIfOpen } from "../helpers.ts";
+import { renderConvenientEffectsAppIfOpen } from "../utils/helpers.ts";
 import { Flags } from "../utils/flags.ts";
 
 /**

@@ -4,7 +4,7 @@ import {
     findActorByUuid,
     findEffectFolderItems,
     getActorUuids,
-} from "./helpers.ts";
+} from "./utils/helpers.ts";
 import { log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
 import { Flags } from "./utils/flags.ts";

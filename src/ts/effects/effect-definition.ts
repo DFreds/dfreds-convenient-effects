@@ -1,7 +1,7 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
-import { createConvenientItem, getBaseType } from "../helpers.ts";
+import { createConvenientItem, getBaseType } from "../utils/helpers.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
