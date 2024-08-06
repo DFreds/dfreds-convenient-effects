@@ -54,7 +54,7 @@
             >
                 <header
                     class="folder-header flexrow"
-                    style="background-color: {{data.folder.flags.dfreds-convenient-effects.folderColor}};"
+                    style="background-color: {{getFolderColorFlag data.folder}};"
                 >
                     <h3 class="noborder"><i
                             class="fas fa-folder-open fa-fw"
@@ -73,7 +73,7 @@
                             data-entry-id="{{effect.id}}"
                             data-document-id="{{effect.id}}"
                             data-document-name="{{effect.name}}"
-                            data-ce-effect-id="{{effect.flags.dfreds-convenient-effects.ceEffectId}}"
+                            data-ce-effect-id="{{getCeEffectIdFlag effect}}"
                             draggable="true"
                             style="display: flex;"
                         >

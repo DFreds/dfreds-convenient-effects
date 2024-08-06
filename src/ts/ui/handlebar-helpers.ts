@@ -16,7 +16,8 @@ class HandlebarHelpers {
         this.#registerIncHelper();
         this.#registerIsGmHelper();
         this.#registerCanCreateFoldersHelper();
-        this.#registerHasNestedEffectsHelper();
+        this.#registerGetFolderColorFlag();
+        this.#registerGetCeEffectIdFlag();
         this.#registerConvenientIconsHelper();
     }
 
@@ -42,9 +43,15 @@ class HandlebarHelpers {
         });
     }
 
-    #registerHasNestedEffectsHelper() {
-        Handlebars.registerHelper("hasNestedEffects", (effect) => {
-            return Flags.getNestedEffects(effect).length > 0;
+    #registerGetFolderColorFlag() {
+        Handlebars.registerHelper("getFolderColorFlag", (item) => {
+            return Flags.getFolderColor(item);
+        });
+    }
+
+    #registerGetCeEffectIdFlag() {
+        Handlebars.registerHelper("getCeEffectIdFlag", (effect) => {
+            return Flags.getCeEffectId(effect);
         });
     }
 
