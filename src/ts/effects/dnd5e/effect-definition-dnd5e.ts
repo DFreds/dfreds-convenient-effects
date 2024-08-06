@@ -640,7 +640,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "- A paralyzed creature is incapacitated (see the condition) and can't move or speak.<br/>- The creature automatically fails Strength and Dexterity saving throws. Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
                 img: "modules/dfreds-convenient-effects/images/paralyzed.svg",
-                statuses: ["paralyzed", "incapacitated"],
+                statuses: ["paralyzed"],
                 changes: [
                     {
                         key: `flags.midi-qol.fail.ability.save.dex`,
@@ -668,9 +668,9 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         value: "0",
                         priority: 25,
                     },
-                    ...(this.#incapacitated.changes ?? []),
                 ],
             },
+            subEffects: [this.#incapacitated],
         });
     }
 
@@ -678,7 +678,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         return createConvenientEffect({
             effect: {
                 name: "Petrified",
-                statuses: ["petrified", "incapacitated"],
+                statuses: ["petrified"],
                 description:
                     "- A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.<br/>- The creature is incapacitated (see the condition), can't move or speak, and is unaware of its surroundings.<br/>- Attack rolls against the creature have advantage.<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- The creature has resistance to all damage.<br/>- The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized. Remove all movement, grant advantage to all who attack, and add damage resistance to all magical and physical attacks",
                 img: "modules/dfreds-convenient-effects/images/petrified.svg",
@@ -719,9 +719,9 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         value: "0",
                         priority: 25,
                     },
-                    ...(this.#incapacitated.changes ?? []),
                 ],
             },
+            subEffects: [this.#incapacitated],
         });
     }
 
@@ -833,7 +833,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         return createConvenientEffect({
             effect: {
                 name: "Stunned",
-                statuses: ["stunned", "incapacitated"],
+                statuses: ["stunned"],
                 description:
                     "- A stunned creature is incapacitated (see the condition), can't move, and can speak only falteringly.<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.",
                 img: "modules/dfreds-convenient-effects/images/stunned.svg",
@@ -853,16 +853,16 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
-                    ...(this.#incapacitated.changes ?? []),
                 ],
             },
+            subEffects: [this.#incapacitated],
         });
     }
 
     get #unconscious(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
             effect: {
-                statuses: ["unconscious", "incapacitated", "prone"],
+                statuses: ["unconscious"],
                 name: "Unconscious",
                 description:
                     "- An unconscious creature is incapacitated (See the condition) can't move or speak, and is unaware of its surroundings.<br/>- The creature drops whatever its holding and falls prone (See the condition).<br/>- The creature automatically fails Strength and Dexterity saving throws.<br/>- Attack rolls against the creature have advantage.<br/>- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.",
@@ -3962,6 +3962,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Encumbered",
                 description: "Lowers movement by 10 ft.",
                 img: "icons/svg/down.svg",
+                statuses: ["encumbered"],
                 changes: [
                     {
                         key: "system.attributes.movement.all",
@@ -3981,6 +3982,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn",
                 img: "modules/dfreds-convenient-effects/images/dodging.svg",
+                statuses: ["dodging"],
                 flags: {
                     dae: {
                         specialDuration: ["turnStart"],
@@ -4076,6 +4078,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves",
                 img: "icons/svg/downgrade.svg",
+                statuses: ["heavilyEncumbered"],
                 changes: [
                     {
                         key: "system.attributes.movement.all",
