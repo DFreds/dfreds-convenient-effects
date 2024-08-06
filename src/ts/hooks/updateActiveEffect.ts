@@ -12,9 +12,13 @@ const UpdateActiveEffect: Listener = {
             (activeEffect: any, _data, _metadata, _userId) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
-                if (!isEffectConvenient(effect)) return;
-
-                renderConvenientEffectsAppIfOpen();
+                if (
+                    Flags.isConvenient(effect) &&
+                    effect.parent instanceof Item &&
+                    Flags.isConvenient(effect.parent)
+                ) {
+                    renderConvenientEffectsAppIfOpen();
+                }
                 // const statusesArray = Array.from(effect.statuses ?? []);
                 // if (isTemporary) {
                 //     statusesArray.unshift(
