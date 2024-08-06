@@ -193,26 +193,19 @@ class Sockets {
 
         if (!actor) return; // This should already be checked for before the socket
 
-        let effectToRemove: ActiveEffect<Actor<null>> | undefined;
+        const effectToRemove = actor.effects.find((activeEffect) => {
+            const isConvenient = Flags.isConvenient(activeEffect);
+            const isMatchingId = activeEffect.id === effectId;
+            const isMatchingName = activeEffect.name === effectName;
+            const isMatchingCeId =
+                Flags.getCeEffectId(activeEffect) === effectId;
 
-        if (origin) {
-            effectToRemove = actor.effects.find((activeEffect) => {
-                return (
-                    isEffectConvenient(activeEffect) &&
-                    (activeEffect.id === effectId ||
-                        activeEffect.name === effectName) &&
-                    activeEffect.origin === origin
-                );
-            });
-        } else {
-            effectToRemove = actor.effects.find((activeEffect) => {
-                return (
-                    isEffectConvenient(activeEffect) &&
-                    (activeEffect.id === effectId ||
-                        activeEffect.name === effectName)
-                );
-            });
-        }
+            const matches =
+                isConvenient &&
+                (isMatchingId || isMatchingName || isMatchingCeId);
+
+            return origin ? matches && activeEffect.origin === origin : matches;
+        });
 
         if (!effectToRemove) return;
 

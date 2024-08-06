@@ -11,12 +11,13 @@ import { Flags } from "./utils/flags.ts";
 
 interface IFindEffect {
     /**
-     * The folder ID. If included, it will only search this folder
+     * The foundry folder (item) ID. If included, it will only search this
+     * folder
      */
     folderId?: string | null;
 
     /**
-     * The effect ID
+     * The foundry effect ID or the CE effect ID
      */
     effectId?: string | null;
 
@@ -28,7 +29,7 @@ interface IFindEffect {
 
 interface IHasEffectApplied {
     /**
-     * The effect ID
+     * The foundry effect ID or the CE effect ID
      */
     effectId?: string;
 
@@ -45,7 +46,7 @@ interface IHasEffectApplied {
 
 interface IToggleEffect {
     /**
-     * The effect ID
+     * The foundry effect ID or the CE effect ID
      */
     effectId?: string;
 
@@ -79,8 +80,8 @@ interface IToggleEffect {
 
 interface IAddEffect {
     /**
-     * The ID of the effect to add. If defined, prioritized over `effectName` and
-     * `effectData`.
+     * The foundry effect ID or the CE effect ID. If defined, prioritized over
+     * `effectName` and `effectData`.
      */
     effectId?: string;
 
@@ -114,7 +115,8 @@ interface IAddEffect {
 
 interface IRemoveEffect {
     /**
-     * The ID of the effect to remove. If defined, prioritized over `effectName`.
+     * The foundry effect ID or the CE effect ID to remove. If defined,
+     * prioritized over `effectName`
      */
     effectId?: string;
 
@@ -174,10 +176,17 @@ class EffectInterface {
             )
             .flatMap((effectItem) => Array(...effectItem.effects))
             .map((effect) => effect as ActiveEffect<Item<null>>)
-            .filter(
-                (effect) =>
-                    effect.id === effectId || effect.name === effectName,
-            );
+            .filter((effect) => {
+                const isConvenient = Flags.isConvenient(effect);
+                const isMatchingId = effect.id === effectId;
+                const isMatchingName = effect.name === effectName;
+                const isMatchingCeId = Flags.getCeEffectId(effect) === effectId;
+
+                return (
+                    isConvenient &&
+                    (isMatchingId || isMatchingName || isMatchingCeId)
+                );
+            });
 
         if (matchingEffects.length > 1) {
             log(
@@ -205,12 +214,19 @@ class EffectInterface {
         const actor = findActorByUuid(uuid);
 
         return (
-            actor?.effects?.some(
-                (effect) =>
-                    isEffectConvenient(effect) &&
-                    (effect.id === effectId || effect.name === effectName) &&
-                    !effect.disabled,
-            ) ?? false
+            actor?.effects?.some((effect) => {
+                const isConvenient = Flags.isConvenient(effect);
+                const isEnabled = !effect.disabled;
+                const isMatchingId = effect.id === effectId;
+                const isMatchingName = effect.name === effectName;
+                const isMatchingCeId = Flags.getCeEffectId(effect) === effectId;
+
+                return (
+                    isConvenient &&
+                    isEnabled &&
+                    (isMatchingId || isMatchingName || isMatchingCeId)
+                );
+            }) ?? false
         );
     }
 
@@ -239,14 +255,12 @@ class EffectInterface {
         }
 
         if (actorUuids.length === 0) {
-            // TODO more descriptive error?
             ui.notifications.error(
                 `Please select or target a token to toggle this effect`,
             );
             return;
         }
 
-        // TODO use promise.all?
         for (const uuid of actorUuids) {
             if (this.hasEffectApplied({ effectId, effectName, uuid })) {
                 await this.removeEffect({ effectId, effectName, uuid, origin });
@@ -295,14 +309,10 @@ class EffectInterface {
         //     if (!effect) return; // dialog closed without selecting one
         // }
 
-        const coreFlags: DocumentFlags = {
-            core: {
-                overlay,
-            },
-        };
-        effectDataToSend.flags = foundry.utils.mergeObject(
-            effectDataToSend.flags ?? {},
-            coreFlags,
+        foundry.utils.setProperty(
+            effectDataToSend,
+            `flags.core.overlay`,
+            overlay,
         );
 
         if (origin) {
@@ -320,7 +330,6 @@ class EffectInterface {
         } satisfies SocketMessage);
     }
 
-    // TODO is adding/removing effect by effect ID viable?
     /**
      * Removes an effect matching the given params from an actor of the given
      * UUID. The effect removal is sent via a socket.

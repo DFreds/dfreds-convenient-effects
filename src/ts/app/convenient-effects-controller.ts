@@ -100,7 +100,7 @@ class ConvenientEffectsController {
      * @param event - event that corresponds to clicking an effect item
      */
     async onToggleEffect(event: Event): Promise<void> {
-        const effectId = this.#findClosestEffectIdByEvent(event);
+        const effectId = this.#findClosestCeEffectIdByEvent(event);
 
         if (!effectId) return;
 
@@ -111,7 +111,7 @@ class ConvenientEffectsController {
     }
 
     async onToggleOverlay(target: JQuery<HTMLElement>): Promise<void> {
-        const effectId = this.#findClosestEffectIdByElement(target);
+        const effectId = this.#findClosestCeEffectIdByElement(target);
 
         if (!effectId) return;
 
@@ -168,7 +168,7 @@ class ConvenientEffectsController {
 
     async onDuplicateEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
-        const effectId = this.#findClosestEffectIdByElement(target);
+        const effectId = this.#findClosestCeEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
@@ -210,7 +210,7 @@ class ConvenientEffectsController {
 
     async onEditEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
-        const effectId = this.#findClosestEffectIdByElement(target);
+        const effectId = this.#findClosestCeEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
@@ -233,7 +233,7 @@ class ConvenientEffectsController {
 
     async onDeleteEffect(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
-        const effectId = this.#findClosestEffectIdByElement(target);
+        const effectId = this.#findClosestCeEffectIdByElement(target);
 
         if (!folderId || !effectId) return;
 
@@ -345,7 +345,7 @@ class ConvenientEffectsController {
 
     onEffectDragStart(event: DragEvent): void {
         const folderId = this.#findClosestFolderIdByEvent(event);
-        const effectId = this.#findClosestEffectIdByEvent(event);
+        const effectId = this.#findClosestCeEffectIdByEvent(event);
 
         if (!folderId || !effectId) return;
 
@@ -448,20 +448,20 @@ class ConvenientEffectsController {
         }
     }
 
-    #findClosestEffectIdByElement(
+    #findClosestCeEffectIdByElement(
         element: JQuery<HTMLElement>,
     ): string | undefined {
         return element
-            .closest("[data-document-id], .convenient-effect")
-            .data("document-id");
+            .closest("[data-ce-effect-id], .convenient-effect")
+            .data("ce-effect-id");
     }
 
-    #findClosestEffectIdByEvent(event: Event): string | undefined {
+    #findClosestCeEffectIdByEvent(event: Event): string | undefined {
         if (!event.target) return;
 
         return $(event.target)
-            .closest("[data-document-id], .convenient-effect")
-            .data("document-id");
+            .closest("[data-ce-effect-id], .convenient-effect")
+            .data("ce-effect-id");
     }
 
     #findClosestFolderIdByElement(
