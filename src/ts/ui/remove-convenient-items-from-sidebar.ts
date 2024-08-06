@@ -1,5 +1,5 @@
 import { DEBUG } from "../constants.ts";
-import { findEffectFolderItems } from "../utils/helpers.ts";
+import { findEffectFolderItems } from "../utils/finds.ts";
 
 function removeConvenientItemsFromSidebar(
     directory: ItemDirectory<Item<null>>,

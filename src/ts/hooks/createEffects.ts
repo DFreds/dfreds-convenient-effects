@@ -4,7 +4,7 @@ import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
 import { Settings } from "../settings.ts";
 import { DEBUG } from "../constants.ts";
-import { findEffectFolderItems } from "../utils/helpers.ts";
+import { findEffectFolderItems } from "../utils/finds.ts";
 
 const CreateEffects: Listener = {
     listen(): void {

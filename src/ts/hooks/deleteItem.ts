@@ -1,4 +1,4 @@
-import { renderConvenientEffectsAppIfOpen } from "../utils/helpers.ts";
+import { renderAppIfOpen } from "../ui/render-app-if-open.ts";
 import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 
@@ -11,7 +11,7 @@ const DeleteItem: Listener = {
             const itemType = item as Item<any>;
 
             if (Flags.isConvenient(itemType)) {
-                renderConvenientEffectsAppIfOpen();
+                renderAppIfOpen();
             }
         });
     },

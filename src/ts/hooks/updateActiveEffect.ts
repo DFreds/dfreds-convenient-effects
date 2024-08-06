@@ -1,6 +1,6 @@
 import { Listener } from "./index.ts";
-import { renderConvenientEffectsAppIfOpen } from "../utils/helpers.ts";
 import { Flags } from "../utils/flags.ts";
+import { renderAppIfOpen } from "../ui/render-app-if-open.ts";
 
 /**
  * Handle re-rendering the app if it is open and an update occurs
@@ -17,7 +17,7 @@ const UpdateActiveEffect: Listener = {
                     effect.parent instanceof Item &&
                     Flags.isConvenient(effect.parent)
                 ) {
-                    renderConvenientEffectsAppIfOpen();
+                    renderAppIfOpen();
                 }
                 // const statusesArray = Array.from(effect.statuses ?? []);
                 // if (isTemporary) {

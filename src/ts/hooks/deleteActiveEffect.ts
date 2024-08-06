@@ -1,5 +1,5 @@
+import { renderAppIfOpen } from "../ui/render-app-if-open.ts";
 import { Listener } from "./index.ts";
-import { renderConvenientEffectsAppIfOpen } from "../utils/helpers.ts";
 import { Flags } from "../utils/flags.ts";
 
 /**
@@ -17,7 +17,7 @@ const DeleteActiveEffect: Listener = {
                     effect.parent instanceof Item &&
                     Flags.isConvenient(effect.parent)
                 ) {
-                    renderConvenientEffectsAppIfOpen();
+                    renderAppIfOpen();
                 }
 
                 if (effect.parent instanceof Actor) {

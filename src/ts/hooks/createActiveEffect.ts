@@ -1,4 +1,4 @@
-import { renderConvenientEffectsAppIfOpen } from "../utils/helpers.ts";
+import { renderAppIfOpen } from "../ui/render-app-if-open.ts";
 import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 
@@ -17,7 +17,7 @@ const CreateActiveEffect: Listener = {
                     effect.parent instanceof Item &&
                     Flags.isConvenient(effect.parent)
                 ) {
-                    renderConvenientEffectsAppIfOpen();
+                    renderAppIfOpen();
                 }
             },
         );

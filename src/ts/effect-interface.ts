@@ -1,10 +1,7 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "./settings.ts";
-import {
-    findActorByUuid,
-    findEffectFolderItems,
-    getActorUuids,
-} from "./utils/helpers.ts";
+import { findActorByUuid, findEffectFolderItems } from "./utils/finds.ts";
+import { getActorUuids } from "./utils/gets.ts";
 import { log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
 import { Flags } from "./utils/flags.ts";

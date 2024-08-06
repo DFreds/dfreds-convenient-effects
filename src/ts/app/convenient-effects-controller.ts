@@ -3,10 +3,9 @@ import { Settings } from "../settings.ts";
 import {
     createConvenientEffect,
     createConvenientItem,
-    findEffectFolderItems,
-    findEffectsForItem,
-    getBaseType,
-} from "../utils/helpers.ts";
+} from "../utils/creates.ts";
+import { findEffectFolderItems, findEffectsForItem } from "../utils/finds.ts";
+import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 import { Flags } from "../utils/flags.ts";
