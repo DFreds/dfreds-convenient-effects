@@ -13,4 +13,8 @@ function log(data: string | any): void {
     }
 }
 
-export { log };
+function error(message: string): void {
+    console.error(`${MODULE_ID} | ${message}`);
+}
+
+export { log, error };

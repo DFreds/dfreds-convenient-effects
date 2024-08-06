@@ -2,7 +2,7 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { Settings } from "./settings.ts";
 import { findActorByUuid, findEffectFolderItems } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
-import { log } from "./logger.ts";
+import { error, log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
 import { Flags } from "./utils/flags.ts";
 import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
@@ -253,7 +253,7 @@ class EffectInterface {
         }
 
         if (actorUuids.length === 0) {
-            ui.notifications.error(
+            ui.notifications.warn(
                 `Please select or target a token to toggle this effect`,
             );
             return;
@@ -265,7 +265,7 @@ class EffectInterface {
         });
 
         if (!effectDataToSend) {
-            ui.notifications.error("Cannot find effect to toggle");
+            error("Cannot find effect to toggle");
             return;
         }
 
@@ -323,12 +323,12 @@ class EffectInterface {
         });
 
         if (!effectDataToSend) {
-            ui.notifications.error("Cannot find effect to add");
+            error("Cannot find effect to add");
             return;
         }
 
         if (!findActorByUuid(uuid)) {
-            ui.notifications.error(`Actor ${uuid} could not be found`);
+            error(`Actor ${uuid} could not be found`);
             return;
         }
 
@@ -371,12 +371,12 @@ class EffectInterface {
         });
 
         if (!effectDataToSend) {
-            ui.notifications.error("Cannot find effect to remove");
+            error("Cannot find effect to remove");
             return;
         }
 
         if (!findActorByUuid(uuid)) {
-            ui.notifications.error(`Actor ${uuid} could not be found`);
+            error(`Actor ${uuid} could not be found`);
             return;
         }
 
