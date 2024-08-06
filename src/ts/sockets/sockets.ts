@@ -1,9 +1,9 @@
 import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
-import { findActorByUuid, isEffectConvenient } from "../helpers.ts";
+import { findActorByUuid } from "../helpers.ts";
 import { log } from "../logger.ts";
-import { FLAGS } from "../constants.ts";
 import { Mapping } from "../effects/mapping.ts";
+import { Flags } from "../utils/flags.ts";
 
 interface AddEffectMessage {
     request: "addEffect";
@@ -130,7 +130,8 @@ class Sockets {
 
         if (!actor) return; // This should already be checked for before the socket
 
-        if (effectData.flags?.[MODULE_ID]?.[FLAGS.IS_DYNAMIC]) {
+        const isDynamic = Flags.isDynamic(effectData);
+        if (isDynamic) {
             const mapping = new Mapping();
             const systemDefinition = mapping.findSystemDefinitionForSystemId();
 
@@ -149,26 +150,20 @@ class Sockets {
             },
         );
 
-        if (effectData.flags?.[MODULE_ID]?.[FLAGS.SUB_EFFECTS]) {
-            const subEffects = (effectData.flags?.[MODULE_ID]?.[
-                FLAGS.SUB_EFFECTS
-            ] ?? []) as PreCreate<ActiveEffectSource>[];
-
+        const subEffects = Flags.getSubEffects(effectData);
+        if (subEffects) {
             // Apply all sub-effects with the original effect being the origin
             for (const subEffect of subEffects) {
                 await game.dfreds.effectInterface.addEffect({
                     effectData: subEffect,
                     uuid,
-                    origin: createdEffects[0].id as ActiveEffectOrigin,
+                    origin: createdEffects[0].id as ActiveEffectOrigin, // TODO use uuid? or ce effect ID?
                 });
             }
         }
 
-        if (effectData.flags?.[MODULE_ID]?.[FLAGS.OTHER_EFFECTS]) {
-            const otherEffects = (effectData.flags?.[MODULE_ID]?.[
-                FLAGS.OTHER_EFFECTS
-            ] ?? []) as PreCreate<ActiveEffectSource>[];
-
+        const otherEffects = Flags.getOtherEffects(effectData);
+        if (otherEffects) {
             // Apply all other effects with no origin
             for (const otherEffect of otherEffects) {
                 await game.dfreds.effectInterface.addEffect({

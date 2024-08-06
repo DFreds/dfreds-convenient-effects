@@ -1,17 +1,18 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ConvenientEffectsApp } from "./app/convenient-effects-app.ts";
-import { FLAGS } from "./constants.ts";
 import {
     ActiveEffectSource,
     EffectChangeData,
 } from "types/foundry/common/documents/active-effect.js";
-import { ItemFlags, ItemSource } from "types/foundry/common/documents/item.js";
+import { ItemSource } from "types/foundry/common/documents/item.js";
 import { Settings } from "./settings.ts";
 import { log } from "./logger.ts";
+import { Flags } from "./utils/flags.ts";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
 }
+
+// TODO break out into other util funcs
 
 // TODO method for hiding/showing individual effects/folder from players using IS_VIEWABLE
 interface ICreateEffectAddOns {
@@ -28,14 +29,9 @@ interface ICreateEffectAddOns {
 function createConvenientItem({
     item,
 }: ICreateItemAddOns): PreCreate<ItemSource> {
-    const itemFlags = item.flags ?? {};
-    const ceFlags: DeepPartial<ItemFlags> = {};
+    Flags.setIsConvenient(item, true); // TODO use to filter out of item directory
+    Flags.setIsViewable(item, true);
 
-    ceFlags[MODULE_ID] = {};
-    ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true; // TODO use to filter from item directory
-    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true;
-
-    item.flags = foundry.utils.mergeObject(ceFlags, itemFlags);
     item.img =
         item.img ?? "modules/dfreds-convenient-effects/images/magic-palm.svg";
 
@@ -52,20 +48,12 @@ function createConvenientEffect({
     subEffects = [],
     otherEffects = [],
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
-    const effectFlags = effect.flags ?? {};
-    const ceFlags: DeepPartial<DocumentFlags> = {};
-
-    ceFlags[MODULE_ID] = {};
-
-    ceFlags[MODULE_ID]![FLAGS.IS_CONVENIENT] = true;
-    ceFlags[MODULE_ID]![FLAGS.IS_VIEWABLE] = true;
-
-    ceFlags[MODULE_ID]![FLAGS.IS_DYNAMIC] = isDynamic;
-    ceFlags[MODULE_ID]![FLAGS.NESTED_EFFECTS] = nestedEffects;
-    ceFlags[MODULE_ID]![FLAGS.SUB_EFFECTS] = subEffects;
-    ceFlags[MODULE_ID]![FLAGS.OTHER_EFFECTS] = otherEffects;
-
-    effect.flags = foundry.utils.mergeObject(ceFlags, effectFlags);
+    Flags.setIsConvenient(effect, true);
+    Flags.setIsViewable(effect, true);
+    Flags.setIsDynamic(effect, isDynamic);
+    Flags.setNestedEffects(effect, nestedEffects);
+    Flags.setSubEffects(effect, subEffects);
+    Flags.setOtherEffects(effect, otherEffects);
 
     if (isTemporary) {
         log("isTemp"); // TODO remove or do something for making passive effects
@@ -108,7 +96,7 @@ function findActorByUuid(
 function findEffectFolderItems(): Item<null>[] {
     return game.items
         .filter((item) => {
-            const isConvenient = isItemConvenient(item);
+            const isConvenient = Flags.isConvenient(item);
             return isConvenient;
         })
         .sort((itemA, itemB) => {
@@ -186,23 +174,6 @@ function getBaseType(): string {
 }
 
 /**
- * Checks if the effect is flagged as convenient
- *
- * @param activeEffect - The effect to check
- * @returns true if it is convenient, false otherwise
- */
-function isEffectConvenient(activeEffect: ActiveEffect<any>): boolean {
-    return (
-        (activeEffect.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) as boolean) ??
-        false
-    );
-}
-
-function isItemConvenient(item: Item<any>): boolean {
-    return (item.getFlag(MODULE_ID, FLAGS.IS_CONVENIENT) as boolean) ?? false;
-}
-
-/**
  * Re-renders the Convenient Effects application if it's open
  */
 function renderConvenientEffectsAppIfOpen(): void {
@@ -222,7 +193,5 @@ export {
     findEffectsForItem,
     getActorUuids,
     getBaseType,
-    isEffectConvenient,
-    isItemConvenient,
     renderConvenientEffectsAppIfOpen,
 };

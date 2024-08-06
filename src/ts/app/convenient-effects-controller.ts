@@ -1,4 +1,3 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ConvenientEffectsApp } from "./convenient-effects-app.ts";
 import { Settings } from "../settings.ts";
 import {
@@ -9,9 +8,8 @@ import {
     getBaseType,
 } from "../helpers.ts";
 import { log } from "../logger.ts";
-import { FLAGS } from "../constants.ts";
-import { ItemFlags } from "types/foundry/common/documents/item.js";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
+import { Flags } from "../utils/flags.ts";
 
 interface ViewData {
     folderData: FolderData[];
@@ -128,19 +126,16 @@ class ConvenientEffectsController {
         const result = await getInputFromDialog({});
 
         if (result.operation === "create") {
-            const flags: DeepPartial<ItemFlags> = {};
-            flags[MODULE_ID] = {};
-            flags[MODULE_ID]![FLAGS.FOLDER_COLOR] = result.data.color;
+            const itemData = createConvenientItem({
+                item: {
+                    name: result.data.name,
+                    type: getBaseType(),
+                },
+            });
 
-            const item = await Item.create(
-                createConvenientItem({
-                    item: {
-                        name: result.data.name,
-                        type: getBaseType(),
-                        flags,
-                    },
-                }),
-            );
+            Flags.setFolderColor(itemData, result.data.color);
+
+            const item = await Item.create(itemData);
 
             log(`Created item ${item?.id}`);
         }
@@ -204,11 +199,7 @@ class ConvenientEffectsController {
         const result = await getInputFromDialog({ folder });
 
         if (result.operation === "update") {
-            await folder.setFlag(
-                MODULE_ID,
-                FLAGS.FOLDER_COLOR,
-                result.data.color,
-            );
+            await Flags.setFolderColor(folder, result.data.color);
             await folder.update({
                 name: result.data.name,
             });

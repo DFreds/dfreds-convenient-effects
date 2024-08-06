@@ -4,10 +4,10 @@ import {
     findActorByUuid,
     findEffectFolderItems,
     getActorUuids,
-    isEffectConvenient,
 } from "./helpers.ts";
 import { log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
+import { Flags } from "./utils/flags.ts";
 
 interface IFindEffect {
     /**

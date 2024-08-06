@@ -1,11 +1,9 @@
-import { id as MODULE_ID } from "@static/module.json";
-import { FLAGS } from "../constants.ts";
 import {
     ActiveEffectSource,
     EffectChangeData,
-    // EffectChangeData,
 } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
+import { Flags } from "../utils/flags.ts";
 
 class HandlebarHelpers {
     #settings: Settings;
@@ -46,10 +44,7 @@ class HandlebarHelpers {
 
     #registerHasNestedEffectsHelper() {
         Handlebars.registerHelper("hasNestedEffects", (effect) => {
-            const nestedEffects =
-                effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
-
-            return nestedEffects.length > 0;
+            return Flags.getNestedEffects(effect).length > 0;
         });
     }
 
@@ -59,18 +54,7 @@ class HandlebarHelpers {
             (effect: ActiveEffect<any>) => {
                 let icons = "";
 
-                const nestedEffects = (effect.getFlag(
-                    MODULE_ID,
-                    FLAGS.NESTED_EFFECTS,
-                ) ?? []) as PreCreate<ActiveEffectSource>[];
-
-                // const nestedEffects: ActiveEffect<any>[] = nestedEffectData.map(
-                //     (data) => {
-                //         return game.dfreds.effectInterface.findEffect({
-                //             effectId: data.id,
-                //         });
-                //     },
-                // );
+                const nestedEffects = Flags.getNestedEffects(effect);
 
                 const effectChanges = (effect.changes ??
                     []) as DeepPartial<EffectChangeData>[];

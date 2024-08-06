@@ -1,8 +1,6 @@
 import { Listener } from "./index.ts";
-import {
-    isEffectConvenient,
-    renderConvenientEffectsAppIfOpen,
-} from "../helpers.ts";
+import { renderConvenientEffectsAppIfOpen } from "../helpers.ts";
+import { Flags } from "../utils/flags.ts";
 
 /**
  * Handle re-rendering the app if it is open and an update occurs

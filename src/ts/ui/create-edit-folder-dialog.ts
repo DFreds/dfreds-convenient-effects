@@ -1,5 +1,4 @@
-import { id as MODULE_ID } from "@static/module.json";
-import { FLAGS } from "../constants.ts";
+import { Flags } from "../utils/flags.ts";
 
 interface FolderResolve {
     data: {
@@ -14,9 +13,7 @@ async function getInputFromDialog({
 }: {
     folder?: Item<null> | null;
 }): Promise<FolderResolve> {
-    const color = folder?.id
-        ? (folder.getFlag(MODULE_ID, FLAGS.FOLDER_COLOR) as string)
-        : "";
+    const color = folder?.id ? Flags.getFolderColor(folder) : "";
     const content = await renderTemplate(
         "modules/dfreds-convenient-effects/templates/create-edit-folder-dialog.hbs",
         {

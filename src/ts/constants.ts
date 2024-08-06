@@ -1,16 +1,5 @@
 export const DEBUG = true;
 
-export const FLAGS = {
-    DESCRIPTION: "description",
-    IS_CONVENIENT: "isConvenient",
-    IS_DYNAMIC: "isDynamic",
-    IS_VIEWABLE: "isViewable",
-    NESTED_EFFECTS: "nestedEffects",
-    SUB_EFFECTS: "subEffects",
-    OTHER_EFFECTS: "otherEffects",
-    FOLDER_COLOR: "folderColor",
-};
-
 export const COLORS = {
     COLD_FIRE: "#389888",
     FIRE: "#f98026",

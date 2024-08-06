@@ -1,7 +1,5 @@
-import {
-    isItemConvenient,
-    renderConvenientEffectsAppIfOpen,
-} from "../helpers.ts";
+import { renderConvenientEffectsAppIfOpen } from "../helpers.ts";
+import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 
 /**
@@ -12,7 +10,7 @@ const UpdateItem: Listener = {
         Hooks.on("updateItem", (item: any, _data, _metadata, _userId) => {
             const itemType = item as Item<any>;
 
-            if (isItemConvenient(itemType)) {
+            if (Flags.isConvenient(itemType)) {
                 renderConvenientEffectsAppIfOpen();
             }
         });
