@@ -48,6 +48,7 @@ function createConvenientEffect({
     subEffects = [],
     otherEffects = [],
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
+    Flags.setCeEffectId(effect, createCeEffectId(effect));
     Flags.setIsConvenient(effect, true);
     Flags.setIsViewable(effect, true);
     Flags.setIsDynamic(effect, isDynamic);
@@ -71,6 +72,11 @@ function createConvenientEffect({
     return effect;
 }
 
+function createCeEffectId(effect: PreCreate<ActiveEffectSource>): string {
+    return `ce-${effect.name?.slugify({ strict: true })}`;
+}
+
+// TODO async this
 /**
  * Gets the actor object by the actor UUID
  *
@@ -186,6 +192,7 @@ function renderConvenientEffectsAppIfOpen(): void {
 }
 
 export {
+    createCeEffectId,
     createConvenientItem,
     createConvenientEffect,
     findActorByUuid,

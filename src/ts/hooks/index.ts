@@ -8,6 +8,7 @@ import { DeleteItem } from "./deleteItem.ts";
 import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
 import { HotbarDrop } from "./hotbarDrop.ts";
 import { Init } from "./init.ts";
+import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
 import { Ready } from "./ready.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
@@ -30,6 +31,7 @@ const HooksCE = {
             UpdateItem,
             DeleteItem,
             CreateActiveEffect,
+            PreUpdateActiveEffect,
             UpdateActiveEffect,
             DeleteActiveEffect,
             RenderItemDirectory,
