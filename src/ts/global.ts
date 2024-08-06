@@ -71,4 +71,14 @@ declare global {
     interface MyUser extends User<Actor<null>> {
         hasPermission(permission: string | UserPermission): boolean;
     }
+
+    interface String {
+        slugify({
+            replacement,
+            strict,
+        }: {
+            replacement?: string;
+            strict?: boolean;
+        }): string;
+    }
 }
