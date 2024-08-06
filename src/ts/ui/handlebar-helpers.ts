@@ -65,13 +65,13 @@ class HandlebarHelpers {
 
                 const effectChanges = (effect.changes ??
                     []) as DeepPartial<EffectChangeData>[];
-                const subChanges = nestedEffects
-                    .flatMap((nestedEffect) => nestedEffect.changes)
-                    .filter((change) => change !== undefined);
+                const nestedChanges = nestedEffects
+                    ?.flatMap((nestedEffect) => nestedEffect.changes)
+                    ?.filter((change) => change !== undefined);
 
                 const allChanges = [
                     ...effectChanges,
-                    ...subChanges,
+                    ...(nestedChanges ?? []),
                 ] as DeepPartial<EffectChangeData>[];
 
                 icons += this.#getNestedEffectsIcon(nestedEffects);
@@ -85,9 +85,9 @@ class HandlebarHelpers {
     }
 
     #getNestedEffectsIcon(
-        nestedEffects: PreCreate<ActiveEffectSource>[],
+        nestedEffects: PreCreate<ActiveEffectSource>[] | undefined,
     ): string {
-        return nestedEffects.length > 0
+        return nestedEffects && nestedEffects.length > 0
             ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
             : "";
     }

@@ -39,30 +39,37 @@ function createConvenientEffect({
     effect,
     isTemporary = true,
     isDynamic = false,
-    atlChanges = [],
-    tokenMagicChanges = [],
-    nestedEffects = [],
-    subEffects = [],
-    otherEffects = [],
+    atlChanges,
+    tokenMagicChanges,
+    nestedEffects,
+    subEffects,
+    otherEffects,
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     Flags.setCeEffectId(effect, createCeEffectId(effect));
     Flags.setIsConvenient(effect, true);
     Flags.setIsViewable(effect, true);
     Flags.setIsDynamic(effect, isDynamic);
-    Flags.setNestedEffects(effect, nestedEffects);
-    Flags.setSubEffects(effect, subEffects);
-    Flags.setOtherEffects(effect, otherEffects);
+
+    if (nestedEffects) {
+        Flags.setNestedEffects(effect, nestedEffects);
+    }
+    if (subEffects) {
+        Flags.setSubEffects(effect, subEffects);
+    }
+    if (otherEffects) {
+        Flags.setOtherEffects(effect, otherEffects);
+    }
 
     if (isTemporary) {
         log("isTemp"); // TODO remove or do something for making passive effects
     }
 
     const settings = new Settings();
-    if (settings.integrateWithAte) {
+    if (settings.integrateWithAte && atlChanges) {
         effect.changes?.push(...atlChanges);
     }
 
-    if (settings.integrateWithTokenMagic) {
+    if (settings.integrateWithTokenMagic && tokenMagicChanges) {
         effect.changes?.push(...tokenMagicChanges);
     }
 

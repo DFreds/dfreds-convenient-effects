@@ -59,15 +59,16 @@ class Flags {
 
     static getNestedEffects(
         effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): PreCreate<ActiveEffectSource>[] {
+    ): PreCreate<ActiveEffectSource>[] | undefined {
         if (effect instanceof ActiveEffect) {
-            return (effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECTS) ??
-                []) as PreCreate<ActiveEffectSource>[];
+            return effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECTS) as
+                | PreCreate<ActiveEffectSource>[]
+                | undefined;
         } else {
-            return (foundry.utils.getProperty(
+            return foundry.utils.getProperty(
                 effect,
                 `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECTS}`,
-            ) ?? []) as PreCreate<ActiveEffectSource>[];
+            ) as PreCreate<ActiveEffectSource>[] | undefined;
         }
     }
 
@@ -84,11 +85,11 @@ class Flags {
 
     static getSubEffects(
         effect: PreCreate<ActiveEffectSource>,
-    ): PreCreate<ActiveEffectSource>[] {
-        return (foundry.utils.getProperty(
+    ): PreCreate<ActiveEffectSource>[] | undefined {
+        return foundry.utils.getProperty(
             effect,
             `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECTS}`,
-        ) ?? []) as PreCreate<ActiveEffectSource>[];
+        ) as PreCreate<ActiveEffectSource>[] | undefined;
     }
 
     static setSubEffects(
@@ -104,11 +105,11 @@ class Flags {
 
     static getOtherEffects(
         effect: PreCreate<ActiveEffectSource>,
-    ): PreCreate<ActiveEffectSource>[] {
-        return (foundry.utils.getProperty(
+    ): PreCreate<ActiveEffectSource>[] | undefined {
+        return foundry.utils.getProperty(
             effect,
             `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECTS}`,
-        ) ?? []) as PreCreate<ActiveEffectSource>[];
+        ) as PreCreate<ActiveEffectSource>[] | undefined;
     }
 
     static setOtherEffects(
@@ -130,10 +131,9 @@ class Flags {
      */
     static isConvenient(document: ActiveEffect<any> | Item<null>): boolean {
         return (
-            (document.getFlag(
-                MODULE_ID,
-                this.#KEYS.IS_CONVENIENT,
-            ) as boolean) ?? false
+            (document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as
+                | boolean
+                | undefined) ?? false
         );
     }
 
@@ -150,8 +150,9 @@ class Flags {
     ): boolean {
         if (effect instanceof ActiveEffect) {
             return (
-                (effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as boolean) ??
-                false
+                (effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as
+                    | boolean
+                    | undefined) ?? false
             );
         } else {
             return (

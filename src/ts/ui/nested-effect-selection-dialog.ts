@@ -36,7 +36,7 @@ async function getNestedEffectSelection(
         { width: 300 },
     )) as string | undefined;
 
-    return nestedEffects.find((nestedEffect) => nestedEffect.name === choice);
+    return nestedEffects?.find((nestedEffect) => nestedEffect.name === choice);
 }
 
 export { getNestedEffectSelection };
