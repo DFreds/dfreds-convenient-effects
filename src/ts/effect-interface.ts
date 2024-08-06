@@ -5,6 +5,7 @@ import { getActorUuids } from "./utils/gets.ts";
 import { log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
 import { Flags } from "./utils/flags.ts";
+import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
 
 interface IFindEffect {
     /**
@@ -258,13 +259,40 @@ class EffectInterface {
             return;
         }
 
+        const effectDataToSend = await this.#getEffectDataToSend({
+            effectId,
+            effectName,
+        });
+
+        if (!effectDataToSend) {
+            ui.notifications.error("Cannot find effect to toggle");
+            return;
+        }
+
         for (const uuid of actorUuids) {
-            if (this.hasEffectApplied({ effectId, effectName, uuid })) {
-                await this.removeEffect({ effectId, effectName, uuid, origin });
+            if (
+                this.hasEffectApplied({
+                    effectId:
+                        effectDataToSend._id ??
+                        Flags.getCeEffectId(effectDataToSend),
+                    effectName: effectDataToSend.name,
+                    uuid,
+                })
+            ) {
+                await this.removeEffect({
+                    effectId:
+                        effectDataToSend._id ??
+                        Flags.getCeEffectId(effectDataToSend),
+                    effectName: effectDataToSend.name,
+                    uuid,
+                    origin,
+                });
             } else {
                 await this.addEffect({
-                    effectId,
-                    effectName,
+                    effectId:
+                        effectDataToSend._id ??
+                        Flags.getCeEffectId(effectDataToSend),
+                    effectName: effectDataToSend.name,
                     uuid,
                     overlay,
                     origin,
@@ -288,8 +316,11 @@ class EffectInterface {
         overlay = false,
         origin,
     }: IAddEffect): Promise<void> {
-        const effect = this.findEffect({ effectId, effectName });
-        const effectDataToSend = effect?.toObject() ?? effectData;
+        const effectDataToSend = await this.#getEffectDataToSend({
+            effectId,
+            effectName,
+            effectData,
+        });
 
         if (!effectDataToSend) {
             ui.notifications.error("Cannot find effect to add");
@@ -301,11 +332,6 @@ class EffectInterface {
             return;
         }
 
-        // if (this.hasNestedEffects(effect) > 0) {
-        //     effect = await this._getNestedEffectSelection(effect);
-        //     if (!effect) return; // dialog closed without selecting one
-        // }
-
         foundry.utils.setProperty(
             effectDataToSend,
             `flags.core.overlay`,
@@ -315,8 +341,6 @@ class EffectInterface {
         if (origin) {
             effectDataToSend.origin = origin;
         }
-
-        // TODO this needs to do any nested effects. Nested effects are handled by client
 
         game.dfreds.sockets.emitAddEffect({
             request: "addEffect",
@@ -341,7 +365,12 @@ class EffectInterface {
         uuid,
         origin,
     }: IRemoveEffect): Promise<void> {
-        if (!effectId && !effectName) {
+        const effectDataToSend = await this.#getEffectDataToSend({
+            effectId,
+            effectName,
+        });
+
+        if (!effectDataToSend) {
             ui.notifications.error("Cannot find effect to remove");
             return;
         }
@@ -351,13 +380,13 @@ class EffectInterface {
             return;
         }
 
-        // TODO this needs to do any nested effects
-
         game.dfreds.sockets.emitRemoveEffect({
             request: "removeEffect",
             data: {
-                effectId,
-                effectName,
+                effectId:
+                    effectDataToSend._id ??
+                    Flags.getCeEffectId(effectDataToSend),
+                effectName: effectDataToSend.name,
                 uuid,
                 origin,
             },
@@ -366,20 +395,6 @@ class EffectInterface {
 
     // TODO needs socket through GM probably?
     // async createNewEffects({ effects }: ICreateNewEffects): Promise<void> {}
-
-    // TODO
-    /**
-     * Checks if the given effect has nested effects
-     *
-     * @param effect - the active effect to check the nested effects on
-     * @returns true if the effect has a nested effect
-     */
-    // hasNestedEffects(effect: ActiveEffect<Item<null>>): boolean {
-    //     const nestedEffects =
-    //         effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
-
-    //     return nestedEffects.length > 0;
-    // }
 
     // TODO should this be exposed in the interface?
     async resetMigrations(): Promise<void> {
@@ -393,39 +408,27 @@ class EffectInterface {
         await this.#settings.clearRanMigrations();
     }
 
-    // async #getNestedEffectSelection(effect: ActiveEffect<any>) {
-    //     const nestedEffectNames =
-    //         effect.getFlag(MODULE_ID, FLAGS.NESTED_EFFECTS) ?? [];
-    //     const nestedEffects = nestedEffectNames
-    //         .map((nestedEffect) =>
-    //             game.dfreds.effectInterface.findEffectByName(nestedEffect),
-    //         )
-    //         .filter((effect) => effect !== undefined);
+    async #getEffectDataToSend({
+        effectId,
+        effectName,
+        effectData,
+    }: {
+        effectId?: string | null;
+        effectName?: string | null;
+        effectData?: PreCreate<ActiveEffectSource>;
+    }): Promise<PreCreate<ActiveEffectSource> | undefined> {
+        const effect = this.findEffect({ effectId, effectName });
+        let effectDataToSend = effect?.toObject() ?? effectData;
 
-    //     const content = await renderTemplate(
-    //         "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
-    //         { parentEffect: effect, nestedEffects },
-    //     );
-    //     const choice = await Dialog.prompt(
-    //         {
-    //             title: effect.name,
-    //             content: content,
-    //             label: "Select Effect",
-    //             callback: (html) => {
-    //                 const htmlChoice = html
-    //                     .find('select[name="effect-choice"]')
-    //                     .val();
-    //                 return htmlChoice;
-    //             },
-    //             rejectClose: false,
-    //         },
-    //         { width: 300 },
-    //     );
+        if (
+            effectDataToSend &&
+            Flags.getNestedEffects(effectDataToSend).length > 0
+        ) {
+            effectDataToSend = await getNestedEffectSelection(effectDataToSend);
+        }
 
-    //     return nestedEffects.find(
-    //         (nestedEffect) => nestedEffect.name === choice,
-    //     );
-    // }
+        return effectDataToSend;
+    }
 }
 
 export { EffectInterface };

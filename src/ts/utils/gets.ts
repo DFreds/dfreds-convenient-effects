@@ -29,4 +29,25 @@ function getBaseType(): string {
     return types[0] ?? "";
 }
 
+// function effectsByActorMappings(): {
+//     actor: Actor<any>;
+//     effects: ActiveEffect<Actor<any>>;
+// }[] {
+//     return canvas.tokens.controlled
+//         .filter((token) => {
+//             const effects = token.actor.effects.filter(
+//                 (activeEffect) => activeEffect.isTemporary,
+//             );
+//             return effects.length > 0;
+//         })
+//         .map((token) => {
+//             const actor = token.actor;
+//             const effects = token.actor.effects.filter(
+//                 (activeEffect) => activeEffect.isTemporary,
+//             );
+
+//             return { actor, effects };
+//         });
+// }
+
 export { getActorUuids, getBaseType };
