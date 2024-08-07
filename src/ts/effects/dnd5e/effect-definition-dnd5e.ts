@@ -2576,7 +2576,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #passWithoutTrace(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Pass without Trace",
@@ -2593,6 +2592,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "fog",
+                },
+            ],
         });
     }
 
@@ -2615,7 +2621,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #protectionFromEnergyAcid(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Protection from Acid",
@@ -2633,11 +2638,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "clover",
+                },
+            ],
         });
     }
 
     get #protectionFromEnergyCold(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Protection from Cold",
@@ -2655,11 +2666,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "pure-ice-aura",
+                },
+            ],
         });
     }
 
     get #protectionFromEnergyFire(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Protection from Fire",
@@ -2677,11 +2694,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "pure-fire-aura",
+                },
+            ],
         });
     }
 
     get #protectionFromEnergyLightning(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Protection from Lightning",
@@ -2699,11 +2722,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "electric",
+                },
+            ],
         });
     }
 
     get #protectionFromEnergyThunder(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Protection from Thunder",
@@ -2721,11 +2750,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "shockwave",
+                },
+            ],
         });
     }
 
     get #protectionFromPoison(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Protection from Poison",
@@ -2743,6 +2778,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "bevel",
+                },
+            ],
         });
     }
 
@@ -3034,7 +3076,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #stoneskin(): PreCreate<ActiveEffectSource> {
-        // TODO token magic effects
         return createConvenientEffect({
             effect: {
                 name: "Stoneskin",
@@ -3052,6 +3093,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "oldfilm",
+                },
+            ],
         });
     }
 
@@ -4005,6 +4053,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            tokenMagicChanges: [
+                {
+                    key: "macro.tokenMagic",
+                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                    value: "Evade Stance",
+                },
+            ],
         });
     }
 
