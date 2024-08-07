@@ -7,8 +7,6 @@ import {
 import { createConvenientEffect } from "../../utils/creates.ts";
 import { COLORS, SECONDS } from "src/ts/constants.ts";
 
-// TODO special: unconscious should apply prone with otherEffects
-// TODO special: what to do with exhaustion?
 class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
 

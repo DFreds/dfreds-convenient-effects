@@ -1,5 +1,6 @@
 import { id as MODULE_ID } from "@static/module.json";
 
+// TODO register menu for backup/restore/reset
 class Settings {
     #USER_ROLES: Record<number, string> = {};
 

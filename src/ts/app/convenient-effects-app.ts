@@ -265,7 +265,6 @@ class ConvenientEffectsApp extends Application {
                     this.#controller,
                 ),
             },
-            // TODO a restore or undo button?
             {
                 name: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="far fa-dot-circle fa-fw"></i>',
