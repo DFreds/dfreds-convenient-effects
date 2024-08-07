@@ -14,10 +14,12 @@ const PreUpdateActiveEffect: Listener = {
                     effect.parent instanceof Item &&
                     Flags.isConvenient(effect.parent)
                 ) {
-                    const effectData = data as ActiveEffectSource;
+                    const effectData = data as PreCreate<ActiveEffectSource>;
 
                     const oldCeEffectId = Flags.getCeEffectId(activeEffect);
-                    const ceEffectId = createCeEffectId(effectData);
+                    const ceEffectId = createCeEffectId(
+                        effectData.name ?? effect.name,
+                    );
 
                     if (ceEffectId !== oldCeEffectId) {
                         Flags.setCeEffectId(effectData, ceEffectId);

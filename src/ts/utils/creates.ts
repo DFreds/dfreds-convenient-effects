@@ -45,7 +45,7 @@ function createConvenientEffect({
     subEffects,
     otherEffects,
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
-    Flags.setCeEffectId(effect, createCeEffectId(effect));
+    Flags.setCeEffectId(effect, createCeEffectId(effect.name));
     Flags.setIsConvenient(effect, true);
     Flags.setIsViewable(effect, true);
     Flags.setIsDynamic(effect, isDynamic);
@@ -76,8 +76,8 @@ function createConvenientEffect({
     return effect;
 }
 
-function createCeEffectId(effect: PreCreate<ActiveEffectSource>): string {
-    return `ce-${effect.name?.slugify({ strict: true })}`;
+function createCeEffectId(effectName?: string): string {
+    return `ce-${effectName?.slugify({ strict: true })}`;
 }
 
 export { createCeEffectId, createConvenientItem, createConvenientEffect };
