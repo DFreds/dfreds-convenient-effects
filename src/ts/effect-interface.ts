@@ -422,8 +422,12 @@ class EffectInterface {
         const effect = this.findEffect({ effectId, effectName });
         let effectDataToSend = effect?.toObject() ?? effectData;
 
-        if (effectDataToSend && Flags.getNestedEffects(effectDataToSend)) {
-            effectDataToSend = await getNestedEffectSelection(effectDataToSend);
+        if (effectDataToSend) {
+            const nestedEffects = Flags.getNestedEffects(effectDataToSend);
+            if (nestedEffects && nestedEffects.length > 0) {
+                effectDataToSend =
+                    await getNestedEffectSelection(effectDataToSend);
+            }
         }
 
         return effectDataToSend;
