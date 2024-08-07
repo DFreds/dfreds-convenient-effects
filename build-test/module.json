@@ -8,13 +8,9 @@
         "verified": "12.330",
         "maximum": 12
     },
-    "esmodules": [
-        "dfreds-convenient-effects.mjs"
-    ],
+    "esmodules": ["dfreds-convenient-effects.mjs"],
     "scripts": [],
-    "styles": [
-        "styles/dfreds-convenient-effects.css"
-    ],
+    "styles": ["styles/dfreds-convenient-effects.css"],
     "packs": [],
     "packFolders": [],
     "relationships": {
@@ -37,8 +33,8 @@
     ],
     "socket": true,
     "url": "https://github.com/DFreds/dfreds-convenient-effects",
-    "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json",
-    "download": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/v7.0.0/dfreds-convenient-effects.zip",
+    "manifest": "https://raw.githubusercontent.com/DFreds/dfreds-convenient-effects/module_rewrite/build-test/module.json",
+    "download": "https://raw.githubusercontent.com/DFreds/dfreds-convenient-effects/module_rewrite/build-test/dfreds-convenient-effects.zip",
     "license": "https://github.com/DFreds/dfreds-convenient-effects/blob/main/LICENSE",
     "readme": "https://github.com/DFreds/dfreds-convenient-effects/blob/main/README.md",
     "bugs": "https://github.com/DFreds/dfreds-convenient-effects/issues",
