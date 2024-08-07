@@ -92,12 +92,18 @@ class Flags {
     }
 
     static getSubEffects(
-        effect: PreCreate<ActiveEffectSource>,
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
     ): PreCreate<ActiveEffectSource>[] | undefined {
-        return foundry.utils.getProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECTS}`,
-        ) as PreCreate<ActiveEffectSource>[] | undefined;
+        if (effect instanceof ActiveEffect) {
+            return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECTS) as
+                | PreCreate<ActiveEffectSource>[]
+                | undefined;
+        } else {
+            return foundry.utils.getProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECTS}`,
+            ) as PreCreate<ActiveEffectSource>[] | undefined;
+        }
     }
 
     static setSubEffects(
@@ -112,12 +118,18 @@ class Flags {
     }
 
     static getOtherEffects(
-        effect: PreCreate<ActiveEffectSource>,
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
     ): PreCreate<ActiveEffectSource>[] | undefined {
-        return foundry.utils.getProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECTS}`,
-        ) as PreCreate<ActiveEffectSource>[] | undefined;
+        if (effect instanceof ActiveEffect) {
+            return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECTS) as
+                | PreCreate<ActiveEffectSource>[]
+                | undefined;
+        } else {
+            return foundry.utils.getProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECTS}`,
+            ) as PreCreate<ActiveEffectSource>[] | undefined;
+        }
     }
 
     static setOtherEffects(
