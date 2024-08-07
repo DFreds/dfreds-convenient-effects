@@ -1,0 +1,44 @@
+{
+  "id": "dfreds-convenient-effects",
+  "title": "DFreds Convenient Effects",
+  "description": "Adds easy to use toggleable active effects for common use cases",
+  "version": "7.0.0",
+  "compatibility": {
+    "minimum": 12,
+    "verified": "12.330",
+    "maximum": 12
+  },
+  "esmodules": ["dfreds-convenient-effects.mjs"],
+  "scripts": [],
+  "styles": ["styles/dfreds-convenient-effects.css"],
+  "packs": [],
+  "packFolders": [],
+  "relationships": {
+    "systems": [],
+    "requires": []
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "authors": [
+    {
+      "name": "DFreds",
+      "url": "https://github.com/DFreds",
+      "discord": "DFreds#1238"
+    }
+  ],
+  "socket": true,
+  "url": "https://github.com/DFreds/dfreds-convenient-effects",
+  "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/untagged-8a89c2400332de814b13/module.json",
+  "download": "https://github.com/DFreds/dfreds-convenient-effects/releases/download/untagged-8a89c2400332de814b13/dfreds-convenient-effects.zip",
+  "license": "https://github.com/DFreds/dfreds-convenient-effects/blob/main/LICENSE",
+  "readme": "https://github.com/DFreds/dfreds-convenient-effects/blob/main/README.md",
+  "bugs": "https://github.com/DFreds/dfreds-convenient-effects/issues",
+  "changelog": "https://github.com/DFreds/dfreds-convenient-effects/releases",
+  "library": false,
+  "media": []
+}
