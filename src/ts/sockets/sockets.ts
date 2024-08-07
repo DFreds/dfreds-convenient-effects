@@ -125,7 +125,7 @@ class Sockets {
         effectData,
         uuid,
     }: AddEffectMessageData): Promise<void> {
-        const actor = findActorByUuid(uuid);
+        const actor = await findActorByUuid(uuid);
         const activeEffectsToApply = [effectData];
 
         if (!actor) return; // This should already be checked for before the socket
@@ -189,7 +189,7 @@ class Sockets {
         uuid,
         origin,
     }: RemoveEffectMessageData): Promise<void> {
-        const actor = findActorByUuid(uuid);
+        const actor = await findActorByUuid(uuid);
 
         if (!actor) return; // This should already be checked for before the socket
 

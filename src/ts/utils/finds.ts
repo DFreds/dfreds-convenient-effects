@@ -1,5 +1,3 @@
-// TODO async this
-
 import { Flags } from "./flags.ts";
 
 /**
@@ -8,10 +6,10 @@ import { Flags } from "./flags.ts";
  * @param uuid The actor UUID
  * @returns the actor that was found via the UUID or undefined if not found
  */
-function findActorByUuid(
+async function findActorByUuid(
     uuid: string,
-): Actor<TokenDocument<any> | null> | undefined {
-    const actorToken = fromUuidSync(uuid);
+): Promise<Actor<TokenDocument<any> | null> | undefined> {
+    const actorToken = await fromUuid(uuid);
 
     if (!actorToken) return undefined;
 

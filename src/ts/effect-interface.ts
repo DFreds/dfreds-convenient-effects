@@ -204,12 +204,12 @@ class EffectInterface {
      * @returns true if the effect is applied to the actor and is a convenient
      * effect, false otherwise
      */
-    hasEffectApplied({
+    async hasEffectApplied({
         effectId,
         effectName,
         uuid,
-    }: IHasEffectApplied): boolean {
-        const actor = findActorByUuid(uuid);
+    }: IHasEffectApplied): Promise<boolean> {
+        const actor = await findActorByUuid(uuid);
 
         return (
             actor?.effects?.some((effect) => {
@@ -270,15 +270,15 @@ class EffectInterface {
         }
 
         for (const uuid of actorUuids) {
-            if (
-                this.hasEffectApplied({
-                    effectId:
-                        effectDataToSend._id ??
-                        Flags.getCeEffectId(effectDataToSend),
-                    effectName: effectDataToSend.name,
-                    uuid,
-                })
-            ) {
+            const hasEffectApplied = await this.hasEffectApplied({
+                effectId:
+                    effectDataToSend._id ??
+                    Flags.getCeEffectId(effectDataToSend),
+                effectName: effectDataToSend.name,
+                uuid,
+            });
+
+            if (hasEffectApplied) {
                 await this.removeEffect({
                     effectId:
                         effectDataToSend._id ??
@@ -327,7 +327,8 @@ class EffectInterface {
             return;
         }
 
-        if (!findActorByUuid(uuid)) {
+        const actor = await findActorByUuid(uuid);
+        if (!actor) {
             error(`Actor ${uuid} could not be found`);
             return;
         }
@@ -375,7 +376,8 @@ class EffectInterface {
             return;
         }
 
-        if (!findActorByUuid(uuid)) {
+        const actor = await findActorByUuid(uuid);
+        if (!actor) {
             error(`Actor ${uuid} could not be found`);
             return;
         }
