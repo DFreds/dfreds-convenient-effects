@@ -1022,7 +1022,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #barkskin(): PreCreate<ActiveEffectSource> {
-        // TODO seems to not work in dnd 3.0.0
         return createConvenientEffect({
             effect: {
                 name: "Barkskin",
@@ -1033,10 +1032,16 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 },
                 changes: [
                     {
-                        key: "system.attributes.ac.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        key: "system.attributes.ac.formula",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
                         value: "16",
-                        priority: 5,
+                        priority: 50,
+                    },
+                    {
+                        key: "system.attributes.ac.calc",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "custom",
+                        priority: 50,
                     },
                 ],
             },
