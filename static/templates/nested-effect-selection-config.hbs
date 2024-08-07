@@ -3,14 +3,14 @@
 
     {{#each chosenEffects as |chosenEffect|}}
         <div class="form-group chosen-effect">
-            <label>Nested Effect {{inc @index}}</label>
+            <label>{{localize "ConvenientEffects.NestedEffect"}} {{inc @index}}</label>
             <div class="form-fields">
                 <button
                     type="button"
                     class="remove-nested-effect"
                     data-action="nested-effect-remove"
                     data-ce-effect-id="{{getCeEffectIdFlag chosenEffect}}"
-                    title="Remove Nested Effect"
+                    title="{{localize 'ConvenientEffects.RemoveNestedEffect'}}"
                 >
                     <i class="fas fa-trash fa-fw"></i>
                 </button>
@@ -26,13 +26,15 @@
                 type="button"
                 class="add-nested-effect"
                 data-action="nested-effect-add"
-                title="Add Nested Effect"
+                    title="{{localize 'ConvenientEffects.AddNestedEffect'}}"
             >
                 <i class="fas fa-plus fa-fw"></i>
             </button>
             <select class="nested-effects-selector">
                 {{#each availableEffects as |availableEffect|}}
-                    <option value="{{availableEffect.id}}">{{availableEffect.name}}</option>
+                    <option
+                        value="{{availableEffect.id}}"
+                    >{{availableEffect.name}}</option>
                 {{/each}}
             </select>
         </div>

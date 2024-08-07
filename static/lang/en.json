@@ -27,5 +27,9 @@
     "ConvenientEffects.NewEffect": "New Effect",
     "ConvenientEffects.EditEffect": "Edit Effect",
     "ConvenientEffects.DeleteEffect": "Delete Effect",
-    "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay"
+    "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay",
+
+    "ConvenientEffects.NestedEffect": "Nested Effect",
+    "ConvenientEffects.RemoveNestedEffect": "Remove Nested Effect",
+    "ConvenientEffects.AddNestedEffect": "Add Nested Effect"
 }
