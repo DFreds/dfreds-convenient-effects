@@ -8,7 +8,7 @@ const CloseActiveEffectConfig: Listener = {
             "closeActiveEffectConfig",
             (activeEffectConfig: any, _html) => {
                 const config = activeEffectConfig as ActiveEffectConfig<any>;
-                const effect = config.object as ActiveEffect<any>;
+                const effect = config.document as ActiveEffect<any>;
 
                 if (
                     Flags.isConvenient(effect) &&

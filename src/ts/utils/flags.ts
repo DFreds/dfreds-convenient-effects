@@ -72,15 +72,23 @@ class Flags {
         }
     }
 
-    static setNestedEffects(
-        effect: object,
+    static async setNestedEffects(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
         nestedEffects: PreCreate<ActiveEffectSource>[],
-    ): boolean {
-        return foundry.utils.setProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECTS}`,
-            nestedEffects,
-        );
+    ): Promise<any> {
+        if (effect instanceof ActiveEffect) {
+            return effect.setFlag(
+                MODULE_ID,
+                this.#KEYS.NESTED_EFFECTS,
+                nestedEffects,
+            );
+        } else {
+            return foundry.utils.setProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECTS}`,
+                nestedEffects,
+            );
+        }
     }
 
     static getSubEffects(
@@ -93,7 +101,7 @@ class Flags {
     }
 
     static setSubEffects(
-        effect: object,
+        effect: PreCreate<ActiveEffectSource>,
         subEffects: PreCreate<ActiveEffectSource>[],
     ): boolean {
         return foundry.utils.setProperty(
@@ -113,7 +121,7 @@ class Flags {
     }
 
     static setOtherEffects(
-        effect: object,
+        effect: PreCreate<ActiveEffectSource>,
         otherEffects: PreCreate<ActiveEffectSource>[],
     ): boolean {
         return foundry.utils.setProperty(

@@ -11,6 +11,7 @@ import { HotbarDrop } from "./hotbarDrop.ts";
 import { Init } from "./init.ts";
 import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
 import { Ready } from "./ready.ts";
+import { RenderActiveEffectConfig } from "./renderActiveEffectConfig.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
 import { UpdateActiveEffect } from "./updateActiveEffect.ts";
@@ -37,6 +38,7 @@ const HooksCE = {
             DeleteActiveEffect,
             RenderItemDirectory,
             ChangeSidebarTab,
+            RenderActiveEffectConfig,
             CloseActiveEffectConfig,
             HotbarDrop,
             DropActorSheetData,
