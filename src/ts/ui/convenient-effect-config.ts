@@ -2,40 +2,50 @@ import { Flags } from "../utils/flags.ts";
 import { findEffectFolderItems, findEffectsForItem } from "../utils/finds.ts";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 
+interface MultiSelectData {
+    id?: string;
+    label?: string;
+    selected: string;
+}
+
 interface ConvenientEffectConfigData
     extends DocumentSheetData<ActiveEffect<any>> {
-    data: ActiveEffect<any>;
-    chosenEffects?: PreCreate<ActiveEffectSource>[];
-    availableEffects: {
-        id?: string;
-        name: string;
-    }[];
+    effect: ActiveEffect<any>;
+    nestedEffects: MultiSelectData[];
+    subEffects: MultiSelectData[];
+    otherEffects: MultiSelectData[];
 }
 
 class ConvenientEffectConfig extends DocumentSheet<
     ActiveEffect<any>,
     DocumentSheetOptions
 > {
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    static init(app: any, html: any, _data: any): void {
+    static init(
+        app: ActiveEffectConfig<any>,
+        html: JQuery,
+        _data: unknown,
+    ): void {
         if (app.document.isOwner || game.user.isGM) {
             const openButton = $(
-                `<a class="open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> Convenient</a>`,
+                `<a class="open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize("ConvenientEffects.ConfigLabel")}</a>`,
             );
             openButton.click(async (_event) => {
-                let Convenient = null;
+                let convenientConfig = null;
                 const activeEffect = await fromUuid(app.document.uuid);
 
                 for (const key in app.document.apps) {
                     const obj = app.document.apps[key];
                     if (obj instanceof ConvenientEffectConfig) {
-                        Convenient = obj;
+                        convenientConfig = obj;
                         break;
                     }
                 }
-                if (!Convenient && activeEffect instanceof ActiveEffect)
-                    Convenient = new ConvenientEffectConfig(activeEffect, {});
-                Convenient?.render(true);
+                if (!convenientConfig && activeEffect instanceof ActiveEffect)
+                    convenientConfig = new ConvenientEffectConfig(
+                        activeEffect,
+                        {},
+                    );
+                convenientConfig?.render(true);
             });
 
             html.closest(".app").find(".open-convenient-config").remove();
@@ -65,96 +75,201 @@ class ConvenientEffectConfig extends DocumentSheet<
         options?: Partial<DocumentSheetOptions>,
     ): Promise<ConvenientEffectConfigData> {
         const context = await super.getData(options);
+        const allEffects = findEffectFolderItems().flatMap((folder) =>
+            findEffectsForItem(folder.id),
+        );
 
-        const chosenNestedEffects = Flags.getNestedEffects(this.document) ?? [];
-        // TODO filter current nested effects out?
-        // TODO effect interface find all?
-        const folders = findEffectFolderItems();
-        const availableEffects = folders
-            .flatMap((folder) => {
-                return findEffectsForItem(folder.id);
-            })
-            .map((effect) => {
-                return {
-                    id: Flags.getCeEffectId(effect),
-                    name: effect.name,
-                };
-            });
+        const currentNestedEffects = Flags.getNestedEffects(this.document);
+        const nestedEffects = allEffects.map((effect) => {
+            const availableId = Flags.getCeEffectId(effect);
+            return {
+                id: availableId,
+                label: effect.name,
+                selected: currentNestedEffects?.some((currentNestedEffect) => {
+                    const chosenId = Flags.getCeEffectId(currentNestedEffect);
+                    return availableId === chosenId;
+                })
+                    ? "selected"
+                    : "",
+            };
+        });
+
+        const currentSubEffects = Flags.getSubEffects(this.document) ?? [];
+        const subEffects = allEffects.map((effect) => {
+            const availableId = Flags.getCeEffectId(effect);
+            return {
+                id: availableId,
+                label: effect.name,
+                selected: currentSubEffects.some((currentSubEffect) => {
+                    const chosenId = Flags.getCeEffectId(currentSubEffect);
+                    return availableId === chosenId;
+                })
+                    ? "selected"
+                    : "",
+            };
+        });
+
+        const currentOtherEffects = Flags.getOtherEffects(this.document) ?? [];
+        const otherEffects = allEffects.map((effect) => {
+            const availableId = Flags.getCeEffectId(effect);
+            return {
+                id: availableId,
+                label: effect.name,
+                selected: currentOtherEffects.some((currentOtherEffect) => {
+                    const chosenId = Flags.getCeEffectId(currentOtherEffect);
+                    return availableId === chosenId;
+                })
+                    ? "selected"
+                    : "",
+            };
+        });
 
         return foundry.utils.mergeObject(context, {
-            data: this.document,
-            chosenNestedEffects,
-            availableEffects,
+            effect: this.document,
+            nestedEffects,
+            subEffects,
+            otherEffects,
         });
     }
 
-    override activateListeners(html: JQuery): void {
-        html.find("#nested-effects-config button").on(
-            "click",
-            async (event) => {
-                event.preventDefault();
-                const action = event.currentTarget.dataset.action;
+    protected override _getSubmitData(
+        updateData?: Record<string, unknown>,
+    ): Record<string, unknown> {
+        console.log(updateData);
+        const fd = new FormDataExtended(this.form, { editors: this.editors });
+        const data = foundry.utils.expandObject(fd.object);
+        if (updateData) foundry.utils.mergeObject(data, updateData);
 
-                let chosenNestedEffects =
-                    Flags.getNestedEffects(this.document) ?? [];
+        if (data.nestedEffects && data.nestedEffects instanceof Array) {
+            Flags.setNestedEffects(
+                data,
+                this.#getNestedEffectsData(data.nestedEffects as string[]),
+            );
+        }
 
-                if (action === "nested-effect-add") {
-                    const effectId = html
-                        .find("#nested-effects-config .nested-effects-selector")
-                        .val() as string;
+        if (data.subEffects && data.subEffects instanceof Array) {
+            Flags.setSubEffects(
+                data,
+                this.#getSubEffectsData(data.subEffects as string[]),
+            );
+        }
 
-                    const effect = game.dfreds.effectInterface.findEffect({
-                        effectId,
-                    });
+        if (data.otherEffects && data.otherEffects instanceof Array) {
+            Flags.setOtherEffects(
+                data,
+                this.#getOtherEffectsData(data.otherEffects as string[]),
+            );
+        }
 
-                    if (!effect) return null;
-
-                    chosenNestedEffects.push(effect.toObject());
-                    chosenNestedEffects =
-                        this.#removeDuplicates(chosenNestedEffects);
-
-                    return this.submit({
-                        preventClose: true,
-                        updateData: {
-                            [`flags.dfreds-convenient-effects.nestedEffects`]:
-                                chosenNestedEffects,
-                        },
-                    });
-                } else if (action === "nested-effect-remove") {
-                    const ceEffectId = event.currentTarget.dataset.ceEffectId;
-                    const newNestedEffects = chosenNestedEffects.filter(
-                        (effect) => Flags.getCeEffectId(effect) !== ceEffectId,
-                    );
-                    return this.submit({
-                        preventClose: true,
-                        updateData: {
-                            [`flags.dfreds-convenient-effects.nestedEffects`]:
-                                newNestedEffects,
-                        },
-                    });
-                }
-                return null;
-            },
-        );
+        return data;
     }
 
-    #removeDuplicates(
-        effects: PreCreate<ActiveEffectSource>[],
+    #getNestedEffectsData(
+        nestedEffectIds: string[],
     ): PreCreate<ActiveEffectSource>[] {
-        const uniqueIds = new Set<string>();
-        return effects.filter((effect) => {
-            const ceEffectId = Flags.getCeEffectId(effect);
+        const chosenNestedEffects = nestedEffectIds
+            .map((id) => {
+                return game.dfreds.effectInterface.findEffect({
+                    effectId: id,
+                });
+            })
+            .filter((effect) => effect !== undefined)
+            .map((effect) => effect!.toObject());
 
-            if (!ceEffectId) return false;
-
-            if (uniqueIds.has(ceEffectId)) {
-                return false;
-            } else {
-                uniqueIds.add(ceEffectId);
-                return true;
-            }
-        });
+        return chosenNestedEffects;
     }
+
+    #getSubEffectsData(
+        subEffectIds: string[],
+    ): PreCreate<ActiveEffectSource>[] {
+        const chosenSubEffects = subEffectIds
+            .map((id) => {
+                return game.dfreds.effectInterface.findEffect({
+                    effectId: id,
+                });
+            })
+            .filter((effect) => effect !== undefined)
+            .map((effect) => effect!.toObject());
+
+        return chosenSubEffects;
+    }
+
+    #getOtherEffectsData(
+        otherEffectIds: string[],
+    ): PreCreate<ActiveEffectSource>[] {
+        const chosenOtherEffects = otherEffectIds
+            .map((id) => {
+                return game.dfreds.effectInterface.findEffect({
+                    effectId: id,
+                });
+            })
+            .filter((effect) => effect !== undefined)
+            .map((effect) => effect!.toObject());
+
+        return chosenOtherEffects;
+    }
+
+    override activateListeners(_html: JQuery): void {
+        // html.find("#nested-effects-config button").on(
+        //     "click",
+        //     async (event) => {
+        //         event.preventDefault();
+        //         const action = event.currentTarget.dataset.action;
+        //         let chosenNestedEffects =
+        //             Flags.getNestedEffects(this.document) ?? [];
+        //         if (action === "nested-effect-add") {
+        //             const effectId = html
+        //                 .find("#nested-effects-config .nested-effects-selector")
+        //                 .val() as string;
+        //             const effect = game.dfreds.effectInterface.findEffect({
+        //                 effectId,
+        //             });
+        //             if (!effect) return null;
+        //             chosenNestedEffects.push(effect.toObject());
+        //             chosenNestedEffects =
+        //                 this.#removeDuplicates(chosenNestedEffects);
+        //             return this.submit({
+        //                 preventClose: true,
+        //                 updateData: {
+        //                     [`flags.dfreds-convenient-effects.nestedEffects`]:
+        //                         chosenNestedEffects,
+        //                 },
+        //             });
+        //         } else if (action === "nested-effect-remove") {
+        //             const ceEffectId = event.currentTarget.dataset.ceEffectId;
+        //             const newNestedEffects = chosenNestedEffects.filter(
+        //                 (effect) => Flags.getCeEffectId(effect) !== ceEffectId,
+        //             );
+        //             return this.submit({
+        //                 preventClose: true,
+        //                 updateData: {
+        //                     [`flags.dfreds-convenient-effects.nestedEffects`]:
+        //                         newNestedEffects,
+        //                 },
+        //             });
+        //         }
+        //         return null;
+        //     },
+        // );
+    }
+
+    // #removeDuplicates(
+    //     effects: PreCreate<ActiveEffectSource>[],
+    // ): PreCreate<ActiveEffectSource>[] {
+    //     const uniqueIds = new Set<string>();
+    //     return effects.filter((effect) => {
+    //         const ceEffectId = Flags.getCeEffectId(effect);
+
+    //         if (!ceEffectId) return false;
+
+    //         if (uniqueIds.has(ceEffectId)) {
+    //             return false;
+    //         } else {
+    //             uniqueIds.add(ceEffectId);
+    //             return true;
+    //         }
+    //     });
+    // }
 }
 
 export { ConvenientEffectConfig };

@@ -29,7 +29,17 @@
     "ConvenientEffects.DeleteEffect": "Delete Effect",
     "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay",
 
-    "ConvenientEffects.NestedEffect": "Nested Effect",
-    "ConvenientEffects.RemoveNestedEffect": "Remove Nested Effect",
-    "ConvenientEffects.AddNestedEffect": "Add Nested Effect"
+    "ConvenientEffects.ConfigLabel": "Convenient",
+    "ConvenientEffects.ConfigFoundryEffectIdLabel": "Foundry Effect ID",
+    "ConvenientEffects.ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
+    "ConvenientEffects.ConfigConvenientEffectIdLabel": "Convenient Effect ID",
+    "ConvenientEffects.ConfigConvenientEffectIdHint": "The nested effects that will be shown as options when the effect is added or removed.",
+    "ConvenientEffects.ConfigDynamicLabel": "Dynamic",
+    "ConvenientEffects.ConfigDynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data.",
+    "ConvenientEffects.ConfigNestedEffectsLabel": "Nested Effects",
+    "ConvenientEffects.ConfigNestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
+    "ConvenientEffects.ConfigSubEffectsLabel": "Sub-Effects",
+    "ConvenientEffects.ConfigSubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
+    "ConvenientEffects.ConfigOtherEffectsLabel": "Other Effects",
+    "ConvenientEffects.ConfigOtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed."
 }

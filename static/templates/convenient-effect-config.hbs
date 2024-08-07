@@ -2,229 +2,106 @@
 
     <!-- Effect Header -->
     <header class="sheet-header">
-        <img class="effect-img" src="{{data.img}}" data-edit="img" />
+        <img class="effect-img" src="{{effect.img}}" data-edit="img" />
         <h1 class="effect-title">
             <input
                 name="name"
                 type="text"
-                value="{{data.name}}"
+                value="{{effect.name}}"
                 placeholder="{{localize 'Name'}}"
                 disabled
             />
         </h1>
     </header>
 
-    <!-- Effect Configuration Tabs -->
-    <nav class="sheet-tabs tabs" aria-role="{{localize 'SHEETS.FormNavLabel'}}">
-        <a class="item" data-tab="details"><i class="fas fa-book"></i>
-            {{localize "EFFECT.TabDetails"}}</a>
-        <a class="item" data-tab="nested-effects"><i class="fas fa-clock"></i>
-            Nested Effects</a>
-        {{!-- <a class="item" data-tab="effects"><i class="fas fa-cogs"></i> {{localize "EFFECT.TabEffects"}}</a> --}}
-    </nav>
-
-    {{!-- TODO localize --}}
-    <!-- Details Tab  -->
-    <section class="tab" data-tab="details">
+    <section>
         <div class="form-group">
-            <label>Foundry Effect ID</label>
+            <label>{{localize "ConvenientEffects.ConfigFoundryEffectIdLabel"}}</label>
             <div class="form-fields">
                 <input
-                    type="text"
                     name="foundryEffectId"
-                    value="{{data.id}}"
+                    type="text"
+                    value="{{effect.id}}"
                     disabled
                 />
             </div>
-            <p class="hint">This is the foundry effect ID and can be used for finding, adding, or removing an effect.</p>
+            <p class="hint">{{localize "ConvenientEffects.ConfigFoundryEffectIdHint"}}</p>
         </div>
 
         <div class="form-group">
-            <label>CE Effect ID</label>
+            <label>{{localize "ConvenientEffects.ConfigConvenientEffectIdLabel"}}</label>
             <div class="form-fields">
                 <input
                     type="text"
                     name="ceEffectId"
-                    value="{{getCeEffectId data}}"
+                    value="{{getCeEffectId effect}}"
                     disabled
                 />
             </div>
-            <p class="hint">This is the convenient effect ID and can be used for finding, adding, or removing an effect.</p>
+            <p class="hint">{{localize "ConvenientEffects.ConfigConvenientEffectIdHint"}}</p>
         </div>
 
         <div class="form-group">
-            <label>Dynamic</label>
-            <input type="checkbox" name="dynamic" {{ checked (isDynamic data) }} disabled/>
-            <p class="hint">If checked, this effect will have dynamic effects applied based on the actor data.</p>
-        </div>
-
-        {{!-- <div class="form-group stacked">
-            <label>{{ localize "EFFECT.Description" }}</label>
-            {{editor descriptionHTML target="description" button=false editable=editable engine="prosemirror" collaborate=false}}
-        </div>
-
-        {{#if isActorEffect}}
-        <div class="form-group">
-            <label>{{ localize "EFFECT.Origin" }}</label>
+            <label>{{localize "ConvenientEffects.ConfigDynamicLabel"}}</label>
             <div class="form-fields">
-                <input type="text" name="origin" value="{{ data.origin }}" disabled/>
+                <input
+                    type="checkbox"
+                    name="dynamic"
+                    {{checked (isDynamic effect)}}
+                    disabled
+                />
             </div>
+            <p class="hint">{{localize "ConvenientEffects.ConfigDynamicHint"}}</p>
         </div>
-        {{/if}}
-
-        {{#if isItemEffect}}
-        <div class="form-group">
-            <label>{{ labels.transfer.name }}</label>
-            <div class="form-fields">
-                <input type="checkbox" name="transfer" {{checked data.transfer}}/>
-            </div>
-            <p class="hint">{{ labels.transfer.hint }}</p>
-        </div>
-        {{/if}}
 
         <div class="form-group">
-            <label>Status Conditions</label>
+            <label>{{localize "ConvenientEffects.ConfigNestedEffectsLabel"}}</label>
             <div class="form-fields">
-                <multi-select name="statuses">
-                    {{#each statuses as |status|}}
-                    <option value="{{status.id}}" {{status.selected}}>{{status.label}}</option>
+                <multi-select name="nestedEffects">
+                    {{#each nestedEffects as |nestedEffect|}}
+                        <option
+                            value="{{nestedEffect.id}}"
+                            {{nestedEffect.selected}}
+                        >{{nestedEffect.label}}</option>
                     {{/each}}
                 </multi-select>
             </div>
-        </div> --}}
-    </section>
-
-    <section class="tab" data-tab="nested-effects">
-
-        <div id="nested-effects-config">
-
-            {{#each chosenNestedEffects as |chosenNestedEffect|}}
-                <div class="form-group chosen-effect">
-                    <label>{{localize "ConvenientEffects.NestedEffect"}}
-                        {{inc @index}}</label>
-                    <div class="form-fields">
-                        <button
-                            type="button"
-                            class="remove-nested-effect"
-                            data-action="nested-effect-remove"
-                            data-ce-effect-id="{{getCeEffectId
-                                chosenNestedEffect
-                            }}"
-                            title="{{localize
-                                'ConvenientEffects.RemoveNestedEffect'
-                            }}"
-                        >
-                            <i class="fas fa-trash fa-fw"></i>
-                        </button>
-                        <input
-                            type="text"
-                            value="{{chosenNestedEffect.name}}"
-                            disabled
-                        />
-                    </div>
-                </div>
-            {{/each}}
-
-            <div class="form-group">
-                <label>Add new nested effect</label>
-                <div class="form-fields add-nested-effect">
-                    <button
-                        type="button"
-                        class="add-nested-effect"
-                        data-action="nested-effect-add"
-                        title="{{localize 'ConvenientEffects.AddNestedEffect'}}"
-                    >
-                        <i class="fas fa-plus fa-fw"></i>
-                    </button>
-                    <select class="nested-effects-selector">
-                        {{#each availableEffects as |availableEffect|}}
-                            <option
-                                value="{{availableEffect.id}}"
-                            >{{availableEffect.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- Duration Tab -->
-    {{!-- <section class="tab" data-tab="duration">
-        <div class="form-group">
-            <label>{{ localize "EFFECT.DurationSecs" }}</label>
-            <div class="form-fields">
-                <input type="number" name="duration.seconds" value="{{ data.duration.seconds }}"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>{{ localize "EFFECT.StartTime" }}</label>
-            <div class="form-fields">
-                <input type="number" name="duration.startTime" value="{{ data.duration.startTime }}"/>
-            </div>
-        </div>
-        <hr/>
-        <div class="form-group">
-            <label>{{ localize "EFFECT.DurationTurns" }}</label>
-            <div class="form-fields">
-                <label>{{ localize "COMBAT.Rounds" }}</label>
-                <input type="number" name="duration.rounds" value="{{ data.duration.rounds }}"/>
-                <label>{{ localize "COMBAT.Turns" }}</label>
-                <input type="number" name="duration.turns" value="{{ data.duration.turns }}"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>{{ localize "EFFECT.Combat" }}</label>
-            <div class="form-fields">
-                <input type="text" name="duration.combat" value="{{ data.duration.combat }}" disabled/>
-            </div>
+            <p class="hint">{{localize "ConvenientEffects.ConfigNestedEffectsHint"}}</p>
         </div>
 
         <div class="form-group">
-            <label>{{ localize "EFFECT.StartTurns" }}</label>
+            <label>{{localize "ConvenientEffects.ConfigSubEffectsLabel"}}</label>
             <div class="form-fields">
-                <label>{{ localize "COMBAT.Round" }}</label>
-                <input type="number" name="duration.startRound" value="{{ data.duration.startRound }}"/>
-                <label>{{ localize "COMBAT.Turn" }}</label>
-                <input type="number" name="duration.startTurn" value="{{ data.duration.startTurn }}"/>
+                <multi-select name="subEffects">
+                    {{#each subEffects as |subEffect|}}
+                        <option
+                            value="{{subEffect.id}}"
+                            {{subEffect.selected}}
+                        >{{subEffect.label}}</option>
+                    {{/each}}
+                </multi-select>
             </div>
+            <p class="hint">{{localize "ConvenientEffects.ConfigSubEffectsHint"}}</p>
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "ConvenientEffects.ConfigOtherEffectsLabel"}}</label>
+            <div class="form-fields">
+                <multi-select name="otherEffects">
+                    {{#each otherEffects as |otherEffect|}}
+                        <option
+                            value="{{otherEffect.id}}"
+                            {{otherEffect.selected}}
+                        >{{otherEffect.label}}</option>
+                    {{/each}}
+                </multi-select>
+            </div>
+            <p class="hint">{{localize "ConvenientEffects.ConfigOtherEffectsHint"}}</p>
         </div>
     </section>
-
-    <!-- Effects Tab -->
-    <section class="tab" data-tab="effects">
-        <header class="effect-change effects-header flexrow">
-            <div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
-            <div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
-            <div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
-            <div class="effect-controls">
-                <a class="effect-control" data-action="add"><i class="far fa-plus-square"></i></a>
-            </div>
-        </header>
-        <ol class="changes-list">
-            {{#each data.changes as |change i|}}
-            <li class="effect-change flexrow" data-index="{{i}}">
-                <div class="key">
-                    <input type="text" name="changes.{{i}}.key" value="{{change.key}}"/>
-                </div>
-                <div class="mode">
-                    <select name="changes.{{i}}.mode" data-dtype="Number">
-                        {{selectOptions ../modes selected=change.mode}}
-                    </select>
-                </div>
-                <div class="value">
-                    <input type="text" name="changes.{{i}}.value" value="{{change.value}}"/>
-                </div>
-                <div class="effect-controls">
-                    <a class="effect-control" data-action="delete"><i class="fas fa-trash"></i></a>
-                </div>
-            </li>
-            {{/each}}
-        </ol>
-    </section> --}}
 
     <footer class="sheet-footer">
         <button type="submit"><i class="fas fa-save"></i>
-            {{localize submitText}}</button>
+            {{localize "EFFECT.Submit"}}</button>
     </footer>
 </form>

@@ -8,7 +8,7 @@ const RenderActiveEffectConfig: Listener = {
             "renderActiveEffectConfig",
             (activeEffectConfig: any, html: any, configData) => {
                 const config = activeEffectConfig as ActiveEffectConfig<any>;
-                // const $html = html as JQuery;
+                const $html = html as JQuery;
 
                 const activeEffect = config.document as ActiveEffect<any>;
                 if (!Flags.isConvenient(activeEffect)) return;
@@ -18,7 +18,7 @@ const RenderActiveEffectConfig: Listener = {
                 if (parent instanceof Item && Flags.isConvenient(parent)) {
                     ConvenientEffectConfig.init(
                         activeEffectConfig,
-                        html,
+                        $html,
                         configData,
                     );
                 }
