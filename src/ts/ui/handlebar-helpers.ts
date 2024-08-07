@@ -16,8 +16,9 @@ class HandlebarHelpers {
         this.#registerIncHelper();
         this.#registerIsGmHelper();
         this.#registerCanCreateFoldersHelper();
-        this.#registerGetFolderColorFlag();
-        this.#registerGetCeEffectIdFlag();
+        this.#registerGetCeEffectId();
+        this.#registerIsDynamic();
+        this.#registerGetFolderColor();
         this.#registerConvenientIconsHelper();
     }
 
@@ -43,15 +44,21 @@ class HandlebarHelpers {
         });
     }
 
-    #registerGetFolderColorFlag() {
-        Handlebars.registerHelper("getFolderColorFlag", (item) => {
-            return Flags.getFolderColor(item);
+    #registerGetCeEffectId() {
+        Handlebars.registerHelper("getCeEffectId", (effect) => {
+            return Flags.getCeEffectId(effect);
         });
     }
 
-    #registerGetCeEffectIdFlag() {
-        Handlebars.registerHelper("getCeEffectIdFlag", (effect) => {
-            return Flags.getCeEffectId(effect);
+    #registerIsDynamic() {
+        Handlebars.registerHelper("isDynamic", (effect) => {
+            return Flags.isDynamic(effect);
+        });
+    }
+
+    #registerGetFolderColor() {
+        Handlebars.registerHelper("getFolderColor", (item) => {
+            return Flags.getFolderColor(item);
         });
     }
 
