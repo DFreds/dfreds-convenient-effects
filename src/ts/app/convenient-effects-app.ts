@@ -106,11 +106,11 @@ class ConvenientEffectsApp extends Application {
     }
 
     protected override _canDragStart(_selector: string): boolean {
-        return this.#controller.canDragStart();
+        return this.#controller.canDrag();
     }
 
     protected override _canDragDrop(_selector: string): boolean {
-        return this.#controller.canDragStart(); // TODO its own handler?
+        return this.#controller.canDrag();
     }
 
     /**
@@ -186,7 +186,6 @@ class ConvenientEffectsApp extends Application {
         );
     }
 
-    // TODO use configure ownership default foundry behavior?
     #initContextMenus(): void {
         ContextMenu.create(
             this,

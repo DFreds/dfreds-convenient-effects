@@ -273,7 +273,6 @@ class ConvenientEffectsController {
         folder?.exportToJSON();
     }
 
-    // TODO combine existing and new or keep total replace? example in old custom-effects-handler
     async onImportFolder(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
@@ -410,8 +409,7 @@ class ConvenientEffectsController {
         }
     }
 
-    canDragStart(): boolean {
-        // TODO remove this?
+    canDrag(): boolean {
         return game.user.role >= this.#settings.appControlsPermission;
     }
 

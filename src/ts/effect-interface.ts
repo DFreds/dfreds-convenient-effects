@@ -184,7 +184,7 @@ class EffectInterface {
     }: IFindEffect): ActiveEffect<Item<null>> | undefined {
         const folders = findFolders();
 
-        if (!folders) return undefined;
+        if (!folders) return;
 
         const matchingEffects = folders
             .filter((folder) =>
