@@ -275,8 +275,6 @@ class ConvenientEffectsController {
         const folder = findFolder(folderId);
         if (!folder) return;
 
-        // TODO checkbox for if passive?
-
         const newEffect = createConvenientEffect({
             effect: {
                 name: game.i18n.localize("ConvenientEffects.NewEffect"),

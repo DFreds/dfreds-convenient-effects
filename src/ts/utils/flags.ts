@@ -6,6 +6,7 @@ class Flags {
     static #KEYS = {
         CE_EFFECT_ID: "ceEffectId",
         IS_CONVENIENT: "isConvenient",
+        IS_TEMPORARY: "isTemporary",
         IS_DYNAMIC: "isDynamic",
         IS_VIEWABLE: "isViewable",
         NESTED_EFFECT_IDS: "nestedEffectIds",
@@ -161,6 +162,25 @@ class Flags {
         return foundry.utils.setProperty(
             document,
             `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
+            value,
+        );
+    }
+
+    static isTemporary(effect: ActiveEffect<any>): boolean {
+        return (
+            (effect.getFlag(MODULE_ID, this.#KEYS.IS_TEMPORARY) as
+                | boolean
+                | undefined) ?? false
+        );
+    }
+
+    static setIsTemporary(
+        effect: PreCreate<ActiveEffectSource>,
+        value: boolean,
+    ): boolean {
+        return foundry.utils.setProperty(
+            effect,
+            `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`,
             value,
         );
     }

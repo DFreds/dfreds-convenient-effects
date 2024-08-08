@@ -42,13 +42,24 @@
         </div>
 
         <div class="form-group">
+            <label>{{localize "ConvenientEffects.ConfigTemporaryLabel"}}</label>
+            <div class="form-fields">
+                <input
+                    type="checkbox"
+                    name="temporary"
+                    {{checked (isTemporary effect)}}
+                />
+            </div>
+            <p class="hint">{{localize "ConvenientEffects.ConfigTemporaryHint"}}</p>
+        </div>
+
+        <div class="form-group">
             <label>{{localize "ConvenientEffects.ConfigViewableLabel"}}</label>
             <div class="form-fields">
                 <input
                     type="checkbox"
                     name="viewable"
                     {{checked (isViewable effect)}}
-                    disabled
                 />
             </div>
             <p class="hint">{{localize "ConvenientEffects.ConfigViewableHint"}}</p>

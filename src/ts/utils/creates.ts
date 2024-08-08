@@ -1,16 +1,14 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { ItemSource } from "types/foundry/common/documents/item.js";
-import { log } from "../logger.ts";
 import { Flags } from "./flags.ts";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
 }
 
-// TODO method for hiding/showing individual effects/folder from players using IS_VIEWABLE
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
-    isTemporary?: boolean; // TODO determines if we add our own status
+    isTemporary?: boolean;
     isViewable?: boolean;
     isDynamic?: boolean;
     nestedEffectIds?: string[];
@@ -41,6 +39,7 @@ function createConvenientEffect({
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     Flags.setCeEffectId(effect, createCeEffectId(effect.name));
     Flags.setIsConvenient(effect, true);
+    Flags.setIsTemporary(effect, isTemporary);
     Flags.setIsViewable(effect, isViewable);
     Flags.setIsDynamic(effect, isDynamic);
 
@@ -52,10 +51,6 @@ function createConvenientEffect({
     }
     if (otherEffectIds) {
         Flags.setOtherEffectIds(effect, otherEffectIds);
-    }
-
-    if (isTemporary) {
-        log("isTemp"); // TODO remove or do something for making passive effects
     }
 
     effect.description = effect.description

@@ -157,7 +157,7 @@ class Sockets {
                 await game.dfreds.effectInterface.addEffect({
                     effectId: subEffectId,
                     uuid,
-                    origin: createdEffects[0].id as ActiveEffectOrigin, // TODO use uuid? or ce effect ID?
+                    origin: createdEffects[0].id as ActiveEffectOrigin,
                 });
             }
         }

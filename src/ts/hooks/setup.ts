@@ -14,10 +14,8 @@ const Setup: Listener = {
                     wrapped: AnyFunction,
                     ...args: any
                 ) {
-                    // TODO can we have a separate flag and allow creating both passive and temp effects?
-                    const isConvenient = Flags.isConvenient(this);
                     const result = wrapped(args) as boolean;
-                    return result || isConvenient;
+                    return result || Flags.isTemporary(this);
                 },
             );
         });

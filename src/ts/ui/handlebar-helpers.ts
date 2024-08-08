@@ -17,6 +17,7 @@ class HandlebarHelpers {
         this.#registerIsGm();
         this.#registerCanCreateFolders();
         this.#registerGetCeEffectId();
+        this.#registerIsTemporary();
         this.#registerIsViewable();
         this.#registerIsDynamic();
         this.#registerGetFolderColor();
@@ -50,6 +51,12 @@ class HandlebarHelpers {
     #registerGetCeEffectId() {
         Handlebars.registerHelper("getCeEffectId", (effect) => {
             return Flags.getCeEffectId(effect);
+        });
+    }
+
+    #registerIsTemporary() {
+        Handlebars.registerHelper("isTemporary", (effect) => {
+            return Flags.isTemporary(effect);
         });
     }
 
@@ -114,6 +121,7 @@ class HandlebarHelpers {
 
                 const allChanges = this.#getAllChanges(effect, nestedEffects);
 
+                icons += this.#getPassiveIcon(effect);
                 icons += this.#getHiddenIcon(effect);
                 icons += this.#getHasNestedEffectsIcon(nestedEffects);
                 icons += this.#getIsNestedEffectsIcon(
@@ -151,8 +159,14 @@ class HandlebarHelpers {
         return [...effectChanges, ...nestedChanges];
     }
 
-    #getHiddenIcon(document: ActiveEffect<Item<null>>): string {
-        return !Flags.isViewable(document)
+    #getPassiveIcon(effect: ActiveEffect<Item<null>>): string {
+        return !effect.isTemporary
+            ? "<i class='fas fa-repeat integration-icon' title='Passive'></i>"
+            : "";
+    }
+
+    #getHiddenIcon(effect: ActiveEffect<Item<null>>): string {
+        return !Flags.isViewable(effect)
             ? "<i class='fas fa-eye-slash integration-icon' title='Effect Hidden'></i>"
             : "";
     }
@@ -192,7 +206,7 @@ class HandlebarHelpers {
         return changes.some((change) =>
             change.key?.startsWith("macro.tokenMagic"),
         )
-            ? "<i class='fas fa-magic integration-icon' title='Token Magic Effects'></i> "
+            ? "<i class='fas fa-wand-magic-sparkles integration-icon' title='Token Magic Effects'></i> "
             : "";
     }
 }

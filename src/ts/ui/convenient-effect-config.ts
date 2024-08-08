@@ -132,10 +132,17 @@ class ConvenientEffectConfig extends DocumentSheet<
     protected override _getSubmitData(
         updateData?: Record<string, unknown>,
     ): Record<string, unknown> {
-        console.log(updateData);
         const fd = new FormDataExtended(this.form, { editors: this.editors });
         const data = foundry.utils.expandObject(fd.object);
         if (updateData) foundry.utils.mergeObject(data, updateData);
+
+        if (Object.hasOwn(data, "temporary")) {
+            Flags.setIsTemporary(data, data.temporary as boolean);
+        }
+
+        if (Object.hasOwn(data, "viewable")) {
+            Flags.setIsViewable(data, data.viewable as boolean);
+        }
 
         if (data.nestedEffectIds && data.nestedEffectIds instanceof Array) {
             Flags.setNestedEffectIds(data, data.nestedEffectIds as string[]);
