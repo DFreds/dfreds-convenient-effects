@@ -402,16 +402,22 @@ class EffectInterface {
     // TODO needs socket through GM probably?
     // async createNewEffects({ effects }: ICreateNewEffects): Promise<void> {}
 
-    // TODO should this be exposed in the interface?
-    async resetMigrations(): Promise<void> {
+    /**
+     * Completely resets the world, re-initializing all effects and re-running
+     * migrations after the forced reload.
+     *
+     * @returns A promise that resolves when the reset is complete
+     */
+    async resetSystemInitialization(): Promise<void> {
         if (!game.user.isGM) return;
 
         const items = findEffectFolderItems();
         await Item.deleteDocuments(items.map((item) => item.id));
 
-        // TODO how do we tell it to recreate the items?
-
+        await this.#settings.setHasInitialized(false);
         await this.#settings.clearRanMigrations();
+
+        await SettingsConfig.reloadConfirm({ world: false });
     }
 
     async #getEffectDataToSend({

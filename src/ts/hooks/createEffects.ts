@@ -2,9 +2,7 @@ import { id as MODULE_ID } from "@static/module.json";
 import { Listener } from "./index.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
-import { Settings } from "../settings.ts";
 import { DEBUG } from "../constants.ts";
-import { findEffectFolderItems } from "../utils/finds.ts";
 
 const CreateEffects: Listener = {
     listen(): void {
@@ -13,15 +11,8 @@ const CreateEffects: Listener = {
             // multiple are logged in
             if (game.user !== game.users.activeGM) return;
 
-            // TODO extract to actual API function to reset?
             if (DEBUG) {
-                const settings = new Settings();
-                const oldItemIds = findEffectFolderItems().map(
-                    (item) => item.id,
-                );
-
-                await Item.deleteDocuments(oldItemIds);
-                await settings.clearRanMigrations();
+                await game.dfreds.effectInterface.resetSystemInitialization();
             }
 
             const mapping = new Mapping();
