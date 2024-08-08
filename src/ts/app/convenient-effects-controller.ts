@@ -4,7 +4,7 @@ import {
     createConvenientEffect,
     createConvenientItem,
 } from "../utils/creates.ts";
-import { findEffectFolderItems, findEffectsForItem } from "../utils/finds.ts";
+import { findEffectsByFolder, findFolders } from "../utils/finds.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
@@ -50,10 +50,10 @@ class ConvenientEffectsController {
 
     getData(): ViewData {
         // TODO don't show nested effects
-        const folders = findEffectFolderItems();
+        const folders = findFolders();
         const folderData = folders.map((folder) => ({
             folder,
-            effects: findEffectsForItem(folder.id),
+            effects: findEffectsByFolder(folder.id),
         }));
 
         return {

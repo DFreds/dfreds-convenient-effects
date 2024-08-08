@@ -3,8 +3,8 @@ import { Settings } from "./settings.ts";
 import {
     findActorByUuid,
     findActorByUuidSync,
-    findEffectFolderItem,
-    findEffectFolderItems,
+    findFolder,
+    findFolders,
 } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
@@ -183,14 +183,14 @@ class EffectInterface {
         effectId,
         effectName,
     }: IFindEffect): ActiveEffect<Item<null>> | undefined {
-        const effectItems = findEffectFolderItems();
+        const folders = findFolders();
 
-        if (!effectItems) return undefined;
+        if (!folders) return undefined;
 
-        const matchingEffects = effectItems
-            .filter((effectItem) =>
+        const matchingEffects = folders
+            .filter((folder) =>
                 // If folderId is included, filter all but that ID
-                folderId ? effectItem.id === folderId : true,
+                folderId ? folder.id === folderId : true,
             )
             .flatMap((effectItem) => Array(...effectItem.effects))
             .map((effect) => effect as ActiveEffect<Item<null>>)
@@ -441,7 +441,7 @@ class EffectInterface {
             return createConvenientEffect({ effect });
         });
 
-        const existingFolder = findEffectFolderItem(existingFolderId ?? "");
+        const existingFolder = findFolder(existingFolderId ?? "");
 
         if (existingFolder) {
             await existingFolder.createEmbeddedDocuments(
@@ -475,8 +475,8 @@ class EffectInterface {
     }): Promise<void> {
         if (!game.user.isGM) return;
 
-        const items = findEffectFolderItems();
-        await Item.deleteDocuments(items.map((item) => item.id));
+        const folders = findFolders();
+        await Item.deleteDocuments(folders.map((item) => item.id));
 
         await this.#settings.setHasInitialized(false);
         await this.#settings.clearRanMigrations();

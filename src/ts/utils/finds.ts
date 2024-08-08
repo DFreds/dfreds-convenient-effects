@@ -38,7 +38,7 @@ function findActorByUuidSync(
     return undefined;
 }
 
-function findEffectFolderItems(): Item<null>[] {
+function findFolders(): Item<null>[] {
     return game.items
         .filter((item) => {
             const isConvenient = Flags.isConvenient(item);
@@ -59,19 +59,23 @@ function findEffectFolderItems(): Item<null>[] {
         });
 }
 
-function findEffectFolderItem(itemId: string): Item<null> | undefined {
+function findFolder(folderId: string): Item<null> | undefined {
     return game.items.find((item) => {
-        return item.id === itemId && Flags.isConvenient(item);
+        return item.id === folderId && Flags.isConvenient(item);
     });
 }
 
-function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
-    const item = game.items.get(itemId);
+function findEffects(): ActiveEffect<Item<null>>[] {
+    return findFolders().flatMap((folder) => findEffectsByFolder(folder.id));
+}
 
-    if (!item) return [];
+function findEffectsByFolder(folderId: string): ActiveEffect<Item<null>>[] {
+    const folder = findFolder(folderId);
+
+    if (!folder) return [];
 
     return (
-        item.effects
+        folder.effects
             .map((effect) => effect as ActiveEffect<Item<null>>)
             // TODO rethink below - maybe based on permissions?
             // .filter(
@@ -96,7 +100,8 @@ function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
 export {
     findActorByUuid,
     findActorByUuidSync,
-    findEffectFolderItem,
-    findEffectFolderItems,
-    findEffectsForItem,
+    findFolder,
+    findFolders,
+    findEffects,
+    findEffectsByFolder,
 };
