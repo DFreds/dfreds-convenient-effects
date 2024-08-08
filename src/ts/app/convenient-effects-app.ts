@@ -56,8 +56,9 @@ class ConvenientEffectsApp extends Application {
         html.find(".folder").on("dragenter", dh).on("dragleave", dh);
 
         this.#controller.expandSavedFolders();
-        this.#controller.setToggleNestedEffectsState();
-        this.#controller.setPrioritizeTargetsState();
+        this.#controller.setShowHiddenEffectsButtonState();
+        this.#controller.setShowNestedEffectsButtonState();
+        this.#controller.setPrioritizeTargetsButtonState();
     }
 
     // NOTE: taken from foundry.js DirectoryApplicationMixin
@@ -148,16 +149,28 @@ class ConvenientEffectsApp extends Application {
         this.#allDirectories.addClass("collapsed");
     }
 
-    isToggleNestedEffectsActive(): boolean {
-        return this.#toggleNestedEffectsButton.hasClass("active");
+    isShowHiddenEffectsActive(): boolean {
+        return this.#showHiddenEffectsButton.hasClass("active");
     }
 
-    removeActiveToggleNestedEffects(): void {
-        this.#toggleNestedEffectsButton.removeClass("active");
+    removeActiveShowHiddenEffects(): void {
+        this.#showHiddenEffectsButton.removeClass("active");
     }
 
-    addActiveToggleNestedEffects(): void {
-        this.#toggleNestedEffectsButton.addClass("active");
+    addActiveShowHiddenEffects(): void {
+        this.#showHiddenEffectsButton.addClass("active");
+    }
+
+    isShowNestedEffectsActive(): boolean {
+        return this.#showNestedEffectsButton.hasClass("active");
+    }
+
+    removeActiveShowNestedEffects(): void {
+        this.#showNestedEffectsButton.removeClass("active");
+    }
+
+    addActiveShowNestedEffects(): void {
+        this.#showNestedEffectsButton.addClass("active");
     }
 
     isPrioritizeTargetsActive(): boolean {
@@ -193,13 +206,17 @@ class ConvenientEffectsApp extends Application {
             "click",
             this.#controller.onToggleFolder.bind(this.#controller),
         );
-        this.#toggleNestedEffectsButton.on(
+        this.#showHiddenEffectsButton.on(
             "click",
-            this.#controller.onToggleNestedEffects.bind(this.#controller),
+            this.#controller.onToggleShowHiddenEffects.bind(this.#controller),
+        );
+        this.#showNestedEffectsButton.on(
+            "click",
+            this.#controller.onToggleShowNestedEffects.bind(this.#controller),
         );
         this.#prioritizeTargetsButton.on(
             "click",
-            this.#controller.onPrioritizeTargets.bind(this.#controller),
+            this.#controller.onTogglePrioritizeTargets.bind(this.#controller),
         );
     }
 
@@ -331,8 +348,12 @@ class ConvenientEffectsApp extends Application {
         return this.#rootView.find(".directory-list .folder-header");
     }
 
-    get #toggleNestedEffectsButton(): JQuery<HTMLElement> {
-        return this.#rootView.find(".toggle-nested-effects");
+    get #showHiddenEffectsButton(): JQuery<HTMLElement> {
+        return this.#rootView.find(".show-hidden-effects");
+    }
+
+    get #showNestedEffectsButton(): JQuery<HTMLElement> {
+        return this.#rootView.find(".show-nested-effects");
     }
 
     get #prioritizeTargetsButton(): JQuery<HTMLElement> {

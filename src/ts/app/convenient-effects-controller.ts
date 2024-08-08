@@ -61,16 +61,46 @@ class ConvenientEffectsController {
         const folderData = folders.map((folder) => {
             const viewableEffects = findEffectsByFolder(folder.id).filter(
                 (effect) => {
-                    const isViewable = Flags.isViewable(effect) ?? true;
-                    const ceEffectId = Flags.getCeEffectId(effect);
+                    /*
+                    if show hidden and show nested
+                        - isViewable can be true or false
+                        - Can be included in nested or not
+                        - Show all effects
 
-                    if (this.#settings.showNestedEffects || !ceEffectId) {
+                    if show hidden and not show nested
+                        - isViewable can be true or false
+                        - Cannot be included in nested
+                        - Show all effects minus nested effects
+
+                    if not show hidden and show nested
+                        - isViewable must be true
+                        - Can be included in nested or not
+                        - Show all effects minus hidden effects
+
+                    if not show hidden and not show nested
+                        - isViewable must be true
+                        - Cannot be included in nested
+                        - Show all effects minus hidden and minus nested
+                    */
+                    const ceEffectId = Flags.getCeEffectId(effect);
+                    if (!ceEffectId) return false;
+
+                    const isViewable = Flags.isViewable(effect) ?? true;
+                    const isNestedEffect = nestedEffectIds.includes(ceEffectId);
+                    const showHiddenEffects = this.#settings.showHiddenEffects;
+                    const showNestedEffects = this.#settings.showNestedEffects;
+
+                    if (showHiddenEffects && showNestedEffects) {
+                        return true; // all
+                    } else if (showHiddenEffects && !showNestedEffects) {
+                        return !isNestedEffect;
+                    } else if (!showHiddenEffects && showNestedEffects) {
                         return isViewable;
-                    } else {
-                        return (
-                            isViewable && !nestedEffectIds.includes(ceEffectId)
-                        );
+                    } else if (!showHiddenEffects && !showNestedEffects) {
+                        return isViewable && !isNestedEffect;
                     }
+
+                    return false;
                 },
             );
 
@@ -451,28 +481,49 @@ class ConvenientEffectsController {
         await this.#settings.clearExpandedFolders();
     }
 
-    setToggleNestedEffectsState(): void {
-        const showNestedEffects = this.#settings.showNestedEffects;
-        if (showNestedEffects) {
-            this.#viewMvc.addActiveToggleNestedEffects();
+    setShowHiddenEffectsButtonState(): void {
+        const showHiddenEffects = this.#settings.showHiddenEffects;
+        if (showHiddenEffects) {
+            this.#viewMvc.addActiveShowHiddenEffects();
         } else {
-            this.#viewMvc.removeActiveToggleNestedEffects();
+            this.#viewMvc.removeActiveShowHiddenEffects();
         }
     }
 
-    async onToggleNestedEffects(_event: Event): Promise<void> {
-        if (this.#viewMvc.isToggleNestedEffectsActive()) {
-            this.#viewMvc.removeActiveToggleNestedEffects();
+    async onToggleShowHiddenEffects(_event: Event): Promise<void> {
+        if (this.#viewMvc.isShowHiddenEffectsActive()) {
+            this.#viewMvc.removeActiveShowHiddenEffects();
+            await this.#settings.setShowHiddenEffects(false);
+        } else {
+            this.#viewMvc.addActiveShowHiddenEffects();
+            await this.#settings.setShowHiddenEffects(true);
+        }
+
+        this.#viewMvc.render();
+    }
+
+    setShowNestedEffectsButtonState(): void {
+        const showNestedEffects = this.#settings.showNestedEffects;
+        if (showNestedEffects) {
+            this.#viewMvc.addActiveShowNestedEffects();
+        } else {
+            this.#viewMvc.removeActiveShowNestedEffects();
+        }
+    }
+
+    async onToggleShowNestedEffects(_event: Event): Promise<void> {
+        if (this.#viewMvc.isShowNestedEffectsActive()) {
+            this.#viewMvc.removeActiveShowNestedEffects();
             await this.#settings.setShowNestedEffects(false);
         } else {
-            this.#viewMvc.addActiveToggleNestedEffects();
+            this.#viewMvc.addActiveShowNestedEffects();
             await this.#settings.setShowNestedEffects(true);
         }
 
         this.#viewMvc.render();
     }
 
-    setPrioritizeTargetsState(): void {
+    setPrioritizeTargetsButtonState(): void {
         const prioritizeTargets = this.#settings.prioritizeTargets;
         if (prioritizeTargets) {
             this.#viewMvc.addActivePrioritizeTargets();
@@ -481,7 +532,7 @@ class ConvenientEffectsController {
         }
     }
 
-    async onPrioritizeTargets(_event: Event): Promise<void> {
+    async onTogglePrioritizeTargets(_event: Event): Promise<void> {
         if (this.#viewMvc.isPrioritizeTargetsActive()) {
             this.#viewMvc.removeActivePrioritizeTargets();
             await this.#settings.setPrioritizeTargets(false);

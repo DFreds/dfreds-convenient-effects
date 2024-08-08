@@ -4,11 +4,19 @@
     align-self: center;
 }
 
-.toggle-nested-effects {
+.show-hidden-effects {
     color: var(--color-text-dark-5);
 }
 
-.toggle-nested-effects.active {
+.show-hidden-effects.active {
+    color: var(--color-text-light-1);
+}
+
+.show-nested-effects {
+    color: var(--color-text-dark-5);
+}
+
+.show-nested-effects.active {
     color: var(--color-text-light-1);
 }
 

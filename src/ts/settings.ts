@@ -9,10 +9,11 @@ class Settings {
     #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
     #INTEGRATE_WITH_ATE = "integrateWithAtl";
     #INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
-    #SHOW_NESTED_EFFECTS = "showNestedEffects";
 
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
+    #SHOW_HIDDEN_EFFECTS = "showHiddenEffects";
+    #SHOW_NESTED_EFFECTS = "showNestedEffects";
     #HAS_INITIALIZED = "hasInitialized";
     #RAN_MIGRATIONS = "ranMigrations";
     #PRIORITIZE_TARGETS = "prioritizeTargets";
@@ -49,6 +50,7 @@ class Settings {
 
     #registerNonConfigSettings(): void {
         this.#registerExpandedFolders();
+        this.#registerShowHiddenEffects();
         this.#registerShowNestedEffects();
         this.#registerPrioritizeTargets();
         this.#registerHasInitialized();
@@ -110,6 +112,16 @@ class Settings {
             config: false,
             default: [],
             type: Array,
+        });
+    }
+
+    #registerShowHiddenEffects(): void {
+        game.settings.register(MODULE_ID, this.#SHOW_HIDDEN_EFFECTS, {
+            name: "Show Hidden Effects",
+            scope: "client",
+            config: false,
+            default: false,
+            type: Boolean,
         });
     }
 
@@ -243,6 +255,17 @@ class Settings {
      */
     isFolderExpanded(id: string): boolean {
         return this.expandedFolders.includes(id);
+    }
+
+    get showHiddenEffects(): boolean {
+        return game.settings.get(
+            MODULE_ID,
+            this.#SHOW_HIDDEN_EFFECTS,
+        ) as boolean;
+    }
+
+    async setShowHiddenEffects(value: boolean): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#SHOW_HIDDEN_EFFECTS, value);
     }
 
     get showNestedEffects(): boolean {
