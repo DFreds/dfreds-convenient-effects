@@ -22,6 +22,22 @@ async function findActorByUuid(
     return undefined;
 }
 
+function findActorByUuidSync(
+    uuid: string,
+): Actor<TokenDocument<any> | null> | undefined {
+    const actorToken = fromUuidSync(uuid);
+
+    if (!actorToken) return undefined;
+
+    if (actorToken instanceof TokenDocument) {
+        return actorToken.actor ?? undefined;
+    } else if (actorToken instanceof Actor) {
+        return actorToken;
+    }
+
+    return undefined;
+}
+
 function findEffectFolderItems(): Item<null>[] {
     return game.items
         .filter((item) => {
@@ -71,4 +87,9 @@ function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
     );
 }
 
-export { findActorByUuid, findEffectFolderItems, findEffectsForItem };
+export {
+    findActorByUuid,
+    findActorByUuidSync,
+    findEffectFolderItems,
+    findEffectsForItem,
+};

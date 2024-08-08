@@ -1,6 +1,10 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "./settings.ts";
-import { findActorByUuid, findEffectFolderItems } from "./utils/finds.ts";
+import {
+    findActorByUuid,
+    findActorByUuidSync,
+    findEffectFolderItems,
+} from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
@@ -204,12 +208,12 @@ class EffectInterface {
      * @returns true if the effect is applied to the actor and is a convenient
      * effect, false otherwise
      */
-    async hasEffectApplied({
+    hasEffectApplied({
         effectId,
         effectName,
         uuid,
-    }: IHasEffectApplied): Promise<boolean> {
-        const actor = await findActorByUuid(uuid);
+    }: IHasEffectApplied): boolean {
+        const actor = findActorByUuidSync(uuid);
 
         return (
             actor?.effects?.some((effect) => {
@@ -270,7 +274,7 @@ class EffectInterface {
         }
 
         for (const uuid of actorUuids) {
-            const hasEffectApplied = await this.hasEffectApplied({
+            const hasEffectApplied = this.hasEffectApplied({
                 effectId:
                     effectDataToSend._id ??
                     Flags.getCeEffectId(effectDataToSend),
