@@ -15,12 +15,13 @@ interface ICreateItemAddOns {
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
     isTemporary?: boolean; // TODO determines if we add our own status
+    isViewable?: boolean;
     isDynamic?: boolean;
     atlChanges?: DeepPartial<EffectChangeData>[];
     tokenMagicChanges?: DeepPartial<EffectChangeData>[];
-    nestedEffects?: PreCreate<ActiveEffectSource>[];
-    subEffects?: PreCreate<ActiveEffectSource>[];
-    otherEffects?: PreCreate<ActiveEffectSource>[];
+    nestedEffectIds?: string[];
+    subEffectIds?: string[];
+    otherEffectIds?: string[];
 }
 
 function createConvenientItem({
@@ -38,26 +39,27 @@ function createConvenientItem({
 function createConvenientEffect({
     effect,
     isTemporary = true,
+    isViewable = true,
     isDynamic = false,
     atlChanges,
     tokenMagicChanges,
-    nestedEffects,
-    subEffects,
-    otherEffects,
+    nestedEffectIds,
+    subEffectIds,
+    otherEffectIds,
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     Flags.setCeEffectId(effect, createCeEffectId(effect.name));
     Flags.setIsConvenient(effect, true);
-    Flags.setIsViewable(effect, true);
+    Flags.setIsViewable(effect, isViewable);
     Flags.setIsDynamic(effect, isDynamic);
 
-    if (nestedEffects) {
-        Flags.setNestedEffects(effect, nestedEffects);
+    if (nestedEffectIds) {
+        Flags.setNestedEffectIds(effect, nestedEffectIds);
     }
-    if (subEffects) {
-        Flags.setSubEffects(effect, subEffects);
+    if (subEffectIds) {
+        Flags.setSubEffectIds(effect, subEffectIds);
     }
-    if (otherEffects) {
-        Flags.setOtherEffects(effect, otherEffects);
+    if (otherEffectIds) {
+        Flags.setOtherEffectIds(effect, otherEffectIds);
     }
 
     if (isTemporary) {

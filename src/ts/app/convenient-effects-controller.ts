@@ -355,7 +355,7 @@ class ConvenientEffectsController {
 
         if (!effect) return;
 
-        if (Flags.getNestedEffects(effect)) {
+        if (Flags.getNestedEffectIds(effect)) {
             // Specially handle nested effect drops to trigger the dialog
             // See dropActorSheetData hook for details
             event.dataTransfer?.setData(

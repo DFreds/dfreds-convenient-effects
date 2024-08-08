@@ -1,9 +1,7 @@
-import {
-    ActiveEffectSource,
-    EffectChangeData,
-} from "types/foundry/common/documents/active-effect.js";
+import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 import { Flags } from "../utils/flags.ts";
+import { notEmpty } from "../utils/types.ts";
 
 class HandlebarHelpers {
     #settings: Settings;
@@ -68,20 +66,27 @@ class HandlebarHelpers {
             (effect: ActiveEffect<any>) => {
                 let icons = "";
 
-                const nestedEffects = Flags.getNestedEffects(effect);
+                const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
+                const nestedEffects = nestedEffectIds
+                    .map((id) => {
+                        return game.dfreds.effectInterface.findEffect({
+                            effectId: id,
+                        });
+                    })
+                    .filter(notEmpty);
 
                 const effectChanges = (effect.changes ??
                     []) as DeepPartial<EffectChangeData>[];
                 const nestedChanges = nestedEffects
-                    ?.flatMap((nestedEffect) => nestedEffect.changes)
-                    ?.filter((change) => change !== undefined);
+                    .flatMap((nestedEffect) => nestedEffect.changes)
+                    .filter(notEmpty);
 
                 const allChanges = [
                     ...effectChanges,
-                    ...(nestedChanges ?? []),
+                    ...nestedChanges,
                 ] as DeepPartial<EffectChangeData>[];
 
-                icons += this.#getNestedEffectsIcon(nestedEffects);
+                icons += this.#getNestedEffectsIcon(nestedEffects ?? []);
                 icons += this.#getMidiIcon(allChanges);
                 icons += this.#getAtlIcon(allChanges);
                 icons += this.#getTokenMagicIcon(allChanges);
@@ -91,9 +96,7 @@ class HandlebarHelpers {
         );
     }
 
-    #getNestedEffectsIcon(
-        nestedEffects: PreCreate<ActiveEffectSource>[] | undefined,
-    ): string {
+    #getNestedEffectsIcon(nestedEffects: ActiveEffect<Item<null>>[]): string {
         return nestedEffects && nestedEffects.length > 0
             ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
             : "";

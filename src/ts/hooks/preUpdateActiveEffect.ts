@@ -14,6 +14,8 @@ const PreUpdateActiveEffect: Listener = {
                     effect.parent instanceof Item &&
                     Flags.isConvenient(effect.parent)
                 ) {
+                    // TODO should we check if any effects have this effect as a nested, sub, or other?
+
                     const effectData = data as PreCreate<ActiveEffectSource>;
 
                     const oldCeEffectId = Flags.getCeEffectId(activeEffect);

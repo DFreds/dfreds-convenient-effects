@@ -6,6 +6,8 @@ import {
 } from "../effect-definition.ts";
 import { createConvenientEffect } from "../../utils/creates.ts";
 import { COLORS, SECONDS } from "src/ts/constants.ts";
+import { Flags } from "src/ts/utils/flags.ts";
+import { notEmpty } from "src/ts/utils/types.ts";
 
 class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
@@ -202,6 +204,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 this.#kiPatientDefense,
                 this.#rage,
                 this.#recklessAttack,
+                this.#recklessAttackAdvantage,
             ],
         };
     }
@@ -632,6 +635,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #paralyzed(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#incapacitated]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Paralyzed",
@@ -668,11 +675,15 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
-            subEffects: [this.#incapacitated],
+            subEffectIds,
         });
     }
 
     get #petrified(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#incapacitated]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Petrified",
@@ -719,7 +730,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
-            subEffects: [this.#incapacitated],
+            subEffectIds,
         });
     }
 
@@ -828,6 +839,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #stunned(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#incapacitated]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Stunned",
@@ -853,11 +868,15 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
-            subEffects: [this.#incapacitated],
+            subEffectIds,
         });
     }
 
     get #unconscious(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#incapacitated]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 statuses: ["unconscious"],
@@ -894,7 +913,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
-            subEffects: [this.#incapacitated],
+            subEffectIds,
         });
     }
 
@@ -1136,20 +1155,28 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #blindnessDeafness(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#blindnessDeafnessBlindness,
+            this.#blindnessDeafnessDeafness,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Blindness/Deafness",
                 description: "Choose between blindness or deafness",
                 img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
             },
-            nestedEffects: [
-                this.#blindnessDeafnessBlindness,
-                this.#blindnessDeafnessDeafness,
-            ],
+            nestedEffectIds,
         });
     }
 
     get #blindnessDeafnessBlindness(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [Flags.getCeEffectId(this.#blinded)].filter(
+            notEmpty,
+        );
+
         return createConvenientEffect({
             effect: {
                 name: "Blindness",
@@ -1160,12 +1187,15 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     seconds: SECONDS.IN_ONE_MINUTE,
                 },
             },
+            subEffectIds,
             // isViewable: this._settings.showNestedEffects,
-            subEffects: [this.#blinded],
         });
     }
 
     get #blindnessDeafnessDeafness(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [Flags.getCeEffectId(this.#deafened)].filter(
+            notEmpty,
+        );
         return createConvenientEffect({
             effect: {
                 name: "Deafness",
@@ -1175,8 +1205,8 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     seconds: SECONDS.IN_ONE_MINUTE,
                 },
             },
+            subEffectIds,
             // isViewable: this._settings.showNestedEffects,
-            subEffects: [this.#deafened],
         });
     }
 
@@ -1258,6 +1288,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #contagion(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#contagionBlindingSickness,
+            this.#contagionFilthFever,
+            this.#contagionFleshRot,
+            this.#contagionMindfire,
+            this.#contagionSeizure,
+            this.#contagionSlimyDoom,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Contagion",
@@ -1265,14 +1306,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     "Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             },
-            nestedEffects: [
-                this.#contagionBlindingSickness,
-                this.#contagionFilthFever,
-                this.#contagionFleshRot,
-                this.#contagionMindfire,
-                this.#contagionSeizure,
-                this.#contagionSlimyDoom,
-            ],
+            nestedEffectIds,
         });
     }
 
@@ -1531,6 +1565,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #enhanceAbility(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#enhanceAbilityBearsEndurance,
+            this.#enhanceAbilityBullsStrength,
+            this.#enhanceAbilityCatsGrace,
+            this.#enhanceAbilityEaglesSplendor,
+            this.#enhanceAbilityFoxsCunning,
+            this.#enhanceAbilityOwlsWisdom,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Enhance Ability",
@@ -1538,14 +1583,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     "Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             },
-            nestedEffects: [
-                this.#enhanceAbilityBearsEndurance,
-                this.#enhanceAbilityBullsStrength,
-                this.#enhanceAbilityCatsGrace,
-                this.#enhanceAbilityEaglesSplendor,
-                this.#enhanceAbilityFoxsCunning,
-                this.#enhanceAbilityOwlsWisdom,
-            ],
+            nestedEffectIds,
         });
     }
 
@@ -1684,16 +1722,20 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #enlargeReduce(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#enlargeReduceEnlarge,
+            this.#enlargeReduceReduce,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Enlarge/Reduce",
                 description: "Choose between Enlarge or Reduce",
                 img: "icons/magic/control/energy-stream-link-large-blue.webp",
             },
-            nestedEffects: [
-                this.#enlargeReduceEnlarge,
-                this.#enlargeReduceReduce,
-            ],
+            nestedEffectIds,
         });
     }
 
@@ -1864,16 +1906,20 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #fireShield(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#fireShieldColdResistance,
+            this.#fireShieldFireResistance,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Fire Shield",
                 description: "Choose between cold or fire resistance",
                 img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
             },
-            nestedEffects: [
-                this.#fireShieldColdResistance,
-                this.#fireShieldFireResistance,
-            ],
+            nestedEffectIds,
         });
     }
 
@@ -2097,6 +2143,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #greaterInvisibility(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#invisible]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Greater Invisibility",
@@ -2108,7 +2158,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 },
                 statuses: ["invisible"],
             },
-            subEffects: [this.#invisible],
+            subEffectIds,
         });
     }
 
@@ -2381,6 +2431,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #invisibility(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#invisible]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Invisibility",
@@ -2397,7 +2451,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 },
                 statuses: ["invisible"],
             },
-            subEffects: [this.#invisible],
+            subEffectIds,
         });
     }
 
@@ -2601,6 +2655,16 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #protectionFromEnergy(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#protectionFromEnergyAcid,
+            this.#protectionFromEnergyCold,
+            this.#protectionFromEnergyFire,
+            this.#protectionFromEnergyLightning,
+            this.#protectionFromEnergyThunder,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Protection from Energy",
@@ -2608,13 +2672,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     "Choose between acid, cold, fire, lightning, or thunder resistance",
                 img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
             },
-            nestedEffects: [
-                this.#protectionFromEnergyAcid,
-                this.#protectionFromEnergyCold,
-                this.#protectionFromEnergyFire,
-                this.#protectionFromEnergyLightning,
-                this.#protectionFromEnergyThunder,
-            ],
+            nestedEffectIds,
         });
     }
 
@@ -3244,6 +3302,15 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #bardicInspiration(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#bardicInspirationD6,
+            this.#bardicInspirationD8,
+            this.#bardicInspirationD10,
+            this.#bardicInspirationD12,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Bardic Inspiration",
@@ -3254,12 +3321,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
             },
-            nestedEffects: [
-                this.#bardicInspirationD6,
-                this.#bardicInspirationD8,
-                this.#bardicInspirationD10,
-                this.#bardicInspirationD12,
-            ],
+            nestedEffectIds,
         });
     }
 
@@ -3680,6 +3742,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #recklessAttack(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#recklessAttackAdvantage]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Reckless Attack",
@@ -3699,26 +3765,28 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
-            subEffects: [
-                createConvenientEffect({
-                    effect: {
-                        name: "Reckless Attack (advantage on attacks)",
-                        description:
-                            "Advantage on melee attacks until end of turn",
-                        img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
-                        duration: {
-                            turns: 1,
-                        },
-                        changes: [
-                            {
-                                key: `flags.midi-qol.advantage.attack.mwak`,
-                                mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                                value: "1",
-                            },
-                        ],
+            subEffectIds,
+        });
+    }
+
+    // TODO isViewable false?
+    get #recklessAttackAdvantage(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: "Reckless Attack (advantage on attacks)",
+                description: "Advantage on melee attacks until end of turn",
+                img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
+                duration: {
+                    turns: 1,
+                },
+                changes: [
+                    {
+                        key: `flags.midi-qol.advantage.attack.mwak`,
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "1",
                     },
-                }),
-            ],
+                ],
+            },
         });
     }
 

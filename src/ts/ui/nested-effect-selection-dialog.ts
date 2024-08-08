@@ -1,10 +1,18 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Flags } from "../utils/flags.ts";
+import { notEmpty } from "../utils/types.ts";
 
 async function getNestedEffectSelection(
     effectData: PreCreate<ActiveEffectSource>,
 ): Promise<PreCreate<ActiveEffectSource> | undefined> {
-    const nestedEffects = Flags.getNestedEffects(effectData);
+    const nestedEffectIds = Flags.getNestedEffectIds(effectData) ?? [];
+    const nestedEffects = nestedEffectIds
+        .map((id) => {
+            return game.dfreds.effectInterface
+                .findEffect({ effectId: id })
+                ?.toObject();
+        })
+        .filter(notEmpty);
 
     const content = await renderTemplate(
         "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
@@ -36,7 +44,7 @@ async function getNestedEffectSelection(
         { width: 300 },
     )) as string | undefined;
 
-    return nestedEffects?.find((nestedEffect) => nestedEffect.name === choice);
+    return nestedEffects.find((nestedEffect) => nestedEffect.name === choice);
 }
 
 export { getNestedEffectSelection };

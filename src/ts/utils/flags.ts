@@ -8,9 +8,9 @@ class Flags {
         IS_CONVENIENT: "isConvenient",
         IS_DYNAMIC: "isDynamic",
         IS_VIEWABLE: "isViewable",
-        NESTED_EFFECTS: "nestedEffects",
-        SUB_EFFECTS: "subEffects",
-        OTHER_EFFECTS: "otherEffects",
+        NESTED_EFFECT_IDS: "nestedEffectIds",
+        SUB_EFFECT_IDS: "subEffectIds",
+        OTHER_EFFECT_IDS: "otherEffectIds",
         FOLDER_COLOR: "folderColor",
     };
 
@@ -57,88 +57,88 @@ class Flags {
         }
     }
 
-    static getNestedEffects(
+    static getNestedEffectIds(
         effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): PreCreate<ActiveEffectSource>[] | undefined {
+    ): string[] | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECTS) as
-                | PreCreate<ActiveEffectSource>[]
+            return effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECT_IDS) as
+                | string[]
                 | undefined;
         } else {
             return foundry.utils.getProperty(
                 effect,
-                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECTS}`,
-            ) as PreCreate<ActiveEffectSource>[] | undefined;
+                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECT_IDS}`,
+            ) as string[] | undefined;
         }
     }
 
-    static async setNestedEffects(
+    static async setNestedEffectIds(
         effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-        nestedEffects: PreCreate<ActiveEffectSource>[],
+        nestedEffectIds: string[],
     ): Promise<any> {
         if (effect instanceof ActiveEffect) {
             return effect.setFlag(
                 MODULE_ID,
-                this.#KEYS.NESTED_EFFECTS,
-                nestedEffects,
+                this.#KEYS.NESTED_EFFECT_IDS,
+                nestedEffectIds,
             );
         } else {
             return foundry.utils.setProperty(
                 effect,
-                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECTS}`,
-                nestedEffects,
+                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECT_IDS}`,
+                nestedEffectIds,
             );
         }
     }
 
-    static getSubEffects(
+    static getSubEffectIds(
         effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): PreCreate<ActiveEffectSource>[] | undefined {
+    ): string[] | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECTS) as
-                | PreCreate<ActiveEffectSource>[]
+            return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECT_IDS) as
+                | string[]
                 | undefined;
         } else {
             return foundry.utils.getProperty(
                 effect,
-                `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECTS}`,
-            ) as PreCreate<ActiveEffectSource>[] | undefined;
+                `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`,
+            ) as string[] | undefined;
         }
     }
 
-    static setSubEffects(
+    static setSubEffectIds(
         effect: PreCreate<ActiveEffectSource>,
-        subEffects: PreCreate<ActiveEffectSource>[],
+        subEffectIds: string[],
     ): boolean {
         return foundry.utils.setProperty(
             effect,
-            `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECTS}`,
-            subEffects,
+            `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`,
+            subEffectIds,
         );
     }
 
-    static getOtherEffects(
+    static getOtherEffectIds(
         effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): PreCreate<ActiveEffectSource>[] | undefined {
+    ): string[] | undefined {
         if (effect instanceof ActiveEffect) {
-                | PreCreate<ActiveEffectSource>[]
-            return effect.getFlag(MODULE_ID, this.#KEYS.OTHER_EFFECTS) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.OTHER_EFFECT_IDS) as
+                | string[]
                 | undefined;
         } else {
             return foundry.utils.getProperty(
                 effect,
-                `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECTS}`,
-            ) as PreCreate<ActiveEffectSource>[] | undefined;
+                `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`,
+            ) as string[] | undefined;
         }
     }
 
-    static setOtherEffects(
+    static setOtherEffectIds(
         effect: PreCreate<ActiveEffectSource>,
-        otherEffects: PreCreate<ActiveEffectSource>[],
+        otherEffects: string[],
     ): boolean {
         return foundry.utils.setProperty(
             effect,
-            `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECTS}`,
+            `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`,
             otherEffects,
         );
     }

@@ -150,24 +150,24 @@ class Sockets {
             },
         );
 
-        const subEffects = Flags.getSubEffects(effectData);
-        if (subEffects) {
+        const subEffectIds = Flags.getSubEffectIds(effectData);
+        if (subEffectIds && subEffectIds.length > 0) {
             // Apply all sub-effects with the original effect being the origin
-            for (const subEffect of subEffects) {
+            for (const subEffectId of subEffectIds) {
                 await game.dfreds.effectInterface.addEffect({
-                    effectData: subEffect,
+                    effectId: subEffectId,
                     uuid,
                     origin: createdEffects[0].id as ActiveEffectOrigin, // TODO use uuid? or ce effect ID?
                 });
             }
         }
 
-        const otherEffects = Flags.getOtherEffects(effectData);
-        if (otherEffects) {
+        const otherEffectIds = Flags.getOtherEffectIds(effectData);
+        if (otherEffectIds && otherEffectIds.length > 0) {
             // Apply all other effects with no origin
-            for (const otherEffect of otherEffects) {
+            for (const otherEffectId of otherEffectIds) {
                 await game.dfreds.effectInterface.addEffect({
-                    effectData: otherEffect,
+                    effectId: otherEffectId,
                     uuid,
                 });
             }

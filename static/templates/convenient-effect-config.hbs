@@ -57,12 +57,12 @@
         <div class="form-group">
             <label>{{localize "ConvenientEffects.ConfigNestedEffectsLabel"}}</label>
             <div class="form-fields">
-                <multi-select name="nestedEffects">
-                    {{#each nestedEffects as |nestedEffect|}}
+                <multi-select name="nestedEffectIds">
+                    {{#each nestedEffectsData as |nestedEffectData|}}
                         <option
-                            value="{{nestedEffect.id}}"
-                            {{nestedEffect.selected}}
-                        >{{nestedEffect.label}}</option>
+                            value="{{nestedEffectData.id}}"
+                            {{nestedEffectData.selected}}
+                        >{{nestedEffectData.label}}</option>
                     {{/each}}
                 </multi-select>
             </div>
@@ -72,12 +72,12 @@
         <div class="form-group">
             <label>{{localize "ConvenientEffects.ConfigSubEffectsLabel"}}</label>
             <div class="form-fields">
-                <multi-select name="subEffects">
-                    {{#each subEffects as |subEffect|}}
+                <multi-select name="subEffectIds">
+                    {{#each subEffectsData as |subEffectData|}}
                         <option
-                            value="{{subEffect.id}}"
-                            {{subEffect.selected}}
-                        >{{subEffect.label}}</option>
+                            value="{{subEffectData.id}}"
+                            {{subEffectData.selected}}
+                        >{{subEffectData.label}}</option>
                     {{/each}}
                 </multi-select>
             </div>
@@ -87,12 +87,12 @@
         <div class="form-group">
             <label>{{localize "ConvenientEffects.ConfigOtherEffectsLabel"}}</label>
             <div class="form-fields">
-                <multi-select name="otherEffects">
-                    {{#each otherEffects as |otherEffect|}}
+                <multi-select name="otherEffectIds">
+                    {{#each otherEffectsData as |otherEffectData|}}
                         <option
-                            value="{{otherEffect.id}}"
-                            {{otherEffect.selected}}
-                        >{{otherEffect.label}}</option>
+                            value="{{otherEffectData.id}}"
+                            {{otherEffectData.selected}}
+                        >{{otherEffectData.label}}</option>
                     {{/each}}
                 </multi-select>
             </div>

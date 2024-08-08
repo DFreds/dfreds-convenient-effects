@@ -1,6 +1,5 @@
 import { Flags } from "../utils/flags.ts";
 import { findEffectFolderItems, findEffectsForItem } from "../utils/finds.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 
 interface MultiSelectData {
     id?: string;
@@ -11,9 +10,9 @@ interface MultiSelectData {
 interface ConvenientEffectConfigData
     extends DocumentSheetData<ActiveEffect<any>> {
     effect: ActiveEffect<any>;
-    nestedEffects: MultiSelectData[];
-    subEffects: MultiSelectData[];
-    otherEffects: MultiSelectData[];
+    nestedEffectsData: MultiSelectData[];
+    subEffectsData: MultiSelectData[];
+    otherEffectsData: MultiSelectData[];
 }
 
 class ConvenientEffectConfig extends DocumentSheet<
@@ -79,45 +78,45 @@ class ConvenientEffectConfig extends DocumentSheet<
             findEffectsForItem(folder.id),
         );
 
-        const currentNestedEffects = Flags.getNestedEffects(this.document);
-        const nestedEffects = allEffects.map((effect) => {
+        const currentNestedEffectIds = Flags.getNestedEffectIds(this.document);
+        const nestedEffectsData = allEffects.map((effect) => {
             const availableId = Flags.getCeEffectId(effect);
             return {
                 id: availableId,
                 label: effect.name,
-                selected: currentNestedEffects?.some((currentNestedEffect) => {
-                    const chosenId = Flags.getCeEffectId(currentNestedEffect);
-                    return availableId === chosenId;
+                selected: currentNestedEffectIds?.some(
+                    (currentNestedEffectId) => {
+                        return availableId === currentNestedEffectId;
+                    },
+                )
+                    ? "selected"
+                    : "",
+            };
+        });
+
+        const currentSubEffectIds = Flags.getSubEffectIds(this.document) ?? [];
+        const subEffectsData = allEffects.map((effect) => {
+            const availableId = Flags.getCeEffectId(effect);
+            return {
+                id: availableId,
+                label: effect.name,
+                selected: currentSubEffectIds.some((currentSubEffectId) => {
+                    return availableId === currentSubEffectId;
                 })
                     ? "selected"
                     : "",
             };
         });
 
-        const currentSubEffects = Flags.getSubEffects(this.document) ?? [];
-        const subEffects = allEffects.map((effect) => {
+        const currentOtherEffectIds =
+            Flags.getOtherEffectIds(this.document) ?? [];
+        const otherEffectsData = allEffects.map((effect) => {
             const availableId = Flags.getCeEffectId(effect);
             return {
                 id: availableId,
                 label: effect.name,
-                selected: currentSubEffects.some((currentSubEffect) => {
-                    const chosenId = Flags.getCeEffectId(currentSubEffect);
-                    return availableId === chosenId;
-                })
-                    ? "selected"
-                    : "",
-            };
-        });
-
-        const currentOtherEffects = Flags.getOtherEffects(this.document) ?? [];
-        const otherEffects = allEffects.map((effect) => {
-            const availableId = Flags.getCeEffectId(effect);
-            return {
-                id: availableId,
-                label: effect.name,
-                selected: currentOtherEffects.some((currentOtherEffect) => {
-                    const chosenId = Flags.getCeEffectId(currentOtherEffect);
-                    return availableId === chosenId;
+                selected: currentOtherEffectIds.some((currentOtherEffectId) => {
+                    return availableId === currentOtherEffectId;
                 })
                     ? "selected"
                     : "",
@@ -126,9 +125,9 @@ class ConvenientEffectConfig extends DocumentSheet<
 
         return foundry.utils.mergeObject(context, {
             effect: this.document,
-            nestedEffects,
-            subEffects,
-            otherEffects,
+            nestedEffectsData,
+            subEffectsData,
+            otherEffectsData,
         });
     }
 
@@ -140,73 +139,19 @@ class ConvenientEffectConfig extends DocumentSheet<
         const data = foundry.utils.expandObject(fd.object);
         if (updateData) foundry.utils.mergeObject(data, updateData);
 
-        if (data.nestedEffects && data.nestedEffects instanceof Array) {
-            Flags.setNestedEffects(
-                data,
-                this.#getNestedEffectsData(data.nestedEffects as string[]),
-            );
+        if (data.nestedEffectIds && data.nestedEffectIds instanceof Array) {
+            Flags.setNestedEffectIds(data, data.nestedEffectIds as string[]);
         }
 
-        if (data.subEffects && data.subEffects instanceof Array) {
-            Flags.setSubEffects(
-                data,
-                this.#getSubEffectsData(data.subEffects as string[]),
-            );
+        if (data.subEffectIds && data.subEffectIds instanceof Array) {
+            Flags.setSubEffectIds(data, data.subEffectIds as string[]);
         }
 
-        if (data.otherEffects && data.otherEffects instanceof Array) {
-            Flags.setOtherEffects(
-                data,
-                this.#getOtherEffectsData(data.otherEffects as string[]),
-            );
+        if (data.otherEffectIds && data.otherEffectIds instanceof Array) {
+            Flags.setOtherEffectIds(data, data.otherEffectIds as string[]);
         }
 
         return data;
-    }
-
-    #getNestedEffectsData(
-        nestedEffectIds: string[],
-    ): PreCreate<ActiveEffectSource>[] {
-        const chosenNestedEffects = nestedEffectIds
-            .map((id) => {
-                return game.dfreds.effectInterface.findEffect({
-                    effectId: id,
-                });
-            })
-            .filter((effect) => effect !== undefined)
-            .map((effect) => effect!.toObject());
-
-        return chosenNestedEffects;
-    }
-
-    #getSubEffectsData(
-        subEffectIds: string[],
-    ): PreCreate<ActiveEffectSource>[] {
-        const chosenSubEffects = subEffectIds
-            .map((id) => {
-                return game.dfreds.effectInterface.findEffect({
-                    effectId: id,
-                });
-            })
-            .filter((effect) => effect !== undefined)
-            .map((effect) => effect!.toObject());
-
-        return chosenSubEffects;
-    }
-
-    #getOtherEffectsData(
-        otherEffectIds: string[],
-    ): PreCreate<ActiveEffectSource>[] {
-        const chosenOtherEffects = otherEffectIds
-            .map((id) => {
-                return game.dfreds.effectInterface.findEffect({
-                    effectId: id,
-                });
-            })
-            .filter((effect) => effect !== undefined)
-            .map((effect) => effect!.toObject());
-
-        return chosenOtherEffects;
     }
 }
 
