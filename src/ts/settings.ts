@@ -7,9 +7,6 @@ class Settings {
     // Config keys
     #APP_CONTROLS_PERMISSION = "appControlsPermission";
     #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
-    #INTEGRATE_WITH_MIDI = "integrateWithMidi";
-    #INTEGRATE_WITH_ATE = "integrateWithAtl";
-    #INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
 
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
@@ -45,9 +42,6 @@ class Settings {
     #registerConfigSettings(): void {
         this.#registerAppControlsPermission();
         this.#registerCreateFoldersPermission();
-        this.#registerIntegrateWithMidi();
-        this.#registerIntegrateWithAte();
-        this.#registerIntegrateWithTokenMagic();
     }
 
     #registerNonConfigSettings(): void {
@@ -82,39 +76,6 @@ class Settings {
             choices: this.#USER_ROLES,
             type: String,
             requiresReload: false,
-        });
-    }
-
-    #registerIntegrateWithMidi(): void {
-        game.settings.register(MODULE_ID, this.#INTEGRATE_WITH_MIDI, {
-            name: "ConvenientEffects.SettingIntegrateWithMidiName",
-            hint: "ConvenientEffects.SettingIntegrateWithMidiHint",
-            scope: "world",
-            config: true,
-            default: false,
-            type: Boolean,
-        });
-    }
-
-    #registerIntegrateWithAte(): void {
-        game.settings.register(MODULE_ID, this.#INTEGRATE_WITH_ATE, {
-            name: "ConvenientEffects.SettingIntegrateWithAteName",
-            hint: "ConvenientEffects.SettingIntegrateWithAteHint",
-            scope: "world",
-            config: true,
-            default: false,
-            type: Boolean,
-        });
-    }
-
-    #registerIntegrateWithTokenMagic(): void {
-        game.settings.register(MODULE_ID, this.#INTEGRATE_WITH_TOKEN_MAGIC, {
-            name: "ConvenientEffects.SettingIntegrateWithTokenMagicName",
-            hint: "ConvenientEffects.SettingIntegrateWithTokenMagicHint",
-            scope: "world",
-            config: true,
-            default: false,
-            type: Boolean,
         });
     }
 
@@ -190,27 +151,6 @@ class Settings {
             MODULE_ID,
             this.#CREATE_FOLDERS_PERMISSION,
         ) as number;
-    }
-
-    get integrateWithMidi(): boolean {
-        return game.settings.get(
-            MODULE_ID,
-            this.#INTEGRATE_WITH_MIDI,
-        ) as boolean;
-    }
-
-    get integrateWithAte(): boolean {
-        return game.settings.get(
-            MODULE_ID,
-            this.#INTEGRATE_WITH_ATE,
-        ) as boolean;
-    }
-
-    get integrateWithTokenMagic(): boolean {
-        return game.settings.get(
-            MODULE_ID,
-            this.#INTEGRATE_WITH_TOKEN_MAGIC,
-        ) as boolean;
     }
 
     /**

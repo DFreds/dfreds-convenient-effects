@@ -123,28 +123,23 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
         effect.changes = effect.changes ?? [];
 
-        effect.changes.push({
-            key: "system.traits.size",
-            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-            value: size,
-        });
-
-        if (this.settings.integrateWithAte) {
-            effect.changes.push(
-                ...[
-                    {
-                        key: "ATL.width",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: tokenSize,
-                    },
-                    {
-                        key: "ATL.height",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: tokenSize,
-                    },
-                ],
-            );
-        }
+        effect.changes.push(
+            {
+                key: "system.traits.size",
+                mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                value: size,
+            },
+            {
+                key: "ATL.width",
+                mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                value: tokenSize,
+            },
+            {
+                key: "ATL.height",
+                mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                value: tokenSize,
+            },
+        );
     }
 
     #addRageEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {

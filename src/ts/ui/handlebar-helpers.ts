@@ -126,24 +126,15 @@ class HandlebarHelpers {
                 icons += this.#getHiddenIcon(effect);
                 icons += this.#getNestedEffectsIcon(nestedEffects ?? []);
 
-                if (
-                    this.#settings.integrateWithMidi &&
-                    findModuleById(MODULE_IDS.MIDI)?.active
-                ) {
+                if (findModuleById(MODULE_IDS.MIDI)?.active) {
                     icons += this.#getMidiIcon(allChanges);
                 }
 
-                if (
-                    this.#settings.integrateWithAte &&
-                    findModuleById(MODULE_IDS.ATE)?.active
-                ) {
+                if (findModuleById(MODULE_IDS.ATE)?.active) {
                     icons += this.#getAteIcon(allChanges);
                 }
 
-                if (
-                    this.#settings.integrateWithTokenMagic &&
-                    findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active
-                ) {
+                if (findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active) {
                     icons += this.#getTokenMagicIcon(allChanges);
                 }
 
