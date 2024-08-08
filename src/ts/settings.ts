@@ -9,7 +9,7 @@ class Settings {
     #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
     #INTEGRATE_WITH_ATE = "integrateWithAtl";
     #INTEGRATE_WITH_TOKEN_MAGIC = "integrateWithTokenMagic";
-    // #SHOW_NESTED_EFFECTS = "showNestedEffects";
+    #SHOW_NESTED_EFFECTS = "showNestedEffects";
 
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
@@ -45,7 +45,7 @@ class Settings {
         this.#registerCreateFoldersPermission();
         this.#registerIntegrateWithAte();
         this.#registerIntegrateWithTokenMagic();
-        // this.#registerShowNestedEffects();
+        this.#registerShowNestedEffects();
     }
 
     #registerNonConfigSettings(): void {
@@ -103,16 +103,16 @@ class Settings {
         });
     }
 
-    // #registerShowNestedEffects(): void {
-    //     game.settings.register(MODULE_ID, this.#SHOW_NESTED_EFFECTS, {
-    //         name: "ConvenientEffects.SettingShowNestedEffectsName",
-    //         hint: "ConvenientEffects.SettingShowNestedEffectsHint",
-    //         scope: "client",
-    //         config: true,
-    //         default: false,
-    //         type: Boolean,
-    //     });
-    // }
+    #registerShowNestedEffects(): void {
+        game.settings.register(MODULE_ID, this.#SHOW_NESTED_EFFECTS, {
+            name: "ConvenientEffects.SettingShowNestedEffectsName",
+            hint: "ConvenientEffects.SettingShowNestedEffectsHint",
+            scope: "client",
+            config: true,
+            default: false,
+            type: Boolean,
+        });
+    }
 
     #registerExpandedFolders(): void {
         game.settings.register(MODULE_ID, this.#EXPANDED_FOLDERS, {
@@ -182,12 +182,12 @@ class Settings {
         ) as boolean;
     }
 
-    // get showNestedEffects(): boolean {
-    //     return game.settings.get(
-    //         MODULE_ID,
-    //         this.#SHOW_NESTED_EFFECTS,
-    //     ) as boolean;
-    // }
+    get showNestedEffects(): boolean {
+        return game.settings.get(
+            MODULE_ID,
+            this.#SHOW_NESTED_EFFECTS,
+        ) as boolean;
+    }
 
     /**
      * Returns the game setting for the saved expanded folder names

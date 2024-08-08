@@ -1,5 +1,5 @@
 import { Flags } from "../utils/flags.ts";
-import { findEffectByUuid, findEffects } from "../utils/finds.ts";
+import { findAllEffects, findEffectByUuid } from "../utils/finds.ts";
 
 interface MultiSelectData {
     id?: string;
@@ -74,7 +74,7 @@ class ConvenientEffectConfig extends DocumentSheet<
         options?: Partial<DocumentSheetOptions>,
     ): Promise<ConvenientEffectConfigData> {
         const context = await super.getData(options);
-        const allEffects = findEffects();
+        const allEffects = findAllEffects();
 
         const currentNestedEffectIds = Flags.getNestedEffectIds(this.document);
         const nestedEffectsData = allEffects.map((effect) => {

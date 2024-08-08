@@ -9,6 +9,7 @@ import {
     findEffectsByFolder,
     findFolder,
     findFolders,
+    findAllNestedEffectIds,
 } from "../utils/finds.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
@@ -54,12 +55,30 @@ class ConvenientEffectsController {
     }
 
     getData(): ViewData {
-        // TODO don't show nested effects
         const folders = findFolders();
-        const folderData = folders.map((folder) => ({
-            folder,
-            effects: findEffectsByFolder(folder.id),
-        }));
+        const nestedEffectIds = findAllNestedEffectIds();
+
+        const folderData = folders.map((folder) => {
+            const viewableEffects = findEffectsByFolder(folder.id).filter(
+                (effect) => {
+                    const isViewable = Flags.isViewable(effect) ?? true;
+                    const ceEffectId = Flags.getCeEffectId(effect);
+
+                    if (this.#settings.showNestedEffects || !ceEffectId) {
+                        return isViewable;
+                    } else {
+                        return (
+                            isViewable && !nestedEffectIds.includes(ceEffectId)
+                        );
+                    }
+                },
+            );
+
+            return {
+                folder,
+                effects: viewableEffects,
+            };
+        });
 
         return {
             folderData,

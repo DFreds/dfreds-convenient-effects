@@ -1188,7 +1188,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 },
             },
             subEffectIds,
-            // isViewable: this._settings.showNestedEffects,
         });
     }
 
@@ -1206,7 +1205,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 },
             },
             subEffectIds,
-            // isViewable: this._settings.showNestedEffects,
         });
     }
 
@@ -1317,7 +1315,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Disadvantage on wisdom checks and wisdom saving throws for 7 days",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_WEEK,
                 },
@@ -1345,7 +1342,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_WEEK,
                 },
@@ -1377,7 +1373,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Disadvantage on charisma checks and vulnerability to all damage",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_WEEK,
                 },
@@ -1404,7 +1399,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Disadvantage on intelligence checks and intelligence saving throws for 7 days",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_WEEK,
                 },
@@ -1431,7 +1425,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_WEEK,
                 },
@@ -1463,7 +1456,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Disadvantage on constitution checks and constitution saving throws for 7 days",
                 img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_WEEK,
                 },
@@ -1594,7 +1586,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Advantage on constitution checks and 2d6 temp hit points for 1 hour",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -1616,7 +1607,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 description:
                     "Advantage on strength checks and double maximum carrying capacity for 1 hour",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -1643,7 +1633,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Cat's Grace",
                 description: "Advantage on dexterity checks for 1 hour",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -1664,7 +1653,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Eagle's Splendor",
                 description: "Advantage on charisma checks for 1 hour",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -1685,7 +1673,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Fox's Cunning",
                 description: "Advantage on intelligence checks for 1 hour",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -1706,7 +1693,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Owl's Wisdom",
                 description: "Advantage on wisdom checks for 1 hour",
                 img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -1768,7 +1754,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ],
             },
             isDynamic: true,
-            // isViewable: this.#settings.showNestedEffects,
         });
     }
 
@@ -1801,7 +1786,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ],
             },
             isDynamic: true,
-            // isViewable: this._settings.showNestedEffects,
         });
     }
 
@@ -1929,7 +1913,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Fire Shield (Cold Resistance)",
                 description: "Add damage resistance to cold for 10 minutes",
                 img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
@@ -1984,7 +1967,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Fire Shield (Fire Resistance)",
                 description: "Add damage resistance to fire for 10 minutes",
                 img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
@@ -2676,7 +2658,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Protection from Acid",
                 description: "Adds damage resistance to acid for 1 hour",
                 img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -2704,7 +2685,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Protection from Cold",
                 description: "Adds damage resistance to cold for 1 hour",
                 img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -2732,7 +2712,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Protection from Fire",
                 description: "Adds damage resistance to fire for 1 hour",
                 img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -2760,7 +2739,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Protection from Lightning",
                 description: "Adds damage resistance to lightning for 1 hour",
                 img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -2788,7 +2766,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Protection from Thunder",
                 description: "Adds damage resistance to thunder for 1 hour",
                 img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
@@ -3325,7 +3302,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Bardic Inspiration (d6)",
                 description: "For bards from level 1 to level 4",
                 img: "icons/skills/melee/unarmed-punch-fist.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
@@ -3361,7 +3337,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Bardic Inspiration (d8)",
                 description: "For bards from level 5 to level 9",
                 img: "icons/skills/melee/unarmed-punch-fist.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
@@ -3397,7 +3372,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Bardic Inspiration (d10)",
                 description: "For bards from level 10 to level 14",
                 img: "icons/skills/melee/unarmed-punch-fist.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
@@ -3433,7 +3407,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 name: "Bardic Inspiration (d12)",
                 description: "For bards from level 15 to level 20",
                 img: "icons/skills/melee/unarmed-punch-fist.webp",
-                // isViewable: this._settings.showNestedEffects,
                 duration: {
                     seconds: SECONDS.IN_TEN_MINUTES,
                 },
@@ -3763,7 +3736,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
-    // TODO isViewable false?
     get #recklessAttackAdvantage(): PreCreate<ActiveEffectSource> {
         return createConvenientEffect({
             effect: {
@@ -3781,6 +3753,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                     },
                 ],
             },
+            isViewable: false,
         });
     }
 

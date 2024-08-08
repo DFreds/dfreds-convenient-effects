@@ -1,4 +1,5 @@
 import { Flags } from "./flags.ts";
+import { notEmpty } from "./types.ts";
 
 /**
  * Gets the actor object by the actor UUID
@@ -41,8 +42,7 @@ function findActorByUuidSync(
 function findFolders(): Item<null>[] {
     return game.items
         .filter((folder) => {
-            const isConvenient = Flags.isConvenient(folder);
-            return isConvenient;
+            return Flags.isConvenient(folder);
         })
         .sort((folderA, folderB) => {
             const nameA = folderA.name.toUpperCase(); // ignore upper and lowercase
@@ -65,7 +65,7 @@ function findFolder(folderId: string): Item<null> | undefined {
     });
 }
 
-function findEffects(): ActiveEffect<Item<null>>[] {
+function findAllEffects(): ActiveEffect<Item<null>>[] {
     return findFolders()
         .flatMap((folder) => findEffectsByFolder(folder.id))
         .sort((effectA, effectB) => {
@@ -88,27 +88,34 @@ function findEffectsByFolder(folderId: string): ActiveEffect<Item<null>>[] {
 
     if (!folder) return [];
 
-    return (
-        folder.effects
-            .map((effect) => effect as ActiveEffect<Item<null>>)
-            // TODO rethink below - maybe based on permissions?
-            // .filter(
-            //     (effect) => effect.getFlag(MODULE_ID, FLAGS.IS_VIEWABLE) ?? true,
-            // )
-            .sort((effectA, effectB) => {
-                const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
-                const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
-                if (nameA < nameB) {
-                    return -1;
-                }
-                if (nameA > nameB) {
-                    return 1;
-                }
+    return folder.effects
+        .map((effect) => effect as ActiveEffect<Item<null>>)
+        .filter((effect) => {
+            return Flags.isConvenient(effect);
+        })
+        .sort((effectA, effectB) => {
+            const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
+            const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
 
-                // names must be equal
-                return 0;
-            })
-    );
+            // names must be equal
+            return 0;
+        });
+}
+
+function findAllNestedEffectIds(): string[] {
+    let nestedEffectIds = findAllEffects()
+        .flatMap((effect) => Flags.getNestedEffectIds(effect))
+        .filter(notEmpty);
+
+    nestedEffectIds = [...new Set(nestedEffectIds)];
+
+    return nestedEffectIds;
 }
 
 async function findEffectByUuid(
@@ -126,7 +133,8 @@ export {
     findActorByUuidSync,
     findFolder,
     findFolders,
-    findEffects,
+    findAllEffects,
     findEffectsByFolder,
+    findAllNestedEffectIds,
     findEffectByUuid,
 };
