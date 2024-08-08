@@ -2,6 +2,8 @@ import { EffectChangeData } from "types/foundry/common/documents/active-effect.j
 import { Settings } from "../settings.ts";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
+import { findModuleById } from "../utils/finds.ts";
+import { MODULE_IDS } from "../constants.ts";
 
 class HandlebarHelpers {
     #settings: Settings;
@@ -123,13 +125,25 @@ class HandlebarHelpers {
 
                 icons += this.#getHiddenIcon(effect);
                 icons += this.#getNestedEffectsIcon(nestedEffects ?? []);
-                icons += this.#getMidiIcon(allChanges); // TODO only if midi is active
 
-                if (this.#settings.integrateWithAte) {
+                if (
+                    this.#settings.integrateWithMidi &&
+                    findModuleById(MODULE_IDS.MIDI)?.active
+                ) {
+                    icons += this.#getMidiIcon(allChanges);
+                }
+
+                if (
+                    this.#settings.integrateWithAte &&
+                    findModuleById(MODULE_IDS.ATE)?.active
+                ) {
                     icons += this.#getAteIcon(allChanges);
                 }
 
-                if (this.#settings.integrateWithTokenMagic) {
+                if (
+                    this.#settings.integrateWithTokenMagic &&
+                    findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active
+                ) {
                     icons += this.#getTokenMagicIcon(allChanges);
                 }
 
@@ -148,7 +162,7 @@ class HandlebarHelpers {
 
     #getNestedEffectsIcon(nestedEffects: ActiveEffect<Item<null>>[]): string {
         return nestedEffects && nestedEffects.length > 0
-            ? "<i class='fas fa-tree integration-icon' title='Nested Effects'></i> "
+            ? "<i class='fas fa-list-tree integration-icon' title='Nested Effects'></i> "
             : "";
     }
 

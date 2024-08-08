@@ -1,6 +1,10 @@
 import { Flags } from "./flags.ts";
 import { notEmpty } from "./types.ts";
 
+function findModuleById(moduleId: string): Module | undefined {
+    return game.modules.get(moduleId);
+}
+
 /**
  * Gets the actor object by the actor UUID
  *
@@ -129,6 +133,7 @@ async function findEffectByUuid(
 }
 
 export {
+    findModuleById,
     findActorByUuid,
     findActorByUuidSync,
     findFolder,

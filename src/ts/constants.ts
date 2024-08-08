@@ -6,6 +6,12 @@ export const COLORS = {
     WHITE: "#ffffff",
 };
 
+export const MODULE_IDS = {
+    ATE: "ATL",
+    MIDI: "midi-qol",
+    TOKEN_MAGIC: "tokenmagic",
+};
+
 export const SECONDS = {
     IN_ONE_ROUND_DND5E: 6,
     IN_ONE_MINUTE: 60,
