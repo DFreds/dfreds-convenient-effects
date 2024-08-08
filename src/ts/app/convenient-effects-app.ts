@@ -255,6 +255,26 @@ class ConvenientEffectsApp extends Application {
                     ),
                 },
                 {
+                    name: "ConvenientEffects.ShowFolder",
+                    icon: '<i class="fas fa-eye fa-fw"></i>',
+                    condition: (target: JQuery): boolean => {
+                        return !this.#controller.isFolderViewable(target);
+                    },
+                    callback: (target: JQuery): void => {
+                        this.#controller.setFolderViewable(target, true);
+                    },
+                },
+                {
+                    name: "ConvenientEffects.HideFolder",
+                    icon: '<i class="fas fa-eye-slash fa-fw"></i>',
+                    condition: (target: JQuery): boolean => {
+                        return this.#controller.isFolderViewable(target);
+                    },
+                    callback: (target: JQuery): void => {
+                        this.#controller.setFolderViewable(target, false);
+                    },
+                },
+                {
                     name: "SIDEBAR.Export",
                     icon: '<i class="fas fa-file-export fa-fw"></i>',
                     condition: this.#controller.isUserFolderOwner.bind(

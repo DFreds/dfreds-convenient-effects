@@ -19,7 +19,8 @@ class HandlebarHelpers {
         this.#registerIsDynamic();
         this.#registerGetFolderColor();
         this.#registerStripHtml();
-        this.#registerConvenientIcons();
+        this.#registerConvenientFolderIcons();
+        this.#registerConvenientEffectIcons();
     }
 
     #registerInc() {
@@ -75,9 +76,28 @@ class HandlebarHelpers {
         });
     }
 
-    #registerConvenientIcons() {
+    #registerConvenientFolderIcons() {
         Handlebars.registerHelper(
-            "convenientIcons",
+            "convenientFolderIcons",
+            (folder: Item<any>) => {
+                let icons = "";
+
+                if (!Flags.isViewable(folder)) {
+                    icons += `
+                        <div class="folder-icon">
+                            <i class="fas fa-eye-slash" title='Folder Hidden'></i>
+                        </div>
+                        `;
+                }
+
+                return icons;
+            },
+        );
+    }
+
+    #registerConvenientEffectIcons() {
+        Handlebars.registerHelper(
+            "convenientEffectIcons",
             (effect: ActiveEffect<any>) => {
                 let icons = "";
 
@@ -104,8 +124,15 @@ class HandlebarHelpers {
                 icons += this.#getHiddenIcon(effect);
                 icons += this.#getNestedEffectsIcon(nestedEffects ?? []);
                 icons += this.#getMidiIcon(allChanges); // TODO only if midi is active
-                icons += this.#getAtlIcon(allChanges);
-                icons += this.#getTokenMagicIcon(allChanges);
+
+                if (this.#settings.integrateWithAte) {
+                    icons += this.#getAteIcon(allChanges);
+                }
+
+                if (this.#settings.integrateWithTokenMagic) {
+                    icons += this.#getTokenMagicIcon(allChanges);
+                }
+
                 // TODO add an icon for an effect that is nested?
 
                 return icons;
@@ -113,8 +140,8 @@ class HandlebarHelpers {
         );
     }
 
-    #getHiddenIcon(effect: ActiveEffect<Item<null>>): string {
-        return !Flags.isViewable(effect)
+    #getHiddenIcon(document: ActiveEffect<Item<null>>): string {
+        return !Flags.isViewable(document)
             ? "<i class='fas fa-eye-slash integration-icon' title='Effect Hidden'></i>"
             : "";
     }
@@ -133,7 +160,7 @@ class HandlebarHelpers {
             : "";
     }
 
-    #getAtlIcon(changes: DeepPartial<EffectChangeData>[]): string {
+    #getAteIcon(changes: DeepPartial<EffectChangeData>[]): string {
         return changes.some((change) => change.key?.startsWith("ATL"))
             ? "<i class='fas fa-lightbulb integration-icon' title='ATL Effects'></i> "
             : "";

@@ -16,6 +16,13 @@
     color: var(--color-text-dark-5);
 }
 
+.folder-icon {
+  position: relative;
+  flex: 0 0 20px;
+  margin-left: 3px;
+  text-align: center;
+}
+
 .show-nested-effects.active {
     color: var(--color-text-light-1);
 }

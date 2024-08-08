@@ -58,10 +58,17 @@ class ConvenientEffectsController {
         const folders = findFolders();
         const nestedEffectIds = findAllNestedEffectIds();
 
-        const folderData = folders.map((folder) => {
-            const viewableEffects = findEffectsByFolder(folder.id).filter(
-                (effect) => {
-                    /*
+        const folderData = folders
+            .filter((folder) => {
+                const isViewable = Flags.isViewable(folder) ?? true;
+                const showHiddenEffects = this.#settings.showHiddenEffects;
+
+                return showHiddenEffects || isViewable;
+            })
+            .map((folder) => {
+                const viewableEffects = findEffectsByFolder(folder.id).filter(
+                    (effect) => {
+                        /*
                     if show hidden and show nested
                         - isViewable can be true or false
                         - Can be included in nested or not
@@ -82,33 +89,36 @@ class ConvenientEffectsController {
                         - Cannot be included in nested
                         - Show all effects minus hidden and minus nested
                     */
-                    const ceEffectId = Flags.getCeEffectId(effect);
-                    if (!ceEffectId) return false;
+                        const ceEffectId = Flags.getCeEffectId(effect);
+                        if (!ceEffectId) return false;
 
-                    const isViewable = Flags.isViewable(effect) ?? true;
-                    const isNestedEffect = nestedEffectIds.includes(ceEffectId);
-                    const showHiddenEffects = this.#settings.showHiddenEffects;
-                    const showNestedEffects = this.#settings.showNestedEffects;
+                        const isViewable = Flags.isViewable(effect) ?? true;
+                        const isNestedEffect =
+                            nestedEffectIds.includes(ceEffectId);
+                        const showHiddenEffects =
+                            this.#settings.showHiddenEffects;
+                        const showNestedEffects =
+                            this.#settings.showNestedEffects;
 
-                    if (showHiddenEffects && showNestedEffects) {
-                        return true; // all
-                    } else if (showHiddenEffects && !showNestedEffects) {
-                        return !isNestedEffect;
-                    } else if (!showHiddenEffects && showNestedEffects) {
-                        return isViewable;
-                    } else if (!showHiddenEffects && !showNestedEffects) {
-                        return isViewable && !isNestedEffect;
-                    }
+                        if (showHiddenEffects && showNestedEffects) {
+                            return true; // all
+                        } else if (showHiddenEffects && !showNestedEffects) {
+                            return !isNestedEffect;
+                        } else if (!showHiddenEffects && showNestedEffects) {
+                            return isViewable;
+                        } else if (!showHiddenEffects && !showNestedEffects) {
+                            return isViewable && !isNestedEffect;
+                        }
 
-                    return false;
-                },
-            );
+                        return false;
+                    },
+                );
 
-            return {
-                folder,
-                effects: viewableEffects,
-            };
-        });
+                return {
+                    folder,
+                    effects: viewableEffects,
+                };
+            });
 
         return {
             folderData,
@@ -122,6 +132,33 @@ class ConvenientEffectsController {
         const folder = findFolder(folderId);
 
         return folder?.isOwner ?? false;
+    }
+
+    isFolderViewable(target: JQuery<HTMLElement>): boolean {
+        const folderId = this.#findClosestFolderIdByElement(target);
+
+        if (!folderId) return false;
+
+        const folder = findFolder(folderId);
+
+        if (!folder) return false;
+
+        return Flags.isViewable(folder);
+    }
+
+    async setFolderViewable(
+        target: JQuery<HTMLElement>,
+        value: boolean,
+    ): Promise<void> {
+        const folderId = this.#findClosestFolderIdByElement(target);
+
+        if (!folderId) return;
+
+        const folder = findFolder(folderId);
+
+        if (!folder) return;
+
+        await Flags.setIsViewable(folder, value);
     }
 
     isEffectViewable(target: JQuery<HTMLElement>): boolean {

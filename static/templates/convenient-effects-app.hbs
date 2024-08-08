@@ -60,13 +60,13 @@
             >
                 <header
                     class="folder-header flexrow"
-                    style="background-color: {{getFolderColor
-                        data.folder
-                    }};"
+                    style="background-color: {{getFolderColor data.folder}};"
                 >
                     <h3 class="noborder"><i
                             class="fas fa-folder-open fa-fw"
                         ></i>{{data.folder.name}}</h3>
+
+                    {{{convenientFolderIcons data.folder}}}
 
                     <a class="create-button create-entry">
                         <i class="fas fa-hand-sparkles"></i>
@@ -94,7 +94,7 @@
                                     title="{{stripHtml effect.description}}"
                                 >{{effect.name}}</a></h4>
 
-                            {{{convenientIcons effect}}}
+                            {{{convenientEffectIcons effect}}}
                         </li>
                     {{/each}}
                 </ol>
