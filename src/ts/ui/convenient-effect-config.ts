@@ -208,68 +208,6 @@ class ConvenientEffectConfig extends DocumentSheet<
 
         return chosenOtherEffects;
     }
-
-    override activateListeners(_html: JQuery): void {
-        // html.find("#nested-effects-config button").on(
-        //     "click",
-        //     async (event) => {
-        //         event.preventDefault();
-        //         const action = event.currentTarget.dataset.action;
-        //         let chosenNestedEffects =
-        //             Flags.getNestedEffects(this.document) ?? [];
-        //         if (action === "nested-effect-add") {
-        //             const effectId = html
-        //                 .find("#nested-effects-config .nested-effects-selector")
-        //                 .val() as string;
-        //             const effect = game.dfreds.effectInterface.findEffect({
-        //                 effectId,
-        //             });
-        //             if (!effect) return null;
-        //             chosenNestedEffects.push(effect.toObject());
-        //             chosenNestedEffects =
-        //                 this.#removeDuplicates(chosenNestedEffects);
-        //             return this.submit({
-        //                 preventClose: true,
-        //                 updateData: {
-        //                     [`flags.dfreds-convenient-effects.nestedEffects`]:
-        //                         chosenNestedEffects,
-        //                 },
-        //             });
-        //         } else if (action === "nested-effect-remove") {
-        //             const ceEffectId = event.currentTarget.dataset.ceEffectId;
-        //             const newNestedEffects = chosenNestedEffects.filter(
-        //                 (effect) => Flags.getCeEffectId(effect) !== ceEffectId,
-        //             );
-        //             return this.submit({
-        //                 preventClose: true,
-        //                 updateData: {
-        //                     [`flags.dfreds-convenient-effects.nestedEffects`]:
-        //                         newNestedEffects,
-        //                 },
-        //             });
-        //         }
-        //         return null;
-        //     },
-        // );
-    }
-
-    // #removeDuplicates(
-    //     effects: PreCreate<ActiveEffectSource>[],
-    // ): PreCreate<ActiveEffectSource>[] {
-    //     const uniqueIds = new Set<string>();
-    //     return effects.filter((effect) => {
-    //         const ceEffectId = Flags.getCeEffectId(effect);
-
-    //         if (!ceEffectId) return false;
-
-    //         if (uniqueIds.has(ceEffectId)) {
-    //             return false;
-    //         } else {
-    //             uniqueIds.add(ceEffectId);
-    //             return true;
-    //         }
-    //     });
-    // }
 }
 
 export { ConvenientEffectConfig };
