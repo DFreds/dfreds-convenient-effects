@@ -451,6 +451,27 @@ class ConvenientEffectsController {
         await this.#settings.clearExpandedFolders();
     }
 
+    setToggleNestedEffectsState(): void {
+        const showNestedEffects = this.#settings.showNestedEffects;
+        if (showNestedEffects) {
+            this.#viewMvc.addActiveToggleNestedEffects();
+        } else {
+            this.#viewMvc.removeActiveToggleNestedEffects();
+        }
+    }
+
+    async onToggleNestedEffects(_event: Event): Promise<void> {
+        if (this.#viewMvc.isToggleNestedEffectsActive()) {
+            this.#viewMvc.removeActiveToggleNestedEffects();
+            await this.#settings.setShowNestedEffects(false);
+        } else {
+            this.#viewMvc.addActiveToggleNestedEffects();
+            await this.#settings.setShowNestedEffects(true);
+        }
+
+        this.#viewMvc.render();
+    }
+
     setPrioritizeTargetsState(): void {
         const prioritizeTargets = this.#settings.prioritizeTargets;
         if (prioritizeTargets) {

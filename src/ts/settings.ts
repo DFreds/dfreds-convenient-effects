@@ -45,11 +45,11 @@ class Settings {
         this.#registerCreateFoldersPermission();
         this.#registerIntegrateWithAte();
         this.#registerIntegrateWithTokenMagic();
-        this.#registerShowNestedEffects();
     }
 
     #registerNonConfigSettings(): void {
         this.#registerExpandedFolders();
+        this.#registerShowNestedEffects();
         this.#registerPrioritizeTargets();
         this.#registerHasInitialized();
         this.#registerRanMigrations();
@@ -103,17 +103,6 @@ class Settings {
         });
     }
 
-    #registerShowNestedEffects(): void {
-        game.settings.register(MODULE_ID, this.#SHOW_NESTED_EFFECTS, {
-            name: "ConvenientEffects.SettingShowNestedEffectsName",
-            hint: "ConvenientEffects.SettingShowNestedEffectsHint",
-            scope: "client",
-            config: true,
-            default: false,
-            type: Boolean,
-        });
-    }
-
     #registerExpandedFolders(): void {
         game.settings.register(MODULE_ID, this.#EXPANDED_FOLDERS, {
             name: "Expanded Folders",
@@ -121,6 +110,16 @@ class Settings {
             config: false,
             default: [],
             type: Array,
+        });
+    }
+
+    #registerShowNestedEffects(): void {
+        game.settings.register(MODULE_ID, this.#SHOW_NESTED_EFFECTS, {
+            name: "Show Nested Effects",
+            scope: "client",
+            config: false,
+            default: false,
+            type: Boolean,
         });
     }
 
@@ -179,13 +178,6 @@ class Settings {
         return game.settings.get(
             MODULE_ID,
             this.#INTEGRATE_WITH_TOKEN_MAGIC,
-        ) as boolean;
-    }
-
-    get showNestedEffects(): boolean {
-        return game.settings.get(
-            MODULE_ID,
-            this.#SHOW_NESTED_EFFECTS,
         ) as boolean;
     }
 
@@ -251,6 +243,17 @@ class Settings {
      */
     isFolderExpanded(id: string): boolean {
         return this.expandedFolders.includes(id);
+    }
+
+    get showNestedEffects(): boolean {
+        return game.settings.get(
+            MODULE_ID,
+            this.#SHOW_NESTED_EFFECTS,
+        ) as boolean;
+    }
+
+    async setShowNestedEffects(value: boolean): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#SHOW_NESTED_EFFECTS, value);
     }
 
     get prioritizeTargets(): boolean {

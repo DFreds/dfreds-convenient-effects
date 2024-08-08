@@ -4,6 +4,14 @@
     align-self: center;
 }
 
+.toggle-nested-effects {
+    color: var(--color-text-dark-5);
+}
+
+.toggle-nested-effects.active {
+    color: var(--color-text-light-1);
+}
+
 .prioritize-targets {
     color: var(--color-text-dark-5);
 }

@@ -19,10 +19,8 @@
     "ConvenientEffects.SettingIntegrateWithTokenMagicName": "Integrate with Token Magic",
     "ConvenientEffects.SettingIntegrateWithTokenMagicHint": "If enabled, certain effects will also apply a token magic filter to tokens via Token Magic.",
 
-    "ConvenientEffects.SettingShowNestedEffectsName": "Show Nested Effects",
-    "ConvenientEffects.SettingShowNestedEffectsHint": "If enabled, nested effects will be shown in the application",
-
     "ConvenientEffects.CreateFolder": "Create Folder",
+    "ConvenientEffects.ToggleNestedEffects": "Toggle Nested Effects",
     "ConvenientEffects.PrioritizeTargets": "Prioritize Targets",
     "ConvenientEffects.NewEffect": "New Effect",
     "ConvenientEffects.EditEffect": "Edit Effect",
