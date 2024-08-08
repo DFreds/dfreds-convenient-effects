@@ -315,6 +315,26 @@ class ConvenientEffectsApp extends Application {
                     this.#controller,
                 ),
             },
+            {
+                name: "ConvenientEffects.ShowEffect",
+                icon: '<i class="fas fa-eye fa-fw"></i>',
+                condition: (target: JQuery): boolean => {
+                    return !this.#controller.isEffectViewable(target);
+                },
+                callback: (target: JQuery): void => {
+                    this.#controller.setEffectViewable(target, true);
+                },
+            },
+            {
+                name: "ConvenientEffects.HideEffect",
+                icon: '<i class="fas fa-eye-slash fa-fw"></i>',
+                condition: (target: JQuery): boolean => {
+                    return this.#controller.isEffectViewable(target);
+                },
+                callback: (target: JQuery): void => {
+                    this.#controller.setEffectViewable(target, false);
+                },
+            },
         ]);
     }
 

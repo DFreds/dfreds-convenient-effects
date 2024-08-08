@@ -26,6 +26,8 @@
     "ConvenientEffects.NewEffect": "New Effect",
     "ConvenientEffects.EditEffect": "Edit Effect",
     "ConvenientEffects.DeleteEffect": "Delete Effect",
+    "ConvenientEffects.ShowEffect": "Show Effect",
+    "ConvenientEffects.HideEffect": "Hide Effect",
     "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay",
 
     "ConvenientEffects.ConfigLabel": "Convenient",
@@ -33,6 +35,8 @@
     "ConvenientEffects.ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
     "ConvenientEffects.ConfigConvenientEffectIdLabel": "Convenient Effect ID",
     "ConvenientEffects.ConfigConvenientEffectIdHint": "The nested effects that will be shown as options when the effect is added or removed.",
+    "ConvenientEffects.ConfigViewableLabel": "Viewable",
+    "ConvenientEffects.ConfigViewableHint": "If checked, this effect will always be shown in the application.",
     "ConvenientEffects.ConfigDynamicLabel": "Dynamic",
     "ConvenientEffects.ConfigDynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data.",
     "ConvenientEffects.ConfigNestedEffectsLabel": "Nested Effects",

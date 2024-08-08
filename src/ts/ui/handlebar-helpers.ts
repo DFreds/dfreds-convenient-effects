@@ -15,6 +15,7 @@ class HandlebarHelpers {
         this.#registerIsGm();
         this.#registerCanCreateFolders();
         this.#registerGetCeEffectId();
+        this.#registerIsViewable();
         this.#registerIsDynamic();
         this.#registerGetFolderColor();
         this.#registerStripHtml();
@@ -46,6 +47,12 @@ class HandlebarHelpers {
     #registerGetCeEffectId() {
         Handlebars.registerHelper("getCeEffectId", (effect) => {
             return Flags.getCeEffectId(effect);
+        });
+    }
+
+    #registerIsViewable() {
+        Handlebars.registerHelper("isViewable", (effect) => {
+            return Flags.isViewable(effect);
         });
     }
 
@@ -94,14 +101,22 @@ class HandlebarHelpers {
                     ...nestedChanges,
                 ] as DeepPartial<EffectChangeData>[];
 
+                icons += this.#getHiddenIcon(effect);
                 icons += this.#getNestedEffectsIcon(nestedEffects ?? []);
-                icons += this.#getMidiIcon(allChanges);
+                icons += this.#getMidiIcon(allChanges); // TODO only if midi is active
                 icons += this.#getAtlIcon(allChanges);
                 icons += this.#getTokenMagicIcon(allChanges);
+                // TODO add an icon for an effect that is nested?
 
                 return icons;
             },
         );
+    }
+
+    #getHiddenIcon(effect: ActiveEffect<Item<null>>): string {
+        return !Flags.isViewable(effect)
+            ? "<i class='fas fa-eye-slash integration-icon' title='Effect Hidden'></i>"
+            : "";
     }
 
     #getNestedEffectsIcon(nestedEffects: ActiveEffect<Item<null>>[]): string {

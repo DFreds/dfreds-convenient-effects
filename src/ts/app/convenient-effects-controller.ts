@@ -124,6 +124,41 @@ class ConvenientEffectsController {
         return folder?.isOwner ?? false;
     }
 
+    isEffectViewable(target: JQuery<HTMLElement>): boolean {
+        const folderId = this.#findClosestFolderIdByElement(target);
+        const effectId = this.#findClosestCeEffectIdByElement(target);
+
+        if (!folderId || !effectId) return false;
+
+        const effect = game.dfreds.effectInterface.findEffect({
+            folderId,
+            effectId,
+        });
+
+        if (!effect) return false;
+
+        return Flags.isViewable(effect);
+    }
+
+    async setEffectViewable(
+        target: JQuery<HTMLElement>,
+        value: boolean,
+    ): Promise<void> {
+        const folderId = this.#findClosestFolderIdByElement(target);
+        const effectId = this.#findClosestCeEffectIdByElement(target);
+
+        if (!folderId || !effectId) return;
+
+        const effect = game.dfreds.effectInterface.findEffect({
+            folderId,
+            effectId,
+        });
+
+        if (!effect) return;
+
+        await Flags.setIsViewable(effect, value);
+    }
+
     /**
      * Handles clicks on folders by collapsing or expanding them
      *

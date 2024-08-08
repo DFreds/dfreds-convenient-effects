@@ -199,12 +199,19 @@ class Flags {
         );
     }
 
-    static setIsViewable(document: object, value: boolean): boolean {
-        return foundry.utils.setProperty(
-            document,
-            `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`,
-            value,
-        );
+    static async setIsViewable(
+        document: ActiveEffect<any> | Item<null> | object,
+        value: boolean,
+    ): Promise<any> {
+        if (document instanceof ActiveEffect || document instanceof Item) {
+            return document.setFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE, value);
+        } else {
+            return foundry.utils.setProperty(
+                document,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`,
+                value,
+            );
+        }
     }
 }
 
