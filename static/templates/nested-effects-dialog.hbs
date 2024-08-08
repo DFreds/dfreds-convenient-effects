@@ -1,6 +1,6 @@
 <form id="nested-effects-dialog" onsubmit="event.preventDefault();">
 
-    <p>{{parentEffect.description}}</p>
+    {{{parentEffect.description}}}
 
     <div class="form-group">
         <label>Chosen Effect</label>
@@ -19,8 +19,8 @@
 
     <div id="nested-effect-descriptions">
         {{#each nestedEffects as |nestedEffect|}}
-            <p><strong>{{nestedEffect.name}}.</strong>
-                {{nestedEffect.description}}</p>
+            <strong>{{nestedEffect.name}}.</strong>
+                {{{nestedEffect.description}}}
         {{/each}}
     </div>
 </form>
