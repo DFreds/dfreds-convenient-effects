@@ -26,7 +26,7 @@ interface ICreateEffectAddOns {
 function createConvenientItem({
     item,
 }: ICreateItemAddOns): PreCreate<ItemSource> {
-    Flags.setIsConvenient(item, true); // TODO use to filter out of item directory
+    Flags.setIsConvenient(item, true);
     Flags.setIsViewable(item, true);
 
     item.img =
