@@ -468,7 +468,11 @@ class EffectInterface {
      *
      * @returns A promise that resolves when the reset is complete
      */
-    async resetSystemInitialization(): Promise<void> {
+    async resetSystemInitialization({
+        confirm = true,
+    }: {
+        confirm?: boolean;
+    }): Promise<void> {
         if (!game.user.isGM) return;
 
         const items = findEffectFolderItems();
@@ -477,7 +481,9 @@ class EffectInterface {
         await this.#settings.setHasInitialized(false);
         await this.#settings.clearRanMigrations();
 
-        await SettingsConfig.reloadConfirm({ world: false });
+        if (confirm) {
+            await SettingsConfig.reloadConfirm({ world: false });
+        }
     }
 
     async #getEffectDataToSend({

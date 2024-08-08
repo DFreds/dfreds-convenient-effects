@@ -12,7 +12,9 @@ const CreateEffects: Listener = {
             if (game.user !== game.users.activeGM) return;
 
             if (DEBUG) {
-                await game.dfreds.effectInterface.resetSystemInitialization();
+                await game.dfreds.effectInterface.resetSystemInitialization({
+                    confirm: false,
+                });
             }
 
             const mapping = new Mapping();
