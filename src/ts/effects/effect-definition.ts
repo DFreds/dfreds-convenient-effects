@@ -3,6 +3,7 @@ import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
+import { DEBUG } from "../constants.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -16,8 +17,14 @@ abstract class EffectDefinition {
     async initialize(): Promise<void> {
         // TODO should we create backup items that can't be modified here? With additional flag perhaps
 
-        await this.#createItemsAndEffects(); // TODO do this only once
-        await this.#runMigrations();
+        if (DEBUG || !this.settings.hasInitialized) {
+            await this.#createItemsAndEffects();
+
+            // Set initialized before migration runs
+            await this.settings.setHasInitialized(true);
+
+            await this.#runMigrations();
+        }
     }
 
     abstract get initialItemEffects(): ItemEffects[];

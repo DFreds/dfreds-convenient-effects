@@ -13,6 +13,7 @@ class Settings {
 
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
+    #HAS_INITIALIZED = "hasInitialized";
     #RAN_MIGRATIONS = "ranMigrations";
     #PRIORITIZE_TARGETS = "prioritizeTargets";
 
@@ -50,6 +51,7 @@ class Settings {
     #registerNonConfigSettings(): void {
         this.#registerExpandedFolders();
         this.#registerPrioritizeTargets();
+        this.#registerHasInitialized();
         this.#registerRanMigrations();
     }
 
@@ -126,6 +128,16 @@ class Settings {
         game.settings.register(MODULE_ID, this.#PRIORITIZE_TARGETS, {
             name: "Prioritize Targets",
             scope: "client",
+            config: false,
+            default: false,
+            type: Boolean,
+        });
+    }
+
+    #registerHasInitialized(): void {
+        game.settings.register(MODULE_ID, this.#HAS_INITIALIZED, {
+            name: "Has Initialized",
+            scope: "world",
             config: false,
             default: false,
             type: Boolean,
@@ -250,6 +262,14 @@ class Settings {
 
     async setPrioritizeTargets(value: boolean): Promise<unknown> {
         return game.settings.set(MODULE_ID, this.#PRIORITIZE_TARGETS, value);
+    }
+
+    get hasInitialized(): boolean {
+        return game.settings.get(MODULE_ID, this.#HAS_INITIALIZED) as boolean;
+    }
+
+    async setHasInitialized(value: boolean): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#HAS_INITIALIZED, value);
     }
 
     /**
