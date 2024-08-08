@@ -66,11 +66,11 @@ function createConvenientEffect({
 
     const settings = new Settings();
     if (settings.integrateWithAte && atlChanges) {
-        effect.changes?.push(...atlChanges);
+        (effect.changes ?? []).push(...atlChanges);
     }
 
     if (settings.integrateWithTokenMagic && tokenMagicChanges) {
-        effect.changes?.push(...tokenMagicChanges);
+        (effect.changes ?? []).push(...tokenMagicChanges);
     }
 
     return effect;
