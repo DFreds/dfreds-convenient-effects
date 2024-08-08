@@ -75,6 +75,10 @@ function createConvenientEffect({
         (effect.changes ?? []).push(...tokenMagicChanges);
     }
 
+    effect.description = effect.description
+        ? `<p>${effect.description}</p>`
+        : `<p></p>`;
+
     return effect;
 }
 
