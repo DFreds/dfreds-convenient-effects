@@ -40,13 +40,13 @@ function findActorByUuidSync(
 
 function findFolders(): Item<null>[] {
     return game.items
-        .filter((item) => {
-            const isConvenient = Flags.isConvenient(item);
+        .filter((folder) => {
+            const isConvenient = Flags.isConvenient(folder);
             return isConvenient;
         })
-        .sort((itemA, itemB) => {
-            const nameA = itemA.name.toUpperCase(); // ignore upper and lowercase
-            const nameB = itemB.name.toUpperCase(); // ignore upper and lowercase
+        .sort((folderA, folderB) => {
+            const nameA = folderA.name.toUpperCase(); // ignore upper and lowercase
+            const nameB = folderB.name.toUpperCase(); // ignore upper and lowercase
             if (nameA < nameB) {
                 return -1;
             }
@@ -60,13 +60,27 @@ function findFolders(): Item<null>[] {
 }
 
 function findFolder(folderId: string): Item<null> | undefined {
-    return game.items.find((item) => {
-        return item.id === folderId && Flags.isConvenient(item);
+    return game.items.find((folder) => {
+        return folder.id === folderId && Flags.isConvenient(folder);
     });
 }
 
 function findEffects(): ActiveEffect<Item<null>>[] {
-    return findFolders().flatMap((folder) => findEffectsByFolder(folder.id));
+    return findFolders()
+        .flatMap((folder) => findEffectsByFolder(folder.id))
+        .sort((effectA, effectB) => {
+            const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
+            const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
+        });
 }
 
 function findEffectsByFolder(folderId: string): ActiveEffect<Item<null>>[] {
