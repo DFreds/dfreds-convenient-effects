@@ -170,7 +170,6 @@ class EffectInterface {
         this.#settings = new Settings();
     }
 
-    // TODO needs socket through GM probably
     /**
      * Searches through the list of available effects and returns one matching
      * either the effect ID or effect name.
