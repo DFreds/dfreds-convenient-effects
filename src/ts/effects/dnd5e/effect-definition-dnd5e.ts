@@ -1142,15 +1142,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "+1d4",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "bloom",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "bloom",
-                },
-            ],
         });
     }
 
@@ -1224,15 +1222,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "blur",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "blur",
-                },
-            ],
         });
     }
 
@@ -1491,22 +1487,20 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         value: "60",
                         priority: 5,
                     },
+                    {
+                        key: "ATL.sight.range",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "60",
+                        priority: 5,
+                    },
+                    {
+                        key: "ATL.sight.visionMode",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "darkvision",
+                        priority: 5,
+                    },
                 ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.sight.range",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-                    value: "60",
-                    priority: 5,
-                },
-                {
-                    key: "ATL.sight.visionMode",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "darkvision",
-                    priority: 5,
-                },
-            ],
         });
     }
 
@@ -1804,37 +1798,33 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "10",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.WHITE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.25",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "pulse","speed": 1,"intensity": 1}',
+                    },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "glow",
+                    },
                 ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "10",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "pulse","speed": 1,"intensity": 1}',
-                },
-            ],
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "glow",
-                },
-            ],
         });
     }
 
@@ -1922,42 +1912,38 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "cold",
                     },
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "20",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "10",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.25",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch", "speed": 3, "intensity": 1}',
+                    },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "fire",
+                    },
                 ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "20",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "10",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch", "speed": 3, "intensity": 1}',
-                },
-            ],
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "fire",
-                },
-            ],
         });
     }
 
@@ -1976,42 +1962,38 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "fire",
                     },
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "20",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "10",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.COLD_FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.25",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch", "speed": 3, "intensity": 1}',
+                    },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "Fire v2 (coldfire)",
+                    },
                 ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "20",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "10",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.COLD_FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch", "speed": 3, "intensity": 1}',
-                },
-            ],
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "Fire v2 (coldfire)",
-                },
-            ],
         });
     }
 
@@ -2113,14 +2095,14 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_MINUTE,
                 },
+                changes: [
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "warp-field",
+                    },
+                ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "warp-field",
-                },
-            ],
         });
     }
 
@@ -2304,6 +2286,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #holdMonster(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#paralyzed]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Hold Monster",
@@ -2313,19 +2299,23 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_MINUTE,
                 },
-                changes: this.#paralyzed.changes,
+                changes: [
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "mantle-of-madness",
+                    },
+                ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "mantle-of-madness",
-                },
-            ],
+            subEffectIds,
         });
     }
 
     get #holdPerson(): PreCreate<ActiveEffectSource> {
+        const subEffectIds = [this.#paralyzed]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+
         return createConvenientEffect({
             effect: {
                 name: "Hold Person",
@@ -2335,15 +2325,15 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_MINUTE,
                 },
-                changes: this.#paralyzed.changes,
+                changes: [
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "mantle-of-madness",
+                    },
+                ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "mantle-of-madness",
-                },
-            ],
+            subEffectIds,
         });
     }
 
@@ -2368,30 +2358,28 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "5",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.WHITE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.25",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+                    },
                 ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "5",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-                },
-            ],
         });
     }
 
@@ -2490,34 +2478,34 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
+                changes: [
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "40",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "20",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.WHITE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.25",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "pulse", "speed": 3,"intensity": 1}',
+                    },
+                ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "40",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "20",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "pulse", "speed": 3,"intensity": 1}',
-                },
-            ],
         });
     }
 
@@ -2592,14 +2580,14 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_MINUTE,
                 },
+                changes: [
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "images",
+                    },
+                ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "images",
-                },
-            ],
         });
     }
 
@@ -2618,15 +2606,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "+10",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "fog",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "fog",
-                },
-            ],
         });
     }
 
@@ -2667,15 +2653,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "acid",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "clover",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "clover",
-                },
-            ],
         });
     }
 
@@ -2694,15 +2678,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "cold",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "pure-ice-aura",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "pure-ice-aura",
-                },
-            ],
         });
     }
 
@@ -2721,15 +2703,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "fire",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "pure-fire-aura",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "pure-fire-aura",
-                },
-            ],
         });
     }
 
@@ -2748,15 +2728,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "lightning",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "electric",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "electric",
-                },
-            ],
         });
     }
 
@@ -2775,15 +2753,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "thunder",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "shockwave",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "shockwave",
-                },
-            ],
         });
     }
 
@@ -2803,15 +2779,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "poison",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "bevel",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "bevel",
-                },
-            ],
         });
     }
 
@@ -2944,15 +2918,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         value: "+5",
                         priority: 5,
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "water-field",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "water-field",
-                },
-            ],
         });
     }
 
@@ -2971,15 +2943,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "+2",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "bloom",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "bloom",
-                },
-            ],
         });
     }
 
@@ -3118,15 +3088,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "physical",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "oldfilm",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "oldfilm",
-                },
-            ],
         });
     }
 
@@ -3457,35 +3425,33 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "+max(1, @abilities.cha.mod)",
                     },
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "40",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "20",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.WHITE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.25",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+                    },
                 ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "40",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "20",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-                },
-            ],
         });
     }
 
@@ -3767,39 +3733,39 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_SIX_HOURS,
                 },
+                changes: [
+                    {
+                        key: "ATL.light.angle",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "60",
+                    },
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "120",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "60",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.4",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch","speed": 1,"intensity": 1}',
+                    },
+                ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.angle",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "60",
-                },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "120",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "60",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
-            ],
         });
     }
 
@@ -3812,34 +3778,34 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
+                changes: [
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "10",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "5",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.2",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch","speed": 1,"intensity": 1}',
+                    },
+                ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "10",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "5",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.2",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
-            ],
         });
     }
 
@@ -3853,34 +3819,34 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_SIX_HOURS,
                 },
+                changes: [
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "5",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.4",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch","speed": 1,"intensity": 1}',
+                    },
+                ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "5",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
-            ],
         });
     }
 
@@ -3893,34 +3859,34 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_SIX_HOURS,
                 },
+                changes: [
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "60",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "30",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.4",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch","speed": 1,"intensity": 1}',
+                    },
+                ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "60",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "30",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
-            ],
         });
     }
 
@@ -3933,34 +3899,34 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 duration: {
                     seconds: SECONDS.IN_ONE_HOUR,
                 },
+                changes: [
+                    {
+                        key: "ATL.light.dim",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "40",
+                    },
+                    {
+                        key: "ATL.light.bright",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "20",
+                    },
+                    {
+                        key: "ATL.light.color",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: COLORS.FIRE,
+                    },
+                    {
+                        key: "ATL.light.alpha",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "0.4",
+                    },
+                    {
+                        key: "ATL.light.animation",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: '{"type": "torch","speed": 1,"intensity": 1}',
+                    },
+                ],
             },
-            atlChanges: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "40",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "20",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
-            ],
         });
     }
 
@@ -4084,15 +4050,13 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
+                    {
+                        key: "macro.tokenMagic",
+                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                        value: "Evade Stance",
+                    },
                 ],
             },
-            tokenMagicChanges: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "Evade Stance",
-                },
-            ],
         });
     }
 

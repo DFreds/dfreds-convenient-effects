@@ -1,9 +1,5 @@
-import {
-    ActiveEffectSource,
-    EffectChangeData,
-} from "types/foundry/common/documents/active-effect.js";
+import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { ItemSource } from "types/foundry/common/documents/item.js";
-import { Settings } from "../settings.ts";
 import { log } from "../logger.ts";
 import { Flags } from "./flags.ts";
 
@@ -17,8 +13,6 @@ interface ICreateEffectAddOns {
     isTemporary?: boolean; // TODO determines if we add our own status
     isViewable?: boolean;
     isDynamic?: boolean;
-    atlChanges?: DeepPartial<EffectChangeData>[];
-    tokenMagicChanges?: DeepPartial<EffectChangeData>[];
     nestedEffectIds?: string[];
     subEffectIds?: string[];
     otherEffectIds?: string[];
@@ -41,8 +35,6 @@ function createConvenientEffect({
     isTemporary = true,
     isViewable = true,
     isDynamic = false,
-    atlChanges,
-    tokenMagicChanges,
     nestedEffectIds,
     subEffectIds,
     otherEffectIds,
@@ -64,15 +56,6 @@ function createConvenientEffect({
 
     if (isTemporary) {
         log("isTemp"); // TODO remove or do something for making passive effects
-    }
-
-    const settings = new Settings();
-    if (settings.integrateWithAte && atlChanges) {
-        (effect.changes ?? []).push(...atlChanges);
-    }
-
-    if (settings.integrateWithTokenMagic && tokenMagicChanges) {
-        (effect.changes ?? []).push(...tokenMagicChanges);
     }
 
     effect.description = effect.description
