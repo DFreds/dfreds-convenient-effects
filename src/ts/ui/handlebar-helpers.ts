@@ -2,7 +2,7 @@ import { EffectChangeData } from "types/foundry/common/documents/active-effect.j
 import { Settings } from "../settings.ts";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
-import { findModuleById } from "../utils/finds.ts";
+import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
 
 class HandlebarHelpers {
@@ -112,19 +112,14 @@ class HandlebarHelpers {
                     })
                     .filter(notEmpty);
 
-                const effectChanges = (effect.changes ??
-                    []) as DeepPartial<EffectChangeData>[];
-                const nestedChanges = nestedEffects
-                    .flatMap((nestedEffect) => nestedEffect.changes)
-                    .filter(notEmpty);
-
-                const allChanges = [
-                    ...effectChanges,
-                    ...nestedChanges,
-                ] as DeepPartial<EffectChangeData>[];
+                const allChanges = this.#getAllChanges(effect, nestedEffects);
 
                 icons += this.#getHiddenIcon(effect);
-                icons += this.#getNestedEffectsIcon(nestedEffects ?? []);
+                icons += this.#getHasNestedEffectsIcon(nestedEffects);
+                icons += this.#getIsNestedEffectsIcon(
+                    Flags.getCeEffectId(effect),
+                    findAllNestedEffectIds(),
+                );
 
                 if (findModuleById(MODULE_IDS.MIDI)?.active) {
                     icons += this.#getMidiIcon(allChanges);
@@ -138,11 +133,22 @@ class HandlebarHelpers {
                     icons += this.#getTokenMagicIcon(allChanges);
                 }
 
-                // TODO add an icon for an effect that is nested?
-
                 return icons;
             },
         );
+    }
+
+    #getAllChanges(
+        effect: ActiveEffect<any>,
+        nestedEffects: ActiveEffect<any>[],
+    ): DeepPartial<EffectChangeData>[] {
+        const effectChanges = (effect.changes ??
+            []) as DeepPartial<EffectChangeData>[];
+        const nestedChanges = nestedEffects
+            .flatMap((nestedEffect) => nestedEffect.changes)
+            .filter(notEmpty);
+
+        return [...effectChanges, ...nestedChanges];
     }
 
     #getHiddenIcon(document: ActiveEffect<Item<null>>): string {
@@ -151,9 +157,20 @@ class HandlebarHelpers {
             : "";
     }
 
-    #getNestedEffectsIcon(nestedEffects: ActiveEffect<Item<null>>[]): string {
+    #getHasNestedEffectsIcon(
+        nestedEffects: ActiveEffect<Item<null>>[],
+    ): string {
         return nestedEffects && nestedEffects.length > 0
-            ? "<i class='fas fa-list-tree integration-icon' title='Nested Effects'></i> "
+            ? "<i class='fas fa-trees integration-icon' title='Has Nested Effects'></i> "
+            : "";
+    }
+
+    #getIsNestedEffectsIcon(
+        ceEffectId: string | undefined,
+        nestedEffectIds: string[],
+    ): string {
+        return ceEffectId && nestedEffectIds?.includes(ceEffectId)
+            ? "<i class='fas fa-tree integration-icon' title='Is Nested Effect'></i> "
             : "";
     }
 
