@@ -4,7 +4,12 @@ import {
     createConvenientEffect,
     createConvenientItem,
 } from "../utils/creates.ts";
-import { findEffectsByFolder, findFolders } from "../utils/finds.ts";
+import {
+    findEffectByUuid,
+    findEffectsByFolder,
+    findFolder,
+    findFolders,
+} from "../utils/finds.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
@@ -65,9 +70,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return false;
 
-        const item = game.items.get(folderId);
+        const folder = findFolder(folderId);
 
-        return item?.isOwner ?? false;
+        return folder?.isOwner ?? false;
     }
 
     /**
@@ -146,7 +151,7 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByEvent(event);
         if (!folderId) return;
 
-        const folder = game.items.get(folderId);
+        const folder = findFolder(folderId);
         if (!folder) return;
 
         // TODO checkbox for if passive?
@@ -171,7 +176,7 @@ class ConvenientEffectsController {
 
         if (!folderId || !effectId) return;
 
-        const item = game.items.get(folderId);
+        const folder = findFolder(folderId);
         const effect = game.dfreds.effectInterface.findEffect({
             folderId,
             effectId,
@@ -179,7 +184,7 @@ class ConvenientEffectsController {
 
         if (!effect) return;
 
-        const effects = await item?.createEmbeddedDocuments("ActiveEffect", [
+        const effects = await folder?.createEmbeddedDocuments("ActiveEffect", [
             effect,
         ]);
 
@@ -192,7 +197,7 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const folder = game.items.get(folderId);
+        const folder = findFolder(folderId);
         if (!folder) return;
 
         const result = await getInputFromDialog({ folder });
@@ -226,8 +231,8 @@ class ConvenientEffectsController {
 
         if (!folderId) return;
 
-        const item = game.items.get(folderId);
-        await item?.deleteDialog();
+        const folder = findFolder(folderId);
+        await folder?.deleteDialog();
     }
 
     async onDeleteEffect(target: JQuery<HTMLElement>): Promise<void> {
@@ -248,13 +253,13 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const item = game.items.get(folderId);
-        if (!item) return;
+        const folder = findFolder(folderId);
+        if (!folder) return;
 
         const offsetTop = target.offset()?.top;
 
         // @ts-expect-error Not type defined in pf2e
-        new DocumentOwnershipConfig(item, {
+        new DocumentOwnershipConfig(folder, {
             top: Math.min(offsetTop ?? 0, window.innerHeight - 350),
             left: window.innerWidth - 720,
         }).render(true);
@@ -264,8 +269,8 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const item = game.items.get(folderId);
-        item?.exportToJSON();
+        const folder = findFolder(folderId);
+        folder?.exportToJSON();
     }
 
     // TODO combine existing and new or keep total replace? example in old custom-effects-handler
@@ -273,8 +278,8 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const item = game.items.get(folderId);
-        await item?.importFromJSONDialog();
+        const folder = findFolder(folderId);
+        await folder?.importFromJSONDialog();
     }
 
     /**
@@ -378,29 +383,29 @@ class ConvenientEffectsController {
         if (!effectString || !folderId) return;
 
         const effectData = JSON.parse(effectString);
-        const effect = fromUuidSync(effectData.uuid) as ActiveEffect<
-            Item<null>
-        >;
+        const effect = await findEffectByUuid(effectData.uuid);
 
-        const originalItem = game.items.get(effect.parent.id);
-        const newItem = game.items.get(folderId);
+        if (!effect) return;
 
-        if (newItem?.isOwner) {
-            await newItem.createEmbeddedDocuments("ActiveEffect", [effect]);
+        const originalFolder = findFolder(effect.parent.id);
+        const newFolder = findFolder(folderId);
 
-            if (originalItem?.isOwner) {
+        if (newFolder?.isOwner) {
+            await newFolder.createEmbeddedDocuments("ActiveEffect", [effect]);
+
+            if (originalFolder?.isOwner) {
                 await effect.delete();
             } else {
                 ui.notifications.warn(
                     `You do not have permission to remove the effect
-                    ${effect.name} from ${originalItem?.name}. Duplicated effect
-                    onto ${newItem.name}`,
+                    ${effect.name} from ${originalFolder?.name}. Duplicated effect
+                    onto ${newFolder.name}`,
                 );
             }
         } else {
             ui.notifications.warn(
                 `You do not have permission to add effect ${effect.name} to
-                folder ${newItem?.name}`,
+                folder ${newFolder?.name}`,
             );
         }
     }

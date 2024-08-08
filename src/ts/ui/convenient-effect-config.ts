@@ -1,5 +1,5 @@
 import { Flags } from "../utils/flags.ts";
-import { findEffects } from "../utils/finds.ts";
+import { findEffectByUuid, findEffects } from "../utils/finds.ts";
 
 interface MultiSelectData {
     id?: string;
@@ -30,7 +30,7 @@ class ConvenientEffectConfig extends DocumentSheet<
             );
             openButton.click(async (_event) => {
                 let convenientConfig = null;
-                const activeEffect = await fromUuid(app.document.uuid);
+                const activeEffect = await findEffectByUuid(app.document.uuid);
 
                 for (const key in app.document.apps) {
                     const obj = app.document.apps[key];

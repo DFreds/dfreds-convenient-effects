@@ -111,6 +111,16 @@ function findEffectsByFolder(folderId: string): ActiveEffect<Item<null>>[] {
     );
 }
 
+async function findEffectByUuid(
+    uuid: string,
+): Promise<ActiveEffect<any> | undefined> {
+    const document = await fromUuid(uuid);
+
+    if (!(document instanceof ActiveEffect)) return;
+
+    return document as ActiveEffect<any>;
+}
+
 export {
     findActorByUuid,
     findActorByUuidSync,
@@ -118,4 +128,5 @@ export {
     findFolders,
     findEffects,
     findEffectsByFolder,
+    findEffectByUuid,
 };
