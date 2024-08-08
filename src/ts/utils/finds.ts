@@ -59,6 +59,12 @@ function findEffectFolderItems(): Item<null>[] {
         });
 }
 
+function findEffectFolderItem(itemId: string): Item<null> | undefined {
+    return game.items.find((item) => {
+        return item.id === itemId && Flags.isConvenient(item);
+    });
+}
+
 function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
     const item = game.items.get(itemId);
 
@@ -90,6 +96,7 @@ function findEffectsForItem(itemId: string): ActiveEffect<Item<null>>[] {
 export {
     findActorByUuid,
     findActorByUuidSync,
+    findEffectFolderItem,
     findEffectFolderItems,
     findEffectsForItem,
 };

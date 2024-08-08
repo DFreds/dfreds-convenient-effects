@@ -3,6 +3,7 @@ import { Settings } from "./settings.ts";
 import {
     findActorByUuid,
     findActorByUuidSync,
+    findEffectFolderItem,
     findEffectFolderItems,
 } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
@@ -10,6 +11,11 @@ import { error, log } from "./logger.ts";
 import { SocketMessage } from "./sockets/sockets.ts";
 import { Flags } from "./utils/flags.ts";
 import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
+import { ItemSource } from "types/foundry/common/documents/item.js";
+import {
+    createConvenientEffect,
+    createConvenientItem,
+} from "./utils/creates.ts";
 
 interface IFindEffect {
     /**
@@ -139,13 +145,23 @@ interface IRemoveEffect {
     origin?: ActiveEffectOrigin | null;
 }
 
-// TODO
-// interface ICreateNewEffects {
-//     /**
-//      * The effects to create
-//      */
-//     effects: PreCreate<ActiveEffectSource>[];
-// }
+interface ICreateNewEffects {
+    /**
+     * The ID of the existing folder to add the effects to. If defined,
+     * prioritized over `folder`
+     */
+    existingFolderId?: string;
+
+    /**
+     * The folder to add the effects to
+     */
+    newFolderData?: PreCreate<ItemSource>;
+
+    /**
+     * The effects to create
+     */
+    effectsData: PreCreate<ActiveEffectSource>[];
+}
 
 class EffectInterface {
     #settings: Settings;
@@ -399,8 +415,52 @@ class EffectInterface {
         } satisfies SocketMessage);
     }
 
-    // TODO needs socket through GM probably?
-    // async createNewEffects({ effects }: ICreateNewEffects): Promise<void> {}
+    /**
+     * Creates effects on either an existing folder with `folderId` or on a new
+     * folder using the data provided by `folder`.
+     *
+     * @param options - the options for creating effects
+     * @returns A promise that resolves when the effect creation is complete
+     */
+    async createNewEffects({
+        existingFolderId,
+        newFolderData,
+        effectsData,
+    }: ICreateNewEffects): Promise<void> {
+        if (!game.user.isGM) return;
+
+        if (!existingFolderId && !newFolderData) {
+            error(
+                `Either an existing folder ID or new folder data need to be
+                defined to create effects`,
+            );
+            return;
+        }
+
+        const newEffectsData = effectsData.map((effect) => {
+            return createConvenientEffect({ effect });
+        });
+
+        const existingFolder = findEffectFolderItem(existingFolderId ?? "");
+
+        if (existingFolder) {
+            await existingFolder.createEmbeddedDocuments(
+                "ActiveEffect",
+                newEffectsData,
+            );
+        } else if (newFolderData) {
+            const newFolder = await Item.create(
+                createConvenientItem({
+                    item: newFolderData,
+                }),
+            );
+
+            await newFolder?.createEmbeddedDocuments(
+                "ActiveEffect",
+                newEffectsData,
+            );
+        }
+    }
 
     /**
      * Completely resets the world, re-initializing all effects and re-running
