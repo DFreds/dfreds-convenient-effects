@@ -5,6 +5,7 @@ import { ItemSource } from "types/foundry/common/documents/item.js";
 class Flags {
     static #KEYS = {
         CE_EFFECT_ID: "ceEffectId",
+        IS_BACKUP: "isBackup",
         IS_CONVENIENT: "isConvenient",
         IS_TEMPORARY: "isTemporary",
         IS_DYNAMIC: "isDynamic",
@@ -36,6 +37,28 @@ class Flags {
             `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`,
             ceEffectId,
         );
+    }
+
+    static isBackup(document: ActiveEffect<any> | Item<null>): boolean {
+        return (
+            (document.getFlag(MODULE_ID, this.#KEYS.IS_BACKUP) as boolean) ??
+            false
+        );
+    }
+
+    static async setIsBackup(
+        document: ActiveEffect<any> | Item<null> | object,
+        value: boolean,
+    ): Promise<any> {
+        if (document instanceof ActiveEffect || document instanceof Item) {
+            return document.setFlag(MODULE_ID, this.#KEYS.IS_BACKUP, value);
+        } else {
+            return foundry.utils.setProperty(
+                document,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
+                value,
+            );
+        }
     }
 
     static getFolderColor(item: Item<null>): string {

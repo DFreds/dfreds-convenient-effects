@@ -4,6 +4,7 @@ import { log } from "../logger.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
 import { DEBUG } from "../constants.ts";
+import { Flags } from "../utils/flags.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -18,7 +19,8 @@ abstract class EffectDefinition {
         // TODO should we create backup items that can't be modified here? With additional flag perhaps
 
         if (DEBUG || !this.settings.hasInitialized) {
-            await this.#createItemsAndEffects();
+            await this.#createItemsAndEffects({ backup: false });
+            await this.#createItemsAndEffects({ backup: true });
 
             // Set initialized before migration runs
             await this.settings.setHasInitialized(true);
@@ -31,7 +33,11 @@ abstract class EffectDefinition {
 
     abstract get migrations(): MigrationType[];
 
-    async #createItemsAndEffects(): Promise<void> {
+    async #createItemsAndEffects({
+        backup,
+    }: {
+        backup: boolean;
+    }): Promise<void> {
         const effectPromises = this.initialItemEffects.map(
             async (itemEffect) => {
                 const item = await Item.create(
@@ -40,6 +46,7 @@ abstract class EffectDefinition {
                             name: itemEffect.itemData.name,
                             type: getBaseType(),
                         },
+                        isBackup: backup,
                     }),
                 );
 
@@ -47,7 +54,10 @@ abstract class EffectDefinition {
 
                 return item.createEmbeddedDocuments(
                     "ActiveEffect",
-                    itemEffect.effects,
+                    itemEffect.effects.map((effect) => {
+                        Flags.setIsBackup(effect, backup);
+                        return effect;
+                    }),
                 );
             },
         );

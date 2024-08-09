@@ -6,7 +6,9 @@ class ConvenientEffectsApp extends Application {
 
     constructor() {
         super();
-        this.#controller = new ConvenientEffectsController(this);
+        this.#controller = new ConvenientEffectsController({
+            viewMvc: this,
+        });
         this.#rootView = $("<div>"); // Init it to something for now
     }
 

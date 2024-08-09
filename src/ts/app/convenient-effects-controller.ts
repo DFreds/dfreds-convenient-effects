@@ -16,6 +16,8 @@ import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 import { Flags } from "../utils/flags.ts";
 
+// TODO shouldn't be able to do a lot of things if backupApp is true
+
 interface ViewData {
     folderData: FolderData[];
 }
@@ -41,6 +43,7 @@ interface SearchResults {
  * Controller class that handles events from the app and manipulating the underlying Foundry data
  */
 class ConvenientEffectsController {
+    #backupApp: boolean;
     #viewMvc: ConvenientEffectsApp;
     #settings: Settings;
 
@@ -49,14 +52,17 @@ class ConvenientEffectsController {
      *
      * @param viewMvc - the app that the controller can interact with
      */
-    constructor(viewMvc: ConvenientEffectsApp) {
+    constructor({ viewMvc }: { viewMvc: ConvenientEffectsApp }) {
+        this.#backupApp = false;
         this.#viewMvc = viewMvc;
         this.#settings = new Settings();
     }
 
     getData(): ViewData {
-        const folders = findFolders();
-        const nestedEffectIds = findAllNestedEffectIds();
+        const folders = findFolders({ backup: this.#backupApp });
+        const nestedEffectIds = findAllNestedEffectIds({
+            backup: this.#backupApp,
+        });
 
         const folderData = folders
             .filter((folder) => {
@@ -66,9 +72,10 @@ class ConvenientEffectsController {
                 return showHiddenEffects || isViewable;
             })
             .map((folder) => {
-                const viewableEffects = findEffectsByFolder(folder.id).filter(
-                    (effect) => {
-                        /*
+                const viewableEffects = findEffectsByFolder(folder.id, {
+                    backup: this.#backupApp,
+                }).filter((effect) => {
+                    /*
                     if show hidden and show nested
                         - isViewable can be true or false
                         - Can be included in nested or not
@@ -89,30 +96,26 @@ class ConvenientEffectsController {
                         - Cannot be included in nested
                         - Show all effects minus hidden and minus nested
                     */
-                        const ceEffectId = Flags.getCeEffectId(effect);
-                        if (!ceEffectId) return false;
+                    const ceEffectId = Flags.getCeEffectId(effect);
+                    if (!ceEffectId) return false;
 
-                        const isViewable = Flags.isViewable(effect) ?? true;
-                        const isNestedEffect =
-                            nestedEffectIds.includes(ceEffectId);
-                        const showHiddenEffects =
-                            this.#settings.showHiddenEffects;
-                        const showNestedEffects =
-                            this.#settings.showNestedEffects;
+                    const isViewable = Flags.isViewable(effect) ?? true;
+                    const isNestedEffect = nestedEffectIds.includes(ceEffectId);
+                    const showHiddenEffects = this.#settings.showHiddenEffects;
+                    const showNestedEffects = this.#settings.showNestedEffects;
 
-                        if (showHiddenEffects && showNestedEffects) {
-                            return true; // all
-                        } else if (showHiddenEffects && !showNestedEffects) {
-                            return !isNestedEffect;
-                        } else if (!showHiddenEffects && showNestedEffects) {
-                            return isViewable;
-                        } else if (!showHiddenEffects && !showNestedEffects) {
-                            return isViewable && !isNestedEffect;
-                        }
+                    if (showHiddenEffects && showNestedEffects) {
+                        return true; // all
+                    } else if (showHiddenEffects && !showNestedEffects) {
+                        return !isNestedEffect;
+                    } else if (!showHiddenEffects && showNestedEffects) {
+                        return isViewable;
+                    } else if (!showHiddenEffects && !showNestedEffects) {
+                        return isViewable && !isNestedEffect;
+                    }
 
-                        return false;
-                    },
-                );
+                    return false;
+                });
 
                 return {
                     folder,
@@ -129,7 +132,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return false;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
 
         return folder?.isOwner ?? false;
     }
@@ -139,7 +144,9 @@ class ConvenientEffectsController {
 
         if (!folderId) return false;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
 
         if (!folder) return false;
 
@@ -154,7 +161,9 @@ class ConvenientEffectsController {
 
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
 
         if (!folder) return;
 
@@ -272,7 +281,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByEvent(event);
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         if (!folder) return;
 
         const newEffect = createConvenientEffect({
@@ -295,7 +306,9 @@ class ConvenientEffectsController {
 
         if (!folderId || !effectId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         const effect = game.dfreds.effectInterface.findEffect({
             folderId,
             effectId,
@@ -316,7 +329,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         if (!folder) return;
 
         const result = await getInputFromDialog({ folder });
@@ -350,7 +365,9 @@ class ConvenientEffectsController {
 
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         await folder?.deleteDialog();
     }
 
@@ -372,7 +389,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         if (!folder) return;
 
         const offsetTop = target.offset()?.top;
@@ -388,7 +407,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         folder?.exportToJSON();
     }
 
@@ -396,7 +417,9 @@ class ConvenientEffectsController {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
-        const folder = findFolder(folderId);
+        const folder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
         await folder?.importFromJSONDialog();
     }
 
@@ -505,8 +528,12 @@ class ConvenientEffectsController {
 
         if (!effect) return;
 
-        const originalFolder = findFolder(effect.parent.id);
-        const newFolder = findFolder(folderId);
+        const originalFolder = findFolder(effect.parent.id, {
+            backup: this.#backupApp,
+        });
+        const newFolder = findFolder(folderId, {
+            backup: this.#backupApp,
+        });
 
         if (newFolder?.isOwner) {
             await newFolder.createEmbeddedDocuments("ActiveEffect", [effect]);

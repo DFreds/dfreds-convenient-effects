@@ -4,11 +4,14 @@ import { Flags } from "./flags.ts";
 
 interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
+    isBackup?: boolean;
+    isViewable?: boolean;
 }
 
 // TODO should we take a bottom up approach instead of top down?  i.e. instead of a parent defining its nested effects, should a child define its parent nested id?
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
+    isBackup?: boolean;
     isTemporary?: boolean;
     isViewable?: boolean;
     isDynamic?: boolean;
@@ -19,10 +22,14 @@ interface ICreateEffectAddOns {
 
 function createConvenientItem({
     item,
+    isBackup = false,
+    isViewable = true,
 }: ICreateItemAddOns): PreCreate<ItemSource> {
     Flags.setIsConvenient(item, true);
-    Flags.setIsViewable(item, true);
+    Flags.setIsBackup(item, isBackup);
+    Flags.setIsViewable(item, isViewable);
 
+    item.name = isBackup ? `${item.name} - Backup` : item.name;
     item.img =
         item.img ?? "modules/dfreds-convenient-effects/images/magic-palm.svg";
 
@@ -31,6 +38,7 @@ function createConvenientItem({
 
 function createConvenientEffect({
     effect,
+    isBackup = false,
     isTemporary = true,
     isViewable = true,
     isDynamic = false,
@@ -40,6 +48,7 @@ function createConvenientEffect({
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     Flags.setCeEffectId(effect, createCeEffectId(effect.name));
     Flags.setIsConvenient(effect, true);
+    Flags.setIsBackup(effect, isBackup);
     Flags.setIsTemporary(effect, isTemporary);
     Flags.setIsViewable(effect, isViewable);
     Flags.setIsDynamic(effect, isDynamic);

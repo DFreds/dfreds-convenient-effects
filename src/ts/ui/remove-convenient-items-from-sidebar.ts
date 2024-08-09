@@ -4,7 +4,14 @@ import { findFolders } from "../utils/finds.ts";
 function removeConvenientItemsFromSidebar(
     directory: ItemDirectory<Item<null>>,
 ): void {
-    const folderIds = findFolders().map((folder) => folder.id);
+    const nonBackupFolders = findFolders({ backup: false }).map(
+        (folder) => folder.id,
+    );
+    const backupFolderIds = findFolders({ backup: true }).map(
+        (folder) => folder.id,
+    );
+
+    const folderIds = [...nonBackupFolders, ...backupFolderIds];
 
     if (!folderIds) return;
     if (DEBUG) return;

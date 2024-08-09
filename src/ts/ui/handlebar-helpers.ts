@@ -139,7 +139,7 @@ class HandlebarHelpers {
                 icons += this.#getHasNestedEffectsIcon(nestedEffects);
                 icons += this.#getIsNestedEffectsIcon(
                     Flags.getCeEffectId(effect),
-                    findAllNestedEffectIds(),
+                    findAllNestedEffectIds({ backup: false }),
                 );
 
                 if (findModuleById(MODULE_IDS.MIDI)?.active) {

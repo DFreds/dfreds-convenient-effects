@@ -182,7 +182,7 @@ class EffectInterface {
         effectId,
         effectName,
     }: IFindEffect): ActiveEffect<Item<null>> | undefined {
-        const folders = findFolders();
+        const folders = findFolders({ backup: false });
 
         if (!folders) return;
 
@@ -440,7 +440,9 @@ class EffectInterface {
             return createConvenientEffect({ effect });
         });
 
-        const existingFolder = findFolder(existingFolderId ?? "");
+        const existingFolder = findFolder(existingFolderId ?? "", {
+            backup: false,
+        });
 
         if (existingFolder) {
             await existingFolder.createEmbeddedDocuments(
@@ -474,8 +476,11 @@ class EffectInterface {
     }): Promise<void> {
         if (!game.user.isGM) return;
 
-        const folders = findFolders();
+        const folders = findFolders({ backup: false });
         await Item.deleteDocuments(folders.map((item) => item.id));
+
+        const backupFolders = findFolders({ backup: true });
+        await Item.deleteDocuments(backupFolders.map((item) => item.id));
 
         await this.#settings.setHasInitialized(false);
         await this.#settings.clearRanMigrations();

@@ -43,10 +43,16 @@ function findActorByUuidSync(
     return undefined;
 }
 
-function findFolders(): Item<null>[] {
+interface FindOptions {
+    backup: boolean;
+}
+
+function findFolders({ backup }: FindOptions): Item<null>[] {
     return game.items
         .filter((folder) => {
-            return Flags.isConvenient(folder);
+            return (
+                Flags.isConvenient(folder) && backup === Flags.isBackup(folder)
+            );
         })
         .sort((folderA, folderB) => {
             const nameA = folderA.name.toUpperCase(); // ignore upper and lowercase
@@ -63,15 +69,22 @@ function findFolders(): Item<null>[] {
         });
 }
 
-function findFolder(folderId: string): Item<null> | undefined {
+function findFolder(
+    folderId: string,
+    { backup }: FindOptions,
+): Item<null> | undefined {
     return game.items.find((folder) => {
-        return folder.id === folderId && Flags.isConvenient(folder);
+        return (
+            folder.id === folderId &&
+            Flags.isConvenient(folder) &&
+            backup === Flags.isBackup(folder)
+        );
     });
 }
 
-function findAllEffects(): ActiveEffect<Item<null>>[] {
-    return findFolders()
-        .flatMap((folder) => findEffectsByFolder(folder.id))
+function findAllEffects({ backup }: FindOptions): ActiveEffect<Item<null>>[] {
+    return findFolders({ backup })
+        .flatMap((folder) => findEffectsByFolder(folder.id, { backup }))
         .sort((effectA, effectB) => {
             const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
             const nameB = effectB.name.toUpperCase(); // ignore upper and lowercase
@@ -87,15 +100,20 @@ function findAllEffects(): ActiveEffect<Item<null>>[] {
         });
 }
 
-function findEffectsByFolder(folderId: string): ActiveEffect<Item<null>>[] {
-    const folder = findFolder(folderId);
+function findEffectsByFolder(
+    folderId: string,
+    { backup }: FindOptions,
+): ActiveEffect<Item<null>>[] {
+    const folder = findFolder(folderId, { backup });
 
     if (!folder) return [];
 
     return folder.effects
         .map((effect) => effect as ActiveEffect<Item<null>>)
         .filter((effect) => {
-            return Flags.isConvenient(effect);
+            return (
+                Flags.isConvenient(effect) && backup === Flags.isBackup(effect)
+            );
         })
         .sort((effectA, effectB) => {
             const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
@@ -112,8 +130,8 @@ function findEffectsByFolder(folderId: string): ActiveEffect<Item<null>>[] {
         });
 }
 
-function findAllNestedEffectIds(): string[] {
-    let nestedEffectIds = findAllEffects()
+function findAllNestedEffectIds({ backup }: FindOptions): string[] {
+    let nestedEffectIds = findAllEffects({ backup })
         .flatMap((effect) => Flags.getNestedEffectIds(effect))
         .filter(notEmpty);
 
@@ -122,8 +140,8 @@ function findAllNestedEffectIds(): string[] {
     return nestedEffectIds;
 }
 
-function findAllSubEffectIds(): string[] {
-    let subEffectIds = findAllEffects()
+function findAllSubEffectIds({ backup }: FindOptions): string[] {
+    let subEffectIds = findAllEffects({ backup })
         .flatMap((effect) => Flags.getSubEffectIds(effect))
         .filter(notEmpty);
 
@@ -132,8 +150,8 @@ function findAllSubEffectIds(): string[] {
     return subEffectIds;
 }
 
-function findAllOtherEffectIds(): string[] {
-    let otherEffectIds = findAllEffects()
+function findAllOtherEffectIds({ backup }: FindOptions): string[] {
+    let otherEffectIds = findAllEffects({ backup })
         .flatMap((effect) => Flags.getOtherEffectIds(effect))
         .filter(notEmpty);
 

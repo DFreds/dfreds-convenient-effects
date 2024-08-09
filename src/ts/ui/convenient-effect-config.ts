@@ -74,7 +74,7 @@ class ConvenientEffectConfig extends DocumentSheet<
         options?: Partial<DocumentSheetOptions>,
     ): Promise<ConvenientEffectConfigData> {
         const context = await super.getData(options);
-        const allEffects = findAllEffects();
+        const allEffects = findAllEffects({ backup: false });
 
         const currentNestedEffectIds = Flags.getNestedEffectIds(this.document);
         const nestedEffectsData = allEffects.map((effect) => {

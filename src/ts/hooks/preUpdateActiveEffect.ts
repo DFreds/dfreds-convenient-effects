@@ -31,7 +31,7 @@ const PreUpdateActiveEffect: Listener = {
 
                     Flags.setCeEffectId(effectData, newCeEffectId);
 
-                    const allEffects = findAllEffects();
+                    const allEffects = findAllEffects({ backup: false });
                     updateOldNestedIds(
                         allEffects,
                         oldCeEffectId,
