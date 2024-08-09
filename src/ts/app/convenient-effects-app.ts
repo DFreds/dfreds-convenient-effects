@@ -258,7 +258,10 @@ class ConvenientEffectsApp extends Application {
                     name: "ConvenientEffects.ShowFolder",
                     icon: '<i class="fas fa-eye fa-fw"></i>',
                     condition: (target: JQuery): boolean => {
-                        return !this.#controller.isFolderViewable(target);
+                        return (
+                            this.#controller.isUserFolderOwner(target) &&
+                            !this.#controller.isFolderViewable(target)
+                        );
                     },
                     callback: (target: JQuery): void => {
                         this.#controller.setFolderViewable(target, true);
@@ -268,7 +271,10 @@ class ConvenientEffectsApp extends Application {
                     name: "ConvenientEffects.HideFolder",
                     icon: '<i class="fas fa-eye-slash fa-fw"></i>',
                     condition: (target: JQuery): boolean => {
-                        return this.#controller.isFolderViewable(target);
+                        return (
+                            this.#controller.isUserFolderOwner(target) &&
+                            this.#controller.isFolderViewable(target)
+                        );
                     },
                     callback: (target: JQuery): void => {
                         this.#controller.setFolderViewable(target, false);
@@ -339,7 +345,10 @@ class ConvenientEffectsApp extends Application {
                 name: "ConvenientEffects.ShowEffect",
                 icon: '<i class="fas fa-eye fa-fw"></i>',
                 condition: (target: JQuery): boolean => {
-                    return !this.#controller.isEffectViewable(target);
+                    return (
+                        this.#controller.isUserFolderOwner(target) &&
+                        !this.#controller.isEffectViewable(target)
+                    );
                 },
                 callback: (target: JQuery): void => {
                     this.#controller.setEffectViewable(target, true);
@@ -349,7 +358,10 @@ class ConvenientEffectsApp extends Application {
                 name: "ConvenientEffects.HideEffect",
                 icon: '<i class="fas fa-eye-slash fa-fw"></i>',
                 condition: (target: JQuery): boolean => {
-                    return this.#controller.isEffectViewable(target);
+                    return (
+                        this.#controller.isUserFolderOwner(target) &&
+                        this.#controller.isEffectViewable(target)
+                    );
                 },
                 callback: (target: JQuery): void => {
                     this.#controller.setEffectViewable(target, false);
