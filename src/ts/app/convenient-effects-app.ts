@@ -196,6 +196,10 @@ class ConvenientEffectsApp extends Application {
             "click",
             this.#controller.onCreateFolder.bind(this.#controller),
         );
+        this.#viewBackupsButton.on(
+            "click",
+            this.#controller.onViewBackups.bind(this.#controller),
+        );
         this.#createEffectButton.on(
             "click",
             this.#controller.onCreateEffect.bind(this.#controller),
@@ -388,6 +392,10 @@ class ConvenientEffectsApp extends Application {
 
     get #createFolderButton() {
         return this.#rootView.find(".create-folder");
+    }
+
+    get #viewBackupsButton() {
+        return this.#rootView.find(".view-backups");
     }
 
     get #createEffectButton() {

@@ -1,5 +1,6 @@
 {
     "ConvenientEffects.AppName": "Convenient Effects",
+    "ConvenientEffects.BackupAppName": "Backup Convenient Effects",
 
     "ConvenientEffects.SettingPlayer": "Player",
     "ConvenientEffects.SettingTrustedPlayer": "Trusted Player",
@@ -23,6 +24,7 @@
     "ConvenientEffects.SettingIntegrateWithTokenMagicHint": "If enabled, certain effects will also apply a token magic filter to tokens via Token Magic. Note that this requires DAE to be active.",
 
     "ConvenientEffects.CreateFolder": "Create Folder",
+    "ConvenientEffects.ViewBackups": "View Backups",
     "ConvenientEffects.ShowFolder": "Show Folder",
     "ConvenientEffects.HideFolder": "Hide Folder",
     "ConvenientEffects.ShowHiddenEffects": "Show Hidden Effects",

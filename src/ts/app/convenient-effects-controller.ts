@@ -15,6 +15,7 @@ import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 import { Flags } from "../utils/flags.ts";
+import { BackupConvenientEffectsApp } from "./backup/backup-convenient-effects-app.ts";
 
 // TODO shouldn't be able to do a lot of things if backupApp is true
 
@@ -254,6 +255,10 @@ class ConvenientEffectsController {
             overlay: true,
             prioritizeTargets: this.#settings.prioritizeTargets,
         });
+    }
+
+    onViewBackups(_event: Event): void {
+        new BackupConvenientEffectsApp().render(true);
     }
 
     async onCreateFolder(_event: Event): Promise<void> {

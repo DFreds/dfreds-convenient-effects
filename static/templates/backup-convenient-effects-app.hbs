@@ -5,32 +5,13 @@
 
     <!-- Directory Header -->
     <header class="directory-header">
-        <div class="header-actions action-buttons flexrow">
-            {{#if (canCreateFolders)}}
-                <button class="create-folder"><i class="fas fa-folder"></i>
-                    {{localize "ConvenientEffects.CreateFolder"}}</button>
-            {{/if}}
-
-            {{#if (isGm)}}
-                <button class="view-backups"><i
-                        class="fas fa-arrow-rotate-left"
-                    ></i>
-                    {{localize "ConvenientEffects.ViewBackups"}}</button>
-            {{/if}}
-        </div>
         <div class="header-search flexrow">
             <a
-                class="header-control show-hidden-effects"
-                aria-label="Show Hidden Effects"
+                class="header-control toggle-search-mode"
+                aria-label="Search by Name only"
                 role="button"
-                data-tooltip="ConvenientEffects.ShowHiddenEffects"
-            ><i class="fa-duotone fa-eye"></i></a>
-            <a
-                class="header-control show-nested-effects"
-                aria-label="Show Nested Effects"
-                role="button"
-                data-tooltip="ConvenientEffects.ShowNestedEffects"
-            ><i class="fa-duotone fa-tree"></i></a>
+                data-tooltip="SIDEBAR.SearchModeName"
+            ><i class="fas fa-search"></i></a>
             <input
                 type="search"
                 name="search"
@@ -46,12 +27,6 @@
                 role="button"
                 data-tooltip="FOLDER.Collapse"
             ><i class="fa-duotone fa-folder-tree"></i></a>
-            <a
-                class="header-control prioritize-targets"
-                aria-label="Prioritize Targets"
-                role="button"
-                data-tooltip="ConvenientEffects.PrioritizeTargets"
-            ><i class="fa-duotone fa-bullseye"></i></a>
         </div>
     </header>
 
@@ -72,15 +47,6 @@
                     <h3 class="noborder"><i
                             class="fas fa-folder-open fa-fw"
                         ></i>{{data.folder.name}}</h3>
-
-                    {{{convenientFolderIcons data.folder}}}
-
-                    {{#if (canCreateEffects data.folder)}}
-                        <a class="create-button create-entry">
-                            <i class="fas fa-hand-sparkles"></i>
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    {{/if}}
                 </header>
 
                 <ol class="subdirectory">
