@@ -16,6 +16,7 @@ class HandlebarHelpers {
         this.#registerInc();
         this.#registerIsGm();
         this.#registerCanCreateFolders();
+        this.#registerCanCreateEffects();
         this.#registerGetCeEffectId();
         this.#registerIsTemporary();
         this.#registerIsViewable();
@@ -48,33 +49,45 @@ class HandlebarHelpers {
         });
     }
 
-    #registerGetCeEffectId() {
-        Handlebars.registerHelper("getCeEffectId", (effect) => {
-            return Flags.getCeEffectId(effect);
+    #registerCanCreateEffects() {
+        Handlebars.registerHelper("canCreateEffects", (folder: Item) => {
+            return folder.isOwner;
         });
+    }
+
+    #registerGetCeEffectId() {
+        Handlebars.registerHelper(
+            "getCeEffectId",
+            (effect: ActiveEffect<any>) => {
+                return Flags.getCeEffectId(effect);
+            },
+        );
     }
 
     #registerIsTemporary() {
-        Handlebars.registerHelper("isTemporary", (effect) => {
-            return Flags.isTemporary(effect);
-        });
+        Handlebars.registerHelper(
+            "isTemporary",
+            (effect: ActiveEffect<any>) => {
+                return Flags.isTemporary(effect);
+            },
+        );
     }
 
     #registerIsViewable() {
-        Handlebars.registerHelper("isViewable", (effect) => {
+        Handlebars.registerHelper("isViewable", (effect: ActiveEffect<any>) => {
             return Flags.isViewable(effect);
         });
     }
 
     #registerIsDynamic() {
-        Handlebars.registerHelper("isDynamic", (effect) => {
+        Handlebars.registerHelper("isDynamic", (effect: ActiveEffect<any>) => {
             return Flags.isDynamic(effect);
         });
     }
 
     #registerGetFolderColor() {
-        Handlebars.registerHelper("getFolderColor", (item) => {
-            return Flags.getFolderColor(item);
+        Handlebars.registerHelper("getFolderColor", (folder: Item<any>) => {
+            return Flags.getFolderColor(folder);
         });
     }
 

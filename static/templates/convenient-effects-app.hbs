@@ -68,10 +68,12 @@
 
                     {{{convenientFolderIcons data.folder}}}
 
-                    <a class="create-button create-entry">
-                        <i class="fas fa-hand-sparkles"></i>
-                        <i class="fas fa-plus"></i>
-                    </a>
+                    {{#if (canCreateEffects data.folder)}}
+                        <a class="create-button create-entry">
+                            <i class="fas fa-hand-sparkles"></i>
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    {{/if}}
                 </header>
 
                 <ol class="subdirectory">
