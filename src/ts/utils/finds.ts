@@ -122,6 +122,26 @@ function findAllNestedEffectIds(): string[] {
     return nestedEffectIds;
 }
 
+function findAllSubEffectIds(): string[] {
+    let subEffectIds = findAllEffects()
+        .flatMap((effect) => Flags.getSubEffectIds(effect))
+        .filter(notEmpty);
+
+    subEffectIds = [...new Set(subEffectIds)];
+
+    return subEffectIds;
+}
+
+function findAllOtherEffectIds(): string[] {
+    let otherEffectIds = findAllEffects()
+        .flatMap((effect) => Flags.getOtherEffectIds(effect))
+        .filter(notEmpty);
+
+    otherEffectIds = [...new Set(otherEffectIds)];
+
+    return otherEffectIds;
+}
+
 async function findEffectByUuid(
     uuid: string,
 ): Promise<ActiveEffect<any> | undefined> {
@@ -141,5 +161,7 @@ export {
     findAllEffects,
     findEffectsByFolder,
     findAllNestedEffectIds,
+    findAllSubEffectIds,
+    findAllOtherEffectIds,
     findEffectByUuid,
 };

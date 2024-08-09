@@ -107,15 +107,23 @@ class Flags {
         }
     }
 
-    static setSubEffectIds(
-        effect: PreCreate<ActiveEffectSource>,
+    static async setSubEffectIds(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
         subEffectIds: string[],
-    ): boolean {
-        return foundry.utils.setProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`,
-            subEffectIds,
-        );
+    ): Promise<any> {
+        if (effect instanceof ActiveEffect) {
+            return effect.setFlag(
+                MODULE_ID,
+                this.#KEYS.SUB_EFFECT_IDS,
+                subEffectIds,
+            );
+        } else {
+            return foundry.utils.setProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`,
+                subEffectIds,
+            );
+        }
     }
 
     static getOtherEffectIds(
@@ -133,15 +141,23 @@ class Flags {
         }
     }
 
-    static setOtherEffectIds(
-        effect: PreCreate<ActiveEffectSource>,
+    static async setOtherEffectIds(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
         otherEffects: string[],
-    ): boolean {
-        return foundry.utils.setProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`,
-            otherEffects,
-        );
+    ): Promise<any> {
+        if (effect instanceof ActiveEffect) {
+            return effect.setFlag(
+                MODULE_ID,
+                this.#KEYS.OTHER_EFFECT_IDS,
+                otherEffects,
+            );
+        } else {
+            return foundry.utils.setProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`,
+                otherEffects,
+            );
+        }
     }
 
     /**

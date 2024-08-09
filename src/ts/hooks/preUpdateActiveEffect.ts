@@ -2,6 +2,12 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 import { createCeEffectId } from "../utils/creates.ts";
+import {
+    updateOldNestedIds,
+    updateOldOtherIds,
+    updateOldSubIds,
+} from "../utils/updates.ts";
+import { findAllEffects } from "../utils/finds.ts";
 
 const PreUpdateActiveEffect: Listener = {
     listen(): void {
@@ -14,18 +20,25 @@ const PreUpdateActiveEffect: Listener = {
                     effect.parent instanceof Item &&
                     Flags.isConvenient(effect.parent)
                 ) {
-                    // TODO should we check if any effects have this effect as a nested, sub, or other?
-
                     const effectData = data as PreCreate<ActiveEffectSource>;
 
                     const oldCeEffectId = Flags.getCeEffectId(activeEffect);
-                    const ceEffectId = createCeEffectId(
+                    const newCeEffectId = createCeEffectId(
                         effectData.name ?? effect.name,
                     );
 
-                    if (ceEffectId !== oldCeEffectId) {
-                        Flags.setCeEffectId(effectData, ceEffectId);
-                    }
+                    if (newCeEffectId === oldCeEffectId) return;
+
+                    Flags.setCeEffectId(effectData, newCeEffectId);
+
+                    const allEffects = findAllEffects();
+                    updateOldNestedIds(
+                        allEffects,
+                        oldCeEffectId,
+                        newCeEffectId,
+                    );
+                    updateOldSubIds(allEffects, oldCeEffectId, newCeEffectId);
+                    updateOldOtherIds(allEffects, oldCeEffectId, newCeEffectId);
                 }
             },
         );
