@@ -1,13 +1,9 @@
 import { BackupConvenientEffectsApp } from "./backup-convenient-effects-app.ts";
 import {
-    findEffectByUuid,
     findEffectsByFolder,
     findFolder,
     findFolders,
 } from "../../utils/finds.ts";
-import { Flags } from "../../utils/flags.ts";
-
-// TODO shouldn't be able to do a lot of things if backupApp is true
 
 interface ViewData {
     folderData: FolderData[];
@@ -34,7 +30,6 @@ interface SearchResults {
  * Controller class that handles events from the app and manipulating the underlying Foundry data
  */
 class BackupConvenientEffectsController {
-    #backupApp: boolean;
     #viewMvc: BackupConvenientEffectsApp;
 
     /**
@@ -43,16 +38,15 @@ class BackupConvenientEffectsController {
      * @param viewMvc - the app that the controller can interact with
      */
     constructor({ viewMvc }: { viewMvc: BackupConvenientEffectsApp }) {
-        this.#backupApp = true;
         this.#viewMvc = viewMvc;
     }
 
     getData(): ViewData {
-        const folders = findFolders({ backup: this.#backupApp });
+        const folders = findFolders({ backup: true });
 
         const folderData = folders.map((folder) => {
             const viewableEffects = findEffectsByFolder(folder.id, {
-                backup: this.#backupApp,
+                backup: true,
             });
 
             return {
@@ -87,42 +81,12 @@ class BackupConvenientEffectsController {
         }
     }
 
-    /**
-     * Handles clicks on effect items by toggling them on or off on selected tokens
-     *
-     * @param event - event that corresponds to clicking an effect item
-     */
-    async onToggleEffect(event: Event): Promise<void> {
-        const effectId = this.#findClosestCeEffectIdByEvent(event);
-
-        if (!effectId) return;
-
-        // TODO
-        // await game.dfreds.effectInterface.toggleEffect({
-        //     effectId,
-        //     prioritizeTargets: this.#settings.prioritizeTargets,
-        // });
-    }
-
-    async onToggleOverlay(target: JQuery<HTMLElement>): Promise<void> {
-        const effectId = this.#findClosestCeEffectIdByElement(target);
-
-        if (!effectId) return;
-
-        // TODO
-        // await game.dfreds.effectInterface.toggleEffect({
-        //     effectId,
-        //     overlay: true,
-        //     prioritizeTargets: this.#settings.prioritizeTargets,
-        // });
-    }
-
     onExportFolder(target: JQuery<HTMLElement>): void {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: true,
         });
         folder?.exportToJSON();
     }
@@ -181,13 +145,12 @@ class BackupConvenientEffectsController {
                 if (match) {
                     $directoryItem.removeClass("collapsed");
                 } else {
-                    dirItem.classList.toggle("collapsed"); // TODO
+                    dirItem.classList.toggle("collapsed", !match);
                 }
             }
         }
     }
 
-    // TODO
     onEffectDragStart(event: DragEvent): void {
         const folderId = this.#findClosestFolderIdByEvent(event);
         const effectId = this.#findClosestCeEffectIdByEvent(event);
@@ -197,63 +160,13 @@ class BackupConvenientEffectsController {
         const effect = game.dfreds.effectInterface.findEffect({
             folderId,
             effectId,
+            backup: true,
         });
 
         if (!effect) return;
 
-        if (Flags.getNestedEffectIds(effect)) {
-            // Specially handle nested effect drops to trigger the dialog
-            // See dropActorSheetData hook for details
-            event.dataTransfer?.setData(
-                "text/plain",
-                JSON.stringify({
-                    effectId: Flags.getCeEffectId(effect),
-                }),
-            );
-        } else {
-            // Let regular core handle drop
-            const dragData = effect.toDragData();
-            event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
-        }
-    }
-
-    // TODO
-    async onEffectDrop(event: DragEvent): Promise<void> {
-        const effectString = event.dataTransfer?.getData("text/plain");
-        const folderId = this.#findClosestFolderIdByEvent(event);
-
-        if (!effectString || !folderId) return;
-
-        const effectData = JSON.parse(effectString);
-        const effect = await findEffectByUuid(effectData.uuid);
-
-        if (!effect) return;
-
-        const originalFolder = findFolder(effect.parent.id, {
-            backup: this.#backupApp,
-        });
-        const newFolder = findFolder(folderId, {
-            backup: this.#backupApp,
-        });
-
-        if (newFolder?.isOwner) {
-            await newFolder.createEmbeddedDocuments("ActiveEffect", [effect]);
-
-            if (originalFolder?.isOwner) {
-                await effect.delete();
-            } else {
-                ui.notifications.warn(
-                    `You do not have permission to remove the effect
-                    ${effect.name} from ${originalFolder?.name}. Duplicated effect
-                    onto ${newFolder.name}`,
-                );
-            }
-        } else {
-            ui.notifications.warn(
-                `You do not have permission to add effect ${effect.name} to
-                folder ${newFolder?.name}`,
-            );
-        }
+        const dragData = effect.toDragData();
+        event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
     }
 
     /**
@@ -263,14 +176,6 @@ class BackupConvenientEffectsController {
      */
     async onCollapseAll(_event: Event): Promise<void> {
         this.#viewMvc.collapseAllFolders();
-    }
-
-    #findClosestCeEffectIdByElement(
-        element: JQuery<HTMLElement>,
-    ): string | undefined {
-        return element
-            .closest("[data-ce-effect-id], .convenient-effect")
-            .data("ce-effect-id");
     }
 
     #findClosestCeEffectIdByEvent(event: Event): string | undefined {

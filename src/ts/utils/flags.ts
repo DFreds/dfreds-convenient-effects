@@ -39,11 +39,22 @@ class Flags {
         );
     }
 
-    static isBackup(document: ActiveEffect<any> | Item<null>): boolean {
-        return (
-            (document.getFlag(MODULE_ID, this.#KEYS.IS_BACKUP) as boolean) ??
-            false
-        );
+    static isBackup(
+        document: ActiveEffect<any> | Item<null> | object,
+    ): boolean {
+        if (document instanceof ActiveEffect || document instanceof Item) {
+            return (
+                (document.getFlag(
+                    MODULE_ID,
+                    this.#KEYS.IS_BACKUP,
+                ) as boolean) ?? false
+            );
+        } else {
+            return foundry.utils.getProperty(
+                document,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
+            );
+        }
     }
 
     static async setIsBackup(

@@ -147,10 +147,6 @@ class BackupConvenientEffectsApp extends Application {
         this.#controller.onEffectDragStart(event);
     }
 
-    protected override async _onDrop(event: DragEvent): Promise<void> {
-        await this.#controller.onEffectDrop(event);
-    }
-
     /**
      * Checks if the folder is collapse
      * @param folderId - the folder ID to check
@@ -226,10 +222,6 @@ class BackupConvenientEffectsApp extends Application {
             "click",
             this.#controller.onCollapseAll.bind(this.#controller),
         );
-        this.#effectListItems.on(
-            "click",
-            this.#controller.onToggleEffect.bind(this.#controller),
-        );
         this.#folderHeaders.on(
             "click",
             this.#controller.onToggleFolder.bind(this.#controller),
@@ -237,8 +229,6 @@ class BackupConvenientEffectsApp extends Application {
     }
 
     #initContextMenus(): void {
-        // TODO restores?
-
         ContextMenu.create(
             this,
             this.#rootView,
@@ -254,16 +244,6 @@ class BackupConvenientEffectsApp extends Application {
                 },
             ],
         );
-
-        ContextMenu.create(this, this.#rootView, ".convenient-effect", [
-            {
-                name: "ConvenientEffects.ToggleAsOverlay",
-                icon: '<i class="far fa-dot-circle fa-fw"></i>',
-                callback: this.#controller.onToggleOverlay.bind(
-                    this.#controller,
-                ),
-            },
-        ]);
     }
 
     #findFolderById(folderId: string): JQuery<HTMLElement> {
@@ -278,10 +258,6 @@ class BackupConvenientEffectsApp extends Application {
 
     get #collapseAllButton(): JQuery<HTMLElement> {
         return this.#rootView.find(".collapse-all");
-    }
-
-    get #effectListItems(): JQuery<HTMLElement> {
-        return this.#rootView.find(".convenient-effect");
     }
 
     get #folderHeaders() {

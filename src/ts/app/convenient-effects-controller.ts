@@ -17,8 +17,6 @@ import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 import { Flags } from "../utils/flags.ts";
 import { BackupConvenientEffectsApp } from "./backup/backup-convenient-effects-app.ts";
 
-// TODO shouldn't be able to do a lot of things if backupApp is true
-
 interface ViewData {
     folderData: FolderData[];
 }
@@ -44,7 +42,6 @@ interface SearchResults {
  * Controller class that handles events from the app and manipulating the underlying Foundry data
  */
 class ConvenientEffectsController {
-    #backupApp: boolean;
     #viewMvc: ConvenientEffectsApp;
     #settings: Settings;
 
@@ -54,15 +51,14 @@ class ConvenientEffectsController {
      * @param viewMvc - the app that the controller can interact with
      */
     constructor({ viewMvc }: { viewMvc: ConvenientEffectsApp }) {
-        this.#backupApp = false;
         this.#viewMvc = viewMvc;
         this.#settings = new Settings();
     }
 
     getData(): ViewData {
-        const folders = findFolders({ backup: this.#backupApp });
+        const folders = findFolders({ backup: false });
         const nestedEffectIds = findAllNestedEffectIds({
-            backup: this.#backupApp,
+            backup: false,
         });
 
         const folderData = folders
@@ -74,7 +70,7 @@ class ConvenientEffectsController {
             })
             .map((folder) => {
                 const viewableEffects = findEffectsByFolder(folder.id, {
-                    backup: this.#backupApp,
+                    backup: false,
                 }).filter((effect) => {
                     /*
                     if show hidden and show nested
@@ -134,7 +130,7 @@ class ConvenientEffectsController {
         if (!folderId) return false;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
 
         return folder?.isOwner ?? false;
@@ -146,7 +142,7 @@ class ConvenientEffectsController {
         if (!folderId) return false;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
 
         if (!folder) return false;
@@ -163,7 +159,7 @@ class ConvenientEffectsController {
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
 
         if (!folder) return;
@@ -287,7 +283,7 @@ class ConvenientEffectsController {
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         if (!folder) return;
 
@@ -312,7 +308,7 @@ class ConvenientEffectsController {
         if (!folderId || !effectId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         const effect = game.dfreds.effectInterface.findEffect({
             folderId,
@@ -335,7 +331,7 @@ class ConvenientEffectsController {
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         if (!folder) return;
 
@@ -371,7 +367,7 @@ class ConvenientEffectsController {
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         await folder?.deleteDialog();
     }
@@ -395,7 +391,7 @@ class ConvenientEffectsController {
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         if (!folder) return;
 
@@ -413,17 +409,18 @@ class ConvenientEffectsController {
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         folder?.exportToJSON();
     }
 
+    // TODO if importing backup, it doesn't set backup to false on anything
     async onImportFolder(target: JQuery<HTMLElement>): Promise<void> {
         const folderId = this.#findClosestFolderIdByElement(target);
         if (!folderId) return;
 
         const folder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
         await folder?.importFromJSONDialog();
     }
@@ -534,12 +531,41 @@ class ConvenientEffectsController {
         if (!effect) return;
 
         const originalFolder = findFolder(effect.parent.id, {
-            backup: this.#backupApp,
+            backup: false,
         });
         const newFolder = findFolder(folderId, {
-            backup: this.#backupApp,
+            backup: false,
         });
 
+        const isFromBackup = Flags.isBackup(effect);
+
+        if (isFromBackup) {
+            await this.#handleBackupEffectDrop(newFolder, effect);
+        } else {
+            await this.#handleNonBackupEffectDrop(
+                newFolder,
+                originalFolder,
+                effect,
+            );
+        }
+    }
+
+    async #handleBackupEffectDrop(
+        newFolder: Item<null> | undefined,
+        effect: ActiveEffect<any>,
+    ): Promise<void> {
+        const effectObject = effect.toObject();
+        Flags.setIsBackup(effectObject, false);
+        await newFolder?.createEmbeddedDocuments("ActiveEffect", [
+            effectObject,
+        ]);
+    }
+
+    async #handleNonBackupEffectDrop(
+        newFolder: Item<null> | undefined,
+        originalFolder: Item<null> | undefined,
+        effect: ActiveEffect<any>,
+    ): Promise<void> {
         if (newFolder?.isOwner) {
             await newFolder.createEmbeddedDocuments("ActiveEffect", [effect]);
 

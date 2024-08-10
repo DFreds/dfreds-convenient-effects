@@ -33,6 +33,11 @@ interface IFindEffect {
      * The effect name
      */
     effectName?: string | null;
+
+    /**
+     * If the find should look at the backup items. Defaults to false
+     */
+    backup?: boolean;
 }
 
 interface IHasEffectApplied {
@@ -181,8 +186,9 @@ class EffectInterface {
         folderId,
         effectId,
         effectName,
+        backup = false,
     }: IFindEffect): ActiveEffect<Item<null>> | undefined {
-        const folders = findFolders({ backup: false });
+        const folders = findFolders({ backup });
 
         if (!folders) return;
 

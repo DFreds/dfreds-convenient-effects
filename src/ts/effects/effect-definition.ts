@@ -16,8 +16,6 @@ abstract class EffectDefinition {
     }
 
     async initialize(): Promise<void> {
-        // TODO should we create backup items that can't be modified here? With additional flag perhaps
-
         if (DEBUG || !this.settings.hasInitialized) {
             await this.#createItemsAndEffects({ backup: false });
             await this.#createItemsAndEffects({ backup: true });
