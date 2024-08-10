@@ -200,12 +200,23 @@ class Flags {
      * @param effect - The effect to check
      * @returns true if it is convenient, false otherwise
      */
-    static isConvenient(document: ActiveEffect<any> | Item<null>): boolean {
-        return (
-            (document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as
-                | boolean
-                | undefined) ?? false
-        );
+    static isConvenient(
+        document: ActiveEffect<any> | Item<null> | object,
+    ): boolean {
+        if (document instanceof ActiveEffect || document instanceof Item) {
+            return (
+                (document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as
+                    | boolean
+                    | undefined) ?? false
+            );
+        } else {
+            return (
+                foundry.utils.getProperty(
+                    document,
+                    `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
+                ) ?? false
+            );
+        }
     }
 
     static setIsConvenient(document: object, value: boolean): boolean {
