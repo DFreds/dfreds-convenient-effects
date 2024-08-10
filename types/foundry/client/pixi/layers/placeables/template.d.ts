@@ -35,7 +35,7 @@ declare global {
 
         protected override _onMouseWheel(
             event: WheelEvent,
-        ): Promise<TObject["document"] | undefined> | void;
+        ): Promise<TObject> | void;
     }
 
     /**

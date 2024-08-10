@@ -73,3 +73,9 @@ export class GridlessGrid extends BaseGrid {
         angle: number,
     ): Point[];
 }
+
+export interface GridlessGrid extends BaseGrid {
+    get isGridless(): true;
+    get isHexagonal(): false;
+    get isSquare(): false;
+}

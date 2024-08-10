@@ -79,6 +79,12 @@ export class SquareGrid extends BaseGrid {
     };
 }
 
+export interface SquareGrid extends BaseGrid {
+    get isGridless(): false;
+    get isHexagonal(): false;
+    get isSquare(): true;
+}
+
 declare global {
     interface SquareGridConfiguration extends GridConfiguration {
         /** The rule for diagonal measurement (see {@link CONST.GRID_DIAGONALS} */

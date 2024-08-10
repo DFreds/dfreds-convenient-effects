@@ -46,7 +46,7 @@ type RegionSchema = {
     >;
     elevation: fields.SchemaField<RegionElevationSchema>;
     /** A collection of embedded RegionBehavior objects */
-    behaviours: fields.EmbeddedCollectionField<BaseRegionBehavior<BaseRegion>>;
+    behaviors: fields.EmbeddedCollectionField<BaseRegionBehavior<BaseRegion>>;
     visibility: fields.NumberField<
         RegionVisibilityValue,
         RegionVisibilityValue,
