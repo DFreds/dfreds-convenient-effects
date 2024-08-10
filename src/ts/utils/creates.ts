@@ -8,7 +8,6 @@ interface ICreateItemAddOns {
     isViewable?: boolean;
 }
 
-// TODO should we take a bottom up approach instead of top down?  i.e. instead of a parent defining its nested effects, should a child define its parent nested id?
 interface ICreateEffectAddOns {
     effect: PreCreate<ActiveEffectSource>;
     isBackup?: boolean;
