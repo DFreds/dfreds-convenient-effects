@@ -479,7 +479,7 @@ class EffectInterface {
         confirm = true,
     }: {
         confirm?: boolean;
-    }): Promise<void> {
+    } = {}): Promise<void> {
         if (!game.user.isGM) return;
 
         const folders = findFolders({ backup: false });
