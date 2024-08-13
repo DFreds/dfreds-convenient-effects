@@ -79,10 +79,6 @@ class Sockets {
         const createdEffects = await actor.createEmbeddedDocuments(
             "ActiveEffect",
             activeEffectsToApply,
-            {
-                keepId: true,
-                keepEmbeddedIds: true,
-            },
         );
 
         const subEffectIds = Flags.getSubEffectIds(effectData);
