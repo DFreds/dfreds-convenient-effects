@@ -4,22 +4,7 @@ import { findActorByUuid } from "../utils/finds.ts";
 import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
-
-interface AddEffectMessage {
-    request: "addEffect";
-    data: AddEffectMessageData;
-}
-
-interface RemoveEffectMessage {
-    request: "removeEffect";
-    data: RemoveEffectMessageData;
-}
-
-type SocketMessage =
-    | AddEffectMessage
-    | RemoveEffectMessage
-    | { request?: never };
-type SocketEventParams = [message: SocketMessage, userId: string];
+import Document from "types/foundry/common/abstract/document.js";
 
 interface AddEffectMessageData {
     /**
@@ -57,78 +42,28 @@ interface RemoveEffectMessageData {
 }
 
 class Sockets {
-    #identifier: string;
+    #socket: SocketlibSocket;
 
     constructor() {
-        this.#identifier = `module.${MODULE_ID}`;
-        this.#activateSocketListener();
+        this.#socket = socketlib.registerModule(MODULE_ID);
+        this.#socket.register("addEffect", this.#onAddEffect.bind(this));
+        this.#socket.register("removeEffect", this.#onRemoveEffect.bind(this));
     }
 
-    #activateSocketListener(): void {
-        game.socket.on(
-            this.#identifier,
-            async (...[message, userId]: SocketEventParams) => {
-                const sender = game.users.get(userId, { strict: true });
-                const receiver = game.user;
-
-                log(
-                    `Sender is ${sender.name} and receiver is ${receiver.name}`,
-                );
-
-                if (!receiver.isGM) return; // Sender can be anyone, receiver should only execute as GM
-
-                switch (message.request) {
-                    case "addEffect": {
-                        await this.#onAddEffect(message.data);
-                        break;
-                    }
-                    case "removeEffect": {
-                        await this.#onRemoveEffect(message.data);
-                        break;
-                    }
-                    default: {
-                        throw Error(
-                            `Received unrecognized socket emission: ${message.request}`,
-                        );
-                    }
-                }
-            },
-        );
-    }
-
-    #emitAsGm({
-        message,
-        handler,
-    }: {
-        message: SocketMessage;
-        handler: () => void | Promise<void>;
-    }): void {
-        if (game.user.isGM) {
-            handler(); // execute locally
-        } else {
-            if (!game.users.activeGM) {
-                throw Error("No active GM, unable to socket through a GM");
-            }
-
-            game.socket.emit(this.#identifier, message);
-        }
-    }
-
-    emitAddEffect(message: AddEffectMessage): void {
-        this.#emitAsGm({
-            message,
-            handler: this.#onAddEffect.bind(this, message.data),
-        });
+    async emitAddEffect(message: AddEffectMessageData): Promise<Document[]> {
+        return this.#socket.executeAsGM("addEffect", message) as Promise<
+            Document[]
+        >;
     }
 
     async #onAddEffect({
         effectData,
         uuid,
-    }: AddEffectMessageData): Promise<void> {
+    }: AddEffectMessageData): Promise<Document[]> {
         const actor = await findActorByUuid(uuid);
         const activeEffectsToApply = [effectData];
 
-        if (!actor) return; // This should already be checked for before the socket
+        if (!actor) return []; // This should already be checked for before the socket
 
         const isDynamic = Flags.isDynamic(effectData);
         if (isDynamic) {
@@ -174,13 +109,15 @@ class Sockets {
         }
 
         log(`Added effect ${effectData.name} to ${actor.name} - ${actor.id}`);
+
+        return createdEffects;
     }
 
-    emitRemoveEffect(message: RemoveEffectMessage): void {
-        this.#emitAsGm({
+    async emitRemoveEffect(message: RemoveEffectMessageData): Promise<void> {
+        return this.#socket.executeAsGM(
+            "removeEffect",
             message,
-            handler: this.#onRemoveEffect.bind(this, message.data),
-        });
+        ) as Promise<void>;
     }
 
     async #onRemoveEffect({
@@ -218,4 +155,3 @@ class Sockets {
 }
 
 export { Sockets };
-export type { SocketMessage };

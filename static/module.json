@@ -15,7 +15,12 @@
     "packFolders": [],
     "relationships": {
         "systems": [],
-        "requires": []
+        "requires": [
+            {
+                "id": "socketlib",
+                "type": "module"
+            }
+        ]
     },
     "languages": [
         {

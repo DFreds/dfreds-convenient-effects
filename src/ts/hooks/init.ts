@@ -12,8 +12,6 @@ const Init: Listener = {
             CONFIG.debug.hooks = DEBUG;
             new Settings().register();
             new HandlebarHelpers().register();
-
-            game.dfreds = game.dfreds || {};
         });
     },
 };

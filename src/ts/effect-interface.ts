@@ -8,7 +8,6 @@ import {
 } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
-import { SocketMessage } from "./sockets/sockets.ts";
 import { Flags } from "./utils/flags.ts";
 import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
 import { ItemSource } from "types/foundry/common/documents/item.js";
@@ -16,6 +15,7 @@ import {
     createConvenientEffect,
     createConvenientItem,
 } from "./utils/creates.ts";
+import Document from "types/foundry/common/abstract/document.js";
 
 interface IFindEffect {
     /**
@@ -202,8 +202,8 @@ class EffectInterface {
             .filter((effect) => {
                 const isConvenient = Flags.isConvenient(effect);
                 const isMatchingId = effect.id === effectId;
-                const isMatchingName = effect.name === effectName;
                 const isMatchingCeId = Flags.getCeEffectId(effect) === effectId;
+                const isMatchingName = effect.name === effectName;
 
                 return (
                     isConvenient &&
@@ -340,7 +340,7 @@ class EffectInterface {
         uuid,
         overlay = false,
         origin,
-    }: IAddEffect): Promise<void> {
+    }: IAddEffect): Promise<Document[]> {
         const effectDataToSend = await this.#getEffectDataToSend({
             effectId,
             effectName,
@@ -349,13 +349,13 @@ class EffectInterface {
 
         if (!effectDataToSend) {
             error("Cannot find effect to add");
-            return;
+            return [];
         }
 
         const actor = await findActorByUuid(uuid);
         if (!actor) {
             error(`Actor ${uuid} could not be found`);
-            return;
+            return [];
         }
 
         foundry.utils.setProperty(
@@ -368,13 +368,10 @@ class EffectInterface {
             effectDataToSend.origin = origin;
         }
 
-        game.dfreds.sockets.emitAddEffect({
-            request: "addEffect",
-            data: {
-                effectData: effectDataToSend,
-                uuid,
-            },
-        } satisfies SocketMessage);
+        return game.dfreds.sockets.emitAddEffect({
+            effectData: effectDataToSend,
+            uuid,
+        });
     }
 
     /**
@@ -407,17 +404,13 @@ class EffectInterface {
             return;
         }
 
-        game.dfreds.sockets.emitRemoveEffect({
-            request: "removeEffect",
-            data: {
-                effectId:
-                    effectDataToSend._id ??
-                    Flags.getCeEffectId(effectDataToSend),
-                effectName: effectDataToSend.name,
-                uuid,
-                origin,
-            },
-        } satisfies SocketMessage);
+        return game.dfreds.sockets.emitRemoveEffect({
+            effectId:
+                effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
+            effectName: effectDataToSend.name,
+            uuid,
+            origin,
+        });
     }
 
     /**

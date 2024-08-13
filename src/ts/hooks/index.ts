@@ -14,6 +14,7 @@ import { Ready } from "./ready.ts";
 import { RenderActiveEffectConfig } from "./renderActiveEffectConfig.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
+import { SocketlibReady } from "./socketlibReady.ts";
 import { UpdateActiveEffect } from "./updateActiveEffect.ts";
 import { UpdateItem } from "./updateItem.ts";
 
@@ -27,6 +28,7 @@ const HooksCE = {
             Init,
             Setup,
             Ready,
+            SocketlibReady,
             CreateEffects,
             GetSceneControlButtons,
             CreateItem,
