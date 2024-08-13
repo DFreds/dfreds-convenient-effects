@@ -5,13 +5,17 @@
  * @param data - The dropped data
  * @param slot - The hotbar slot to use
  */
+
+import { Flags } from "../utils/flags.ts";
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 async function createMacro(
     effect: ActiveEffect<any>,
     slot?: number | string,
 ): Promise<void> {
     const name = `Toggle Convenient Effect - ${effect.name}`;
-    const command = `game.dfreds.effectInterface.toggleEffect({ effectId: "${effect.id}" })`;
+    const id = Flags.getCeEffectId(effect);
+    const command = `game.dfreds.effectInterface.toggleEffect({ effectId: "${id}" })`;
 
     let macro = game.macros.find(
         (macro) => macro.name === name && macro.command === command,
