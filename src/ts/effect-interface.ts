@@ -3,6 +3,7 @@ import { Settings } from "./settings.ts";
 import {
     findActorByUuid,
     findActorByUuidSync,
+    findAllEffects,
     findFolder,
     findFolders,
 } from "./utils/finds.ts";
@@ -16,6 +17,13 @@ import {
     createConvenientItem,
 } from "./utils/creates.ts";
 import Document from "types/foundry/common/abstract/document.js";
+
+interface IFindEffects {
+    /**
+     * If the find should look at the backup items. Defaults to false
+     */
+    backup?: boolean;
+}
 
 interface IFindEffect {
     /**
@@ -173,6 +181,18 @@ class EffectInterface {
 
     constructor() {
         this.#settings = new Settings();
+    }
+
+    /**
+     * Finds all defined effects
+     *
+     * @param params - The parameters to find effects
+     * @returns The list of active effects
+     */
+    findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<
+        Item<null>
+    >[] {
+        return findAllEffects({ backup });
     }
 
     /**
