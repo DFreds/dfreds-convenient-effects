@@ -13,64 +13,67 @@ declare global {
         "FAST" = 3,
     }
 
-    export interface LibWrapper {
+    type PerformanceModes = "NORMAL" | "FAST" | "AUTO" | PERF_MODES;
+    type WrapperTypes = "WRAPPER" | "MIXED" | "OVERRIDE" | WRAPPER_TYPES;
+
+    export class libWrapper {
         // Properties
         /**
          * Get libWrapper version
          * @returns {string}  libWrapper version in string form, i.e. "<MAJOR>.<MINOR>.<PATCH>.<SUFFIX><META>"
          */
-        get version(): string;
+        static get version(): string;
 
         /**
          * Get libWrapper version
          * @returns {[number,number,number,number,string]}  libWrapper version in array form, i.e. [<MAJOR>, <MINOR>, <PATCH>, <SUFFIX>, <META>]
          */
-        get versions(): [number, number, number, number, string];
+        static get versions(): [number, number, number, number, string];
 
         /**
          * Get the Git version identifier.
          * @returns {string}  Git version identifier, usually 'HEAD' or the commit hash.
          */
-        get git_version(): string;
+        static get git_version(): string;
 
         /**
          * @returns {boolean}  The real libWrapper module will always return false. Fallback implementations (e.g. poly-fill / shim) should return true.
          */
-        get is_fallback(): boolean;
+        static get is_fallback(): boolean;
 
         // Errors
-        get LibWrapperError(): Error;
+        static get LibWrapperError(): Error;
 
-        get Error(): Error;
+        static get Error(): Error;
 
-        get LibWrapperInternalError(): Error;
+        static get LibWrapperInternalError(): Error;
 
-        get InternalError(): Error;
+        static get InternalError(): Error;
 
-        get LibWrapperPackageError(): Error;
+        static get LibWrapperPackageError(): Error;
 
-        get PackageError(): Error;
+        static get PackageError(): Error;
 
-        get LibWrapperAlreadyOverriddenError(): Error;
+        static get LibWrapperAlreadyOverriddenError(): Error;
 
-        get AlreadyOverriddenError(): Error;
+        static get AlreadyOverriddenError(): Error;
 
-        get LibWrapperInvalidWrapperChainError(): Error;
+        static get LibWrapperInvalidWrapperChainError(): Error;
 
-        get InvalidWrapperChainError(): Error;
+        static get InvalidWrapperChainError(): Error;
 
         // Enums - First introduced in v1.9.0.0
-        get WRAPPER(): WRAPPER_TYPES.WRAPPER;
+        static get WRAPPER(): WRAPPER_TYPES.WRAPPER;
 
-        get MIXED(): WRAPPER_TYPES.MIXED;
+        static get MIXED(): WRAPPER_TYPES.MIXED;
 
-        get OVERRIDE(): WRAPPER_TYPES.OVERRIDE;
+        static get OVERRIDE(): WRAPPER_TYPES.OVERRIDE;
 
-        get PERF_NORMAL(): PERF_MODES.NORMAL;
+        static get PERF_NORMAL(): PERF_MODES.NORMAL;
 
-        get PERF_AUTO(): PERF_MODES.AUTO;
+        static get PERF_AUTO(): PERF_MODES.AUTO;
 
-        get PERF_FAST(): PERF_MODES.FAST;
+        static get PERF_FAST(): PERF_MODES.FAST;
 
         // Methods
         /**
@@ -83,7 +86,7 @@ declare global {
          * @param suffix
          * @returns {boolean}      Returns true if the libWrapper version is at least the queried version, otherwise false.
          */
-        version_at_least(
+        static version_at_least(
             major: number,
             minor?: number,
             patch?: number,
@@ -101,9 +104,9 @@ declare global {
          *
          * Returns a unique numeric target identifier, which can be used as a replacement for 'target' in future calls to 'libWrapper.register' and 'libWrapper.unregister'.
          *
-         * @param {string} package_id  The package identifier, i.e. the 'id' field in your module/system/world's manifest.
+         * @param package_id The package identifier, i.e. the 'id' field in your module/system/world's manifest.
          *
-         * @param {number|string} target The target identifier, specifying which wrapper should be registered.
+         * @param target The target identifier, specifying which wrapper should be registered.
          *
          *   This can be either:
          *     1. A unique target identifier obtained from a previous 'libWrapper.register' call.
@@ -119,11 +122,10 @@ declare global {
          *
          *   By default, libWrapper searches for normal methods or property getters only. To wrap a property's setter, append '#set' to the name, for example 'SightLayer.prototype.blurDistance#set'.
          *
-         * @param {function} fn        Wrapper function. The first argument will be the next function in the chain, except for 'OVERRIDE' wrappers.
+         * @param fn Wrapper function. The first argument will be the next function in the chain, except for 'OVERRIDE' wrappers.
          *                             The remaining arguments will correspond to the parameters passed to the wrapped method.
          *
-         * @param type
-         * @param options
+         * @param type The type of the wrapper. Default is 'MIXED'.
          *
          *   The possible types are:
          *
@@ -142,11 +144,14 @@ declare global {
          *     Catching this exception should allow you to fail gracefully, and for example warn the user of the conflict.
          *     Note that if the GM has explicitly given your package priority over the existing one, no exception will be thrown and your wrapper will take over.
          *
+         * @param options Additional options to libWrapper.
          *
+         * @param options.chain If 'true', the first parameter to 'fn' will be a function object that can be called to continue the chain.
          *   This parameter must be 'true' when registering non-OVERRIDE wrappers.
          *   Default is 'false' if type=='OVERRIDE', otherwise 'true'.
          *   First introduced in v1.3.6.0.
          *
+         * @param options.perf_mode Selects the preferred performance mode for this wrapper. Default is 'AUTO'.
          *   It will be used if all other wrappers registered on the same target also prefer the same mode, otherwise the default will be used instead.
          *   This option should only be specified with good reason. In most cases, using 'AUTO' in order to allow the GM to choose is the best option.
          *   First introduced in v1.5.0.0.
@@ -170,6 +175,7 @@ declare global {
          *     Will allow the GM to choose which performance mode to use.
          *     Equivalent to 'FAST' when the libWrapper 'High-Performance Mode' setting is enabled by the GM, otherwise 'NORMAL'.
          *
+         * @param options.bind An array of parameters that should be passed to 'fn'.
          *
          *   This allows avoiding an extra function call, for instance:
          *     libWrapper.register(PACKAGE_ID, "foo", function(wrapped, ...args) { return someFunction.call(this, wrapped, "foo", "bar", ...args) });
@@ -178,18 +184,44 @@ declare global {
          *
          *   First introduced in v1.12.0.0.
          *
-         * @returns {number} Unique numeric 'target' identifier which can be used in future 'libWrapper.register' and 'libWrapper.unregister' calls.
+         * @returns Unique numeric 'target' identifier which can be used in future 'libWrapper.register' and 'libWrapper.unregister' calls.
          *   Added in v1.11.0.0.
          */
-        register(
+        static register(
             package_id: string,
             target: number | string,
             fn: Function,
-            type?: string | WRAPPER_TYPES,
+            type?: WrapperTypes,
             options?: {
                 chain?: boolean;
-                perf_mode?: string | PERF_MODES;
+                perf_mode?: PerformanceModes;
                 bind?: any[];
+            },
+        ): number;
+        static register<T extends ThisType<F>, F extends (...args: any) => any>(
+            package_id: string,
+            target: number | string,
+            fn: (this: T, wrapped: F, ...args: Parameters<F>) => ReturnType<F>,
+            type?:
+                | WRAPPER_TYPES.WRAPPER
+                | WRAPPER_TYPES.MIXED
+                | "WRAPPER"
+                | "MIXED",
+            options?: {
+                chain?: true;
+                perf_mode?: PerformanceModes;
+                bind?: Parameters<F>;
+            },
+        ): number;
+        static register<T extends ThisType<F>, F extends (...args: any) => any>(
+            package_id: string,
+            target: number | string,
+            fn: (this: T, ...args: Parameters<F>) => ReturnType<F>,
+            type?: WRAPPER_TYPES.OVERRIDE | "OVERRIDE",
+            options?: {
+                chain?: boolean;
+                perf_mode?: PerformanceModes;
+                bind?: Parameters<F>;
             },
         ): number;
 
@@ -211,7 +243,7 @@ declare global {
          *
          * @param fail         If true, this method will throw an exception if it fails to find the method to unwrap. Default is 'true'.
          */
-        unregister(
+        static unregister(
             package_id: string,
             target: number | string,
             fail?: boolean,
@@ -224,7 +256,7 @@ declare global {
          *
          * @param {string} package_id  The package identifier, i.e. the 'id' field in your module/system/world's manifest.
          */
-        unregister_all(package_id: string): void;
+        static unregister_all(package_id: string): void;
 
         /**
          * Ignore conflicts matching specific filters when detected, instead of warning the user.
@@ -249,7 +281,7 @@ declare global {
          *   Be careful when setting this to 'true', as confirmed conflicts are almost certainly something the user should be made aware of.
          *   Defaults to 'false'.
          */
-        ignore_conflicts(
+        static ignore_conflicts(
             package_id: string,
             ignore_ids: string | string[],
             targets: string | string[],
