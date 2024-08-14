@@ -24,7 +24,7 @@ class Controls {
             title: "DFreds Convenient Effects",
             icon: "fas fa-hand-sparkles",
             toolclip: {
-                src: "modules/dfreds-convenient-effects/images/toolclip-ce.webm", // TODO need to re-record this
+                src: "modules/dfreds-convenient-effects/images/toolclip-ce.webm",
                 heading: "DFreds Convenient Effects",
                 items: [
                     {
