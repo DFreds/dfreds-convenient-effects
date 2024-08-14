@@ -4,7 +4,10 @@ import {
     ItemEffects,
     MigrationType,
 } from "../effect-definition.ts";
-import { createConvenientEffect } from "../../utils/creates.ts";
+import {
+    createConvenientEffect,
+    createConvenientItem,
+} from "../../utils/creates.ts";
 import { COLORS, SECONDS } from "src/ts/constants.ts";
 import { Flags } from "src/ts/utils/flags.ts";
 import { notEmpty } from "src/ts/utils/types.ts";
@@ -24,24 +27,30 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     override get migrations(): MigrationType[] {
         return [
-            // {
-            //     key: "2024-07-15-sample-migration",
-            //     date: new Date("2024-07-15"),
-            //     func: async () => {
-            // const settings = new Settings();
-            // const itemIds = settings.effectItemIds;
-            // const backupItemIds = game.items
-            //     .filter((item) => {
-            //         const backupItemId = item.getFlag(
-            //             MODULE_ID,
-            //             FLAGS.BACKUP_ID,
-            //         ) as string | undefined;
-            //         return backupItemId !== undefined;
-            //     })
-            //     .map((backupItem) => backupItem.id);
-            //         log("Sample migration running");
-            //     },
-            // },
+            {
+                key: "2024-08-14-migrate-old-custom-effects",
+                date: new Date("2024-08-14"),
+                func: async () => {
+                    const oldCustomEffect = game.items.find(
+                        (item) => item.name === "Custom Convenient Effects",
+                    );
+
+                    if (!oldCustomEffect) return;
+
+                    const newItem = createConvenientItem({
+                        item: oldCustomEffect.toObject(),
+                    });
+                    newItem.name = "Legacy Custom Convenient Effects";
+                    newItem.effects = newItem.effects
+                        ?.filter(notEmpty)
+                        .map((effect) => {
+                            return createConvenientEffect({ effect });
+                        });
+
+                    await Item.create(newItem);
+                    await oldCustomEffect.delete();
+                },
+            },
         ];
     }
 
