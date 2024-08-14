@@ -76,7 +76,11 @@
                     {{{convenientFolderIcons data.folder}}}
 
                     {{#if (canCreateEffects data.folder)}}
-                        <a class="create-button create-entry">
+                        <a
+                            class="create-button create-entry"
+                            aria-label="Create Effect"
+                            data-tooltip="ConvenientEffects.CreateEffect"
+                        >
                             <i class="fas fa-hand-sparkles"></i>
                             <i class="fas fa-plus"></i>
                         </a>
