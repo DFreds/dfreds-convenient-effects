@@ -36,9 +36,6 @@ This module helps with the types of issues described above by allowing creation
 of active effects that can be applied quickly and easily. For DND5e and SW5e, it
 provides dozens of pre-configured effects for conditions and spells.
 
-For a better idea of what this module does, check out the
-[demos](https://github.com/DFreds/dfreds-convenient-effects/wiki/Demos).
-
 You can configure some stuff:
 
 ![Settings](docs/settings.png)
