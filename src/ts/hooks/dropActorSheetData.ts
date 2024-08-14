@@ -3,7 +3,7 @@ import { Listener } from "./index.ts";
 const DropActorSheetData: Listener = {
     listen(): void {
         Hooks.on("dropActorSheetData", (actor: any, _actorSheet, data: any) => {
-            if (!data.effectId) return;
+            if (!data.effectId) return; // let regular drag and drop handle it
 
             const actorData = actor as Actor<any>;
 
