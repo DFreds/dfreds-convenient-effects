@@ -22,9 +22,9 @@ abstract class EffectDefinition {
 
             // Set initialized before migration runs
             await this.settings.setHasInitialized(true);
-
-            await this.#runMigrations();
         }
+
+        await this.#runMigrations();
     }
 
     abstract get initialItemEffects(): ItemEffects[];
