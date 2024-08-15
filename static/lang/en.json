@@ -23,6 +23,9 @@
     "ConvenientEffects.SettingIntegrateWithTokenMagicName": "Integrate with Token Magic",
     "ConvenientEffects.SettingIntegrateWithTokenMagicHint": "If enabled, certain effects will also apply a token magic filter to tokens via Token Magic. Note that this requires DAE to be active.",
 
+    "ConvenientEffects.KeybindingToggleAppName": "Toggle Convenient Effects App",
+    "ConvenientEffects.KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
+
     "ConvenientEffects.CreateFolder": "Create Folder",
     "ConvenientEffects.CreateEffect": "Create Effect",
     "ConvenientEffects.ViewBackups": "View Backups",
