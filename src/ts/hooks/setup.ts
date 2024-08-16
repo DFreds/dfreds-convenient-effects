@@ -4,6 +4,10 @@ import { Listener } from "./index.ts";
 import { Flags } from "../utils/flags.ts";
 import { ItemSource } from "types/foundry/common/documents/item.js";
 import { notEmpty } from "../utils/types.ts";
+import {
+    createConvenientEffect,
+    createConvenientItem,
+} from "../utils/creates.ts";
 
 const Setup: Listener = {
     listen(): void {
@@ -29,30 +33,30 @@ const Setup: Listener = {
                     wrapped: AnyFunction,
                     ...args: any
                 ) {
+                    // `this` is the item that will be replaced with data
+                    // Only do our wrapper if importing into an existing convenient item
+                    if (!Flags.isConvenient(this)) {
+                        wrapped(args);
+                        return;
+                    }
+
                     const [json] = args;
 
                     const item = Item.fromJSON(
                         json,
                     ).toObject() as PreCreate<ItemSource>;
 
-                    if (Flags.isConvenient(item) && Flags.isBackup(item)) {
-                        Flags.setIsBackup(item, false);
-                        const effects = item.effects
-                            ?.filter(notEmpty)
-                            .map((effect) => {
-                                Flags.setIsBackup(effect, false);
-                                return effect;
-                            });
+                    const convenientItem = createConvenientItem({
+                        item,
+                    });
+                    convenientItem.effects = convenientItem.effects
+                        ?.filter(notEmpty)
+                        .map((effect) => {
+                            return createConvenientEffect({ effect });
+                        });
 
-                        item.effects = effects;
-
-                        const newJson = JSON.stringify(item, null, 2);
-                        console.log(newJson);
-
-                        wrapped([newJson]);
-                    } else {
-                        wrapped(args);
-                    }
+                    const newJson = JSON.stringify(convenientItem, null, 2);
+                    wrapped([newJson]);
                 },
             );
         });
