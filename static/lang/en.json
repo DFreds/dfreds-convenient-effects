@@ -14,15 +14,6 @@
     "ConvenientEffects.SettingCreateFoldersPermissionName": "Create Folders Permission",
     "ConvenientEffects.SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
 
-    "ConvenientEffects.SettingIntegrateWithMidiName": "Integrate with Midi",
-    "ConvenientEffects.SettingIntegrateWithMidiHint": "If enabled, certain effects will also add midi-qol changes. Note that this is only useful for the dnd5e system and requires midi-qol to be active.",
-
-    "ConvenientEffects.SettingIntegrateWithAteName": "Integrate with ATE",
-    "ConvenientEffects.SettingIntegrateWithAteHint": "If enabled, certain effects will also change light emitted from tokens or the size of a token via Active Token Effects. Note that this requires ATE to be active.",
-
-    "ConvenientEffects.SettingIntegrateWithTokenMagicName": "Integrate with Token Magic",
-    "ConvenientEffects.SettingIntegrateWithTokenMagicHint": "If enabled, certain effects will also apply a token magic filter to tokens via Token Magic. Note that this requires DAE to be active.",
-
     "ConvenientEffects.KeybindingToggleAppName": "Toggle Convenient Effects App",
     "ConvenientEffects.KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
 
@@ -45,7 +36,7 @@
     "ConvenientEffects.ConfigFoundryEffectIdLabel": "Foundry Effect ID",
     "ConvenientEffects.ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
     "ConvenientEffects.ConfigConvenientEffectIdLabel": "Convenient Effect ID",
-    "ConvenientEffects.ConfigConvenientEffectIdHint": "The nested effects that will be shown as options when the effect is added or removed.",
+    "ConvenientEffects.ConfigConvenientEffectIdHint": "This is the Convenient effect ID and can be used for finding, adding, or removing an effect.",
     "ConvenientEffects.ConfigTemporaryLabel": "Temporary",
     "ConvenientEffects.ConfigTemporaryHint": "If checked, this effect will always be labeled as a temporary effect, even if it doesn't have a duration or status.",
     "ConvenientEffects.ConfigViewableLabel": "Viewable",
