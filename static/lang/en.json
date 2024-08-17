@@ -31,6 +31,8 @@
     "ConvenientEffects.ShowEffect": "Show Effect",
     "ConvenientEffects.HideEffect": "Hide Effect",
     "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay",
+    "ConvenientEffects.ResetSystemEffects": "Reset System Effects",
+    "ConvenientEffects.ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
 
     "ConvenientEffects.ConfigLabel": "Convenient",
     "ConvenientEffects.ConfigFoundryEffectIdLabel": "Foundry Effect ID",

@@ -222,6 +222,10 @@ class BackupConvenientEffectsApp extends Application {
             "click",
             this.#controller.onCollapseAll.bind(this.#controller),
         );
+        this.#resetSystemEffects.on(
+            "click",
+            this.#controller.onResetSystemEffects.bind(this.#controller),
+        );
         this.#folderHeaders.on(
             "click",
             this.#controller.onToggleFolder.bind(this.#controller),
@@ -258,6 +262,10 @@ class BackupConvenientEffectsApp extends Application {
 
     get #collapseAllButton(): JQuery<HTMLElement> {
         return this.#rootView.find(".collapse-all");
+    }
+
+    get #resetSystemEffects(): JQuery<HTMLElement> {
+        return this.#rootView.find(".reset-system-effects");
     }
 
     get #folderHeaders() {
