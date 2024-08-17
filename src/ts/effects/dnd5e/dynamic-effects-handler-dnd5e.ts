@@ -12,16 +12,16 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         if (!effect.name) return;
 
         switch (effect.name.toLowerCase()) {
-            case "divine word":
+            case game.i18n.localize("ConvenientEffects.Dnd.DivineWord.name").toLowerCase():
                 await this.#addDivineWordEffects(effect, actor);
                 break;
-            case "enlarge":
+            case game.i18n.localize("ConvenientEffects.Dnd.Enlarge.name").toLowerCase():
                 this.#addEnlargeEffects(effect, actor);
                 break;
-            case "rage":
+            case game.i18n.localize("ConvenientEffects.Dnd.Rage.name").toLowerCase():
                 this.#addRageEffects(effect, actor);
                 break;
-            case "reduce":
+            case game.i18n.localize("ConvenientEffects.Dnd.Reduce.name").toLowerCase():
                 this.#addReduceEffects(effect, actor);
                 break;
         }
@@ -40,51 +40,51 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 "system.attributes.hp.value": 0,
             });
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Dead",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Dead.name"),
                 uuid: actor.uuid,
                 overlay: true,
             });
-            effect.description = "Killed instantly";
+            effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.dead");
         } else if (remainingHp <= 30) {
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Blinded",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Blinded.name"),
                 uuid: actor.uuid,
                 origin,
             });
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Deafened",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
                 uuid: actor.uuid,
                 origin,
             });
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Stunned",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Stunned.name"),
                 uuid: actor.uuid,
                 origin,
             });
-            effect.description = "Blinded, deafened, and stunned for 1 hour";
+            effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.stunned");
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_ONE_HOUR;
         } else if (remainingHp <= 40) {
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Blinded",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Blinded.name"),
                 uuid: actor.uuid,
                 origin,
             });
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Deafened",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
                 uuid: actor.uuid,
                 origin,
             });
-            effect.description = "Deafened and blinded for 10 minutes";
+            effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.blinded");
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_TEN_MINUTES;
         } else if (remainingHp <= 50) {
             await game.dfreds.effectInterface.addEffect({
-                effectName: "Deafened",
+                effectName: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
                 uuid: actor.uuid,
                 origin,
             });
-            effect.description = "Deafened for 1 minute";
+            effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.deafened");
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_ONE_MINUTE;
         }
@@ -148,7 +148,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         );
 
         if (!barbarianClass) {
-            ui.notifications.warn("Selected actor is not a Barbarian");
+            ui.notifications.warn(game.i18n.localize("ConvenientEffects.Dnd.Rage.notABarbarian"));
             return;
         }
 
@@ -166,7 +166,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             "path-of-the-totem-warrior";
         const hasBearTotemSpirit = actor.items.find(
             (item) =>
-                item.type === "feat" && item.name === "Totem Spirit: Bear",
+                item.type === "feat" && item.name === game.i18n.localize("ConvenientEffects.Dnd.Rage.bearTotemFeat"),
         );
 
         if (isTotemWarrior && hasBearTotemSpirit) {
