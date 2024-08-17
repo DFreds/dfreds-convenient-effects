@@ -148,6 +148,9 @@ declare global {
             default: PreCreate<foundry.data.PrototypeTokenSource>;
         };
         get(
+            key: "core.dynamicTokenRingFitMode",
+        ): SettingConfig & { default: "grid" | "subject" };
+        get(
             key: "core.notesDisplayToggle",
         ): SettingConfig & { default: boolean };
     }
