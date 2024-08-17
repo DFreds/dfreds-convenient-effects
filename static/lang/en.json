@@ -1,54 +1,687 @@
 {
-    "ConvenientEffects.AppName": "Convenient Effects",
-    "ConvenientEffects.BackupAppName": "Backup Convenient Effects",
+    "ConvenientEffects": {
+        "AppName": "Convenient Effects",
+        "BackupAppName": "Backup Convenient Effects",
 
-    "ConvenientEffects.SettingPlayer": "Player",
-    "ConvenientEffects.SettingTrustedPlayer": "Trusted Player",
-    "ConvenientEffects.SettingAssistantGM": "Assistant GM",
-    "ConvenientEffects.SettingGameMaster": "Game Master",
-    "ConvenientEffects.SettingNone": "None",
+        "SettingPlayer": "Player",
+        "SettingTrustedPlayer": "Trusted Player",
+        "SettingAssistantGM": "Assistant GM",
+        "SettingGameMaster": "Game Master",
+        "SettingNone": "None",
 
-    "ConvenientEffects.SettingAppControlsPermissionName": "App Controls Permission",
-    "ConvenientEffects.SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
+        "SettingAppControlsPermissionName": "App Controls Permission",
+        "SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
 
-    "ConvenientEffects.SettingCreateFoldersPermissionName": "Create Folders Permission",
-    "ConvenientEffects.SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
+        "SettingCreateFoldersPermissionName": "Create Folders Permission",
+        "SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
 
-    "ConvenientEffects.KeybindingToggleAppName": "Toggle Convenient Effects App",
-    "ConvenientEffects.KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
+        "KeybindingToggleAppName": "Toggle Convenient Effects App",
+        "KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
 
-    "ConvenientEffects.CreateFolder": "Create Folder",
-    "ConvenientEffects.CreateEffect": "Create Effect",
-    "ConvenientEffects.ViewBackups": "View Backups",
-    "ConvenientEffects.ShowFolder": "Show Folder",
-    "ConvenientEffects.HideFolder": "Hide Folder",
-    "ConvenientEffects.ShowHiddenEffects": "Show Hidden Effects",
-    "ConvenientEffects.ShowNestedEffects": "Show Nested Effects",
-    "ConvenientEffects.PrioritizeTargets": "Prioritize Targets",
-    "ConvenientEffects.NewEffect": "New Effect",
-    "ConvenientEffects.EditEffect": "Edit Effect",
-    "ConvenientEffects.DeleteEffect": "Delete Effect",
-    "ConvenientEffects.ShowEffect": "Show Effect",
-    "ConvenientEffects.HideEffect": "Hide Effect",
-    "ConvenientEffects.ToggleAsOverlay": "Toggle as Overlay",
-    "ConvenientEffects.ResetSystemEffects": "Reset System Effects",
-    "ConvenientEffects.ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
+        "CreateFolder": "Create Folder",
+        "CreateEffect": "Create Effect",
+        "ViewBackups": "View Backups",
+        "ShowFolder": "Show Folder",
+        "HideFolder": "Hide Folder",
+        "ShowHiddenEffects": "Show Hidden Effects",
+        "ShowNestedEffects": "Show Nested Effects",
+        "PrioritizeTargets": "Prioritize Targets",
+        "NewEffect": "New Effect",
+        "EditEffect": "Edit Effect",
+        "DeleteEffect": "Delete Effect",
+        "ShowEffect": "Show Effect",
+        "HideEffect": "Hide Effect",
+        "ToggleAsOverlay": "Toggle as Overlay",
+        "ResetSystemEffects": "Reset System Effects",
+        "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
 
-    "ConvenientEffects.ConfigLabel": "Convenient",
-    "ConvenientEffects.ConfigFoundryEffectIdLabel": "Foundry Effect ID",
-    "ConvenientEffects.ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
-    "ConvenientEffects.ConfigConvenientEffectIdLabel": "Convenient Effect ID",
-    "ConvenientEffects.ConfigConvenientEffectIdHint": "This is the Convenient effect ID and can be used for finding, adding, or removing an effect.",
-    "ConvenientEffects.ConfigTemporaryLabel": "Temporary",
-    "ConvenientEffects.ConfigTemporaryHint": "If checked, this effect will always be labeled as a temporary effect, even if it doesn't have a duration or status.",
-    "ConvenientEffects.ConfigViewableLabel": "Viewable",
-    "ConvenientEffects.ConfigViewableHint": "If checked, this effect will always be shown in the application.",
-    "ConvenientEffects.ConfigDynamicLabel": "Dynamic",
-    "ConvenientEffects.ConfigDynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data. This cannot be changed and is used for very specific effect cases.",
-    "ConvenientEffects.ConfigNestedEffectsLabel": "Nested Effects",
-    "ConvenientEffects.ConfigNestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
-    "ConvenientEffects.ConfigSubEffectsLabel": "Sub-Effects",
-    "ConvenientEffects.ConfigSubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
-    "ConvenientEffects.ConfigOtherEffectsLabel": "Other Effects",
-    "ConvenientEffects.ConfigOtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed."
+        "ConfigLabel": "Convenient",
+        "ConfigFoundryEffectIdLabel": "Foundry Effect ID",
+        "ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
+        "ConfigConvenientEffectIdLabel": "Convenient Effect ID",
+        "ConfigConvenientEffectIdHint": "This is the Convenient effect ID and can be used for finding, adding, or removing an effect.",
+        "ConfigTemporaryLabel": "Temporary",
+        "ConfigTemporaryHint": "If checked, this effect will always be labeled as a temporary effect, even if it doesn't have a duration or status.",
+        "ConfigViewableLabel": "Viewable",
+        "ConfigViewableHint": "If checked, this effect will always be shown in the application.",
+        "ConfigDynamicLabel": "Dynamic",
+        "ConfigDynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data. This cannot be changed and is used for very specific effect cases.",
+        "ConfigNestedEffectsLabel": "Nested Effects",
+        "ConfigNestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
+        "ConfigSubEffectsLabel": "Sub-Effects",
+        "ConfigSubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
+        "ConfigOtherEffectsLabel": "Other Effects",
+        "ConfigOtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed.",
+        "Dnd": {
+            "Folders": {
+                "Conditions": "Conditions",
+                "Spells": "Spells",
+                "ClassFeatures": "Class Features",
+                "Equipment": "Equipment",
+                "Other": "Other"
+            },
+            "AcidArrow": {
+                "name": "Acid Arrow",
+                "description": "Causes 2d4 acid damage at the end of next turn"
+            },
+            "Aid": {
+                "name": "Aid",
+                "description": "Add to current and maximum hit points for 8 hours"
+            },
+            "AlterSelf": {
+                "name": "Alter Self",
+                "description": "No active effects and lasts for 1 hour"
+            },
+            "AntilifeShell": {
+                "name": "Antilife Shell",
+                "description": "No active effects and lasts for 1 hour"
+            },
+            "ArcaneHand": {
+                "name": "Arcane Hand",
+                "description": "No active effects and lasts for 1 minute"
+            },
+            "Bane": {
+                "name": "Bane",
+                "description": "<p>Subtract 1d4 from all saving throws and attack rolls for 1 minute</p>"
+            },
+            "BardicInspiration": {
+                "name": "Bardic Inspiration",
+                "description": "<p>Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes</p>"
+            },
+            "BardicInspirationd10": {
+                "name": "Bardic Inspiration (d10)",
+                "description": "<p>For bards from level 10 to level 14</p>"
+            },
+            "BardicInspirationd12": {
+                "name": "Bardic Inspiration (d12)",
+                "description": "<p>For bards from level 15 to level 20</p>"
+            },
+            "BardicInspirationd6": {
+                "name": "Bardic Inspiration (d6)",
+                "description": "<p>For bards from level 1 to level 4</p>"
+            },
+            "BardicInspirationd8": {
+                "name": "Bardic Inspiration (d8)",
+                "description": "<p>For bards from level 5 to level 9</p>"
+            },
+            "Barkskin": {
+                "name": "Barkskin",
+                "description": "<p>Upgrade AC to 16 for 1 hour</p>"
+            },
+            "BeaconofHope": {
+                "name": "Beacon of Hope",
+                "description": "<p>Adds advantage to wisdom saving throws and death saving throws for 1 minute</p>"
+            },
+            "BearsEndurance": {
+                "name": "Bear's Endurance",
+                "description": "<p>Advantage on constitution checks and 2d6 temp hit points for 1 hour</p>"
+            },
+            "BlackTentacles": {
+                "name": "Black Tentacles",
+                "description": "<p>Apply the effects of the restrained condition for 1 minute</p>"
+            },
+            "Bless": {
+                "name": "Bless",
+                "description": "<p>Add 1d4 to all saving throws and attack rolls for 1 minute</p>"
+            },
+            "Blinded": {
+                "name": "Blinded",
+                "description": "<p>- A blinded creature can't see and automatically fails any ability check that requires sight.<br />- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.</p>"
+            },
+            "BlindingSickness": {
+                "name": "Blinding Sickness",
+                "description": "<p>Disadvantage on wisdom checks and wisdom saving throws for 7 days</p>"
+            },
+            "Blindness": {
+                "name": "Blindness",
+                "description": "<p>Disadvantage on attack rolls while granting advantage to all who attack for 1 minute</p>"
+            },
+            "BlindnessDeafness": {
+                "name": "Blindness/Deafness",
+                "description": "<p>Choose between blindness or deafness</p>"
+            },
+            "Blur": {
+                "name": "Blur",
+                "description": "<p>Grants disadvantage to all who attack for 1 minute</p>"
+            },
+            "BonusAction": {
+                "name": "Bonus Action",
+                "description": "<p>No active effects and expires on turn start</p>"
+            },
+            "BullsStrength": {
+                "name": "Bull's Strength",
+                "description": "<p>Advantage on strength checks and double maximum carrying capacity for 1 hour</p>"
+            },
+            "BullseyeLantern": {
+                "name": "Bullseye Lantern",
+                "description": "<p>Adds lantern light in a 60 degree cone for 6 hours (requires ATL)</p>"
+            },
+            "Candle": {
+                "name": "Candle",
+                "description": "<p>Adds candle light for 1 hour (requires ATL)</p>"
+            },
+            "CatsGrace": {
+                "name": "Cat's Grace",
+                "description": "<p>Advantage on dexterity checks for 1 hour</p>"
+            },
+            "ChannelDivinitySacredWeapon": {
+                "name": "Channel Divinity: Sacred Weapon",
+                "description": "<p>Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)</p>"
+            },
+            "ChannelDivinityTurntheUnholy": {
+                "name": "Channel Divinity: Turn the Unholy",
+                "description": "<p>No active effects and lasts for 1 minute. Expires on taking damage.</p>"
+            },
+            "ChannelDivinityTurnUndead": {
+                "name": "Channel Divinity: Turn Undead",
+                "description": "<p>No active effects and lasts for 1 minute. Expires on taking damage.</p>"
+            },
+            "CharmPerson": {
+                "name": "Charm Person",
+                "description": "<p>No active effects and lasts for 1 hour</p>"
+            },
+            "Charmed": {
+                "name": "Charmed",
+                "description": "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature."
+            },
+            "Command": {
+                "name": "Command",
+                "description": "<p>No active effects and lasts until the end of next turn</p>"
+            },
+            "ComprehendLanguages": {
+                "name": "Comprehend Languages",
+                "description": "<p>Adds all languages for 1 hour</p>"
+            },
+            "Concentrating": {
+                "name": "Concentrating",
+                "description": "<p>Some Spells require you to maintain Concentration in order to keep their magic active. If you lose Concentration, such a spell ends.</p>"
+            },
+            "Contagion": {
+                "name": "Contagion",
+                "description": "<p>Choose between blinding sickness, filth fever, flesh rot, mindfire, seizure, or slimy doom</p>"
+            },
+            "CoverHalf": {
+                "name": "Cover (Half)",
+                "description": "<p>Adds 2 to AC and dexterity saving throws</p>"
+            },
+            "CoverThreeQuarters": {
+                "name": "Cover (Three-Quarters)",
+                "description": "<p>Adds 5 to AC and dexterity saving throws</p>"
+            },
+            "CoverTotal": {
+                "name": "Cover (Total)",
+                "description": "<p>Causes all attacks to fail automatically</p>"
+            },
+            "Darkvision": {
+                "name": "Darkvision",
+                "description": "<p>Upgrade darkvision to 60 ft. for 8 hours</p>"
+            },
+            "Dead": {
+                "name": "Dead",
+                "description": "<p>No active effects</p>"
+            },
+            "Deafened": {
+                "name": "Deafened",
+                "description": "<p>- A deafened creature can't hear and automatically fails any ability check that requires hearing.</p>"
+            },
+            "Deafness": {
+                "name": "Deafness",
+                "description": "<p>No active effects and lasts for 1 minute</p>"
+            },
+            "DisguiseSelf": {
+                "name": "Disguise Self",
+                "description": "<p>No active effects and lasts for 1 hour</p>"
+            },
+            "DivineFavor": {
+                "name": "Divine Favor",
+                "description": "<p>Add 1d4 radiant damage to weapon attacks for 1 minute</p>"
+            },
+            "DivineWord": {
+                "name": "Divine Word",
+                "description": "<p>Adds various effects based on the remaining hit points</p>",
+                "dead": "Killed instantly",
+                "stunned": "Blinded, deafened, and stunned for 1 hour",
+                "blinded": "Deafened and blinded for 10 minutes",
+                "deafened": "Deafened for 1 minute"
+            },
+            "Dodge": {
+                "name": "Dodge",
+                "description": "<p>Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn</p>"
+            },
+            "EaglesSplendor": {
+                "name": "Eagle's Splendor",
+                "description": "<p>Advantage on charisma checks for 1 hour</p>"
+            },
+            "Encumbered": {
+                "name": "Encumbered",
+                "description": "<p>Lowers movement by 10 ft.</p>"
+            },
+            "EnhanceAbility": {
+                "name": "Enhance Ability",
+                "description": "<p>Choose between Bear's Endurance, Bull's Strength, Cat's Grace, Eagle's Splendor, Fox's Cunning, or Owl's Wisdom</p>"
+            },
+            "Enlarge": {
+                "name": "Enlarge",
+                "description": "<p>Add 1d4 to damage and advantage on strength checks and strength saving throws for 1 minute</p>"
+            },
+            "EnlargeReduce": {
+                "name": "Enlarge/Reduce",
+                "description": "<p>Choose between Enlarge or Reduce</p>"
+            },
+            "Exhaustion1": {
+                "name": "Exhaustion 1",
+                "description": "<p>Disadvantage on ability checks</p>"
+            },
+            "Exhaustion2": {
+                "name": "Exhaustion 2",
+                "description": "<p>Disadvantage on ability checks and speed halved</p>"
+            },
+            "Exhaustion3": {
+                "name": "Exhaustion 3",
+                "description": "<p>Disadvantage on ability checks, speed halved, and disadvantage on attacks and saving throws</p>"
+            },
+            "Exhaustion4": {
+                "name": "Exhaustion 4",
+                "description": "<p>Disadvantage on ability checks, speed halved, disadvantage on attacks and saving throws, and hit point maximum halved</p>"
+            },
+            "Exhaustion5": {
+                "name": "Exhaustion 5",
+                "description": "<p>Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved</p>"
+            },
+            "FaerieFire": {
+                "name": "Faerie Fire",
+                "description": "<p>Grants advantage to all who attack for 1 minute</p>"
+            },
+            "FalseLife": {
+                "name": "False Life",
+                "description": "<p>Add temporary hit points 1 hour</p>"
+            },
+            "FeatherFall": {
+                "name": "Feather Fall",
+                "description": "<p>No active effects and lasts for 1 minute</p>"
+            },
+            "Feeblemind": {
+                "name": "Feeblemind",
+                "description": "<p>Set intelligence and charisma scores to 1 until removed</p>"
+            },
+            "FilthFever": {
+                "name": "Filth Fever",
+                "description": "<p>Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days</p>"
+            },
+            "FindthePath": {
+                "name": "Find the Path",
+                "description": "<p>No active effects and lasts for 1 day</p>"
+            },
+            "FireShield": {
+                "name": "Fire Shield",
+                "description": "<p>Choose between cold or fire resistance</p>"
+            },
+            "FireShieldColdResistance": {
+                "name": "Fire Shield (Cold Resistance)",
+                "description": "<p>Add damage resistance to cold for 10 minutes</p>"
+            },
+            "FireShieldFireResistance": {
+                "name": "Fire Shield (Fire Resistance)",
+                "description": "<p>Add damage resistance to fire for 10 minutes</p>"
+            },
+            "Flanked": {
+                "name": "Flanked",
+                "description": "<p>Grants advantage to all who melee attack</p>"
+            },
+            "Flanking": {
+                "name": "Flanking",
+                "description": "<p>Grants advantage on melee attack rolls</p>"
+            },
+            "FleshRot": {
+                "name": "Flesh Rot",
+                "description": "<p>Disadvantage on charisma checks and vulnerability to all damage</p>"
+            },
+            "Fly": {
+                "name": "Fly",
+                "description": "<p>Upgrade flying speed to 60 ft. for 10 minutes</p>"
+            },
+            "Foresight": {
+                "name": "Foresight",
+                "description": "<p>Grants advantage on attack rolls, ability checks, and saving throws while granting disadvantage to all who attack for 8 hours</p>"
+            },
+            "FoxsCunning": {
+                "name": "Fox's Cunning",
+                "description": "<p>Advantage on intelligence checks for 1 hour</p>"
+            },
+            "FreedomofMovement": {
+                "name": "Freedom of Movement",
+                "description": "<p>No active effects and lasts for 1 hour</p>"
+            },
+            "Frightened": {
+                "name": "Frightened",
+                "description": "<p>- A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.<br />- The creature can't willingly move closer to the source of its fear.</p>"
+            },
+            "GlobeofInvulnerability": {
+                "name": "Globe of Invulnerability",
+                "description": "<p>No active effects and lasts for 1 minute</p>"
+            },
+            "Grappled": {
+                "name": "Grappled",
+                "description": "<p>- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- The condition ends if the grappler is incapacitated.<br />- The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect.</p>"
+            },
+            "GreatWeaponMaster": {
+                "name": "Great Weapon Master",
+                "description": "<p>Subtracts 5 from melee attacks but adds 10 to melee damage</p>"
+            },
+            "GreaterInvisibility": {
+                "name": "Greater Invisibility",
+                "description": "<p>Grants advantage on attack rolls while forcing disadvantage to all who attack for 1 minute</p>"
+            },
+            "Guidance": {
+                "name": "Guidance",
+                "description": "<p>Adds 1d4 to one ability or skill check for 1 minute</p>"
+            },
+            "GuidingBolt": {
+                "name": "Guiding Bolt",
+                "description": "<p>Grants advantage to next attacker or until the end of next turn</p>"
+            },
+            "Haste": {
+                "name": "Haste",
+                "description": "<p>Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute</p>"
+            },
+            "HeavilyEncumbered": {
+                "name": "Heavily Encumbered",
+                "description": "<p>Lowers movement by 20 ft., disadvantage on all attack rolls, and disadvantage on strength, dexterity, and constitution saves</p>"
+            },
+            "HeroesFeast": {
+                "name": "Heroes' Feast",
+                "description": "<p>Immunity to poison and frightened, make all wisdom saving throws with advantage, and hit point maximum increases by 2d10 for 24 hours</p>"
+            },
+            "Heroism": {
+                "name": "Heroism",
+                "description": "<p>Immunity to frightened for 1 minute</p>"
+            },
+            "HideousLaughter": {
+                "name": "Hideous Laughter",
+                "description": "<p>Apply the effects of the prone and incapacitated conditions for 1 minute</p>"
+            },
+            "HoldMonster": {
+                "name": "Hold Monster",
+                "description": "<p>Apply the effects of the paralyzed condition for 1 minute</p>"
+            },
+            "HoldPerson": {
+                "name": "Hold Person",
+                "description": "<p>Apply the effects of the paralyzed condition for 1 minute</p>"
+            },
+            "HolyAura": {
+                "name": "Holy Aura",
+                "description": "<p>Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute</p>"
+            },
+            "HoodedLantern": {
+                "name": "Hooded Lantern",
+                "description": "<p>Adds hooded lantern light for 6 hours (requires ATL)</p>"
+            },
+            "HuntersMark": {
+                "name": "Hunter's Mark",
+                "description": "<p>No active effects and lasts until removed (for now)</p>"
+            },
+            "Incapacitated": {
+                "name": "Incapacitated",
+                "description": "<p>- An incapacitated creature can't take actions or reactions</p>"
+            },
+            "Inspiration": {
+                "name": "Inspiration",
+                "description": "<p>Advantage on everything and expires after any action, save, check, or skill roll</p>"
+            },
+            "Invisibility": {
+                "name": "Invisibility",
+                "description": "<p>Grants advantage on next attack roll while forcing disadvantage to all who attack for 1 hour. Expires after 1 attack.</p>"
+            },
+            "Invisible": {
+                "name": "Invisible",
+                "description": "<p>- An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature's location can be detected by any noise it makes or any tracks it leaves.<br />- Attack rolls against the creature have disadvantage, and the creature's attack rolls have advantage.</p>"
+            },
+            "IrresistibleDance": {
+                "name": "Irresistible Dance",
+                "description": "<p>Zero movement, disadvantage on dexterity saving throws, disadvantage on attack rolls, and grants advantage to all who attack for 1 minute</p>"
+            },
+            "Jump": {
+                "name": "Jump",
+                "description": "<p>No active effects and lasts for 1 minute</p>"
+            },
+            "KiEmptyBody": {
+                "name": "Ki: Empty Body",
+                "description": "<p>Grants advantage on attack rolls, forces disadvantage to all who attack, and grants resistance to all damage except force for 1 minute</p>"
+            },
+            "KiPatientDefense": {
+                "name": "Ki: Patient Defense",
+                "description": "<p>Grants disadvantage to all who attack and advantage on all dexterity saving throws until next turn</p>"
+            },
+            "Lantern": {
+                "name": "Lantern",
+                "description": "<p>Adds lantern light for 6 hours (requires ATL)</p>"
+            },
+            "Light": {
+                "name": "Light",
+                "description": "<p>Emits 20/40 light for 1 hour (requires ATL)</p>"
+            },
+            "Longstrider": {
+                "name": "Longstrider",
+                "description": "<p>Increase all movement by 10 ft. for 1 hour</p>"
+            },
+            "MageArmor": {
+                "name": "Mage Armor",
+                "description": "<p>Upgrades armor to 13 + dex modifier for 8 hours</p>"
+            },
+            "MindBlank": {
+                "name": "Mind Blank",
+                "description": "<p>Adds immunity to psychic damage for 24 hours</p>"
+            },
+            "Mindfire": {
+                "name": "Mindfire",
+                "description": "<p>Disadvantage on intelligence checks and intelligence saving throws for 7 days</p>"
+            },
+            "MirrorImage": {
+                "name": "Mirror Image",
+                "description": "<p>No active effects and lasts for 1 minute</p>"
+            },
+            "OwlsWisdom": {
+                "name": "Owl's Wisdom",
+                "description": "<p>Advantage on wisdom checks for 1 hour</p>"
+            },
+            "Paralyzed": {
+                "name": "Paralyzed",
+                "description": "<p>- A paralyzed creature is incapacitated (see the condition) and can't move or speak.<br />- The creature automatically fails Strength and Dexterity saving throws. Attack rolls against the creature have advantage.<br />- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</p>"
+            },
+            "PasswithoutTrace": {
+                "name": "Pass without Trace",
+                "description": "<p>Add 10 to stealth checks for 1 hour</p>"
+            },
+            "Petrified": {
+                "name": "Petrified",
+                "description": "<p>- A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.<br />- The creature is incapacitated (see the condition), can't move or speak, and is unaware of its surroundings.<br />- Attack rolls against the creature have advantage.<br />- The creature automatically fails Strength and Dexterity saving throws.<br />- The creature has resistance to all damage.<br />- The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized. Remove all movement, grant advantage to all who attack, and add damage resistance to all magical and physical attacks</p>"
+            },
+            "Poisoned": {
+                "name": "Poisoned",
+                "description": "<p>- A poisoned creature has disadvantage on attack rolls and ability checks.</p>"
+            },
+            "Prone": {
+                "name": "Prone",
+                "description": "<p>- A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.<br />- The creature has disadvantage on attack rolls.<br />- An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage.</p>"
+            },
+            "ProtectionfromAcid": {
+                "name": "Protection from Acid",
+                "description": "<p>Adds damage resistance to acid for 1 hour</p>"
+            },
+            "ProtectionfromCold": {
+                "name": "Protection from Cold",
+                "description": "<p>Adds damage resistance to cold for 1 hour</p>"
+            },
+            "ProtectionfromEnergy": {
+                "name": "Protection from Energy",
+                "description": "<p>Choose between acid, cold, fire, lightning, or thunder resistance</p>"
+            },
+            "ProtectionfromEvilandGood": {
+                "name": "Protection from Evil and Good",
+                "description": "<p>No active effects and lasts for 10 minutes</p>"
+            },
+            "ProtectionfromFire": {
+                "name": "Protection from Fire",
+                "description": "<p>Adds damage resistance to fire for 1 hour</p>"
+            },
+            "ProtectionfromLightning": {
+                "name": "Protection from Lightning",
+                "description": "<p>Adds damage resistance to lightning for 1 hour</p>"
+            },
+            "ProtectionfromPoison": {
+                "name": "Protection from Poison",
+                "description": "<p>Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)</p>"
+            },
+            "ProtectionfromThunder": {
+                "name": "Protection from Thunder",
+                "description": "<p>Adds damage resistance to thunder for 1 hour</p>"
+            },
+            "Rage": {
+                "name": "Rage",
+                "description": "<p>Advantage on strength checks and strength saving throws, a variable bonus to melee damage based on barbarian level, and resistance to piercing, bludgeoning, and slashing damage for 1 minute. Also handles Path of the Totem Warrior resistances.</p>",
+                "notABarbarian": "Selected actor is not a Barbarian",
+                "bearTotemFeat": "Totem Spirit: Bear"
+            },
+            "RangedDisadvantage": {
+                "name": "Ranged Disadvantage",
+                "description": "<p>Disadvantage on ranged attack rolls</p>"
+            },
+            "RayofFrost": {
+                "name": "Ray of Frost",
+                "description": "<p>Lowers movement by 10 ft</p>"
+            },
+            "Reaction": {
+                "name": "Reaction",
+                "description": "<p>No active effects and expires on turn start</p>"
+            },
+            "Ready": {
+                "name": "Ready",
+                "description": "<p>No active effects and expires on turn start</p>"
+            },
+            "RecklessAttack": {
+                "name": "Reckless Attack",
+                "description": "<p>Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round</p>"
+            },
+            "RecklessAttackadvantageonattacks": {
+                "name": "Reckless Attack (advantage on attacks)",
+                "description": "<p>Advantage on melee attacks until end of turn</p>"
+            },
+            "Reduce": {
+                "name": "Reduce",
+                "description": "<p>Subtract 1d4 from damage and disadvantage on strength checks and strength saving throws for 1 minute</p>"
+            },
+            "Regenerate": {
+                "name": "Regenerate",
+                "description": "<p>Regain 1 hit point at the start of each turn for 1 hour</p>"
+            },
+            "ResilientSphere": {
+                "name": "Resilient Sphere",
+                "description": "<p>Adds total immunity to all damage and half movement for 1 minute</p>"
+            },
+            "Resistance": {
+                "name": "Resistance",
+                "description": "<p>Add 1d4 to a single saving throw in the next minute</p>"
+            },
+            "Restrained": {
+                "name": "Restrained",
+                "description": "<p>- A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.<br />- The creature has disadvantage on Dexterity saving throws.</p>"
+            },
+            "Seizure": {
+                "name": "Seizure",
+                "description": "<p>Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days</p>"
+            },
+            "Sharpshooter": {
+                "name": "Sharpshooter",
+                "description": "<p>Subtracts 5 from ranged attacks but adds 10 to ranged damage</p>"
+            },
+            "Shield": {
+                "name": "Shield",
+                "description": "<p>Add 5 to AC until next turn</p>"
+            },
+            "ShieldofFaith": {
+                "name": "Shield of Faith",
+                "description": "<p>Adds 2 to the AC for 10 minutes</p>"
+            },
+            "SlimyDoom": {
+                "name": "Slimy Doom",
+                "description": "<p>Disadvantage on constitution checks and constitution saving throws for 7 days</p>"
+            },
+            "Slow": {
+                "name": "Slow",
+                "description": "<p>Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute</p>"
+            },
+            "SpeakwithAnimals": {
+                "name": "Speak with Animals",
+                "description": "<p>No active effects and lasts for 10 minutes</p>"
+            },
+            "SpeakwithDead": {
+                "name": "Speak with Dead",
+                "description": "<p>No active effects and lasts for 10 minutes</p>"
+            },
+            "SpeakwithPlants": {
+                "name": "Speak with Plants",
+                "description": "<p>No active effects and lasts for 10 minutes</p>"
+            },
+            "SpiderClimb": {
+                "name": "Spider Climb",
+                "description": "<p>Grants climbing speed equal to walking speed for 1 hour</p>"
+            },
+            "SpiritGuardians": {
+                "name": "Spirit Guardians",
+                "description": "<p>No active effects and lasts for 10 minutes</p>"
+            },
+            "SpiritualWeapon": {
+                "name": "Spiritual Weapon",
+                "description": "<p>No active effects and lasts for 1 minute</p>"
+            },
+            "Stoneskin": {
+                "name": "Stoneskin",
+                "description": "<p>Adds resistance to non-magical physical damage for 1 hour</p>"
+            },
+            "Stunned": {
+                "name": "Stunned",
+                "description": "<p>- A stunned creature is incapacitated (see the condition), can't move, and can speak only falteringly.<br />- The creature automatically fails Strength and Dexterity saving throws.<br />- Attack rolls against the creature have advantage.</p>"
+            },
+            "Suggestion": {
+                "name": "Suggestion",
+                "description": "<p>No active effects and lasts for 8 hours</p>"
+            },
+            "Telekinesis": {
+                "name": "Telekinesis",
+                "description": "<p>No active effects and lasts for 10 minutes</p>"
+            },
+            "Torch": {
+                "name": "Torch",
+                "description": "<p>Adds torch light for 1 hour (requires ATL)</p>"
+            },
+            "TrueStrike": {
+                "name": "True Strike",
+                "description": "<p>Grants advantage on next attack or until the end of next turn</p>"
+            },
+            "Unconscious": {
+                "name": "Unconscious",
+                "description": "<p>- An unconscious creature is incapacitated (See the condition) can't move or speak, and is unaware of its surroundings.<br />- The creature drops whatever its holding and falls prone (See the condition).<br />- The creature automatically fails Strength and Dexterity saving throws.<br />- Attack rolls against the creature have advantage.<br />- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</p>"
+            },
+            "ViciousMockery": {
+                "name": "Vicious Mockery",
+                "description": "<p>Grants disadvantage on next attack or until the end of next turn</p>"
+            },
+            "WardingBond": {
+                "name": "Warding Bond",
+                "description": "<p>Adds 1 to AC and saving throws and grants resistance to all damage for 1 hour</p>"
+            },
+            "WaterBreathing": {
+                "name": "Water Breathing",
+                "description": "<p>No active effects and lasts for 24 hours</p>"
+            },
+            "WaterWalk": {
+                "name": "Water Walk",
+                "description": "<p>No active effects and lasts for 1 hour</p>"
+            },
+            "Wounded": {
+                "name": "Wounded",
+                "description": "<p>No active effects</p>"
+            }
+        }
+    }
 }
