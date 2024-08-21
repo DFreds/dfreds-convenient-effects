@@ -1,4 +1,7 @@
-import type { HandlebarsApplicationDocumentSheet } from "../api/handlebars-application.d.ts";
+import type {
+    HandlebarsApplicationDocumentSheet,
+    HandlebarsTemplatePart,
+} from "../api/handlebars-application.d.ts";
 
 /**
  * The Application responsible for configuring a single User document.
@@ -10,12 +13,7 @@ import type { HandlebarsApplicationDocumentSheet } from "../api/handlebars-appli
 export default class UserConfig<
     TUser extends User,
 > extends HandlebarsApplicationDocumentSheet<TUser> {
-    static override PARTS: {
-        form: {
-            id: "form";
-            template: "templates/sheets/user-config.hbs";
-        };
-    };
+    static override PARTS: Record<string, HandlebarsTemplatePart>;
 
     override _prepareContext(
         options: DocumentSheetRenderOptions,
