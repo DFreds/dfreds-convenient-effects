@@ -88,19 +88,19 @@
                 "name": "Bardic Inspiration",
                 "description": "Add a dice to a single ability check, attack roll, or saving throw in the next 10 minutes"
             },
-            "BardicInspirationd10": {
+            "BardicInspirationD10": {
                 "name": "Bardic Inspiration (d10)",
                 "description": "For bards from level 10 to level 14"
             },
-            "BardicInspirationd12": {
+            "BardicInspirationD12": {
                 "name": "Bardic Inspiration (d12)",
                 "description": "For bards from level 15 to level 20"
             },
-            "BardicInspirationd6": {
+            "BardicInspirationD6": {
                 "name": "Bardic Inspiration (d6)",
                 "description": "For bards from level 1 to level 4"
             },
-            "BardicInspirationd8": {
+            "BardicInspirationD8": {
                 "name": "Bardic Inspiration (d8)",
                 "description": "For bards from level 5 to level 9"
             },
@@ -108,7 +108,7 @@
                 "name": "Barkskin",
                 "description": "Upgrade AC to 16 for 1 hour"
             },
-            "BeaconofHope": {
+            "BeaconOfHope": {
                 "name": "Beacon of Hope",
                 "description": "Adds advantage to wisdom saving throws and death saving throws for 1 minute"
             },
@@ -168,7 +168,7 @@
                 "name": "Channel Divinity: Sacred Weapon",
                 "description": "Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)"
             },
-            "ChannelDivinityTurntheUnholy": {
+            "ChannelDivinityTurnTheUnholy": {
                 "name": "Channel Divinity: Turn the Unholy",
                 "description": "No active effects and lasts for 1 minute. Expires on taking damage."
             },
@@ -308,7 +308,7 @@
                 "name": "Filth Fever",
                 "description": "Disadvantage on strength checks strength saving throws, and attacks that use strength for 7 days"
             },
-            "FindthePath": {
+            "FindThePath": {
                 "name": "Find the Path",
                 "description": "No active effects and lasts for 1 day"
             },
@@ -348,7 +348,7 @@
                 "name": "Fox's Cunning",
                 "description": "Advantage on intelligence checks for 1 hour"
             },
-            "FreedomofMovement": {
+            "FreedomOfMovement": {
                 "name": "Freedom of Movement",
                 "description": "No active effects and lasts for 1 hour"
             },
@@ -356,7 +356,7 @@
                 "name": "Frightened",
                 "description": "- A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.<br />- The creature can't willingly move closer to the source of its fear."
             },
-            "GlobeofInvulnerability": {
+            "GlobeOfInvulnerability": {
                 "name": "Globe of Invulnerability",
                 "description": "No active effects and lasts for 1 minute"
             },
@@ -488,7 +488,7 @@
                 "name": "Paralyzed",
                 "description": "- A paralyzed creature is incapacitated (see the condition) and can't move or speak.<br />- The creature automatically fails Strength and Dexterity saving throws. Attack rolls against the creature have advantage.<br />- Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature."
             },
-            "PasswithoutTrace": {
+            "PassWithoutTrace": {
                 "name": "Pass without Trace",
                 "description": "Add 10 to stealth checks for 1 hour"
             },
@@ -504,35 +504,35 @@
                 "name": "Prone",
                 "description": "- A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.<br />- The creature has disadvantage on attack rolls.<br />- An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage."
             },
-            "ProtectionfromAcid": {
+            "ProtectionFromAcid": {
                 "name": "Protection from Acid",
                 "description": "Adds damage resistance to acid for 1 hour"
             },
-            "ProtectionfromCold": {
+            "ProtectionFromCold": {
                 "name": "Protection from Cold",
                 "description": "Adds damage resistance to cold for 1 hour"
             },
-            "ProtectionfromEnergy": {
+            "ProtectionFromEnergy": {
                 "name": "Protection from Energy",
                 "description": "Choose between acid, cold, fire, lightning, or thunder resistance"
             },
-            "ProtectionfromEvilandGood": {
+            "ProtectionFromEvilAndGood": {
                 "name": "Protection from Evil and Good",
                 "description": "No active effects and lasts for 10 minutes"
             },
-            "ProtectionfromFire": {
+            "ProtectionFromFire": {
                 "name": "Protection from Fire",
                 "description": "Adds damage resistance to fire for 1 hour"
             },
-            "ProtectionfromLightning": {
+            "ProtectionFromLightning": {
                 "name": "Protection from Lightning",
                 "description": "Adds damage resistance to lightning for 1 hour"
             },
-            "ProtectionfromPoison": {
+            "ProtectionFromPoison": {
                 "name": "Protection from Poison",
                 "description": "Adds resistance to poison for 1 hour (does not grant automatic advantage on saving throws against poison)"
             },
-            "ProtectionfromThunder": {
+            "ProtectionFromThunder": {
                 "name": "Protection from Thunder",
                 "description": "Adds damage resistance to thunder for 1 hour"
             },
@@ -546,7 +546,7 @@
                 "name": "Ranged Disadvantage",
                 "description": "Disadvantage on ranged attack rolls"
             },
-            "RayofFrost": {
+            "RayOfFrost": {
                 "name": "Ray of Frost",
                 "description": "Lowers movement by 10 ft"
             },
@@ -562,7 +562,7 @@
                 "name": "Reckless Attack",
                 "description": "Advantage on melee attacks for a turn and grants advantage to those who attack for 1 round"
             },
-            "RecklessAttackadvantageonattacks": {
+            "RecklessAttackAdvantageOnAttacks": {
                 "name": "Reckless Attack (advantage on attacks)",
                 "description": "Advantage on melee attacks until end of turn"
             },
@@ -598,7 +598,7 @@
                 "name": "Shield",
                 "description": "Add 5 to AC until next turn"
             },
-            "ShieldofFaith": {
+            "ShieldOfFaith": {
                 "name": "Shield of Faith",
                 "description": "Adds 2 to the AC for 10 minutes"
             },
@@ -610,15 +610,15 @@
                 "name": "Slow",
                 "description": "Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute"
             },
-            "SpeakwithAnimals": {
+            "SpeakWithAnimals": {
                 "name": "Speak with Animals",
                 "description": "No active effects and lasts for 10 minutes"
             },
-            "SpeakwithDead": {
+            "SpeakWithDead": {
                 "name": "Speak with Dead",
                 "description": "No active effects and lasts for 10 minutes"
             },
-            "SpeakwithPlants": {
+            "SpeakWithPlants": {
                 "name": "Speak with Plants",
                 "description": "No active effects and lasts for 10 minutes"
             },
