@@ -20,14 +20,20 @@ const DeleteActiveEffect: Listener = {
                     renderAppIfOpen();
                 }
 
-                if (effect.parent instanceof Actor) {
+                if (
+                    game.user === game.users.activeGM &&
+                    effect.parent instanceof Actor
+                ) {
                     // Remove effects that were added due to this effect
                     const actor = effect.parent as Actor;
                     const effectIdsFromThisEffect = actor.effects
                         .filter((effect) => effect.origin === activeEffect.id)
                         .map((effect) => effect.id);
 
-                    if (effectIdsFromThisEffect) {
+                    if (
+                        effectIdsFromThisEffect &&
+                        effectIdsFromThisEffect.length > 0
+                    ) {
                         actor.deleteEmbeddedDocuments(
                             "ActiveEffect",
                             effectIdsFromThisEffect,
