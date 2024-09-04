@@ -571,7 +571,7 @@
         "description": "Soustrayez 1d4 aux dégâts et désavantages aux tests de force et aux jets de sauvegarde de force pendant 1 minute."
       },
       "Regenerate": {
-        "name": "RRégénération",
+        "name": "Régénération",
         "description": "Récupérez 1 point de vie au début de chaque tour pendant 1 heure"
       },
       "ResilientSphere": {
