@@ -44,17 +44,13 @@ jobs:
         working-directory: ./dist
         run: zip -r ./dfreds-convenient-effects.zip ./*
 
-      - name: Get changes between tags
-        id: changes
-        uses: simbo/changes-between-tags-action@v1
-
       - name: Create versioned release
         id: create_version_release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true # Set this to false if you want to prevent updating existing releases
           artifacts: "./dist/module.json, ./dist/dfreds-convenient-effects.zip"
-          body: "${{ steps.changes.outputs.changes }} \n ${{ github.event.release.body }}"
+          body: "${{ github.event.release.body }}"
           draft: true
           generateReleaseNotes: true
           name: ${{ github.event.release.name }}
