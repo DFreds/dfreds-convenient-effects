@@ -27,7 +27,7 @@ class Flags {
             return foundry.utils.getProperty(
                 effect,
                 `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`,
-            );
+            ) as string | undefined;
         }
     }
 
@@ -53,7 +53,7 @@ class Flags {
             return foundry.utils.getProperty(
                 document,
                 `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
-            );
+            ) as boolean;
         }
     }
 
@@ -211,10 +211,10 @@ class Flags {
             );
         } else {
             return (
-                foundry.utils.getProperty(
+                (foundry.utils.getProperty(
                     document,
                     `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
-                ) ?? false
+                ) as boolean) ?? false
             );
         }
     }
@@ -257,10 +257,10 @@ class Flags {
             );
         } else {
             return (
-                foundry.utils.getProperty(
+                (foundry.utils.getProperty(
                     effect,
                     `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`,
-                ) ?? false
+                ) as boolean) ?? false
             );
         }
     }
