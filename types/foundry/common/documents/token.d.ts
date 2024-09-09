@@ -154,7 +154,7 @@ type TokenSchema = {
         effects: fields.NumberField;
         subject: fields.SchemaField<{
             scale: fields.NumberField;
-            texture: fields.FilePathField;
+            texture: fields.FilePathField<ImageFilePath>;
         }>;
     }>;
     /** An object of optional key/value flags */

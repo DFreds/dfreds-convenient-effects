@@ -295,8 +295,8 @@ type TextureDataSchema = {
     src: fields.FilePathField<
         ImageFilePath | VideoFilePath,
         ImageFilePath | VideoFilePath,
-        true,
         false,
+        true,
         true
     >;
     /** The scale of the texture in the X dimension. */

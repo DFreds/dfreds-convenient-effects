@@ -3,7 +3,7 @@ export {
     default as BaseActiveEffect,
 } from "./active-effect.ts";
 export { default as BaseActorDelta } from "./actor-delta.ts";
-export { ActorFlags, ActorSource, default as BaseActor } from "./actor.ts";
+export { ActorSource, default as BaseActor } from "./actor.ts";
 export { AdventureSource, default as BaseAdventure } from "./adventure.ts";
 export { default as BaseAmbientLight } from "./ambient-light.ts";
 export {
@@ -26,12 +26,7 @@ export {
     FogExplorationSource,
 } from "./fog-exploration.ts";
 export { default as BaseFolder, FolderSource } from "./folder.ts";
-export {
-    default as BaseItem,
-    ItemFlags,
-    ItemSchema,
-    ItemSource,
-} from "./item.ts";
+export { default as BaseItem, ItemSchema, ItemSource } from "./item.ts";
 export { default as BaseJournalEntryPage } from "./journal-entry-page.ts";
 export {
     default as BaseJournalEntry,
