@@ -86,7 +86,7 @@
       },
       "BardicInspiration": {
         "name": "Inspiration bardique [Barde]",
-        "description": "Ajoutez un dé à un seul jet de caractéristique, d'attaque ou de sauvegarde dans les 10 prochaines minutes."
+        "description": "Ajoutez un dé à un seul jet de caractéristique, d'attaque ou de sauvegarde dans les 10 prochaines minutes"
       },
       "BardicInspirationD10": {
         "name": "Inspiration bardique (d10)",
@@ -125,11 +125,11 @@
         "description": "Ajoutez 1d4 à tous les jets de sauvegarde et d'attaque pendant 1 minute"
       },
       "Blinded": {
-        "name": "Aveugle",
+        "name": "Aveuglé",
         "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ inline]"
       },
       "BlindingSickness": {
-        "name": "Bouille-crâne",
+        "name": "Mal aveuglant",
         "description": "Désavantage sur les jets de sagesse et les jets de sauvegarde de sagesse pendant 7 jours"
       },
       "Blindness": {
@@ -141,7 +141,7 @@
         "description": "Choisissez entre la cécité ou la surdité"
       },
       "Blur": {
-        "name": "Flour",
+        "name": "Flou",
         "description": "Accorde un désavantage à tous ceux qui attaquent pendant 1 minute"
       },
       "BonusAction": {
@@ -149,7 +149,7 @@
         "description": "Aucun effet actif et expire au début du tour"
       },
       "BullsStrength": {
-        "name": "Force du taureau.",
+        "name": "Force du taureau",
         "description": "Avantage sur les contrôles de résistance et double capacité de charge maximale pendant 1 heure"
       },
       "BullseyeLantern": {
@@ -161,7 +161,7 @@
         "description": "Ajoute la lumière d'une bougie pendant 1 heure (nécessite ATL)"
       },
       "CatsGrace": {
-        "name": "Grâce félinet",
+        "name": "Grâce féline",
         "description": "Avantage sur les contrôles de dextérité pendant 1 heure"
       },
       "ChannelDivinitySacredWeapon": {
@@ -170,11 +170,11 @@
       },
       "ChannelDivinityTurnTheUnholy": {
         "name": "Conduit divin : Renvoi des impies [Paladin - Serment de dévotion]",
-        "description": "Aucun effet actif et dure 1 minute. "
+        "description": "Aucun effet actif et dure 1 minute"
       },
       "ChannelDivinityTurnUndead": {
         "name": "onduit divin : Renvoi des morts-vivants [Clerc]",
-        "description": "Aucun effet actif et dure 1 minute. "
+        "description": "Aucun effet actif et dure 1 minute"
       },
       "CharmPerson": {
         "name": "Charme-personne",
@@ -194,11 +194,11 @@
       },
       "Concentrating": {
         "name": "Concentré",
-        "description": "Certains sorts nécessitent que vous mainteniez votre concentration afin de garder leur magie active. "
+        "description": "Certains sorts nécessitent que vous mainteniez votre concentration afin de garder leur magie active"
       },
       "Contagion": {
         "name": "Contagion",
-        "description": "Choisissez entre Bouille-crâne, Convulsions, Fièvre répugnante, Mal aveuglant, Mort poisseuse ou Pourriture."
+        "description": "Choisissez entre Bouille-crâne, Convulsions, Fièvre répugnante, Mal aveuglant, Mort poisseuse ou Pourriture"
       },
       "CoverHalf": {
         "name": "Couverture (moitié)",
@@ -214,7 +214,7 @@
       },
       "Darkvision": {
         "name": "Vision dans le noir",
-        "description": "Améliorez la vision dans le noir à 60 pieds pendant 8 heures"
+        "description": "Améliorez la vision dans le noir à 18 mètres pendant 8 heures"
       },
       "Dead": {
         "name": "Mort",
@@ -234,7 +234,7 @@
       },
       "DivineFavor": {
         "name": "Faveur divine",
-        "description": "Ajoute 1d4 dégâts radiants aux attaques avec des armes pendant 1 minute."
+        "description": "Ajoute 1d4 dégâts radiants aux attaques avec des armes pendant 1 minute"
       },
       "DivineWord": {
         "name": "Parole divine",
@@ -246,7 +246,7 @@
       },
       "Dodge": {
         "name": "Esquiver",
-        "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour."
+        "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour"
       },
       "EaglesSplendor": {
         "name": "Splendeur de l'aigle",
@@ -254,15 +254,15 @@
       },
       "Encumbered": {
         "name": "Encombré",
-        "description": "Réduit le mouvement de 10 pieds."
+        "description": "Réduit le mouvement de 3 mètres"
       },
       "EnhanceAbility": {
         "name": "Amélioration de caractéristique",
-        "description": "Choisissez entre Force du taureau, Grâce féline, Endurance de l'ours, Ruse du renard, Sagesse du hibou ou Splendeur de l'aigle."
+        "description": "Choisissez entre Force du taureau, Grâce féline, Endurance de l'ours, Ruse du renard, Sagesse du hibou ou Splendeur de l'aigle"
       },
       "Enlarge": {
         "name": "Agrandissement",
-        "description": "Ajoutez 1d4 aux dégâts et à l'avantage aux jets de force et de sauvegarde de force pendant 1 minute."
+        "description": "Ajoutez 1d4 aux dégâts et à l'avantage aux jets de force et de sauvegarde de force pendant 1 minute"
       },
       "EnlargeReduce": {
         "name": "Agrandissement/Rapetissement",
@@ -302,14 +302,14 @@
       },
       "Feeblemind": {
         "name": "Esprit faible",
-        "description": "Réglez les scores d'intelligence et de charisme sur 1 jusqu'à leur suppression."
+        "description": "Réglez les scores d'intelligence et de charisme sur 1 jusqu'à leur suppression"
       },
       "FilthFever": {
         "name": "Fièvre répugnante",
-        "description": "Désavantage aux jets de caractéristiques, de sauvegarde et d'attaque basés sur la Force pendant 7 jours."
+        "description": "Désavantage aux jets de caractéristiques, de sauvegarde et d'attaque basés sur la Force pendant 7 jours"
       },
       "FindThePath": {
-        "name": "Orientation",
+        "name": "Sens de l'orientation",
         "description": "Aucun effet actif et dure 1 jour"
       },
       "FireShield": {
@@ -386,7 +386,7 @@
       },
       "HeavilyEncumbered": {
         "name": "Fortement encombré",
-        "description": "Réduit le mouvement de 20 pieds, le désavantage sur tous les jets d'attaque et le désavantage sur la force, la dextérité et les sauvegardes de constitution."
+        "description": "Réduit le mouvement de 6 mètres, le désavantage sur tous les jets d'attaque et le désavantage sur la force, la dextérité et les sauvegardes de constitution."
       },
       "HeroesFeast": {
         "name": "Festin des Héros",
@@ -410,11 +410,11 @@
       },
       "HolyAura": {
         "name": "Aura sacrée",
-        "description": "Avantage aux jets de sauvegarde, accorde un désavantage à tous ceux qui attaquent et émet une faible lumière dans un rayon de 1,5 mètre (nécessite ATL) pendant 1 minute."
+        "description": "Avantage aux jets de sauvegarde, accorde un désavantage à tous ceux qui attaquent et émet une faible lumière dans un rayon de 1,5 mètres (nécessite ATL) pendant 1 minute."
       },
       "HoodedLantern": {
-        "name": "Lanterne à capuchon",
-        "description": "Ajoute une lanterne à capuchon pendant 6 heures (nécessite ATL)"
+        "name": "Lanterne à capote",
+        "description": "Ajoute une lanterne à capote pendant 6 heures (nécessite ATL)"
       },
       "HuntersMark": {
         "name": "Marque du chasseur",
@@ -430,7 +430,7 @@
       },
       "Invisibility": {
         "name": "Invisibilité",
-        "description": "Accorde un avantage au prochain jet d'attaque tout en forçant un désavantage à tous ceux qui attaquent pendant 1 heure. "
+        "description": "Accorde un avantage au prochain jet d'attaque tout en forçant un désavantage à tous ceux qui attaquent pendant 1 heure"
       },
       "Invisible": {
         "name": "Invisible",
@@ -446,11 +446,11 @@
       },
       "KiEmptyBody": {
         "name": "Ki : Désertion de l'âme [Moine]",
-        "description": "Accorde un avantage aux jets d'attaque, désavantage à tous ceux qui attaquent et confère une résistance à tous les dégâts sauf à ceux de force pendant 1 minute."
+        "description": "Accorde un avantage aux jets d'attaque, désavantage à tous ceux qui attaquent et confère une résistance à tous les dégâts sauf à ceux de force pendant 1 minute"
       },
       "KiPatientDefense": {
         "name": "Ki : Patience défensive [Moine]",
-        "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour."
+        "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour"
       },
       "Lantern": {
         "name": "Lanterne",
@@ -538,7 +538,7 @@
       },
       "Rage": {
         "name": "Rage",
-        "description": "Avantage sur les jets de caractéristique et de sauvegarde de force, un bonus variable aux dégâts de mêlée basé sur le niveau du barbare et une résistance aux dégâts perforants, contondants et tranchants pendant 1 minute. ",
+        "description": "Avantage sur les jets de caractéristique et de sauvegarde de force, un bonus variable aux dégâts de mêlée basé sur le niveau du barbare et une résistance aux dégâts perforants, contondants et tranchants pendant 1 minute",
         "notABarbarian": "L'acteur sélectionné n'est pas un barbare",
         "bearTotemFeat": "Esprit totem : Ours [Barbare - Voie du guerrier totem]"
       },
@@ -548,7 +548,7 @@
       },
       "RayOfFrost": {
         "name": "Rayon de givre",
-        "description": "Réduit le mouvement de 10 pieds"
+        "description": "Réduit le mouvement de 3 mètres"
       },
       "Reaction": {
         "name": "Réaction",
@@ -568,7 +568,7 @@
       },
       "Reduce": {
         "name": "Rapetissement",
-        "description": "Soustrayez 1d4 aux dégâts et désavantages aux tests de force et aux jets de sauvegarde de force pendant 1 minute."
+        "description": "Soustrayez 1d4 aux dégâts et désavantages aux tests de force et aux jets de sauvegarde de force pendant 1 minute"
       },
       "Regenerate": {
         "name": "Régénération",
@@ -608,7 +608,7 @@
       },
       "Slow": {
         "name": "Lenteur",
-        "description": "Réduit de moitié le mouvement et soustrait 2 aux jets de sauvegarde de CA et de dextérité pendant 1 minute (réduit à une seule action)."
+        "description": "Réduit de moitié le mouvement et soustrait 2 aux jets de sauvegarde de CA et de dextérité pendant 1 minute (réduit à une seule action)"
       },
       "SpeakWithAnimals": {
         "name": "Communication avec les animaux",
@@ -668,7 +668,7 @@
       },
       "WardingBond": {
         "name": "Lien de protection",
-        "description": "Ajoute 1 à la CA et aux jets de sauvegarde et confère une résistance à tous les dégâts pendant 1 heure."
+        "description": "Ajoute 1 à la CA et aux jets de sauvegarde et confère une résistance à tous les dégâts pendant 1 heure"
       },
       "WaterBreathing": {
         "name": "Respiration aquatique",
