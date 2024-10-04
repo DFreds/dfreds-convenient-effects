@@ -377,7 +377,7 @@
         "description": "Ajoute 1d4 à un test de capacité ou de compétence pendant 1 minute"
       },
       "GuidingBolt": {
-        "name": "Rayon traçante",
+        "name": "Rayon traçant",
         "description": "Accorde un avantage au prochain attaquant ou jusqu'à la fin du prochain tour"
       },
       "Haste": {
