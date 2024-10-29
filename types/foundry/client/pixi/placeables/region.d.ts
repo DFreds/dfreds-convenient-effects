@@ -20,8 +20,8 @@ declare global {
                 propagate: ["refreshState", "refreshBorder"];
                 alias: boolean;
             };
-            refreshState: {};
-            refreshBorder: {};
+            refreshState: object;
+            refreshBorder: object;
         };
 
         /** The scaling factor used for Clipper paths. */

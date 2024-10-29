@@ -17,7 +17,7 @@ declare global {
 
         static override RENDER_FLAGS: {
             redraw: { propagate: ["refresh"] };
-            redrawEffects: {};
+            redrawEffects: object;
             refresh: {
                 propagate: [
                     "refreshState",
@@ -30,7 +30,7 @@ declare global {
                 alias: true;
             };
             refreshState: { propagate: ["refreshVisibility", "refreshTarget"] };
-            refreshVisibility: {};
+            refreshVisibility: object;
             refreshTransform: {
                 propagate: [
                     "refreshPosition",
@@ -39,8 +39,8 @@ declare global {
                 ];
                 alias: true;
             };
-            refreshPosition: {};
-            refreshRotation: {};
+            refreshPosition: object;
+            refreshRotation: object;
             refreshSize: {
                 propagate: [
                     "refreshPosition",
@@ -52,9 +52,9 @@ declare global {
                     "refreshTooltip",
                 ];
             };
-            refreshElevation: {};
+            refreshElevation: object;
             refreshMesh: { propagate: ["refreshShader"] };
-            refreshShader: {};
+            refreshShader: object;
             refreshShape: {
                 propagate: [
                     "refreshVisibility",
@@ -63,14 +63,14 @@ declare global {
                     "refreshEffects",
                 ];
             };
-            refreshBorder: {};
-            refreshBars: {};
-            refreshEffects: {};
-            refreshNameplate: {};
-            refreshTarget: {};
-            refreshTooltip: {};
-            refreshRingVisuals: {};
-            recoverFromPreview: {};
+            refreshBorder: object;
+            refreshBars: object;
+            refreshEffects: object;
+            refreshNameplate: object;
+            refreshTarget: object;
+            refreshTooltip: object;
+            refreshRingVisuals: object;
+            recoverFromPreview: object;
         };
 
         /** The shape of this token. */
@@ -207,11 +207,11 @@ declare global {
          */
         get isVisible(): boolean;
 
-        /** The animation name used for Token movement  */
+        /** The animation name used for Token movement */
         get animationName(): string;
 
         /* -------------------------------------------- */
-        /*  Lighting and Vision Attributes
+        /*  Lighting and Vision Attributes              */
         /* -------------------------------------------- */
 
         /** Test whether the Token has sight (or blindness) at any radius */

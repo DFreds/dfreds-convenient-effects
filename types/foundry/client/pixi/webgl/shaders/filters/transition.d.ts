@@ -49,7 +49,7 @@ declare global {
             texture: PIXI.Texture,
             options?: {
                 type?: TextureTransitionType;
-                name?: string | Symbol;
+                name?: string | symbol;
                 duration?: number;
                 easing?: Function | string;
             },

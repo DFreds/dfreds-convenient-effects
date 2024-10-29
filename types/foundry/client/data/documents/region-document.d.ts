@@ -129,7 +129,7 @@ declare global {
         TUser extends User = User,
     > extends BaseRegionEvent<TDocument, TUser> {
         name: "regionBoundary";
-        data: {};
+        data: object;
     }
 
     type RegionEvent<

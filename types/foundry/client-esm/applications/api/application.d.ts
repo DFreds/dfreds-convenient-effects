@@ -1,9 +1,18 @@
+import type {
+    ApplicationClosingOptions,
+    ApplicationConfiguration,
+    ApplicationFormConfiguration,
+    ApplicationHeaderControlsEntry,
+    ApplicationRenderContext,
+    ApplicationRenderOptions,
+} from "../_types.d.ts";
+
 /** The Application class is responsible for rendering an HTMLElement into the Foundry Virtual Tabletop user interface. */
-export default class ApplicationV2<
+export default abstract class ApplicationV2<
     TConfig extends ApplicationConfiguration = ApplicationConfiguration,
     TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions,
 > {
-    constructor(options: Partial<TConfig>);
+    constructor(options: DeepPartial<TConfig>);
 
     /**
      * Designates which upstream Application class in this class' inheritance chain is the base application.
@@ -35,8 +44,8 @@ export default class ApplicationV2<
         close: HTMLButtonElement;
         controls: HTMLButtonElement;
         controlsDropdown: HTMLDivElement;
-        onDrag: Function;
-        onResize: Function;
+        onDrag: (event: DragEvent) => void;
+        onResize: (event: DragEvent) => void;
         pointerStartPosition: ApplicationPosition;
         pointerMoveThrottle: boolean;
     };
@@ -146,8 +155,8 @@ export default class ApplicationV2<
      * @returns            The result of HTML rendering may be implementation specific.
      *                     Whatever value is returned here is passed to _replaceHTML
      */
-    protected _renderHTML(
-        context: Record<string, unknown>,
+    protected abstract _renderHTML(
+        context: ApplicationRenderContext,
         options: TRenderOptions,
     ): Promise<unknown>;
 
@@ -158,7 +167,7 @@ export default class ApplicationV2<
      * @param content                 The content element into which the rendered result must be inserted
      * @param options                 Options which configure application rendering behavior
      */
-    protected _replaceHTML(
+    protected abstract _replaceHTML(
         result: unknown,
         content: HTMLElement,
         options: TRenderOptions,

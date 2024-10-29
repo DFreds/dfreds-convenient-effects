@@ -8,7 +8,10 @@ declare class CombatTrackerConfig<
         options?: Partial<FormApplicationOptions>,
     ): Promise<FormApplicationData<TObject>>;
 
-    protected override _updateObject(event: Event, formData: {}): Promise<void>;
+    protected override _updateObject(
+        event: Event,
+        formData: Record<string, unknown>,
+    ): Promise<void>;
 
     override activateListeners(html: JQuery): void;
 
