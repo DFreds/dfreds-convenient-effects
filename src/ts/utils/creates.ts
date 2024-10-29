@@ -63,7 +63,9 @@ function createConvenientEffect({
     }
 
     effect.description = effect.description
-        ? `<p>${effect.description}</p>`
+        ? effect.description.includes("<p>")
+            ? effect.description
+            : `<p>${effect.description}</p>`
         : `<p></p>`;
 
     return effect;
