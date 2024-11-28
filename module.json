@@ -1,5 +1,5 @@
 {
-  "id": "dfreds-convenient-effects",
+  "id": "dfreds-convenient-effects-for-fvtt-11",
   "title": "DFreds Convenient Effects",
   "description": "Adds easy to use toggleable active effects for common use cases",
   "author": "DFreds",
@@ -50,8 +50,8 @@
   },
   "packs": [],
   "socket": true,
-  "manifest": "https://github.com/darksuji/dfreds-convenient-effects-for-fvtt-11/releases/download/v6.0.3-base/module.json",
-  "download": "https://github.com/darksuji/dfreds-convenient-effects-for-fvtt-11/archive/refs/tags/v6.0.3-base.zip",
+  "manifest": "https://github.com/darksuji/dfreds-convenient-effects-for-fvtt-11/releases/download/v6.0.3-p2/module.json",
+  "download": "https://github.com/darksuji/dfreds-convenient-effects-for-fvtt-11/archive/refs/tags/v6.0.3-p2.zip",
   "protected": false,
   "coreTranslation": false
 }
