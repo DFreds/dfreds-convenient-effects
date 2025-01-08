@@ -2,13 +2,19 @@ export {};
 
 declare global {
     interface QuadtreeObject<
-        TPlaceableObject extends PlaceableObject = PlaceableObject,
-        TQuadtree extends
-            Quadtree<TPlaceableObject> = Quadtree<TPlaceableObject>,
+        TObject extends object = object,
+        TQuadtree extends Quadtree<TObject> = Quadtree<TObject>,
     > {
         r: Rectangle;
-        t: TPlaceableObject;
+        t: TObject;
         n: Set<TQuadtree>;
+    }
+
+    interface QuadtreeOptions<TObject extends object> {
+        maxObjects?: number;
+        maxDepth?: number;
+        _depth?: number;
+        _root?: Quadtree<TObject>;
     }
 
     /**
@@ -21,7 +27,7 @@ declare global {
      * @param [options._depth=0]       The depth level of the sub-tree. For internal use
      * @param [options._root]          The root of the quadtree. For internal use
      */
-    class Quadtree<TPlaceableObject extends PlaceableObject> {
+    class Quadtree<TObject extends object> {
         /** The bounding rectangle of the region */
         bounds: Rectangle;
 
@@ -35,7 +41,7 @@ declare global {
         depth: number;
 
         /** The objects contained at this level of the tree */
-        objects: QuadtreeObject<TPlaceableObject, this>[];
+        objects: QuadtreeObject<TObject, this>[];
 
         /** Children of this node */
         nodes: this[];
@@ -43,15 +49,7 @@ declare global {
         /** The root Quadtree */
         root: this;
 
-        constructor(
-            bounds: Rectangle,
-            options?: {
-                maxObjects?: number;
-                maxDepth?: number;
-                _depth?: number;
-                _root?: Quadtree<TPlaceableObject>;
-            },
-        );
+        constructor(bounds: Rectangle, options?: QuadtreeOptions<TObject>);
 
         /**
          * A constant that enumerates the index order of the quadtree nodes from top-left to bottom-right.
@@ -62,7 +60,7 @@ declare global {
         /**
          * Return an array of all the objects in the Quadtree (recursive)
          */
-        get all(): QuadtreeObject<TPlaceableObject, this>[];
+        get all(): QuadtreeObject<TObject, this>[];
 
         /* -------------------------------------------- */
         /*  Tree Management                             */
@@ -89,21 +87,21 @@ declare global {
          * @param  obj  The object being inserted
          * @returns     The Quadtree nodes the object was added to.
          */
-        insert(obj: QuadtreeObject<TPlaceableObject, this>): this[];
+        insert(obj: QuadtreeObject<TObject, this>): this[];
 
         /**
          * Remove an object from the quadtree
          * @param target     The quadtree target being removed
          * @returns          The Quadtree for method chaining
          */
-        remove(target: TPlaceableObject): this;
+        remove(target: TObject): this;
 
         /**
          * Remove an existing object from the quadtree and re-insert it with a new position
          * @param obj  The object being inserted
          * @returns    The Quadtree nodes the object was added to
          */
-        update(obj: QuadtreeObject<TPlaceableObject, this>): this[];
+        update(obj: QuadtreeObject<TObject, this>): this[];
 
         /* -------------------------------------------- */
         /*  Target Identification                       */
@@ -126,9 +124,9 @@ declare global {
                     obj: QuadtreeObject,
                     rect: Rectangle,
                 ) => boolean;
-                _s: Set<TPlaceableObject>;
+                _s: Set<TObject>;
             },
-        ): Set<TPlaceableObject>;
+        ): Set<TObject>;
 
         /**
          * Obtain the leaf nodes to which a target rectangle belongs.
@@ -160,7 +158,7 @@ declare global {
     /**
      * A subclass of Quadtree specifically intended for classifying the location of objects on the game canvas.
      */
-    class CanvasQuadtree<
-        TPlaceableObject extends PlaceableObject,
-    > extends Quadtree<TPlaceableObject> {}
+    class CanvasQuadtree<TObject extends object> extends Quadtree<TObject> {
+        constructor(options?: QuadtreeOptions<TObject>);
+    }
 }

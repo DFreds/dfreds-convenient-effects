@@ -1015,7 +1015,7 @@ export class EmbeddedDataField<
     THasInitial extends boolean = true,
 > extends SchemaField<
     TModelProp["schema"]["fields"],
-    SourceFromSchema<TModelProp["schema"]["fields"]>,
+    TModelProp["_source"],
     TModelProp,
     TRequired,
     TNullable,

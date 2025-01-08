@@ -1,4 +1,4 @@
-import { PrimaryOccludableObjectMixin } from "./primary-occludable-object.ts";
+import type { PrimaryOccludableObjectMixin } from "./primary-occludable-object.d.ts";
 
 /**
  * A basic PCO sprite mesh which is handling occlusion and depth.
@@ -8,7 +8,6 @@ import { PrimaryOccludableObjectMixin } from "./primary-occludable-object.ts";
  * @param [options.name]        The name of this sprite.
  * @param [options.object]      Any object that owns this sprite.
  */
-/* eslint-disable @typescript-eslint/no-unused-expressions, no-unused-expressions */
 export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
     SpriteMesh,
 ) {
@@ -19,11 +18,7 @@ export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
             object?: object;
         },
         shaderClass: typeof PrimaryBaseSamplerShader,
-    ) {
-        options;
-        shaderClass;
-        super(options.texture, shaderClass);
-    }
+    );
 
     declare object: object | null;
 
@@ -43,19 +38,13 @@ export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
     /*  PIXI Events                                 */
     /* -------------------------------------------- */
 
-    protected override _onTextureUpdate(): void {}
+    protected override _onTextureUpdate(): void;
 
     /* -------------------------------------------- */
     /*  Helper Methods                              */
     /* -------------------------------------------- */
 
-    override setShaderClass(
-        shaderClass: typeof PrimaryBaseSamplerShader,
-    ): void {
-        shaderClass;
-    }
-
-    /* -------------------------------------------- */
+    override setShaderClass(shaderClass: typeof PrimaryBaseSamplerShader): void;
 
     /**
      * An all-in-one helper method: Resizing the PCO according to desired dimensions and options.
@@ -93,19 +82,15 @@ export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
             scaleX?: number;
             scaleY?: number;
         },
-    ): void {
-        baseWidth;
-        baseHeight;
-        options;
-    }
+    ): void;
 
     /* -------------------------------------------- */
     /*  Methods                                     */
     /* -------------------------------------------- */
 
-    protected override _updateBatchData(): void {}
+    protected override _updateBatchData(): void;
 
-    protected override _calculateCanvasBounds(): void {}
+    protected override _calculateCanvasBounds(): void;
 
     /**
      * Is the given point in canvas space contained in this object?
@@ -115,11 +100,7 @@ export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
     override containsCanvasPoint(
         point: PIXI.IPointData,
         textureAlphaThreshold?: number,
-    ): boolean {
-        point;
-        textureAlphaThreshold;
-        return true;
-    }
+    ): boolean;
 
     /**
      * Is the given point in world space contained in this object?
@@ -129,19 +110,13 @@ export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
     override containsPoint(
         point: PIXI.IPointData,
         textureAlphaThreshold?: number,
-    ): boolean {
-        point;
-        textureAlphaThreshold;
-        return true;
-    }
+    ): boolean;
 
     /* -------------------------------------------- */
     /*  Rendering Methods                           */
     /* -------------------------------------------- */
 
-    override renderDepthData(renderer: PIXI.Renderer): void {
-        renderer;
-    }
+    override renderDepthData(renderer: PIXI.Renderer): void;
 
     /* -------------------------------------------- */
 
@@ -151,7 +126,5 @@ export class PrimarySpriteMesh extends PrimaryOccludableObjectMixin(
      * @param renderer The renderer
      * @internal
      */
-    _renderVoid(renderer: PIXI.Renderer): void {
-        renderer;
-    }
+    _renderVoid(renderer: PIXI.Renderer): void;
 }

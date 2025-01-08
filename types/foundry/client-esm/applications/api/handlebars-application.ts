@@ -155,7 +155,7 @@ export interface HandlebarsTemplatePart {
      * be persisted during a re-render operation. A blank string is used
      * to denote that the root level of the part is scrollable.
      */
-    scrollable?: boolean[];
+    scrollable?: string[];
 
     /** A registry of forms selectors and submission handlers. */
     forms?: Record<string, ApplicationFormConfiguration>;
