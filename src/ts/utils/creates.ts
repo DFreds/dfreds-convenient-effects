@@ -72,7 +72,7 @@ function createConvenientEffect({
 }
 
 function createCeEffectId(effectName?: string): string {
-    return `ce-${effectName?.slugify({ strict: true })}`;
+    return `ce-${effectName?.slugify()}`;
 }
 
 export { createCeEffectId, createConvenientItem, createConvenientEffect };
