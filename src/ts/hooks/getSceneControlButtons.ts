@@ -6,6 +6,7 @@ import { Listener } from "./index.ts";
  */
 const GetSceneControlButtons: Listener = {
     listen(): void {
+        // TODO replace with lib-dfreds-ui-extender
         Hooks.on("getSceneControlButtons", (controls: SceneControl[]) => {
             new Controls().initialize(controls);
         });

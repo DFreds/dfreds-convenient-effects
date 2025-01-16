@@ -1,4 +1,4 @@
-import { id as MODULE_ID } from "@static/module.json";
+import { MODULE_ID } from "./constants.ts";
 
 class Settings {
     #USER_ROLES: Record<number, string> = {};

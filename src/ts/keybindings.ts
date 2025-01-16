@@ -1,5 +1,5 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ConvenientEffectsApp } from "./app/convenient-effects-app.ts";
+import { MODULE_ID } from "./constants.ts";
 
 class Keybindings {
     #TOGGLE_CONVENIENT_EFFECTS_APP = "toggleConvenientEffectsApp";

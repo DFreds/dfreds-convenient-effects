@@ -26,7 +26,7 @@ class ConvenientEffectConfig extends DocumentSheet<
     ): void {
         if (app.document.isOwner || game.user.isGM) {
             const openButton = $(
-                `<a class="open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize("ConvenientEffects.ConfigLabel")}</a>`,
+                `<a class="header-button control open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize("ConvenientEffects.ConfigLabel")}</a>`,
             );
             openButton.click(async (_event) => {
                 let convenientConfig = null;

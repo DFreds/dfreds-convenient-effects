@@ -1,6 +1,6 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { ItemSource } from "types/foundry/common/documents/item.js";
+import { MODULE_ID } from "../constants.ts";
 
 class Flags {
     static #KEYS = {

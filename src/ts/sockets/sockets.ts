@@ -1,10 +1,10 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { findActorByUuid } from "../utils/finds.ts";
 import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
 import Document from "types/foundry/common/abstract/document.js";
+import { MODULE_ID } from "../constants.ts";
 
 interface AddEffectMessageData {
     /**

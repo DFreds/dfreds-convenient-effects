@@ -1,4 +1,3 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { libWrapper } from "@static/lib/shim.ts";
 import { Listener } from "./index.ts";
 import { Flags } from "../utils/flags.ts";
@@ -8,6 +7,7 @@ import {
     createConvenientEffect,
     createConvenientItem,
 } from "../utils/creates.ts";
+import { MODULE_ID } from "../constants.ts";
 
 const Setup: Listener = {
     listen(): void {

@@ -1,8 +1,7 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { Listener } from "./index.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
-import { DEBUG } from "../constants.ts";
+import { DEBUG, MODULE_ID } from "../constants.ts";
 
 const CreateEffects: Listener = {
     listen(): void {

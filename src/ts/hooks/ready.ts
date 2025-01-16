@@ -1,6 +1,6 @@
-import { id as MODULE_ID } from "@static/module.json";
 import { Listener } from "./index.ts";
 import { EffectInterface } from "../effect-interface.ts";
+import { MODULE_ID } from "../constants.ts";
 
 /**
  * Handle creating the Item that will hold the effects
