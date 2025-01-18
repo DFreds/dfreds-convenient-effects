@@ -41,7 +41,8 @@
         "typeRoots": [
             "node_modules/@types",
             "types/foundry",
-            "types/libWrapper"
+            "types/libWrapper",
+            "types/uiExtender"
         ]
     },
     "watchOptions": {
