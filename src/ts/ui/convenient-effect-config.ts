@@ -8,22 +8,30 @@ interface MultiSelectData {
 }
 
 interface ConvenientEffectConfigData
-    extends DocumentSheetData<ActiveEffect<any>> {
+    extends FormApplicationData<ActiveEffect<any>> {
     effect: ActiveEffect<any>;
     nestedEffectsData: MultiSelectData[];
     subEffectsData: MultiSelectData[];
     otherEffectsData: MultiSelectData[];
 }
 
-class ConvenientEffectConfig extends DocumentSheet<
+class ConvenientEffectConfig extends FormApplication<
     ActiveEffect<any>,
-    DocumentSheetOptions
+    FormApplicationOptions
 > {
+    constructor(
+        object?: ActiveEffect<any>,
+        options?: Partial<FormApplicationOptions>,
+    ) {
+        super(object, options);
+    }
+
     static init(
         app: ActiveEffectConfig<any>,
         html: JQuery,
         _data: unknown,
     ): void {
+        // todo add to ui extender?
         if (app.document.isOwner || game.user.isGM) {
             const openButton = $(
                 `<a class="header-button control open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize("ConvenientEffects.ConfigLabel")}</a>`,
@@ -53,30 +61,26 @@ class ConvenientEffectConfig extends DocumentSheet<
         }
     }
 
-    static override get defaultOptions(): DocumentSheetOptions {
+    static override get defaultOptions(): FormApplicationOptions {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            id: "convenient-effect-config",
+            title: "ConvenientEffects.ConfigTitle",
+            popOut: true,
             template:
                 "modules/dfreds-convenient-effects/templates/convenient-effect-config.hbs",
-            classes: ["sheet", "active-effect-sheet"],
-            tabs: [
-                {
-                    navSelector: ".tabs",
-                    contentSelector: "form",
-                    initial: "details",
-                },
-            ],
+            classes: ["sheet"],
             width: 580,
             height: "auto",
         });
     }
 
     override async getData(
-        options?: Partial<DocumentSheetOptions>,
+        options?: Partial<FormApplicationOptions>,
     ): Promise<ConvenientEffectConfigData> {
         const context = await super.getData(options);
         const allEffects = findAllEffects({ backup: false });
 
-        const currentNestedEffectIds = Flags.getNestedEffectIds(this.document);
+        const currentNestedEffectIds = Flags.getNestedEffectIds(this.object);
         const nestedEffectsData = allEffects.map((effect) => {
             const availableId = Flags.getCeEffectId(effect);
             return {
@@ -92,7 +96,7 @@ class ConvenientEffectConfig extends DocumentSheet<
             };
         });
 
-        const currentSubEffectIds = Flags.getSubEffectIds(this.document) ?? [];
+        const currentSubEffectIds = Flags.getSubEffectIds(this.object) ?? [];
         const subEffectsData = allEffects.map((effect) => {
             const availableId = Flags.getCeEffectId(effect);
             return {
@@ -107,7 +111,7 @@ class ConvenientEffectConfig extends DocumentSheet<
         });
 
         const currentOtherEffectIds =
-            Flags.getOtherEffectIds(this.document) ?? [];
+            Flags.getOtherEffectIds(this.object) ?? [];
         const otherEffectsData = allEffects.map((effect) => {
             const availableId = Flags.getCeEffectId(effect);
             return {
@@ -122,7 +126,7 @@ class ConvenientEffectConfig extends DocumentSheet<
         });
 
         return foundry.utils.mergeObject(context, {
-            effect: this.document,
+            effect: this.object,
             nestedEffectsData,
             subEffectsData,
             otherEffectsData,
@@ -157,6 +161,13 @@ class ConvenientEffectConfig extends DocumentSheet<
         }
 
         return data;
+    }
+
+    protected override _updateObject(
+        _event: Event,
+        formData: Record<string, unknown>,
+    ): Promise<unknown> {
+        return this.object.update(formData);
     }
 }
 

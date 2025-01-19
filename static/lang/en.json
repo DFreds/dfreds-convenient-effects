@@ -35,6 +35,7 @@
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
 
+        "ConfigTitle": "Convenient Config",
         "ConfigLabel": "Convenient",
         "ConfigFoundryEffectIdLabel": "Foundry Effect ID",
         "ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
