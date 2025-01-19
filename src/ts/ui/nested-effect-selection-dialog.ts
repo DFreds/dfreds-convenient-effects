@@ -16,7 +16,11 @@ async function getNestedEffectSelection(
 
     const content = await renderTemplate(
         "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
-        { parentEffect: effectData, nestedEffects },
+        {
+            parentEffect: effectData,
+            nestedEffects,
+            default: nestedEffects[0].name,
+        },
     );
 
     const choice = (await Dialog.wait(
