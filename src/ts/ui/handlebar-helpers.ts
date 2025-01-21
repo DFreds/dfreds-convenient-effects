@@ -13,7 +13,6 @@ class HandlebarHelpers {
     }
 
     register(): void {
-        this.#registerInc();
         this.#registerCanCreateFolders();
         this.#registerCanCreateEffects();
         this.#registerGetCeEffectId();
@@ -25,11 +24,6 @@ class HandlebarHelpers {
         this.#registerConvenientEffectIcons();
     }
 
-    #registerInc() {
-        Handlebars.registerHelper("inc", (value) => {
-            return parseInt(value) + 1;
-        });
-    }
     #registerCanCreateFolders() {
         Handlebars.registerHelper("canCreateFolders", () => {
             const canCreateItems = game.user.hasPermission("ITEM_CREATE");
