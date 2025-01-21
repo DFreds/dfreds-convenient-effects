@@ -14,7 +14,6 @@ class HandlebarHelpers {
 
     register(): void {
         this.#registerInc();
-        this.#registerIsGm();
         this.#registerCanCreateFolders();
         this.#registerCanCreateEffects();
         this.#registerGetCeEffectId();
@@ -22,7 +21,6 @@ class HandlebarHelpers {
         this.#registerIsViewable();
         this.#registerIsDynamic();
         this.#registerGetFolderColor();
-        this.#registerStripHtml();
         this.#registerConvenientFolderIcons();
         this.#registerConvenientEffectIcons();
     }
@@ -32,13 +30,6 @@ class HandlebarHelpers {
             return parseInt(value) + 1;
         });
     }
-
-    #registerIsGm() {
-        Handlebars.registerHelper("isGm", () => {
-            return game.user.isGM;
-        });
-    }
-
     #registerCanCreateFolders() {
         Handlebars.registerHelper("canCreateFolders", () => {
             const canCreateItems = game.user.hasPermission("ITEM_CREATE");
@@ -88,13 +79,6 @@ class HandlebarHelpers {
     #registerGetFolderColor() {
         Handlebars.registerHelper("getFolderColor", (folder: Item<any>) => {
             return Flags.getFolderColor(folder);
-        });
-    }
-
-    #registerStripHtml() {
-        Handlebars.registerHelper("stripHtml", (str: string) => {
-            const regExp = /<[/\w]+>/g;
-            return new Handlebars.SafeString(str.replace(regExp, ""));
         });
     }
 
