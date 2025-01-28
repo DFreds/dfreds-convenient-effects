@@ -170,6 +170,12 @@ async function findEffectByUuid(
     return document as ActiveEffect<any>;
 }
 
+function findEffectByCeId(ceId: string): ActiveEffect<any> | undefined {
+    return findAllEffects({ backup: false }).find((effect) => {
+        return Flags.getCeEffectId(effect) === ceId;
+    });
+}
+
 export {
     findModuleById,
     findActorByUuid,
@@ -182,4 +188,5 @@ export {
     findAllSubEffectIds,
     findAllOtherEffectIds,
     findEffectByUuid,
+    findEffectByCeId,
 };

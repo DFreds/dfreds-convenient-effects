@@ -10,6 +10,7 @@ import {
     findFolder,
     findFolders,
     findAllNestedEffectIds,
+    findEffectByCeId,
 } from "../utils/finds.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
@@ -526,7 +527,9 @@ class ConvenientEffectsController {
         if (!effectString || !folderId) return;
 
         const effectData = JSON.parse(effectString);
-        const effect = await findEffectByUuid(effectData.uuid);
+        const effect =
+            (await findEffectByUuid(effectData.uuid)) ??
+            findEffectByCeId(effectData.effectId);
 
         if (!effect) return;
 
