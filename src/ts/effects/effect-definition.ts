@@ -1,6 +1,6 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
-import { log } from "../logger.ts";
+import { error, log } from "../logger.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
 import { DEBUG } from "../constants.ts";
@@ -86,7 +86,7 @@ abstract class EffectDefinition {
                 await this.settings.addRanMigration(migration.key);
             }
         } catch (e: any) {
-            log(`Something went wrong while running migrations: ${e}`);
+            error(`Something went wrong while running migrations: ${e}`);
         }
     }
 }
