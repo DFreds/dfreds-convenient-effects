@@ -13,8 +13,8 @@ import { Ready } from "./ready.ts";
 import { RenderActiveEffectConfig } from "./renderActiveEffectConfig.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
-import { SocketlibReady } from "./socketlibReady.ts";
-import { UiExtenderInit } from "./uiExtenderInit.ts";
+import { SocketlibReady } from "./socketlib.ready.ts";
+import { UiExtenderInit } from "./uiExtender.init.ts";
 import { UpdateActiveEffect } from "./updateActiveEffect.ts";
 import { UpdateItem } from "./updateItem.ts";
 
