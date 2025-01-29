@@ -73,6 +73,7 @@ a shim will be used instead. You'll be pestered to install it though so... [just
 do it](https://www.youtube.com/watch?v=ZXsQAXx_ao0)
 - [socketlib](https://foundryvtt.com/packages/socketlib) by Stäbchenfisch - A
 library that makes it easy to do difficult things with sockets
+- [Lib: DFreds UI Extender](https://foundryvtt.com/packages/lib-dfreds-ui-extender) by DFreds (that's me) - A library that makes it easy to add new UI elements to Foundry
 
 ## Modules That Help
 
