@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "tsc && vite build",
+        "stage": "tsc && npm run clean && vite build --mode stage",
         "dev": "tsc && npm run clean && vite build --mode development",
         "clean": "tsx ./build/clean.ts",
         "hot": "vite serve",
