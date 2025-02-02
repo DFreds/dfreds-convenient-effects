@@ -62,6 +62,11 @@ declare global {
         tooltip: string;
 
         /**
+         * If the button will toggle active/inactive states
+         */
+        toggle?: boolean;
+
+        /**
          * The name of action when clicking the button
          */
         action?: string;
@@ -88,17 +93,27 @@ declare global {
          * The click handler
          *
          * @param event The click event
+         * @param button The div containing the button
          * @param data The data for the item with the HUD
          */
-        onClick?: (event: JQuery.ClickEvent, data: any) => void;
+        onClick?: (
+            event: JQuery.ClickEvent,
+            button: JQuery<HTMLDivElement>,
+            data: any,
+        ) => void;
 
         /**
          * The right-click handler
          *
          * @param event The context menu event
+         * @param button The div containing the button
          * @param data The data for the item with the HUD
          */
-        onRightClick?: (event: JQuery.ContextMenuEvent, data: any) => void;
+        onRightClick?: (
+            event: JQuery.ContextMenuEvent,
+            button: JQuery<HTMLDivElement>,
+            data: any,
+        ) => void;
     }
 
     declare interface SceneControlTool {
