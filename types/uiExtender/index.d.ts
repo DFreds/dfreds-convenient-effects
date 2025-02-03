@@ -62,11 +62,6 @@ declare global {
         tooltip: string;
 
         /**
-         * If the button will toggle active/inactive states
-         */
-        toggle?: boolean;
-
-        /**
          * The name of action when clicking the button
          */
         action?: string;
@@ -113,6 +108,19 @@ declare global {
             event: JQuery.ContextMenuEvent,
             button: JQuery<HTMLDivElement>,
             data: any,
+        ) => void;
+
+        /**
+         * The render complete handler
+         *
+         * @param hud The base placeable HUD instance
+         * @param html The html for the HUD
+         * @param data The data for the HUD
+         */
+        onRenderComplete?: (
+            hud: BasePlaceableHUD<any>,
+            html: JQuery,
+            data: object,
         ) => void;
     }
 
