@@ -8,7 +8,7 @@ function renderAppIfOpen(): void {
     const ceApp = openApps.find((app) => app instanceof ConvenientEffectsApp);
 
     if (ceApp) {
-        ceApp.render();
+        (ceApp as ConvenientEffectsApp).refresh();
     }
 }
 

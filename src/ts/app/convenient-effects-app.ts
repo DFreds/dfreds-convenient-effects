@@ -4,12 +4,16 @@ class ConvenientEffectsApp extends Application {
     #controller: ConvenientEffectsController;
     #rootView: JQuery<HTMLElement>;
 
+    refresh: AnyFunction;
+
     constructor() {
         super();
         this.#controller = new ConvenientEffectsController({
             viewMvc: this,
         });
         this.#rootView = $("<div>"); // Init it to something for now
+
+        this.refresh = foundry.utils.debounce(this.render.bind(this), 100);
     }
 
     static override get defaultOptions(): ApplicationOptions {
