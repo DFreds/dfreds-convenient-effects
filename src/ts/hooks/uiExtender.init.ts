@@ -17,14 +17,14 @@ const UiExtenderInit: Listener = {
                 },
                 tool: {
                     name: "convenient-effects",
-                    title: "DFreds Convenient Effects",
+                    title: "ConvenientEffects.AppName",
                     icon: "fas fa-hand-sparkles",
                     toolclip: {
                         src: "modules/dfreds-convenient-effects/images/toolclip-ce.webm",
-                        heading: "DFreds Convenient Effects",
+                        heading: "ConvenientEffects.AppName",
                         items: [
                             {
-                                heading: "Convenient Effects",
+                                heading: "ConvenientEffects.AppName",
                                 reference: "CONTROLS.Click",
                             },
                         ],
