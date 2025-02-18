@@ -36,6 +36,16 @@
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
 
+        "FolderHidden": "Folder Hidden",
+        "Passive": "Passive",
+        "EffectHidden": "Effect Hidden",
+        "HasNestedEffects": "Has Nested Effects",
+        "IsNestedEffect": "Is Nested Effect",
+        "StatusEffect": "Status Effect",
+        "MidiQolEffects": "Midi-QoL Effects",
+        "AtlEffects": "ATL Effects",
+        "TokenMagicEffects": "Token Magic Effects",
+
         "ConfigTitle": "Convenient Config",
         "ConfigLabel": "Convenient",
         "ConfigFoundryEffectIdLabel": "Foundry Effect ID",
