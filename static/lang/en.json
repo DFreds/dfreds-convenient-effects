@@ -32,6 +32,7 @@
         "ShowEffect": "Show Effect",
         "HideEffect": "Hide Effect",
         "ToggleAsOverlay": "Toggle as Overlay",
+        "ToggleStatusEffect": "Toggle Status Effect",
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
 

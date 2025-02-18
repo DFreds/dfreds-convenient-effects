@@ -342,6 +342,16 @@ class ConvenientEffectsApp extends Application {
                 ),
             },
             {
+                name: "ConvenientEffects.ToggleStatusEffect",
+                icon: '<i class="far fa-person-rays fa-fw"></i>',
+                condition: this.#controller.canToggleStatusEffect.bind(
+                    this.#controller,
+                ),
+                callback: this.#controller.onToggleStatusEffect.bind(
+                    this.#controller,
+                ),
+            },
+            {
                 name: "SIDEBAR.Duplicate",
                 icon: '<i class="far fa-copy fa-fw"></i>',
                 condition: this.#controller.isUserFolderOwner.bind(

@@ -14,6 +14,7 @@ export const MODULE_IDS = {
     ATE: "ATL",
     MIDI: "midi-qol",
     TOKEN_MAGIC: "tokenmagic",
+    STATUS_EFFECTS: "dfreds-status-effects",
 };
 
 export const SECONDS = {

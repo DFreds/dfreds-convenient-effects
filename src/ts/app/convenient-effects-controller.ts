@@ -11,12 +11,15 @@ import {
     findFolders,
     findAllNestedEffectIds,
     findEffectByCeId,
+    findModuleById,
 } from "../utils/finds.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { log } from "../logger.ts";
 import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
 import { Flags } from "../utils/flags.ts";
 import { BackupConvenientEffectsApp } from "./backup/backup-convenient-effects-app.ts";
+import { MODULE_IDS } from "../constants.ts";
+import { StatusEffectsModule } from "../integrations/status-effect-types.ts";
 
 interface ViewData {
     folderData: FolderData[];
@@ -252,6 +255,42 @@ class ConvenientEffectsController {
             overlay: true,
             prioritizeTargets: this.#settings.prioritizeTargets,
         });
+    }
+
+    canToggleStatusEffect(_target: JQuery<HTMLElement>): boolean {
+        return !!findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active;
+    }
+
+    async onToggleStatusEffect(target: JQuery<HTMLElement>): Promise<void> {
+        const ceEffectId = this.#findClosestCeEffectIdByElement(target);
+        if (!ceEffectId) return;
+
+        const ceEffect = findEffectByCeId(ceEffectId);
+        if (!ceEffect) return;
+
+        const statusEffectsModule = findModuleById(
+            MODULE_IDS.STATUS_EFFECTS,
+        ) as StatusEffectsModule | undefined;
+        if (!statusEffectsModule?.active) return;
+
+        const statusEffectsApi = statusEffectsModule.api;
+        const statusEffect = statusEffectsApi.findStatusEffect({
+            effectId: ceEffectId,
+            effectName: ceEffect.name,
+        });
+
+        if (statusEffect) {
+            await statusEffectsApi.deleteStatusEffect({
+                effectId: ceEffectId,
+                effectName: ceEffect.name,
+            });
+        } else {
+            await statusEffectsApi.createNewStatusEffects({
+                effectsData: [ceEffect.toObject()],
+            });
+        }
+
+        this.#viewMvc.render();
     }
 
     onViewBackups(_event: Event): void {

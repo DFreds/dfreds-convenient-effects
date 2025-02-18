@@ -4,6 +4,7 @@ import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
+import { StatusEffectsModule } from "../integrations/status-effect-types.ts";
 
 class HandlebarHelpers {
     #settings: Settings;
@@ -120,6 +121,10 @@ class HandlebarHelpers {
                     findAllNestedEffectIds({ backup: false }),
                 );
 
+                if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
+                    icons += this.#getStatusEffectsIcon(effect);
+                }
+
                 if (findModuleById(MODULE_IDS.MIDI)?.active) {
                     icons += this.#getMidiIcon(allChanges);
                 }
@@ -176,6 +181,22 @@ class HandlebarHelpers {
     ): string {
         return ceEffectId && nestedEffectIds?.includes(ceEffectId)
             ? "<i class='fas fa-tree integration-icon' title='Is Nested Effect'></i> "
+            : "";
+    }
+
+    #getStatusEffectsIcon(effect: ActiveEffect<Item<null>>): string {
+        const statusEffectsModule = findModuleById(
+            MODULE_IDS.STATUS_EFFECTS,
+        ) as StatusEffectsModule | undefined;
+
+        const statusEffectsApi = statusEffectsModule?.api;
+        const statusEffect = statusEffectsApi?.findStatusEffect({
+            effectId: Flags.getCeEffectId(effect),
+            effectName: effect.name,
+        });
+
+        return statusEffect
+            ? "<i class='fas fa-person-rays integration-icon' title='Status Effect'></i>"
             : "";
     }
 
