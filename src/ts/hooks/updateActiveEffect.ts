@@ -12,11 +12,12 @@ const UpdateActiveEffect: Listener = {
             (activeEffect: any, _data, _metadata, _userId) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
-                if (
+                const isConvenient =
                     Flags.isConvenient(effect) &&
                     effect.parent instanceof Item &&
-                    Flags.isConvenient(effect.parent)
-                ) {
+                    Flags.isConvenient(effect.parent);
+
+                if (isConvenient) {
                     renderAppIfOpen();
                 }
                 // const statusesArray = Array.from(effect.statuses ?? []);

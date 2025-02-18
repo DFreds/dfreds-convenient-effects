@@ -245,7 +245,7 @@ class EffectInterface {
      * with the given UUID match the effect ID or name and are a convenient
      * effect
      *
-     * @param options - The options to determine if the effect is applied
+     * @param params - The parameters to determine if the effect is applied
      * @returns true if the effect is applied to the actor and is a convenient
      * effect, false otherwise
      */
@@ -274,14 +274,14 @@ class EffectInterface {
     }
 
     /**
-     * Toggles the effect on the provided actor UUIDS as the GM via sockets. If
+     * Toggles the effect on the provided actor UUIDs as the GM via sockets. If
      * no actor UUIDs are provided, it finds one of these in this priority:
      *
      * 1. The targeted tokens (if prioritize targets is enabled)
      * 2. The currently selected tokens on the canvas
      * 3. The user configured character
      *
-     * @param options - the options for toggling an effect
+     * @param params - the parameters for toggling an effect
      * @returns A promise that resolves when all effects are added
      */
     async toggleEffect({
@@ -350,7 +350,7 @@ class EffectInterface {
      * Adds an effect matching the given params to the actor of the given UUID.
      * The effect adding is sent via a socket.
      *
-     * @param options - the options for adding an effect
+     * @param params - the parameters for adding an effect
      * @returns A promise that resolves when the effect is sent via the socket
      */
     async addEffect({
@@ -398,7 +398,7 @@ class EffectInterface {
      * Removes an effect matching the given params from an actor of the given
      * UUID. The effect removal is sent via a socket.
      *
-     * @param options - the options for removing an effect
+     * @param params - the parameters for removing an effect
      * @returns A promise that resolves when the removal request is sent via the
      * socket
      */
@@ -437,7 +437,7 @@ class EffectInterface {
      * Creates effects on either an existing folder with `folderId` or on a new
      * folder using the data provided by `folder`.
      *
-     * @param options - the options for creating effects
+     * @param params - the parameters for creating effects
      * @returns A promise that resolves when the effect creation is complete
      */
     async createNewEffects({
