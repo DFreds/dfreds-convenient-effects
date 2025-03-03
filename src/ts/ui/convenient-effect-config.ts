@@ -1,9 +1,9 @@
 import { Flags } from "../utils/flags.ts";
 import { findAllEffects, findEffectByUuid } from "../utils/finds.ts";
 import {
-    DocumentSheetConfiguration,
-    DocumentSheetRenderOptions,
-} from "types/foundry/client-esm/applications/api/document-sheet.js";
+    ApplicationConfiguration,
+    ApplicationRenderOptions,
+} from "types/foundry/client-esm/applications/_types.js";
 
 interface MultiSelectData {
     id?: string;
@@ -18,15 +18,22 @@ interface ConvenientEffectConfigData {
     otherEffectsData: MultiSelectData[];
 }
 
-const { DocumentSheetV2, HandlebarsApplicationMixin } =
-    foundry.applications.api;
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
-    DocumentSheetV2<
-        DocumentSheetConfiguration<ActiveEffect<any>>,
-        DocumentSheetRenderOptions
-    >,
+    ApplicationV2,
 ) {
+    #document: ActiveEffect<any>;
+
+    constructor(
+        options?: DeepPartial<
+            ApplicationConfiguration & { document: ActiveEffect<any> }
+        >,
+    ) {
+        super(options);
+        this.#document = options?.document as ActiveEffect<any>;
+    }
+
     static init(
         app: ActiveEffectConfig<any>,
         html: JQuery,
@@ -61,15 +68,15 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         }
     }
 
-    static override DEFAULT_OPTIONS: DeepPartial<DocumentSheetConfiguration> = {
+    static override DEFAULT_OPTIONS: DeepPartial<ApplicationConfiguration> = {
         id: "convenient-effect-config",
+        classes: ["sheet"],
         tag: "form",
         window: {
             contentClasses: ["standard-form"],
             icon: "fas fa-hand-sparkles",
             title: "ConvenientEffects.ConfigTitle",
         },
-        actions: {},
         position: {
             width: 580,
             height: "auto",
@@ -92,8 +99,12 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         },
     };
 
+    get document(): ActiveEffect<any> {
+        return this.#document;
+    }
+
     protected override async _prepareContext(
-        _options: DocumentSheetRenderOptions,
+        _options: ApplicationRenderOptions,
     ): Promise<ConvenientEffectConfigData & { buttons: object[] }> {
         const allEffects = findAllEffects({ backup: false });
 
@@ -157,7 +168,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         };
     }
 
-    protected override _prepareSubmitData(
+    #prepareSubmitData(
         _event: SubmitEvent | Event,
         _form: HTMLFormElement,
         formData: FormDataExtended,
@@ -193,7 +204,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         formData: FormDataExtended,
     ): Promise<void> {
         const thisClass = this as unknown as ConvenientEffectConfigV2;
-        const submitData = thisClass._prepareSubmitData(event, form, formData);
+        const submitData = thisClass.#prepareSubmitData(event, form, formData);
         await thisClass.document.update(submitData as Record<string, unknown>);
     }
 }
