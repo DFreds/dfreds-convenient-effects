@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-
 /** A batch renderer with a customizable data transfer function to packed geometries. */
 declare class BatchRenderer extends PIXI.BatchRenderer {
     /** The batch shader generator class. */

@@ -1,7 +1,5 @@
 export {};
 
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-
 declare global {
     /** A filter specialized for transition effects between a source object and a target texture. */
     class TextureTransitionFilter extends AbstractBaseFilter {

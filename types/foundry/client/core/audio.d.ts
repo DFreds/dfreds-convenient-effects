@@ -1,7 +1,5 @@
 export {};
 
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-
 declare global {
     /**
      * A helper class to provide common functionality for working with HTML5 audio and Howler instances

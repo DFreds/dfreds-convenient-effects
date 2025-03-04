@@ -196,7 +196,8 @@ declare global {
     }
 
     type ModifierKey =
-        (typeof KeyboardManager)["MODIFIER_KEYS"][keyof (typeof KeyboardManager)["MODIFIER_KEYS"]];
+        | (typeof KeyboardManager.MODIFIER_KEYS)[keyof typeof KeyboardManager.MODIFIER_KEYS]
+        | typeof KeyboardManager.CONTROL_KEY_STRING;
 
     interface KeyboardEventContext {
         event: KeyboardEvent;

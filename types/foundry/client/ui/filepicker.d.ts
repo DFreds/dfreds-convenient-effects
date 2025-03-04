@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-
 /**
  * The FilePicker application renders contents of the server-side public directory.
  * This app allows for navigating and uploading files to the public path.

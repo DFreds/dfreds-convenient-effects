@@ -51,6 +51,11 @@ declare global {
             time: boolean;
         };
 
+        time: {
+            roundTime: number;
+            turnTime: number;
+        };
+
         compendium: {
             /**
              * Configure a table of compendium UUID redirects. Must be configured before the game *ready* hook is fired.

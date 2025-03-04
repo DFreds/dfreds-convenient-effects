@@ -849,7 +849,7 @@ export class ArrayField<
             SourcePropFromDataField<TElementField>
         >[] = SourcePropFromDataField<TElementField>[],
         TModelProp extends object = ModelPropFromDataField<TElementField>[],
-        TRequired extends boolean = false,
+        TRequired extends boolean = true,
         TNullable extends boolean = false,
         THasInitial extends boolean = true,
     >
@@ -956,7 +956,7 @@ export interface ArrayField<
         SourcePropFromDataField<TElementField>
     >[] = SourcePropFromDataField<TElementField>[],
     TModelProp extends object = ModelPropFromDataField<TElementField>[],
-    TRequired extends boolean = false,
+    TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true,
 > extends DataField<
