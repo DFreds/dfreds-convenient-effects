@@ -13,7 +13,7 @@ async function createMacro(
     effect: ActiveEffect<any>,
     slot?: number | string,
 ): Promise<void> {
-    const name = `Toggle Convenient Effect - ${effect.name}`;
+    const name = `${game.i18n.localize(EN_JSON.ConvenientEffects.ToggleConvenientEffect)} - ${effect.name}`;
     const id = Flags.getCeEffectId(effect);
     const command = `game.dfreds.effectInterface.toggleEffect({ effectId: "${id}" })`;
 

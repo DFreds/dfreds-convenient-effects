@@ -329,7 +329,7 @@ class ConvenientEffectsController {
 
         const newEffect = createConvenientEffect({
             effect: {
-                name: game.i18n.localize("ConvenientEffects.NewEffect"),
+                name: game.i18n.localize(EN_JSON.ConvenientEffects.NewEffect),
                 img: "icons/svg/aura.svg",
             },
         });
@@ -615,15 +615,25 @@ class ConvenientEffectsController {
                 await effect.delete();
             } else {
                 ui.notifications.warn(
-                    `You do not have permission to remove the effect
-                    ${effect.name} from ${originalFolder?.name}. Duplicated effect
-                    onto ${newFolder.name}`,
+                    game.i18n.format(
+                        EN_JSON.ConvenientEffects.NoPermissionToRemoveEffect,
+                        {
+                            effectName: effect.name,
+                            originalFolderName: originalFolder?.name ?? "",
+                            newFolderName: newFolder?.name ?? "",
+                        },
+                    ),
                 );
             }
         } else {
             ui.notifications.warn(
-                `You do not have permission to add effect ${effect.name} to
-                folder ${newFolder?.name}`,
+                game.i18n.format(
+                    EN_JSON.ConvenientEffects.NoPermissionToAddEffect,
+                    {
+                        effectName: effect.name,
+                        newFolderName: newFolder?.name ?? "",
+                    },
+                ),
             );
         }
     }

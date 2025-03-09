@@ -31,10 +31,14 @@
         "DeleteEffect": "Delete Effect",
         "ShowEffect": "Show Effect",
         "HideEffect": "Hide Effect",
+        "ToggleConvenientEffect": "Toggle Convenient Effect",
         "ToggleAsOverlay": "Toggle as Overlay",
         "ToggleStatusEffect": "Toggle Status Effect",
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
+        "SelectEffect": "Select Effect",
+        "NoPermissionToRemoveEffect": "You do not have permission to remove the effect {effectName} from {originalFolderName}. Duplicated effect onto {newFolderName}",
+        "NoPermissionToAddEffect": "You do not have permission to add effect {effectName} to folder {newFolderName}",
 
         "FolderHidden": "Folder Hidden",
         "Passive": "Passive",
@@ -64,6 +68,7 @@
         "ConfigSubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
         "ConfigOtherEffectsLabel": "Other Effects",
         "ConfigOtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed.",
+
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
