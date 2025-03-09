@@ -46,6 +46,8 @@
 - First-class support for popular modules, such as Midi-QoL, Times Up, DAE, Active Token Lighting, and Token Magic FX
 - Extensive API for use in macros
 
+![Convenient Effects](https://www.dfreds-modules.com/assets/images/convenient-effects-app-6dc7002b72d0faf3c1e972332ebdaf0b.png)
+
 ## Getting Started
 
 ### See the [documentation](https://www.dfreds-modules.com/free-modules/convenient-effects) page for details.
