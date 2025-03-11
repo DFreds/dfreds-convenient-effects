@@ -109,7 +109,6 @@ class Settings {
     }
 
     #registerPrioritizeTargets(): void {
-        // TODO consider making visible config?
         game.settings.register(MODULE_ID, this.#PRIORITIZE_TARGETS, {
             name: "Prioritize Targets",
             scope: "client",
