@@ -9,6 +9,7 @@
         "stage": "tsc && npm run clean && vite build --mode stage",
         "dev": "tsc && npm run clean && vite build --mode development",
         "clean": "tsx ./build/clean.ts",
+        "foundry": "tsx ./build/start-foundry.ts",
         "hot": "vite serve",
         "watch": "tsc && npm run clean && vite build --watch --mode development",
         "link": "tsx ./build/link-foundry.ts",
