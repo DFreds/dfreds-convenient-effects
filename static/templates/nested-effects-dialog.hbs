@@ -6,7 +6,12 @@
         <label>Chosen Effect</label>
         <div class="form-fields">
             <select name="effect-choice" autofocus>
-                {{selectOptions nestedEffects selected=default nameAttr="name" valueAttr="name"}}
+                {{selectOptions
+                    nestedEffects
+                    selected=default
+                    labelAttr="name"
+                    valueAttr="name"
+                }}
             </select>
         </div>
     </div>
@@ -14,7 +19,7 @@
     <div id="nested-effect-descriptions">
         {{#each nestedEffects as |nestedEffect|}}
             <strong>{{nestedEffect.name}}.</strong>
-                {{{nestedEffect.description}}}
+            {{{nestedEffect.description}}}
         {{/each}}
     </div>
 </form>
