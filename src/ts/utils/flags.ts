@@ -1,4 +1,6 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
+import BaseActiveEffect, {
+    ActiveEffectSource,
+} from "types/foundry/common/documents/active-effect.js";
 import { ItemSource } from "types/foundry/common/documents/item.js";
 import { MODULE_ID } from "../constants.ts";
 
@@ -17,7 +19,10 @@ class Flags {
     };
 
     static getCeEffectId(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
+        effect:
+            | ActiveEffect<any>
+            | BaseActiveEffect<any>
+            | PreCreate<ActiveEffectSource>,
     ): string | undefined {
         if (effect instanceof ActiveEffect) {
             return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as

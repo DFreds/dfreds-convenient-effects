@@ -1,11 +1,11 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "./settings.ts";
 import {
-    findActorByUuid,
-    findActorByUuidSync,
+    findDocumentByUuidSync,
     findAllEffects,
     findFolder,
     findFolders,
+    findDocumentByUuid,
 } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
@@ -254,10 +254,10 @@ class EffectInterface {
         effectName,
         uuid,
     }: IHasEffectApplied): boolean {
-        const actor = findActorByUuidSync(uuid);
+        const document = findDocumentByUuidSync(uuid);
 
         return (
-            actor?.effects?.some((effect) => {
+            document?.effects?.some((effect) => {
                 const isConvenient = Flags.isConvenient(effect);
                 const isEnabled = !effect.disabled;
                 const isMatchingId = effect.id === effectId;
@@ -372,9 +372,9 @@ class EffectInterface {
             return [];
         }
 
-        const actor = await findActorByUuid(uuid);
-        if (!actor) {
-            error(`Actor ${uuid} could not be found`);
+        const document = await findDocumentByUuid(uuid);
+        if (!document) {
+            error(`Document ${uuid} could not be found`);
             return [];
         }
 
@@ -418,9 +418,9 @@ class EffectInterface {
             return;
         }
 
-        const actor = await findActorByUuid(uuid);
-        if (!actor) {
-            error(`Actor ${uuid} could not be found`);
+        const document = await findDocumentByUuid(uuid);
+        if (!document) {
+            error(`Document ${uuid} could not be found`);
             return;
         }
 
