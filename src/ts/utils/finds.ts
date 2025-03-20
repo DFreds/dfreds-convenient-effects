@@ -6,10 +6,10 @@ function findModuleById(moduleId: string): Module | undefined {
 }
 
 /**
- * Gets the actor object by the actor UUID
+ * Gets the document object by the document UUID
  *
- * @param uuid The actor UUID
- * @returns the actor that was found via the UUID or undefined if not found
+ * @param uuid The document UUID
+ * @returns the document that was found via the UUID or undefined if not found
  */
 async function findDocumentByUuid(
     uuid: string,

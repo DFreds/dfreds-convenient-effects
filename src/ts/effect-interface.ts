@@ -60,7 +60,7 @@ interface IHasEffectApplied {
     effectName?: string;
 
     /**
-     * The UUID of the actor
+     * The UUID of the document
      */
     uuid: string;
 }
@@ -77,7 +77,7 @@ interface IToggleEffect {
     effectName?: string;
 
     /**
-     * The UUIDs of the actors. Set to an empty array by default
+     * The UUIDs of the documents. Set to an empty array by default
      */
     uuids?: string[];
 
@@ -119,7 +119,7 @@ interface IAddEffect {
     effectData?: PreCreate<ActiveEffectSource>;
 
     /**
-     * The UUID of the actor
+     * The UUID of the document
      */
     uuid: string;
 
@@ -147,7 +147,7 @@ interface IRemoveEffect {
     effectName?: string;
 
     /**
-     * The UUID of the actor
+     * The UUID of the document
      */
     uuid: string;
 
@@ -241,12 +241,12 @@ class EffectInterface {
     }
 
     /**
-     * Checks to see if any of the current active effects applied to the actor
+     * Checks to see if any of the current active effects applied to the document
      * with the given UUID match the effect ID or name and are a convenient
      * effect
      *
      * @param params - The parameters to determine if the effect is applied
-     * @returns true if the effect is applied to the actor and is a convenient
+     * @returns true if the effect is applied to the document and is a convenient
      * effect, false otherwise
      */
     hasEffectApplied({
@@ -274,8 +274,8 @@ class EffectInterface {
     }
 
     /**
-     * Toggles the effect on the provided actor UUIDs as the GM via sockets. If
-     * no actor UUIDs are provided, it finds one of these in this priority:
+     * Toggles the effect on the provided document UUIDs as the GM via sockets. If
+     * no document UUIDs are provided, it finds one of these in this priority:
      *
      * 1. The targeted tokens (if prioritize targets is enabled)
      * 2. The currently selected tokens on the canvas
@@ -292,12 +292,12 @@ class EffectInterface {
         prioritizeTargets = false,
         origin,
     }: IToggleEffect): Promise<void> {
-        let actorUuids = uuids;
-        if (actorUuids.length === 0) {
-            actorUuids = getActorUuids(prioritizeTargets);
+        let documentUuids = uuids;
+        if (documentUuids.length === 0) {
+            documentUuids = getActorUuids(prioritizeTargets);
         }
 
-        if (actorUuids.length === 0) {
+        if (documentUuids.length === 0) {
             ui.notifications.warn(
                 `Please select or target a token to toggle this effect`,
             );
@@ -314,7 +314,7 @@ class EffectInterface {
             return;
         }
 
-        for (const uuid of actorUuids) {
+        for (const uuid of documentUuids) {
             const hasEffectApplied = this.hasEffectApplied({
                 effectId:
                     effectDataToSend._id ??
@@ -347,7 +347,7 @@ class EffectInterface {
     }
 
     /**
-     * Adds an effect matching the given params to the actor of the given UUID.
+     * Adds an effect matching the given params to the document of the given UUID.
      * The effect adding is sent via a socket.
      *
      * @param params - the parameters for adding an effect
@@ -395,7 +395,7 @@ class EffectInterface {
     }
 
     /**
-     * Removes an effect matching the given params from an actor of the given
+     * Removes an effect matching the given params from a document of the given
      * UUID. The effect removal is sent via a socket.
      *
      * @param params - the parameters for removing an effect

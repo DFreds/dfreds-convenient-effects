@@ -13,7 +13,7 @@ interface AddEffectMessageData {
     effectData: PreCreate<ActiveEffectSource>;
 
     /**
-     * The UUID of the actor to add the effect to
+     * The UUID of the document to add the effect to
      */
     uuid: string;
 }
@@ -30,7 +30,7 @@ interface RemoveEffectMessageData {
     effectName?: string;
 
     /**
-     * The UUID of the actor to remove the effect from
+     * The UUID of the document to remove the effect from
      */
     uuid: string;
 
