@@ -1,5 +1,20 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 
+function acCover({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.ac.cover",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
 function exhaustion({
     value,
     priority,
@@ -40,4 +55,4 @@ function movement({
     };
 }
 
-export { exhaustion, movement };
+export { exhaustion, movement, acCover };

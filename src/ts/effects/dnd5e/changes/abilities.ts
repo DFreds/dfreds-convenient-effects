@@ -17,4 +17,21 @@ function abilityUpgrade({
     };
 }
 
-export { abilityUpgrade };
+function saveBonus({
+    ability,
+    value,
+    priority,
+}: {
+    ability: "str" | "dex" | "con" | "int" | "wis" | "cha";
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.abilities.${ability}.bonuses.save`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
+export { abilityUpgrade, saveBonus };
