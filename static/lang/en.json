@@ -206,6 +206,10 @@
                 "name": "Bracers of Archery",
                 "description": "- Adds +2 to ranged attack damage<br/>- Adds proficiency in longbow and shortbow"
             },
+            "BracersOfDefense": {
+                "name": "Bracers of Defense",
+                "description": "- Adds +2 to AC"
+            },
             "BullsStrength": {
                 "name": "Bull's Strength",
                 "description": "Advantage on strength checks and double maximum carrying capacity for 1 hour"

@@ -233,6 +233,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 this.#beltOfCloudGiantStrength,
                 this.#beltOfStormGiantStrength,
                 this.#bracersOfArchery,
+                this.#bracersOfDefense,
             ],
         };
     }
@@ -512,6 +513,28 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         key: "system.traits.weaponProf.value",
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                         value: "shortbow",
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #bracersOfDefense(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BracersOfDefense.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BracersOfDefense.description,
+                ),
+                img: "icons/equipment/wrist/bracer-yellow-fancy.webp",
+                changes: [
+                    {
+                        key: "system.attributes.ac.bonus",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "2",
                     },
                 ],
             },
