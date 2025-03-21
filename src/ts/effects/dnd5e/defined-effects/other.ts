@@ -2,7 +2,7 @@ import { createConvenientEffect } from "src/ts/utils/creates.ts";
 import { ItemEffects } from "../../effect-definition.ts";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { acCover, movement } from "../changes/attributes.ts";
-import { saveBonus } from "../changes/abilities.ts";
+import { abilitySaveBonus } from "../changes/abilities.ts";
 import { tokenMagic } from "../changes/macros.ts";
 import {
     advantageSave,
@@ -71,7 +71,7 @@ function coverHalf(): PreCreate<ActiveEffectSource> {
                 acCover({
                     value: "+2",
                 }),
-                saveBonus({
+                abilitySaveBonus({
                     ability: "dex",
                     value: "+2",
                 }),
@@ -94,7 +94,7 @@ function coverThreeQuarters(): PreCreate<ActiveEffectSource> {
                 acCover({
                     value: "+5",
                 }),
-                saveBonus({
+                abilitySaveBonus({
                     ability: "dex",
                     value: "+5",
                 }),

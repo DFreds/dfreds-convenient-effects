@@ -17,7 +17,7 @@ function abilityUpgrade({
     };
 }
 
-function saveBonus({
+function abilitySaveBonus({
     ability,
     value,
     priority,
@@ -34,4 +34,4 @@ function saveBonus({
     };
 }
 
-export { abilityUpgrade, saveBonus };
+export { abilityUpgrade, abilitySaveBonus };
