@@ -19,6 +19,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
             this.#spells,
             this.#classFeatures,
             this.#equipment,
+            this.#magicItems,
             this.#other,
         ];
     }
@@ -214,6 +215,17 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         };
     }
 
+    get #magicItems(): ItemEffects {
+        return {
+            itemData: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.Folders.MagicItems,
+                ),
+            },
+            effects: [
+            ],
+        };
+    }
     get #other(): ItemEffects {
         return {
             itemData: {
