@@ -15,6 +15,21 @@ function acBonus({
     };
 }
 
+function acCalc({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.ac.calc",
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+        priority,
+    };
+}
+
 function acCover({
     value,
     priority,
@@ -30,7 +45,22 @@ function acCover({
     };
 }
 
-function darkvision({
+function acFormula({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.ac.formula",
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+        priority,
+    };
+}
+
+function upgradeDarkvision({
     value,
     priority,
 }: {
@@ -85,4 +115,38 @@ function movement({
     };
 }
 
-export { acBonus, acCover, exhaustion, movement, darkvision };
+function upgradeMovement({
+    movementType,
+    value,
+    priority,
+}: {
+    movementType:
+        | "all"
+        | "burrow"
+        | "climb"
+        | "fly"
+        | "hover"
+        | "swim"
+        | "units"
+        | "walk";
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.attributes.movement.${movementType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        value,
+        priority,
+    };
+}
+
+export {
+    acBonus,
+    acCalc,
+    acCover,
+    acFormula,
+    exhaustion,
+    movement,
+    upgradeMovement,
+    upgradeDarkvision,
+};

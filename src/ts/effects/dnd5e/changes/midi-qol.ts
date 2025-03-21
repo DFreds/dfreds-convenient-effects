@@ -16,6 +16,14 @@ function disadvantage(): Partial<EffectChangeData> {
     };
 }
 
+function advantageDeathSave(): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.advantage.deathSave`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 function advantageAttack({
     attackType,
 }: {
@@ -212,6 +220,7 @@ function optionalSkill({
 
 export {
     advantage,
+    advantageDeathSave,
     disadvantage,
     advantageAttack,
     disadvantageAttack,

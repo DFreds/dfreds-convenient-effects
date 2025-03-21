@@ -3,12 +3,20 @@ import { EffectChangeData } from "types/foundry/common/documents/active-effect.j
 function addDamageImmunity({
     damageType,
 }: {
-    damageType: "poison";
+    damageType: "poison" | "psychic";
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.di.value",
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
         value: damageType,
+    };
+}
+
+function addAllDamageImmunity(): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.di.all",
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
     };
 }
 
@@ -70,6 +78,7 @@ function addWeaponProficiency({
 }
 
 export {
+    addAllDamageImmunity,
     addAllDamageResistance,
     addDamageImmunity,
     addDamageResistance,

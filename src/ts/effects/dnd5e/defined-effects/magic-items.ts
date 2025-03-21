@@ -14,7 +14,7 @@ import {
     addLanguage,
     addWeaponProficiency,
 } from "../changes/traits.ts";
-import { acBonus, darkvision } from "../changes/attributes.ts";
+import { acBonus, upgradeDarkvision } from "../changes/attributes.ts";
 import { atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 
 function magicItems(): ItemEffects {
@@ -108,7 +108,7 @@ function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
                 addDamageResistance({
                     damageType: "poison",
                 }),
-                darkvision({
+                upgradeDarkvision({
                     value: "60",
                     priority: 5,
                 }),

@@ -15,6 +15,30 @@ import {
 } from "./conditions.ts";
 import { Flags } from "src/ts/utils/flags.ts";
 import { notEmpty } from "src/ts/utils/types.ts";
+import {
+    acBonus,
+    acCalc,
+    acFormula,
+    upgradeDarkvision,
+    movement,
+    upgradeMovement,
+} from "../changes/attributes.ts";
+import {
+    advantageAbilitySave,
+    advantageAttack,
+    advantageDeathSave,
+    disadvantageAttack,
+    grantAdvantageAttack,
+    grantDisadvantageAttack,
+} from "../changes/midi-qol.ts";
+import { tokenMagic } from "../changes/macros.ts";
+import { abilitySaveBonus } from "../changes/abilities.ts";
+import {
+    addAllDamageImmunity,
+    addDamageImmunity,
+    addDamageResistance,
+} from "../changes/traits.ts";
+import { atlLight, atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 
 function spells(): ItemEffects {
     return {
@@ -242,18 +266,14 @@ function barkskin(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.attributes.ac.formula",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                acFormula({
                     value: "16",
                     priority: 50,
-                },
-                {
-                    key: "system.attributes.ac.calc",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                acCalc({
                     value: "custom",
                     priority: 50,
-                },
+                }),
             ],
         },
     });
@@ -269,16 +289,10 @@ function beaconOfHope(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.save.wis`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.deathSave`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilitySave({
+                    saveType: "wis",
+                }),
+                advantageDeathSave(),
             ],
         },
     });
@@ -310,36 +324,28 @@ function bless(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.bonuses.abilities.save",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                saveBonus({
                     value: "+1d4",
-                },
-                {
-                    key: "system.bonuses.msak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                attackBonus({
+                    attackType: "msak",
                     value: "+1d4",
-                },
-                {
-                    key: "system.bonuses.mwak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                attackBonus({
+                    attackType: "mwak",
                     value: "+1d4",
-                },
-                {
-                    key: "system.bonuses.rsak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                attackBonus({
+                    attackType: "rsak",
                     value: "+1d4",
-                },
-                {
-                    key: "system.bonuses.rwak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                attackBonus({
+                    attackType: "rwak",
                     value: "+1d4",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                tokenMagic({
                     value: "bloom",
-                },
+                }),
             ],
         },
     });
@@ -406,16 +412,12 @@ function blur(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.grants.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                grantDisadvantageAttack({
+                    attackType: "all",
+                }),
+                tokenMagic({
                     value: "blur",
-                },
+                }),
             ],
         },
     });
@@ -666,24 +668,18 @@ function darkvision(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
             changes: [
-                {
-                    key: "system.attributes.senses.darkvision",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                upgradeDarkvision({
                     value: "60",
                     priority: 5,
-                },
-                {
-                    key: "ATL.sight.range",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                }),
+                atlSightRange({
                     value: "60",
                     priority: 5,
-                },
-                {
-                    key: "ATL.sight.visionMode",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlSightVisionMode({
                     value: "darkvision",
                     priority: 5,
-                },
+                }),
             ],
         },
     });
@@ -981,36 +977,28 @@ function faerieFire(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.grants.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                grantAdvantageAttack({
+                    attackType: "all",
+                }),
+                atlLight({
+                    lightType: "dim",
                     value: "10",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "pulse","speed": 1,"intensity": 1}',
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                tokenMagic({
                     value: "glow",
-                },
+                }),
             ],
         },
     });
@@ -1099,41 +1087,32 @@ function fireShieldColdResistance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "cold",
-                },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                addDamageResistance({
+                    damageType: "cold",
+                }),
+                atlLight({
+                    lightType: "dim",
                     value: "20",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "10",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch", "speed": 3, "intensity": 1}',
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                tokenMagic({
                     value: "fire",
-                },
+                }),
             ],
         },
     });
@@ -1151,41 +1130,32 @@ function fireShieldFireResistance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "fire",
-                },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                addDamageResistance({
+                    damageType: "fire",
+                }),
+                atlLight({
+                    lightType: "dim",
                     value: "20",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "10",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.COLD_FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch", "speed": 3, "intensity": 1}',
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                tokenMagic({
                     value: "Fire v2 (coldfire)",
-                },
+                }),
             ],
         },
     });
@@ -1215,12 +1185,11 @@ function fly(): PreCreate<ActiveEffectSource> {
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             statuses: ["flying"],
             changes: [
-                {
-                    key: "system.attributes.movement.fly",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                upgradeMovement({
+                    movementType: "fly",
                     value: "60",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -1293,11 +1262,9 @@ function globeOfInvulnerability(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                tokenMagic({
                     value: "warp-field",
-                },
+                }),
             ],
         },
     });
@@ -1487,11 +1454,9 @@ function holdMonster(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                tokenMagic({
                     value: "mantle-of-madness",
-                },
+                }),
             ],
         },
         subEffectIds,
@@ -1511,11 +1476,9 @@ function holdPerson(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/debuff-chains-ropes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                tokenMagic({
                     value: "mantle-of-madness",
-                },
+                }),
             ],
         },
         subEffectIds,
@@ -1542,26 +1505,22 @@ function holyAura(): PreCreate<ActiveEffectSource> {
                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                     value: "1",
                 },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "dim",
                     value: "5",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-                },
+                }),
             ],
         },
     });
@@ -1610,12 +1569,11 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                movement({
+                    movementType: "all",
                     value: "0",
                     priority: 25,
-                },
+                }),
                 {
                     key: `flags.midi-qol.disadvantage.ability.save.dex`,
                     mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
@@ -1659,31 +1617,26 @@ function light(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "dim",
                     value: "40",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "20",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "pulse", "speed": 3,"intensity": 1}',
-                },
+                }),
             ],
         },
     });
@@ -1699,12 +1652,11 @@ function longstrider(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/air/wind-stream-blue-gray.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                movement({
+                    movementType: "all",
                     value: "+10",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -1720,12 +1672,10 @@ function mageArmor(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
             changes: [
-                {
-                    key: "system.attributes.ac.calc",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                acCalc({
                     value: "mage",
                     priority: 5,
-                },
+                }),
             ],
         },
     });
@@ -1741,11 +1691,9 @@ function mindBlank(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/air/air-burst-spiral-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_DAY },
             changes: [
-                {
-                    key: "system.traits.di.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "psychic",
-                },
+                addDamageImmunity({
+                    damageType: "psychic",
+                }),
             ],
         },
     });
@@ -1761,11 +1709,9 @@ function mirrorImage(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                tokenMagic({
                     value: "images",
-                },
+                }),
             ],
         },
     });
@@ -1788,11 +1734,9 @@ function passWithoutTrace(): PreCreate<ActiveEffectSource> {
                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                     value: "+10",
                 },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                tokenMagic({
                     value: "fog",
-                },
+                }),
             ],
         },
     });
@@ -1834,16 +1778,12 @@ function protectionFromEnergyAcid(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "acid",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                addDamageResistance({
+                    damageType: "acid",
+                }),
+                tokenMagic({
                     value: "clover",
-                },
+                }),
             ],
         },
     });
@@ -1861,16 +1801,12 @@ function protectionFromEnergyCold(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "cold",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                addDamageResistance({
+                    damageType: "cold",
+                }),
+                tokenMagic({
                     value: "pure-ice-aura",
-                },
+                }),
             ],
         },
     });
@@ -1888,16 +1824,12 @@ function protectionFromEnergyFire(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "fire",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                addDamageResistance({
+                    damageType: "fire",
+                }),
+                tokenMagic({
                     value: "pure-fire-aura",
-                },
+                }),
             ],
         },
     });
@@ -1915,16 +1847,12 @@ function protectionFromEnergyLightning(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "lightning",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                addDamageResistance({
+                    damageType: "lightning",
+                }),
+                tokenMagic({
                     value: "electric",
-                },
+                }),
             ],
         },
     });
@@ -1942,16 +1870,12 @@ function protectionFromEnergyThunder(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "thunder",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                addDamageResistance({
+                    damageType: "thunder",
+                }),
+                tokenMagic({
                     value: "shockwave",
-                },
+                }),
             ],
         },
     });
@@ -1969,16 +1893,12 @@ function protectionFromPoison(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "poison",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                addDamageResistance({
+                    damageType: "poison",
+                }),
+                tokenMagic({
                     value: "bevel",
-                },
+                }),
             ],
         },
     });
@@ -2009,12 +1929,11 @@ function rayOfFrost(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/beam-rays-blue-small.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E },
             changes: [
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                movement({
+                    movementType: "all",
                     value: "-10",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -2052,17 +1971,12 @@ function resilientSphere(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/explosion-star-large-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                movement({
+                    movementType: "all",
                     value: "*0.5",
                     priority: 25,
-                },
-                {
-                    key: "system.traits.di.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                }),
+                addAllDamageImmunity(),
             ],
         },
     });
@@ -2104,17 +2018,13 @@ function shield(): PreCreate<ActiveEffectSource> {
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E },
             flags: { dae: { specialDuration: ["turnStart"] } },
             changes: [
-                {
-                    key: "system.attributes.ac.bonus",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                acBonus({
                     value: "+5",
                     priority: 5,
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                tokenMagic({
                     value: "water-field",
-                },
+                }),
             ],
         },
     });
@@ -2132,16 +2042,12 @@ function shieldOfFaith(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: "system.attributes.ac.bonus",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                acBonus({
                     value: "+2",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                tokenMagic({
                     value: "bloom",
-                },
+                }),
             ],
         },
     });
@@ -2157,22 +2063,18 @@ function slow(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/air/fog-gas-smoke-dense-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.attributes.ac.bonus",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                acBonus({
                     value: "-2",
-                },
-                {
-                    key: "system.abilities.dex.bonuses.save",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                abilitySaveBonus({
+                    ability: "dex",
                     value: "-2",
-                },
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                movement({
+                    movementType: "all",
                     value: "*0.5",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -2233,12 +2135,11 @@ function spiderClimb(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/debuff-chains-blue.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: "system.attributes.movement.climb",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                upgradeMovement({
+                    movementType: "climb",
                     value: "@attributes.movement.walk",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -2289,11 +2190,9 @@ function stoneskin(): PreCreate<ActiveEffectSource> {
                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                     value: "physical",
                 },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                tokenMagic({
                     value: "oldfilm",
-                },
+                }),
             ],
         },
     });
@@ -2336,11 +2235,9 @@ function trueStrike(): PreCreate<ActiveEffectSource> {
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
             flags: { dae: { specialDuration: ["1Attack"] } },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAttack({
+                    attackType: "all",
+                }),
             ],
         },
     });
@@ -2359,11 +2256,9 @@ function viciousMockery(): PreCreate<ActiveEffectSource> {
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
             flags: { dae: { specialDuration: ["1Attack"] } },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAttack({
+                    attackType: "all",
+                }),
             ],
         },
     });
