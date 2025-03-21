@@ -1,4 +1,3 @@
-import EnJSON from "@static/lang/en.json" with { type: "json" };
 import { EffectInterface } from "./effect-interface.ts";
 import { Sockets } from "./sockets/sockets.ts";
 
@@ -68,5 +67,4 @@ declare global {
     }
 
     const BUILD_MODE: "development" | "stage" | "production";
-    const EN_JSON: typeof EnJSON;
 }

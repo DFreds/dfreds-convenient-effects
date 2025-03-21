@@ -6,9 +6,7 @@ import { ItemEffects } from "../../effect-definition.ts";
 function equipment(): ItemEffects {
     return {
         itemData: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Folders.Equipment,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Folders.Equipment"),
         },
         effects: [
             bullseyeLantern(),
@@ -24,10 +22,10 @@ function bullseyeLantern(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BullseyeLantern.name,
+                "ConvenientEffects.Dnd.BullseyeLantern.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BullseyeLantern.description,
+                "ConvenientEffects.Dnd.BullseyeLantern.description",
             ),
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { seconds: SECONDS.IN_SIX_HOURS },
@@ -70,9 +68,9 @@ function bullseyeLantern(): PreCreate<ActiveEffectSource> {
 function candle(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Candle.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Candle.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Candle.description,
+                "ConvenientEffects.Dnd.Candle.description",
             ),
             img: "icons/sundries/lights/candle-unlit-white.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -111,10 +109,10 @@ function hoodedLantern(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HoodedLantern.name,
+                "ConvenientEffects.Dnd.HoodedLantern.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HoodedLantern.description,
+                "ConvenientEffects.Dnd.HoodedLantern.description",
             ),
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { seconds: SECONDS.IN_SIX_HOURS },
@@ -152,11 +150,9 @@ function hoodedLantern(): PreCreate<ActiveEffectSource> {
 function lantern(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Lantern.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Lantern.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Lantern.description,
+                "ConvenientEffects.Dnd.Lantern.description",
             ),
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { seconds: SECONDS.IN_SIX_HOURS },
@@ -194,9 +190,9 @@ function lantern(): PreCreate<ActiveEffectSource> {
 function torch(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Torch.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Torch.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Torch.description,
+                "ConvenientEffects.Dnd.Torch.description",
             ),
             img: "icons/sundries/lights/torch-black.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },

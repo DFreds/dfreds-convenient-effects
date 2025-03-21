@@ -19,9 +19,7 @@ import { notEmpty } from "src/ts/utils/types.ts";
 function spells(): ItemEffects {
     return {
         itemData: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Folders.Spells,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Folders.Spells"),
         },
         effects: [
             acidArrow(),
@@ -130,11 +128,9 @@ function spells(): ItemEffects {
 function acidArrow(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AcidArrow.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.AcidArrow.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AcidArrow.description,
+                "ConvenientEffects.Dnd.AcidArrow.description",
             ),
             img: "icons/magic/acid/projectile-bolts-salvo-green.webp",
             changes: [
@@ -151,9 +147,9 @@ function acidArrow(): PreCreate<ActiveEffectSource> {
 function aid(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Aid.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Aid.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Aid.description,
+                "ConvenientEffects.Dnd.Aid.description",
             ),
             img: "icons/magic/life/heart-cross-blue.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
@@ -164,11 +160,9 @@ function aid(): PreCreate<ActiveEffectSource> {
 function alterSelf(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AlterSelf.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.AlterSelf.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AlterSelf.description,
+                "ConvenientEffects.Dnd.AlterSelf.description",
             ),
             img: "icons/magic/control/debuff-energy-hold-green.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -180,10 +174,10 @@ function antilifeShell(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AntilifeShell.name,
+                "ConvenientEffects.Dnd.AntilifeShell.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AntilifeShell.description,
+                "ConvenientEffects.Dnd.AntilifeShell.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -194,11 +188,9 @@ function antilifeShell(): PreCreate<ActiveEffectSource> {
 function arcaneHand(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ArcaneHand.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.ArcaneHand.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ArcaneHand.description,
+                "ConvenientEffects.Dnd.ArcaneHand.description",
             ),
             img: "icons/magic/fire/projectile-fireball-smoke-strong-teal.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -209,9 +201,9 @@ function arcaneHand(): PreCreate<ActiveEffectSource> {
 function bane(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Bane.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Bane.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Bane.description,
+                "ConvenientEffects.Dnd.Bane.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -243,11 +235,9 @@ function bane(): PreCreate<ActiveEffectSource> {
 function barkskin(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Barkskin.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Barkskin.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Barkskin.description,
+                "ConvenientEffects.Dnd.Barkskin.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -272,11 +262,9 @@ function barkskin(): PreCreate<ActiveEffectSource> {
 function beaconOfHope(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeaconOfHope.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeaconOfHope.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeaconOfHope.description,
+                "ConvenientEffects.Dnd.BeaconOfHope.description",
             ),
             img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -300,10 +288,10 @@ function blackTentacles(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BlackTentacles.name,
+                "ConvenientEffects.Dnd.BlackTentacles.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BlackTentacles.description,
+                "ConvenientEffects.Dnd.BlackTentacles.description",
             ),
             img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -315,9 +303,9 @@ function blackTentacles(): PreCreate<ActiveEffectSource> {
 function bless(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Bless.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Bless.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Bless.description,
+                "ConvenientEffects.Dnd.Bless.description",
             ),
             img: "icons/magic/control/buff-flight-wings-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -367,10 +355,10 @@ function blindnessDeafness(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BlindnessDeafness.name,
+                "ConvenientEffects.Dnd.BlindnessDeafness.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BlindnessDeafness.description,
+                "ConvenientEffects.Dnd.BlindnessDeafness.description",
             ),
             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
         },
@@ -382,11 +370,9 @@ function blindnessDeafnessBlindness(): PreCreate<ActiveEffectSource> {
     const subEffectIds = [Flags.getCeEffectId(blinded())].filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Blindness.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Blindness.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Blindness.description,
+                "ConvenientEffects.Dnd.Blindness.description",
             ),
             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -399,11 +385,9 @@ function blindnessDeafnessDeafness(): PreCreate<ActiveEffectSource> {
     const subEffectIds = [Flags.getCeEffectId(deafened())].filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Deafness.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Deafness.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Deafness.description,
+                "ConvenientEffects.Dnd.Deafness.description",
             ),
             img: "icons/magic/perception/eye-ringed-glow-angry-red.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -415,9 +399,9 @@ function blindnessDeafnessDeafness(): PreCreate<ActiveEffectSource> {
 function blur(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Blur.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Blur.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Blur.description,
+                "ConvenientEffects.Dnd.Blur.description",
             ),
             img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -440,11 +424,9 @@ function blur(): PreCreate<ActiveEffectSource> {
 function charmPerson(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CharmPerson.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CharmPerson.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CharmPerson.description,
+                "ConvenientEffects.Dnd.CharmPerson.description",
             ),
             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -456,11 +438,9 @@ function charmPerson(): PreCreate<ActiveEffectSource> {
 function command(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Command.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Command.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Command.description,
+                "ConvenientEffects.Dnd.Command.description",
             ),
             img: "icons/magic/fire/explosion-fireball-small-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
@@ -472,10 +452,10 @@ function comprehendLanguages(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ComprehendLanguages.name,
+                "ConvenientEffects.Dnd.ComprehendLanguages.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ComprehendLanguages.description,
+                "ConvenientEffects.Dnd.ComprehendLanguages.description",
             ),
             img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -503,11 +483,9 @@ function contagion(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Contagion.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Contagion.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Contagion.description,
+                "ConvenientEffects.Dnd.Contagion.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
         },
@@ -519,10 +497,10 @@ function contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BlindingSickness.name,
+                "ConvenientEffects.Dnd.BlindingSickness.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BlindingSickness.description,
+                "ConvenientEffects.Dnd.BlindingSickness.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
@@ -546,11 +524,9 @@ function contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
 function contagionFilthFever(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FilthFever.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FilthFever.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FilthFever.description,
+                "ConvenientEffects.Dnd.FilthFever.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
@@ -578,11 +554,9 @@ function contagionFilthFever(): PreCreate<ActiveEffectSource> {
 function contagionFleshRot(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FleshRot.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FleshRot.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FleshRot.description,
+                "ConvenientEffects.Dnd.FleshRot.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
@@ -605,11 +579,9 @@ function contagionFleshRot(): PreCreate<ActiveEffectSource> {
 function contagionMindfire(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Mindfire.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Mindfire.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Mindfire.description,
+                "ConvenientEffects.Dnd.Mindfire.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
@@ -632,11 +604,9 @@ function contagionMindfire(): PreCreate<ActiveEffectSource> {
 function contagionSeizure(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Seizure.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Seizure.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Seizure.description,
+                "ConvenientEffects.Dnd.Seizure.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
@@ -664,11 +634,9 @@ function contagionSeizure(): PreCreate<ActiveEffectSource> {
 function contagionSlimyDoom(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SlimyDoom.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.SlimyDoom.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SlimyDoom.description,
+                "ConvenientEffects.Dnd.SlimyDoom.description",
             ),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
@@ -691,11 +659,9 @@ function contagionSlimyDoom(): PreCreate<ActiveEffectSource> {
 function darkvision(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Darkvision.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Darkvision.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Darkvision.description,
+                "ConvenientEffects.Dnd.Darkvision.description",
             ),
             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
@@ -726,11 +692,9 @@ function darkvision(): PreCreate<ActiveEffectSource> {
 function disguiseSelf(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DisguiseSelf.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.DisguiseSelf.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DisguiseSelf.description,
+                "ConvenientEffects.Dnd.DisguiseSelf.description",
             ),
             img: "icons/magic/control/debuff-energy-hold-teal-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -741,11 +705,9 @@ function disguiseSelf(): PreCreate<ActiveEffectSource> {
 function divineFavor(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineFavor.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.DivineFavor.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineFavor.description,
+                "ConvenientEffects.Dnd.DivineFavor.description",
             ),
             img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -762,11 +724,9 @@ function divineFavor(): PreCreate<ActiveEffectSource> {
 function divineWord(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineWord.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.DivineWord.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineWord.description,
+                "ConvenientEffects.Dnd.DivineWord.description",
             ),
             img: "icons/magic/light/explosion-star-large-orange-purple.webp",
         },
@@ -788,10 +748,10 @@ function enhanceAbility(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.EnhanceAbility.name,
+                "ConvenientEffects.Dnd.EnhanceAbility.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.EnhanceAbility.description,
+                "ConvenientEffects.Dnd.EnhanceAbility.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
         },
@@ -803,10 +763,10 @@ function enhanceAbilityBearsEndurance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BearsEndurance.name,
+                "ConvenientEffects.Dnd.BearsEndurance.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BearsEndurance.description,
+                "ConvenientEffects.Dnd.BearsEndurance.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -825,10 +785,10 @@ function enhanceAbilityBullsStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BullsStrength.name,
+                "ConvenientEffects.Dnd.BullsStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BullsStrength.description,
+                "ConvenientEffects.Dnd.BullsStrength.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -852,11 +812,9 @@ function enhanceAbilityBullsStrength(): PreCreate<ActiveEffectSource> {
 function enhanceAbilityCatsGrace(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CatsGrace.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CatsGrace.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CatsGrace.description,
+                "ConvenientEffects.Dnd.CatsGrace.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -875,10 +833,10 @@ function enhanceAbilityEaglesSplendor(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.EaglesSplendor.name,
+                "ConvenientEffects.Dnd.EaglesSplendor.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.EaglesSplendor.description,
+                "ConvenientEffects.Dnd.EaglesSplendor.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -896,11 +854,9 @@ function enhanceAbilityEaglesSplendor(): PreCreate<ActiveEffectSource> {
 function enhanceAbilityFoxsCunning() {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FoxsCunning.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FoxsCunning.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FoxsCunning.description,
+                "ConvenientEffects.Dnd.FoxsCunning.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -918,11 +874,9 @@ function enhanceAbilityFoxsCunning() {
 function enhanceAbilityOwlsWisdom() {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.OwlsWisdom.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.OwlsWisdom.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.OwlsWisdom.description,
+                "ConvenientEffects.Dnd.OwlsWisdom.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -944,10 +898,10 @@ function enlargeReduce(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.EnlargeReduce.name,
+                "ConvenientEffects.Dnd.EnlargeReduce.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.EnlargeReduce.description,
+                "ConvenientEffects.Dnd.EnlargeReduce.description",
             ),
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
         },
@@ -958,11 +912,9 @@ function enlargeReduce(): PreCreate<ActiveEffectSource> {
 function enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Enlarge.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Enlarge.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Enlarge.description,
+                "ConvenientEffects.Dnd.Enlarge.description",
             ),
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -991,9 +943,9 @@ function enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
 function enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Reduce.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Reduce.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Reduce.description,
+                "ConvenientEffects.Dnd.Reduce.description",
             ),
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1022,11 +974,9 @@ function enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
 function faerieFire(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FaerieFire.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FaerieFire.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FaerieFire.description,
+                "ConvenientEffects.Dnd.FaerieFire.description",
             ),
             img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1069,11 +1019,9 @@ function faerieFire(): PreCreate<ActiveEffectSource> {
 function falseLife(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FalseLife.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FalseLife.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FalseLife.description,
+                "ConvenientEffects.Dnd.FalseLife.description",
             ),
             img: "icons/magic/life/heart-cross-purple-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1084,11 +1032,9 @@ function falseLife(): PreCreate<ActiveEffectSource> {
 function featherFall(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FeatherFall.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FeatherFall.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FeatherFall.description,
+                "ConvenientEffects.Dnd.FeatherFall.description",
             ),
             img: "icons/magic/air/wind-swirl-pink-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1099,11 +1045,9 @@ function featherFall(): PreCreate<ActiveEffectSource> {
 function feeblemind(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Feeblemind.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Feeblemind.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Feeblemind.description,
+                "ConvenientEffects.Dnd.Feeblemind.description",
             ),
             img: "icons/magic/light/explosion-star-large-teal-purple.webp",
             changes: [
@@ -1133,11 +1077,9 @@ function fireShield(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FireShield.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FireShield.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FireShield.description,
+                "ConvenientEffects.Dnd.FireShield.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
         },
@@ -1149,11 +1091,10 @@ function fireShieldColdResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FireShieldColdResistance.name,
+                "ConvenientEffects.Dnd.FireShieldColdResistance.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FireShieldColdResistance
-                    .description,
+                "ConvenientEffects.Dnd.FireShieldColdResistance.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -1202,11 +1143,10 @@ function fireShieldFireResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FireShieldFireResistance.name,
+                "ConvenientEffects.Dnd.FireShieldFireResistance.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FireShieldFireResistance
-                    .description,
+                "ConvenientEffects.Dnd.FireShieldFireResistance.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -1254,11 +1194,9 @@ function fireShieldFireResistance(): PreCreate<ActiveEffectSource> {
 function findThePath(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FindThePath.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.FindThePath.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FindThePath.description,
+                "ConvenientEffects.Dnd.FindThePath.description",
             ),
             img: "icons/magic/light/explosion-star-teal.webp",
             duration: { seconds: SECONDS.IN_ONE_DAY },
@@ -1269,9 +1207,9 @@ function findThePath(): PreCreate<ActiveEffectSource> {
 function fly(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Fly.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Fly.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Fly.description,
+                "ConvenientEffects.Dnd.Fly.description",
             ),
             img: "icons/magic/control/energy-stream-link-white.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -1291,11 +1229,9 @@ function fly(): PreCreate<ActiveEffectSource> {
 function foresight(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Foresight.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Foresight.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Foresight.description,
+                "ConvenientEffects.Dnd.Foresight.description",
             ),
             img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
@@ -1334,10 +1270,10 @@ function freedomOfMovement(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FreedomOfMovement.name,
+                "ConvenientEffects.Dnd.FreedomOfMovement.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.FreedomOfMovement.description,
+                "ConvenientEffects.Dnd.FreedomOfMovement.description",
             ),
             img: "icons/skills/melee/strike-blade-knife-white-red.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1349,11 +1285,10 @@ function globeOfInvulnerability(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GlobeOfInvulnerability.name,
+                "ConvenientEffects.Dnd.GlobeOfInvulnerability.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GlobeOfInvulnerability
-                    .description,
+                "ConvenientEffects.Dnd.GlobeOfInvulnerability.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1375,10 +1310,10 @@ function greaterInvisibility(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GreaterInvisibility.name,
+                "ConvenientEffects.Dnd.GreaterInvisibility.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GreaterInvisibility.description,
+                "ConvenientEffects.Dnd.GreaterInvisibility.description",
             ),
             img: "icons/magic/air/fog-gas-smoke-swirling-gray.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1391,11 +1326,9 @@ function greaterInvisibility(): PreCreate<ActiveEffectSource> {
 function guidance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Guidance.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Guidance.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Guidance.description,
+                "ConvenientEffects.Dnd.Guidance.description",
             ),
             img: "icons/magic/control/buff-flight-wings-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1423,11 +1356,9 @@ function guidance(): PreCreate<ActiveEffectSource> {
 function guidingBolt(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GuidingBolt.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.GuidingBolt.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GuidingBolt.description,
+                "ConvenientEffects.Dnd.GuidingBolt.description",
             ),
             img: "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
@@ -1446,9 +1377,9 @@ function guidingBolt(): PreCreate<ActiveEffectSource> {
 function haste(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Haste.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Haste.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Haste.description,
+                "ConvenientEffects.Dnd.Haste.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1477,11 +1408,9 @@ function haste(): PreCreate<ActiveEffectSource> {
 function heroesFeast(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HeroesFeast.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HeroesFeast.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HeroesFeast.description,
+                "ConvenientEffects.Dnd.HeroesFeast.description",
             ),
             img: "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_DAY },
@@ -1509,11 +1438,9 @@ function heroesFeast(): PreCreate<ActiveEffectSource> {
 function heroism(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Heroism.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Heroism.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Heroism.description,
+                "ConvenientEffects.Dnd.Heroism.description",
             ),
             img: "icons/magic/life/heart-cross-strong-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1532,10 +1459,10 @@ function hideousLaughter(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HideousLaughter.name,
+                "ConvenientEffects.Dnd.HideousLaughter.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HideousLaughter.description,
+                "ConvenientEffects.Dnd.HideousLaughter.description",
             ),
             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1553,11 +1480,9 @@ function holdMonster(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HoldMonster.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HoldMonster.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HoldMonster.description,
+                "ConvenientEffects.Dnd.HoldMonster.description",
             ),
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1579,11 +1504,9 @@ function holdPerson(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HoldPerson.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HoldPerson.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HoldPerson.description,
+                "ConvenientEffects.Dnd.HoldPerson.description",
             ),
             img: "icons/magic/control/debuff-chains-ropes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1602,11 +1525,9 @@ function holdPerson(): PreCreate<ActiveEffectSource> {
 function holyAura(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HolyAura.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HolyAura.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HolyAura.description,
+                "ConvenientEffects.Dnd.HolyAura.description",
             ),
             img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1649,11 +1570,9 @@ function holyAura(): PreCreate<ActiveEffectSource> {
 function huntersMark(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HuntersMark.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HuntersMark.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HuntersMark.description,
+                "ConvenientEffects.Dnd.HuntersMark.description",
             ),
             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
         },
@@ -1666,11 +1585,9 @@ function invisibility(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Invisibility.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Invisibility.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Invisibility.description,
+                "ConvenientEffects.Dnd.Invisibility.description",
             ),
             img: "icons/magic/air/fog-gas-smoke-dense-gray.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1685,10 +1602,10 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.IrresistibleDance.name,
+                "ConvenientEffects.Dnd.IrresistibleDance.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.IrresistibleDance.description,
+                "ConvenientEffects.Dnd.IrresistibleDance.description",
             ),
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1722,9 +1639,9 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
 function jump(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Jump.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Jump.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Jump.description,
+                "ConvenientEffects.Dnd.Jump.description",
             ),
             img: "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1735,9 +1652,9 @@ function jump(): PreCreate<ActiveEffectSource> {
 function light(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Light.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Light.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Light.description,
+                "ConvenientEffects.Dnd.Light.description",
             ),
             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1775,11 +1692,9 @@ function light(): PreCreate<ActiveEffectSource> {
 function longstrider(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Longstrider.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Longstrider.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Longstrider.description,
+                "ConvenientEffects.Dnd.Longstrider.description",
             ),
             img: "icons/magic/air/wind-stream-blue-gray.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -1798,11 +1713,9 @@ function longstrider(): PreCreate<ActiveEffectSource> {
 function mageArmor(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.MageArmor.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.MageArmor.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.MageArmor.description,
+                "ConvenientEffects.Dnd.MageArmor.description",
             ),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
@@ -1821,11 +1734,9 @@ function mageArmor(): PreCreate<ActiveEffectSource> {
 function mindBlank(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.MindBlank.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.MindBlank.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.MindBlank.description,
+                "ConvenientEffects.Dnd.MindBlank.description",
             ),
             img: "icons/magic/air/air-burst-spiral-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_DAY },
@@ -1843,11 +1754,9 @@ function mindBlank(): PreCreate<ActiveEffectSource> {
 function mirrorImage(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.MirrorImage.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.MirrorImage.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.MirrorImage.description,
+                "ConvenientEffects.Dnd.MirrorImage.description",
             ),
             img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -1866,10 +1775,10 @@ function passWithoutTrace(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.PassWithoutTrace.name,
+                "ConvenientEffects.Dnd.PassWithoutTrace.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.PassWithoutTrace.description,
+                "ConvenientEffects.Dnd.PassWithoutTrace.description",
             ),
             img: "icons/magic/air/fog-gas-smoke-brown.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1902,10 +1811,10 @@ function protectionFromEnergy(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromEnergy.name,
+                "ConvenientEffects.Dnd.ProtectionFromEnergy.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromEnergy.description,
+                "ConvenientEffects.Dnd.ProtectionFromEnergy.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
         },
@@ -1917,10 +1826,10 @@ function protectionFromEnergyAcid(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromAcid.name,
+                "ConvenientEffects.Dnd.ProtectionFromAcid.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromAcid.description,
+                "ConvenientEffects.Dnd.ProtectionFromAcid.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1944,10 +1853,10 @@ function protectionFromEnergyCold(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromCold.name,
+                "ConvenientEffects.Dnd.ProtectionFromCold.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromCold.description,
+                "ConvenientEffects.Dnd.ProtectionFromCold.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1971,10 +1880,10 @@ function protectionFromEnergyFire(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromFire.name,
+                "ConvenientEffects.Dnd.ProtectionFromFire.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromFire.description,
+                "ConvenientEffects.Dnd.ProtectionFromFire.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -1998,11 +1907,10 @@ function protectionFromEnergyLightning(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromLightning.name,
+                "ConvenientEffects.Dnd.ProtectionFromLightning.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromLightning
-                    .description,
+                "ConvenientEffects.Dnd.ProtectionFromLightning.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -2026,10 +1934,10 @@ function protectionFromEnergyThunder(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromThunder.name,
+                "ConvenientEffects.Dnd.ProtectionFromThunder.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromThunder.description,
+                "ConvenientEffects.Dnd.ProtectionFromThunder.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -2053,10 +1961,10 @@ function protectionFromPoison(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromPoison.name,
+                "ConvenientEffects.Dnd.ProtectionFromPoison.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromPoison.description,
+                "ConvenientEffects.Dnd.ProtectionFromPoison.description",
             ),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -2080,11 +1988,10 @@ function protectionFromEvilAndGood(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromEvilAndGood.name,
+                "ConvenientEffects.Dnd.ProtectionFromEvilAndGood.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ProtectionFromEvilAndGood
-                    .description,
+                "ConvenientEffects.Dnd.ProtectionFromEvilAndGood.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2095,11 +2002,9 @@ function protectionFromEvilAndGood(): PreCreate<ActiveEffectSource> {
 function rayOfFrost(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.RayOfFrost.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RayOfFrost.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.RayOfFrost.description,
+                "ConvenientEffects.Dnd.RayOfFrost.description",
             ),
             img: "icons/magic/light/beam-rays-blue-small.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E },
@@ -2118,11 +2023,9 @@ function rayOfFrost(): PreCreate<ActiveEffectSource> {
 function regenerate(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Regenerate.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Regenerate.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Regenerate.description,
+                "ConvenientEffects.Dnd.Regenerate.description",
             ),
             img: "icons/magic/life/heart-cross-strong-flame-green.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -2141,10 +2044,10 @@ function resilientSphere(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ResilientSphere.name,
+                "ConvenientEffects.Dnd.ResilientSphere.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ResilientSphere.description,
+                "ConvenientEffects.Dnd.ResilientSphere.description",
             ),
             img: "icons/magic/light/explosion-star-large-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -2168,11 +2071,9 @@ function resilientSphere(): PreCreate<ActiveEffectSource> {
 function resistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Resistance.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Resistance.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Resistance.description,
+                "ConvenientEffects.Dnd.Resistance.description",
             ),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -2195,9 +2096,9 @@ function resistance(): PreCreate<ActiveEffectSource> {
 function shield(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Shield.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Shield.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Shield.description,
+                "ConvenientEffects.Dnd.Shield.description",
             ),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E },
@@ -2223,10 +2124,10 @@ function shieldOfFaith(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ShieldOfFaith.name,
+                "ConvenientEffects.Dnd.ShieldOfFaith.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ShieldOfFaith.description,
+                "ConvenientEffects.Dnd.ShieldOfFaith.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2249,9 +2150,9 @@ function shieldOfFaith(): PreCreate<ActiveEffectSource> {
 function slow(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Slow.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Slow.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Slow.description,
+                "ConvenientEffects.Dnd.Slow.description",
             ),
             img: "icons/magic/air/fog-gas-smoke-dense-pink.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -2281,10 +2182,10 @@ function speakWithAnimals(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpeakWithAnimals.name,
+                "ConvenientEffects.Dnd.SpeakWithAnimals.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpeakWithAnimals.description,
+                "ConvenientEffects.Dnd.SpeakWithAnimals.description",
             ),
             img: "icons/magic/nature/wolf-paw-glow-small-teal-blue.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2296,10 +2197,10 @@ function speakWithDead(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpeakWithDead.name,
+                "ConvenientEffects.Dnd.SpeakWithDead.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpeakWithDead.description,
+                "ConvenientEffects.Dnd.SpeakWithDead.description",
             ),
             img: "icons/magic/control/fear-fright-shadow-monster-green.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2311,10 +2212,10 @@ function speakWithPlants(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpeakWithPlants.name,
+                "ConvenientEffects.Dnd.SpeakWithPlants.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpeakWithPlants.description,
+                "ConvenientEffects.Dnd.SpeakWithPlants.description",
             ),
             img: "icons/magic/nature/leaf-glow-teal.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2325,11 +2226,9 @@ function speakWithPlants(): PreCreate<ActiveEffectSource> {
 function spiderClimb(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpiderClimb.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.SpiderClimb.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpiderClimb.description,
+                "ConvenientEffects.Dnd.SpiderClimb.description",
             ),
             img: "icons/magic/control/debuff-chains-blue.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2349,10 +2248,10 @@ function spiritGuardians(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpiritGuardians.name,
+                "ConvenientEffects.Dnd.SpiritGuardians.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpiritGuardians.description,
+                "ConvenientEffects.Dnd.SpiritGuardians.description",
             ),
             img: "icons/magic/light/projectile-bolts-salvo-white.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2364,10 +2263,10 @@ function spiritualWeapon(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpiritualWeapon.name,
+                "ConvenientEffects.Dnd.SpiritualWeapon.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.SpiritualWeapon.description,
+                "ConvenientEffects.Dnd.SpiritualWeapon.description",
             ),
             img: "icons/magic/fire/dagger-rune-enchant-flame-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
@@ -2378,11 +2277,9 @@ function spiritualWeapon(): PreCreate<ActiveEffectSource> {
 function stoneskin(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Stoneskin.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Stoneskin.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Stoneskin.description,
+                "ConvenientEffects.Dnd.Stoneskin.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -2405,11 +2302,9 @@ function stoneskin(): PreCreate<ActiveEffectSource> {
 function suggestion(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Suggestion.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Suggestion.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Suggestion.description,
+                "ConvenientEffects.Dnd.Suggestion.description",
             ),
             img: "icons/magic/air/air-burst-spiral-pink.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
@@ -2420,11 +2315,9 @@ function suggestion(): PreCreate<ActiveEffectSource> {
 function telekinesis(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Telekinesis.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Telekinesis.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Telekinesis.description,
+                "ConvenientEffects.Dnd.Telekinesis.description",
             ),
             img: "icons/magic/control/debuff-energy-hold-levitate-yellow.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
@@ -2435,11 +2328,9 @@ function telekinesis(): PreCreate<ActiveEffectSource> {
 function trueStrike(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.TrueStrike.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.TrueStrike.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.TrueStrike.description,
+                "ConvenientEffects.Dnd.TrueStrike.description",
             ),
             img: "icons/magic/fire/dagger-rune-enchant-blue-gray.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
@@ -2459,10 +2350,10 @@ function viciousMockery(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ViciousMockery.name,
+                "ConvenientEffects.Dnd.ViciousMockery.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.ViciousMockery.description,
+                "ConvenientEffects.Dnd.ViciousMockery.description",
             ),
             img: "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
@@ -2481,11 +2372,9 @@ function viciousMockery(): PreCreate<ActiveEffectSource> {
 function wardingBond(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.WardingBond.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.WardingBond.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.WardingBond.description,
+                "ConvenientEffects.Dnd.WardingBond.description",
             ),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
@@ -2519,10 +2408,10 @@ function waterBreathing(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.WaterBreathing.name,
+                "ConvenientEffects.Dnd.WaterBreathing.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.WaterBreathing.description,
+                "ConvenientEffects.Dnd.WaterBreathing.description",
             ),
             img: "icons/magic/water/pseudopod-swirl-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_DAY },
@@ -2533,11 +2422,9 @@ function waterBreathing(): PreCreate<ActiveEffectSource> {
 function waterWalk(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.WaterWalk.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.WaterWalk.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.WaterWalk.description,
+                "ConvenientEffects.Dnd.WaterWalk.description",
             ),
             img: "icons/creatures/slimes/slime-movement-swirling-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },

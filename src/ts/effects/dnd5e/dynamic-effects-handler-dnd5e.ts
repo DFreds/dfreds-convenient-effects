@@ -13,22 +13,22 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
         switch (effect.name.toLowerCase()) {
             case game.i18n
-                .localize(EN_JSON.ConvenientEffects.Dnd.DivineWord.name)
+                .localize("ConvenientEffects.Dnd.DivineWord.name")
                 .toLowerCase():
                 await this.#addDivineWordEffects(effect, actor);
                 break;
             case game.i18n
-                .localize(EN_JSON.ConvenientEffects.Dnd.Enlarge.name)
+                .localize("ConvenientEffects.Dnd.Enlarge.name")
                 .toLowerCase():
                 this.#addEnlargeEffects(effect, actor);
                 break;
             case game.i18n
-                .localize(EN_JSON.ConvenientEffects.Dnd.Rage.name)
+                .localize("ConvenientEffects.Dnd.Rage.name")
                 .toLowerCase():
                 this.#addRageEffects(effect, actor);
                 break;
             case game.i18n
-                .localize(EN_JSON.ConvenientEffects.Dnd.Reduce.name)
+                .localize("ConvenientEffects.Dnd.Reduce.name")
                 .toLowerCase():
                 this.#addReduceEffects(effect, actor);
                 break;
@@ -49,71 +49,71 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             });
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Dead.name,
+                    "ConvenientEffects.Dnd.Dead.name",
                 ),
                 uuid: actor.uuid,
                 overlay: true,
             });
             effect.description = game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineWord.dead,
+                "ConvenientEffects.Dnd.DivineWord.dead",
             );
         } else if (remainingHp <= 30) {
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Blinded.name,
+                    "ConvenientEffects.Dnd.Blinded.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Deafened.name,
+                    "ConvenientEffects.Dnd.Deafened.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Stunned.name,
+                    "ConvenientEffects.Dnd.Stunned.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
             effect.description = game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineWord.stunned,
+                "ConvenientEffects.Dnd.DivineWord.stunned",
             );
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_ONE_HOUR;
         } else if (remainingHp <= 40) {
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Blinded.name,
+                    "ConvenientEffects.Dnd.Blinded.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Deafened.name,
+                    "ConvenientEffects.Dnd.Deafened.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
             effect.description = game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineWord.blinded,
+                "ConvenientEffects.Dnd.DivineWord.blinded",
             );
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_TEN_MINUTES;
         } else if (remainingHp <= 50) {
             await game.dfreds.effectInterface.addEffect({
                 effectName: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Deafened.name,
+                    "ConvenientEffects.Dnd.Deafened.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
             effect.description = game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.DivineWord.deafened,
+                "ConvenientEffects.Dnd.DivineWord.deafened",
             );
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_ONE_MINUTE;
@@ -179,9 +179,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
         if (!barbarianClass) {
             ui.notifications.warn(
-                game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Rage.notABarbarian,
-                ),
+                game.i18n.localize("ConvenientEffects.Dnd.Rage.notABarbarian"),
             );
             return;
         }
@@ -203,7 +201,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 item.type === "feat" &&
                 item.name ===
                     game.i18n.localize(
-                        EN_JSON.ConvenientEffects.Dnd.Rage.bearTotemFeat,
+                        "ConvenientEffects.Dnd.Rage.bearTotemFeat",
                     ),
         );
 

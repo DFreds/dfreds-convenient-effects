@@ -40,7 +40,7 @@ class ConvenientEffectsApp extends Application {
                     contentSelector: ".directory-list",
                 },
             ],
-            title: EN_JSON.ConvenientEffects.AppName,
+            title: "ConvenientEffects.AppName",
             template:
                 "modules/dfreds-convenient-effects/templates/convenient-effects-app.hbs",
         });
@@ -265,7 +265,7 @@ class ConvenientEffectsApp extends Application {
                     ),
                 },
                 {
-                    name: EN_JSON.ConvenientEffects.ShowFolder,
+                    name: "ConvenientEffects.ShowFolder",
                     icon: '<i class="fas fa-eye fa-fw"></i>',
                     condition: (target: JQuery): boolean => {
                         return (
@@ -278,7 +278,7 @@ class ConvenientEffectsApp extends Application {
                     },
                 },
                 {
-                    name: EN_JSON.ConvenientEffects.HideFolder,
+                    name: "ConvenientEffects.HideFolder",
                     icon: '<i class="fas fa-eye-slash fa-fw"></i>',
                     condition: (target: JQuery): boolean => {
                         return (
@@ -315,7 +315,7 @@ class ConvenientEffectsApp extends Application {
 
         ContextMenu.create(this, this.#rootView, ".convenient-effect", [
             {
-                name: EN_JSON.ConvenientEffects.EditEffect,
+                name: "ConvenientEffects.EditEffect",
                 icon: '<i class="fas fa-edit fa-fw"></i>',
                 condition: this.#controller.isUserFolderOwner.bind(
                     this.#controller,
@@ -325,7 +325,7 @@ class ConvenientEffectsApp extends Application {
                 },
             },
             {
-                name: EN_JSON.ConvenientEffects.DeleteEffect,
+                name: "ConvenientEffects.DeleteEffect",
                 icon: '<i class="fas fa-trash fa-fw"></i>',
                 condition: this.#controller.isUserFolderOwner.bind(
                     this.#controller,
@@ -335,14 +335,14 @@ class ConvenientEffectsApp extends Application {
                 ),
             },
             {
-                name: EN_JSON.ConvenientEffects.ToggleAsOverlay,
+                name: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="far fa-dot-circle fa-fw"></i>',
                 callback: this.#controller.onToggleOverlay.bind(
                     this.#controller,
                 ),
             },
             {
-                name: EN_JSON.ConvenientEffects.ToggleStatusEffect,
+                name: "ConvenientEffects.ToggleStatusEffect",
                 icon: '<i class="far fa-person-rays fa-fw"></i>',
                 condition: this.#controller.canToggleStatusEffect.bind(
                     this.#controller,
@@ -362,7 +362,7 @@ class ConvenientEffectsApp extends Application {
                 ),
             },
             {
-                name: EN_JSON.ConvenientEffects.ShowEffect,
+                name: "ConvenientEffects.ShowEffect",
                 icon: '<i class="fas fa-eye fa-fw"></i>',
                 condition: (target: JQuery): boolean => {
                     return (
@@ -375,7 +375,7 @@ class ConvenientEffectsApp extends Application {
                 },
             },
             {
-                name: EN_JSON.ConvenientEffects.HideEffect,
+                name: "ConvenientEffects.HideEffect",
                 icon: '<i class="fas fa-eye-slash fa-fw"></i>',
                 condition: (target: JQuery): boolean => {
                     return (

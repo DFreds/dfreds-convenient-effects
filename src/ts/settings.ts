@@ -17,19 +17,19 @@ class Settings {
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
-            EN_JSON.ConvenientEffects.SettingPlayer,
+            "ConvenientEffects.Setting.Player",
         );
         this.#USER_ROLES[CONST.USER_ROLES.TRUSTED] = game.i18n.localize(
-            EN_JSON.ConvenientEffects.SettingTrustedPlayer,
+            "ConvenientEffects.Setting.TrustedPlayer",
         );
         this.#USER_ROLES[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize(
-            EN_JSON.ConvenientEffects.SettingAssistantGM,
+            "ConvenientEffects.Setting.AssistantGM",
         );
         this.#USER_ROLES[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize(
-            EN_JSON.ConvenientEffects.SettingGameMaster,
+            "ConvenientEffects.Setting.GameMaster",
         );
         this.#USER_ROLES[5] = game.i18n.localize(
-            EN_JSON.ConvenientEffects.SettingNone,
+            "ConvenientEffects.Setting.None",
         );
     }
 
@@ -54,8 +54,8 @@ class Settings {
 
     #registerAppControlsPermission(): void {
         game.settings.register(MODULE_ID, this.#APP_CONTROLS_PERMISSION, {
-            name: EN_JSON.ConvenientEffects.SettingAppControlsPermissionName,
-            hint: EN_JSON.ConvenientEffects.SettingAppControlsPermissionHint,
+            name: "ConvenientEffects.Setting.AppControlsPermissionName",
+            hint: "ConvenientEffects.Setting.AppControlsPermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,
@@ -67,8 +67,8 @@ class Settings {
 
     #registerCreateFoldersPermission(): void {
         game.settings.register(MODULE_ID, this.#CREATE_FOLDERS_PERMISSION, {
-            name: EN_JSON.ConvenientEffects.SettingCreateFoldersPermissionName,
-            hint: EN_JSON.ConvenientEffects.SettingCreateFoldersPermissionHint,
+            name: "ConvenientEffects.Setting.CreateFoldersPermissionName",
+            hint: "ConvenientEffects.Setting.CreateFoldersPermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,

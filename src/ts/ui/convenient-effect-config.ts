@@ -34,7 +34,7 @@ class ConvenientEffectConfig extends FormApplication<
         // todo add to ui extender?
         if (app.document.isOwner || game.user.isGM) {
             const openButton = $(
-                `<a class="header-button control open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize(EN_JSON.ConvenientEffects.ConfigLabel)}</a>`,
+                `<a class="header-button control open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize("ConvenientEffects.ConfigLabel")}</a>`,
             );
             openButton.click(async (_event) => {
                 let convenientConfig = null;
@@ -64,7 +64,7 @@ class ConvenientEffectConfig extends FormApplication<
     static override get defaultOptions(): FormApplicationOptions {
         return foundry.utils.mergeObject(super.defaultOptions, {
             id: "convenient-effect-config",
-            title: EN_JSON.ConvenientEffects.ConfigTitle,
+            title: "ConvenientEffects.ConfigTitle",
             popOut: true,
             template:
                 "modules/dfreds-convenient-effects/templates/convenient-effect-config.hbs",

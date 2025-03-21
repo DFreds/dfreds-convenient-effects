@@ -10,7 +10,7 @@ function magicItems(): ItemEffects {
     return {
         itemData: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Folders.MagicItems,
+                "ConvenientEffects.Dnd.Folders.MagicItems",
             ),
         },
         effects: [
@@ -66,10 +66,10 @@ function amuletOfHealth(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AmuletOfHealth.name,
+                "ConvenientEffects.Dnd.AmuletOfHealth.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.AmuletOfHealth.description,
+                "ConvenientEffects.Dnd.AmuletOfHealth.description",
             ),
             img: "icons/equipment/neck/pendant-faceted-red.webp",
             changes: [
@@ -88,10 +88,10 @@ function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfDwarvenkind.name,
+                "ConvenientEffects.Dnd.BeltOfDwarvenkind.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfDwarvenkind.description,
+                "ConvenientEffects.Dnd.BeltOfDwarvenkind.description",
             ),
             img: "icons/equipment/waist/belt-armored-steel.webp",
             changes: [
@@ -155,10 +155,10 @@ function beltOfGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfGiantStrength.description,
+                "ConvenientEffects.Dnd.BeltOfGiantStrength.description",
             ),
             img: "icons/equipment/waist/belt-armored-steel.webp",
         },
@@ -171,11 +171,10 @@ function beltOfHillGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfHillGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfHillGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfHillGiantStrength
-                    .description,
+                "ConvenientEffects.Dnd.BeltOfHillGiantStrength.description",
             ),
             img: "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
             changes: [
@@ -193,11 +192,10 @@ function beltOfStoneGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfStoneGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfStoneGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfStoneGiantStrength
-                    .description,
+                "ConvenientEffects.Dnd.BeltOfStoneGiantStrength.description",
             ),
             img: "icons/equipment/waist/belt-armored-steel.webp",
             changes: [
@@ -215,11 +213,10 @@ function beltOfFrostGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfFrostGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfFrostGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfFrostGiantStrength
-                    .description,
+                "ConvenientEffects.Dnd.BeltOfFrostGiantStrength.description",
             ),
             img: "icons/equipment/waist/cloth-sash-purple.webp",
             changes: [
@@ -237,11 +234,10 @@ function beltOfFireGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfFireGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfFireGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfFireGiantStrength
-                    .description,
+                "ConvenientEffects.Dnd.BeltOfFireGiantStrength.description",
             ),
             img: "icons/equipment/waist/belt-coiled-leather-steel.webp",
             changes: [
@@ -259,11 +255,10 @@ function beltOfCloudGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfCloudGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfCloudGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfCloudGiantStrength
-                    .description,
+                "ConvenientEffects.Dnd.BeltOfCloudGiantStrength.description",
             ),
             img: "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
             changes: [
@@ -281,11 +276,10 @@ function beltOfStormGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfStormGiantStrength.name,
+                "ConvenientEffects.Dnd.BeltOfStormGiantStrength.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BeltOfStormGiantStrength
-                    .description,
+                "ConvenientEffects.Dnd.BeltOfStormGiantStrength.description",
             ),
             img: "icons/equipment/waist/sash-cloth-gold-purple.webp",
             changes: [
@@ -303,10 +297,10 @@ function bracersOfArchery(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BracersOfArchery.name,
+                "ConvenientEffects.Dnd.BracersOfArchery.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BracersOfArchery.description,
+                "ConvenientEffects.Dnd.BracersOfArchery.description",
             ),
             img: "icons/equipment/wrist/bracer-banded-leather.webp",
             changes: [
@@ -334,10 +328,10 @@ function bracersOfDefense(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BracersOfDefense.name,
+                "ConvenientEffects.Dnd.BracersOfDefense.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BracersOfDefense.description,
+                "ConvenientEffects.Dnd.BracersOfDefense.description",
             ),
             img: "icons/equipment/wrist/bracer-yellow-fancy.webp",
             changes: [
@@ -356,10 +350,10 @@ function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.RingOfAcidResistance.name,
+                "ConvenientEffects.Dnd.RingOfAcidResistance.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.RingOfAcidResistance.description,
+                "ConvenientEffects.Dnd.RingOfAcidResistance.description",
             ),
             img: "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
             changes: [

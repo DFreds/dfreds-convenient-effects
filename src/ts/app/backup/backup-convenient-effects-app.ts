@@ -83,7 +83,7 @@ class BackupConvenientEffectsApp extends Application {
                     contentSelector: ".directory-list",
                 },
             ],
-            title: EN_JSON.ConvenientEffects.BackupAppName,
+            title: "ConvenientEffects.BackupAppName",
             template:
                 "modules/dfreds-convenient-effects/templates/backup-convenient-effects-app.hbs",
         });

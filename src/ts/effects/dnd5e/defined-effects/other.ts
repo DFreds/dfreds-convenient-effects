@@ -19,9 +19,7 @@ import { attackBonus, damageBonus } from "../changes/bonuses.ts";
 function other(): ItemEffects {
     return {
         itemData: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Folders.Other,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Folders.Other"),
         },
         effects: [
             bonusAction(),
@@ -46,11 +44,9 @@ function other(): ItemEffects {
 function bonusAction(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BonusAction.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BonusAction.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.BonusAction.description,
+                "ConvenientEffects.Dnd.BonusAction.description",
             ),
             img: "modules/dfreds-convenient-effects/images/bonus-action.svg",
             flags: {
@@ -65,11 +61,9 @@ function bonusAction(): PreCreate<ActiveEffectSource> {
 function coverHalf(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CoverHalf.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CoverHalf.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CoverHalf.description,
+                "ConvenientEffects.Dnd.CoverHalf.description",
             ),
             img: "modules/dfreds-convenient-effects/images/broken-wall.svg",
             tint: "#dae34f",
@@ -90,10 +84,10 @@ function coverThreeQuarters(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CoverThreeQuarters.name,
+                "ConvenientEffects.Dnd.CoverThreeQuarters.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CoverThreeQuarters.description,
+                "ConvenientEffects.Dnd.CoverThreeQuarters.description",
             ),
             img: "modules/dfreds-convenient-effects/images/brick-wall.svg",
             changes: [
@@ -112,11 +106,9 @@ function coverThreeQuarters(): PreCreate<ActiveEffectSource> {
 function coverTotal(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CoverTotal.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CoverTotal.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.CoverTotal.description,
+                "ConvenientEffects.Dnd.CoverTotal.description",
             ),
             img: "modules/dfreds-convenient-effects/images/castle.svg",
             changes: [grantFailAttack({ attackType: "all" })],
@@ -127,11 +119,9 @@ function coverTotal(): PreCreate<ActiveEffectSource> {
 function encumbered(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Encumbered.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Encumbered.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Encumbered.description,
+                "ConvenientEffects.Dnd.Encumbered.description",
             ),
             img: "icons/svg/down.svg",
             statuses: ["encumbered"],
@@ -149,9 +139,9 @@ function encumbered(): PreCreate<ActiveEffectSource> {
 function dodge(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Dodge.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Dodge.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Dodge.description,
+                "ConvenientEffects.Dnd.Dodge.description",
             ),
             img: "modules/dfreds-convenient-effects/images/dodging.svg",
             statuses: ["dodging"],
@@ -174,11 +164,9 @@ function dodge(): PreCreate<ActiveEffectSource> {
 function flanked(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Flanked.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Flanked.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Flanked.description,
+                "ConvenientEffects.Dnd.Flanked.description",
             ),
             img: "modules/dfreds-convenient-effects/images/encirclement.svg",
             changes: [
@@ -196,11 +184,9 @@ function flanked(): PreCreate<ActiveEffectSource> {
 function flanking(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Flanking.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Flanking.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Flanking.description,
+                "ConvenientEffects.Dnd.Flanking.description",
             ),
             img: "icons/svg/sword.svg",
             changes: [
@@ -219,10 +205,10 @@ function greatWeaponMaster(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GreatWeaponMaster.name,
+                "ConvenientEffects.Dnd.GreatWeaponMaster.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.GreatWeaponMaster.description,
+                "ConvenientEffects.Dnd.GreatWeaponMaster.description",
             ),
             img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
             changes: [
@@ -243,10 +229,10 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HeavilyEncumbered.name,
+                "ConvenientEffects.Dnd.HeavilyEncumbered.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.HeavilyEncumbered.description,
+                "ConvenientEffects.Dnd.HeavilyEncumbered.description",
             ),
             img: "icons/svg/downgrade.svg",
             statuses: ["heavilyEncumbered"],
@@ -276,11 +262,9 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
 function inspiration(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Inspiration.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Inspiration.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Inspiration.description,
+                "ConvenientEffects.Dnd.Inspiration.description",
             ),
             img: "icons/magic/control/buff-luck-fortune-green.webp",
             flags: {
@@ -302,10 +286,10 @@ function rangedDisadvantage(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.RangedDisadvantage.name,
+                "ConvenientEffects.Dnd.RangedDisadvantage.name",
             ),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.RangedDisadvantage.description,
+                "ConvenientEffects.Dnd.RangedDisadvantage.description",
             ),
             img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
             changes: [
@@ -323,11 +307,9 @@ function rangedDisadvantage(): PreCreate<ActiveEffectSource> {
 function reaction(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Reaction.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Reaction.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Reaction.description,
+                "ConvenientEffects.Dnd.Reaction.description",
             ),
             img: "modules/dfreds-convenient-effects/images/reaction.svg",
             flags: {
@@ -342,9 +324,9 @@ function reaction(): PreCreate<ActiveEffectSource> {
 function ready(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Ready.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Ready.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Ready.description,
+                "ConvenientEffects.Dnd.Ready.description",
             ),
             img: "modules/dfreds-convenient-effects/images/ready.svg",
             flags: { dae: { specialDuration: ["turnStart"] } },
@@ -355,11 +337,9 @@ function ready(): PreCreate<ActiveEffectSource> {
 function sharpshooter(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Sharpshooter.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Sharpshooter.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Sharpshooter.description,
+                "ConvenientEffects.Dnd.Sharpshooter.description",
             ),
             img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
             changes: [

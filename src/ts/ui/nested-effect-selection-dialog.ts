@@ -34,7 +34,7 @@ async function getNestedEffectSelection(
             buttons: {
                 ok: {
                     icon: '<i class="fas fa-check"></i>',
-                    label: EN_JSON.ConvenientEffects.SelectEffect,
+                    label: "ConvenientEffects.SelectEffect",
                     // @ts-expect-error Complains about returning, but works
                     callback: (html: JQuery) => {
                         const htmlChoice = html

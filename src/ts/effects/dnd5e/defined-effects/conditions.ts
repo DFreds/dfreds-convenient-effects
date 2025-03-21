@@ -24,7 +24,7 @@ function conditions(): ItemEffects {
     return {
         itemData: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Folders.Conditions,
+                "ConvenientEffects.Dnd.Folders.Conditions",
             ),
         },
         effects: [
@@ -57,11 +57,9 @@ function conditions(): ItemEffects {
 function blinded(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Blinded.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Blinded.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Blinded.description,
+                "ConvenientEffects.Dnd.Blinded.description",
             ),
             img: "modules/dfreds-convenient-effects/images/blinded.svg",
             statuses: ["blinded"],
@@ -80,12 +78,10 @@ function blinded(): PreCreate<ActiveEffectSource> {
 function charmed(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Charmed.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Charmed.name"),
             statuses: ["charmed"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Charmed.description,
+                "ConvenientEffects.Dnd.Charmed.description",
             ),
             img: "modules/dfreds-convenient-effects/images/charmed.svg",
         },
@@ -96,11 +92,11 @@ function concentrating(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Concentrating.name,
+                "ConvenientEffects.Dnd.Concentrating.name",
             ),
             statuses: ["concentrating"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Concentrating.description,
+                "ConvenientEffects.Dnd.Concentrating.description",
             ),
             img: "modules/dfreds-convenient-effects/images/concentrating.svg",
         },
@@ -110,10 +106,10 @@ function concentrating(): PreCreate<ActiveEffectSource> {
 function dead(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Dead.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Dead.name"),
             statuses: ["dead"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Dead.description,
+                "ConvenientEffects.Dnd.Dead.description",
             ),
             img: "icons/svg/skull.svg",
         },
@@ -123,12 +119,10 @@ function dead(): PreCreate<ActiveEffectSource> {
 function deafened(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Deafened.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
             statuses: ["deafened"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Deafened.description,
+                "ConvenientEffects.Dnd.Deafened.description",
             ),
             img: "modules/dfreds-convenient-effects/images/deafened.svg",
         },
@@ -138,12 +132,10 @@ function deafened(): PreCreate<ActiveEffectSource> {
 function exhaustion1(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion1.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.name"),
             statuses: ["exhaustion"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion1.description,
+                "ConvenientEffects.Dnd.Exhaustion1.description",
             ),
             img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
             flags: { dnd5e: { exhaustionLevel: 1 } },
@@ -163,12 +155,10 @@ function exhaustion1(): PreCreate<ActiveEffectSource> {
 function exhaustion2(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion2.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.name"),
             statuses: ["exhaustion"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion2.description,
+                "ConvenientEffects.Dnd.Exhaustion2.description",
             ),
             img: "modules/dfreds-convenient-effects/images/exhaustion2.svg",
             flags: { dnd5e: { exhaustionLevel: 2 } },
@@ -193,12 +183,10 @@ function exhaustion2(): PreCreate<ActiveEffectSource> {
 function exhaustion3(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion3.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.name"),
             statuses: ["exhaustion"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion3.description,
+                "ConvenientEffects.Dnd.Exhaustion3.description",
             ),
             img: "modules/dfreds-convenient-effects/images/exhaustion3.svg",
             flags: { dnd5e: { exhaustionLevel: 3 } },
@@ -229,12 +217,10 @@ function exhaustion3(): PreCreate<ActiveEffectSource> {
 function exhaustion4(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion4.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.name"),
             statuses: ["exhaustion"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion4.description,
+                "ConvenientEffects.Dnd.Exhaustion4.description",
             ),
             img: "modules/dfreds-convenient-effects/images/exhaustion4.svg",
             flags: { dnd5e: { exhaustionLevel: 4 } },
@@ -265,12 +251,10 @@ function exhaustion4(): PreCreate<ActiveEffectSource> {
 function exhaustion5(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion5.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.name"),
             statuses: ["exhaustion"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Exhaustion5.description,
+                "ConvenientEffects.Dnd.Exhaustion5.description",
             ),
             img: "modules/dfreds-convenient-effects/images/exhaustion5.svg",
             flags: { dnd5e: { exhaustionLevel: 5 } },
@@ -301,12 +285,10 @@ function exhaustion5(): PreCreate<ActiveEffectSource> {
 function frightened(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Frightened.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Frightened.name"),
             statuses: ["frightened"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Frightened.description,
+                "ConvenientEffects.Dnd.Frightened.description",
             ),
             img: "modules/dfreds-convenient-effects/images/frightened.svg",
             changes: [
@@ -324,12 +306,10 @@ function frightened(): PreCreate<ActiveEffectSource> {
 function grappled(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Grappled.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Grappled.name"),
             statuses: ["grappled"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Grappled.description,
+                "ConvenientEffects.Dnd.Grappled.description",
             ),
             img: "modules/dfreds-convenient-effects/images/grappled.svg",
             changes: [
@@ -347,11 +327,11 @@ function incapacitated(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Incapacitated.name,
+                "ConvenientEffects.Dnd.Incapacitated.name",
             ),
             statuses: ["incapacitated"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Incapacitated.description,
+                "ConvenientEffects.Dnd.Incapacitated.description",
             ),
             img: "modules/dfreds-convenient-effects/images/incapacitated.svg",
         },
@@ -361,12 +341,10 @@ function incapacitated(): PreCreate<ActiveEffectSource> {
 function invisible(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Invisible.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Invisible.name"),
             statuses: ["invisible"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Invisible.description,
+                "ConvenientEffects.Dnd.Invisible.description",
             ),
             img: "modules/dfreds-convenient-effects/images/invisible.svg",
             changes: [
@@ -387,11 +365,9 @@ function paralyzed(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Paralyzed.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Paralyzed.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Paralyzed.description,
+                "ConvenientEffects.Dnd.Paralyzed.description",
             ),
             img: "modules/dfreds-convenient-effects/images/paralyzed.svg",
             statuses: ["paralyzed"],
@@ -425,12 +401,10 @@ function petrified(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Petrified.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Petrified.name"),
             statuses: ["petrified"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Petrified.description,
+                "ConvenientEffects.Dnd.Petrified.description",
             ),
             img: "modules/dfreds-convenient-effects/images/petrified.svg",
             changes: [
@@ -461,12 +435,10 @@ function petrified(): PreCreate<ActiveEffectSource> {
 function poisoned(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Poisoned.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Poisoned.name"),
             statuses: ["poisoned"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Poisoned.description,
+                "ConvenientEffects.Dnd.Poisoned.description",
             ),
             img: "modules/dfreds-convenient-effects/images/poisoned.svg",
             changes: [
@@ -486,10 +458,10 @@ function poisoned(): PreCreate<ActiveEffectSource> {
 function prone(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(EN_JSON.ConvenientEffects.Dnd.Prone.name),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Prone.name"),
             statuses: ["prone"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Prone.description,
+                "ConvenientEffects.Dnd.Prone.description",
             ),
             img: "modules/dfreds-convenient-effects/images/prone.svg",
             changes: [
@@ -521,12 +493,10 @@ function prone(): PreCreate<ActiveEffectSource> {
 function restrained(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Restrained.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Restrained.name"),
             statuses: ["restrained"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Restrained.description,
+                "ConvenientEffects.Dnd.Restrained.description",
             ),
             img: "modules/dfreds-convenient-effects/images/restrained.svg",
             changes: [
@@ -562,12 +532,10 @@ function stunned(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Stunned.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Stunned.name"),
             statuses: ["stunned"],
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Stunned.description,
+                "ConvenientEffects.Dnd.Stunned.description",
             ),
             img: "modules/dfreds-convenient-effects/images/stunned.svg",
             changes: [
@@ -593,11 +561,9 @@ function unconscious(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             statuses: ["unconscious"],
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Unconscious.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Unconscious.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Unconscious.description,
+                "ConvenientEffects.Dnd.Unconscious.description",
             ),
             img: "icons/svg/unconscious.svg",
             changes: [
@@ -627,11 +593,9 @@ function unconscious(): PreCreate<ActiveEffectSource> {
 function wounded(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Wounded.name,
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Wounded.name"),
             description: game.i18n.localize(
-                EN_JSON.ConvenientEffects.Dnd.Wounded.description,
+                "ConvenientEffects.Dnd.Wounded.description",
             ),
             img: "modules/dfreds-convenient-effects/images/wounded.svg",
         },

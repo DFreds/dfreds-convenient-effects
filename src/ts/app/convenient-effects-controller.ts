@@ -329,7 +329,7 @@ class ConvenientEffectsController {
 
         const newEffect = createConvenientEffect({
             effect: {
-                name: game.i18n.localize(EN_JSON.ConvenientEffects.NewEffect),
+                name: game.i18n.localize("ConvenientEffects.NewEffect"),
                 img: "icons/svg/aura.svg",
             },
         });
@@ -616,7 +616,7 @@ class ConvenientEffectsController {
             } else {
                 ui.notifications.warn(
                     game.i18n.format(
-                        EN_JSON.ConvenientEffects.NoPermissionToRemoveEffect,
+                        "ConvenientEffects.NoPermissionToRemoveEffect",
                         {
                             effectName: effect.name,
                             originalFolderName: originalFolder?.name ?? "",
@@ -627,13 +627,10 @@ class ConvenientEffectsController {
             }
         } else {
             ui.notifications.warn(
-                game.i18n.format(
-                    EN_JSON.ConvenientEffects.NoPermissionToAddEffect,
-                    {
-                        effectName: effect.name,
-                        newFolderName: newFolder?.name ?? "",
-                    },
-                ),
+                game.i18n.format("ConvenientEffects.NoPermissionToAddEffect", {
+                    effectName: effect.name,
+                    newFolderName: newFolder?.name ?? "",
+                }),
             );
         }
     }
