@@ -1,4 +1,3 @@
-import { DEBUG } from "../constants.ts";
 import { findFolders } from "../utils/finds.ts";
 
 function removeConvenientItemsFromSidebar(
@@ -14,7 +13,7 @@ function removeConvenientItemsFromSidebar(
     const folderIds = [...nonBackupFolders, ...backupFolderIds];
 
     if (!folderIds) return;
-    if (DEBUG) return;
+    if (BUILD_MODE === "development") return;
 
     const html = directory.element;
     folderIds.forEach((convenientItemId) => {

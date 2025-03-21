@@ -3,7 +3,6 @@ import { Settings } from "../settings.ts";
 import { error, log } from "../logger.ts";
 import { getBaseType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
-import { DEBUG } from "../constants.ts";
 import { Flags } from "../utils/flags.ts";
 
 abstract class EffectDefinition {
@@ -16,7 +15,7 @@ abstract class EffectDefinition {
     }
 
     async initialize(): Promise<void> {
-        if (DEBUG || !this.settings.hasInitialized) {
+        if (BUILD_MODE === "development" || !this.settings.hasInitialized) {
             await this.#createItemsAndEffects({ backup: false });
             await this.#createItemsAndEffects({ backup: true });
 

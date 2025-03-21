@@ -1,7 +1,7 @@
 import { Listener } from "./index.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { log } from "../logger.ts";
-import { DEBUG, MODULE_ID } from "../constants.ts";
+import { MODULE_ID } from "../constants.ts";
 
 const CreateEffects: Listener = {
     listen(): void {
@@ -10,7 +10,7 @@ const CreateEffects: Listener = {
             // multiple are logged in
             if (game.user !== game.users.activeGM) return;
 
-            if (DEBUG) {
+            if (BUILD_MODE === "development") {
                 await game.dfreds.effectInterface.resetSystemInitialization({
                     confirm: false,
                 });

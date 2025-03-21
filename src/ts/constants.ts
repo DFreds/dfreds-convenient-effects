@@ -2,8 +2,6 @@ import moduleData from "@static/module.json" assert { type: "json" };
 
 export const MODULE_ID = moduleData.id;
 
-export const DEBUG = false;
-
 export const COLORS = {
     COLD_FIRE: "#389888",
     FIRE: "#f98026",
