@@ -4,7 +4,7 @@ function tokenMagic({
     value,
     priority,
 }: {
-    value: "Evade Stance";
+    value: "Evade Stance" | "outline";
     priority?: number;
 }): Partial<EffectChangeData> {
     return {

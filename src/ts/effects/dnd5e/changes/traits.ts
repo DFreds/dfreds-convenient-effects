@@ -12,16 +12,37 @@ function addDamageImmunity({
     };
 }
 
-function addAllDamageResistance({
+function addDamageResistance({
     damageType,
 }: {
-    damageType: "physical" | "magical";
+    damageType:
+        | "acid"
+        | "bludgeoning"
+        | "cold"
+        | "fire"
+        | "force"
+        | "lightning"
+        | "necrotic"
+        | "piercing"
+        | "poison"
+        | "psychic"
+        | "radiant"
+        | "slashing"
+        | "thunder";
 }): Partial<EffectChangeData> {
     return {
-        key: "system.traits.dr.all",
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        key: "system.traits.dr.value",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
         value: damageType,
     };
 }
 
-export { addDamageImmunity, addAllDamageResistance };
+function addAllDamageResistance(): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.dr.all",
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
+export { addDamageImmunity, addDamageResistance, addAllDamageResistance };

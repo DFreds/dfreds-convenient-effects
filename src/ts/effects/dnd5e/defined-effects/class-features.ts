@@ -4,6 +4,22 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { Flags } from "src/ts/utils/flags.ts";
 import { notEmpty } from "src/ts/utils/types.ts";
 import { COLORS, SECONDS } from "src/ts/constants.ts";
+import { tokenMagic } from "../changes/macros.ts";
+import {
+    advantageAbilityCheck,
+    advantageAttack,
+    advantageSave,
+    grantAdvantageAttack,
+    grantDisadvantageAttack,
+    optionalAttack,
+    optionalLabel,
+    optionalSave,
+    optionalSkill,
+} from "../changes/midi-qol.ts";
+import { atlLight } from "../changes/atl.ts";
+import { attackBonus, damageBonus } from "../changes/bonuses.ts";
+import { addDamageResistance } from "../changes/traits.ts";
+import { invisible } from "./conditions.ts";
 
 function classFeatures(): ItemEffects {
     return {
@@ -66,26 +82,25 @@ function bardicInspirationD6(): PreCreate<ActiveEffectSource> {
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.label`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "Bardic Inspiration",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                optionalLabel({
+                    key: "bardic-inspiration",
+                    label: "Bardic Inspiration",
+                }),
+                optionalAttack({
+                    key: "bardic-inspiration",
+                    attackType: "all",
                     value: "+1d6",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSave({
+                    key: "bardic-inspiration",
+                    saveType: "all",
                     value: "+1d6",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSkill({
+                    key: "bardic-inspiration",
+                    skillType: "all",
                     value: "+1d6",
-                },
+                }),
             ],
         },
     });
@@ -103,26 +118,25 @@ function bardicInspirationD8(): PreCreate<ActiveEffectSource> {
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.label`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "Bardic Inspiration",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                optionalLabel({
+                    key: "bardic-inspiration",
+                    label: "Bardic Inspiration",
+                }),
+                optionalAttack({
+                    key: "bardic-inspiration",
+                    attackType: "all",
                     value: "+1d8",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSave({
+                    key: "bardic-inspiration",
+                    saveType: "all",
                     value: "+1d8",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSkill({
+                    key: "bardic-inspiration",
+                    skillType: "all",
                     value: "+1d8",
-                },
+                }),
             ],
         },
     });
@@ -140,26 +154,25 @@ function bardicInspirationD10(): PreCreate<ActiveEffectSource> {
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.label`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "Bardic Inspiration",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                optionalLabel({
+                    key: "bardic-inspiration",
+                    label: "Bardic Inspiration",
+                }),
+                optionalAttack({
+                    key: "bardic-inspiration",
+                    attackType: "all",
                     value: "+1d10",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSave({
+                    key: "bardic-inspiration",
+                    saveType: "all",
                     value: "+1d10",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSkill({
+                    key: "bardic-inspiration",
+                    skillType: "all",
                     value: "+1d10",
-                },
+                }),
             ],
         },
     });
@@ -177,26 +190,25 @@ function bardicInspirationD12(): PreCreate<ActiveEffectSource> {
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { seconds: SECONDS.IN_TEN_MINUTES },
             changes: [
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.label`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "Bardic Inspiration",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                optionalLabel({
+                    key: "bardic-inspiration",
+                    label: "Bardic Inspiration",
+                }),
+                optionalAttack({
+                    key: "bardic-inspiration",
+                    attackType: "all",
                     value: "+1d12",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSave({
+                    key: "bardic-inspiration",
+                    saveType: "all",
                     value: "+1d12",
-                },
-                {
-                    key: `flags.midi-qol.optional.bardic-inspiration.skill.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                optionalSkill({
+                    key: "bardic-inspiration",
+                    skillType: "all",
                     value: "+1d12",
-                },
+                }),
             ],
         },
     });
@@ -215,41 +227,34 @@ function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
             img: "icons/weapons/swords/sword-gold-holy.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.bonuses.mwak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                attackBonus({
+                    attackType: "mwak",
                     value: "+max(1, @abilities.cha.mod)",
-                },
-                {
-                    key: "system.bonuses.rwak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                attackBonus({
+                    attackType: "rwak",
                     value: "+max(1, @abilities.cha.mod)",
-                },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "dim",
                     value: "40",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "20",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.WHITE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.25",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
-                },
+                }),
             ],
         },
     });
@@ -301,91 +306,20 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/perception/silhouette-stealth-shadow.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.grants.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "physical",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "bludgeoning",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "piercing",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "slashing",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "silver",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "adamant",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "acid",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "cold",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "fire",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "lightning",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "necrotic",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "poison",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "psychic",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "radiant",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "thunder",
-                },
+                ...(invisible().changes ?? []),
+                addDamageResistance({ damageType: "bludgeoning" }),
+                addDamageResistance({ damageType: "piercing" }),
+                addDamageResistance({ damageType: "slashing" }),
+                addDamageResistance({ damageType: "acid" }),
+                addDamageResistance({ damageType: "cold" }),
+                addDamageResistance({ damageType: "fire" }),
+                addDamageResistance({ damageType: "lightning" }),
+                addDamageResistance({ damageType: "necrotic" }),
+                addDamageResistance({ damageType: "poison" }),
+                addDamageResistance({ damageType: "psychic" }),
+                addDamageResistance({ damageType: "radiant" }),
+                addDamageResistance({ damageType: "slashing" }),
+                addDamageResistance({ damageType: "thunder" }),
             ],
         },
     });
@@ -403,16 +337,8 @@ function kiPatientDefense(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-glowing-blue.webp",
             flags: { dae: { specialDuration: ["turnStart"] } },
             changes: [
-                {
-                    key: `flags.midi-qol.grants.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.save.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                grantDisadvantageAttack({ attackType: "all" }),
+                advantageSave({ saveType: "dex" }),
             ],
         },
     });
@@ -428,41 +354,16 @@ function rage(): PreCreate<ActiveEffectSource> {
             img: "icons/creatures/abilities/mouth-teeth-human.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.save.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "slashing",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "piercing",
-                },
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "bludgeoning",
-                },
-                {
-                    key: "system.bonuses.mwak.damage",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                advantageAbilityCheck({ abilityCheckType: "str" }),
+                advantageSave({ saveType: "str" }),
+                addDamageResistance({ damageType: "slashing" }),
+                addDamageResistance({ damageType: "piercing" }),
+                addDamageResistance({ damageType: "bludgeoning" }),
+                damageBonus({
+                    damageType: "mwak",
                     value: "+ @scale.barbarian.rage-damage",
-                },
-                {
-                    key: "macro.tokenMagic",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "outline",
-                },
+                }),
+                tokenMagic({ value: "outline" }),
             ],
         },
         isDynamic: true,
@@ -483,13 +384,7 @@ function recklessAttack(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
             flags: { dae: { specialDuration: ["turnStart"] } },
-            changes: [
-                {
-                    key: `flags.midi-qol.grants.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-            ],
+            changes: [grantAdvantageAttack({ attackType: "all" })],
         },
         subEffectIds,
     });
@@ -508,13 +403,7 @@ function recklessAttackAdvantage(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
             duration: { turns: 1 },
-            changes: [
-                {
-                    key: `flags.midi-qol.advantage.attack.mwak`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-            ],
+            changes: [advantageAttack({ attackType: "mwak" })],
         },
         isViewable: false,
     });

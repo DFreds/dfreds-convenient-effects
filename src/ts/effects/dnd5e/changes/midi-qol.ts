@@ -67,7 +67,7 @@ function grantDisadvantageAttack({
 function advantageAbilityCheck({
     abilityCheckType,
 }: {
-    abilityCheckType: "all";
+    abilityCheckType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.advantage.ability.check.${abilityCheckType}`,
@@ -79,7 +79,7 @@ function advantageAbilityCheck({
 function disadvantageAbilityCheck({
     abilityCheckType,
 }: {
-    abilityCheckType: "all";
+    abilityCheckType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.disadvantage.ability.check.${abilityCheckType}`,
@@ -148,6 +148,68 @@ function grantFailAttack({
     };
 }
 
+function optionalLabel({
+    key,
+    label,
+}: {
+    key: string;
+    label: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.optional.${key}.label`,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value: label,
+    };
+}
+
+function optionalAttack({
+    key,
+    attackType,
+    value,
+}: {
+    key: string;
+    attackType: "all" | "mwak" | "msak" | "rwak" | "rsak";
+    value: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.optional.${key}.attack.${attackType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+    };
+}
+
+function optionalSave({
+    key,
+    saveType,
+    value,
+}: {
+    key: string;
+    saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
+    value: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.optional.${key}.save.${saveType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+    };
+}
+
+function optionalSkill({
+    key,
+    skillType,
+    value,
+}: {
+    key: string;
+    skillType: "all";
+    value: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.optional.${key}.skill.${skillType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+    };
+}
+
 export {
     advantage,
     disadvantage,
@@ -162,4 +224,8 @@ export {
     failSave,
     grantCriticalRange,
     grantFailAttack,
+    optionalLabel,
+    optionalAttack,
+    optionalSave,
+    optionalSkill,
 };
