@@ -5,7 +5,7 @@ function atlLight({
     value,
     priority,
 }: {
-    lightType: "dim" | "bright" | "color" | "alpha" | "animation";
+    lightType: "angle" | "dim" | "bright" | "color" | "alpha" | "animation";
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {

@@ -2,6 +2,7 @@ import { COLORS, SECONDS } from "src/ts/constants.ts";
 import { createConvenientEffect } from "src/ts/utils/creates.ts";
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { ItemEffects } from "../../effect-definition.ts";
+import { atlLight } from "../changes/atl.ts";
 
 function equipment(): ItemEffects {
     return {
@@ -30,36 +31,30 @@ function bullseyeLantern(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { seconds: SECONDS.IN_SIX_HOURS },
             changes: [
-                {
-                    key: "ATL.light.angle",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "angle",
                     value: "60",
-                },
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "dim",
                     value: "120",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "60",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
+                }),
             ],
         },
     });
@@ -75,31 +70,26 @@ function candle(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/candle-unlit-white.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "dim",
                     value: "10",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "5",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.2",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
+                }),
             ],
         },
     });
@@ -117,31 +107,26 @@ function hoodedLantern(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { seconds: SECONDS.IN_SIX_HOURS },
             changes: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "dim",
                     value: "5",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "0",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
+                }),
             ],
         },
     });
@@ -157,31 +142,26 @@ function lantern(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { seconds: SECONDS.IN_SIX_HOURS },
             changes: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "dim",
                     value: "60",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "30",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
+                }),
             ],
         },
     });
@@ -197,31 +177,26 @@ function torch(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/torch-black.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "ATL.light.dim",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                atlLight({
+                    lightType: "dim",
                     value: "40",
-                },
-                {
-                    key: "ATL.light.bright",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "bright",
                     value: "20",
-                },
-                {
-                    key: "ATL.light.color",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "color",
                     value: COLORS.FIRE,
-                },
-                {
-                    key: "ATL.light.alpha",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "alpha",
                     value: "0.4",
-                },
-                {
-                    key: "ATL.light.animation",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlLight({
+                    lightType: "animation",
                     value: '{"type": "torch","speed": 1,"intensity": 1}',
-                },
+                }),
             ],
         },
     });
