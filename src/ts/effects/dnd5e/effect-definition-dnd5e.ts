@@ -764,12 +764,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
-                    {
-                        key: "system.attributes.hp.max",
-                        mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-                        value: "0.5",
-                        priority: 5,
-                    },
                 ],
             },
         });
@@ -818,12 +812,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         key: `flags.midi-qol.disadvantage.ability.save.all`,
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
-                    },
-                    {
-                        key: "system.attributes.hp.max",
-                        mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-                        value: "0.5",
-                        priority: 5,
                     },
                 ],
             },
