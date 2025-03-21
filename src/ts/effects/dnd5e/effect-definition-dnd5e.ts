@@ -203,6 +203,8 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
             },
             effects: [
+                // this.#armorOfInvulnerability, nested effect
+                // this.#armorOfResistance, nested effect
                 this.#amuletOfHealth,
                 this.#beltOfDwarvenkind,
                 this.#beltOfGiantStrength,
@@ -212,9 +214,39 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 this.#beltOfFireGiantStrength,
                 this.#beltOfCloudGiantStrength,
                 this.#beltOfStormGiantStrength,
+                // this.#bootsOfElvenkind,
+                // this.#bootsOfSpeed, // TODO maybe - it's an active effect
+                // this.#bootsOfTheWinterlands,
                 this.#bracersOfArchery,
                 this.#bracersOfDefense,
+                // this.#broochOfShielding,
+                // this.#broomOfFlying,
+                // this.#cloakOfArachnida,
+                // this.#cloakOfDisplacement,
+                // this.#cloakOfElvenkind,
+                // this.#cloakOfProtection
+                // this.#cloakOfTheMantaRay,
+                // this.#eyesOfTheEagle,
+                // this.#gauntletsOfOgrePower,
+                // this.#gogglesOfNight,
+                // this.#headbandOfIntellect,
+                // this.#robeOfEyes,
+                // this.#robeOfStars,
+                // this.#robeOfTheArchmagi,
+                // this.#iounStone,
+                // this.#mantleOfSpellResistance,
+                // this.#periaptOfHealth,
+                // this.#periaptOfProofAgainstPoison,
+                // this.#stoneOfGoodLuck,
+                // this.#wingedBoots, // TODO maybe
+                // this.#wingsOfFlying, // TODO maybe
                 this.#ringOfAcidResistance,
+                // this.#ringOfFreeAction,
+                // this.#ringOfProtection,
+                // this.#ringOfResistance,
+                // this.#ringOfSwimming,
+                // this.#ringOfWarmth
+                // TODO oils? https://www.5esrd.com/gamemastering/magic-items/potions-oils/
             ],
         };
     }
