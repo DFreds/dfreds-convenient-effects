@@ -1,5 +1,21 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 
+function advantage(): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.advantage.all`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
+function disadvantage(): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.disadvantage.all`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 function advantageAttack({
     attackType,
 }: {
@@ -120,7 +136,21 @@ function grantCriticalRange({
     };
 }
 
+function grantFailAttack({
+    attackType,
+}: {
+    attackType: "all";
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.grants.attack.fail.${attackType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 export {
+    advantage,
+    disadvantage,
     advantageAttack,
     disadvantageAttack,
     grantAdvantageAttack,
@@ -131,4 +161,5 @@ export {
     disadvantageSave,
     failSave,
     grantCriticalRange,
+    grantFailAttack,
 };

@@ -5,10 +5,16 @@ import { acCover, movement } from "../changes/attributes.ts";
 import { abilitySaveBonus } from "../changes/abilities.ts";
 import { tokenMagic } from "../changes/macros.ts";
 import {
+    advantage,
+    advantageAttack,
     advantageSave,
+    disadvantageAttack,
+    disadvantageSave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
+    grantFailAttack,
 } from "../changes/midi-qol.ts";
+import { attackBonus, damageBonus } from "../changes/bonuses.ts";
 
 function other(): ItemEffects {
     return {
@@ -113,13 +119,7 @@ function coverTotal(): PreCreate<ActiveEffectSource> {
                 EN_JSON.ConvenientEffects.Dnd.CoverTotal.description,
             ),
             img: "modules/dfreds-convenient-effects/images/castle.svg",
-            changes: [
-                {
-                    key: `flags.midi-qol.grants.attack.fail.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-            ],
+            changes: [grantFailAttack({ attackType: "all" })],
         },
     });
 }
@@ -204,16 +204,12 @@ function flanking(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/svg/sword.svg",
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.attack.mwak`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.attack.msak`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAttack({
+                    attackType: "mwak",
+                }),
+                advantageAttack({
+                    attackType: "msak",
+                }),
             ],
         },
     });
@@ -230,16 +226,14 @@ function greatWeaponMaster(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
             changes: [
-                {
-                    key: "system.bonuses.mwak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                attackBonus({
+                    attackType: "mwak",
                     value: "-5",
-                },
-                {
-                    key: "system.bonuses.mwak.damage",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                damageBonus({
+                    damageType: "mwak",
                     value: "+10",
-                },
+                }),
             ],
         },
     });
@@ -257,32 +251,23 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
             img: "icons/svg/downgrade.svg",
             statuses: ["heavilyEncumbered"],
             changes: [
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                movement({
+                    movementType: "all",
                     value: "-20",
                     priority: 25,
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.con`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                }),
+                disadvantageAttack({
+                    attackType: "all",
+                }),
+                disadvantageSave({
+                    saveType: "str",
+                }),
+                disadvantageSave({
+                    saveType: "dex",
+                }),
+                disadvantageSave({
+                    saveType: "con",
+                }),
             ],
         },
     });
@@ -308,13 +293,7 @@ function inspiration(): PreCreate<ActiveEffectSource> {
                     ],
                 },
             },
-            changes: [
-                {
-                    key: `flags.midi-qol.advantage.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                    value: "1",
-                },
-            ],
+            changes: [advantage()],
         },
     });
 }
@@ -330,16 +309,12 @@ function rangedDisadvantage(): PreCreate<ActiveEffectSource> {
             ),
             img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.attack.rwak`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.attack.rsak`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAttack({
+                    attackType: "rwak",
+                }),
+                disadvantageAttack({
+                    attackType: "rsak",
+                }),
             ],
         },
     });
@@ -388,16 +363,14 @@ function sharpshooter(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
             changes: [
-                {
-                    key: "system.bonuses.rwak.attack",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                attackBonus({
+                    attackType: "rwak",
                     value: "-5",
-                },
-                {
-                    key: "system.bonuses.rwak.damage",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                damageBonus({
+                    damageType: "rwak",
                     value: "+10",
-                },
+                }),
             ],
         },
     });
