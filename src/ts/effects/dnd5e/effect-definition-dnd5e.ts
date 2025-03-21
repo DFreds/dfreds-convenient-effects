@@ -232,6 +232,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 this.#beltOfFireGiantStrength,
                 this.#beltOfCloudGiantStrength,
                 this.#beltOfStormGiantStrength,
+                this.#bracersOfArchery,
             ],
         };
     }
@@ -338,6 +339,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 img: "icons/equipment/waist/belt-armored-steel.webp",
             },
             nestedEffectIds,
+            isTemporary: false,
         });
     }
 
@@ -485,6 +487,37 @@ class EffectDefinitionDnd5e extends EffectDefinition {
         });
     }
 
+    get #bracersOfArchery(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BracersOfArchery.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BracersOfArchery.description,
+                ),
+                img: "icons/equipment/wrist/bracer-banded-leather.webp",
+                changes: [
+                    {
+                        key: "system.bonuses.rwak.damage",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "2",
+                    },
+                    {
+                        key: "system.traits.weaponProf.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "longbow",
+                    },
+                    {
+                        key: "system.traits.weaponProf.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "shortbow",
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
     get #other(): ItemEffects {
         return {
             itemData: {

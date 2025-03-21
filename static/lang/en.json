@@ -202,6 +202,10 @@
                 "name": "Bonus Action",
                 "description": "No active effects and expires on turn start"
             },
+            "BracersOfArchery": {
+                "name": "Bracers of Archery",
+                "description": "- Adds +2 to ranged attack damage<br/>- Adds proficiency in longbow and shortbow"
+            },
             "BullsStrength": {
                 "name": "Bull's Strength",
                 "description": "Advantage on strength checks and double maximum carrying capacity for 1 hour"
