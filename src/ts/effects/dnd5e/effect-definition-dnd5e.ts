@@ -223,8 +223,31 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
             },
             effects: [
+                this.#amuletOfHealth,
             ],
         };
+    }
+
+    get #amuletOfHealth(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.AmuletOfHealth.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.AmuletOfHealth.description,
+                ),
+                img: "icons/equipment/neck/pendant-faceted-red.webp",
+                changes: [
+                    {
+                        key: "system.abilities.con.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "19",
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
     }
     get #other(): ItemEffects {
         return {

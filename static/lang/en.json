@@ -90,6 +90,10 @@
                 "name": "Alter Self",
                 "description": "No active effects and lasts for 1 hour"
             },
+            "AmuletOfHealth": {
+                "name": "Amulet of Health",
+                "description": "Upgrade constitution to 19"
+            },
             "AntilifeShell": {
                 "name": "Antilife Shell",
                 "description": "No active effects and lasts for 1 hour"
