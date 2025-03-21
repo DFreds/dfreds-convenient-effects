@@ -446,12 +446,7 @@ function petrified(): PreCreate<ActiveEffectSource> {
                 addDamageImmunity({
                     damageType: "poison",
                 }),
-                addAllDamageResistance({
-                    damageType: "physical",
-                }),
-                addAllDamageResistance({
-                    damageType: "magical",
-                }),
+                addAllDamageResistance(),
                 movement({
                     movementType: "all",
                     value: "0",
