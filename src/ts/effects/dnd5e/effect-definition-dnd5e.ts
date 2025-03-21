@@ -5,16 +5,16 @@ import {
     MigrationType,
 } from "../effect-definition.ts";
 import { createConvenientEffect } from "../../utils/creates.ts";
-import { COLORS, SECONDS } from "src/ts/constants.ts";
 import { Flags } from "src/ts/utils/flags.ts";
 import { notEmpty } from "src/ts/utils/types.ts";
 import { migrateOldCustomEffects } from "./migrations/2024-08-14-migrate-old-custom-effects.ts";
 import { abilityUpgrade } from "./changes/abilities.ts";
 import { damageBonus } from "./changes/bonuses.ts";
+import { classFeatures } from "./defined-effects/class-features.ts";
 import { conditions } from "./defined-effects/conditions.ts";
+import { equipment } from "./defined-effects/equipment.ts";
 import { other } from "./defined-effects/other.ts";
 import { spells } from "./defined-effects/spells.ts";
-import { classFeatures } from "./defined-effects/class-features.ts";
 
 class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
@@ -24,7 +24,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
             conditions(),
             spells(),
             classFeatures(),
-            this.#equipment,
+            equipment(),
             this.#magicItems,
             other(),
         ];
@@ -32,23 +32,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     override get migrations(): MigrationType[] {
         return [migrateOldCustomEffects];
-    }
-
-    get #equipment(): ItemEffects {
-        return {
-            itemData: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Folders.Equipment,
-                ),
-            },
-            effects: [
-                this.#bullseyeLantern,
-                this.#candle,
-                this.#hoodedLantern,
-                this.#lantern,
-                this.#torch,
-            ],
-        };
     }
 
     get #magicItems(): ItemEffects {
@@ -418,221 +401,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ],
             },
             isTemporary: false,
-        });
-    }
-
-    get #bullseyeLantern(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.BullseyeLantern.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.BullseyeLantern.description,
-                ),
-                img: "icons/sundries/lights/lantern-iron-yellow.webp",
-                duration: { seconds: SECONDS.IN_SIX_HOURS },
-                changes: [
-                    {
-                        key: "ATL.light.angle",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "60",
-                    },
-                    {
-                        key: "ATL.light.dim",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "120",
-                    },
-                    {
-                        key: "ATL.light.bright",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "60",
-                    },
-                    {
-                        key: "ATL.light.color",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: COLORS.FIRE,
-                    },
-                    {
-                        key: "ATL.light.alpha",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "0.4",
-                    },
-                    {
-                        key: "ATL.light.animation",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: '{"type": "torch","speed": 1,"intensity": 1}',
-                    },
-                ],
-            },
-        });
-    }
-
-    get #candle(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Candle.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Candle.description,
-                ),
-                img: "icons/sundries/lights/candle-unlit-white.webp",
-                duration: { seconds: SECONDS.IN_ONE_HOUR },
-                changes: [
-                    {
-                        key: "ATL.light.dim",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "10",
-                    },
-                    {
-                        key: "ATL.light.bright",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "5",
-                    },
-                    {
-                        key: "ATL.light.color",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: COLORS.FIRE,
-                    },
-                    {
-                        key: "ATL.light.alpha",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "0.2",
-                    },
-                    {
-                        key: "ATL.light.animation",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: '{"type": "torch","speed": 1,"intensity": 1}',
-                    },
-                ],
-            },
-        });
-    }
-
-    get #hoodedLantern(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.HoodedLantern.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.HoodedLantern.description,
-                ),
-                img: "icons/sundries/lights/lantern-iron-yellow.webp",
-                duration: { seconds: SECONDS.IN_SIX_HOURS },
-                changes: [
-                    {
-                        key: "ATL.light.dim",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "5",
-                    },
-                    {
-                        key: "ATL.light.bright",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "0",
-                    },
-                    {
-                        key: "ATL.light.color",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: COLORS.FIRE,
-                    },
-                    {
-                        key: "ATL.light.alpha",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "0.4",
-                    },
-                    {
-                        key: "ATL.light.animation",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: '{"type": "torch","speed": 1,"intensity": 1}',
-                    },
-                ],
-            },
-        });
-    }
-
-    get #lantern(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Lantern.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Lantern.description,
-                ),
-                img: "icons/sundries/lights/lantern-iron-yellow.webp",
-                duration: { seconds: SECONDS.IN_SIX_HOURS },
-                changes: [
-                    {
-                        key: "ATL.light.dim",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "60",
-                    },
-                    {
-                        key: "ATL.light.bright",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "30",
-                    },
-                    {
-                        key: "ATL.light.color",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: COLORS.FIRE,
-                    },
-                    {
-                        key: "ATL.light.alpha",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "0.4",
-                    },
-                    {
-                        key: "ATL.light.animation",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: '{"type": "torch","speed": 1,"intensity": 1}',
-                    },
-                ],
-            },
-        });
-    }
-
-    get #torch(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Torch.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Torch.description,
-                ),
-                img: "icons/sundries/lights/torch-black.webp",
-                duration: { seconds: SECONDS.IN_ONE_HOUR },
-                changes: [
-                    {
-                        key: "ATL.light.dim",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "40",
-                    },
-                    {
-                        key: "ATL.light.bright",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "20",
-                    },
-                    {
-                        key: "ATL.light.color",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: COLORS.FIRE,
-                    },
-                    {
-                        key: "ATL.light.alpha",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "0.4",
-                    },
-                    {
-                        key: "ATL.light.animation",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: '{"type": "torch","speed": 1,"intensity": 1}',
-                    },
-                ],
-            },
         });
     }
 }
