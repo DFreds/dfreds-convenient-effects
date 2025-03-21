@@ -8,8 +8,8 @@ import {
     advantageAttack,
     disadvantageAbilityCheck,
     disadvantageAttack,
-    disadvantageSave,
-    failSave,
+    disadvantageAbilitySave,
+    failAbilitySave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
     grantCriticalRange,
@@ -206,7 +206,7 @@ function exhaustion3(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageSave({
+                disadvantageAbilitySave({
                     saveType: "all",
                 }),
             ],
@@ -240,7 +240,7 @@ function exhaustion4(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageSave({
+                disadvantageAbilitySave({
                     saveType: "all",
                 }),
             ],
@@ -274,7 +274,7 @@ function exhaustion5(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageSave({
+                disadvantageAbilitySave({
                     saveType: "all",
                 }),
             ],
@@ -372,10 +372,10 @@ function paralyzed(): PreCreate<ActiveEffectSource> {
             img: "modules/dfreds-convenient-effects/images/paralyzed.svg",
             statuses: ["paralyzed"],
             changes: [
-                failSave({
+                failAbilitySave({
                     saveType: "str",
                 }),
-                failSave({
+                failAbilitySave({
                     saveType: "dex",
                 }),
                 grantAdvantageAttack({
@@ -411,10 +411,10 @@ function petrified(): PreCreate<ActiveEffectSource> {
                 grantAdvantageAttack({
                     attackType: "all",
                 }),
-                failSave({
+                failAbilitySave({
                     saveType: "str",
                 }),
-                failSave({
+                failAbilitySave({
                     saveType: "dex",
                 }),
                 addDamageImmunity({
@@ -445,11 +445,9 @@ function poisoned(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilityCheck({
+                    abilityCheckType: "all",
+                }),
             ],
         },
     });
@@ -500,27 +498,20 @@ function restrained(): PreCreate<ActiveEffectSource> {
             ),
             img: "modules/dfreds-convenient-effects/images/restrained.svg",
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.grants.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                disadvantageAbilitySave({
+                    saveType: "dex",
+                }),
+                disadvantageAttack({
+                    attackType: "all",
+                }),
+                advantageAttack({
+                    attackType: "all",
+                }),
+                movement({
+                    movementType: "all",
                     value: "0",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -539,10 +530,10 @@ function stunned(): PreCreate<ActiveEffectSource> {
             ),
             img: "modules/dfreds-convenient-effects/images/stunned.svg",
             changes: [
-                failSave({
+                failAbilitySave({
                     saveType: "str",
                 }),
-                failSave({
+                failAbilitySave({
                     saveType: "dex",
                 }),
                 grantAdvantageAttack({
@@ -567,10 +558,10 @@ function unconscious(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/svg/unconscious.svg",
             changes: [
-                failSave({
+                failAbilitySave({
                     saveType: "str",
                 }),
-                failSave({
+                failAbilitySave({
                     saveType: "dex",
                 }),
                 grantAdvantageAttack({

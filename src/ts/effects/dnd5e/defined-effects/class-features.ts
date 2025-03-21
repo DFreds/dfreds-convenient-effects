@@ -8,7 +8,7 @@ import { tokenMagic } from "../changes/macros.ts";
 import {
     advantageAbilityCheck,
     advantageAttack,
-    advantageSave,
+    advantageAbilitySave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
     optionalAttack,
@@ -333,7 +333,7 @@ function kiPatientDefense(): PreCreate<ActiveEffectSource> {
             flags: { dae: { specialDuration: ["turnStart"] } },
             changes: [
                 grantDisadvantageAttack({ attackType: "all" }),
-                advantageSave({ saveType: "dex" }),
+                advantageAbilitySave({ saveType: "dex" }),
             ],
         },
     });
@@ -350,7 +350,7 @@ function rage(): PreCreate<ActiveEffectSource> {
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
                 advantageAbilityCheck({ abilityCheckType: "str" }),
-                advantageSave({ saveType: "str" }),
+                advantageAbilitySave({ saveType: "str" }),
                 addDamageResistance({ damageType: "slashing" }),
                 addDamageResistance({ damageType: "piercing" }),
                 addDamageResistance({ damageType: "bludgeoning" }),

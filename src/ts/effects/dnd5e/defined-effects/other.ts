@@ -7,9 +7,9 @@ import { tokenMagic } from "../changes/macros.ts";
 import {
     advantage,
     advantageAttack,
-    advantageSave,
+    advantageAbilitySave,
     disadvantageAttack,
-    disadvantageSave,
+    disadvantageAbilitySave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
     grantFailAttack,
@@ -150,7 +150,7 @@ function dodge(): PreCreate<ActiveEffectSource> {
                 grantDisadvantageAttack({
                     attackType: "all",
                 }),
-                advantageSave({
+                advantageAbilitySave({
                     saveType: "dex",
                 }),
                 tokenMagic({
@@ -245,13 +245,13 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageSave({
+                disadvantageAbilitySave({
                     saveType: "str",
                 }),
-                disadvantageSave({
+                disadvantageAbilitySave({
                     saveType: "dex",
                 }),
-                disadvantageSave({
+                disadvantageAbilitySave({
                     saveType: "con",
                 }),
             ],

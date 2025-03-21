@@ -88,7 +88,7 @@ function disadvantageAbilityCheck({
     };
 }
 
-function advantageSave({
+function advantageAbilitySave({
     saveType,
 }: {
     saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
@@ -100,7 +100,7 @@ function advantageSave({
     };
 }
 
-function disadvantageSave({
+function disadvantageAbilitySave({
     saveType,
 }: {
     saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
@@ -112,7 +112,7 @@ function disadvantageSave({
     };
 }
 
-function failSave({
+function failAbilitySave({
     saveType,
 }: {
     saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
@@ -219,9 +219,9 @@ export {
     grantDisadvantageAttack,
     advantageAbilityCheck,
     disadvantageAbilityCheck,
-    advantageSave,
-    disadvantageSave,
-    failSave,
+    advantageAbilitySave,
+    disadvantageAbilitySave,
+    failAbilitySave,
     grantCriticalRange,
     grantFailAttack,
     optionalLabel,
