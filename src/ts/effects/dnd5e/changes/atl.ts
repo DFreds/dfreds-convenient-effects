@@ -17,4 +17,34 @@ function atlLight({
     };
 }
 
-export { atlLight };
+function atlSightRange({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `ATL.sight.range`,
+        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        value,
+        priority,
+    };
+}
+
+function atlSightVisionMode({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `ATL.sight.visionMode`,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+        priority,
+    };
+}
+
+export { atlLight, atlSightRange, atlSightVisionMode };

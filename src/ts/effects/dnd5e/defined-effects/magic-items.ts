@@ -3,8 +3,19 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { ItemEffects } from "../../effect-definition.ts";
 import { Flags } from "src/ts/utils/flags.ts";
 import { notEmpty } from "src/ts/utils/types.ts";
-import { abilityUpgrade } from "../changes/abilities.ts";
+import {
+    addAbility,
+    downgradeAbility,
+    upgradeAbility,
+} from "../changes/abilities.ts";
 import { damageBonus } from "../changes/bonuses.ts";
+import {
+    addDamageResistance,
+    addLanguage,
+    addWeaponProficiency,
+} from "../changes/traits.ts";
+import { acBonus, darkvision } from "../changes/attributes.ts";
+import { atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 
 function magicItems(): ItemEffects {
     return {
@@ -73,11 +84,10 @@ function amuletOfHealth(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/neck/pendant-faceted-red.webp",
             changes: [
-                {
-                    key: "system.abilities.con.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                upgradeAbility({
+                    ability: "con",
                     value: "19",
-                },
+                }),
             ],
         },
         isTemporary: false,
@@ -95,46 +105,34 @@ function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/belt-armored-steel.webp",
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "poison",
-                },
-                {
-                    key: "system.attributes.senses.darkvision",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                addDamageResistance({
+                    damageType: "poison",
+                }),
+                darkvision({
                     value: "60",
                     priority: 5,
-                },
-                {
-                    key: "ATL.sight.range",
-                    mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                }),
+                atlSightRange({
                     value: "60",
                     priority: 5,
-                },
-                {
-                    key: "ATL.sight.visionMode",
-                    mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                }),
+                atlSightVisionMode({
                     value: "darkvision",
                     priority: 5,
-                },
-                {
-                    key: "system.traits.languages.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "dwarvish",
-                },
-                {
-                    key: "system.abilities.con.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                addLanguage({
+                    language: "dwarvish",
+                }),
+                addAbility({
+                    ability: "con",
                     value: "2",
                     priority: 5,
-                },
-                {
-                    key: "system.abilities.con.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+                }),
+                downgradeAbility({
+                    ability: "con",
                     value: "20",
                     priority: 50,
-                },
+                }),
             ],
         },
         isTemporary: false,
@@ -178,7 +176,7 @@ function beltOfHillGiantStrength(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
             changes: [
-                abilityUpgrade({
+                upgradeAbility({
                     ability: "str",
                     value: "21",
                 }),
@@ -199,7 +197,7 @@ function beltOfStoneGiantStrength(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/belt-armored-steel.webp",
             changes: [
-                abilityUpgrade({
+                upgradeAbility({
                     ability: "str",
                     value: "23",
                 }),
@@ -220,7 +218,7 @@ function beltOfFrostGiantStrength(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/cloth-sash-purple.webp",
             changes: [
-                abilityUpgrade({
+                upgradeAbility({
                     ability: "str",
                     value: "23",
                 }),
@@ -241,7 +239,7 @@ function beltOfFireGiantStrength(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/belt-coiled-leather-steel.webp",
             changes: [
-                abilityUpgrade({
+                upgradeAbility({
                     ability: "str",
                     value: "25",
                 }),
@@ -262,7 +260,7 @@ function beltOfCloudGiantStrength(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
             changes: [
-                abilityUpgrade({
+                upgradeAbility({
                     ability: "str",
                     value: "27",
                 }),
@@ -283,7 +281,7 @@ function beltOfStormGiantStrength(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/waist/sash-cloth-gold-purple.webp",
             changes: [
-                abilityUpgrade({
+                upgradeAbility({
                     ability: "str",
                     value: "29",
                 }),
@@ -308,16 +306,12 @@ function bracersOfArchery(): PreCreate<ActiveEffectSource> {
                     damageType: "rwak",
                     value: "2",
                 }),
-                {
-                    key: "system.traits.weaponProf.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "longbow",
-                },
-                {
-                    key: "system.traits.weaponProf.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "shortbow",
-                },
+                addWeaponProficiency({
+                    weapon: "longbow",
+                }),
+                addWeaponProficiency({
+                    weapon: "shortbow",
+                }),
             ],
         },
         isTemporary: false,
@@ -335,11 +329,9 @@ function bracersOfDefense(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/wrist/bracer-yellow-fancy.webp",
             changes: [
-                {
-                    key: "system.attributes.ac.bonus",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                acBonus({
                     value: "2",
-                },
+                }),
             ],
         },
         isTemporary: false,
@@ -357,11 +349,9 @@ function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "acid",
-                },
+                addDamageResistance({
+                    damageType: "acid",
+                }),
             ],
         },
         isTemporary: false,

@@ -1,9 +1,43 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 
-function abilityUpgrade({
+function addAbility({
     ability,
     value,
-    priority = 5,
+    priority,
+}: {
+    ability: "str" | "dex" | "con" | "int" | "wis" | "cha";
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.abilities.${ability}.value`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
+function downgradeAbility({
+    ability,
+    value,
+    priority,
+}: {
+    ability: "str" | "dex" | "con" | "int" | "wis" | "cha";
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.abilities.${ability}.value`,
+        mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+        value,
+        priority,
+    };
+}
+
+function upgradeAbility({
+    ability,
+    value,
+    priority,
 }: {
     ability: "str" | "dex" | "con" | "int" | "wis" | "cha";
     value: string;
@@ -34,4 +68,4 @@ function abilitySaveBonus({
     };
 }
 
-export { abilityUpgrade, abilitySaveBonus };
+export { addAbility, downgradeAbility, upgradeAbility, abilitySaveBonus };

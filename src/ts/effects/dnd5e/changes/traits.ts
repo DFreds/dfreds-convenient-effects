@@ -45,4 +45,34 @@ function addAllDamageResistance(): Partial<EffectChangeData> {
     };
 }
 
-export { addDamageImmunity, addDamageResistance, addAllDamageResistance };
+function addLanguage({
+    language,
+}: {
+    language: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.languages.value",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: language,
+    };
+}
+
+function addWeaponProficiency({
+    weapon,
+}: {
+    weapon: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.weaponProf.value",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: weapon,
+    };
+}
+
+export {
+    addAllDamageResistance,
+    addDamageImmunity,
+    addDamageResistance,
+    addLanguage,
+    addWeaponProficiency,
+};

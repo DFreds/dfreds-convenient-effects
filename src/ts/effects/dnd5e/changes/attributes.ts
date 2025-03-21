@@ -1,5 +1,20 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 
+function acBonus({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.ac.bonus",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
 function acCover({
     value,
     priority,
@@ -10,6 +25,21 @@ function acCover({
     return {
         key: "system.attributes.ac.cover",
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
+function darkvision({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.senses.darkvision",
+        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
         value,
         priority,
     };
@@ -55,4 +85,4 @@ function movement({
     };
 }
 
-export { exhaustion, movement, acCover };
+export { acBonus, acCover, exhaustion, movement, darkvision };
