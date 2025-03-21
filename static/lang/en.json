@@ -138,6 +138,38 @@
                 "name": "Bear's Endurance",
                 "description": "Advantage on constitution checks and 2d6 temp hit points for 1 hour"
             },
+            "BeltOfDwarvenkind": {
+                "name": "Belt of Dwarvenkind",
+                "description": "- Adds +2 to constitution to a maximum of 20<br/>- Adds poison resistance<br/>- Adds darkvision<br/>- Adds dwarvish language"
+            },
+            "BeltOfGiantStrength": {
+                "name": "Belt of Giant Strength",
+                "description": "Choose between the Belt of Hill Giant Strength, Belt of Frost Giant Strength, Belt of Stone Giant Strength, Belt of Fire Giant Strength, Belt of Cloud Giant Strength, or Belt of Storm Giant Strength"
+            },
+            "BeltOfHillGiantStrength": {
+                "name": "Belt of Hill Giant Strength",
+                "description": "Upgrades strength to 21"
+            },
+            "BeltOfFrostGiantStrength": {
+                "name": "Belt of Frost Giant Strength",
+                "description": "Upgrades strength to 23"
+            },
+            "BeltOfStoneGiantStrength": {
+                "name": "Belt of Stone Giant Strength",
+                "description": "Upgrades strength to 23"
+            },
+            "BeltOfFireGiantStrength": {
+                "name": "Belt of Fire Giant Strength",
+                "description": "Upgrades strength to 25"
+            },
+            "BeltOfCloudGiantStrength": {
+                "name": "Belt of Cloud Giant Strength",
+                "description": "Upgrades strength to 27"
+            },
+            "BeltOfStormGiantStrength": {
+                "name": "Belt of Storm Giant Strength",
+                "description": "Upgrades strength to 29"
+            },
             "BlackTentacles": {
                 "name": "Black Tentacles",
                 "description": "Apply the effects of the restrained condition for 1 minute"

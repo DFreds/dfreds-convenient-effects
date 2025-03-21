@@ -224,6 +224,14 @@ class EffectDefinitionDnd5e extends EffectDefinition {
             },
             effects: [
                 this.#amuletOfHealth,
+                this.#beltOfDwarvenkind,
+                this.#beltOfGiantStrength,
+                this.#beltOfHillGiantStrength,
+                this.#beltOfFrostGiantStrength,
+                this.#beltOfStoneGiantStrength,
+                this.#beltOfFireGiantStrength,
+                this.#beltOfCloudGiantStrength,
+                this.#beltOfStormGiantStrength,
             ],
         };
     }
@@ -249,6 +257,234 @@ class EffectDefinitionDnd5e extends EffectDefinition {
             isTemporary: false,
         });
     }
+
+    get #beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfDwarvenkind.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfDwarvenkind.description,
+                ),
+                img: "icons/equipment/waist/belt-armored-steel.webp",
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "poison",
+                    },
+                    {
+                        key: "system.attributes.senses.darkvision",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "60",
+                        priority: 5,
+                    },
+                    {
+                        key: "ATL.sight.range",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "60",
+                        priority: 5,
+                    },
+                    {
+                        key: "ATL.sight.visionMode",
+                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                        value: "darkvision",
+                        priority: 5,
+                    },
+                    {
+                        key: "system.traits.languages.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "dwarvish",
+                    },
+                    {
+                        key: "system.abilities.con.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "2",
+                        priority: 5,
+                    },
+                    {
+                        key: "system.abilities.con.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+                        value: "20",
+                        priority: 50,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #beltOfGiantStrength(): PreCreate<ActiveEffectSource> {
+        const nestedEffectIds = [
+            this.#beltOfHillGiantStrength,
+            this.#beltOfStoneGiantStrength,
+            this.#beltOfFrostGiantStrength,
+            this.#beltOfFireGiantStrength,
+            this.#beltOfCloudGiantStrength,
+            this.#beltOfStormGiantStrength,
+        ]
+            .map((effect) => Flags.getCeEffectId(effect))
+            .filter(notEmpty);
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/belt-armored-steel.webp",
+            },
+            nestedEffectIds,
+        });
+    }
+
+    get #beltOfHillGiantStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfHillGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfHillGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
+                changes: [
+                    {
+                        key: "system.abilities.str.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "21",
+                        priority: 5,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #beltOfStoneGiantStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfStoneGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfStoneGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/belt-armored-steel.webp",
+                changes: [
+                    {
+                        key: "system.abilities.str.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "23",
+                        priority: 5,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #beltOfFrostGiantStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfFrostGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfFrostGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/cloth-sash-purple.webp",
+                changes: [
+                    {
+                        key: "system.abilities.str.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "23",
+                        priority: 5,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #beltOfFireGiantStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfFireGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfFireGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/belt-coiled-leather-steel.webp",
+                changes: [
+                    {
+                        key: "system.abilities.str.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "25",
+                        priority: 5,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #beltOfCloudGiantStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfCloudGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfCloudGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
+                changes: [
+                    {
+                        key: "system.abilities.str.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "27",
+                        priority: 5,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
+    get #beltOfStormGiantStrength(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfStormGiantStrength.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.BeltOfStormGiantStrength
+                        .description,
+                ),
+                img: "icons/equipment/waist/sash-cloth-gold-purple.webp",
+                changes: [
+                    {
+                        key: "system.abilities.str.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                        value: "29",
+                        priority: 5,
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
     get #other(): ItemEffects {
         return {
             itemData: {
