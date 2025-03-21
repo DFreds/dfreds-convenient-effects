@@ -9,13 +9,26 @@ import { COLORS, SECONDS } from "src/ts/constants.ts";
 import { Flags } from "src/ts/utils/flags.ts";
 import { notEmpty } from "src/ts/utils/types.ts";
 import { migrateOldCustomEffects } from "./migrations/2024-08-14-migrate-old-custom-effects.ts";
+import { abilityUpgrade } from "./changes/abilities.ts";
+import { attackBonus, damageBonus, saveBonus } from "./changes/bonuses.ts";
+import {
+    blinded,
+    conditions,
+    charmed,
+    deafened,
+    paralyzed,
+    prone,
+    restrained,
+    invisible,
+    incapacitated,
+} from "./defined-effects/conditions.ts";
 
 class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
 
     override get initialItemEffects(): ItemEffects[] {
         return [
-            this.#conditions,
+            conditions(),
             this.#spells,
             this.#classFeatures,
             this.#equipment,
@@ -26,40 +39,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
 
     override get migrations(): MigrationType[] {
         return [migrateOldCustomEffects];
-    }
-
-    get #conditions(): ItemEffects {
-        return {
-            itemData: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Folders.Conditions,
-                ),
-            },
-            effects: [
-                this.#blinded,
-                this.#charmed,
-                this.#concentrating,
-                this.#dead,
-                this.#deafened,
-                this.#exhaustion1,
-                this.#exhaustion2,
-                this.#exhaustion3,
-                this.#exhaustion4,
-                this.#exhaustion5,
-                this.#frightened,
-                this.#grappled,
-                this.#incapacitated,
-                this.#invisible,
-                this.#paralyzed,
-                this.#petrified,
-                this.#poisoned,
-                this.#prone,
-                this.#restrained,
-                this.#stunned,
-                this.#unconscious,
-                this.#wounded,
-            ],
-        };
     }
 
     get #spells(): ItemEffects {
@@ -357,12 +336,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
                 changes: [
-                    {
-                        key: "system.abilities.str.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    abilityUpgrade({
+                        ability: "str",
                         value: "21",
-                        priority: 5,
-                    },
+                    }),
                 ],
             },
             isTemporary: false,
@@ -381,12 +358,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/waist/belt-armored-steel.webp",
                 changes: [
-                    {
-                        key: "system.abilities.str.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    abilityUpgrade({
+                        ability: "str",
                         value: "23",
-                        priority: 5,
-                    },
+                    }),
                 ],
             },
             isTemporary: false,
@@ -405,12 +380,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/waist/cloth-sash-purple.webp",
                 changes: [
-                    {
-                        key: "system.abilities.str.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    abilityUpgrade({
+                        ability: "str",
                         value: "23",
-                        priority: 5,
-                    },
+                    }),
                 ],
             },
             isTemporary: false,
@@ -429,12 +402,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/waist/belt-coiled-leather-steel.webp",
                 changes: [
-                    {
-                        key: "system.abilities.str.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    abilityUpgrade({
+                        ability: "str",
                         value: "25",
-                        priority: 5,
-                    },
+                    }),
                 ],
             },
             isTemporary: false,
@@ -453,12 +424,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
                 changes: [
-                    {
-                        key: "system.abilities.str.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    abilityUpgrade({
+                        ability: "str",
                         value: "27",
-                        priority: 5,
-                    },
+                    }),
                 ],
             },
             isTemporary: false,
@@ -477,12 +446,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/waist/sash-cloth-gold-purple.webp",
                 changes: [
-                    {
-                        key: "system.abilities.str.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+                    abilityUpgrade({
+                        ability: "str",
                         value: "29",
-                        priority: 5,
-                    },
+                    }),
                 ],
             },
             isTemporary: false,
@@ -500,11 +467,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/equipment/wrist/bracer-banded-leather.webp",
                 changes: [
-                    {
-                        key: "system.bonuses.rwak.damage",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    damageBonus({
+                        damageType: "rwak",
                         value: "2",
-                    },
+                    }),
                     {
                         key: "system.traits.weaponProf.value",
                         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -591,718 +557,6 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 this.#sharpshooter,
             ],
         };
-    }
-
-    get #blinded(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Blinded.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Blinded.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/blinded.svg",
-                statuses: ["blinded"],
-                changes: [
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #charmed(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Charmed.name,
-                ),
-                statuses: ["charmed"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Charmed.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/charmed.svg",
-            },
-        });
-    }
-
-    get #concentrating(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Concentrating.name,
-                ),
-                statuses: ["concentrating"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Concentrating.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/concentrating.svg",
-            },
-        });
-    }
-
-    get #dead(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Dead.name,
-                ),
-                statuses: ["dead"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Dead.description,
-                ),
-                img: "icons/svg/skull.svg",
-            },
-        });
-    }
-
-    get #deafened(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Deafened.name,
-                ),
-                statuses: ["deafened"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Deafened.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/deafened.svg",
-            },
-        });
-    }
-
-    get #exhaustion1(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion1.name,
-                ),
-                statuses: ["exhaustion"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion1.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
-                flags: { dnd5e: { exhaustionLevel: 1 } },
-                changes: [
-                    {
-                        key: "system.attributes.exhaustion",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "flags.dnd5e.initiativeDisadv",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #exhaustion2(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion2.name,
-                ),
-                statuses: ["exhaustion"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion2.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/exhaustion2.svg",
-                flags: { dnd5e: { exhaustionLevel: 2 } },
-                changes: [
-                    {
-                        key: "system.attributes.exhaustion",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "2",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "flags.dnd5e.initiativeDisadv",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "*0.5",
-                        priority: 25,
-                    },
-                ],
-            },
-        });
-    }
-
-    get #exhaustion3(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion3.name,
-                ),
-                statuses: ["exhaustion"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion3.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/exhaustion3.svg",
-                flags: { dnd5e: { exhaustionLevel: 3 } },
-                changes: [
-                    {
-                        key: "system.attributes.exhaustion",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "3",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "flags.dnd5e.initiativeDisadv",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "*0.5",
-                        priority: 25,
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.save.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #exhaustion4(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion4.name,
-                ),
-                statuses: ["exhaustion"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion4.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/exhaustion4.svg",
-                flags: { dnd5e: { exhaustionLevel: 4 } },
-                changes: [
-                    {
-                        key: "system.attributes.exhaustion",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "4",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "flags.dnd5e.initiativeDisadv",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "*0.5",
-                        priority: 25,
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.save.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #exhaustion5(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion5.name,
-                ),
-                statuses: ["exhaustion"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Exhaustion5.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/exhaustion5.svg",
-                flags: { dnd5e: { exhaustionLevel: 5 } },
-                changes: [
-                    {
-                        key: "system.attributes.exhaustion",
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "5",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "flags.dnd5e.initiativeDisadv",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "0",
-                        priority: 25,
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.save.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #frightened(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Frightened.name,
-                ),
-                statuses: ["frightened"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Frightened.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/frightened.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #grappled(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Grappled.name,
-                ),
-                statuses: ["grappled"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Grappled.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/grappled.svg",
-                changes: [
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "0",
-                        priority: 25,
-                    },
-                ],
-            },
-        });
-    }
-
-    get #incapacitated(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Incapacitated.name,
-                ),
-                statuses: ["incapacitated"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Incapacitated.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/incapacitated.svg",
-            },
-        });
-    }
-
-    get #invisible(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Invisible.name,
-                ),
-                statuses: ["invisible"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Invisible.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/invisible.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #paralyzed(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#incapacitated]
-            .map((effect) => Flags.getCeEffectId(effect))
-            .filter(notEmpty);
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Paralyzed.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Paralyzed.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/paralyzed.svg",
-                statuses: ["paralyzed"],
-                changes: [
-                    {
-                        key: `flags.midi-qol.fail.ability.save.dex`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.fail.ability.save.str`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.critical.range`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "5",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "0",
-                        priority: 25,
-                    },
-                ],
-            },
-            subEffectIds,
-        });
-    }
-
-    get #petrified(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#incapacitated]
-            .map((effect) => Flags.getCeEffectId(effect))
-            .filter(notEmpty);
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Petrified.name,
-                ),
-                statuses: ["petrified"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Petrified.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/petrified.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.fail.ability.save.dex`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.fail.ability.save.str`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.traits.di.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                        value: "poison",
-                    },
-                    {
-                        key: "system.traits.dr.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "physical",
-                    },
-                    {
-                        key: "system.traits.dr.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "magical",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "0",
-                        priority: 25,
-                    },
-                ],
-            },
-            subEffectIds,
-        });
-    }
-
-    get #poisoned(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Poisoned.name,
-                ),
-                statuses: ["poisoned"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Poisoned.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/poisoned.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.check.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-        });
-    }
-
-    get #prone(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Prone.name,
-                ),
-                statuses: ["prone"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Prone.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/prone.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.mwak`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.msak`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.disadvantage.attack.rwak`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.disadvantage.attack.rsak`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "*0.5",
-                        priority: 25,
-                    },
-                ],
-            },
-        });
-    }
-
-    get #restrained(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Restrained.name,
-                ),
-                statuses: ["restrained"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Restrained.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/restrained.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.disadvantage.ability.save.dex`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.disadvantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "0",
-                        priority: 25,
-                    },
-                ],
-            },
-        });
-    }
-
-    get #stunned(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#incapacitated]
-            .map((effect) => Flags.getCeEffectId(effect))
-            .filter(notEmpty);
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Stunned.name,
-                ),
-                statuses: ["stunned"],
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Stunned.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/stunned.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.fail.ability.save.dex`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.fail.ability.save.str`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                ],
-            },
-            subEffectIds,
-        });
-    }
-
-    get #unconscious(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#incapacitated]
-            .map((effect) => Flags.getCeEffectId(effect))
-            .filter(notEmpty);
-        return createConvenientEffect({
-            effect: {
-                statuses: ["unconscious"],
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Unconscious.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Unconscious.description,
-                ),
-                img: "icons/svg/unconscious.svg",
-                changes: [
-                    {
-                        key: `flags.midi-qol.fail.ability.save.dex`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.fail.ability.save.str`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.advantage.attack.all`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "1",
-                    },
-                    {
-                        key: `flags.midi-qol.grants.critical.range`,
-                        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-                        value: "5",
-                    },
-                    {
-                        key: "system.attributes.movement.all",
-                        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                        value: "0",
-                        priority: 25,
-                    },
-                ],
-            },
-            subEffectIds,
-        });
-    }
-
-    get #wounded(): PreCreate<ActiveEffectSource> {
-        return createConvenientEffect({
-            effect: {
-                name: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Wounded.name,
-                ),
-                description: game.i18n.localize(
-                    EN_JSON.ConvenientEffects.Dnd.Wounded.description,
-                ),
-                img: "modules/dfreds-convenient-effects/images/wounded.svg",
-            },
-        });
     }
 
     get #acidArrow(): PreCreate<ActiveEffectSource> {
@@ -1398,31 +652,25 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
                 duration: { seconds: SECONDS.IN_ONE_MINUTE },
                 changes: [
-                    {
-                        key: "system.bonuses.abilities.save",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    saveBonus({
                         value: "-1d4",
-                    },
-                    {
-                        key: "system.bonuses.msak.attack",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    }),
+                    attackBonus({
+                        attackType: "mwak",
                         value: "-1d4",
-                    },
-                    {
-                        key: "system.bonuses.mwak.attack",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    }),
+                    attackBonus({
+                        attackType: "msak",
                         value: "-1d4",
-                    },
-                    {
-                        key: "system.bonuses.rsak.attack",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    }),
+                    attackBonus({
+                        attackType: "rsak",
                         value: "-1d4",
-                    },
-                    {
-                        key: "system.bonuses.rwak.attack",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    }),
+                    attackBonus({
+                        attackType: "rwak",
                         value: "-1d4",
-                    },
+                    }),
                 ],
             },
         });
@@ -1495,7 +743,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
                 duration: { seconds: SECONDS.IN_ONE_MINUTE },
-                changes: this.#restrained.changes,
+                changes: restrained().changes,
             },
         });
     }
@@ -1569,9 +817,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #blindnessDeafnessBlindness(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [Flags.getCeEffectId(this.#blinded)].filter(
-            notEmpty,
-        );
+        const subEffectIds = [Flags.getCeEffectId(blinded())].filter(notEmpty);
         return createConvenientEffect({
             effect: {
                 name: game.i18n.localize(
@@ -1588,9 +834,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #blindnessDeafnessDeafness(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [Flags.getCeEffectId(this.#deafened)].filter(
-            notEmpty,
-        );
+        const subEffectIds = [Flags.getCeEffectId(deafened())].filter(notEmpty);
         return createConvenientEffect({
             effect: {
                 name: game.i18n.localize(
@@ -1644,7 +888,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 ),
                 img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
                 duration: { seconds: SECONDS.IN_ONE_HOUR },
-                changes: this.#charmed.changes,
+                changes: charmed().changes,
             },
         });
     }
@@ -1734,7 +978,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
                         value: "1",
                     },
-                    ...(this.#blinded?.changes ?? []),
+                    ...(blinded().changes ?? []),
                 ],
             },
         });
@@ -1947,11 +1191,10 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
                 duration: { seconds: SECONDS.IN_ONE_MINUTE },
                 changes: [
-                    {
-                        key: "system.bonuses.weapon.damage",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                    damageBonus({
+                        damageType: "weapon",
                         value: "+1d4[radiant]",
-                    },
+                    }),
                 ],
             },
         });
@@ -2574,7 +1817,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #greaterInvisibility(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#invisible]
+        const subEffectIds = [invisible()]
             .map((effect) => Flags.getCeEffectId(effect))
             .filter(notEmpty);
         return createConvenientEffect({
@@ -2748,15 +1991,15 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
                 duration: { seconds: SECONDS.IN_ONE_MINUTE },
                 changes: [
-                    ...(this.#incapacitated.changes ?? []),
-                    ...(this.#prone.changes ?? []),
+                    ...(incapacitated().changes ?? []),
+                    ...(prone().changes ?? []),
                 ],
             },
         });
     }
 
     get #holdMonster(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#paralyzed]
+        const subEffectIds = [paralyzed()]
             .map((effect) => Flags.getCeEffectId(effect))
             .filter(notEmpty);
         return createConvenientEffect({
@@ -2782,7 +2025,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #holdPerson(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#paralyzed]
+        const subEffectIds = [paralyzed()]
             .map((effect) => Flags.getCeEffectId(effect))
             .filter(notEmpty);
         return createConvenientEffect({
@@ -2869,7 +2112,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     get #invisibility(): PreCreate<ActiveEffectSource> {
-        const subEffectIds = [this.#invisible]
+        const subEffectIds = [invisible()]
             .map((effect) => Flags.getCeEffectId(effect))
             .filter(notEmpty);
         return createConvenientEffect({
