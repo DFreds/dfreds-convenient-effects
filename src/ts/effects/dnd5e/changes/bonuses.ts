@@ -18,7 +18,7 @@ function attackBonus({
     priority?: number;
 }): Partial<EffectChangeData> {
     return {
-        key: `system.bonuses.${attackType}.value`,
+        key: `system.bonuses.${attackType}.attack`,
         mode: CONST.ACTIVE_EFFECT_MODES.ADD,
         value,
         priority,
