@@ -648,6 +648,10 @@
                 "name": "Restrained",
                 "description": "- A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.<br />- The creature has disadvantage on Dexterity saving throws."
             },
+            "RingOfAcidResistance": {
+                "name": "Ring of Acid Resistance",
+                "description": "Adds acid resistance"
+            },
             "Seizure": {
                 "name": "Seizure",
                 "description": "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days"

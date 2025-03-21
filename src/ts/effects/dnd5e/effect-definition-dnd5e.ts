@@ -234,6 +234,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
                 this.#beltOfStormGiantStrength,
                 this.#bracersOfArchery,
                 this.#bracersOfDefense,
+                this.#ringOfAcidResistance,
             ],
         };
     }
@@ -541,6 +542,30 @@ class EffectDefinitionDnd5e extends EffectDefinition {
             isTemporary: false,
         });
     }
+
+    get #ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
+        return createConvenientEffect({
+            effect: {
+                name: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.RingOfAcidResistance.name,
+                ),
+                description: game.i18n.localize(
+                    EN_JSON.ConvenientEffects.Dnd.RingOfAcidResistance
+                        .description,
+                ),
+                img: "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
+                changes: [
+                    {
+                        key: "system.traits.dr.value",
+                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        value: "acid",
+                    },
+                ],
+            },
+            isTemporary: false,
+        });
+    }
+
     get #other(): ItemEffects {
         return {
             itemData: {
