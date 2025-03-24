@@ -140,6 +140,21 @@ function upgradeMovement({
     };
 }
 
+function multiplyEncumbrance({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.encumbrance.max",
+        mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+        value,
+        priority,
+    };
+}
+
 export {
     acBonus,
     acCalc,
@@ -149,4 +164,5 @@ export {
     movement,
     upgradeMovement,
     upgradeDarkvision,
+    multiplyEncumbrance,
 };

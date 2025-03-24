@@ -39,7 +39,7 @@ function advantageAttack({
 function disadvantageAttack({
     attackType,
 }: {
-    attackType: "all" | "mwak" | "msak" | "rwak" | "rsak";
+    attackType: "all" | "mwak" | "msak" | "rwak" | "rsak" | "str" | "dex";
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.disadvantage.attack.${attackType}`,
@@ -67,6 +67,18 @@ function grantDisadvantageAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.disadvantage.attack.${attackType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
+function advantageAbility({
+    abilityType,
+}: {
+    abilityType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.advantage.ability.${abilityType}`,
         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
         value: "1",
     };
@@ -202,6 +214,22 @@ function optionalSave({
     };
 }
 
+function optionalAbilityCheck({
+    key,
+    abilityCheckType,
+    value,
+}: {
+    key: string;
+    abilityCheckType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
+    value: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.optional.${key}.check.${abilityCheckType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        value,
+    };
+}
+
 function optionalSkill({
     key,
     skillType,
@@ -226,6 +254,7 @@ export {
     disadvantageAttack,
     grantAdvantageAttack,
     grantDisadvantageAttack,
+    advantageAbility,
     advantageAbilityCheck,
     disadvantageAbilityCheck,
     advantageAbilitySave,
@@ -236,5 +265,6 @@ export {
     optionalLabel,
     optionalAttack,
     optionalSave,
+    optionalAbilityCheck,
     optionalSkill,
 };

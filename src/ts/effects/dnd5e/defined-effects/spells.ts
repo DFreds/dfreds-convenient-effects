@@ -22,23 +22,38 @@ import {
     upgradeDarkvision,
     movement,
     upgradeMovement,
+    multiplyEncumbrance,
 } from "../changes/attributes.ts";
 import {
+    advantageAbility,
+    advantageAbilityCheck,
     advantageAbilitySave,
     advantageAttack,
     advantageDeathSave,
+    disadvantageAbilityCheck,
+    disadvantageAbilitySave,
     disadvantageAttack,
     grantAdvantageAttack,
     grantDisadvantageAttack,
+    optionalAbilityCheck,
+    optionalLabel,
+    optionalSave,
+    optionalSkill,
 } from "../changes/midi-qol.ts";
 import { tokenMagic } from "../changes/macros.ts";
-import { abilitySaveBonus } from "../changes/abilities.ts";
+import { abilitySaveBonus, downgradeAbility } from "../changes/abilities.ts";
 import {
     addAllDamageImmunity,
+    addAllDamageResistance,
+    addAllDamageVulnerability,
+    addAllLanguages,
+    addConditionImmunity,
     addDamageImmunity,
     addDamageResistance,
 } from "../changes/traits.ts";
 import { atlLight, atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
+import { skillCheckBonus } from "../changes/skills.ts";
+import { initiativeAdv } from "../changes/dnd5e.ts";
 
 function spells(): ItemEffects {
     return {
@@ -461,13 +476,7 @@ function comprehendLanguages(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
-            changes: [
-                {
-                    key: "system.traits.languages.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-            ],
+            changes: [addAllLanguages()],
         },
     });
 }
@@ -507,16 +516,12 @@ function contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.wis`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.wis`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilitySave({
+                    saveType: "wis",
+                }),
+                disadvantageAbilityCheck({
+                    abilityCheckType: "wis",
+                }),
                 ...(blinded().changes ?? []),
             ],
         },
@@ -533,21 +538,15 @@ function contagionFilthFever(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.attack.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilitySave({
+                    saveType: "str",
+                }),
+                disadvantageAbilityCheck({
+                    abilityCheckType: "str",
+                }),
+                disadvantageAttack({
+                    attackType: "str",
+                }),
             ],
         },
     });
@@ -563,16 +562,10 @@ function contagionFleshRot(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.cha`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "system.traits.dv.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilityCheck({
+                    abilityCheckType: "cha",
+                }),
+                addAllDamageVulnerability(),
             ],
         },
     });
@@ -588,16 +581,12 @@ function contagionMindfire(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.int`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.int`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilitySave({
+                    saveType: "int",
+                }),
+                disadvantageAbilityCheck({
+                    abilityCheckType: "int",
+                }),
             ],
         },
     });
@@ -613,21 +602,15 @@ function contagionSeizure(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.attack.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilitySave({
+                    saveType: "dex",
+                }),
+                disadvantageAbilityCheck({
+                    abilityCheckType: "dex",
+                }),
+                disadvantageAttack({
+                    attackType: "dex",
+                }),
             ],
         },
     });
@@ -643,16 +626,12 @@ function contagionSlimyDoom(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.con`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.con`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilitySave({
+                    saveType: "con",
+                }),
+                disadvantageAbilityCheck({
+                    abilityCheckType: "con",
+                }),
             ],
         },
     });
@@ -767,11 +746,9 @@ function enhanceAbilityBearsEndurance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.con`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilityCheck({
+                    abilityCheckType: "con",
+                }),
             ],
         },
     });
@@ -789,17 +766,13 @@ function enhanceAbilityBullsStrength(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "system.attributes.encumbrance.max",
-                    mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+                advantageAbilityCheck({
+                    abilityCheckType: "str",
+                }),
+                multiplyEncumbrance({
                     value: "2",
                     priority: 5,
-                },
+                }),
             ],
         },
     });
@@ -815,11 +788,9 @@ function enhanceAbilityCatsGrace(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilityCheck({
+                    abilityCheckType: "dex",
+                }),
             ],
         },
     });
@@ -837,11 +808,9 @@ function enhanceAbilityEaglesSplendor(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.cha`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilityCheck({
+                    abilityCheckType: "cha",
+                }),
             ],
         },
     });
@@ -857,11 +826,9 @@ function enhanceAbilityFoxsCunning() {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.int`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilityCheck({
+                    abilityCheckType: "int",
+                }),
             ],
         },
     });
@@ -877,11 +844,9 @@ function enhanceAbilityOwlsWisdom() {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.check.wis`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilityCheck({
+                    abilityCheckType: "wis",
+                }),
             ],
         },
     });
@@ -915,21 +880,16 @@ function enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.bonuses.weapon.damage",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                damageBonus({
+                    damageType: "weapon",
                     value: "+1d4",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.check.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.save.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                }),
+                advantageAbilityCheck({
+                    abilityCheckType: "str",
+                }),
+                advantageAbilitySave({
+                    saveType: "str",
+                }),
             ],
         },
         isDynamic: true,
@@ -946,21 +906,16 @@ function enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.bonuses.weapon.damage",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                damageBonus({
+                    damageType: "weapon",
                     value: "-1d4",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.check.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.str`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                }),
+                disadvantageAbilityCheck({
+                    abilityCheckType: "str",
+                }),
+                disadvantageAbilitySave({
+                    saveType: "str",
+                }),
             ],
         },
         isDynamic: true,
@@ -1039,18 +994,16 @@ function feeblemind(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/magic/light/explosion-star-large-teal-purple.webp",
             changes: [
-                {
-                    key: "system.abilities.int.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+                downgradeAbility({
+                    ability: "int",
                     value: "1",
                     priority: 25,
-                },
-                {
-                    key: "system.abilities.cha.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+                }),
+                downgradeAbility({
+                    ability: "cha",
                     value: "1",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -1205,31 +1158,19 @@ function foresight(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
             duration: { seconds: SECONDS.IN_EIGHT_HOURS },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "flags.dnd5e.initiativeAdv",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.grants.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAttack({
+                    attackType: "all",
+                }),
+                advantageAbility({
+                    abilityType: "all",
+                }),
+                advantageAbilitySave({
+                    saveType: "all",
+                }),
+                initiativeAdv(),
+                grantDisadvantageAttack({
+                    attackType: "all",
+                }),
             ],
         },
     });
@@ -1300,21 +1241,20 @@ function guidance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.optional.guidance.label`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "Guidance",
-                },
-                {
-                    key: `flags.midi-qol.optional.guidance.check.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                optionalLabel({
+                    key: "guidance",
+                    label: "Guidance",
+                }),
+                optionalAbilityCheck({
+                    key: "guidance",
+                    abilityCheckType: "all",
                     value: "+1d4",
-                },
-                {
-                    key: `flags.midi-qol.optional.guidance.skill.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                optionalSkill({
+                    key: "guidance",
+                    skillType: "all",
                     value: "+1d4",
-                },
+                }),
             ],
         },
     });
@@ -1331,11 +1271,9 @@ function guidingBolt(): PreCreate<ActiveEffectSource> {
             duration: { seconds: SECONDS.IN_ONE_ROUND_DND5E, turns: 1 },
             flags: { dae: { specialDuration: ["isAttacked"] } },
             changes: [
-                {
-                    key: `flags.midi-qol.grants.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                grantAdvantageAttack({
+                    attackType: "all",
+                }),
             ],
         },
     });
@@ -1351,22 +1289,17 @@ function haste(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.attributes.ac.bonus",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                acBonus({
                     value: "+2",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.save.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: "system.attributes.movement.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                }),
+                advantageAbilitySave({
+                    saveType: "dex",
+                }),
+                movement({
+                    movementType: "all",
                     value: "*2",
                     priority: 25,
-                },
+                }),
             ],
         },
     });
@@ -1382,21 +1315,15 @@ function heroesFeast(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_DAY },
             changes: [
-                {
-                    key: "system.traits.di.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "poison",
-                },
-                {
-                    key: "system.traits.ci.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "frightened",
-                },
-                {
-                    key: `flags.midi-qol.advantage.ability.save.wis`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                addDamageImmunity({
+                    damageType: "poison",
+                }),
+                addConditionImmunity({
+                    condition: "frightened",
+                }),
+                advantageAbilitySave({
+                    saveType: "wis",
+                }),
             ],
         },
     });
@@ -1412,11 +1339,9 @@ function heroism(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/life/heart-cross-strong-blue.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: "system.traits.ci.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "frightened",
-                },
+                addConditionImmunity({
+                    condition: "frightened",
+                }),
             ],
         },
     });
@@ -1495,16 +1420,12 @@ function holyAura(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.advantage.ability.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.grants.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                advantageAbilitySave({
+                    saveType: "all",
+                }),
+                grantDisadvantageAttack({
+                    attackType: "all",
+                }),
                 atlLight({
                     lightType: "dim",
                     value: "5",
@@ -1574,21 +1495,15 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
                     value: "0",
                     priority: 25,
                 }),
-                {
-                    key: `flags.midi-qol.disadvantage.ability.save.dex`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.disadvantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
-                {
-                    key: `flags.midi-qol.grants.advantage.attack.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "1",
-                },
+                disadvantageAbilitySave({
+                    saveType: "dex",
+                }),
+                disadvantageAttack({
+                    attackType: "all",
+                }),
+                grantAdvantageAttack({
+                    attackType: "all",
+                }),
             ],
         },
     });
@@ -1729,11 +1644,10 @@ function passWithoutTrace(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/air/fog-gas-smoke-brown.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.skills.ste.bonuses.check",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                skillCheckBonus({
+                    skillType: "ste",
                     value: "+10",
-                },
+                }),
                 tokenMagic({
                     value: "fog",
                 }),
@@ -1992,16 +1906,15 @@ function resistance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                {
-                    key: `flags.midi-qol.optional.resistance.label`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "Resistance",
-                },
-                {
-                    key: `flags.midi-qol.optional.resistance.save.all`,
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+                optionalLabel({
+                    key: "resistance",
+                    label: "Resistance",
+                }),
+                optionalSave({
+                    key: "resistance",
+                    saveType: "all",
                     value: "+1d4",
-                },
+                }),
             ],
         },
     });
@@ -2185,11 +2098,15 @@ function stoneskin(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.traits.dr.value",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                    value: "physical",
-                },
+                addDamageResistance({
+                    damageType: "bludgeoning",
+                }),
+                addDamageResistance({
+                    damageType: "piercing",
+                }),
+                addDamageResistance({
+                    damageType: "slashing",
+                }),
                 tokenMagic({
                     value: "oldfilm",
                 }),
@@ -2274,26 +2191,13 @@ function wardingBond(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                {
-                    key: "system.attributes.ac.bonus",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                acBonus({
                     value: "+1",
-                },
-                {
-                    key: "system.bonuses.abilities.save",
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }),
+                saveBonus({
                     value: "+1",
-                },
-                {
-                    key: "system.traits.dr.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "physical",
-                },
-                {
-                    key: "system.traits.dr.all",
-                    mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-                    value: "magical",
-                },
+                }),
+                addAllDamageResistance(),
             ],
         },
     });

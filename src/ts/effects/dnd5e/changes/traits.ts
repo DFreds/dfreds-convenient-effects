@@ -1,5 +1,17 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 
+function addConditionImmunity({
+    condition,
+}: {
+    condition: "frightened" | "poisoned" | "stunned" | "unconscious";
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.ci.value",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: condition,
+    };
+}
+
 function addDamageImmunity({
     damageType,
 }: {
@@ -53,6 +65,14 @@ function addAllDamageResistance(): Partial<EffectChangeData> {
     };
 }
 
+function addAllDamageVulnerability(): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.dv.all",
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 function addLanguage({
     language,
 }: {
@@ -77,11 +97,22 @@ function addWeaponProficiency({
     };
 }
 
+function addAllLanguages(): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.languages.all",
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 export {
+    addConditionImmunity,
     addAllDamageImmunity,
     addAllDamageResistance,
     addDamageImmunity,
     addDamageResistance,
     addLanguage,
     addWeaponProficiency,
+    addAllLanguages,
+    addAllDamageVulnerability,
 };
