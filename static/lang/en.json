@@ -671,9 +671,49 @@
                 "name": "Restrained",
                 "description": "- A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.<br />- The creature has disadvantage on Dexterity saving throws."
             },
+            "RingOfResistance": {
+                "name": "Ring of Resistance",
+                "description": "Choose between acid, cold, fire, force, lightning, necrotic, poison, psychic, radiant, or thunder resistance"
+            },
             "RingOfAcidResistance": {
                 "name": "Ring of Acid Resistance",
                 "description": "Adds acid resistance"
+            },
+            "RingOfColdResistance": {
+                "name": "Ring of Cold Resistance",
+                "description": "Adds cold resistance"
+            },
+            "RingOfFireResistance": {
+                "name": "Ring of Fire Resistance",
+                "description": "Adds fire resistance"
+            },
+            "RingOfForceResistance": {
+                "name": "Ring of Force Resistance",
+                "description": "Adds force resistance"
+            },
+            "RingOfLightningResistance": {
+                "name": "Ring of Lightning Resistance",
+                "description": "Adds lightning resistance"
+            },
+            "RingOfNecroticResistance": {
+                "name": "Ring of Necrotic Resistance",
+                "description": "Adds necrotic resistance"
+            },
+            "RingOfPoisonResistance": {
+                "name": "Ring of Poison Resistance",
+                "description": "Adds poison resistance"
+            },
+            "RingOfPsychicResistance": {
+                "name": "Ring of Psychic Resistance",
+                "description": "Adds psychic resistance"
+            },
+            "RingOfRadiantResistance": {
+                "name": "Ring of Radiant Resistance",
+                "description": "Adds radiant resistance"
+            },
+            "RingOfThunderResistance": {
+                "name": "Ring of Thunder Resistance",
+                "description": "Adds thunder resistance"
             },
             "RingOfFreeAction": {
                 "name": "Ring of Free Action",

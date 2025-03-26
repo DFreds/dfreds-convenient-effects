@@ -43,7 +43,7 @@ function magicItems(): ItemEffects {
             beltOfCloudGiantStrength(),
             beltOfStormGiantStrength(),
             bootsOfElvenkind(),
-            // this.#bootsOfSpeed, // TODO maybe - it's an active effect
+            // bootsOfSpeed(), // TODO maybe - it's an active effect
             bootsOfTheWinterlands(),
             bracersOfArchery(),
             bracersOfDefense(),
@@ -68,9 +68,18 @@ function magicItems(): ItemEffects {
             // stoneOfGoodLuck(),
             // wingedBoots, // TODO maybe
             // wingsOfFlying, // TODO maybe
-            ringOfAcidResistance(),
             ringOfFreeAction(),
-            // ringOfResistance(), // todo maybe - either nested or lots of them
+            ringOfResistance(),
+            ringOfAcidResistance(),
+            ringOfColdResistance(),
+            ringOfFireResistance(),
+            ringOfForceResistance(),
+            ringOfLightningResistance(),
+            ringOfNecroticResistance(),
+            ringOfPoisonResistance(),
+            ringOfPsychicResistance(),
+            ringOfRadiantResistance(),
+            ringOfThunderResistance(),
             ringOfSwimming(),
             ringOfWarmth(),
             // TODO oils? https://www.5esrd.com/gamemastering/magic-items/potions-oils/
@@ -435,6 +444,37 @@ function cloakOfTheMantaRay(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function ringOfResistance(): PreCreate<ActiveEffectSource> {
+    const nestedEffectIds = [
+        ringOfAcidResistance(),
+        ringOfColdResistance(),
+        ringOfFireResistance(),
+        ringOfForceResistance(),
+        ringOfLightningResistance(),
+        ringOfNecroticResistance(),
+        ringOfPoisonResistance(),
+        ringOfPsychicResistance(),
+        ringOfRadiantResistance(),
+        ringOfThunderResistance(),
+    ]
+        .map((effect) => Flags.getCeEffectId(effect))
+        .filter(notEmpty);
+
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-faceted-silver-orange.webp",
+        },
+        nestedEffectIds,
+        isTemporary: false,
+    });
+}
+
 function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
@@ -448,6 +488,186 @@ function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
             changes: [
                 addDamageResistance({
                     damageType: "acid",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfColdResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfColdResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfColdResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-faceted-silver-orange.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "cold",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfFireResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfFireResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfFireResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-gold-orange.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "fire",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfForceResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfForceResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfForceResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-faceted-gold-purple.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "force",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfLightningResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfLightningResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfLightningResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-gold-orange.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "lightning",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfNecroticResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfNecroticResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfNecroticResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "necrotic",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfPoisonResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfPoisonResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfPoisonResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-faceted-gold-purple.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "poison",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfPsychicResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfPsychicResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfPsychicResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "psychic",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfRadiantResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfRadiantResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfRadiantResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-inlay-red.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "radiant",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfThunderResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfThunderResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfThunderResistance.description",
+            ),
+            img: "icons/equipment/finger/ring-faceted-silver-orange.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "thunder",
                 }),
             ],
         },
