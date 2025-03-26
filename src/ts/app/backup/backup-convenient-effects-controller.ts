@@ -180,7 +180,7 @@ class BackupConvenientEffectsController {
 
     async onResetSystemEffects(_event: Event): Promise<void> {
         return Dialog.confirm({
-            title: "ConvenientEffects.ResetSystemEffects",
+            title: game.i18n.localize("ConvenientEffects.ResetSystemEffects"),
             content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
             yes: () => {
                 game.dfreds.effectInterface.resetSystemInitialization();
