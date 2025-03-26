@@ -202,6 +202,18 @@
                 "name": "Bonus Action",
                 "description": "No active effects and expires on turn start"
             },
+            "BootsOfElvenkind": {
+                "name": "Boots of Elvenkind",
+                "description": "Advantage on stealth checks"
+            },
+            "BootsOfTheWinterlands": {
+                "name": "Boots of the Winterlands",
+                "description": "Adds damage resistance to cold"
+            },
+            "BroochOfShielding": {
+                "name": "Brooch of Shielding",
+                "description": "Adds damage resistance to force"
+            },
             "BracersOfArchery": {
                 "name": "Bracers of Archery",
                 "description": "- Adds +2 to ranged attack damage<br/>- Adds proficiency in longbow and shortbow"
@@ -245,6 +257,14 @@
             "Charmed": {
                 "name": "Charmed",
                 "description": "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature."
+            },
+            "CloakOfProtection": {
+                "name": "Cloak of Protection",
+                "description": "Adds +1 to AC and +1 to all saving throws"
+            },
+            "CloakOfTheMantaRay": {
+                "name": "Cloak of the Manta Ray",
+                "description": "Adds swim speed of 60 ft"
             },
             "Command": {
                 "name": "Command",
@@ -651,6 +671,18 @@
             "RingOfAcidResistance": {
                 "name": "Ring of Acid Resistance",
                 "description": "Adds acid resistance"
+            },
+            "RingOfFreeAction": {
+                "name": "Ring of Free Action",
+                "description": "Adds immunity to paralyzed and restrained"
+            },
+            "RingOfSwimming": {
+                "name": "Ring of Swimming",
+                "description": "Adds swim speed of 40 ft"
+            },
+            "RingOfWarmth": {
+                "name": "Ring of Warmth",
+                "description": "Adds cold resistance"
             },
             "Seizure": {
                 "name": "Seizure",

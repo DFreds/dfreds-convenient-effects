@@ -8,14 +8,20 @@ import {
     downgradeAbility,
     upgradeAbility,
 } from "../changes/abilities.ts";
-import { damageBonus } from "../changes/bonuses.ts";
+import { damageBonus, saveBonus } from "../changes/bonuses.ts";
 import {
+    addConditionImmunity,
     addDamageResistance,
     addLanguage,
     addWeaponProficiency,
 } from "../changes/traits.ts";
-import { acBonus, upgradeDarkvision } from "../changes/attributes.ts";
+import {
+    acBonus,
+    upgradeDarkvision,
+    upgradeMovement,
+} from "../changes/attributes.ts";
 import { atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
+import { advantageSkill } from "../changes/midi-qol.ts";
 
 function magicItems(): ItemEffects {
     return {
@@ -36,38 +42,37 @@ function magicItems(): ItemEffects {
             beltOfFireGiantStrength(),
             beltOfCloudGiantStrength(),
             beltOfStormGiantStrength(),
-            // this.#bootsOfElvenkind,
+            bootsOfElvenkind(),
             // this.#bootsOfSpeed, // TODO maybe - it's an active effect
-            // this.#bootsOfTheWinterlands,
+            bootsOfTheWinterlands(),
             bracersOfArchery(),
             bracersOfDefense(),
-            // this.#broochOfShielding,
-            // this.#broomOfFlying,
-            // this.#cloakOfArachnida,
-            // this.#cloakOfDisplacement,
-            // this.#cloakOfElvenkind,
-            // this.#cloakOfProtection
-            // this.#cloakOfTheMantaRay,
-            // this.#eyesOfTheEagle,
-            // this.#gauntletsOfOgrePower,
-            // this.#gogglesOfNight,
-            // this.#headbandOfIntellect,
-            // this.#robeOfEyes,
-            // this.#robeOfStars,
-            // this.#robeOfTheArchmagi,
-            // this.#iounStone,
-            // this.#mantleOfSpellResistance,
-            // this.#periaptOfHealth,
-            // this.#periaptOfProofAgainstPoison,
-            // this.#stoneOfGoodLuck,
-            // this.#wingedBoots, // TODO maybe
-            // this.#wingsOfFlying, // TODO maybe
+            broochOfShielding(),
+            // broomOfFlying(),
+            // cloakOfArachnida(),
+            // cloakOfDisplacement(),
+            // cloakOfElvenkind(),
+            cloakOfProtection(),
+            cloakOfTheMantaRay(),
+            // eyesOfTheEagle(),
+            // gauntletsOfOgrePower(),
+            // gogglesOfNight(),
+            // headbandOfIntellect(),
+            // robeOfEyes(),
+            // robeOfStars(),
+            // robeOfTheArchmagi(),
+            // iounStone(),
+            // mantleOfSpellResistance(),
+            // periaptOfHealth(),
+            // periaptOfProofAgainstPoison(),
+            // stoneOfGoodLuck(),
+            // wingedBoots, // TODO maybe
+            // wingsOfFlying, // TODO maybe
             ringOfAcidResistance(),
-            // this.#ringOfFreeAction,
-            // this.#ringOfProtection,
-            // this.#ringOfResistance,
-            // this.#ringOfSwimming,
-            // this.#ringOfWarmth
+            ringOfFreeAction(),
+            // ringOfResistance(), // todo maybe - either nested or lots of them
+            ringOfSwimming(),
+            ringOfWarmth(),
             // TODO oils? https://www.5esrd.com/gamemastering/magic-items/potions-oils/
         ],
     };
@@ -291,6 +296,38 @@ function beltOfStormGiantStrength(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function bootsOfElvenkind(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.BootsOfElvenkind.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.BootsOfElvenkind.description",
+            ),
+            img: "icons/equipment/feet/boots-pointed-cloth-green.webp",
+            changes: [advantageSkill({ skillType: "ste" })],
+        },
+        isTemporary: false,
+    });
+}
+
+function bootsOfTheWinterlands(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.BootsOfTheWinterlands.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.BootsOfTheWinterlands.description",
+            ),
+            img: "icons/equipment/feet/boots-leather-banded-furred.webp",
+            changes: [addDamageResistance({ damageType: "cold" })],
+        },
+        isTemporary: false,
+    });
+}
+
 function bracersOfArchery(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
@@ -338,6 +375,66 @@ function bracersOfDefense(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function broochOfShielding(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.BroochOfShielding.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.BroochOfShielding.description",
+            ),
+            img: "icons/equipment/neck/pendant-bronze-gem-blue.webp",
+            changes: [addDamageResistance({ damageType: "force" })],
+        },
+        isTemporary: false,
+    });
+}
+
+function cloakOfProtection(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfProtection.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfProtection.description",
+            ),
+            img: "icons/equipment/back/cloak-heavy-fur-blue.webp",
+            changes: [
+                acBonus({
+                    value: "+1",
+                }),
+                saveBonus({
+                    value: "+1",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function cloakOfTheMantaRay(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfTheMantaRay.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfTheMantaRay.description",
+            ),
+            img: "icons/equipment/head/hood-cloth-teal-gold.webp",
+            changes: [
+                upgradeMovement({
+                    movementType: "swim",
+                    value: "60",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
 function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
@@ -358,4 +455,65 @@ function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function ringOfFreeAction(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfFreeAction.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfFreeAction.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
+            changes: [
+                addConditionImmunity({
+                    condition: "paralyzed",
+                }),
+                addConditionImmunity({
+                    condition: "restrained",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfSwimming(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfSwimming.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfSwimming.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
+            changes: [
+                upgradeMovement({
+                    movementType: "swim",
+                    value: "40",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function ringOfWarmth(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfWarmth.name"),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RingOfWarmth.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-gold-orange.webp",
+            changes: [
+                addDamageResistance({
+                    damageType: "cold",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
 export { magicItems };

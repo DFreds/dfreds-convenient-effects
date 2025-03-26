@@ -3,7 +3,13 @@ import { EffectChangeData } from "types/foundry/common/documents/active-effect.j
 function addConditionImmunity({
     condition,
 }: {
-    condition: "frightened" | "poisoned" | "stunned" | "unconscious";
+    condition:
+        | "frightened"
+        | "paralyzed"
+        | "poisoned"
+        | "stunned"
+        | "unconscious"
+        | "restrained";
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.ci.value",

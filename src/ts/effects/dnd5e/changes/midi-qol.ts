@@ -144,6 +144,18 @@ function failAbilitySave({
     };
 }
 
+function advantageSkill({
+    skillType,
+}: {
+    skillType: "ste";
+}): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.advantage.skill.${skillType}`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 function grantCriticalRange({
     range,
 }: {
@@ -260,6 +272,7 @@ export {
     advantageAbilitySave,
     disadvantageAbilitySave,
     failAbilitySave,
+    advantageSkill,
     grantCriticalRange,
     grantFailAttack,
     optionalLabel,
