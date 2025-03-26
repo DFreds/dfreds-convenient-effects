@@ -25,6 +25,36 @@ function attackBonus({
     };
 }
 
+function spellDcBonus({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.bonuses.spell.dc`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
+function checkBonus({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.bonuses.abilities.check`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
 function damageBonus({
     damageType,
     value,
@@ -66,4 +96,4 @@ function saveBonus({
     };
 }
 
-export { attackBonus, damageBonus, saveBonus };
+export { attackBonus, checkBonus, damageBonus, saveBonus, spellDcBonus };

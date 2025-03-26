@@ -4,6 +4,7 @@ function addConditionImmunity({
     condition,
 }: {
     condition:
+        | "diseased"
         | "frightened"
         | "paralyzed"
         | "poisoned"

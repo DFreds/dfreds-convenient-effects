@@ -147,7 +147,7 @@ function failAbilitySave({
 function advantageSkill({
     skillType,
 }: {
-    skillType: "ste";
+    skillType: "ste" | "prc";
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.advantage.skill.${skillType}`,
@@ -258,6 +258,14 @@ function optionalSkill({
     };
 }
 
+function magicResistanceSaves(): Partial<EffectChangeData> {
+    return {
+        key: `flags.midi-qol.magicResistance.save.all`,
+        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        value: "1",
+    };
+}
+
 export {
     advantage,
     advantageDeathSave,
@@ -280,4 +288,5 @@ export {
     optionalSave,
     optionalAbilityCheck,
     optionalSkill,
+    magicResistanceSaves,
 };

@@ -60,6 +60,21 @@ function acFormula({
     };
 }
 
+function addDarkvision({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.senses.darkvision",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
 function upgradeDarkvision({
     value,
     priority,
@@ -69,6 +84,21 @@ function upgradeDarkvision({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.darkvision",
+        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        value,
+        priority,
+    };
+}
+
+function upgradeTrueSight({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.senses.truesight",
         mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
         value,
         priority,
@@ -164,5 +194,7 @@ export {
     movement,
     upgradeMovement,
     upgradeDarkvision,
+    upgradeTrueSight,
     multiplyEncumbrance,
+    addDarkvision,
 };

@@ -8,20 +8,35 @@ import {
     downgradeAbility,
     upgradeAbility,
 } from "../changes/abilities.ts";
-import { damageBonus, saveBonus } from "../changes/bonuses.ts";
+import {
+    attackBonus,
+    checkBonus,
+    damageBonus,
+    saveBonus,
+    spellDcBonus,
+} from "../changes/bonuses.ts";
 import {
     addConditionImmunity,
+    addDamageImmunity,
     addDamageResistance,
     addLanguage,
     addWeaponProficiency,
 } from "../changes/traits.ts";
 import {
     acBonus,
+    acCalc,
+    acFormula,
+    addDarkvision,
     upgradeDarkvision,
     upgradeMovement,
+    upgradeTrueSight,
 } from "../changes/attributes.ts";
 import { atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
-import { advantageSkill } from "../changes/midi-qol.ts";
+import {
+    advantageSkill,
+    grantDisadvantageAttack,
+    magicResistanceSaves,
+} from "../changes/midi-qol.ts";
 
 function magicItems(): ItemEffects {
     return {
@@ -31,8 +46,6 @@ function magicItems(): ItemEffects {
             ),
         },
         effects: [
-            // this.#armorOfInvulnerability, nested effect
-            // this.#armorOfResistance, nested effect
             amuletOfHealth(),
             beltOfDwarvenkind(),
             beltOfGiantStrength(),
@@ -50,22 +63,22 @@ function magicItems(): ItemEffects {
             broochOfShielding(),
             // broomOfFlying(),
             // cloakOfArachnida(),
-            // cloakOfDisplacement(),
-            // cloakOfElvenkind(),
+            cloakOfDisplacement(),
+            cloakOfElvenkind(),
             cloakOfProtection(),
             cloakOfTheMantaRay(),
-            // eyesOfTheEagle(),
-            // gauntletsOfOgrePower(),
-            // gogglesOfNight(),
-            // headbandOfIntellect(),
-            // robeOfEyes(),
-            // robeOfStars(),
-            // robeOfTheArchmagi(),
-            // iounStone(),
-            // mantleOfSpellResistance(),
-            // periaptOfHealth(),
-            // periaptOfProofAgainstPoison(),
-            // stoneOfGoodLuck(),
+            eyesOfTheEagle(),
+            gauntletsOfOgrePower(),
+            gogglesOfNight(),
+            headbandOfIntellect(),
+            robeOfEyes(),
+            robeOfStars(),
+            robeOfTheArchmagi(),
+            // iounStone(), // TODO lots of nested effects
+            mantleOfSpellResistance(),
+            periaptOfHealth(),
+            periaptOfProofAgainstPoison(),
+            stoneOfGoodLuck(),
             // wingedBoots, // TODO maybe
             // wingsOfFlying, // TODO maybe
             ringOfFreeAction(),
@@ -400,6 +413,38 @@ function broochOfShielding(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function cloakOfDisplacement(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfDisplacement.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfDisplacement.description",
+            ),
+            img: "icons/equipment/back/cloak-brown-accent-brown-layered-collared-fur.webp",
+            changes: [grantDisadvantageAttack({ attackType: "all" })],
+        },
+        isTemporary: false,
+    });
+}
+
+function cloakOfElvenkind(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfElvenkind.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.CloakOfElvenkind.description",
+            ),
+            img: "icons/equipment/back/cloak-collared-feathers-green.webp",
+            changes: [advantageSkill({ skillType: "ste" })],
+        },
+        isTemporary: false,
+    });
+}
+
 function cloakOfProtection(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
@@ -668,6 +713,239 @@ function ringOfThunderResistance(): PreCreate<ActiveEffectSource> {
             changes: [
                 addDamageResistance({
                     damageType: "thunder",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function eyesOfTheEagle(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.EyesOfTheEagle.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.EyesOfTheEagle.description",
+            ),
+            img: "icons/equipment/head/goggles-leather-blue.webp",
+            changes: [
+                advantageSkill({
+                    skillType: "prc",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function gauntletsOfOgrePower(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.GauntletsOfOgrePower.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.GauntletsOfOgrePower.description",
+            ),
+            img: "icons/equipment/hand/gauntlet-armored-steel-grey.webp",
+            changes: [
+                upgradeAbility({
+                    ability: "str",
+                    value: "19",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function gogglesOfNight(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.GogglesOfNight.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.GogglesOfNight.description",
+            ),
+            img: "icons/equipment/head/goggles-leather-blue.webp",
+            changes: [addDarkvision({ value: "60" })],
+        },
+        isTemporary: false,
+    });
+}
+
+function headbandOfIntellect(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.HeadbandOfIntellect.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.HeadbandOfIntellect.description",
+            ),
+            img: "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
+            changes: [
+                upgradeAbility({
+                    ability: "int",
+                    value: "19",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function robeOfEyes(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.RobeOfEyes.name"),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RobeOfEyes.description",
+            ),
+            img: "icons/equipment/head/hood-red.webp",
+            changes: [
+                advantageSkill({
+                    skillType: "prc",
+                }),
+                upgradeDarkvision({
+                    value: "120",
+                }),
+                upgradeTrueSight({
+                    value: "120",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function robeOfStars(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.RobeOfStars.name"),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RobeOfStars.description",
+            ),
+            img: "icons/equipment/back/cloak-plain-blue.webp",
+            changes: [
+                saveBonus({
+                    value: "+1",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function robeOfTheArchmagi(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.RobeOfTheArchmagi.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.RobeOfTheArchmagi.description",
+            ),
+            img: "icons/equipment/back/cloak-plain-white.webp",
+            changes: [
+                acCalc({
+                    value: "custom",
+                }),
+                acFormula({
+                    value: "15 + @abilities.dex.mod",
+                }),
+                magicResistanceSaves(),
+                attackBonus({
+                    attackType: "spell",
+                    value: "+2",
+                }),
+                spellDcBonus({
+                    value: "+2",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function mantleOfSpellResistance(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.MantleOfSpellResistance.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.MantleOfSpellResistance.description",
+            ),
+            img: "icons/equipment/back/cape-layered-violet-white-swirl.webp",
+            changes: [magicResistanceSaves()],
+        },
+        isTemporary: false,
+    });
+}
+
+function periaptOfHealth(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.PeriaptOfHealth.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.PeriaptOfHealth.description",
+            ),
+            img: "icons/equipment/neck/pendant-faceted-red.webp",
+            changes: [
+                addConditionImmunity({
+                    condition: "diseased",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function periaptOfProofAgainstPoison(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.PeriaptOfProofAgainstPoison.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.PeriaptOfProofAgainstPoison.description",
+            ),
+            img: "icons/equipment/neck/necklace-hook-brown.webp",
+            changes: [
+                addConditionImmunity({
+                    condition: "poisoned",
+                }),
+                addDamageImmunity({
+                    damageType: "poison",
+                }),
+            ],
+        },
+        isTemporary: false,
+    });
+}
+
+function stoneOfGoodLuck(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize(
+                "ConvenientEffects.Dnd.StoneOfGoodLuck.name",
+            ),
+            description: game.i18n.localize(
+                "ConvenientEffects.Dnd.StoneOfGoodLuck.description",
+            ),
+            img: "icons/commodities/gems/gem-rough-rectangle-red.webp",
+            changes: [
+                saveBonus({
+                    value: "+1",
+                }),
+                checkBonus({
+                    value: "+1",
                 }),
             ],
         },

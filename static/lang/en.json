@@ -261,6 +261,14 @@
                 "name": "Charmed",
                 "description": "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature."
             },
+            "CloakOfDisplacement": {
+                "name": "Cloak of Displacement",
+                "description": "Grants disadvantage to all who attack"
+            },
+            "CloakOfElvenkind": {
+                "name": "Cloak of Elvenkind",
+                "description": "Advantage on stealth checks"
+            },
             "CloakOfProtection": {
                 "name": "Cloak of Protection",
                 "description": "Adds +1 to AC and +1 to all saving throws"
@@ -373,6 +381,10 @@
                 "name": "Exhaustion 5",
                 "description": "Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved"
             },
+            "EyesOfTheEagle": {
+                "name": "Eyes of the Eagle",
+                "description": "Advantage on perception checks"
+            },
             "FaerieFire": {
                 "name": "Faerie Fire",
                 "description": "Grants advantage to all who attack for 1 minute"
@@ -441,9 +453,17 @@
                 "name": "Frightened",
                 "description": "- A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.<br />- The creature can't willingly move closer to the source of its fear."
             },
+            "GauntletsOfOgrePower": {
+                "name": "Gauntlets of Ogre Power",
+                "description": "Upgrades strength to 19"
+            },
             "GlobeOfInvulnerability": {
                 "name": "Globe of Invulnerability",
                 "description": "No active effects and lasts for 1 minute"
+            },
+            "GogglesOfNight": {
+                "name": "Goggles of Night",
+                "description": "Adds 60 ft. of darkvision"
             },
             "Grappled": {
                 "name": "Grappled",
@@ -468,6 +488,10 @@
             "Haste": {
                 "name": "Haste",
                 "description": "Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute"
+            },
+            "HeadbandOfIntellect": {
+                "name": "Headband of Intellect",
+                "description": "Upgrades intelligence to 19"
             },
             "HeavilyEncumbered": {
                 "name": "Heavily Encumbered",
@@ -553,6 +577,10 @@
                 "name": "Mage Armor",
                 "description": "Upgrades armor to 13 + dex modifier for 8 hours"
             },
+            "MantleOfSpellResistance": {
+                "name": "Mantle of Spell Resistance",
+                "description": "Adds advantage on saving throws against spells"
+            },
             "MindBlank": {
                 "name": "Mind Blank",
                 "description": "Adds immunity to psychic damage for 24 hours"
@@ -576,6 +604,14 @@
             "PassWithoutTrace": {
                 "name": "Pass without Trace",
                 "description": "Add 10 to stealth checks for 1 hour"
+            },
+            "PeriaptOfHealth": {
+                "name": "Periapt of Health",
+                "description": "Adds immunity to diseased"
+            },
+            "PeriaptOfProofAgainstPoison": {
+                "name": "Periapt of Proof Against Poison",
+                "description": "Adds immunity to poison damage and the poisoned condition"
             },
             "Petrified": {
                 "name": "Petrified",
@@ -727,6 +763,18 @@
                 "name": "Ring of Warmth",
                 "description": "Adds cold resistance"
             },
+            "RobeOfEyes": {
+                "name": "Robe of Eyes",
+                "description": "Advantage on perception checks, upgrade darkvision to 120 ft., and upgrade truesight to 120 ft."
+            },
+            "RobeOfStars": {
+                "name": "Robe of Stars",
+                "description": "Adds +1 to all saving throws"
+            },
+            "RobeOfTheArchmagi": {
+                "name": "Robe of the Archmagi",
+                "description": "Sets base AC to 15 + dex modifier, adds advantage on saving throws against spells, and adds +2 to spell attack rolls and spell DC"
+            },
             "Seizure": {
                 "name": "Seizure",
                 "description": "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days"
@@ -778,6 +826,10 @@
             "Stoneskin": {
                 "name": "Stoneskin",
                 "description": "Adds resistance to non-magical physical damage for 1 hour"
+            },
+            "StoneOfGoodLuck": {
+                "name": "Stone of Good Luck",
+                "description": "Adds +1 to all checks and saves"
             },
             "Stunned": {
                 "name": "Stunned",
