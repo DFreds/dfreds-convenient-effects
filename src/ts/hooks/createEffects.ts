@@ -20,11 +20,7 @@ const CreateEffects: Listener = {
             const systemDefinition = mapping.findSystemDefinitionForSystemId();
 
             try {
-                ui.notifications.info(`Initializing convenient effects...`);
                 await systemDefinition?.effectDefinition?.initialize();
-                ui.notifications.info(
-                    `Finished initializing convenient effects`,
-                );
             } catch (e: any) {
                 ui.notifications.error(
                     `Something went wrong while initializing convenient effects`,

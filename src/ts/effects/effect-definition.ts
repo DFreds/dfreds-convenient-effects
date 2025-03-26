@@ -16,11 +16,17 @@ abstract class EffectDefinition {
 
     async initialize(): Promise<void> {
         if (BUILD_MODE === "development" || !this.settings.hasInitialized) {
+            ui.notifications.info(
+                game.i18n.localize("ConvenientEffects.Initializing"),
+            );
             await this.#createItemsAndEffects({ backup: false });
             await this.#createItemsAndEffects({ backup: true });
 
             // Set initialized before migration runs
             await this.settings.setHasInitialized(true);
+            ui.notifications.info(
+                game.i18n.localize("ConvenientEffects.FinishedInitializing"),
+            );
         }
 
         await this.#runMigrations();
