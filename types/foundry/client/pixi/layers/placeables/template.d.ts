@@ -27,7 +27,7 @@ declare global {
 
         protected override _onDragLeftStart(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<TObject | void>;
+        ): void;
 
         protected override _onDragLeftMove(
             event: PlaceablesLayerPointerEvent<TObject>,

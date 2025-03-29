@@ -321,7 +321,7 @@ declare global {
          */
         protected override _onDragLeftStart(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<TObject | void>;
+        ): TObject | void;
 
         /**
          * Continue a left-click drag workflow originating from the Canvas stage.
@@ -337,7 +337,7 @@ declare global {
          */
         protected override _onDragLeftDrop(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<void>;
+        ): void;
 
         /**
          * Cancel a left-click drag workflow originating from the Canvas stage.

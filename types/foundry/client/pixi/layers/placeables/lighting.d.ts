@@ -43,11 +43,11 @@ declare global {
 
         protected override _onDragLeftStart(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<void>;
+        ): void;
 
         protected override _onDragLeftMove(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<void>;
+        ): void;
 
         protected override _onDragLeftCancel(event: PIXI.FederatedEvent): void;
 

@@ -129,6 +129,8 @@ export abstract class DataField<
 
     initial: this["options"]["initial"];
 
+    nullable: TNullable;
+
     /** The initially provided options which configure the data field */
     options: DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>;
 
