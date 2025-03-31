@@ -1,4 +1,4 @@
-import { ConvenientEffectConfig } from "../ui/convenient-effect-config.ts";
+import { ConvenientEffectConfigV2 } from "../ui/convenient-effect-config.ts";
 import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 
@@ -16,7 +16,7 @@ const RenderActiveEffectConfig: Listener = {
                 const parent = activeEffect.parent;
 
                 if (parent instanceof Item && Flags.isConvenient(parent)) {
-                    ConvenientEffectConfig.init(
+                    ConvenientEffectConfigV2.init(
                         activeEffectConfig,
                         $html,
                         configData,
