@@ -17,19 +17,19 @@ class Settings {
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
-            "ConvenientEffects.Setting.Player",
+            "ConvenientEffects.SettingPlayer",
         );
         this.#USER_ROLES[CONST.USER_ROLES.TRUSTED] = game.i18n.localize(
-            "ConvenientEffects.Setting.TrustedPlayer",
+            "ConvenientEffects.SettingTrustedPlayer",
         );
         this.#USER_ROLES[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize(
-            "ConvenientEffects.Setting.AssistantGM",
+            "ConvenientEffects.SettingAssistantGM",
         );
         this.#USER_ROLES[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize(
-            "ConvenientEffects.Setting.GameMaster",
+            "ConvenientEffects.SettingGameMaster",
         );
         this.#USER_ROLES[5] = game.i18n.localize(
-            "ConvenientEffects.Setting.None",
+            "ConvenientEffects.SettingNone",
         );
     }
 
@@ -54,8 +54,8 @@ class Settings {
 
     #registerAppControlsPermission(): void {
         game.settings.register(MODULE_ID, this.#APP_CONTROLS_PERMISSION, {
-            name: "ConvenientEffects.Setting.AppControlsPermissionName",
-            hint: "ConvenientEffects.Setting.AppControlsPermissionHint",
+            name: "ConvenientEffects.SettingAppControlsPermissionName",
+            hint: "ConvenientEffects.SettingAppControlsPermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,
@@ -67,8 +67,8 @@ class Settings {
 
     #registerCreateFoldersPermission(): void {
         game.settings.register(MODULE_ID, this.#CREATE_FOLDERS_PERMISSION, {
-            name: "ConvenientEffects.Setting.CreateFoldersPermissionName",
-            hint: "ConvenientEffects.Setting.CreateFoldersPermissionHint",
+            name: "ConvenientEffects.SettingCreateFoldersPermissionName",
+            hint: "ConvenientEffects.SettingCreateFoldersPermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,
