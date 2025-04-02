@@ -11,7 +11,7 @@ const UiExtenderInit: Listener = {
 
             uiExtender.registerSceneControl({
                 moduleId: MODULE_ID,
-                name: "token",
+                name: "tokens",
                 predicate: () => {
                     return game.user.role >= settings.appControlsPermission;
                 },
@@ -31,7 +31,7 @@ const UiExtenderInit: Listener = {
                     },
                     button: true,
                     visible: true,
-                    onClick: () => {
+                    onChange: (_event?: Event, _active?: boolean) => {
                         new ConvenientEffectsApp().render(true);
                     },
                 },
