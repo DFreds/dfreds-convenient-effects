@@ -181,42 +181,6 @@ class BackupConvenientEffectsApp extends Application {
         this.#allDirectories.addClass("collapsed");
     }
 
-    isShowHiddenEffectsActive(): boolean {
-        return this.#showHiddenEffectsButton.hasClass("active");
-    }
-
-    removeActiveShowHiddenEffects(): void {
-        this.#showHiddenEffectsButton.removeClass("active");
-    }
-
-    addActiveShowHiddenEffects(): void {
-        this.#showHiddenEffectsButton.addClass("active");
-    }
-
-    isShowNestedEffectsActive(): boolean {
-        return this.#showNestedEffectsButton.hasClass("active");
-    }
-
-    removeActiveShowNestedEffects(): void {
-        this.#showNestedEffectsButton.removeClass("active");
-    }
-
-    addActiveShowNestedEffects(): void {
-        this.#showNestedEffectsButton.addClass("active");
-    }
-
-    isPrioritizeTargetsActive(): boolean {
-        return this.#prioritizeTargetsButton.hasClass("active");
-    }
-
-    removeActivePrioritizeTargets(): void {
-        this.#prioritizeTargetsButton.removeClass("active");
-    }
-
-    addActivePrioritizeTargets(): void {
-        this.#prioritizeTargetsButton.addClass("active");
-    }
-
     #initClickListeners(): void {
         this.#collapseAllButton.on(
             "click",
@@ -270,18 +234,6 @@ class BackupConvenientEffectsApp extends Application {
 
     get #folderHeaders() {
         return this.#rootView.find(".directory-list .folder-header");
-    }
-
-    get #showHiddenEffectsButton(): JQuery<HTMLElement> {
-        return this.#rootView.find(".show-hidden-effects");
-    }
-
-    get #showNestedEffectsButton(): JQuery<HTMLElement> {
-        return this.#rootView.find(".show-nested-effects");
-    }
-
-    get #prioritizeTargetsButton(): JQuery<HTMLElement> {
-        return this.#rootView.find(".prioritize-targets");
     }
 }
 
