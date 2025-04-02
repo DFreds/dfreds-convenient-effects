@@ -15,10 +15,10 @@ function removeConvenientItemsFromSidebar(
     if (!folderIds) return;
     if (BUILD_MODE === "development") return;
 
-    const html = directory.element;
+    const $html = $(directory.element);
     folderIds.forEach((convenientItemId) => {
-        const li = html.find(`li[data-document-id="${convenientItemId}"]`);
-        li.remove();
+        const $li = $html.find(`li[data-entry-id="${convenientItemId}"]`);
+        $li.remove();
     });
 }
 

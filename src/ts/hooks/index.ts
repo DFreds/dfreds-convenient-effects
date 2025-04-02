@@ -1,4 +1,3 @@
-import { ChangeSidebarTab } from "./changeSidebarTab.ts";
 import { CloseActiveEffectConfig } from "./closeActiveEffectConfig.ts";
 import { CreateActiveEffect } from "./createActiveEffect.ts";
 import { CreateEffects } from "./createEffects.ts";
@@ -39,7 +38,6 @@ const HooksCE = {
             UpdateActiveEffect,
             DeleteActiveEffect,
             RenderItemDirectory,
-            ChangeSidebarTab,
             RenderActiveEffectConfig,
             CloseActiveEffectConfig,
             HotbarDrop,
