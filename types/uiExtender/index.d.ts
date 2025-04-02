@@ -1,8 +1,20 @@
 export {};
 
 declare global {
-    export class UiExtender {
+    /**
+     * The UiExtender class
+     */
+    export interface UiExtender {
+        /**
+         * Register a scene control
+         * @param input The scene control input
+         */
         registerSceneControl(input: SceneControlInput): void;
+
+        /**
+         * Register a HUD button
+         * @param input The HUD button input
+         */
         registerHudButton(input: HudButtonInput): void;
     }
 
@@ -13,11 +25,11 @@ declare global {
         moduleId: string;
 
         /**
-         * The name of the token layer
+         * The name of the control layer
          */
         name:
-            | "token"
-            | "measure"
+            | "tokens"
+            | "templates"
             | "tiles"
             | "drawings"
             | "walls"
@@ -25,11 +37,6 @@ declare global {
             | "sounds"
             | "regions"
             | "notes";
-
-        /**
-         * The position to put the button. If no number is given, it will append it to the end
-         */
-        position?: number;
 
         /**
          * The predicate to determine if the control should be visible
@@ -42,7 +49,50 @@ declare global {
         /**
          * The tool data
          */
-        tool: SceneControlTool;
+        tool: SceneControlToolInput;
+    }
+
+    export interface SceneControlToolInput {
+        /** The name of the tool */
+        name: string;
+        /** The order of the tool */
+        order?: number;
+        /** The title of the tool */
+        title: string;
+        /** The icon of the tool */
+        icon: string;
+        /** Whether the tool is visible */
+        visible?: boolean;
+        /** Whether the tool is toggleable */
+        toggle?: boolean;
+        /** Whether the tool is active */
+        active?: boolean;
+        /** Whether the tool is a button */
+        button?: boolean;
+        /** The change handler */
+        onChange?: (event?: Event, active?: boolean) => void;
+        /** The toolclip configuration */
+        toolclip?: ToolclipConfigurationInput;
+    }
+
+    export interface ToolclipConfigurationInput {
+        /** The filename of the toolclip video. */
+        src: string;
+        /** The heading string. */
+        heading: string;
+        /** The items in the toolclip body. */
+        items: ToolclipConfigurationItemInput[];
+    }
+
+    export interface ToolclipConfigurationItemInput {
+        /** A plain paragraph of content for this item. */
+        paragraph?: string;
+        /** A heading for the item. */
+        heading?: string;
+        /** Content for the item. */
+        content?: string;
+        /** If the item is a single key reference, use this instead of content. */
+        reference?: string;
     }
 
     export interface HudButtonInput {
@@ -88,25 +138,21 @@ declare global {
          * The click handler
          *
          * @param event The click event
-         * @param button The div containing the button
+         * @param button The button element
          * @param data The data for the item with the HUD
          */
-        onClick?: (
-            event: JQuery.ClickEvent,
-            button: JQuery<HTMLDivElement>,
-            data: any,
-        ) => void;
+        onClick?: (event: JQuery.ClickEvent, button: JQuery, data: any) => void;
 
         /**
          * The right-click handler
          *
          * @param event The context menu event
-         * @param button The div containing the button
+         * @param button The button element
          * @param data The data for the item with the HUD
          */
         onRightClick?: (
             event: JQuery.ContextMenuEvent,
-            button: JQuery<HTMLDivElement>,
+            button: JQuery,
             data: any,
         ) => void;
 
@@ -122,39 +168,6 @@ declare global {
             html: JQuery,
             data: object,
         ) => void;
-    }
-
-    declare interface SceneControlTool {
-        name: string;
-        title: string;
-        icon: string;
-        visible: boolean;
-        toggle?: boolean;
-        active?: boolean;
-        button?: boolean;
-        onClick?: () => void;
-        /** Configuration for rendering the tool's toolclip. */
-        toolclip?: ToolclipConfiguration;
-    }
-
-    declare interface ToolclipConfiguration {
-        /** The filename of the toolclip video. */
-        src: string;
-        /** The heading string. */
-        heading: string;
-        /** The items in the toolclip body. */
-        items: ToolclipConfigurationItem[];
-    }
-
-    declare interface ToolclipConfigurationItem {
-        /** A plain paragraph of content for this item. */
-        paragraph?: string;
-        /** A heading for the item. */
-        heading?: string;
-        /** Content for the item. */
-        content?: string;
-        /** If the item is a single key reference, use this instead of content. */
-        reference?: string;
     }
 
     namespace Hooks {
