@@ -13,8 +13,8 @@ class Keybindings {
             MODULE_ID,
             this.#TOGGLE_CONVENIENT_EFFECTS_APP,
             {
-                name: "ConvenientEffects.Keybinding.ToggleAppName",
-                hint: "ConvenientEffects.Keybinding.ToggleAppHint",
+                name: "ConvenientEffects.KeybindingToggleAppName",
+                hint: "ConvenientEffects.KeybindingToggleAppHint",
                 onDown: async () => {
                     const openApps = Object.values(ui.windows);
                     const ceApp = openApps.find(
