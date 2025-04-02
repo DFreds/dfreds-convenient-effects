@@ -8,7 +8,7 @@ const RenderActiveEffectConfig: Listener = {
             "renderActiveEffectConfig",
             (activeEffectConfig: any, html: any, configData) => {
                 const config = activeEffectConfig as ActiveEffectConfig<any>;
-                const $html = html as JQuery;
+                const $html = $(html as HTMLElement);
 
                 const activeEffect = config.document as ActiveEffect<any>;
                 if (!Flags.isConvenient(activeEffect)) return;
