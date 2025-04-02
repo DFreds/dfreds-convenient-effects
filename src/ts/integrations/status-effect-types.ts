@@ -1,5 +1,8 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 
+// TODO extract to types folder
+// TODO status effects should provide folder first
+
 interface StatusEffectsModule extends Module {
     api: StatusEffectsApi;
 }

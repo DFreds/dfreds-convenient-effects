@@ -20,13 +20,6 @@ const UpdateActiveEffect: Listener = {
                 if (isConvenient) {
                     renderAppIfOpen();
                 }
-                // const statusesArray = Array.from(effect.statuses ?? []);
-                // if (isTemporary) {
-                //     statusesArray.unshift(
-                //         `convenient-effect-${effect.name}`.slugify(),
-                //     );
-                // }
-                // effect.statuses = statusesArray;
             },
         );
     },
