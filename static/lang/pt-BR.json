@@ -3,20 +3,24 @@
         "AppName": "Efeitos Convenientes",
         "BackupAppName": "Fazer backup de Efeitos Convenientes",
 
-        "SettingPlayer": "Jogador",
-        "SettingTrustedPlayer": "Jogador Confiável",
-        "SettingAssistantGM": "MJ Assistente",
-        "SettingGameMaster": "Mestre de Jogo",
-        "SettingNone": "Nenhum",
+        "Setting": {
+            "Player": "Jogador",
+            "TrustedPlayer": "Jogador Confiável",
+            "AssistantGM": "MJ Assistente",
+            "GameMaster": "Mestre de Jogo",
+            "None": "Nenhum",
 
-        "SettingAppControlsPermissionName": "Permissão dos Controles do Aplicativo",
-        "SettingAppControlsPermissionHint": "Isto define o nível mínimo de permissão para ver e aplicar Efeitos Convenientes através do aplicativo por meio do botão em controles de token. Definir isto como Nenhum desabilitará o botão completamente.",
+            "AppControlsPermissionName": "Permissão dos Controles do Aplicativo",
+            "AppControlsPermissionHint": "Isto define o nível mínimo de permissão para ver e aplicar Efeitos Convenientes através do aplicativo por meio do botão em controles de token. Definir isto como Nenhum desabilitará o botão completamente.",
 
-        "SettingCreateFoldersPermissionName": "Criar Permissão de Pastas",
-        "SettingCreateFoldersPermissionHint": "Isto define o nível mínimo de permissão para criar novas pastas de efeitos no aplicativo Efeitos Convenientes. Definir isto como Nenhum(a) desabilitará o botão de criação completamente. Note que um usuário também deve ter a permissão nativa do Foundry para criar itens para que isto funcione.",
+            "CreateFoldersPermissionName": "Criar Permissão de Pastas",
+            "CreateFoldersPermissionHint": "Isto define o nível mínimo de permissão para criar novas pastas de efeitos no aplicativo Efeitos Convenientes. Definir isto como Nenhum(a) desabilitará o botão de criação completamente. Note que um usuário também deve ter a permissão nativa do Foundry para criar itens para que isto funcione."
+        },
 
-        "KeybindingToggleAppName": "Alternar Aplicativo Efeitos Convenientes",
-        "KeybindingToggleAppHint": "Isso abrirá o aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento.",
+        "Keybinding": {
+            "ToggleAppName": "Alternar Aplicativo Efeitos Convenientes",
+            "ToggleAppHint": "Isso abrirá o aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento."
+        },
 
         "CreateEffect": "Criar Efeito",
         "ViewBackups": "Visualizar Backups",

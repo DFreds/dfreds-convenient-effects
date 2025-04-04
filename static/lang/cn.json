@@ -3,20 +3,24 @@
         "AppName": "Convenient Effects",
         "BackupAppName": "Backup Convenient Effects",
 
-        "SettingPlayer": "玩家",
-        "SettingTrustedPlayer": "受信玩家",
-        "SettingAssistantGM": "GM助手",
-        "SettingGameMaster": "GM",
-        "SettingNone": "无",
+        "Setting": {
+            "Player": "玩家",
+            "TrustedPlayer": "受信玩家",
+            "AssistantGM": "GM助手",
+            "GameMaster": "GM",
+            "None": "无",
 
-        "SettingAppControlsPermissionName": "App控制权限",
-        "SettingAppControlsPermissionHint": "定义最低能使用Convenient Effects赋予Token效果的角色，将其设置为“无”将完全禁用该功能。",
+            "AppControlsPermissionName": "App控制权限",
+            "AppControlsPermissionHint": "定义最低能使用Convenient Effects赋予Token效果的角色，将其设置为“无”将完全禁用该功能。",
 
-        "SettingCreateFoldersPermissionName": "创建文件夹权限",
-        "SettingCreateFoldersPermissionHint": "定义最低能创建效果和文件夹的角色，将其设置为“无”将完全禁用该按钮。",
+            "CreateFoldersPermissionName": "创建文件夹权限",
+            "CreateFoldersPermissionHint": "定义最低能创建效果和文件夹的角色，将其设置为“无”将完全禁用该按钮。"
+        },
 
-        "KeybindingToggleAppName": "应用效果的方式",
-        "KeybindingToggleAppHint": "如果便捷效果应用程序关闭，则打开它；如果它已打开，则关闭它。",
+        "Keybinding": {
+            "ToggleAppName": "应用效果的方式",
+            "ToggleAppHint": "如果便捷效果应用程序关闭，则打开它；如果它已打开，则关闭它。"
+        },
 
         "CreateEffect": "创建效果",
         "ViewBackups": "查看备份",

@@ -13,8 +13,8 @@ class Keybindings {
             MODULE_ID,
             this.#TOGGLE_CONVENIENT_EFFECTS_APP,
             {
-                name: "ConvenientEffects.KeybindingToggleAppName",
-                hint: "ConvenientEffects.KeybindingToggleAppHint",
+                name: "ConvenientEffects.Keybinding.ToggleAppName",
+                hint: "ConvenientEffects.Keybinding.ToggleAppHint",
                 onDown: async () => {
                     const applications = foundry.applications.instances;
 

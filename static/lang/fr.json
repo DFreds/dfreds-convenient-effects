@@ -3,20 +3,24 @@
         "AppName": "Effets Pratiques",
         "BackupAppName": "Restauration Effets Pratiquess",
 
-        "SettingPlayer": "Joueur",
-        "SettingTrustedPlayer": "Joueur de confiance",
-        "SettingAssistantGM": "Assistant du Maître du Jeu",
-        "SettingGameMaster": "Maître du Jeu",
-        "SettingNone": "Aucun",
+        "Setting": {
+            "Player": "Joueur",
+            "TrustedPlayer": "Joueur de confiance",
+            "AssistantGM": "Assistant du Maître du Jeu",
+            "GameMaster": "Maître du Jeu",
+            "None": "Aucun",
 
-        "SettingAppControlsPermissionName": "Autorisation de contrôle des applications",
-        "SettingAppControlsPermissionHint": "Ceci définit le niveau d'autorisation minimum pour voir et appliquer des effets pratiques via l'application via le bouton sur les contrôles des jetons. La valeur Aucun désactive entièrement le bouton.",
+            "AppControlsPermissionName": "Autorisation de contrôle des applications",
+            "AppControlsPermissionHint": "Ceci définit le niveau d'autorisation minimum pour voir et appliquer des effets pratiques via l'application via le bouton sur les contrôles des jetons. La valeur Aucun désactive entièrement le bouton.",
 
-        "SettingCreateFoldersPermissionName": "Autorisation de créer des dossiers",
-        "SettingCreateFoldersPermissionHint": "Ceci définit le niveau d'autorisation minimum pour créer de nouveaux dossiers d'effets dans l'application Practical Effects. La valeur Aucun désactive entièrement le bouton de création. Notez qu'un utilisateur doit également avoir l'autorisation de créer des éléments dans le cadre de Foundry pour que cela fonctionne. ",
+            "CreateFoldersPermissionName": "Autorisation de créer des dossiers",
+            "CreateFoldersPermissionHint": "Ceci définit le niveau d'autorisation minimum pour créer de nouveaux dossiers d'effets dans l'application Practical Effects. La valeur Aucun désactive entièrement le bouton de création. Notez qu'un utilisateur doit également avoir l'autorisation de créer des éléments dans le cadre de Foundry pour que cela fonctionne. "
+        },
 
-        "KeybindingToggleAppName": "Basculer l'application d'effets pratiques",
-        "KeybindingToggleAppHint": "Cela ouvrira l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte.",
+        "Keybinding": {
+            "ToggleAppName": "Basculer l'application d'effets pratiques",
+            "ToggleAppHint": "Cela ouvrira l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte."
+        },
 
         "CreateEffect": "Créer un effet",
         "ViewBackups": "Afficher les sauvegardes",

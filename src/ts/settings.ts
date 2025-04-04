@@ -67,8 +67,8 @@ class Settings {
 
     #registerCreateFoldersPermission(): void {
         game.settings.register(MODULE_ID, this.#CREATE_FOLDERS_PERMISSION, {
-            name: "ConvenientEffects.SettingCreateFoldersPermissionName",
-            hint: "ConvenientEffects.SettingCreateFoldersPermissionHint",
+            name: "ConvenientEffects.Setting.CreateFoldersPermissionName",
+            hint: "ConvenientEffects.Setting.CreateFoldersPermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,

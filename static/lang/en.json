@@ -3,20 +3,24 @@
         "AppName": "Convenient Effects",
         "BackupAppName": "Backup Convenient Effects",
 
-        "SettingPlayer": "Player",
-        "SettingTrustedPlayer": "Trusted Player",
-        "SettingAssistantGM": "Assistant GM",
-        "SettingGameMaster": "Game Master",
-        "SettingNone": "None",
+        "Setting": {
+            "Player": "Player",
+            "TrustedPlayer": "Trusted Player",
+            "AssistantGM": "Assistant GM",
+            "GameMaster": "Game Master",
+            "None": "None",
 
-        "SettingAppControlsPermissionName": "App Controls Permission",
-        "SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
+            "AppControlsPermissionName": "App Controls Permission",
+            "AppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
 
-        "SettingCreateFoldersPermissionName": "Create Folders Permission",
-        "SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
+            "CreateFoldersPermissionName": "Create Folders Permission",
+            "CreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work."
+        },
 
-        "KeybindingToggleAppName": "Toggle Convenient Effects App",
-        "KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
+        "Keybinding": {
+            "ToggleAppName": "Toggle Convenient Effects App",
+            "ToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open."
+        },
 
         "CreateEffect": "Create Effect",
         "SearchEffects": "Search Effects",
