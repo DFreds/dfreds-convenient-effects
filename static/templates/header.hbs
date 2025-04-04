@@ -29,65 +29,93 @@
                 class="view-backups"
                 data-action="viewBackups"
             >
-                <i class="fas fa-arrow-rotate-left" inert></i>
+                <i class="fa-solid fa-arrow-rotate-left" inert></i>
                 <span>{{localize "ConvenientEffects.ViewBackups"}}</span>
             </button>
         {{/if}}
     </div>
 
-    {{! Search & Sort }}
-    <search>
-        {{! Show Hidden Effects }}
-        <button
-            type="button"
-            class="inline-control ce-inline-control"
-            data-action="toggleHiddenEffects"
-            data-tooltip
-            aria-label="{{localize 'ConvenientEffects.ShowHiddenEffects'}}"
-        >
-            <i class="fa-duotone fa-eye" inert></i>
-        </button>
+    {{#if isBackup}}
+        <search>
+            <button type="button" class="inline-control ce-inline-control">
+                <i class="fa-solid fa-magnifying-glass" inert></i>
+            </button>
 
-        {{! Show Nested Effects }}
-        <button
-            type="button"
-            class="inline-control ce-inline-control"
-            data-action="toggleNestedEffects"
-            data-tooltip
-            aria-label="{{localize 'ConvenientEffects.ShowNestedEffects'}}"
-        >
-            <i class="fa-duotone fa-tree" inert></i>
-        </button>
+            {{! Search Input }}
+            <input
+                type="search"
+                name="search"
+                autocomplete="off"
+                placeholder="{{localize 'ConvenientEffects.SearchEffects'}}"
+                aria-label="{{localize 'ConvenientEffects.SearchEffects'}}"
+            />
 
-        {{! Search Input }}
-        <input
-            type="search"
-            name="search"
-            autocomplete="off"
-            placeholder="{{localize 'ConvenientEffects.SearchEffects'}}"
-            aria-label="{{localize 'ConvenientEffects.SearchEffects'}}"
-        />
+            {{! Reset System Effects }}
+            <button
+                type="button"
+                class="inline-control collapse-all"
+                data-action="resetSystemEffects"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.ResetSystemEffects'}}"
+            >
+                <i class="fa-solid fa-arrow-rotate-left" inert></i>
+            </button>
+        </search>
+    {{else}}
+        {{! Search & Sort }}
+        <search>
+            {{! Show Hidden Effects }}
+            <button
+                type="button"
+                class="inline-control ce-inline-control"
+                data-action="toggleHiddenEffects"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.ShowHiddenEffects'}}"
+            >
+                <i class="fa-solid fa-eye" inert></i>
+            </button>
 
-        {{! Collapse All }}
-        <button
-            type="button"
-            class="inline-control collapse-all"
-            data-action="collapseFolders"
-            data-tooltip
-            aria-label="{{localize 'FOLDER.Collapse'}}"
-        >
-            <i class="fa-duotone fa-folder-tree" inert></i>
-        </button>
+            {{! Show Nested Effects }}
+            <button
+                type="button"
+                class="inline-control ce-inline-control"
+                data-action="toggleNestedEffects"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.ShowNestedEffects'}}"
+            >
+                <i class="fa-solid fa-tree" inert></i>
+            </button>
 
-        {{! Prioritize Targets }}
-        <button
-            type="button"
-            class="inline-control ce-inline-control"
-            data-action="togglePrioritizeTargets"
-            data-tooltip
-            aria-label="{{localize 'ConvenientEffects.PrioritizeTargets'}}"
-        >
-            <i class="fa-duotone fa-bullseye" inert></i>
-        </button>
-    </search>
+            {{! Search Input }}
+            <input
+                type="search"
+                name="search"
+                autocomplete="off"
+                placeholder="{{localize 'ConvenientEffects.SearchEffects'}}"
+                aria-label="{{localize 'ConvenientEffects.SearchEffects'}}"
+            />
+
+            {{! Collapse All }}
+            <button
+                type="button"
+                class="inline-control collapse-all"
+                data-action="collapseFolders"
+                data-tooltip
+                aria-label="{{localize 'FOLDER.Collapse'}}"
+            >
+                <i class="fa-solid fa-folder-tree" inert></i>
+            </button>
+
+            {{! Prioritize Targets }}
+            <button
+                type="button"
+                class="inline-control ce-inline-control"
+                data-action="togglePrioritizeTargets"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.PrioritizeTargets'}}"
+            >
+                <i class="fa-solid fa-bullseye" inert></i>
+            </button>
+        </search>
+    {{/if}}
 </header>
