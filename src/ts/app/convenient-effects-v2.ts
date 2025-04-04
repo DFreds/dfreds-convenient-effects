@@ -512,40 +512,37 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             }).bind(this.element);
 
             const showHiddenEffectsButton = this.element.querySelector(
-                ".show-hidden-effects",
+                "[data-action='toggleHiddenEffects']",
             ) as HTMLButtonElement;
             const showNestedEffectsButton = this.element.querySelector(
-                ".show-nested-effects",
+                "[data-action='toggleNestedEffects']",
             ) as HTMLButtonElement;
             const prioritizeTargetsButton = this.element.querySelector(
-                ".prioritize-targets",
+                "[data-action='togglePrioritizeTargets']",
             ) as HTMLButtonElement;
 
             if (showHiddenEffectsButton) {
                 const showHiddenEffects = this.#settings.showHiddenEffects;
-                if (showHiddenEffects) {
-                    showHiddenEffectsButton.classList.add("active");
-                } else {
-                    showHiddenEffectsButton.classList.remove("active");
-                }
+                showHiddenEffectsButton.setAttribute(
+                    "aria-pressed",
+                    showHiddenEffects.toString(),
+                );
             }
 
             if (showNestedEffectsButton) {
                 const showNestedEffects = this.#settings.showNestedEffects;
-                if (showNestedEffects) {
-                    showNestedEffectsButton.classList.add("active");
-                } else {
-                    showNestedEffectsButton.classList.remove("active");
-                }
+                showNestedEffectsButton.setAttribute(
+                    "aria-pressed",
+                    showNestedEffects.toString(),
+                );
             }
 
             if (prioritizeTargetsButton) {
                 const prioritizeTargets = this.#settings.prioritizeTargets;
-                if (prioritizeTargets) {
-                    prioritizeTargetsButton.classList.add("active");
-                } else {
-                    prioritizeTargetsButton.classList.remove("active");
-                }
+                prioritizeTargetsButton.setAttribute(
+                    "aria-pressed",
+                    prioritizeTargets.toString(),
+                );
             }
         }
 
@@ -933,14 +930,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
         const isHiddenEffects = this.#settings.showHiddenEffects;
+        buttonHtml.setAttribute("aria-pressed", isHiddenEffects.toString());
 
-        if (isHiddenEffects) {
-            buttonHtml.classList.add("active");
-        } else {
-            buttonHtml.classList.remove("active");
-        }
-
-        this.render({ force: true });
+        this.render({ parts: ["directory"] });
     }
 
     static async #onToggleNestedEffects(...args: any[]): Promise<void> {
@@ -959,14 +951,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
         const isNestedEffects = this.#settings.showNestedEffects;
+        buttonHtml.setAttribute("aria-pressed", isNestedEffects.toString());
 
-        if (isNestedEffects) {
-            buttonHtml.classList.add("active");
-        } else {
-            buttonHtml.classList.remove("active");
-        }
-
-        this.render({ force: true });
+        this.render({ parts: ["directory"] });
     }
 
     static async #onTogglePrioritizeTargets(...args: any[]): Promise<void> {
@@ -985,14 +972,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
         const isPrioritizeTargets = this.#settings.prioritizeTargets;
+        buttonHtml.setAttribute("aria-pressed", isPrioritizeTargets.toString());
 
-        if (isPrioritizeTargets) {
-            buttonHtml.classList.add("active");
-        } else {
-            buttonHtml.classList.remove("active");
-        }
-
-        this.render({ force: true });
+        this.render({ parts: ["directory"] });
     }
 
     static async #onViewBackups(...args: any[]): Promise<void> {
