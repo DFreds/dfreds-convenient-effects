@@ -1,0 +1,93 @@
+<header class="directory-header flexcol">
+
+    {{! Header Actions }}
+    <div class="header-actions action-buttons flexrow">
+        {{!-- {{#if canCreateEntry}}
+            <button
+                type="button"
+                class="create-entry"
+                data-action="createEntry"
+            >
+                <i class="{{sidebarIcon}}" inert></i>
+                <span>{{localize "SIDEBAR.Create" type=label}}</span>
+            </button>
+        {{/if}} --}}
+        {{#if canCreateFolder}}
+            <button
+                type="button"
+                class="create-folder"
+                data-action="createFolder"
+            >
+                <i class="{{folderIcon}}" inert></i>
+                <span>{{localize "FOLDER.Create"}}</span>
+            </button>
+        {{/if}}
+
+        {{#if canViewBackups}}
+            <button
+                type="button"
+                class="view-backups"
+                data-action="viewBackups"
+            >
+                <i class="fas fa-arrow-rotate-left" inert></i>
+                <span>{{localize "ConvenientEffects.ViewBackups"}}</span>
+            </button>
+        {{/if}}
+    </div>
+
+    {{! Search & Sort }}
+    <search>
+        {{! Show Hidden Effects }}
+        <button
+            type="button"
+            class="inline-control show-hidden-effects"
+            data-action="toggleHiddenEffects"
+            data-tooltip
+            aria-label="{{localize 'ConvenientEffects.ShowHiddenEffects'}}"
+        >
+            <i class="fa-duotone fa-eye" inert></i>
+        </button>
+
+        {{! Show Nested Effects }}
+        <button
+            type="button"
+            class="inline-control show-nested-effects"
+            data-action="toggleNestedEffects"
+            data-tooltip
+            aria-label="{{localize 'ConvenientEffects.ShowNestedEffects'}}"
+        >
+            <i class="fa-duotone fa-tree" inert></i>
+        </button>
+
+        {{! Search Input }}
+        <input
+            type="search"
+            name="search"
+            autocomplete="off"
+            placeholder="{{localize 'ConvenientEffects.SearchEffects'}}"
+            aria-label="{{localize 'ConvenientEffects.SearchEffects'}}"
+        />
+
+        {{! Collapse All }}
+        <button
+            type="button"
+            class="inline-control collapse-all"
+            data-action="collapseFolders"
+            data-tooltip
+            aria-label="{{localize 'FOLDER.Collapse'}}"
+        >
+            <i class="fa-duotone fa-folder-tree" inert></i>
+        </button>
+
+        {{! Prioritize Targets }}
+        <button
+            type="button"
+            class="inline-control prioritize-targets"
+            data-action="togglePrioritizeTargets"
+            data-tooltip
+            aria-label="{{localize 'ConvenientEffects.PrioritizeTargets'}}"
+        >
+            <i class="fa-duotone fa-bullseye" inert></i>
+        </button>
+    </search>
+</header>
