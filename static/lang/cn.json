@@ -18,7 +18,6 @@
         "KeybindingToggleAppName": "应用效果的方式",
         "KeybindingToggleAppHint": "如果便捷效果应用程序关闭，则打开它；如果它已打开，则关闭它。",
 
-        "CreateFolder": "创建文件夹",
         "CreateEffect": "创建效果",
         "ViewBackups": "查看备份",
         "ShowFolder": "显示文件夹",

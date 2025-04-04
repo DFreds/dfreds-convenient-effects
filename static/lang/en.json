@@ -18,7 +18,6 @@
         "KeybindingToggleAppName": "Toggle Convenient Effects App",
         "KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
 
-        "CreateFolder": "Create Folder",
         "CreateEffect": "Create Effect",
         "ViewBackups": "View Backups",
         "ShowFolder": "Show Folder",
