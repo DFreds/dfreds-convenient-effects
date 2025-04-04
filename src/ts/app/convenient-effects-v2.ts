@@ -1064,17 +1064,18 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             if (elHtml.hidden) continue;
             if (elHtml.classList.contains("folder")) {
                 const { folderId } = elHtml.dataset;
-                // uuid in elHtml.dataset
-                const match = folderIds.has(folderId ?? "");
+
+                if (!folderId) continue;
+                const match = folderIds.has(folderId);
+
                 elHtml.style.display = !query || match ? "flex" : "none";
                 if (autoExpandIds.has(folderId ?? "")) {
                     if (query && match) elHtml.classList.add("expanded");
                 } else {
-                    // TODO
-                    // elHtml.classList.toggle(
-                    //     "expanded",
-                    //     uuid in game.folders._expanded,
-                    // );
+                    elHtml.classList.toggle(
+                        "expanded",
+                        this.#settings.isFolderExpanded(folderId),
+                    );
                 }
             } else {
                 this._onMatchSearchEntry(query, entryIds, elHtml, options);
