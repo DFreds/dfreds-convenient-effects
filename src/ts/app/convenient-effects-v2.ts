@@ -240,7 +240,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
                     if (!ceEffectId) return;
 
-                    const ceEffect = findEffectByCeId(ceEffectId);
+                    const ceEffect = findEffectByCeId(ceEffectId, {
+                        backup: this.options.convenientEffects.backup,
+                    });
                     if (!ceEffect) return;
 
                     const statusEffectsModule = findModuleById(
@@ -1182,93 +1184,117 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     async _createDroppedEntry(
-        entry: object, // TODO i think it's the active effect
-        updates?: object,
-    ): Promise<ActiveEffect<Item<null>> | null> {
-        console.log("createDroppedEntry", entry, updates);
-        // TODO
-        return Promise.resolve(null);
-    }
+        entry: ActiveEffect<Item<null>>,
+        newFolder?: Item<null>,
+        originalFolder?: Item<null>,
+    ): Promise<void> {
+        const isFromBackup = Flags.isBackup(entry);
 
-    async _createDroppedFolderContent(
-        folder: Folder,
-        targetFolder?: Folder,
-    ): Promise<Folder[]> {
-        console.log("createDroppedFolderContent", folder, targetFolder);
-        // TODO
-        return [];
-    }
+        if (isFromBackup) {
+            const effectObject = entry.toObject();
+            Flags.setIsBackup(effectObject, false);
+            await newFolder?.createEmbeddedDocuments("ActiveEffect", [
+                effectObject,
+            ]);
+        } else {
+            if (newFolder?.isOwner) {
+                await newFolder.createEmbeddedDocuments("ActiveEffect", [
+                    entry,
+                ]);
 
-    async _createDroppedFolderDocuments(
-        folder: Folder,
-        documents: object[],
-    ): Promise<ActiveEffect<Item<null>>[]> {
-        console.log("createDroppedFolderDocuments", folder, documents);
-        // TODO
-        return [];
-    }
-
-    _entryAlreadyExists(entry: ClientDocument): boolean {
-        console.log("entryAlreadyExists", entry);
-        // TODO
-        return false;
+                if (originalFolder?.isOwner) {
+                    await entry.delete();
+                } else {
+                    ui.notifications.warn(
+                        game.i18n.format(
+                            "ConvenientEffects.NoPermissionToRemoveEffect",
+                            {
+                                effectName: entry.name,
+                                originalFolderName: originalFolder?.name ?? "",
+                                newFolderName: newFolder?.name ?? "",
+                            },
+                        ),
+                    );
+                }
+            } else {
+                ui.notifications.warn(
+                    game.i18n.format(
+                        "ConvenientEffects.NoPermissionToAddEffect",
+                        {
+                            effectName: entry.name,
+                            newFolderName: newFolder?.name ?? "",
+                        },
+                    ),
+                );
+            }
+        }
     }
 
     _entryBelongsToFolder(
-        entry: object, // TODO i think it's the active effect
-        folder: string,
+        entry: ActiveEffect<Item<null>>,
+        folder?: Item<null>,
     ): boolean {
-        console.log("entryBelongsToFolder", entry, folder);
-        // TODO
-        return false;
+        if (!folder) return false;
+        return entry.parent.id === folder.id;
     }
 
-    async _getDroppedEntryFromData(
-        data: object,
-    ): Promise<ActiveEffect<any> | undefined> {
-        return ActiveEffect.fromDropData(data);
+    async _getDroppedEntryFromData(data: {
+        uuid?: string;
+        effectId?: string;
+    }): Promise<ActiveEffect<any> | undefined> {
+        return data.uuid
+            ? await findEffectByUuid(data.uuid)
+            : data.effectId
+              ? findEffectByCeId(data.effectId, {
+                    backup: false,
+                })
+              : undefined;
     }
 
     _getEntryDragData(entryId: string): object {
-        console.log("getEntryDragData", entryId);
-        // return findEffect(entryId, { backup: false })?.toDragData() ?? {};
-        // TODO
-        return {};
-    }
+        const effect = findEffectByCeId(entryId, {
+            backup: this.options.convenientEffects.backup,
+        });
 
-    _getFolderDragData(folderId: string): object {
-        return findFolder(folderId, { backup: false })?.toDragData() ?? {};
+        if (!effect) return {};
+
+        const dragData = Flags.getNestedEffectIds(effect)
+            ? {
+                  effectId: entryId,
+              }
+            : effect.toDragData();
+
+        return dragData;
     }
 
     async _handleDroppedEntry(
         target: HTMLElement,
-        data: object,
+        data: {
+            uuid?: string;
+            effectId?: string;
+        },
     ): Promise<void> {
-        console.log("handleDroppedEntry", target, data);
-        // TODO
-    }
+        const closestFolder = target.closest(
+            ".directory-item.folder",
+        ) as HTMLElement;
+        closestFolder.classList.remove("droptarget");
+        const folderId = closestFolder.dataset.folderId;
+        if (!data || !folderId) return;
 
-    async _handleDroppedFolder(
-        target: HTMLElement,
-        data: object,
-    ): Promise<void> {
-        console.log("handleDroppedFolder", target, data);
-        // TODO
-    }
+        const newFolder = findFolder(folderId, {
+            backup: false, // only care about non-backup folders
+        });
 
-    async _handleDroppedForeignFolder(
-        folder: Folder,
-        closestFolderId: string,
-        sortData: object,
-    ): Promise<{ folder: Folder; sortNeeded: boolean } | null> {
-        console.log(
-            "handleDroppedForeignFolder",
-            folder,
-            closestFolderId,
-            sortData,
-        );
-        // TODO
-        return null;
+        const entry = await this._getDroppedEntryFromData(data);
+        if (!entry) return;
+
+        if (this._entryBelongsToFolder(entry, newFolder)) return;
+
+        const originalFolder = findFolder(entry.parent.id, {
+            backup: false, // only care about non-backup folders
+        });
+
+        await this._createDroppedEntry(entry, newFolder, originalFolder);
     }
 
     _onDragHighlight(event: DragEvent): void {
@@ -1291,157 +1317,33 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         );
     }
 
-    _onDragOver(event: DragEvent): void {
-        console.log("onDragOver", event);
-    }
+    _onDragOver(_event: DragEvent): void {}
 
     _onDragStart(event: DragEvent): void {
         // ui.context?.close({ animate: false });
-        // const { entryId, folderId } = event.currentTarget.dataset;
-        // const dragData = folderId ? this._getFolderDragData(folderId) : this._getEntryDragData(entryId);
-        // event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-
         if (!event.currentTarget) return;
-
-        const folderHtml = (event.currentTarget as HTMLElement).closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
-        const folderId = folderHtml.dataset.folderId;
 
         const entryHtml = (event.currentTarget as HTMLElement).closest(
             ".directory-item.entry",
         ) as HTMLElement;
         const effectId = entryHtml.dataset.ceEffectId;
 
-        if (!folderId || !effectId) return;
+        if (!effectId) return;
 
-        const effect = game.dfreds.effectInterface.findEffect({
-            folderId,
-            effectId,
-        });
-
-        if (!effect) return;
-
-        if (Flags.getNestedEffectIds(effect)) {
-            // Specially handle nested effect drops to trigger the dialog
-            // See dropActorSheetData hook for details
-            event.dataTransfer?.setData(
-                "text/plain",
-                JSON.stringify({
-                    effectId: Flags.getCeEffectId(effect),
-                }),
-            );
-        } else {
-            // Let regular core handle drop
-            const dragData = effect.toDragData();
-            event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
-        }
+        const dragData = this._getEntryDragData(effectId);
+        event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
     }
 
     async _onDrop(event: DragEvent): Promise<void> {
-        // const data = foundry.applications.ux.TextEditor.getDragEventData(event);
-        // if (!data.type) return;
-        // const target = event.target.closest('.directory-item') ?? null;
-        // if (data.type === 'Folder') return this._handleDroppedFolder(target, data);
-        // else if (data.type === this.documentName)
-        //   return this._handleDroppedEntry(target, data);
-        // todo handle dropped item or actor?
+        // @ts-expect-error not typed
+        const data = foundry.applications.ux.TextEditor.getDragEventData(event);
 
-        const effectData =
-            // @ts-expect-error not typed
-            foundry.applications.ux.TextEditor.getDragEventData(event);
+        const target =
+            (event.target as HTMLElement).closest(".directory-item.folder") ??
+            null;
+        if (!target) return;
 
-        if (!event.target) return;
-
-        const folderHtml = (event.target as HTMLElement).closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
-        const folderId = folderHtml.dataset.folderId;
-
-        if (!effectData || !folderId) return;
-
-        const effect =
-            (await findEffectByUuid(effectData.uuid)) ??
-            findEffectByCeId(effectData.effectId);
-
-        if (!effect) return;
-
-        const originalFolder = findFolder(effect.parent.id, {
-            backup: false,
-        });
-        const newFolder = findFolder(folderId, {
-            backup: false,
-        });
-
-        const isFromBackup = Flags.isBackup(effect);
-
-        if (isFromBackup) {
-            const effectObject = effect.toObject();
-            Flags.setIsBackup(effectObject, false);
-            await newFolder?.createEmbeddedDocuments("ActiveEffect", [
-                effectObject,
-            ]);
-        } else {
-            if (newFolder?.isOwner) {
-                await newFolder.createEmbeddedDocuments("ActiveEffect", [
-                    effect,
-                ]);
-
-                if (originalFolder?.isOwner) {
-                    await effect.delete();
-                } else {
-                    ui.notifications.warn(
-                        game.i18n.format(
-                            "ConvenientEffects.NoPermissionToRemoveEffect",
-                            {
-                                effectName: effect.name,
-                                originalFolderName: originalFolder?.name ?? "",
-                                newFolderName: newFolder?.name ?? "",
-                            },
-                        ),
-                    );
-                }
-            } else {
-                ui.notifications.warn(
-                    game.i18n.format(
-                        "ConvenientEffects.NoPermissionToAddEffect",
-                        {
-                            effectName: effect.name,
-                            newFolderName: newFolder?.name ?? "",
-                        },
-                    ),
-                );
-            }
-        }
-    }
-
-    async _organizeDroppedFoldersAndDocuments(
-        folder: Folder,
-        targetFolder?: Folder,
-    ): Promise<{ foldersToCreate: Folder[]; documentsToCreate: Document[] }> {
-        console.log("organizeDroppedFoldersAndDocuments", folder, targetFolder);
-        // TODO
-        return { foldersToCreate: [], documentsToCreate: [] };
-    }
-
-    static async _handleDroppedFolder(
-        target: HTMLElement,
-        data: object,
-        config: {
-            folders: Folder[];
-            label: string;
-            maxFolderDepth: number;
-            type: string;
-        },
-    ): Promise<{
-        closestFolderId?: string;
-        folder: Folder;
-        sortData: object;
-        foreign?: boolean;
-    } | void> {
-        console.log("handleDroppedFolder", target, data, config);
-        // TODO
-        return;
+        return this._handleDroppedEntry(target as HTMLElement, data);
     }
 
     // TODO probably put in a controller

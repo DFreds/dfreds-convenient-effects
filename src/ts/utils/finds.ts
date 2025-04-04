@@ -182,8 +182,11 @@ async function findEffectByUuid(
     return document as ActiveEffect<any>;
 }
 
-function findEffectByCeId(ceId: string): ActiveEffect<any> | undefined {
-    return findAllEffects({ backup: false }).find((effect) => {
+function findEffectByCeId(
+    ceId: string,
+    { backup }: FindOptions,
+): ActiveEffect<any> | undefined {
+    return findAllEffects({ backup }).find((effect) => {
         return Flags.getCeEffectId(effect) === ceId;
     });
 }
