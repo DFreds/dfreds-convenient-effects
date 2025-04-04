@@ -176,19 +176,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     drop: this._onDrop.bind(this),
                 },
             }).bind(this.element);
-
-            this.element
-                .querySelectorAll(".directory-item.folder")
-                .forEach((folder) => {
-                    folder.addEventListener(
-                        "dragenter",
-                        this._onDragHighlight.bind(this) as EventListener,
-                    );
-                    folder.addEventListener(
-                        "dragleave",
-                        this._onDragHighlight.bind(this) as EventListener,
-                    );
-                });
         }
     }
 
@@ -630,26 +617,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
     abstract _canDragStart(_selector: string): boolean;
 
     abstract _getEntryDragData(entryId: string): object;
-
-    _onDragHighlight(event: DragEvent): void {
-        event.stopPropagation();
-        if (event.type === "dragenter") {
-            for (const el of this.element.querySelectorAll(".droptarget")) {
-                el.classList.remove("droptarget");
-            }
-        }
-        if (
-            event.type === "dragleave" &&
-            (event.currentTarget as HTMLElement)?.contains(event.target as Node)
-        ) {
-            return;
-        }
-
-        (event.currentTarget as HTMLElement).classList.toggle(
-            "droptarget",
-            event.type === "dragenter",
-        );
-    }
 
     abstract _onDragOver(_event: DragEvent): void;
 

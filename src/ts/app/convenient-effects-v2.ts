@@ -449,6 +449,19 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
                     folderHtml.classList.add("expanded");
                 }
             });
+
+            this.element
+                .querySelectorAll(".directory-item.folder")
+                .forEach((folder) => {
+                    folder.addEventListener(
+                        "dragenter",
+                        this._onDragHighlight.bind(this) as EventListener,
+                    );
+                    folder.addEventListener(
+                        "dragleave",
+                        this._onDragHighlight.bind(this) as EventListener,
+                    );
+                });
         }
     }
 
@@ -737,6 +750,26 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         });
 
         await this._createDroppedEntry(entry, newFolder, originalFolder);
+    }
+
+    _onDragHighlight(event: DragEvent): void {
+        event.stopPropagation();
+        if (event.type === "dragenter") {
+            for (const el of this.element.querySelectorAll(".droptarget")) {
+                el.classList.remove("droptarget");
+            }
+        }
+        if (
+            event.type === "dragleave" &&
+            (event.currentTarget as HTMLElement)?.contains(event.target as Node)
+        ) {
+            return;
+        }
+
+        (event.currentTarget as HTMLElement).classList.toggle(
+            "droptarget",
+            event.type === "dragenter",
+        );
     }
 
     override _onDragOver(_event: DragEvent): void {}
