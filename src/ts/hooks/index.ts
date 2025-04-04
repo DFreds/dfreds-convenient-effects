@@ -5,11 +5,11 @@ import { CreateItem } from "./createItem.ts";
 import { DeleteActiveEffect } from "./deleteActiveEffect.ts";
 import { DeleteItem } from "./deleteItem.ts";
 import { DropActorSheetData } from "./dropActorSheetData.ts";
+import { GetHeaderControlsActiveEffectConfig } from "./getHeaderControlsActiveEffectConfig.ts";
 import { HotbarDrop } from "./hotbarDrop.ts";
 import { Init } from "./init.ts";
 import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
 import { Ready } from "./ready.ts";
-import { RenderActiveEffectConfig } from "./renderActiveEffectConfig.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
 import { SocketlibReady } from "./socketlib.ready.ts";
@@ -38,10 +38,10 @@ const HooksCE = {
             UpdateActiveEffect,
             DeleteActiveEffect,
             RenderItemDirectory,
-            RenderActiveEffectConfig,
             CloseActiveEffectConfig,
             HotbarDrop,
             DropActorSheetData,
+            GetHeaderControlsActiveEffectConfig,
         ];
 
         for (const listener of listeners) {

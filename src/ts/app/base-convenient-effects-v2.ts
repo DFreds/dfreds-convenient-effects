@@ -86,7 +86,7 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
         },
         directory: {
             template: `modules/${MODULE_ID}/templates/directory.hbs`,
-            scrollable: [".directory-list"],
+            scrollable: [""],
         },
     };
 

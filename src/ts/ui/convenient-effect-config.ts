@@ -1,5 +1,5 @@
 import { Flags } from "../utils/flags.ts";
-import { findAllEffects, findEffectByUuid } from "../utils/finds.ts";
+import { findAllEffects } from "../utils/finds.ts";
 
 interface MultiSelectData {
     id?: string;
@@ -24,41 +24,6 @@ class ConvenientEffectConfig extends FormApplication<
         options?: Partial<FormApplicationOptions>,
     ) {
         super(object, options);
-    }
-
-    static init(
-        app: ActiveEffectConfig<any>,
-        html: JQuery,
-        _data: unknown,
-    ): void {
-        // todo add to ui extender?
-        if (app.document.isOwner || game.user.isGM) {
-            const openButton = $(
-                `<a class="header-button control open-convenient-config" title="convenient-config"><i class="fas fa-hand-sparkles"></i> ${game.i18n.localize("ConvenientEffects.ConfigLabel")}</a>`,
-            );
-            openButton.click(async (_event) => {
-                let convenientConfig = null;
-                const activeEffect = await findEffectByUuid(app.document.uuid);
-
-                for (const key in app.document.apps) {
-                    const obj = app.document.apps[key];
-                    if (obj instanceof ConvenientEffectConfig) {
-                        convenientConfig = obj;
-                        break;
-                    }
-                }
-                if (!convenientConfig && activeEffect instanceof ActiveEffect)
-                    convenientConfig = new ConvenientEffectConfig(
-                        activeEffect,
-                        {},
-                    );
-                convenientConfig?.render(true);
-            });
-
-            html.closest(".app").find(".open-convenient-config").remove();
-            const titleElement = html.closest(".app").find(".window-title");
-            openButton.insertAfter(titleElement);
-        }
     }
 
     static override get defaultOptions(): FormApplicationOptions {

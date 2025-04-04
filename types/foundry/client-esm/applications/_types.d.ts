@@ -77,7 +77,9 @@ export interface ApplicationHeaderControlsEntry {
     /** The action name triggered by clicking the control button */
     action: string;
     /** Is the control button visible for the current client? */
-    visible: boolean;
+    visible?: () => boolean;
+    /** The function to call when the control button is clicked */
+    onClick?: (event: PointerEvent) => void;
 }
 
 export interface ApplicationConstructorParams {
