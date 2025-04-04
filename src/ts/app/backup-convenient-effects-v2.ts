@@ -10,6 +10,12 @@ class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         window: {
             title: "ConvenientEffects.BackupAppName",
         },
+        position: {
+            width: 300,
+            height: 600,
+            top: 75,
+            left: 125 + 300 + 18,
+        },
         // renderUpdateKeys: ["name", "img"],
         actions: {
             resetSystemEffects: BackupConvenientEffectsV2.#onResetSystemEffects,
