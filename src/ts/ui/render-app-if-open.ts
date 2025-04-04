@@ -1,14 +1,16 @@
-import { ConvenientEffectsApp } from "../app/convenient-effects-app.ts";
+import { ConvenientEffectsV2 } from "../app/convenient-effects-v2.ts";
 
 /**
  * Re-renders the Convenient Effects application if it's open
  */
 function renderAppIfOpen(): void {
-    const openApps = Object.values(ui.windows);
-    const ceApp = openApps.find((app) => app instanceof ConvenientEffectsApp);
+    const applications = foundry.applications.instances;
 
-    if (ceApp) {
-        (ceApp as ConvenientEffectsApp).refresh();
+    // @ts-expect-error The types provided by pf2e think this is a number
+    const convenientEffectsV2 = applications.get("convenient-effects-v2");
+
+    if (convenientEffectsV2) {
+        (convenientEffectsV2 as ConvenientEffectsV2).render();
     }
 }
 

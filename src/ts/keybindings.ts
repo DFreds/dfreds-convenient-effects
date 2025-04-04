@@ -1,4 +1,4 @@
-import { ConvenientEffectsApp } from "./app/convenient-effects-app.ts";
+import { ConvenientEffectsV2 } from "./app/convenient-effects-v2.ts";
 import { MODULE_ID } from "./constants.ts";
 
 class Keybindings {
@@ -16,15 +16,17 @@ class Keybindings {
                 name: "ConvenientEffects.KeybindingToggleAppName",
                 hint: "ConvenientEffects.KeybindingToggleAppHint",
                 onDown: async () => {
-                    const openApps = Object.values(ui.windows);
-                    const ceApp = openApps.find(
-                        (app) => app instanceof ConvenientEffectsApp,
+                    const applications = foundry.applications.instances;
+
+                    const convenientEffectsV2 = applications.get(
+                        // @ts-expect-error The types provided by pf2e think this is a number
+                        "convenient-effects-v2",
                     );
 
-                    if (ceApp) {
-                        await ceApp.close();
+                    if (convenientEffectsV2) {
+                        (convenientEffectsV2 as ConvenientEffectsV2).close();
                     } else {
-                        new ConvenientEffectsApp().render(true);
+                        new ConvenientEffectsV2().render(true);
                     }
                 },
             },
