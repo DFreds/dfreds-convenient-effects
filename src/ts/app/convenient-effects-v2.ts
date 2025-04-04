@@ -1025,10 +1025,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         element: HTMLElement,
         _options: object,
     ): void {
+        const entryId = element.dataset.entryId;
+        if (!entryId) return;
+
         element.style.display =
-            !query || entryIds.has(element.dataset.entryId ?? "")
-                ? "flex"
-                : "none";
+            !query || entryIds.has(entryId) ? "flex" : "none";
     }
 
     _onSearchFilter(
