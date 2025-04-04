@@ -1123,17 +1123,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         entryIds: Set<string>,
         folderIds: Set<string>,
         autoExpandIds: Set<string>,
-        options: object = {},
+        _options: object = {},
     ): void {
-        console.log(
-            "matchSearchEntries",
-            query,
-            entryIds,
-            folderIds,
-            autoExpandIds,
-            options,
-        );
-
         const nameOnlySearch = true; // TODO
         const entries = findAllEffects({
             backup: this.options.convenientEffects.backup,
@@ -1146,9 +1137,12 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
             if (!entryId || !entry.parent._id) continue;
 
+            // If we matched a folder, add its child entries
             if (matchedFolderIds.has(entry.parent._id)) {
                 entryIds.add(entryId);
-            } else if (
+            }
+            // Otherwise, if we are searching by name, match the entry name
+            else if (
                 nameOnlySearch &&
                 query.test(
                     // @ts-expect-error no types for this yet
@@ -1156,13 +1150,22 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 )
             ) {
                 entryIds.add(entryId);
-                this.#onMatchFolder(
-                    entry.parent,
-                    matchedFolderIds,
-                    autoExpandIds,
-                );
+                this.#onMatchFolder(entry.parent, folderIds, autoExpandIds);
             }
         }
+
+        if (nameOnlySearch) return;
+
+        // Full text search.
+        // const matches = this.collection.search({
+        //     query: query.source,
+        //     exclude: Array.from(entryIds),
+        // });
+        // for (const match of matches) {
+        //     if (entryIds.has(match._id)) continue;
+        //     entryIds.add(match._id);
+        //     this.#onMatchFolder(match.folder, folderIds, autoExpandIds);
+        // }
     }
 
     _matchSearchFolders(
