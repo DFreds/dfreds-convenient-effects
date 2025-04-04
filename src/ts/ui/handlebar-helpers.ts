@@ -140,13 +140,13 @@ class HandlebarHelpers {
 
     #getPassiveIcon(effect: ActiveEffect<Item<null>>): string {
         return !effect.isTemporary
-            ? `<i class='fas fa-repeat integration-icon' title='${game.i18n.localize("ConvenientEffects.Passive")}'></i>`
+            ? `<i class='fas fa-repeat integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.Passive")}'></i>`
             : "";
     }
 
     #getHiddenIcon(effect: ActiveEffect<Item<null>>): string {
         return !Flags.isViewable(effect)
-            ? `<i class='fas fa-eye-slash integration-icon' title='${game.i18n.localize("ConvenientEffects.EffectHidden")}'></i>`
+            ? `<i class='fas fa-eye-slash integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.EffectHidden")}'></i>`
             : "";
     }
 
@@ -154,7 +154,7 @@ class HandlebarHelpers {
         nestedEffects: ActiveEffect<Item<null>>[],
     ): string {
         return nestedEffects && nestedEffects.length > 0
-            ? `<i class='fas fa-trees integration-icon' title='${game.i18n.localize("ConvenientEffects.HasNestedEffects")}'></i> `
+            ? `<i class='fas fa-trees integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.HasNestedEffects")}'></i> `
             : "";
     }
 
@@ -163,7 +163,7 @@ class HandlebarHelpers {
         nestedEffectIds: string[],
     ): string {
         return ceEffectId && nestedEffectIds?.includes(ceEffectId)
-            ? `<i class='fas fa-tree integration-icon' title='${game.i18n.localize("ConvenientEffects.IsNestedEffect")}'></i> `
+            ? `<i class='fas fa-tree integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.IsNestedEffect")}'></i> `
             : "";
     }
 
@@ -179,7 +179,7 @@ class HandlebarHelpers {
         });
 
         return statusEffect
-            ? `<i class='fas fa-person-rays integration-icon' title='${game.i18n.localize("ConvenientEffects.StatusEffect")}'></i> `
+            ? `<i class='fas fa-person-rays integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.StatusEffect")}'></i> `
             : "";
     }
 
@@ -187,13 +187,13 @@ class HandlebarHelpers {
         return changes.some((change) =>
             change.key?.startsWith("flags.midi-qol"),
         )
-            ? `<i class='fas fa-dice-d20 integration-icon' title='${game.i18n.localize("ConvenientEffects.MidiQolEffects")}'></i> `
+            ? `<i class='fas fa-dice-d20 integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.MidiQolEffects")}'></i> `
             : "";
     }
 
     #getAteIcon(changes: DeepPartial<EffectChangeData>[]): string {
         return changes.some((change) => change.key?.startsWith("ATL"))
-            ? `<i class='fas fa-lightbulb integration-icon' title='${game.i18n.localize("ConvenientEffects.AtlEffects")}'></i> `
+            ? `<i class='fas fa-lightbulb integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.AtlEffects")}'></i> `
             : "";
     }
 
@@ -201,7 +201,7 @@ class HandlebarHelpers {
         return changes.some((change) =>
             change.key?.startsWith("macro.tokenMagic"),
         )
-            ? `<i class='fas fa-wand-magic-sparkles integration-icon' title='${game.i18n.localize("ConvenientEffects.TokenMagicEffects")}'></i> `
+            ? `<i class='fas fa-wand-magic-sparkles integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.TokenMagicEffects")}'></i> `
             : "";
     }
 }
