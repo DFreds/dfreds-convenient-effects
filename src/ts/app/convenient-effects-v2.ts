@@ -106,7 +106,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         },
         directory: {
             template: `modules/${MODULE_ID}/templates/directory.hbs`,
-            scrollable: [""],
+            scrollable: [".directory-list"],
         },
     };
 
