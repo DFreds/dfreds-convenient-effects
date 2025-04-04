@@ -303,6 +303,7 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         Object.assign(context, {
             folderData,
+            canCreateEntry: this._canCreateEntry(),
             entryPartial: BaseConvenientEffectsV2._entryPartial,
             folderPartial: BaseConvenientEffectsV2._folderPartial,
         });
@@ -315,7 +316,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
         Object.assign(context, {
             canViewBackups:
                 game.user.isGM && !this.options.convenientEffects.backup,
-            canCreateEntry: this._canCreateEntry(),
             canCreateFolder: this._canCreateFolder(),
             isBackup: this.options.convenientEffects.backup,
             // searchMode:
