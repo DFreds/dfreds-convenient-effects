@@ -1,5 +1,4 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
-import { Settings } from "../settings.ts";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
@@ -7,14 +6,7 @@ import { MODULE_IDS } from "../constants.ts";
 import { StatusEffectsModule } from "../integrations/status-effect-types.ts";
 
 class HandlebarHelpers {
-    #settings: Settings;
-
-    constructor() {
-        this.#settings = new Settings();
-    }
-
     register(): void {
-        this.#registerCanCreateFolders();
         this.#registerCanCreateEffects();
         this.#registerGetCeEffectId();
         this.#registerIsTemporary();
@@ -25,16 +17,7 @@ class HandlebarHelpers {
         this.#registerConvenientEffectIcons();
     }
 
-    #registerCanCreateFolders() {
-        Handlebars.registerHelper("canCreateFolders", () => {
-            const canCreateItems = game.user.hasPermission("ITEM_CREATE");
-            const settingEnabled =
-                game.user.role >= this.#settings.createFoldersPermission;
-
-            return canCreateItems && settingEnabled;
-        });
-    }
-
+    // TODO can this be replaced?
     #registerCanCreateEffects() {
         Handlebars.registerHelper("canCreateEffects", (folder: Item) => {
             return folder.isOwner;
