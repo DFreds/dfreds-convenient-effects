@@ -1107,15 +1107,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const folderId = folderItem._id;
         if (!folderId) return;
 
-        // @ts-expect-error ignore for now
-        const visited = folderIds.has(folderId);
         folderIds.add(folderId);
 
         if (autoExpand) {
             autoExpandIds.add(folderId);
         }
-
-        // if ( !visited && folder.folder ) this.#onMatchFolder(folder.folder, folderIds, autoExpandIds);
     }
 
     _matchSearchEntries(
