@@ -132,6 +132,7 @@ declare global {
 
         /** Configuration for the Folder document */
         Folder: {
+            sidebarIcon: string;
             documentClass: typeof Folder;
             collection: typeof Folders;
         };

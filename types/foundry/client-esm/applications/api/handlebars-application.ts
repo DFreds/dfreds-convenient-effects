@@ -42,14 +42,17 @@ export default function HandlebarsApplicationMixin<
          *
          * @param partId       The part being rendered
          * @param context      Shared context provided by _prepareContext
+         * @param options      Options passed to the render method
          * @returns Context data for a specific part
          */
         protected async _preparePartContext(
             partId: string,
             context: object,
+            options: HandlebarsRenderOptions,
         ): Promise<object> {
             partId;
             context;
+            options;
             return {};
         }
 
@@ -125,6 +128,13 @@ export default function HandlebarsApplicationMixin<
             partId;
             htmlElement;
             options;
+        }
+
+        protected _configureRenderParts(
+            options: HandlebarsRenderOptions,
+        ): Record<string, HandlebarsTemplatePart> {
+            options;
+            return {};
         }
     }
 

@@ -313,7 +313,10 @@ export default abstract class ApplicationV2<
      * @param context      Prepared context data
      * @param  options                 Provided render options
      */
-    protected _onFirstRender(context: object, options: TRenderOptions): void;
+    protected _onFirstRender(
+        context: object,
+        options: TRenderOptions,
+    ): Promise<void>;
 
     /**
      * Actions performed before any render of the Application.
@@ -416,4 +419,25 @@ export default abstract class ApplicationV2<
         element: HTMLElement,
         timeout: number,
     ): Promise<void>;
+
+    /**
+     * Create a ContextMenu instance used in this Application.
+     * @param  handler  A handler function that provides initial context options
+     * @param selector                   A CSS selector to which the ContextMenu will be bound
+     * @param options                  Additional options which affect ContextMenu construction
+     * @param options.container        A parent HTMLElement which contains the selector target
+     * @param options.hookName         The hook name
+     * @param options.parentClassHooks Whether to call hooks for the parent classes in the inheritance chain.
+     * @returns A created ContextMenu or null if no menu items were defined
+     * @protected
+     */
+    _createContextMenu(
+        handler: () => ContextMenuEntry[],
+        selector: string,
+        options?: {
+            container?: HTMLElement;
+            hookName?: string;
+            parentClassHooks?: boolean;
+        },
+    ): ContextMenu | null;
 }
