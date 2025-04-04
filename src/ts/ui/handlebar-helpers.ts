@@ -69,7 +69,7 @@ class HandlebarHelpers {
                 if (!Flags.isViewable(folder)) {
                     icons += `
                         <div class="folder-icon">
-                            <i class="fas fa-eye-slash" title='${game.i18n.localize("ConvenientEffects.FolderHidden")}'></i>
+                            <i class="fas fa-eye-slash" data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.FolderHidden")}'></i>
                         </div>
                         `;
                 }

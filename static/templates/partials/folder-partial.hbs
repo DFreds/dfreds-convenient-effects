@@ -11,6 +11,8 @@
         <i class="fa-solid fa-folder-open fa-fw" inert></i>
         <span class="folder-name ellipsis">{{ data.folder.name }}</span>
 
+        {{{convenientFolderIcons data.folder}}}
+
         {{#if @root.canCreateEntry}}
             <button
                 type="button"
