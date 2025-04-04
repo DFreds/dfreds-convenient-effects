@@ -592,8 +592,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const context = await super._prepareContext(options);
         Object.assign(context, {
             folderIcon: CONFIG.Folder.sidebarIcon,
-            label: "DOCUMENT.ActiveEffect",
-            labelPlural: "DOCUMENT.ActiveEffects",
+            label: game.i18n.localize("DOCUMENT.ActiveEffect"),
+            labelPlural: game.i18n.localize("DOCUMENT.ActiveEffects"),
             sidebarIcon: "fa-solid fa-hand-sparkles",
         });
 

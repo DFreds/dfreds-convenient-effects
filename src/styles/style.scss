@@ -1,24 +1,26 @@
-// .integration-icon {
-//     margin-right: 12px;
-//     flex: none;
-//     align-self: center;
-// }
+#convenient-effects-v2 {
+    .ce-inline-control {
+        color: var(--color-text-dark-5);
 
-.ce-inline-control {
-    color: var(--color-text-dark-5);
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
 
-    &:focus {
-        box-shadow: none;
-        outline: none;
+        &:hover {
+            background-color: var(--color-cool-3);
+        }
+
+        &[aria-pressed="true"] {
+            color: var(--button-text-color);
+            background-color: var(--color-cool-3);
+        }
     }
 
-    &:hover {
-        background-color: var(--color-cool-3);
-    }
-
-    &[aria-pressed="true"] {
-        color: var(--button-text-color);
-        background-color: var(--color-cool-3);
+    .integration-icon {
+        margin-right: 12px;
+        flex: none;
+        align-self: center;
     }
 }
 
