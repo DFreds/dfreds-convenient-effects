@@ -438,6 +438,7 @@ export default abstract class ApplicationV2<
             container?: HTMLElement;
             hookName?: string;
             parentClassHooks?: boolean;
+            [key: string]: any;
         },
     ): ContextMenu | null;
 }

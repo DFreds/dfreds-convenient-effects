@@ -145,10 +145,16 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         this._createContextMenu(
             this._getFolderContextOptions,
             ".folder .folder-header",
+            {
+                fixed: true,
+            },
         );
         this._createContextMenu(
             this._getEntryContextOptions,
             ".directory-item[data-entry-id]",
+            {
+                fixed: true,
+            },
         );
     }
 
