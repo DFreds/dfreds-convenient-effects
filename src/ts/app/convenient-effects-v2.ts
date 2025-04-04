@@ -202,24 +202,23 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const folder = findFolder(folderId, {
-                        backup: false,
-                    });
-                    const effect = game.dfreds.effectInterface.findEffect({
+                    const original = game.dfreds.effectInterface.findEffect({
                         folderId,
                         effectId,
                     });
 
-                    if (!effect) return;
+                    if (!original) return;
 
-                    const effects = await folder?.createEmbeddedDocuments(
-                        "ActiveEffect",
-                        [effect],
+                    const clone = await original.clone(
+                        {
+                            name: game.i18n.format("DOCUMENT.CopyOf", {
+                                name: original._source.name,
+                            }),
+                        },
+                        { save: true, addSource: true },
                     );
 
-                    if (!effects) return;
-
-                    (effects[0] as ActiveEffect<Item<null>>).sheet.render(true);
+                    clone.sheet.render(true);
                 },
             },
             {
