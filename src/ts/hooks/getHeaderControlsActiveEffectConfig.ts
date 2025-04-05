@@ -1,6 +1,6 @@
 import { ApplicationHeaderControlsEntry } from "types/foundry/client-esm/applications/_types.js";
 import { Listener } from "./index.ts";
-import { ConvenientEffectConfig } from "../ui/convenient-effect-config.ts";
+import { ConvenientEffectConfigV2 } from "../ui/convenient-effect-config.ts";
 import { Flags } from "../utils/flags.ts";
 
 const GetHeaderControlsActiveEffectConfig: Listener = {
@@ -28,9 +28,9 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                         return (isOwner || isGM) && isItem && isConvenientItem;
                     },
                     onClick: () => {
-                        new ConvenientEffectConfig(configTyped.document).render(
-                            true,
-                        );
+                        new ConvenientEffectConfigV2(
+                            configTyped.document,
+                        ).render(true);
                     },
                 });
             },

@@ -1,16 +1,10 @@
-<form autocomplete="off">
+<div>
 
     <!-- Effect Header -->
     <header class="sheet-header">
         <img class="effect-img" src="{{effect.img}}" data-edit="img" />
         <h1 class="effect-title">
-            <input
-                name="name"
-                type="text"
-                value="{{effect.name}}"
-                placeholder="{{localize 'Name'}}"
-                disabled
-            />
+            {{effect.name}}
         </h1>
     </header>
 
@@ -123,9 +117,4 @@
             <p class="hint">{{localize "ConvenientEffects.ConfigOtherEffectsHint"}}</p>
         </div>
     </section>
-
-    <footer class="sheet-footer">
-        <button type="submit"><i class="fas fa-save"></i>
-            {{localize "EFFECT.Submit"}}</button>
-    </footer>
-</form>
+</div>
