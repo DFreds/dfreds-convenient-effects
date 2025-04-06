@@ -4,7 +4,11 @@ import {
     ApplicationConfiguration,
     ApplicationRenderOptions,
 } from "types/foundry/client-esm/applications/_types.js";
-
+import { MODULE_ID } from "../constants.ts";
+import type {
+    ActiveEffectSchema,
+    ActiveEffectSource,
+} from "types/foundry/common/documents/active-effect.d.ts";
 interface MultiSelectData {
     id?: string;
     label?: string;
@@ -13,6 +17,9 @@ interface MultiSelectData {
 
 interface ConvenientEffectConfigData {
     effect: ActiveEffect<any>;
+    source: ActiveEffectSource;
+    fields: ActiveEffectSchema;
+    rootId: string;
     nestedEffectsData: MultiSelectData[];
     subEffectsData: MultiSelectData[];
     otherEffectsData: MultiSelectData[];
@@ -20,45 +27,48 @@ interface ConvenientEffectConfigData {
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
-class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
-    ApplicationV2,
-) {
-    #document: ActiveEffect<any>;
+interface ConvenientEffectConfigOptions extends ApplicationConfiguration {
+    document: ActiveEffect<any> | null;
+}
 
-    constructor(
-        options?: DeepPartial<
-            ApplicationConfiguration & { document: ActiveEffect<any> }
-        >,
-    ) {
+class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
+    ApplicationV2<ConvenientEffectConfigOptions>,
+) {
+    #document?: ActiveEffect<any> | null;
+
+    constructor(options?: DeepPartial<ConvenientEffectConfigOptions>) {
         super(options);
-        this.#document = options?.document as ActiveEffect<any>;
+        this.#document = options?.document;
     }
 
-    static override DEFAULT_OPTIONS: DeepPartial<ApplicationConfiguration> = {
-        id: "convenient-effect-config",
-        classes: ["sheet"],
-        tag: "form",
-        window: {
-            contentClasses: ["standard-form"],
-            icon: "fas fa-hand-sparkles",
-            title: "ConvenientEffects.ConfigTitle",
-        },
-        position: {
-            width: 580,
-            height: "auto",
-        },
-        form: {
-            handler: this.#onSubmit,
-            closeOnSubmit: true,
-            submitOnChange: false,
-        },
-    };
+    static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectConfigOptions> =
+        {
+            id: "convenient-effect-config",
+            classes: ["sheet"],
+            tag: "form",
+            document: null,
+            window: {
+                contentClasses: ["standard-form"],
+                icon: "fas fa-hand-sparkles",
+                title: "ConvenientEffects.ConfigTitle",
+            },
+            position: {
+                width: 580,
+            },
+            form: {
+                handler: this.#onSubmit,
+                submitOnChange: false,
+                closeOnSubmit: true,
+            },
+        };
 
     static override PARTS = {
-        convenientConfig: {
+        header: {
+            template: `modules/${MODULE_ID}/templates/ce-config/header.hbs`,
+        },
+        config: {
             id: "convenient-config",
-            template:
-                "modules/dfreds-convenient-effects/templates/convenient-effect-config-v2.hbs",
+            template: `modules/${MODULE_ID}/templates/ce-config/config.hbs`,
         },
         footer: {
             template: "templates/generic/form-footer.hbs",
@@ -66,7 +76,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
     };
 
     get document(): ActiveEffect<any> {
-        return this.#document;
+        return this.#document as ActiveEffect<any>;
     }
 
     protected override async _prepareContext(
@@ -121,6 +131,9 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
 
         return {
             effect: this.document,
+            source: this.document._source,
+            fields: this.document.schema.fields,
+            rootId: this.document.id,
             nestedEffectsData,
             subEffectsData,
             otherEffectsData,
