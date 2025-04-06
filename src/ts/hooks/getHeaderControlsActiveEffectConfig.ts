@@ -28,9 +28,9 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                         return (isOwner || isGM) && isItem && isConvenientItem;
                     },
                     onClick: () => {
-                        new ConvenientEffectConfigV2(
-                            configTyped.document,
-                        ).render(true);
+                        new ConvenientEffectConfigV2({
+                            document: configTyped.document,
+                        }).render(true);
                     },
                 });
             },
