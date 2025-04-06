@@ -73,6 +73,10 @@
         "ConfigOtherEffectsLabel": "Other Effects",
         "ConfigOtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed.",
 
+        "ConfigIDsLegend": "IDs",
+        "ConfigFlagsLegend": "Flags",
+        "ConfigDependentEffectsLegend": "Dependent Effects",
+
         "Initializing": "Initializing convenient effects...",
         "FinishedInitializing": "Finished initializing convenient effects",
 
