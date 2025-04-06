@@ -82,17 +82,17 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
     static override PARTS = {
         header: {
-            template: `modules/${MODULE_ID}/templates/header.hbs`,
+            template: `modules/${MODULE_ID}/templates/ce-app/header.hbs`,
         },
         directory: {
-            template: `modules/${MODULE_ID}/templates/directory.hbs`,
+            template: `modules/${MODULE_ID}/templates/ce-app/directory.hbs`,
             scrollable: [""],
         },
     };
 
-    static _entryPartial = `modules/${MODULE_ID}/templates/partials/document-partial.hbs`;
+    static _entryPartial = `modules/${MODULE_ID}/templates/ce-app/partials/document-partial.hbs`;
 
-    static _folderPartial = `modules/${MODULE_ID}/templates/partials/folder-partial.hbs`;
+    static _folderPartial = `modules/${MODULE_ID}/templates/ce-app/partials/folder-partial.hbs`;
 
     protected override _configureRenderParts(
         options: HandlebarsRenderOptions,

@@ -1,16 +1,11 @@
-<div>
+<section>
+    <fieldset>
+        <legend>{{localize "ConvenientEffects.ConfigIDsLegend"}}</legend>
 
-    <!-- Effect Header -->
-    <header class="sheet-header">
-        <img class="effect-img" src="{{effect.img}}" data-edit="img" />
-        <h1 class="effect-title">
-            {{effect.name}}
-        </h1>
-    </header>
-
-    <section>
         <div class="form-group">
-            <label>{{localize "ConvenientEffects.ConfigFoundryEffectIdLabel"}}</label>
+            <label>{{localize
+                    "ConvenientEffects.ConfigFoundryEffectIdLabel"
+                }}</label>
             <div class="form-fields">
                 <input
                     name="foundryEffectId"
@@ -19,11 +14,15 @@
                     disabled
                 />
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigFoundryEffectIdHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigFoundryEffectIdHint"
+                }}</p>
         </div>
 
         <div class="form-group">
-            <label>{{localize "ConvenientEffects.ConfigConvenientEffectIdLabel"}}</label>
+            <label>{{localize
+                    "ConvenientEffects.ConfigConvenientEffectIdLabel"
+                }}</label>
             <div class="form-fields">
                 <input
                     type="text"
@@ -32,8 +31,15 @@
                     disabled
                 />
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigConvenientEffectIdHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigConvenientEffectIdHint"
+                }}</p>
         </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize "ConvenientEffects.ConfigFlagsLegend"}}</legend>
 
         <div class="form-group">
             <label>{{localize "ConvenientEffects.ConfigTemporaryLabel"}}</label>
@@ -44,7 +50,9 @@
                     {{checked (isTemporary effect)}}
                 />
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigTemporaryHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigTemporaryHint"
+                }}</p>
         </div>
 
         <div class="form-group">
@@ -56,7 +64,9 @@
                     {{checked (isViewable effect)}}
                 />
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigViewableHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigViewableHint"
+                }}</p>
         </div>
 
         <div class="form-group">
@@ -69,11 +79,21 @@
                     disabled
                 />
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigDynamicHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigDynamicHint"
+                }}</p>
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize
+                "ConvenientEffects.ConfigDependentEffectsLegend"
+            }}</legend>
 
         <div class="form-group">
-            <label>{{localize "ConvenientEffects.ConfigNestedEffectsLabel"}}</label>
+            <label>{{localize
+                    "ConvenientEffects.ConfigNestedEffectsLabel"
+                }}</label>
             <div class="form-fields">
                 <multi-select name="nestedEffectIds">
                     {{#each nestedEffectsData as |nestedEffectData|}}
@@ -84,11 +104,15 @@
                     {{/each}}
                 </multi-select>
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigNestedEffectsHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigNestedEffectsHint"
+                }}</p>
         </div>
 
         <div class="form-group">
-            <label>{{localize "ConvenientEffects.ConfigSubEffectsLabel"}}</label>
+            <label>{{localize
+                    "ConvenientEffects.ConfigSubEffectsLabel"
+                }}</label>
             <div class="form-fields">
                 <multi-select name="subEffectIds">
                     {{#each subEffectsData as |subEffectData|}}
@@ -99,11 +123,15 @@
                     {{/each}}
                 </multi-select>
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigSubEffectsHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigSubEffectsHint"
+                }}</p>
         </div>
 
         <div class="form-group">
-            <label>{{localize "ConvenientEffects.ConfigOtherEffectsLabel"}}</label>
+            <label>{{localize
+                    "ConvenientEffects.ConfigOtherEffectsLabel"
+                }}</label>
             <div class="form-fields">
                 <multi-select name="otherEffectIds">
                     {{#each otherEffectsData as |otherEffectData|}}
@@ -114,7 +142,9 @@
                     {{/each}}
                 </multi-select>
             </div>
-            <p class="hint">{{localize "ConvenientEffects.ConfigOtherEffectsHint"}}</p>
+            <p class="hint">{{localize
+                    "ConvenientEffects.ConfigOtherEffectsHint"
+                }}</p>
         </div>
-    </section>
-</div>
+    </fieldset>
+</section>
