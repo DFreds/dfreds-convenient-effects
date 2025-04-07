@@ -3,6 +3,7 @@ import { findAllEffects } from "../utils/finds.ts";
 import {
     ApplicationConfiguration,
     ApplicationRenderOptions,
+    ApplicationTabsConfiguration,
 } from "types/foundry/client-esm/applications/_types.js";
 import { MODULE_ID } from "../constants.ts";
 
@@ -61,12 +62,46 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         header: {
             template: `modules/${MODULE_ID}/templates/ce-config/header.hbs`,
         },
-        config: {
-            id: "convenient-config",
-            template: `modules/${MODULE_ID}/templates/ce-config/config.hbs`,
+        tabs: {
+            template: "templates/generic/tab-navigation.hbs",
+        },
+        ids: {
+            id: "ids",
+            template: `modules/${MODULE_ID}/templates/ce-config/ids.hbs`,
+        },
+        flags: {
+            id: "flags",
+            template: `modules/${MODULE_ID}/templates/ce-config/flags.hbs`,
+        },
+        dependentEffects: {
+            id: "dependentEffects",
+            template: `modules/${MODULE_ID}/templates/ce-config/dependent-effects.hbs`,
         },
         footer: {
             template: "templates/generic/form-footer.hbs",
+        },
+    };
+
+    static override TABS: Record<string, ApplicationTabsConfiguration> = {
+        sheet: {
+            tabs: [
+                {
+                    id: "ids",
+                    icon: "fa-solid fa-hashtag",
+                    label: "ConvenientEffects.ConfigIDsLegend",
+                },
+                {
+                    id: "flags",
+                    icon: "fa-solid fa-flag",
+                    label: "ConvenientEffects.ConfigFlagsLegend",
+                },
+                {
+                    id: "dependentEffects",
+                    icon: "fa-solid fa-list-tree",
+                    label: "ConvenientEffects.ConfigDependentEffectsLegend",
+                },
+            ],
+            initial: "ids",
         },
     };
 
@@ -94,18 +129,30 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         context: object,
         options: foundry.applications.api.HandlebarsRenderOptions,
     ): Promise<object> {
-        await super._preparePartContext(partId, context, options);
+        const partContext = await super._preparePartContext(
+            partId,
+            context,
+            options,
+        );
+
+        // @ts-expect-error todo
+        if (partId in partContext.tabs) {
+            // @ts-expect-error todo
+            partContext.tab = partContext.tabs[partId];
+        }
 
         switch (partId) {
-            case "config":
+            case "ids":
+            case "flags":
+            case "dependentEffects":
                 this.#prepareConfigContext(context);
                 break;
             case "footer":
-                this.#prepareFooterContext(context);
+                this.#prepareFooterContext(partContext);
                 break;
         }
 
-        return context;
+        return partContext;
     }
 
     #prepareConfigContext(context: object): void {
