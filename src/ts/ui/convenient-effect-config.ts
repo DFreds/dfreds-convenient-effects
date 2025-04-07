@@ -5,10 +5,13 @@ import {
     ApplicationRenderOptions,
 } from "types/foundry/client-esm/applications/_types.js";
 import { MODULE_ID } from "../constants.ts";
-import type {
-    ActiveEffectSchema,
-    ActiveEffectSource,
-} from "types/foundry/common/documents/active-effect.d.ts";
+
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
+interface ConvenientEffectConfigOptions extends ApplicationConfiguration {
+    document: ActiveEffect<any> | null;
+}
+
 interface MultiSelectData {
     id?: string;
     label?: string;
@@ -16,19 +19,9 @@ interface MultiSelectData {
 }
 
 interface ConvenientEffectConfigData {
-    effect: ActiveEffect<any>;
-    source: ActiveEffectSource;
-    fields: ActiveEffectSchema;
-    rootId: string;
     nestedEffectsData: MultiSelectData[];
     subEffectsData: MultiSelectData[];
     otherEffectsData: MultiSelectData[];
-}
-
-const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
-
-interface ConvenientEffectConfigOptions extends ApplicationConfiguration {
-    document: ActiveEffect<any> | null;
 }
 
 class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
@@ -62,6 +55,8 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             },
         };
 
+    // TODO maybe break into tabs?
+
     static override PARTS = {
         header: {
             template: `modules/${MODULE_ID}/templates/ce-config/header.hbs`,
@@ -81,7 +76,39 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
 
     protected override async _prepareContext(
         _options: ApplicationRenderOptions,
-    ): Promise<ConvenientEffectConfigData & { buttons: object[] }> {
+    ): Promise<object> {
+        const context = await super._prepareContext(_options);
+
+        Object.assign(context, {
+            effect: this.document,
+            source: this.document._source,
+            fields: this.document.schema.fields,
+            rootId: this.document.id,
+        });
+
+        return context;
+    }
+
+    protected override async _preparePartContext(
+        partId: string,
+        context: object,
+        options: foundry.applications.api.HandlebarsRenderOptions,
+    ): Promise<object> {
+        await super._preparePartContext(partId, context, options);
+
+        switch (partId) {
+            case "config":
+                this.#prepareConfigContext(context);
+                break;
+            case "footer":
+                this.#prepareFooterContext(context);
+                break;
+        }
+
+        return context;
+    }
+
+    #prepareConfigContext(context: object): void {
         const allEffects = findAllEffects({ backup: false });
 
         const currentNestedEffectIds = Flags.getNestedEffectIds(this.document);
@@ -129,22 +156,25 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             };
         });
 
-        return {
-            effect: this.document,
-            source: this.document._source,
-            fields: this.document.schema.fields,
-            rootId: this.document.id,
+        const configData: ConvenientEffectConfigData = {
             nestedEffectsData,
             subEffectsData,
             otherEffectsData,
+        };
+
+        Object.assign(context, configData);
+    }
+
+    #prepareFooterContext(context: object): void {
+        Object.assign(context, {
             buttons: [
                 {
                     type: "submit",
-                    icon: "fa-solid fa-save",
+                    icon: "fa-solid fa-floppy-disk",
                     label: "EFFECT.Submit",
                 },
             ],
-        };
+        });
     }
 
     #prepareSubmitData(
