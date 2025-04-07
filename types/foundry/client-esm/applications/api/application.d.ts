@@ -5,6 +5,7 @@ import type {
     ApplicationHeaderControlsEntry,
     ApplicationRenderContext,
     ApplicationRenderOptions,
+    ApplicationTabsConfiguration,
 } from "../_types.d.ts";
 
 /** The Application class is responsible for rendering an HTMLElement into the Foundry Virtual Tabletop user interface. */
@@ -22,6 +23,8 @@ export default abstract class ApplicationV2<
     static BASE_APPLICATION: ApplicationV2;
 
     static DEFAULT_OPTIONS: DeepPartial<ApplicationConfiguration>;
+
+    static TABS: Record<string, ApplicationTabsConfiguration>;
 
     static RENDER_STATES: {
         ERROR: -3;

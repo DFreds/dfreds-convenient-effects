@@ -63,6 +63,20 @@ export interface ApplicationWindowConfiguration {
     contentClasses?: string[];
 }
 
+export interface ApplicationTabsConfiguration {
+    /** An array of tab configuration data */
+    tabs: {
+        id: string;
+        icon?: string;
+        label?: string;
+        tooltip?: string;
+    }[];
+    /** The tab in this group that will be active on first render */
+    initial?: string;
+    /** A localization path prefix for all tabs in the group: if set, a label is generated for each tab using a full path of `${labelPrefix}.${tabId}` */
+    labelPrefix?: string;
+}
+
 export interface ApplicationFormConfiguration {
     handler: ApplicationFormSubmission;
     submitOnChange: boolean;
