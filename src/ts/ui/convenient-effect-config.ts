@@ -44,7 +44,8 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             window: {
                 contentClasses: ["standard-form"],
                 icon: "fas fa-hand-sparkles",
-                title: "ConvenientEffects.ConfigTitle",
+                title: "ConvenientEffects.Config.Title",
+                resizable: true,
             },
             position: {
                 width: 580,
@@ -55,8 +56,6 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
                 closeOnSubmit: true,
             },
         };
-
-    // TODO maybe break into tabs?
 
     static override PARTS = {
         header: {
@@ -88,17 +87,17 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
                 {
                     id: "ids",
                     icon: "fa-solid fa-hashtag",
-                    label: "ConvenientEffects.ConfigIDsLegend",
+                    label: "ConvenientEffects.Config.IDsTab",
                 },
                 {
                     id: "flags",
                     icon: "fa-solid fa-flag",
-                    label: "ConvenientEffects.ConfigFlagsLegend",
+                    label: "ConvenientEffects.Config.FlagsTab",
                 },
                 {
                     id: "dependentEffects",
                     icon: "fa-solid fa-list-tree",
-                    label: "ConvenientEffects.ConfigDependentEffectsLegend",
+                    label: "ConvenientEffects.Config.DependentEffectsTab",
                 },
             ],
             initial: "ids",
@@ -119,6 +118,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             source: this.document._source,
             fields: this.document.schema.fields,
             rootId: this.document.id,
+            ...this.#prepareContext(),
         });
 
         return context;
@@ -135,18 +135,16 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             options,
         );
 
-        // @ts-expect-error todo
-        if (partId in partContext.tabs) {
-            // @ts-expect-error todo
-            partContext.tab = partContext.tabs[partId];
+        // Check if tabs exists in the context and if the partId matches a tab
+        const contextWithTabs = partContext as {
+            tabs?: Record<string, unknown>;
+            tab?: unknown;
+        };
+        if (contextWithTabs.tabs && partId in contextWithTabs.tabs) {
+            contextWithTabs.tab = contextWithTabs.tabs[partId];
         }
 
         switch (partId) {
-            case "ids":
-            case "flags":
-            case "dependentEffects":
-                this.#prepareConfigContext(context);
-                break;
             case "footer":
                 this.#prepareFooterContext(partContext);
                 break;
@@ -155,7 +153,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         return partContext;
     }
 
-    #prepareConfigContext(context: object): void {
+    #prepareContext(): ConvenientEffectConfigData {
         const allEffects = findAllEffects({ backup: false });
 
         const currentNestedEffectIds = Flags.getNestedEffectIds(this.document);
@@ -209,7 +207,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             otherEffectsData,
         };
 
-        Object.assign(context, configData);
+        return configData;
     }
 
     #prepareFooterContext(context: object): void {
