@@ -2,6 +2,8 @@ import { ActiveEffectSource } from "types/foundry/common/documents/active-effect
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 
+const { DialogV2 } = foundry.applications.api;
+
 async function getNestedEffectSelection(
     effectData: PreCreate<ActiveEffectSource>,
 ): Promise<PreCreate<ActiveEffectSource> | undefined> {
@@ -23,30 +25,38 @@ async function getNestedEffectSelection(
         },
     );
 
-    const choice = (await Dialog.wait(
-        {
+    const choice = (await DialogV2.wait({
+        id: "nested-effect-selection-dialog",
+        window: {
             title: effectData.name,
-            content,
-            default: "ok",
-            close: () => {
-                return null;
-            },
-            buttons: {
-                ok: {
-                    icon: '<i class="fas fa-check"></i>',
-                    label: game.i18n.localize("ConvenientEffects.SelectEffect"),
-                    // @ts-expect-error Complains about returning, but works
-                    callback: (html: JQuery) => {
-                        const htmlChoice = html
-                            .find('select[name="effect-choice"]')
-                            .val();
-                        return htmlChoice;
-                    },
-                },
-            },
+            icon: "fa-solid fa-trees",
         },
-        { width: 300 },
-    )) as string | undefined;
+        position: {
+            width: 480,
+        },
+        close: () => {
+            return null;
+        },
+        content,
+        buttons: [
+            {
+                action: "ok",
+                label: "ConvenientEffects.SelectEffect",
+                icon: "fa-solid fa-check",
+                callback: async (
+                    _event: PointerEvent | SubmitEvent,
+                    _button: HTMLButtonElement,
+                    dialog: HTMLDialogElement,
+                ) => {
+                    const htmlChoice = $(dialog)
+                        .find('select[name="effect-choice"]')
+                        .val();
+                    return htmlChoice;
+                },
+                default: true,
+            },
+        ],
+    })) as string | undefined;
 
     return nestedEffects.find((nestedEffect) => nestedEffect.name === choice);
 }

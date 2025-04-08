@@ -1,4 +1,4 @@
-<form id="nested-effects-dialog" onsubmit="event.preventDefault();">
+<form onsubmit="event.preventDefault();">
 
     {{{parentEffect.description}}}
 
@@ -16,10 +16,10 @@
         </div>
     </div>
 
-    <div id="nested-effect-descriptions">
-        {{#each nestedEffects as |nestedEffect|}}
-            <strong>{{nestedEffect.name}}.</strong>
+    {{#each nestedEffects as |nestedEffect|}}
+        <div class="nested-effect-description">
+            <strong>{{nestedEffect.name}}</strong>
             {{{nestedEffect.description}}}
-        {{/each}}
-    </div>
+        </div>
+    {{/each}}
 </form>

@@ -87,15 +87,10 @@ export default abstract class DialogV2<
      *                           Promise resolves to null.
      */
     static wait({
-        rejectClose,
-        close,
-        render,
         ...options
-    }: {
-        rejectClose: boolean;
-        close: DialogV2CloseCallback;
-        render: DialogV2RenderCallback;
-    } & Partial<DialogV2Configuration>): Promise<unknown>;
+    }: {} & Partial<
+        ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions
+    >): Promise<unknown>;
 }
 
 export interface DialogV2Button {
