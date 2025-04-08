@@ -57,7 +57,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
         ],
         tag: "section",
         window: {
-            contentClasses: ["standard-form"],
             icon: "fa-solid fa-hand-sparkles",
             resizable: true,
             minimizable: true,
