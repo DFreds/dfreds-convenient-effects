@@ -7,20 +7,16 @@ import {
     findModuleById,
     findEffectByUuid,
 } from "../../utils/finds.ts";
-import { getInputFromDialog } from "../create-edit-folder-dialog.ts";
+import { ConvenientFolderConfig } from "../convenient-folder-config.ts";
 import { Flags } from "../../utils/flags.ts";
 import { StatusEffectsModule } from "../../integrations/status-effect-types.ts";
-import {
-    createConvenientEffect,
-    createConvenientItem,
-} from "../../utils/creates.ts";
-import { getBaseType } from "../../utils/gets.ts";
-import { log } from "../../logger.ts";
+import { createConvenientEffect } from "../../utils/creates.ts";
 import {
     BaseConvenientEffectsV2,
     ConvenientEffectsOptions,
 } from "./base-convenient-effects-v2.ts";
 import { BackupConvenientEffectsV2 } from "./backup-convenient-effects-v2.ts";
+import { getBaseType } from "src/ts/utils/gets.ts";
 
 class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
     #settings: Settings;
@@ -273,14 +269,11 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folder) return;
 
-                    const result = await getInputFromDialog({ folder });
+                    const folderConfig = new ConvenientFolderConfig({
+                        document: folder,
+                    });
 
-                    if (result.operation === "update") {
-                        await Flags.setFolderColor(folder, result.data.color);
-                        await folder.update({
-                            name: result.data.name,
-                        });
-                    }
+                    folderConfig.render({ force: true });
                 },
             },
             {
@@ -524,6 +517,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
             newEffect,
         ]);
 
+        // todo force: true when this is app v2 type
         (effects[0] as ActiveEffect<Item<null>>).sheet.render(true);
     }
 
@@ -538,22 +532,15 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         _target: HTMLElement,
     ): Promise<void> {
         event.stopPropagation();
-        const result = await getInputFromDialog({});
 
-        if (result.operation === "create") {
-            const itemData = createConvenientItem({
-                item: {
-                    name: result.data.name,
-                    type: getBaseType(),
-                },
-            });
+        const folderConfig = new ConvenientFolderConfig({
+            document: new Item.implementation({
+                name: game.i18n.localize("FOLDER.Create"),
+                type: getBaseType(),
+            }),
+        });
 
-            Flags.setFolderColor(itemData, result.data.color);
-
-            const item = await Item.create(itemData);
-
-            log(`Created item ${item?.id}`);
-        }
+        folderConfig.render({ force: true });
     }
 
     static async #onToggleHiddenEffects(...args: any[]): Promise<void> {
