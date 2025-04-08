@@ -83,7 +83,7 @@ class Flags {
     }
 
     static async setFolderColor(
-        item: Item<any> | PreCreate<ItemSource>,
+        item: Item<any> | PreCreate<ItemSource> | object,
         color: string,
     ): Promise<any> {
         if (item instanceof Item) {

@@ -6,6 +6,7 @@ interface ICreateItemAddOns {
     item: PreCreate<ItemSource>;
     isBackup?: boolean;
     isViewable?: boolean;
+    color?: string;
 }
 
 interface ICreateEffectAddOns {
@@ -23,10 +24,15 @@ function createConvenientItem({
     item,
     isBackup = false,
     isViewable = true,
+    color,
 }: ICreateItemAddOns): PreCreate<ItemSource> {
     Flags.setIsConvenient(item, true);
     Flags.setIsBackup(item, isBackup);
     Flags.setIsViewable(item, isViewable);
+
+    if (color) {
+        Flags.setFolderColor(item, color);
+    }
 
     item.name = isBackup ? `${item.name} - Backup` : item.name;
     item.img =
