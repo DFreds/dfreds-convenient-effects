@@ -1,0 +1,14 @@
+<div class="standard-form">
+    {{formGroup
+        fields.name
+        value=source.name
+        placeholder=namePlaceholder
+        rootId=rootId
+    }}
+    <div class="form-group">
+        <label>{{localize "FOLDER.FIELDS.color.label"}}</label>
+        <div class="form-fields">
+            <color-picker name="color" value="{{color}}"></color-picker>
+        </div>
+    </div>
+</div>
