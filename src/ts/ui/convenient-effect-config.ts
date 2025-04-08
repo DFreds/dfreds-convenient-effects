@@ -6,6 +6,7 @@ import {
     ApplicationTabsConfiguration,
 } from "types/foundry/client-esm/applications/_types.js";
 import { MODULE_ID } from "../constants.ts";
+import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -127,7 +128,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
     protected override async _preparePartContext(
         partId: string,
         context: object,
-        options: foundry.applications.api.HandlebarsRenderOptions,
+        options: HandlebarsRenderOptions,
     ): Promise<object> {
         const partContext = await super._preparePartContext(
             partId,
