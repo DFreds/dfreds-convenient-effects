@@ -17,7 +17,7 @@ const UiExtenderInit: Listener = {
                     return game.user.role >= settings.appControlsPermission;
                 },
                 tool: {
-                    name: "convenient-effects",
+                    name: "convenientEffects",
                     title: "ConvenientEffects.AppName",
                     icon: "fas fa-hand-sparkles",
                     toolclip: {
