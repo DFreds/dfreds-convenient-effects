@@ -1,4 +1,4 @@
-import { findEffectByCeId, findFolder } from "../utils/finds.ts";
+import { findEffectByCeId, findFolder } from "../../utils/finds.ts";
 import {
     BaseConvenientEffectsV2,
     ConvenientEffectsOptions,

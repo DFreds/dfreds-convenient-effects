@@ -6,16 +6,16 @@ import {
     HandlebarsRenderOptions,
     HandlebarsTemplatePart,
 } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
-import { Settings } from "../settings.ts";
-import { MODULE_ID } from "../constants.ts";
+import { Settings } from "../../settings.ts";
+import { MODULE_ID } from "../../constants.ts";
 import {
     findAllEffects,
     findAllNestedEffectIds,
     findEffectsByFolder,
     findFolder,
     findFolders,
-} from "../utils/finds.ts";
-import { Flags } from "../utils/flags.ts";
+} from "../../utils/finds.ts";
+import { Flags } from "../../utils/flags.ts";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 

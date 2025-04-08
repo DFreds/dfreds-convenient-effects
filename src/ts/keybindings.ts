@@ -1,4 +1,4 @@
-import { ConvenientEffectsV2 } from "./app/convenient-effects-v2.ts";
+import { ConvenientEffectsV2 } from "./ui/ce-app/convenient-effects-v2.ts";
 import { MODULE_ID } from "./constants.ts";
 
 class Keybindings {

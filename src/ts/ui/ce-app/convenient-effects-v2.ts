@@ -1,21 +1,21 @@
 import { ApplicationRenderOptions } from "types/foundry/client-esm/applications/_types.js";
-import { Settings } from "../settings.ts";
-import { MODULE_IDS } from "../constants.ts";
+import { Settings } from "../../settings.ts";
+import { MODULE_IDS } from "../../constants.ts";
 import {
     findEffectByCeId,
     findFolder,
     findModuleById,
     findEffectByUuid,
-} from "../utils/finds.ts";
-import { getInputFromDialog } from "../ui/create-edit-folder-dialog.ts";
-import { Flags } from "../utils/flags.ts";
-import { StatusEffectsModule } from "../integrations/status-effect-types.ts";
+} from "../../utils/finds.ts";
+import { getInputFromDialog } from "../create-edit-folder-dialog.ts";
+import { Flags } from "../../utils/flags.ts";
+import { StatusEffectsModule } from "../../integrations/status-effect-types.ts";
 import {
     createConvenientEffect,
     createConvenientItem,
-} from "../utils/creates.ts";
-import { getBaseType } from "../utils/gets.ts";
-import { log } from "../logger.ts";
+} from "../../utils/creates.ts";
+import { getBaseType } from "../../utils/gets.ts";
+import { log } from "../../logger.ts";
 import {
     BaseConvenientEffectsV2,
     ConvenientEffectsOptions,

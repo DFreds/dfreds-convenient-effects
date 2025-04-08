@@ -2,7 +2,7 @@ import { MODULE_ID } from "../constants.ts";
 import { Listener } from "./index.ts";
 import { Settings } from "../settings.ts";
 // import { ConvenientEffectsApp } from "../app/convenient-effects-app.ts";
-import { ConvenientEffectsV2 } from "../app/convenient-effects-v2.ts";
+import { ConvenientEffectsV2 } from "../ui/ce-app/convenient-effects-v2.ts";
 
 const UiExtenderInit: Listener = {
     listen(): void {

@@ -1,4 +1,4 @@
-import { ConvenientEffectsV2 } from "../app/convenient-effects-v2.ts";
+import { ConvenientEffectsV2 } from "./ce-app/convenient-effects-v2.ts";
 
 /**
  * Re-renders the Convenient Effects application if it's open
