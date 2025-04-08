@@ -30,7 +30,7 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                     onClick: () => {
                         new ConvenientEffectConfigV2({
                             document: configTyped.document,
-                        }).render(true);
+                        }).render({ force: true });
                     },
                 });
             },

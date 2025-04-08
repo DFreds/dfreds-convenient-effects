@@ -26,7 +26,7 @@ class Keybindings {
                     if (convenientEffectsV2) {
                         (convenientEffectsV2 as ConvenientEffectsV2).close();
                     } else {
-                        new ConvenientEffectsV2().render(true);
+                        new ConvenientEffectsV2().render({ force: true });
                     }
                 },
             },

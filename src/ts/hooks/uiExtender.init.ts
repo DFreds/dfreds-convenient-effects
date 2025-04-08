@@ -33,7 +33,7 @@ const UiExtenderInit: Listener = {
                     button: true,
                     visible: true,
                     onChange: (_event?: Event, _active?: boolean) => {
-                        new ConvenientEffectsV2().render(true);
+                        new ConvenientEffectsV2().render({ force: true });
                     },
                 },
             });

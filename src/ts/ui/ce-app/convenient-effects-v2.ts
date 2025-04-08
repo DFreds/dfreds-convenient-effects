@@ -91,6 +91,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
                         effectId,
                     });
 
+                    // todo force: true when this is app v2 type
                     effect?.sheet.render(true);
                 },
             },
@@ -218,6 +219,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
                         { save: true, addSource: true },
                     );
 
+                    // todo force: true when this is app v2 type
                     clone.sheet.render(true);
                 },
             },
