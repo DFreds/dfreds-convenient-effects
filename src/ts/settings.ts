@@ -17,19 +17,19 @@ class Settings {
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize(
-            "ConvenientEffects.SettingPlayer",
+            "ConvenientEffects.Setting.Player",
         );
         this.#USER_ROLES[CONST.USER_ROLES.TRUSTED] = game.i18n.localize(
-            "ConvenientEffects.SettingTrustedPlayer",
+            "ConvenientEffects.Setting.TrustedPlayer",
         );
         this.#USER_ROLES[CONST.USER_ROLES.ASSISTANT] = game.i18n.localize(
-            "ConvenientEffects.SettingAssistantGM",
+            "ConvenientEffects.Setting.AssistantGM",
         );
         this.#USER_ROLES[CONST.USER_ROLES.GAMEMASTER] = game.i18n.localize(
-            "ConvenientEffects.SettingGameMaster",
+            "ConvenientEffects.Setting.GameMaster",
         );
         this.#USER_ROLES[5] = game.i18n.localize(
-            "ConvenientEffects.SettingNone",
+            "ConvenientEffects.Setting.None",
         );
     }
 
@@ -54,8 +54,8 @@ class Settings {
 
     #registerAppControlsPermission(): void {
         game.settings.register(MODULE_ID, this.#APP_CONTROLS_PERMISSION, {
-            name: "ConvenientEffects.SettingAppControlsPermissionName",
-            hint: "ConvenientEffects.SettingAppControlsPermissionHint",
+            name: "ConvenientEffects.Setting.AppControlsPermissionName",
+            hint: "ConvenientEffects.Setting.AppControlsPermissionHint",
             scope: "world",
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,
