@@ -1,6 +1,6 @@
 <section class="tab{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
     <div class="form-group">
-        <label>{{localize "ConvenientEffects.ConfigNestedEffectsLabel"}}</label>
+        <label>{{localize "ConvenientEffects.Config.NestedEffectsLabel"}}</label>
         <div class="form-fields">
             <multi-select name="nestedEffectIds">
                 {{#each nestedEffectsData as |nestedEffectData|}}
@@ -11,11 +11,11 @@
                 {{/each}}
             </multi-select>
         </div>
-        <p class="hint">{{localize "ConvenientEffects.ConfigNestedEffectsHint"}}</p>
+        <p class="hint">{{localize "ConvenientEffects.Config.NestedEffectsHint"}}</p>
     </div>
 
     <div class="form-group">
-        <label>{{localize "ConvenientEffects.ConfigSubEffectsLabel"}}</label>
+        <label>{{localize "ConvenientEffects.Config.SubEffectsLabel"}}</label>
         <div class="form-fields">
             <multi-select name="subEffectIds">
                 {{#each subEffectsData as |subEffectData|}}
@@ -26,11 +26,11 @@
                 {{/each}}
             </multi-select>
         </div>
-        <p class="hint">{{localize "ConvenientEffects.ConfigSubEffectsHint"}}</p>
+        <p class="hint">{{localize "ConvenientEffects.Config.SubEffectsHint"}}</p>
     </div>
 
     <div class="form-group">
-        <label>{{localize "ConvenientEffects.ConfigOtherEffectsLabel"}}</label>
+        <label>{{localize "ConvenientEffects.Config.OtherEffectsLabel"}}</label>
         <div class="form-fields">
             <multi-select name="otherEffectIds">
                 {{#each otherEffectsData as |otherEffectData|}}
@@ -41,6 +41,6 @@
                 {{/each}}
             </multi-select>
         </div>
-        <p class="hint">{{localize "ConvenientEffects.ConfigOtherEffectsHint"}}</p>
+        <p class="hint">{{localize "ConvenientEffects.Config.OtherEffectsHint"}}</p>
     </div>
 </section>

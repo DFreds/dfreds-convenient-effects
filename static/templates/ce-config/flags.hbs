@@ -1,6 +1,6 @@
 <section class="tab{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
     <div class="form-group">
-        <label>{{localize "ConvenientEffects.ConfigTemporaryLabel"}}</label>
+        <label>{{localize "ConvenientEffects.Config.TemporaryLabel"}}</label>
         <div class="form-fields">
             <input
                 type="checkbox"
@@ -8,11 +8,11 @@
                 {{checked (isTemporary effect)}}
             />
         </div>
-        <p class="hint">{{localize "ConvenientEffects.ConfigTemporaryHint"}}</p>
+        <p class="hint">{{localize "ConvenientEffects.Config.TemporaryHint"}}</p>
     </div>
 
     <div class="form-group">
-        <label>{{localize "ConvenientEffects.ConfigViewableLabel"}}</label>
+        <label>{{localize "ConvenientEffects.Config.ViewableLabel"}}</label>
         <div class="form-fields">
             <input
                 type="checkbox"
@@ -20,11 +20,11 @@
                 {{checked (isViewable effect)}}
             />
         </div>
-        <p class="hint">{{localize "ConvenientEffects.ConfigViewableHint"}}</p>
+        <p class="hint">{{localize "ConvenientEffects.Config.ViewableHint"}}</p>
     </div>
 
     <div class="form-group">
-        <label>{{localize "ConvenientEffects.ConfigDynamicLabel"}}</label>
+        <label>{{localize "ConvenientEffects.Config.DynamicLabel"}}</label>
         <div class="form-fields">
             <input
                 type="checkbox"
@@ -33,6 +33,6 @@
                 disabled
             />
         </div>
-        <p class="hint">{{localize "ConvenientEffects.ConfigDynamicHint"}}</p>
+        <p class="hint">{{localize "ConvenientEffects.Config.DynamicHint"}}</p>
     </div>
 </section>

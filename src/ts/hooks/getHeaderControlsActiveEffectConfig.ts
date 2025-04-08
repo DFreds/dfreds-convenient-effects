@@ -16,7 +16,7 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
 
                 controlsTyped.push({
                     icon: "fa-solid fa-hand-sparkles",
-                    label: "ConvenientEffects.ConfigLabel",
+                    label: "ConvenientEffects.Config.Title",
                     action: "convenient-effect-config",
                     visible: () => {
                         const parent = configTyped.document.parent;
