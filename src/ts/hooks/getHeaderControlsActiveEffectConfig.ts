@@ -1,6 +1,6 @@
 import { ApplicationHeaderControlsEntry } from "types/foundry/client-esm/applications/_types.js";
 import { Listener } from "./index.ts";
-import { ConvenientEffectConfigV2 } from "../ui/convenient-effect-config.ts";
+import { ConvenientEffectConfigV2 } from "../ui/ce-config/convenient-effect-config.ts";
 import { Flags } from "../utils/flags.ts";
 
 const GetHeaderControlsActiveEffectConfig: Listener = {

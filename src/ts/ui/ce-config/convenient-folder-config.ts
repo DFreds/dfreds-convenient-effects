@@ -2,11 +2,11 @@ import {
     ApplicationConfiguration,
     ApplicationRenderOptions,
 } from "types/foundry/client-esm/applications/_types.js";
-import { Flags } from "../utils/flags.ts";
-import { MODULE_ID } from "../constants.ts";
+import { Flags } from "../../utils/flags.ts";
+import { MODULE_ID } from "../../constants.ts";
 import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
-import { getBaseType } from "../utils/gets.ts";
-import { createConvenientItem } from "../utils/creates.ts";
+import { getBaseType } from "../../utils/gets.ts";
+import { createConvenientItem } from "../../utils/creates.ts";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 

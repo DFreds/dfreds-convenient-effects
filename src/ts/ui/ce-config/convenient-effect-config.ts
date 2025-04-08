@@ -1,11 +1,11 @@
-import { Flags } from "../utils/flags.ts";
-import { findAllEffects } from "../utils/finds.ts";
+import { Flags } from "../../utils/flags.ts";
+import { findAllEffects } from "../../utils/finds.ts";
 import {
     ApplicationConfiguration,
     ApplicationRenderOptions,
     ApplicationTabsConfiguration,
 } from "types/foundry/client-esm/applications/_types.js";
-import { MODULE_ID } from "../constants.ts";
+import { MODULE_ID } from "../../constants.ts";
 import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;

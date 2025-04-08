@@ -7,7 +7,7 @@ import {
     findModuleById,
     findEffectByUuid,
 } from "../../utils/finds.ts";
-import { ConvenientFolderConfig } from "../convenient-folder-config.ts";
+import { ConvenientFolderConfig } from "../ce-config/convenient-folder-config.ts";
 import { Flags } from "../../utils/flags.ts";
 import { StatusEffectsModule } from "../../integrations/status-effect-types.ts";
 import { createConvenientEffect } from "../../utils/creates.ts";
