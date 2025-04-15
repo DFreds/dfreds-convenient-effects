@@ -4,6 +4,8 @@ import {
     ConvenientEffectsOptions,
 } from "./base-convenient-effects-v2.ts";
 
+const { DialogV2 } = foundry.applications.api;
+
 class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectsOptions> = {
         id: "backup-convenient-effects-v2",
@@ -94,15 +96,18 @@ class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         _event: PointerEvent,
         _target: HTMLElement,
     ): Promise<void> {
-        // TODO new dialog
-        return Dialog.confirm({
-            title: game.i18n.localize("ConvenientEffects.ResetSystemEffects"),
-            content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
-            yes: () => {
-                game.dfreds?.effectInterface?.resetSystemInitialization();
+        const proceed = await DialogV2.confirm({
+            window: {
+                title: game.i18n.localize(
+                    "ConvenientEffects.ResetSystemEffects",
+                ),
             },
-            defaultYes: false,
+            content: `<strong>${game.i18n.localize("AreYouSure")}</strong><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
         });
+
+        if (!proceed) return;
+
+        await game.dfreds?.effectInterface?.resetSystemInitialization();
     }
 }
 
