@@ -43,6 +43,7 @@
             "types/convenientEffects",
             "types/foundry",
             "types/libWrapper",
+            "types/statusEffects",
             "types/uiExtender"
         ]
     },

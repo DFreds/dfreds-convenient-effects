@@ -3,7 +3,6 @@ import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
-import { StatusEffectsModule } from "../integrations/status-effect-types.ts";
 
 class HandlebarHelpers {
     register(): void {
