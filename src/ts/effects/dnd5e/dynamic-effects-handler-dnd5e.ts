@@ -47,7 +47,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             await actor.update({
                 "system.attributes.hp.value": 0,
             });
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Dead.name",
                 ),
@@ -58,21 +58,21 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 "ConvenientEffects.Dnd.DivineWord.dead",
             );
         } else if (remainingHp <= 30) {
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Blinded.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Deafened.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Stunned.name",
                 ),
@@ -85,14 +85,14 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_ONE_HOUR;
         } else if (remainingHp <= 40) {
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Blinded.name",
                 ),
                 uuid: actor.uuid,
                 origin,
             });
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Deafened.name",
                 ),
@@ -105,7 +105,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             effect.duration = effect.duration ?? {};
             effect.duration.seconds = SECONDS.IN_TEN_MINUTES;
         } else if (remainingHp <= 50) {
-            await game.dfreds.effectInterface.addEffect({
+            await game.dfreds?.effectInterface?.addEffect({
                 effectName: game.i18n.localize(
                     "ConvenientEffects.Dnd.Deafened.name",
                 ),

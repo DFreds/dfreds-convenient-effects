@@ -10,8 +10,8 @@ async function getNestedEffectSelection(
     const nestedEffectIds = Flags.getNestedEffectIds(effectData) ?? [];
     const nestedEffects = nestedEffectIds
         .map((id) => {
-            return game.dfreds.effectInterface
-                .findEffect({ effectId: id })
+            return game.dfreds?.effectInterface
+                ?.findEffect({ effectId: id })
                 ?.toObject();
         })
         .filter(notEmpty);

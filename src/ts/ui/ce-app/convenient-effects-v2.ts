@@ -76,7 +76,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const effect = game.dfreds.effectInterface.findEffect({
+                    const effect = game.dfreds?.effectInterface?.findEffect({
                         folderId,
                         effectId,
                     });
@@ -104,7 +104,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const effect = game.dfreds.effectInterface.findEffect({
+                    const effect = game.dfreds?.effectInterface?.findEffect({
                         folderId,
                         effectId,
                     });
@@ -123,7 +123,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!effectId) return;
 
-                    await game.dfreds.effectInterface.toggleEffect({
+                    await game.dfreds?.effectInterface?.toggleEffect({
                         effectId,
                         overlay: true,
                         prioritizeTargets: this.#settings.prioritizeTargets,
@@ -193,7 +193,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const original = game.dfreds.effectInterface.findEffect({
+                    const original = game.dfreds?.effectInterface?.findEffect({
                         folderId,
                         effectId,
                     });
@@ -469,7 +469,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!effectId) return;
 
-        await game.dfreds.effectInterface.toggleEffect({
+        await game.dfreds?.effectInterface?.toggleEffect({
             effectId,
             prioritizeTargets: this.#settings.prioritizeTargets,
         });
@@ -802,7 +802,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!folderId || !effectId) return false;
 
-        const effect = game.dfreds.effectInterface.findEffect({
+        const effect = game.dfreds?.effectInterface?.findEffect({
             folderId,
             effectId,
         });
@@ -837,7 +837,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!folderId || !effectId) return;
 
-        const effect = game.dfreds.effectInterface.findEffect({
+        const effect = game.dfreds?.effectInterface?.findEffect({
             folderId,
             effectId,
         });

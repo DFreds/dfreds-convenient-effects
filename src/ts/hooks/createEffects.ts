@@ -11,7 +11,7 @@ const CreateEffects: Listener = {
             if (game.user !== game.users.activeGM) return;
 
             if (BUILD_MODE === "development") {
-                await game.dfreds.effectInterface.resetSystemInitialization({
+                await game.dfreds?.effectInterface?.resetSystemInitialization({
                     confirm: false,
                 });
             }

@@ -6,7 +6,7 @@ const CloseActiveEffectConfig: Listener = {
     listen(): void {
         Hooks.on(
             "closeActiveEffectConfig",
-            (activeEffectConfig: any, _html) => {
+            (activeEffectConfig: any, _html: any) => {
                 const config = activeEffectConfig as ActiveEffectConfig<any>;
                 const effect = config.document as ActiveEffect<any>;
 

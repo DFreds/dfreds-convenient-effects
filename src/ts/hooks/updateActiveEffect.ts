@@ -9,7 +9,7 @@ const UpdateActiveEffect: Listener = {
     listen(): void {
         Hooks.on(
             "updateActiveEffect",
-            (activeEffect: any, _data, _metadata, _userId) => {
+            (activeEffect: any, _data: any, _metadata: any, _userId: any) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
                 const isConvenient =

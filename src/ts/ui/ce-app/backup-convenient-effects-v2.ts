@@ -99,7 +99,7 @@ class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
             title: game.i18n.localize("ConvenientEffects.ResetSystemEffects"),
             content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
             yes: () => {
-                game.dfreds.effectInterface.resetSystemInitialization();
+                game.dfreds?.effectInterface?.resetSystemInitialization();
             },
             defaultYes: false,
         });

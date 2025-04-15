@@ -7,7 +7,7 @@ import { Listener } from "./index.ts";
  */
 const DeleteItem: Listener = {
     listen(): void {
-        Hooks.on("deleteItem", (item: any, _metadata, _userId) => {
+        Hooks.on("deleteItem", (item: any, _metadata: any, _userId: any) => {
             const itemType = item as Item<any>;
 
             if (Flags.isConvenient(itemType)) {

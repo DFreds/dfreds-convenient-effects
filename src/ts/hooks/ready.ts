@@ -1,5 +1,5 @@
 import { Listener } from "./index.ts";
-import { EffectInterface } from "../effect-interface.ts";
+import { EffectInterfaceImpl } from "../effect-interface.ts";
 import { MODULE_ID } from "../constants.ts";
 
 /**
@@ -9,7 +9,7 @@ const Ready: Listener = {
     listen(): void {
         Hooks.once("ready", async () => {
             game.dfreds = game.dfreds || {};
-            game.dfreds.effectInterface = new EffectInterface();
+            game.dfreds.effectInterface = new EffectInterfaceImpl();
             Hooks.callAll(`${MODULE_ID}.createEffects`);
         });
     },

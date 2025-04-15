@@ -11,172 +11,13 @@ import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
 import { Flags } from "./utils/flags.ts";
 import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
-import { ItemSource } from "types/foundry/common/documents/item.js";
 import {
     createConvenientEffect,
     createConvenientItem,
 } from "./utils/creates.ts";
 import Document from "types/foundry/common/abstract/document.js";
 
-interface IFindEffects {
-    /**
-     * If the find should look at the backup items. Defaults to false
-     */
-    backup?: boolean;
-}
-
-interface IFindEffect {
-    /**
-     * The foundry folder (item) ID. If included, it will only search this
-     * folder
-     */
-    folderId?: string | null;
-
-    /**
-     * The foundry effect ID or the CE effect ID
-     */
-    effectId?: string | null;
-
-    /**
-     * The effect name
-     */
-    effectName?: string | null;
-
-    /**
-     * If the find should look at the backup items. Defaults to false
-     */
-    backup?: boolean;
-}
-
-interface IHasEffectApplied {
-    /**
-     * The foundry effect ID or the CE effect ID
-     */
-    effectId?: string;
-
-    /**
-     * The effect name
-     */
-    effectName?: string;
-
-    /**
-     * The UUID of the document
-     */
-    uuid: string;
-}
-
-interface IToggleEffect {
-    /**
-     * The foundry effect ID or the CE effect ID
-     */
-    effectId?: string;
-
-    /**
-     * The effect name
-     */
-    effectName?: string;
-
-    /**
-     * The UUIDs of the documents. Set to an empty array by default
-     */
-    uuids?: string[];
-
-    /**
-     * Applies the effect as an overlay or not. Set to false by default
-     */
-    overlay?: boolean;
-
-    /**
-     * Toggles effects on targets over selected tokens if set to true. Set to
-     * false by default.
-     */
-    prioritizeTargets?: boolean;
-
-    /**
-     * The origin of the effect. If toggling off, it will only remove the effect
-     * if the origin matches.
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-interface IAddEffect {
-    /**
-     * The foundry effect ID or the CE effect ID. If defined, prioritized over
-     * `effectName` and `effectData`.
-     */
-    effectId?: string;
-
-    /**
-     * The name of the effect to add. If defined, prioritized over
-     * `effectData`.
-     */
-    effectName?: string;
-
-    /**
-     * The effect data to add. This is used to apply an effect that is NOT
-     * already defined.
-     */
-    effectData?: PreCreate<ActiveEffectSource>;
-
-    /**
-     * The UUID of the document
-     */
-    uuid: string;
-
-    /**
-     * Applies the effect as an overlay or not. Set to false by default.
-     */
-    overlay?: boolean;
-
-    /**
-     * The origin of the effect
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-interface IRemoveEffect {
-    /**
-     * The foundry effect ID or the CE effect ID to remove. If defined,
-     * prioritized over `effectName`
-     */
-    effectId?: string;
-
-    /**
-     * The name of the effect to remove
-     */
-    effectName?: string;
-
-    /**
-     * The UUID of the document
-     */
-    uuid: string;
-
-    /**
-     * The origin of the effect. If defined, only removes the effect if the
-     * origin matches
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-interface ICreateNewEffects {
-    /**
-     * The ID of the existing folder to add the effects to. If defined,
-     * prioritized over `folder`
-     */
-    existingFolderId?: string;
-
-    /**
-     * The folder to add the effects to
-     */
-    newFolderData?: PreCreate<ItemSource>;
-
-    /**
-     * The effects to create
-     */
-    effectsData: PreCreate<ActiveEffectSource>[];
-}
-
-class EffectInterface {
+class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
 
     constructor() {
@@ -388,10 +229,12 @@ class EffectInterface {
             effectDataToSend.origin = origin;
         }
 
-        return game.dfreds.sockets.emitAddEffect({
-            effectData: effectDataToSend,
-            uuid,
-        });
+        return (
+            game.dfreds?.sockets?.emitAddEffect({
+                effectData: effectDataToSend,
+                uuid,
+            }) ?? []
+        );
     }
 
     /**
@@ -424,7 +267,7 @@ class EffectInterface {
             return;
         }
 
-        return game.dfreds.sockets.emitRemoveEffect({
+        return game.dfreds?.sockets?.emitRemoveEffect({
             effectId:
                 effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
             effectName: effectDataToSend.name,
@@ -533,4 +376,4 @@ class EffectInterface {
     }
 }
 
-export { EffectInterface };
+export { EffectInterfaceImpl };

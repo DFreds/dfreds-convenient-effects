@@ -1,6 +1,3 @@
-import { EffectInterface } from "./effect-interface.ts";
-import { Sockets } from "./sockets/sockets.ts";
-
 declare global {
     namespace globalThis {
         let CONFIG: Config<
@@ -28,7 +25,16 @@ declare global {
             EffectsCanvasGroup
         >;
         let canvas: Canvas;
-        let game: GameDFreds;
+        let game: Game<
+            Actor<null>,
+            Actors<Actor<null>>,
+            ChatMessage,
+            Combat,
+            Item<null>,
+            Macro,
+            Scene,
+            User<Actor<null>>
+        >;
         let ui: FoundryUI<
             ActorDirectory<Actor<null>>,
             ItemDirectory<Item<null>>,
@@ -41,30 +47,6 @@ declare global {
 
     type AnyFunction = (...args: any) => any;
     type AnyAsyncFunction = (...args: any) => Promise<any>;
-
-    type ActiveEffectOrigin =
-        | `Actor.${string}`
-        | `Scene.${string}.Token.${string}.Actor.${string}`
-        | `Compendium.${string}.Actor.${string}`
-        | `Item.${string}`
-        | `Compendium.${string}.Item.${string}`;
-
-    interface GameDFreds
-        extends Game<
-            Actor<null>,
-            Actors<Actor<null>>,
-            ChatMessage,
-            Combat,
-            Item<null>,
-            Macro,
-            Scene,
-            User<Actor<null>>
-        > {
-        dfreds: {
-            effectInterface: EffectInterface;
-            sockets: Sockets;
-        };
-    }
 
     const BUILD_MODE: "development" | "stage" | "production";
 }

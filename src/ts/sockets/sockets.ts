@@ -87,7 +87,7 @@ class Sockets {
         if (subEffectIds && subEffectIds.length > 0) {
             // Apply all sub-effects with the original effect being the origin
             for (const subEffectId of subEffectIds) {
-                await game.dfreds.effectInterface.addEffect({
+                await game.dfreds?.effectInterface?.addEffect({
                     effectId: subEffectId,
                     uuid,
                     origin: createdEffects[0].id as ActiveEffectOrigin,
@@ -99,7 +99,7 @@ class Sockets {
         if (otherEffectIds && otherEffectIds.length > 0) {
             // Apply all other effects with no origin
             for (const otherEffectId of otherEffectIds) {
-                await game.dfreds.effectInterface.addEffect({
+                await game.dfreds?.effectInterface?.addEffect({
                     effectId: otherEffectId,
                     uuid,
                 });

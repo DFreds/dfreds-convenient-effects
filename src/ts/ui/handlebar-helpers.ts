@@ -87,7 +87,7 @@ class HandlebarHelpers {
                 const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
                 const nestedEffects = nestedEffectIds
                     .map((id) => {
-                        return game.dfreds.effectInterface.findEffect({
+                        return game.dfreds?.effectInterface?.findEffect({
                             effectId: id,
                         });
                     })

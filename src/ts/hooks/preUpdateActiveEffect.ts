@@ -13,7 +13,7 @@ const PreUpdateActiveEffect: Listener = {
     listen(): void {
         Hooks.on(
             "preUpdateActiveEffect",
-            (activeEffect: any, data: any, _metadata, _userId) => {
+            (activeEffect: any, data: any, _metadata: any, _userId: any) => {
                 const effect = activeEffect as ActiveEffect<any>;
                 if (
                     Flags.isConvenient(effect) &&
