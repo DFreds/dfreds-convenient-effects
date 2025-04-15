@@ -2,10 +2,7 @@ import {
     ApplicationConfiguration,
     ApplicationRenderOptions,
 } from "types/foundry/client-esm/applications/_types.js";
-import {
-    HandlebarsRenderOptions,
-    HandlebarsTemplatePart,
-} from "types/foundry/client-esm/applications/api/handlebars-application.ts";
+import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
 import { Settings } from "../../settings.ts";
 import { MODULE_ID } from "../../constants.ts";
 import {
@@ -79,33 +76,23 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
         },
     };
 
+    static _entryPartial = `modules/${MODULE_ID}/templates/ce-app/partials/document-partial.hbs`;
+
+    static _folderPartial = `modules/${MODULE_ID}/templates/ce-app/partials/folder-partial.hbs`;
+
     static override PARTS = {
         header: {
             template: `modules/${MODULE_ID}/templates/ce-app/header.hbs`,
         },
         directory: {
             template: `modules/${MODULE_ID}/templates/ce-app/directory.hbs`,
+            templates: [
+                BaseConvenientEffectsV2._entryPartial,
+                BaseConvenientEffectsV2._folderPartial,
+            ],
             scrollable: [""],
         },
     };
-
-    static _entryPartial = `modules/${MODULE_ID}/templates/ce-app/partials/document-partial.hbs`;
-
-    static _folderPartial = `modules/${MODULE_ID}/templates/ce-app/partials/folder-partial.hbs`;
-
-    protected override _configureRenderParts(
-        options: HandlebarsRenderOptions,
-    ): Record<string, HandlebarsTemplatePart> {
-        const parts = super._configureRenderParts(options);
-
-        parts.directory.templates ??= [];
-        parts.directory.templates.push(
-            BaseConvenientEffectsV2._entryPartial,
-            BaseConvenientEffectsV2._folderPartial,
-        );
-
-        return parts;
-    }
 
     _createContextMenus(): void {
         this._createContextMenu(
