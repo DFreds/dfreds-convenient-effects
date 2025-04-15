@@ -17,7 +17,6 @@ class HandlebarHelpers {
         this.#registerConvenientEffectIcons();
     }
 
-    // TODO can this be replaced?
     #registerCanCreateEffects() {
         Handlebars.registerHelper("canCreateEffects", (folder: Item) => {
             return folder.isOwner;

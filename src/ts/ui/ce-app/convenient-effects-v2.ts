@@ -47,12 +47,6 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         },
     };
 
-    override _canCreateEntry(): boolean {
-        // TODO
-        return true;
-        // return game.user.hasPermission("ITEM_CREATE");
-    }
-
     override _canCreateFolder(): boolean {
         const canCreateItems = game.user.hasPermission("ITEM_CREATE");
         const settingEnabled =

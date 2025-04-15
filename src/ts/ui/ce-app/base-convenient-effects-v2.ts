@@ -111,8 +111,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
         );
     }
 
-    abstract _canCreateEntry(): boolean;
-
     abstract _canCreateFolder(): boolean;
 
     abstract _getEntryContextOptions(): ContextMenuEntry[];
@@ -276,7 +274,7 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         Object.assign(context, {
             folderData,
-            canCreateEntry: this._canCreateEntry(),
+            isBackup: this.options.convenientEffects.backup,
             entryPartial: BaseConvenientEffectsV2._entryPartial,
             folderPartial: BaseConvenientEffectsV2._folderPartial,
         });
@@ -478,7 +476,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 if (autoExpandIds.has(folderId ?? "")) {
                     if (query && match) elHtml.classList.add("expanded");
                 } else {
-                    // TODO for backup?
                     elHtml.classList.toggle(
                         "expanded",
                         this.#settings.isFolderExpanded(folderId),

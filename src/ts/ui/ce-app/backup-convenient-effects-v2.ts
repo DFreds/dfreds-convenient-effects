@@ -25,10 +25,6 @@ class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         },
     };
 
-    override _canCreateEntry(): boolean {
-        return false;
-    }
-
     override _canCreateFolder(): boolean {
         return false;
     }

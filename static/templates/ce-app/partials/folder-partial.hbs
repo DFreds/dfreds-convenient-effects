@@ -13,14 +13,16 @@
 
         {{{convenientFolderIcons data.folder}}}
 
-        {{#if @root.canCreateEntry}}
-            <button
-                type="button"
-                class="create-button create-entry icon icon-plus {{ @root.sidebarIcon }}"
-                data-tooltip data-action="createEntry"
-                aria-label="{{ localize "SIDEBAR.Create" type=@root.label }}">
-            </button>
-        {{/if}}
+        {{#unless @root.isBackup}}
+            {{#if (canCreateEffects data.folder)}}
+                <button
+                    type="button"
+                    class="create-button create-entry icon icon-plus {{ @root.sidebarIcon }}"
+                    data-tooltip data-action="createEntry"
+                    aria-label="{{ localize "SIDEBAR.Create" type=@root.label }}">
+                </button>
+            {{/if}}
+        {{/unless}}
     </header>
 
     {{!-- Folder Contents --}}
