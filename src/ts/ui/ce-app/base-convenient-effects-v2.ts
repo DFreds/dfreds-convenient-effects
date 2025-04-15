@@ -526,7 +526,8 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
         autoExpandIds: Set<string>,
         _options: object = {},
     ): void {
-        const nameOnlySearch = true; // TODO
+        // Note: This is from FoundryVTT: we could do a different search
+        const nameOnlySearch = true;
         const entries = findAllEffects({
             backup: this.options.convenientEffects.backup,
         });
@@ -618,8 +619,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     abstract _onDrop(event: DragEvent): Promise<void> | void;
-
-    // TODO probably put in a controller
 }
 
 export { BaseConvenientEffectsV2 };
