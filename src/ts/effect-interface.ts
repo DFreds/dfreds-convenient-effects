@@ -19,9 +19,11 @@ import Document from "types/foundry/common/abstract/document.js";
 
 class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
+    #sockets: Sockets;
 
-    constructor() {
+    constructor({ sockets }: { sockets: Sockets }) {
         this.#settings = new Settings();
+        this.#sockets = sockets;
     }
 
     /**
@@ -230,7 +232,7 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         return (
-            game.dfreds?.sockets?.emitAddEffect({
+            this.#sockets.emitAddEffect({
                 effectData: effectDataToSend,
                 uuid,
             }) ?? []
@@ -267,7 +269,7 @@ class EffectInterfaceImpl implements EffectInterface {
             return;
         }
 
-        return game.dfreds?.sockets?.emitRemoveEffect({
+        return this.#sockets.emitRemoveEffect({
             effectId:
                 effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
             effectName: effectDataToSend.name,
@@ -376,4 +378,4 @@ class EffectInterfaceImpl implements EffectInterface {
     }
 }
 
-export { EffectInterfaceImpl };
+export { EffectInterfaceImpl as EffectInterface };

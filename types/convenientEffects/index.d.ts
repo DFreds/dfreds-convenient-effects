@@ -6,7 +6,6 @@ declare global {
     interface Game {
         dfreds?: {
             effectInterface?: EffectInterface;
-            sockets?: Sockets;
         };
     }
 
