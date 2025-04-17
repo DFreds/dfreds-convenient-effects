@@ -18,7 +18,6 @@ class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
             top: 75,
             left: 125 + 300 + 18,
         },
-        // renderUpdateKeys: ["name", "img"],
         actions: {
             resetSystemEffects: BackupConvenientEffectsV2.#onResetSystemEffects,
         },

@@ -64,7 +64,6 @@ abstract class BaseConvenientEffectsV2 extends HandlebarsApplicationMixin(
             top: 75,
             left: 125,
         },
-        // renderUpdateKeys: ["name", "img"],
         actions: {
             collapseFolders: BaseConvenientEffectsV2.#onCollapseFolders,
             toggleFolder: BaseConvenientEffectsV2.#onToggleFolder,

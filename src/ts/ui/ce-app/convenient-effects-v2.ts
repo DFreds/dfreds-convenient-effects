@@ -30,7 +30,6 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         window: {
             title: "ConvenientEffects.AppName",
         },
-        // renderUpdateKeys: ["name", "img"],
         actions: {
             activateEntry: ConvenientEffectsV2.#onClickEntry,
             createEntry: ConvenientEffectsV2.#onCreateEntry,
