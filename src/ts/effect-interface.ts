@@ -16,6 +16,7 @@ import {
     createConvenientItem,
 } from "./utils/creates.ts";
 import Document from "types/foundry/common/abstract/document.js";
+import { Sockets } from "./sockets/sockets.ts";
 
 class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;

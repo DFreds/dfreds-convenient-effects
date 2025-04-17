@@ -301,50 +301,9 @@ declare global {
         } = {}): Promise<void>;
     }
 
-    interface AddEffectMessageData {
-        /**
-         * The effect data to add
-         */
-        effectData: PreCreate<ActiveEffectSource>;
-
-        /**
-         * The UUID of the document to add the effect to
-         */
-        uuid: string;
-    }
-
-    interface RemoveEffectMessageData {
-        /**
-         * The ID of the effect to remove
-         */
-        effectId?: string;
-
-        /**
-         * The name of the effect to remove
-         */
-        effectName?: string;
-
-        /**
-         * The UUID of the document to remove the effect from
-         */
-        uuid: string;
-
-        /**
-         * Only removes the effect if the origin matches. If undefined, removes any
-         * effect with the matching ID or name
-         */
-        origin?: ActiveEffectOrigin | null;
-    }
-
-    export interface Sockets {
-        emitAddEffect(message: AddEffectMessageData): Promise<Document[]>;
-
-        emitRemoveEffect(message: RemoveEffectMessageData): Promise<void>;
-    }
-
     namespace Hooks {
-        type HookParamsConvenientEffectsCreateEffects =
-            HookParameters<"dfreds-convenient-effects.createEffects">;
+        type HookParamsConvenientEffectsReady =
+            HookParameters<"dfreds-convenient-effects.ready">;
 
         /**
          * Register a callback handler which should be triggered when a hook is triggered.
@@ -352,7 +311,7 @@ declare global {
          * @param hook The unique name of the hooked event
          * @param fn   The callback function which should be triggered when the hook event occurs
          */
-        function on(...args: HookParamsConvenientEffectsCreateEffects): number;
+        function on(...args: HookParamsConvenientEffectsReady): number;
 
         /**
          * Register a callback handler for an event which is only triggered once the first time the event occurs.
@@ -361,8 +320,6 @@ declare global {
          * @param hook  The unique name of the hooked event
          * @param fn    The callback function which should be triggered when the hook event occurs
          */
-        function once(
-            ...args: HookParamsConvenientEffectsCreateEffects
-        ): number;
+        function once(...args: HookParamsConvenientEffectsReady): number;
     }
 }
