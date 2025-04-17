@@ -6,42 +6,7 @@ import { Flags } from "../utils/flags.ts";
 import Document from "types/foundry/common/abstract/document.js";
 import { MODULE_ID } from "../constants.ts";
 
-interface AddEffectMessageData {
-    /**
-     * The effect data to add
-     */
-    effectData: PreCreate<ActiveEffectSource>;
-
-    /**
-     * The UUID of the document to add the effect to
-     */
-    uuid: string;
-}
-
-interface RemoveEffectMessageData {
-    /**
-     * The ID of the effect to remove
-     */
-    effectId?: string;
-
-    /**
-     * The name of the effect to remove
-     */
-    effectName?: string;
-
-    /**
-     * The UUID of the document to remove the effect from
-     */
-    uuid: string;
-
-    /**
-     * Only removes the effect if the origin matches. If undefined, removes any
-     * effect with the matching ID or name
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-class Sockets {
+class SocketsImpl implements Sockets {
     #socket: SocketlibSocket;
 
     constructor() {
@@ -158,4 +123,4 @@ class Sockets {
     }
 }
 
-export { Sockets };
+export { SocketsImpl as Sockets };
