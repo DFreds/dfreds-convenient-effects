@@ -1,4 +1,5 @@
 import { findEffectByCeId, findFolder } from "../../utils/finds.ts";
+import { getApi } from "../../utils/gets.ts";
 import {
     BaseConvenientEffectsV2,
     ConvenientEffectsOptions,
@@ -106,7 +107,7 @@ class BackupConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!proceed) return;
 
-        await game.dfreds?.effectInterface?.resetSystemInitialization();
+        await getApi().resetSystemInitialization();
     }
 }
 

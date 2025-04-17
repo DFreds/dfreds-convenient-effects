@@ -15,7 +15,7 @@ import {
     ConvenientEffectsOptions,
 } from "./base-convenient-effects-v2.ts";
 import { BackupConvenientEffectsV2 } from "./backup-convenient-effects-v2.ts";
-import { getBaseType } from "src/ts/utils/gets.ts";
+import { getApi, getBaseType } from "src/ts/utils/gets.ts";
 
 class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
     #settings: Settings;
@@ -74,7 +74,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const effect = game.dfreds?.effectInterface?.findEffect({
+                    const effect = getApi().findEffect({
                         folderId,
                         effectId,
                     });
@@ -102,7 +102,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const effect = game.dfreds?.effectInterface?.findEffect({
+                    const effect = getApi().findEffect({
                         folderId,
                         effectId,
                     });
@@ -121,7 +121,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!effectId) return;
 
-                    await game.dfreds?.effectInterface?.toggleEffect({
+                    await getApi().toggleEffect({
                         effectId,
                         overlay: true,
                         prioritizeTargets: this.#settings.prioritizeTargets,
@@ -191,7 +191,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
                     if (!folderId || !effectId) return;
 
-                    const original = game.dfreds?.effectInterface?.findEffect({
+                    const original = getApi().findEffect({
                         folderId,
                         effectId,
                     });
@@ -467,7 +467,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!effectId) return;
 
-        await game.dfreds?.effectInterface?.toggleEffect({
+        await getApi().toggleEffect({
             effectId,
             prioritizeTargets: this.#settings.prioritizeTargets,
         });
@@ -800,7 +800,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!folderId || !effectId) return false;
 
-        const effect = game.dfreds?.effectInterface?.findEffect({
+        const effect = getApi().findEffect({
             folderId,
             effectId,
         });
@@ -835,7 +835,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         if (!folderId || !effectId) return;
 
-        const effect = game.dfreds?.effectInterface?.findEffect({
+        const effect = getApi().findEffect({
             folderId,
             effectId,
         });

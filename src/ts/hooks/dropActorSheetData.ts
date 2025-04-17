@@ -1,3 +1,4 @@
+import { getApi } from "../utils/gets.ts";
 import { Listener } from "./index.ts";
 
 const DropActorSheetData: Listener = {
@@ -9,7 +10,7 @@ const DropActorSheetData: Listener = {
 
                 const actorData = actor as Actor<any>;
 
-                game.dfreds?.effectInterface?.addEffect({
+                getApi().addEffect({
                     effectId: data.effectId,
                     uuid: actorData.uuid,
                 });

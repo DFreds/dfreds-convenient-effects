@@ -1,7 +1,7 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
-
+import { getApi } from "../utils/gets.ts";
 const { DialogV2 } = foundry.applications.api;
 
 async function getNestedEffectSelection(
@@ -10,9 +10,7 @@ async function getNestedEffectSelection(
     const nestedEffectIds = Flags.getNestedEffectIds(effectData) ?? [];
     const nestedEffects = nestedEffectIds
         .map((id) => {
-            return game.dfreds?.effectInterface
-                ?.findEffect({ effectId: id })
-                ?.toObject();
+            return getApi().findEffect({ effectId: id })?.toObject();
         })
         .filter(notEmpty);
 

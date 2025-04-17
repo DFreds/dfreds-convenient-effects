@@ -1,10 +1,10 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { findDocumentByUuid } from "../utils/finds.ts";
 import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
 import Document from "types/foundry/common/abstract/document.js";
 import { MODULE_ID } from "../constants.ts";
+import { getApi } from "../utils/gets.ts";
 
 class SocketsImpl implements Sockets {
     #socket: SocketlibSocket;
@@ -52,7 +52,7 @@ class SocketsImpl implements Sockets {
         if (subEffectIds && subEffectIds.length > 0) {
             // Apply all sub-effects with the original effect being the origin
             for (const subEffectId of subEffectIds) {
-                await game.dfreds?.effectInterface?.addEffect({
+                await getApi().addEffect({
                     effectId: subEffectId,
                     uuid,
                     origin: createdEffects[0].id as ActiveEffectOrigin,
@@ -64,7 +64,7 @@ class SocketsImpl implements Sockets {
         if (otherEffectIds && otherEffectIds.length > 0) {
             // Apply all other effects with no origin
             for (const otherEffectId of otherEffectIds) {
-                await game.dfreds?.effectInterface?.addEffect({
+                await getApi().addEffect({
                     effectId: otherEffectId,
                     uuid,
                 });

@@ -3,6 +3,7 @@ import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
+import { getApi } from "../utils/gets.ts";
 
 class HandlebarHelpers {
     register(): void {
@@ -86,9 +87,7 @@ class HandlebarHelpers {
                 const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
                 const nestedEffects = nestedEffectIds
                     .map((id) => {
-                        return game.dfreds?.effectInterface?.findEffect({
-                            effectId: id,
-                        });
+                        return getApi().findEffect({ effectId: id });
                     })
                     .filter(notEmpty);
 
