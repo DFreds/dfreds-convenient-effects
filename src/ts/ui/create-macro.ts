@@ -15,7 +15,7 @@ async function createMacro(
 ): Promise<void> {
     const name = `${game.i18n.localize("ConvenientEffects.ToggleConvenientEffect")} - ${effect.name}`;
     const id = Flags.getCeEffectId(effect);
-    const command = `game.dfreds.effectInterface.toggleEffect({ effectId: "${id}" })`;
+    const command = `game.modules.get("dfreds-convenient-effects").api.toggleEffect({ effectId: "${id}" })`;
 
     let macro = game.macros.find(
         (macro) => macro.name === name && macro.command === command,
