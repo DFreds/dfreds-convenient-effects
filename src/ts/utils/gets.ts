@@ -1,3 +1,5 @@
+import { MODULE_ID } from "../constants.ts";
+
 /**
  * Gets all UUIDs for selected or targeted tokens
  *
@@ -29,6 +31,10 @@ function getBaseType(): string {
     return types[0] ?? "";
 }
 
+function getApi(): EffectInterface {
+    return (game.modules.get(MODULE_ID) as ConvenientEffectsModule).api;
+}
+
 // function effectsByActorMappings(): {
 //     actor: Actor<any>;
 //     effects: ActiveEffect<Actor<any>>;
@@ -50,4 +56,4 @@ function getBaseType(): string {
 //         });
 // }
 
-export { getActorUuids, getBaseType };
+export { getActorUuids, getBaseType, getApi };
