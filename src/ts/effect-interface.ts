@@ -26,25 +26,12 @@ class EffectInterfaceImpl implements EffectInterface {
         this.#sockets = sockets;
     }
 
-    /**
-     * Finds all defined effects
-     *
-     * @param params - The parameters to find effects
-     * @returns The list of active effects
-     */
     findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<
         Item<null>
     >[] {
         return findAllEffects({ backup });
     }
 
-    /**
-     * Searches through the list of available effects and returns one matching
-     * either the effect ID or effect name.
-     *
-     * @param params - The parameters to find the effect
-     * @returns The active effect or undefined if it can't be found
-     */
     findEffect({
         folderId,
         effectId,
@@ -83,15 +70,6 @@ class EffectInterfaceImpl implements EffectInterface {
         return matchingEffects[0];
     }
 
-    /**
-     * Checks to see if any of the current active effects applied to the document
-     * with the given UUID match the effect ID or name and are a convenient
-     * effect
-     *
-     * @param params - The parameters to determine if the effect is applied
-     * @returns true if the effect is applied to the document and is a convenient
-     * effect, false otherwise
-     */
     hasEffectApplied({
         effectId,
         effectName,
@@ -116,17 +94,6 @@ class EffectInterfaceImpl implements EffectInterface {
         );
     }
 
-    /**
-     * Toggles the effect on the provided document UUIDs as the GM via sockets. If
-     * no document UUIDs are provided, it finds one of these in this priority:
-     *
-     * 1. The targeted tokens (if prioritize targets is enabled)
-     * 2. The currently selected tokens on the canvas
-     * 3. The user configured character
-     *
-     * @param params - the parameters for toggling an effect
-     * @returns A promise that resolves when all effects are added
-     */
     async toggleEffect({
         effectId,
         effectName,
@@ -189,13 +156,6 @@ class EffectInterfaceImpl implements EffectInterface {
         }
     }
 
-    /**
-     * Adds an effect matching the given params to the document of the given UUID.
-     * The effect adding is sent via a socket.
-     *
-     * @param params - the parameters for adding an effect
-     * @returns A promise that resolves when the effect is sent via the socket
-     */
     async addEffect({
         effectId,
         effectName,
@@ -239,14 +199,6 @@ class EffectInterfaceImpl implements EffectInterface {
         );
     }
 
-    /**
-     * Removes an effect matching the given params from a document of the given
-     * UUID. The effect removal is sent via a socket.
-     *
-     * @param params - the parameters for removing an effect
-     * @returns A promise that resolves when the removal request is sent via the
-     * socket
-     */
     async removeEffect({
         effectId,
         effectName,
@@ -278,13 +230,6 @@ class EffectInterfaceImpl implements EffectInterface {
         });
     }
 
-    /**
-     * Creates effects on either an existing folder with `folderId` or on a new
-     * folder using the data provided by `folder`.
-     *
-     * @param params - the parameters for creating effects
-     * @returns A promise that resolves when the effect creation is complete
-     */
     async createNewEffects({
         existingFolderId,
         newFolderData,
@@ -327,12 +272,6 @@ class EffectInterfaceImpl implements EffectInterface {
         }
     }
 
-    /**
-     * Completely resets the world, re-initializing all effects and re-running
-     * migrations after the forced reload.
-     *
-     * @returns A promise that resolves when the reset is complete
-     */
     async resetSystemInitialization({
         confirm = true,
     }: {
