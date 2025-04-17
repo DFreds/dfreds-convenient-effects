@@ -1,6 +1,5 @@
 import { CloseActiveEffectConfig } from "./closeActiveEffectConfig.ts";
 import { CreateActiveEffect } from "./createActiveEffect.ts";
-import { CreateEffects } from "./createEffects.ts";
 import { CreateItem } from "./createItem.ts";
 import { DeleteActiveEffect } from "./deleteActiveEffect.ts";
 import { DeleteItem } from "./deleteItem.ts";
@@ -29,7 +28,6 @@ const HooksCE = {
             Setup,
             Ready,
             SocketlibReady,
-            CreateEffects,
             CreateItem,
             UpdateItem,
             DeleteItem,
