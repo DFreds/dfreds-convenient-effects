@@ -3,8 +3,18 @@ import Document from "types/foundry/common/abstract/document.js";
 export {};
 
 declare global {
+    interface ConvenientEffectsModule extends Module {
+        api: EffectInterface;
+    }
+
     interface Game {
+        /**
+         * @deprecated Use `game.modules.get(MODULE_ID)` instead
+         */
         dfreds?: {
+            /**
+             * @deprecated Use `game.modules.get(MODULE_ID).api` instead
+             */
             effectInterface?: EffectInterface;
         };
     }
