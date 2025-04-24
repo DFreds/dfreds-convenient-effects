@@ -15,7 +15,7 @@ import {
     ConvenientEffectsOptions,
 } from "./base-convenient-effects-v2.ts";
 import { BackupConvenientEffectsV2 } from "./backup-convenient-effects-v2.ts";
-import { getApi, getBaseType } from "src/ts/utils/gets.ts";
+import { getApi, getItemType } from "src/ts/utils/gets.ts";
 
 class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
     #settings: Settings;
@@ -528,7 +528,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
         const folderConfig = new ConvenientFolderConfig({
             document: new Item.implementation({
                 name: game.i18n.localize("SIDEBAR.ACTIONS.CREATE.Folder"),
-                type: getBaseType(),
+                type: getItemType(),
             }),
         });
 

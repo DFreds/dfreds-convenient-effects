@@ -1,7 +1,7 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 import { error, log } from "../logger.ts";
-import { getBaseType } from "../utils/gets.ts";
+import { getApi, getItemType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
 import { Flags } from "../utils/flags.ts";
 
@@ -47,7 +47,7 @@ abstract class EffectDefinition {
                     createConvenientItem({
                         item: {
                             name: itemEffect.itemData.name,
-                            type: getBaseType(),
+                            type: getItemType(),
                         },
                         isBackup: backup,
                     }),

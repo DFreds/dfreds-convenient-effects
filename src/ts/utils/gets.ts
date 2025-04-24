@@ -26,9 +26,10 @@ function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
     }
 }
 
-function getBaseType(): string {
+function getItemType(): string {
     const types = Object.keys(CONFIG.Item.typeLabels);
-    return types[0] ?? "";
+    // Use the last type in the list because the first is usually "base" and that can be problematic
+    return types[types.length - 1] ?? "";
 }
 
 function getApi(): EffectInterface {
@@ -56,4 +57,4 @@ function getApi(): EffectInterface {
 //         });
 // }
 
-export { getActorUuids, getBaseType, getApi };
+export { getActorUuids, getItemType, getApi };

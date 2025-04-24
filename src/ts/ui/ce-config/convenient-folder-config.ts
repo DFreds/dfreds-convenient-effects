@@ -5,7 +5,7 @@ import {
 import { Flags } from "../../utils/flags.ts";
 import { MODULE_ID } from "../../constants.ts";
 import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
-import { getBaseType } from "../../utils/gets.ts";
+import { getItemType } from "../../utils/gets.ts";
 import { createConvenientItem } from "../../utils/creates.ts";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -186,7 +186,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
                             name: game.i18n.localize(
                                 "SIDEBAR.ACTIONS.CREATE.Folder",
                             ),
-                            type: getBaseType(),
+                            type: getItemType(),
                         },
                     }),
                     submitData,
