@@ -56,7 +56,7 @@ abstract class EffectDefinition {
     }): Promise<void> {
         const effectPromises = this.initialItemEffects.map(
             async (itemEffect) => {
-                const item = await Item.create(
+                const item = await Item.implementation.create(
                     createConvenientItem({
                         item: {
                             name: itemEffect.itemData.name,

@@ -16,6 +16,7 @@ import {
 } from "./base-convenient-effects-v2.ts";
 import { BackupConvenientEffectsV2 } from "./backup-convenient-effects-v2.ts";
 import { getApi, getItemType } from "src/ts/utils/gets.ts";
+import { error } from "src/ts/logger.ts";
 
 class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
     #settings: Settings;
@@ -509,8 +510,12 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
             newEffect,
         ]);
 
-        // todo force: true when this is app v2 type
-        (effects[0] as ActiveEffect<Item<null>>).sheet.render(true);
+        if (effects[0]) {
+            // todo force: true when this is app v2 type
+            (effects[0] as ActiveEffect<Item<null>>).sheet.render(true);
+        } else {
+            error("Failed to create effect");
+        }
     }
 
     static async #onCreateFolder(...args: any[]): Promise<void> {
