@@ -527,7 +527,7 @@ class ConvenientEffectsV2 extends BaseConvenientEffectsV2 {
 
         const folderConfig = new ConvenientFolderConfig({
             document: new Item.implementation({
-                name: game.i18n.localize("FOLDER.Create"),
+                name: game.i18n.localize("SIDEBAR.ACTIONS.CREATE.Folder"),
                 type: getBaseType(),
             }),
         });

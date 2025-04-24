@@ -56,7 +56,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
     override get title(): string {
         return this.document?._id
             ? `${game.i18n.localize("FOLDER.Update")}: ${this.document.name}`
-            : game.i18n.localize("FOLDER.Create");
+            : game.i18n.localize("SIDEBAR.ACTIONS.CREATE.Folder");
     }
 
     get document(): Item<any> {
@@ -123,7 +123,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
                     icon: "fa-solid fa-floppy-disk",
                     label: this.document?._id
                         ? "FOLDER.Update"
-                        : "FOLDER.Create",
+                        : "SIDEBAR.ACTIONS.CREATE.Folder",
                 },
             ],
         });
@@ -183,7 +183,9 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
                 foundry.utils.mergeObject(
                     createConvenientItem({
                         item: {
-                            name: game.i18n.localize("FOLDER.Create"),
+                            name: game.i18n.localize(
+                                "SIDEBAR.ACTIONS.CREATE.Folder",
+                            ),
                             type: getBaseType(),
                         },
                     }),
