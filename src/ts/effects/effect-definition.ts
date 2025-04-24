@@ -15,7 +15,20 @@ abstract class EffectDefinition {
     }
 
     async initialize(): Promise<void> {
-        if (BUILD_MODE === "development" || !this.settings.hasInitialized) {
+        if (BUILD_MODE === "development") {
+            log(
+                `Debug mode is enabled, deleting any effects for ${this.systemId} and clearing migrations`,
+            );
+
+            await getApi().resetSystemInitialization({
+                confirm: false,
+            });
+
+            await this.settings.setHasInitialized(false);
+            await this.settings.clearRanMigrations();
+        }
+
+        if (!this.settings.hasInitialized) {
             ui.notifications.info(
                 game.i18n.localize("ConvenientEffects.Initializing"),
             );
