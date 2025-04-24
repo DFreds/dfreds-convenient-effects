@@ -84,11 +84,16 @@ abstract class EffectDefinition {
                     `Running version ${migration.key} migration for ${this.systemId}`,
                 );
 
-                await migration.func();
-
-                // Save each successful migration so that if something fails
-                // before the end, it picks up at the right spot
-                await this.settings.addRanMigration(migration.key);
+                const success = await migration.func();
+                if (success) {
+                    // Save each successful migration so that if something fails
+                    // before the end, it picks up at the right spot
+                    await this.settings.addRanMigration(migration.key);
+                } else {
+                    error(
+                        `Failed to run migration ${migration.key} for ${this.systemId}`,
+                    );
+                }
             }
         } catch (e: any) {
             error(`Something went wrong while running migrations: ${e}`);
@@ -127,7 +132,7 @@ type MigrationType = {
     /**
      * The migration function
      */
-    func: AnyAsyncFunction;
+    func: AsyncBooleanFunction;
 };
 
 export { EffectDefinition };

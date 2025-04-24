@@ -46,7 +46,7 @@ declare global {
     }
 
     type AnyFunction = (...args: any) => any;
-    type AnyAsyncFunction = (...args: any) => Promise<any>;
+    type AsyncBooleanFunction = (...args: any) => Promise<boolean>;
 
     const BUILD_MODE: "development" | "stage" | "production";
 }
