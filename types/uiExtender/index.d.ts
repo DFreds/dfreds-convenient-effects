@@ -1,3 +1,5 @@
+import { ApplicationV2 } from "types/foundry/client-esm/applications/_types.js";
+
 export {};
 
 declare global {
@@ -16,6 +18,27 @@ declare global {
          * @param input The HUD button input
          */
         registerHudButton(input: HudButtonInput): void;
+
+        /**
+         * Register a directory
+         * @param input The directory input
+         */
+        registerDirectory(input: DirectoryInput): void;
+
+        /**
+         * Get the scene controls. Meant for internal use only.
+         */
+        get _sceneControls(): SceneControlInput[];
+
+        /**
+         * Get the HUD buttons. Meant for internal use only.
+         */
+        get _hudButtons(): HudButtonInput[];
+
+        /**
+         * Get the directories. Meant for internal use only.
+         */
+        get _directories(): DirectoryInput[];
     }
 
     export interface SceneControlInput {
@@ -53,7 +76,7 @@ declare global {
     }
 
     export interface SceneControlToolInput {
-        /** The name of the tool */
+        /** The name of the tool. This should be camelCase for maximum compatibility. */
         name: string;
         /** The order of the tool */
         order?: number;
@@ -168,6 +191,47 @@ declare global {
             html: JQuery,
             data: object,
         ) => void;
+    }
+
+    export interface DirectoryInput {
+        /**
+         * The ID of the module registering
+         */
+        moduleId: string;
+
+        /**
+         * The ID of the directory
+         */
+        id: string;
+
+        /**
+         * The tooltip of the directory
+         */
+        tooltip?: string;
+
+        /**
+         * The icon of the directory
+         */
+        icon?: string;
+
+        /**
+         * The document name. If provided, it will take precedence over the icon
+         * and tooltip. Otherwise, the document name will be used to find the
+         * pre-configured sidebar icon and tooltip that it expects to exist on
+         * CONFIG[documentName].
+         */
+        documentName?: string;
+
+        /**
+         * The order of the directory. If not provided, the directory will be
+         * added to the end of the sidebar.
+         */
+        order?: number;
+
+        /**
+         * The application of the directory
+         */
+        applicationClass: new (...args: any[]) => AbstractSidebarTab;
     }
 
     namespace Hooks {
