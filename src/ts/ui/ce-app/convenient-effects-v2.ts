@@ -466,25 +466,27 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         options: ApplicationRenderOptions,
     ): void {
         super._onRender(context, options);
+
+        // Search
         if (options.parts?.includes("header")) {
             // @ts-expect-error not typed
             new foundry.applications.ux.SearchFilter({
                 inputSelector: "search input",
                 contentSelector: ".directory-list",
                 callback: this._onSearchFilter.bind(this),
-                initial:
-                    (
-                        this.element.querySelector(
-                            "search input",
-                        ) as HTMLInputElement
-                    )?.value ?? "",
+                initial: (
+                    this.element.querySelector(
+                        "search input",
+                    ) as HTMLInputElement
+                ).value,
             }).bind(this.element);
         }
 
+        // Drag-drop
         if (options.parts?.includes("directory")) {
             // @ts-expect-error not typed
             new foundry.applications.ux.DragDrop.implementation({
-                dragSelector: ".directory-item.entry",
+                dragSelector: ".directory-item",
                 dropSelector: ".directory-list",
                 permissions: {
                     dragstart: this._canDragStart.bind(this),
@@ -496,8 +498,22 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     drop: this._onDrop.bind(this),
                 },
             }).bind(this.element);
+
+            this.element
+                .querySelectorAll(".directory-item.folder")
+                .forEach((folder) => {
+                    folder.addEventListener(
+                        "dragenter",
+                        this._onDragHighlight.bind(this) as EventListener,
+                    );
+                    folder.addEventListener(
+                        "dragleave",
+                        this._onDragHighlight.bind(this) as EventListener,
+                    );
+                });
         }
 
+        // Toggle buttons
         if (options.parts?.includes("header")) {
             const showHiddenEffectsButton = this.element.querySelector(
                 "[data-action='toggleHiddenEffects']",
@@ -534,6 +550,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             }
         }
 
+        // Expand folders
         if (options.parts?.includes("directory")) {
             this.#settings.expandedFolders.forEach((folderId) => {
                 const folderHtml = this.element.querySelector(
@@ -543,19 +560,6 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     folderHtml.classList.add("expanded");
                 }
             });
-
-            this.element
-                .querySelectorAll(".directory-item.folder")
-                .forEach((folder) => {
-                    folder.addEventListener(
-                        "dragenter",
-                        this._onDragHighlight.bind(this) as EventListener,
-                    );
-                    folder.addEventListener(
-                        "dragleave",
-                        this._onDragHighlight.bind(this) as EventListener,
-                    );
-                });
         }
     }
 
