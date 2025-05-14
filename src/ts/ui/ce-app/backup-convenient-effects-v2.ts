@@ -42,8 +42,8 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
 ) {
     #settings: Settings;
 
-    constructor() {
-        super();
+    constructor(options?: DeepPartial<ConvenientEffectsOptions>) {
+        super(options);
         this.#settings = new Settings();
     }
 

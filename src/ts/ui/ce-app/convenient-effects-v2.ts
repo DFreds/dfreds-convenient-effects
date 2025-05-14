@@ -48,16 +48,14 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 ) {
     #settings: Settings;
 
-    constructor() {
-        super();
+    constructor(options?: DeepPartial<ConvenientEffectsOptions>) {
+        super(options);
         this.#settings = new Settings();
     }
 
     static override tabName: string = "convenientEffects";
 
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectsOptions> = {
-        id: "convenient-effects-v2",
-        tag: "section",
         classes: ["directory", "flexcol"],
         window: {
             title: "ConvenientEffects.AppName",
