@@ -27,9 +27,10 @@
 
     {{#if isBackup}}
         <search>
-            <button type="button" class="inline-control ce-inline-control">
-                <i class="fa-solid fa-magnifying-glass" inert></i>
-            </button>
+            <button
+                type="button"
+                class="inline-control ce-inline-control icon fa-solid fa-magnifying-glass"
+            ></button>
 
             {{! Search Input }}
             <input
@@ -43,13 +44,11 @@
             {{! Reset System Effects }}
             <button
                 type="button"
-                class="inline-control collapse-all"
+                class="inline-control collapse-all icon fa-solid fa-arrow-rotate-left"
                 data-action="resetSystemEffects"
                 data-tooltip
                 aria-label="{{localize 'ConvenientEffects.ResetSystemEffects'}}"
-            >
-                <i class="fa-solid fa-arrow-rotate-left" inert></i>
-            </button>
+            ></button>
         </search>
     {{else}}
         {{! Search & Sort }}
@@ -57,24 +56,20 @@
             {{! Show Hidden Effects }}
             <button
                 type="button"
-                class="inline-control ce-inline-control"
+                class="inline-control ce-inline-control icon fa-solid fa-eye"
                 data-action="toggleHiddenEffects"
                 data-tooltip
                 aria-label="{{localize 'ConvenientEffects.ShowHiddenEffects'}}"
-            >
-                <i class="fa-solid fa-eye" inert></i>
-            </button>
+            ></button>
 
             {{! Show Nested Effects }}
             <button
                 type="button"
-                class="inline-control ce-inline-control"
+                class="inline-control ce-inline-control icon fa-solid fa-tree"
                 data-action="toggleNestedEffects"
                 data-tooltip
                 aria-label="{{localize 'ConvenientEffects.ShowNestedEffects'}}"
-            >
-                <i class="fa-solid fa-tree" inert></i>
-            </button>
+            ></button>
 
             {{! Search Input }}
             <input
@@ -88,24 +83,20 @@
             {{! Collapse All }}
             <button
                 type="button"
-                class="inline-control collapse-all"
+                class="inline-control collapse-all icon fa-solid fa-folder-tree"
                 data-action="collapseFolders"
                 data-tooltip
                 aria-label="{{localize 'FOLDER.Collapse'}}"
-            >
-                <i class="fa-solid fa-folder-tree" inert></i>
-            </button>
+            ></button>
 
             {{! Prioritize Targets }}
             <button
                 type="button"
-                class="inline-control ce-inline-control"
+                class="inline-control ce-inline-control icon fa-solid fa-bullseye"
                 data-action="togglePrioritizeTargets"
                 data-tooltip
                 aria-label="{{localize 'ConvenientEffects.PrioritizeTargets'}}"
-            >
-                <i class="fa-solid fa-bullseye" inert></i>
-            </button>
+            ></button>
         </search>
     {{/if}}
 </header>
