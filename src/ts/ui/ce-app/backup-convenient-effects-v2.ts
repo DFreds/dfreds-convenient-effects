@@ -66,8 +66,6 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         position: {
             width: 300,
             height: 600,
-            top: 75,
-            left: 125 + 300 + 18,
         },
         actions: {
             collapseFolders: BackupConvenientEffectsV2.#onCollapseFolders,
