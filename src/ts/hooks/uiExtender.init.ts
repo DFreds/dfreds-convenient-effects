@@ -8,7 +8,7 @@ const UiExtenderInit: Listener = {
             const uiExtender = uiExt as UiExtender;
             uiExtender.registerDirectory({
                 moduleId: MODULE_ID,
-                id: "convenientEffects",
+                id: ConvenientEffectsV2.tabName,
                 tooltip: "ConvenientEffects.AppName",
                 icon: "fas fa-hand-sparkles",
                 order: 5,
