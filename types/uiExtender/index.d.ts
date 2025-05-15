@@ -232,6 +232,13 @@ declare global {
          * The application of the directory
          */
         applicationClass: new (...args: any[]) => AbstractSidebarTab;
+
+        /**
+         * The predicate to determine if the directory should be added
+         *
+         * @returns true if the directory should be added, false otherwise
+         */
+        predicate?: () => boolean;
     }
 
     namespace Hooks {
