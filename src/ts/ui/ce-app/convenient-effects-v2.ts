@@ -1090,7 +1090,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const isHiddenEffects = this.#settings.showHiddenEffects;
         buttonHtml.setAttribute("aria-pressed", isHiddenEffects.toString());
 
-        this.render({ parts: ["directory"] });
+        this.render({ parts: ["header", "directory"] });
     }
 
     static async #onToggleNestedEffects(...args: any[]): Promise<void> {
@@ -1111,7 +1111,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const isNestedEffects = this.#settings.showNestedEffects;
         buttonHtml.setAttribute("aria-pressed", isNestedEffects.toString());
 
-        this.render({ parts: ["directory"] });
+        this.render({ parts: ["header", "directory"] });
     }
 
     static async #onTogglePrioritizeTargets(...args: any[]): Promise<void> {
@@ -1132,7 +1132,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const isPrioritizeTargets = this.#settings.prioritizeTargets;
         buttonHtml.setAttribute("aria-pressed", isPrioritizeTargets.toString());
 
-        this.render({ parts: ["directory"] });
+        this.render({ parts: ["header", "directory"] });
     }
 
     static async #onViewBackups(...args: any[]): Promise<void> {
