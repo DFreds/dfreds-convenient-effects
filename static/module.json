@@ -22,7 +22,10 @@
             },
             {
                 "id": "lib-dfreds-ui-extender",
-                "type": "module"
+                "type": "module",
+                "compatibility": {
+                    "verified": "2.1.1"
+                }
             }
         ]
     },
