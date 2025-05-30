@@ -108,11 +108,11 @@ declare global {
          * The function to call when the menu item is clicked. Receives the HTML element
          * of the entry that this context menu is for.
          */
-        callback: (target: JQuery) => void;
+        callback: (target: HTMLElement) => void | Promise<void>;
         /**
          * A function to call to determine if this item appears in the menu.
          * Receives the HTML element of the entry that this context menu is for.
          */
-        condition?: (target: JQuery) => boolean;
+        condition?: (target: HTMLElement) => boolean | Promise<boolean>;
     }
 }

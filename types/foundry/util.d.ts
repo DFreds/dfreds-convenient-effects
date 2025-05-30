@@ -42,12 +42,8 @@ declare global {
         ? U
         : never;
 
-    type TypeParamOf<T> = T extends TypeWithGeneric<infer U> ? U : never;
-
     type ValueOf<T extends object> = T[keyof T];
 
     /** A JSON-compatible value, plus `undefined` */
     type JSONValue = string | number | boolean | object | null | undefined;
 }
-
-type TypeWithGeneric<T> = T[];

@@ -1,6 +1,8 @@
-import { id as MODULE_ID } from "@static/module.json";
+import { MODULE_ID } from "../constants.ts";
+import { Mapping } from "../effects/mapping.ts";
+import { error } from "../logger.ts";
 import { Listener } from "./index.ts";
-import { EffectInterface } from "../effect-interface.ts";
+import { renderApp } from "../ui/render-app-if-open.ts";
 
 /**
  * Handle creating the Item that will hold the effects
@@ -8,9 +10,21 @@ import { EffectInterface } from "../effect-interface.ts";
 const Ready: Listener = {
     listen(): void {
         Hooks.once("ready", async () => {
-            game.dfreds = game.dfreds || {};
-            game.dfreds.effectInterface = new EffectInterface();
-            Hooks.callAll(`${MODULE_ID}.createEffects`);
+            if (game.user !== game.users.activeGM) return;
+
+            const mapping = new Mapping();
+            const systemDefinition = mapping.findSystemDefinitionForSystemId();
+
+            try {
+                await systemDefinition?.effectDefinition?.initialize();
+                Hooks.callAll(`${MODULE_ID}.ready`);
+                renderApp();
+            } catch (e: any) {
+                ui.notifications.error(
+                    `Something went wrong while initializing convenient effects`,
+                );
+                error(`Error while initializing convenient effects: ${e}`);
+            }
         });
     },
 };

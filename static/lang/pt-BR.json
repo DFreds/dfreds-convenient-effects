@@ -3,23 +3,25 @@
         "AppName": "Efeitos Convenientes",
         "BackupAppName": "Fazer backup de Efeitos Convenientes",
 
-        "SettingPlayer": "Jogador",
-        "SettingTrustedPlayer": "Jogador Confiável",
-        "SettingAssistantGM": "MJ Assistente",
-        "SettingGameMaster": "Mestre de Jogo",
-        "SettingNone": "Nenhum",
+        "Setting": {
+            "Player": "Jogador",
+            "TrustedPlayer": "Jogador Confiável",
+            "AssistantGM": "MJ Assistente",
+            "GameMaster": "Mestre de Jogo",
+            "None": "Nenhum",
 
-        "SettingAppControlsPermissionName": "Permissão dos Controles do Aplicativo",
-        "SettingAppControlsPermissionHint": "Isto define o nível mínimo de permissão para ver e aplicar Efeitos Convenientes através do aplicativo por meio do botão em controles de token. Definir isto como Nenhum desabilitará o botão completamente.",
+            "AppControlsPermissionName": "Permissão dos Controles do Aplicativo",
+            "AppControlsPermissionHint": "Isto define o nível mínimo de permissão para ver e aplicar Efeitos Convenientes através do aplicativo por meio do botão em controles de token. Definir isto como Nenhum desabilitará o botão completamente.",
 
-        "SettingCreateFoldersPermissionName": "Criar Permissão de Pastas",
-        "SettingCreateFoldersPermissionHint": "Isto define o nível mínimo de permissão para criar novas pastas de efeitos no aplicativo Efeitos Convenientes. Definir isto como Nenhum(a) desabilitará o botão de criação completamente. Note que um usuário também deve ter a permissão nativa do Foundry para criar itens para que isto funcione.",
+            "CreateFoldersPermissionName": "Criar Permissão de Pastas",
+            "CreateFoldersPermissionHint": "Isto define o nível mínimo de permissão para criar novas pastas de efeitos no aplicativo Efeitos Convenientes. Definir isto como Nenhum(a) desabilitará o botão de criação completamente. Note que um usuário também deve ter a permissão nativa do Foundry para criar itens para que isto funcione."
+        },
 
-        "KeybindingToggleAppName": "Alternar Aplicativo Efeitos Convenientes",
-        "KeybindingToggleAppHint": "Isso abrirá o aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento.",
+        "Keybinding": {
+            "ToggleAppName": "Alternar Aplicativo Efeitos Convenientes",
+            "ToggleAppHint": "Isso abrirá o aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento."
+        },
 
-        "CreateFolder": "Criar Pasta",
-        "CreateEffect": "Criar Efeito",
         "ViewBackups": "Visualizar Backups",
         "ShowFolder": "Mostrar Pasta",
         "HideFolder": "Esconder Pasta",
@@ -35,23 +37,30 @@
         "ResetSystemEffects": "Redefinir Efeitos do Sistema",
         "ResetSystemEffectsWarning": "Isso redefinirá completamente os efeitos integrados, desfazendo quaisquer criações, exclusões ou edições personalizadas que foram feitas.",
 
-        "ConfigLabel": "Conveniente",
-        "ConfigFoundryEffectIdLabel": "ID do Efeito do Foundry",
-        "ConfigFoundryEffectIdHint": "Este é o ID do efeito do Foundry, e pode ser usado para localizar, adicionar ou remover um efeito.",
-        "ConfigConvenientEffectIdLabel": "ID do Efeito Conveniente",
-        "ConfigConvenientEffectIdHint": "Este é o ID do Efeito Conveniente, e pode ser usado para localizar, adicionar ou remover um efeito.",
-        "ConfigTemporaryLabel": "Temporário",
-        "ConfigTemporaryHint": "Se marcado, este efeito será sempre rotulado como um efeito temporário, mesmo que não tenha duração ou status.",
-        "ConfigViewableLabel": "Visível",
-        "ConfigViewableHint": "Se marcado, esse efeito estará sempre visível no aplicativo.",
-        "ConfigDynamicLabel": "Dinâmico",
-        "ConfigDynamicHint": "Se marcado, este efeito terá efeitos dinâmicos aplicados com base nos dados do ator. Isso não pode ser alterado e é usado para casos de efeitos muito específicos.",
-        "ConfigNestedEffectsLabel": "Efeitos Aninhados",
-        "ConfigNestedEffectsHint": "Os efeitos aninhados que serão mostrados como opções quando o efeito for adicionado ou removido.",
-        "ConfigSubEffectsLabel": "Subefeitos",
-        "ConfigSubEffectsHint": "Os subefeitos que serão aplicados em relação a este efeito. Se este efeito for removido, todos os subefeitos serão removidos automaticamente também.",
-        "ConfigOtherEffectsLabel": "Outros Efeitos",
-        "ConfigOtherEffectsHint": "Os outros efeitos que serão aplicados em relação a este efeito. Se este efeito for removido, os outros efeitos não serão removidos automaticamente.",
+        "Config": {
+            "Title": "Configuração de Efeitos Convenientes",
+            "FoundryEffectIdLabel": "ID do Efeito do Foundry",
+            "FoundryEffectIdHint": "Este é o ID do efeito do Foundry, e pode ser usado para localizar, adicionar ou remover um efeito.",
+            "ConvenientEffectIdLabel": "ID do Efeito Conveniente",
+            "ConvenientEffectIdHint": "Este é o ID do Efeito Conveniente, e pode ser usado para localizar, adicionar ou remover um efeito.",
+            "TemporaryLabel": "Temporário",
+            "TemporaryHint": "Se marcado, este efeito será sempre rotulado como um efeito temporário, mesmo que não tenha duração ou status.",
+            "ViewableLabel": "Visível",
+            "ViewableHint": "Se marcado, esse efeito estará sempre visível no aplicativo.",
+            "DynamicLabel": "Dinâmico",
+            "DynamicHint": "Se marcado, este efeito terá efeitos dinâmicos aplicados com base nos dados do ator. Isso não pode ser alterado e é usado para casos de efeitos muito específicos.",
+            "NestedEffectsLabel": "Efeitos Aninhados",
+            "NestedEffectsHint": "Os efeitos aninhados que serão mostrados como opções quando o efeito for adicionado ou removido.",
+            "SubEffectsLabel": "Subefeitos",
+            "SubEffectsHint": "Os subefeitos que serão aplicados em relação a este efeito. Se este efeito for removido, todos os subefeitos serão removidos automaticamente também.",
+            "OtherEffectsLabel": "Outros Efeitos",
+            "OtherEffectsHint": "Os outros efeitos que serão aplicados em relação a este efeito. Se este efeito for removido, os outros efeitos não serão removidos automaticamente.",
+
+            "IDsTab": "IDs",
+            "FlagsTab": "Sinalizadores",
+            "DependentEffectsTab": "Efeitos Dependentes"
+        },
+
         "Dnd": {
             "Folders": {
                 "Conditions": "Condições",

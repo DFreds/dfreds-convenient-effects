@@ -1,3 +1,4 @@
+import type { RollParseNode } from "../client-esm/dice/_types.d.mts";
 import type {
     DiceTerm,
     FunctionTerm,
@@ -5,8 +6,6 @@ import type {
     PoolTerm,
     RollTerm,
 } from "../client-esm/dice/terms/module.d.ts";
-
-export {};
 
 declare global {
     /**
@@ -138,22 +137,70 @@ declare global {
         evaluate(options?: EvaluateRollParams): Promise<Rolled<this>>;
 
         /**
+         * Execute the Roll synchronously, replacing dice and evaluating the total result.
+         * @param [options={}]
+         * @param [options.minimize=false]     Minimize the result, obtaining the smallest possible value.
+         * @param [options.maximize=false]     Maximize the result, obtaining the largest possible value.
+         * @param [options.strict=true]        Throw an Error if the Roll contains non-deterministic terms that cannot be
+         *                                     evaluated synchronously. If this is set to false, non-deterministic terms will
+         *                                     be ignored.
+         * @param [options.allowStrings=false] If true, string terms will not cause an error to be thrown during evaluation.
+         * @returns The evaluated Roll instance.
+         */
+        evaluateSync(options?: EvaluateRollParams): Rolled<this>;
+
+        /**
          * Evaluate the roll asynchronously.
-         * A temporary helper method used to migrate behavior from 0.7.x (sync by default) to 0.9.x (async by default).
+         * @param [options]                  Options which inform how evaluation is performed
+         * @param [options.minimize]         Force the result to be minimized
+         * @param [options.maximize]         Force the result to be maximized
+         * @param [options.allowStrings]     If true, string terms will not cause an error to be thrown during
+         *                                   evaluation.
+         * @param [options.allowInteractive] If false, force the use of digital rolls and do not prompt the user to make
+         *                                   manual rolls.
          */
         protected _evaluate({
             minimize,
             maximize,
+            allowStrings,
         }?: EvaluateRollParams): Promise<Rolled<this>>;
 
         /**
-         * Evaluate the roll synchronously.
-         * A temporary helper method used to migrate behavior from 0.7.x (sync by default) to 0.9.x (async by default).
+         * Evaluate an AST asynchronously.
+         * @param node The root node or term.
+         * @param [options]              Options which inform how evaluation is performed
+         * @param [options.minimize]     Force the result to be minimized
+         * @param [options.maximize]     Force the result to be maximized
+         * @param [options.allowStrings] If true, string terms will not cause an error to be thrown during evaluation.
          */
-        protected _evaluateSync({
-            minimize,
-            maximize,
-        }?: EvaluateRollParams): Rolled<this>;
+        protected _evaluateASTAsync(
+            node: RollParseNode | RollTerm,
+            options?: EvaluateRollParams,
+        ): Promise<string | number>;
+
+        /**
+         * Evaluate the roll synchronously.
+         * @param [options]          Options which inform how evaluation is performed
+         * @param [options.minimize] Force the result to be minimized
+         * @param [options.maximize] Force the result to be maximized
+         * @param [options.strict]   Throw an error if encountering a term that cannot be synchronously evaluated.
+         * @param [options.allowStrings] If true, string terms will not cause an error to be thrown during evaluation.
+         */
+        protected _evaluateSync(options?: EvaluateRollSyncParams): Rolled<this>;
+
+        /**
+         * Evaluate an AST synchronously.
+         * @param node                   The root node or term.
+         * @param [options]              Options which inform how evaluation is performed
+         * @param [options.minimize]     Force the result to be minimized
+         * @param [options.maximize]     Force the result to be maximized
+         * @param [options.strict]       Throw an error if encountering a term that cannot be synchronously evaluated.
+         * @param [options.allowStrings] If true, string terms will not cause an error to be thrown during evaluation.
+         */
+        protected _evaluateASTSync(
+            node: RollParseNode | RollTerm,
+            options?: EvaluateRollSyncParams,
+        ): string | number;
 
         /**
          * Safely evaluate the final total result for the Roll using its component terms.
@@ -530,7 +577,10 @@ declare global {
         allowInteractive?: boolean;
     }
 
+    interface EvaluateRollSyncParams extends EvaluateRollParams {
+        strict?: boolean;
+    }
+
     // Empty extended interface that can be expanded by the system without polluting Math itself
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface RollMathProxy extends Math {}
 }

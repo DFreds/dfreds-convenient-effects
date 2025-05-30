@@ -1,687 +1,696 @@
 {
-  "ConvenientEffects": {
-    "AppName": "Effets Pratiques",
-    "BackupAppName": "Restauration Effets Pratiquess",
+    "ConvenientEffects": {
+        "AppName": "Effets Pratiques",
+        "BackupAppName": "Restauration Effets Pratiquess",
 
-    "SettingPlayer": "Joueur",
-    "SettingTrustedPlayer": "Joueur de confiance",
-    "SettingAssistantGM": "Assistant du Maître du Jeu",
-    "SettingGameMaster": "Maître du Jeu",
-    "SettingNone": "Aucun",
+        "Setting": {
+            "Player": "Joueur",
+            "TrustedPlayer": "Joueur de confiance",
+            "AssistantGM": "Assistant du Maître du Jeu",
+            "GameMaster": "Maître du Jeu",
+            "None": "Aucun",
 
-    "SettingAppControlsPermissionName": "Autorisation de contrôle des applications",
-    "SettingAppControlsPermissionHint": "Ceci définit le niveau d'autorisation minimum pour voir et appliquer des effets pratiques via l'application via le bouton sur les contrôles des jetons. La valeur Aucun désactive entièrement le bouton.",
+            "AppControlsPermissionName": "Autorisation de contrôle des applications",
+            "AppControlsPermissionHint": "Ceci définit le niveau d'autorisation minimum pour voir et appliquer des effets pratiques via l'application via le bouton sur les contrôles des jetons. La valeur Aucun désactive entièrement le bouton.",
 
-    "SettingCreateFoldersPermissionName": "Autorisation de créer des dossiers",
-    "SettingCreateFoldersPermissionHint": "Ceci définit le niveau d'autorisation minimum pour créer de nouveaux dossiers d'effets dans l'application Practical Effects. La valeur Aucun désactive entièrement le bouton de création. Notez qu'un utilisateur doit également avoir l'autorisation de créer des éléments dans le cadre de Foundry pour que cela fonctionne. ",
-    
-    "KeybindingToggleAppName": "Basculer l'application d'effets pratiques",
-    "KeybindingToggleAppHint": "Cela ouvrira l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte.",
+            "CreateFoldersPermissionName": "Autorisation de créer des dossiers",
+            "CreateFoldersPermissionHint": "Ceci définit le niveau d'autorisation minimum pour créer de nouveaux dossiers d'effets dans l'application Practical Effects. La valeur Aucun désactive entièrement le bouton de création. Notez qu'un utilisateur doit également avoir l'autorisation de créer des éléments dans le cadre de Foundry pour que cela fonctionne. "
+        },
 
-    "CreateFolder": "Créer un dossier",
-    "CreateEffect": "Créer un effet",
-    "ViewBackups": "Afficher les sauvegardes",
-    "ShowFolder": "Afficher le dossier",
-    "HideFolder": "Masquer le dossier",
-    "ShowHiddenEffects": "Afficher les effets cachés",
-    "ShowNestedEffects": "Afficher les effets imbriqués",
-    "PrioritizeTargets": "Prioriser les cibles",
-    "NewEffect": "Nouvel effet",
-    "EditEffect": "Modifier l'effet",
-    "DeleteEffect": "Supprimer l'effet",
-    "ShowEffect": "Afficher l'effet",
-    "HideEffect": "Masquer l'effet",
-    "ToggleAsOverlay": "Basculer en superposition",
-    "ResetSystemEffects": "Réinitialiser les effets du système",
-    "ResetSystemEffectsWarning": "Cela réinitialisera complètement les effets intégrés, annulant toutes les créations, suppressions ou modifications personnalisées effectuées.",
+        "Keybinding": {
+            "ToggleAppName": "Basculer l'application d'effets pratiques",
+            "ToggleAppHint": "Cela ouvrira l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte."
+        },
 
-    "ConfigLabel": "Convenient",
-    "ConfigFoundryEffectIdLabel": "ID d'effet de fonderie",
-    "ConfigFoundryEffectIdHint": "Il s'agit de l'ID de l'effet de fonderie et peut être utilisé pour rechercher, ajouter ou supprimer un effet.",
-    "ConfigConvenientEffectIdLabel": "ID d'effet pratique",
-    "ConfigConvenientEffectIdHint": "Il s’agit de l’ID d’effet pratique et peut être utilisé pour rechercher, ajouter ou supprimer un effet.",
-    "ConfigTemporaryLabel": "Temporaire",
-    "ConfigTemporaryHint": "Si cette case est cochée, cet effet sera toujours qualifié d'effet temporaire, même s'il n'a pas de durée ni de statut.",
-    "ConfigViewableLabel": "Visible",
-    "ConfigViewableHint": "Si cette case est cochée, cet effet sera toujours affiché dans l'application.",
-    "ConfigDynamicLabel": "Dynamique",
-    "ConfigDynamicHint": "Si cette case est cochée, cet effet aura des effets dynamiques appliqués en fonction des données de l'acteur. ",
-    "ConfigNestedEffectsLabel": "Effets imbriqués",
-    "ConfigNestedEffectsHint": "Les effets imbriqués qui seront affichés sous forme d'options lorsque l'effet est ajouté ou supprimé.",
-    "ConfigSubEffectsLabel": "Sous-effets",
-    "ConfigSubEffectsHint": "Les sous-effets qui seront appliqués en relation avec cet effet. ",
-    "ConfigOtherEffectsLabel": "Autres effets",
-    "ConfigOtherEffectsHint": "Les autres effets qui seront appliqués en relation avec cet effet. ",
-    "Dnd": {
-      "Folders": {
-        "Conditions": "Conditions",
-        "Spells": "Sorts",
-        "ClassFeatures": "Capacités des classes",
-        "Equipment": "Équipement",
-        "Other": "Autre"
-      },
-      "AcidArrow": {
-        "name": "Flèche acide",
-        "description": "Cause 2d4 dégâts d'acide à la fin du prochain tour"
-      },
-      "Aid": {
-        "name": "Aide",
-        "description": "Ajouter aux points de vie actuels et maximum pendant 8 heures"
-      },
-      "AlterSelf": {
-        "name": "Modification d'apparence",
-        "description": "Aucun effet actif et dure 1 heure"
-      },
-      "AntilifeShell": {
-        "name": "Coquille antivie",
-        "description": "Aucun effet actif et dure 1 heure"
-      },
-      "ArcaneHand": {
-        "name": "Main arcanique",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "Bane": {
-        "name": "Fléau",
-        "description": "Soustrayez 1d4 à tous les jets de sauvegarde et d'attaque pendant 1 minute."
-      },
-      "BardicInspiration": {
-        "name": "Inspiration bardique [Barde]",
-        "description": "Ajoutez un dé à un seul jet de caractéristique, d'attaque ou de sauvegarde dans les 10 prochaines minutes."
-      },
-      "BardicInspirationD10": {
-        "name": "Inspiration bardique (d10)",
-        "description": "Pour les bardes du niveau 10 au niveau 14"
-      },
-      "BardicInspirationD12": {
-        "name": "Inspiration bardique (d12)",
-        "description": "Pour les bardes du niveau 15 au niveau 20"
-      },
-      "BardicInspirationD6": {
-        "name": "Inspiration bardique (d6)",
-        "description": "Pour les bardes du niveau 1 au niveau 4"
-      },
-      "BardicInspirationD8": {
-        "name": "Inspiration bardique (d8)",
-        "description": "Pour les bardes du niveau 5 au niveau 9"
-      },
-      "Barkskin": {
-        "name": "Peau d'écorce",
-        "description": "Améliorez la CA à 16 pendant 1 heure"
-      },
-      "BeaconOfHope": {
-        "name": "Lueur d'espoir",
-        "description": "Ajoute un avantage aux jets de sauvegarde de sagesse et contre la mort pendant 1 minute"
-      },
-      "BearsEndurance": {
-        "name": "Endurance de l'ours",
-        "description": "Avantage sur les jets de constitution et 2d6 points de vie temporaires pendant 1 heure"
-      },
-      "BlackTentacles": {
-        "name": "Tentacules noirs",
-        "description": "Appliquer les effets de la condition de entravée pendant 1 minute"
-      },
-      "Bless": {
-        "name": "Bénédiction",
-        "description": "Ajoutez 1d4 à tous les jets de sauvegarde et d'attaque pendant 1 minute"
-      },
-      "Blinded": {
-        "name": "Aveugle",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ inline]"
-      },
-      "BlindingSickness": {
-        "name": "Bouille-crâne",
-        "description": "Désavantage sur les jets de sagesse et les jets de sauvegarde de sagesse pendant 7 jours"
-      },
-      "Blindness": {
-        "name": "Cécité",
-        "description": "Désavantage aux jets d'attaque tout en accordant un avantage à tous ceux qui attaquent pendant 1 minute"
-      },
-      "BlindnessDeafness": {
-        "name": "Cécité/Surdité",
-        "description": "Choisissez entre la cécité ou la surdité"
-      },
-      "Blur": {
-        "name": "Flour",
-        "description": "Accorde un désavantage à tous ceux qui attaquent pendant 1 minute"
-      },
-      "BonusAction": {
-        "name": "Action bonus",
-        "description": "Aucun effet actif et expire au début du tour"
-      },
-      "BullsStrength": {
-        "name": "Force du taureau.",
-        "description": "Avantage sur les contrôles de résistance et double capacité de charge maximale pendant 1 heure"
-      },
-      "BullseyeLantern": {
-        "name": "Lanterne sourde",
-        "description": "Ajoute une lumière de lanterne dans un cône de 18 mètres pendant 6 heures (nécessite ATL)"
-      },
-      "Candle": {
-        "name": "Bougie",
-        "description": "Ajoute la lumière d'une bougie pendant 1 heure (nécessite ATL)"
-      },
-      "CatsGrace": {
-        "name": "Grâce félinet",
-        "description": "Avantage sur les contrôles de dextérité pendant 1 heure"
-      },
-      "ChannelDivinitySacredWeapon": {
-        "name": "Conduit divin : Arme sacré [Paladin - Serment de dévotion]",
-        "description": "Ajoutez un modificateur de charisme (minimum +1) à tous les jets d'attaque avec une arme et émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 minute (nécessite ATL)"
-      },
-      "ChannelDivinityTurnTheUnholy": {
-        "name": "Conduit divin : Renvoi des impies [Paladin - Serment de dévotion]",
-        "description": "Aucun effet actif et dure 1 minute. "
-      },
-      "ChannelDivinityTurnUndead": {
-        "name": "onduit divin : Renvoi des morts-vivants [Clerc]",
-        "description": "Aucun effet actif et dure 1 minute. "
-      },
-      "CharmPerson": {
-        "name": "Charme-personne",
-        "description": "Aucun effet actif et dure 1 heure"
-      },
-      "Charmed": {
-        "name": "Charmé",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD inline]"
-      },
-      "Command": {
-        "name": "Injonction",
-        "description": "Aucun effet actif et dure jusqu'à la fin du prochain tour"
-      },
-      "ComprehendLanguages": {
-        "name": "Compréhension des langues",
-        "description": "Ajoute toutes les langues pendant 1 heure"
-      },
-      "Concentrating": {
-        "name": "Concentré",
-        "description": "Certains sorts nécessitent que vous mainteniez votre concentration afin de garder leur magie active. "
-      },
-      "Contagion": {
-        "name": "Contagion",
-        "description": "Choisissez entre Bouille-crâne, Convulsions, Fièvre répugnante, Mal aveuglant, Mort poisseuse ou Pourriture."
-      },
-      "CoverHalf": {
-        "name": "Couverture (moitié)",
-        "description": "Ajoute 2 à la CA et aux jets de sauvegarde dextérité"
-      },
-      "CoverThreeQuarters": {
-        "name": "Couverture (trois quarts)",
-        "description": "Ajoute 5 à la CA et aux jets de sauvegarde dextérité"
-      },
-      "CoverTotal": {
-        "name": "Couverture (totale)",
-        "description": "Fait échouer automatiquement toutes les attaques"
-      },
-      "Darkvision": {
-        "name": "Vision dans le noir",
-        "description": "Améliorez la vision dans le noir à 60 pieds pendant 8 heures"
-      },
-      "Dead": {
-        "name": "Mort",
-        "description": "Aucun effet actif"
-      },
-      "Deafened": {
-        "name": "Assourdi",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY inline]"
-      },
-      "Deafness": {
-        "name": "Surdité",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "DisguiseSelf": {
-        "name": "Déguisement",
-        "description": "Aucun effet actif et dure 1 heure"
-      },
-      "DivineFavor": {
-        "name": "Faveur divine",
-        "description": "Ajoute 1d4 dégâts radiants aux attaques avec des armes pendant 1 minute."
-      },
-      "DivineWord": {
-        "name": "Parole divine",
-        "description": "Ajoute divers effets en fonction des points de vie restants",
-        "dead": "Tué instantanément",
-        "stunned": "Aveuglé, assourdi et étourdi pendant 1 heure",
-        "blinded": "Assourdi et aveuglé pendant 10 minutes",
-        "deafened": "Assourdi pendant 1 minute"
-      },
-      "Dodge": {
-        "name": "Esquiver",
-        "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour."
-      },
-      "EaglesSplendor": {
-        "name": "Splendeur de l'aigle",
-        "description": "Avantage sur les tests de charisme pendant 1 heure"
-      },
-      "Encumbered": {
-        "name": "Encombré",
-        "description": "Réduit le mouvement de 10 pieds."
-      },
-      "EnhanceAbility": {
-        "name": "Amélioration de caractéristique",
-        "description": "Choisissez entre Force du taureau, Grâce féline, Endurance de l'ours, Ruse du renard, Sagesse du hibou ou Splendeur de l'aigle."
-      },
-      "Enlarge": {
-        "name": "Agrandissement",
-        "description": "Ajoutez 1d4 aux dégâts et à l'avantage aux jets de force et de sauvegarde de force pendant 1 minute."
-      },
-      "EnlargeReduce": {
-        "name": "Agrandissement/Rapetissement",
-        "description": "Choisissez entre Agrandissement ou Rapetissement"
-      },
-      "Exhaustion1": {
-        "name": "Épuisement 1",
-        "description": "Désavantage sur les tests de caractéristiques"
-      },
-      "Exhaustion2": {
-        "name": "Épuisement 2",
-        "description": "Désavantage sur les tests de caractéristiques et vitesse réduite de moitié"
-      },
-      "Exhaustion3": {
-        "name": "Épuisement 3",
-        "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié et désavantage sur les attaques et les jets de sauvegarde"
-      },
-      "Exhaustion4": {
-        "name": "Épuisement 4",
-        "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
-      },
-      "Exhaustion5": {
-        "name": "Épuisement 5",
-        "description": "Désavantage sur les tests de caractéristiques, vitesse réduite à 0, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
-      },
-      "FaerieFire": {
-        "name": "Lueurs féeriques",
-        "description": "Accorde un avantage à tous ceux qui attaquent pendant 1 minute"
-      },
-      "FalseLife": {
-        "name": "Simulacre de vie",
-        "description": "Ajouter des points de vie temporaires 1 heure"
-      },
-      "FeatherFall": {
-        "name": "Feuille morte",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "Feeblemind": {
-        "name": "Esprit faible",
-        "description": "Réglez les scores d'intelligence et de charisme sur 1 jusqu'à leur suppression."
-      },
-      "FilthFever": {
-        "name": "Fièvre répugnante",
-        "description": "Désavantage aux jets de caractéristiques, de sauvegarde et d'attaque basés sur la Force pendant 7 jours."
-      },
-      "FindThePath": {
-        "name": "Orientation",
-        "description": "Aucun effet actif et dure 1 jour"
-      },
-      "FireShield": {
-        "name": "Bouclier de feu",
-        "description": "Choisissez entre la résistance au froid ou au feu"
-      },
-      "FireShieldColdResistance": {
-        "name": "Bouclier de feu (résistance au froid)",
-        "description": "Ajoute une résistance aux dégâts au froid pendant 10 minutes"
-      },
-      "FireShieldFireResistance": {
-        "name": "Bouclier de feu (résistance au feu)",
-        "description": "Ajoute une résistance aux dégâts au feu pendant 10 minutes"
-      },
-      "Flanked": {
-        "name": "Pris en tenaille",
-        "description": "Accorde un avantage à tous ceux qui attaquent au corps à corps"
-      },
-      "Flanking": {
-        "name": "Tenaille",
-        "description": "Accorde un avantage sur les jets d'attaque en mêlée"
-      },
-      "FleshRot": {
-        "name": "Pourriture",
-        "description": "Désavantage aux jets de Charisme et est vulnérable à tous les types de dégâts"
-      },
-      "Fly": {
-        "name": "Vol",
-        "description": "Améliorez la vitesse de vol à 18 mètres pendant 10 minutes"
-      },
-      "Foresight": {
-        "name": "Prémonition",
-        "description": "Accorde un avantage aux jets d'attaque, de caractéristiques et de sauvegarde tout en accordant un désavantage à tous ceux qui attaquent pendant 8 heures"
-      },
-      "FoxsCunning": {
-        "name": "Ruse du renard",
-        "description": "Avantage sur les contrôles de renseignement pendant 1 heure"
-      },
-      "FreedomOfMovement": {
-        "name": "Liberté de mouvement",
-        "description": "Aucun effet actif et dure 1 heure"
-      },
-      "Frightened": {
-        "name": "Effrayé",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij inline]"
-      },
-      "GlobeOfInvulnerability": {
-        "name": "Globe d'invulnérabilité",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "Grappled": {
-        "name": "Agrippé",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn inline]"
-      },
-      "GreatWeaponMaster": {
-        "name": "Maître des armes à deux mains",
-        "description": "Soustrait 5 aux attaques de mêlée mais ajoute 10 aux dégâts de mêlée"
-      },
-      "GreaterInvisibility": {
-        "name": "Invisibilité suprême",
-        "description": "Accorde un avantage aux jets d'attaque tout en forçant un désavantage à tous ceux qui attaquent pendant 1 minute"
-      },
-      "Guidance": {
-        "name": "Assistance",
-        "description": "Ajoute 1d4 à un test de capacité ou de compétence pendant 1 minute"
-      },
-      "GuidingBolt": {
-        "name": "Rayon traçante",
-        "description": "Accorde un avantage au prochain attaquant ou jusqu'à la fin du prochain tour"
-      },
-      "Haste": {
-        "name": "Hâte",
-        "description": "Vitesse doublée, ajoutez 2 à la CA, et avantage sur les jets de sauvegarde de dextérité pendant 1 minute (+1 action à chaque tour)"
-      },
-      "HeavilyEncumbered": {
-        "name": "Fortement encombré",
-        "description": "Réduit le mouvement de 20 pieds, le désavantage sur tous les jets d'attaque et le désavantage sur la force, la dextérité et les sauvegardes de constitution."
-      },
-      "HeroesFeast": {
-        "name": "Festin des Héros",
-        "description": "Immunité au poison et à la peur, effectuez tous les jets de sauvegarde de sagesse avec avantage et le maximum de points de vie augmente de 2d10 pendant 24 heures."
-      },
-      "Heroism": {
-        "name": "Héroïsme",
-        "description": "Immunité à la peur pendant 1 minute"
-      },
-      "HideousLaughter": {
-        "name": "Fou rire",
-        "description": "Appliquer les effets des conditions À terre et Neutralisé pendant 1 minute"
-      },
-      "HoldMonster": {
-        "name": "Immobilisation de monstre",
-        "description": "Appliquer l'effet Paralysé pendant 1 minute"
-      },
-      "HoldPerson": {
-        "name": "Immobilisation de personne",
-        "description": "Appliquer l'effet Paralysé pendant 1 minute"
-      },
-      "HolyAura": {
-        "name": "Aura sacrée",
-        "description": "Avantage aux jets de sauvegarde, accorde un désavantage à tous ceux qui attaquent et émet une faible lumière dans un rayon de 1,5 mètre (nécessite ATL) pendant 1 minute."
-      },
-      "HoodedLantern": {
-        "name": "Lanterne à capuchon",
-        "description": "Ajoute une lanterne à capuchon pendant 6 heures (nécessite ATL)"
-      },
-      "HuntersMark": {
-        "name": "Marque du chasseur",
-        "description": "Aucun effet actif et dure jusqu'à 1 heure"
-      },
-      "Incapacitated": {
-        "name": "Neutralisé",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb inline]"
-      },
-      "Inspiration": {
-        "name": "Inspiration",
-        "description": "Avantage sur tout et expire après toute action, sauvegarde, vérification ou jet de compétence"
-      },
-      "Invisibility": {
-        "name": "Invisibilité",
-        "description": "Accorde un avantage au prochain jet d'attaque tout en forçant un désavantage à tous ceux qui attaquent pendant 1 heure. "
-      },
-      "Invisible": {
-        "name": "Invisible",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u inline]"
-      },
-      "IrresistibleDance": {
-        "name": "Danse irrésistible",
-        "description": "Aucun mouvement, désavantage aux jets de sauvegarde de dextérité, d'attaque et accorde un avantage à tous ceux qui attaquent pendant 1 minute."
-      },
-      "Jump": {
-        "name": "Saut",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "KiEmptyBody": {
-        "name": "Ki : Désertion de l'âme [Moine]",
-        "description": "Accorde un avantage aux jets d'attaque, désavantage à tous ceux qui attaquent et confère une résistance à tous les dégâts sauf à ceux de force pendant 1 minute."
-      },
-      "KiPatientDefense": {
-        "name": "Ki : Patience défensive [Moine]",
-        "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour."
-      },
-      "Lantern": {
-        "name": "Lanterne",
-        "description": "Ajoute une lumière de lanterne pendant 6 heures (nécessite ATL)"
-      },
-      "Light": {
-        "name": "Lumière",
-        "description": "Émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 heure (nécessite ATL)"
-      },
-      "Longstrider": {
-        "name": "Grande foulée",
-        "description": "Augmente tous les mouvements de 3 mètres pendant 1 heure"
-      },
-      "MageArmor": {
-        "name": "Armure de mage",
-        "description": "Améliore l'armure à 13 + modificateur dex pendant 8 heures"
-      },
-      "MindBlank": {
-        "name": "Esprit impénétrable",
-        "description": "Ajoute l'immunité aux dégâts psychiques pendant 24 heures"
-      },
-      "Mindfire": {
-        "name": "Bouille-crâne",
-        "description": "Désavantage aux jets de caractéristique et de sauvegarde d'Intelligence pendant 7 jours"
-      },
-      "MirrorImage": {
-        "name": "Image miroir",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "OwlsWisdom": {
-        "name": "Sagesse du hibou",
-        "description": "Avantage sur les contrôles de sagesse pendant 1 heure"
-      },
-      "Paralyzed": {
-        "name": "Paralysé",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP inline]"
-      },
-      "PassWithoutTrace": {
-        "name": "Passer sans trace",
-        "description": "Ajoutez 10 aux jets de dextérité (discrétion) pendant 1 heure"
-      },
-      "Petrified": {
-        "name": "Pétrifié",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi inline]"
-      },
-      "Poisoned": {
-        "name": "Empoisonné",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx inline]"
-      },
-      "Prone": {
-        "name": "À terre",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT inline]"
-      },
-      "ProtectionFromAcid": {
-        "name": "Protection contre l'acide",
-        "description": "Ajoute une résistance aux dommages causés par l'acide pendant 1 heure"
-      },
-      "ProtectionFromCold": {
-        "name": "Protection contre le froid",
-        "description": "Ajoute une résistance aux dégâts au froid pendant 1 heure"
-      },
-      "ProtectionFromEnergy": {
-        "name": "Protection contre l'énergie",
-        "description": "Choisissez entre la résistance à l'acide, au froid, au feu, à la foudre ou au tonnerre"
-      },
-      "ProtectionFromEvilAndGood": {
-        "name": "Protection contre le mal et le bien",
-        "description": "Aucun effet actif et dure 10 minutes"
-      },
-      "ProtectionFromFire": {
-        "name": "Protection contre le feu",
-        "description": "Ajoute une résistance aux dégâts du feu pendant 1 heure"
-      },
-      "ProtectionFromLightning": {
-        "name": "Protection contre la foudre",
-        "description": "Ajoute une résistance aux dégâts de la foudre pendant 1 heure"
-      },
-      "ProtectionFromPoison": {
-        "name": "Protection contre le poison",
-        "description": "Ajoute une résistance au poison pendant 1 heure (n'accorde pas d'avantage automatique aux jets de sauvegarde contre le poison)"
-      },
-      "ProtectionFromThunder": {
-        "name": "Protection contre le tonnerre",
-        "description": "Ajoute une résistance aux dégâts du tonnerre pendant 1 heure"
-      },
-      "Rage": {
-        "name": "Rage",
-        "description": "Avantage sur les jets de caractéristique et de sauvegarde de force, un bonus variable aux dégâts de mêlée basé sur le niveau du barbare et une résistance aux dégâts perforants, contondants et tranchants pendant 1 minute. ",
-        "notABarbarian": "L'acteur sélectionné n'est pas un barbare",
-        "bearTotemFeat": "Esprit totem : Ours [Barbare - Voie du guerrier totem]"
-      },
-      "RangedDisadvantage": {
-        "name": "Attaques à distance dans un combat au corps à corps",
-        "description": "Inconvénient sur les jets d'attaque à distance"
-      },
-      "RayOfFrost": {
-        "name": "Rayon de givre",
-        "description": "Réduit le mouvement de 10 pieds"
-      },
-      "Reaction": {
-        "name": "Réaction",
-        "description": "Aucun effet actif et expire au début du tour"
-      },
-      "Ready": {
-        "name": "Se tenir prêt",
-        "description": "Aucun effet actif et expire au début du tour"
-      },
-      "RecklessAttack": {
-        "name": "Attaque téméraire [Barbare]",
-        "description": "Avantage sur les attaques de mêlée pendant un tour et accorde un avantage à ceux qui attaquent pendant 1 tour"
-      },
-      "RecklessAttackAdvantageOnAttacks": {
-        "name": "Attaque téméraire (avantage sur les attaques)",
-        "description": "Avantage sur les attaques de mêlée jusqu'à la fin du tour"
-      },
-      "Reduce": {
-        "name": "Rapetissement",
-        "description": "Soustrayez 1d4 aux dégâts et désavantages aux tests de force et aux jets de sauvegarde de force pendant 1 minute."
-      },
-      "Regenerate": {
-        "name": "Régénération",
-        "description": "Récupérez 1 point de vie au début de chaque tour pendant 1 heure"
-      },
-      "ResilientSphere": {
-        "name": "Sphère résiliente",
-        "description": "Ajoute une immunité totale à tous les dégâts et à la moitié des mouvements pendant 1 minute"
-      },
-      "Resistance": {
-        "name": "Résistance",
-        "description": "Ajoutez 1d4 à un seul jet de sauvegarde dans la minute suivante"
-      },
-      "Restrained": {
-        "name": "Entravé",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc inline]"
-      },
-      "Seizure": {
-        "name": "Convulsions",
-        "description": "Désavantage aux jets de caractéristique, sauvegarde et d'attaque basés sur la dextérité pendant 7 jours"
-      },
-      "Sharpshooter": {
-        "name": "Tireur d'élite",
-        "description": "Soustrait 5 aux jets d'attaque à distance mais ajoute 10 aux dégâts de l'attaque"
-      },
-      "Shield": {
-        "name": "Bouclier",
-        "description": "Ajoutez 5 à la CA jusqu'au prochain tour"
-      },
-      "ShieldOfFaith": {
-        "name": "Bouclier de la foi",
-        "description": "Ajoute 2 à la CA pendant 10 minutes"
-      },
-      "SlimyDoom": {
-        "name": "Mort poisseusex",
-        "description": "Désavantage aux jets de caractéristiquen et de sauvegarde de constitution"
-      },
-      "Slow": {
-        "name": "Lenteur",
-        "description": "Réduit de moitié le mouvement et soustrait 2 aux jets de sauvegarde de CA et de dextérité pendant 1 minute (réduit à une seule action)."
-      },
-      "SpeakWithAnimals": {
-        "name": "Communication avec les animaux",
-        "description": "Aucun effet actif et dure 10 minutes"
-      },
-      "SpeakWithDead": {
-        "name": "Communication avec les morts",
-        "description": "Aucun effet actif et dure 10 minutes"
-      },
-      "SpeakWithPlants": {
-        "name": "Communication avec les plantes",
-        "description": "Aucun effet actif et dure 10 minutes"
-      },
-      "SpiderClimb": {
-        "name": "Pattes d'araignéee",
-        "description": "Accorde une vitesse d'escalade égale à la vitesse de marche pendant 1 heure"
-      },
-      "SpiritGuardians": {
-        "name": "Esprits gardiens",
-        "description": "Aucun effet actif et dure 10 minutes"
-      },
-      "SpiritualWeapon": {
-        "name": "Arme spirituelle",
-        "description": "Aucun effet actif et dure 1 minute"
-      },
-      "Stoneskin": {
-        "name": "Peau de pierre",
-        "description": "Ajoute de la résistance aux dégâts physiques non magiques pendant 1 heure"
-      },
-      "Stunned": {
-        "name": "Étourdi",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS inline]"
-      },
-      "Suggestion": {
-        "name": "Suggestion",
-        "description": "Aucun effet actif et dure 8 heures"
-      },
-      "Telekinesis": {
-        "name": "Télékinésie",
-        "description": "Aucun effet actif et dure 10 minutes"
-      },
-      "Torch": {
-        "name": "Torche",
-        "description": "Ajoute une lampe torche pendant 1 heure (nécessite ATL)"
-      },
-      "TrueStrike": {
-        "name": "Coup au but",
-        "description": "Accorde un avantage lors de la prochaine attaque ou jusqu'à la fin du prochain tour"
-      },
-      "Unconscious": {
-        "name": "Inconscient",
-        "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd inline]"
-      },
-      "ViciousMockery": {
-        "name": "Moquerie cruelle",
-        "description": "Accorde un désavantage lors de la prochaine attaque ou jusqu'à la fin du prochain tour"
-      },
-      "WardingBond": {
-        "name": "Lien de protection",
-        "description": "Ajoute 1 à la CA et aux jets de sauvegarde et confère une résistance à tous les dégâts pendant 1 heure."
-      },
-      "WaterBreathing": {
-        "name": "Respiration aquatique",
-        "description": "Aucun effet actif et dure 24 heures"
-      },
-      "WaterWalk": {
-        "name": "Marche sur l'onde",
-        "description": "Aucun effet actif et dure 1 heure"
-      },
-      "Wounded": {
-        "name": "Blessé",
-        "description": "Aucun effet actif"
-      }
+        "ViewBackups": "Afficher les sauvegardes",
+        "ShowFolder": "Afficher le dossier",
+        "HideFolder": "Masquer le dossier",
+        "ShowHiddenEffects": "Afficher les effets cachés",
+        "ShowNestedEffects": "Afficher les effets imbriqués",
+        "PrioritizeTargets": "Prioriser les cibles",
+        "NewEffect": "Nouvel effet",
+        "EditEffect": "Modifier l'effet",
+        "DeleteEffect": "Supprimer l'effet",
+        "ShowEffect": "Afficher l'effet",
+        "HideEffect": "Masquer l'effet",
+        "ToggleAsOverlay": "Basculer en superposition",
+        "ResetSystemEffects": "Réinitialiser les effets du système",
+        "ResetSystemEffectsWarning": "Cela réinitialisera complètement les effets intégrés, annulant toutes les créations, suppressions ou modifications personnalisées effectuées.",
+
+        "Config": {
+            "Title": "Convenient",
+            "FoundryEffectIdLabel": "ID d'effet de fonderie",
+            "FoundryEffectIdHint": "Il s'agit de l'ID de l'effet de fonderie et peut être utilisé pour rechercher, ajouter ou supprimer un effet.",
+            "ConvenientEffectIdLabel": "ID d'effet pratique",
+            "ConvenientEffectIdHint": "Il s'agit de l'ID d'effet pratique et peut être utilisé pour rechercher, ajouter ou supprimer un effet.",
+            "TemporaryLabel": "Temporaire",
+            "TemporaryHint": "Si cette case est cochée, cet effet sera toujours qualifié d'effet temporaire, même s'il n'a pas de durée ni de statut.",
+            "ViewableLabel": "Visible",
+            "ViewableHint": "Si cette case est cochée, cet effet sera toujours affiché dans l'application.",
+            "DynamicLabel": "Dynamique",
+            "DynamicHint": "Si cette case est cochée, cet effet aura des effets dynamiques appliqués en fonction des données de l'acteur. ",
+            "NestedEffectsLabel": "Effets imbriqués",
+            "NestedEffectsHint": "Les effets imbriqués qui seront affichés sous forme d'options lorsque l'effet est ajouté ou supprimé.",
+            "SubEffectsLabel": "Sous-effets",
+            "SubEffectsHint": "Les sous-effets qui seront appliqués en relation avec cet effet. ",
+            "OtherEffectsLabel": "Autres effets",
+            "OtherEffectsHint": "Les autres effets qui seront appliqués en relation avec cet effet. ",
+
+            "IDsTab": "IDs",
+            "FlagsTab": "Indicateurs",
+            "DependentEffectsTab": "Effets dépendants"
+        },
+
+        "Dnd": {
+            "Folders": {
+                "Conditions": "Conditions",
+                "Spells": "Sorts",
+                "ClassFeatures": "Capacités des classes",
+                "Equipment": "Équipement",
+                "Other": "Autre"
+            },
+            "AcidArrow": {
+                "name": "Flèche acide",
+                "description": "Cause 2d4 dégâts d'acide à la fin du prochain tour"
+            },
+            "Aid": {
+                "name": "Aide",
+                "description": "Ajouter aux points de vie actuels et maximum pendant 8 heures"
+            },
+            "AlterSelf": {
+                "name": "Modification d'apparence",
+                "description": "Aucun effet actif et dure 1 heure"
+            },
+            "AntilifeShell": {
+                "name": "Coquille antivie",
+                "description": "Aucun effet actif et dure 1 heure"
+            },
+            "ArcaneHand": {
+                "name": "Main arcanique",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "Bane": {
+                "name": "Fléau",
+                "description": "Soustrayez 1d4 à tous les jets de sauvegarde et d'attaque pendant 1 minute."
+            },
+            "BardicInspiration": {
+                "name": "Inspiration bardique [Barde]",
+                "description": "Ajoutez un dé à un seul jet de caractéristique, d'attaque ou de sauvegarde dans les 10 prochaines minutes"
+            },
+            "BardicInspirationD10": {
+                "name": "Inspiration bardique (d10)",
+                "description": "Pour les bardes du niveau 10 au niveau 14"
+            },
+            "BardicInspirationD12": {
+                "name": "Inspiration bardique (d12)",
+                "description": "Pour les bardes du niveau 15 au niveau 20"
+            },
+            "BardicInspirationD6": {
+                "name": "Inspiration bardique (d6)",
+                "description": "Pour les bardes du niveau 1 au niveau 4"
+            },
+            "BardicInspirationD8": {
+                "name": "Inspiration bardique (d8)",
+                "description": "Pour les bardes du niveau 5 au niveau 9"
+            },
+            "Barkskin": {
+                "name": "Peau d'écorce",
+                "description": "Améliorez la CA à 16 pendant 1 heure"
+            },
+            "BeaconOfHope": {
+                "name": "Lueur d'espoir",
+                "description": "Ajoute un avantage aux jets de sauvegarde de sagesse et contre la mort pendant 1 minute"
+            },
+            "BearsEndurance": {
+                "name": "Endurance de l'ours",
+                "description": "Avantage sur les jets de constitution et 2d6 points de vie temporaires pendant 1 heure"
+            },
+            "BlackTentacles": {
+                "name": "Tentacules noirs",
+                "description": "Appliquer les effets de la condition de entravée pendant 1 minute"
+            },
+            "Bless": {
+                "name": "Bénédiction",
+                "description": "Ajoutez 1d4 à tous les jets de sauvegarde et d'attaque pendant 1 minute"
+            },
+            "Blinded": {
+                "name": "Aveuglé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ inline]"
+            },
+            "BlindingSickness": {
+                "name": "Mal aveuglant",
+                "description": "Désavantage sur les jets de sagesse et les jets de sauvegarde de sagesse pendant 7 jours"
+            },
+            "Blindness": {
+                "name": "Cécité",
+                "description": "Désavantage aux jets d'attaque tout en accordant un avantage à tous ceux qui attaquent pendant 1 minute"
+            },
+            "BlindnessDeafness": {
+                "name": "Cécité/Surdité",
+                "description": "Choisissez entre la cécité ou la surdité"
+            },
+            "Blur": {
+                "name": "Flou",
+                "description": "Accorde un désavantage à tous ceux qui attaquent pendant 1 minute"
+            },
+            "BonusAction": {
+                "name": "Action bonus",
+                "description": "Aucun effet actif et expire au début du tour"
+            },
+            "BullsStrength": {
+                "name": "Force du taureau",
+                "description": "Avantage sur les contrôles de résistance et double capacité de charge maximale pendant 1 heure"
+            },
+            "BullseyeLantern": {
+                "name": "Lanterne sourde",
+                "description": "Ajoute une lumière de lanterne dans un cône de 18 mètres pendant 6 heures (nécessite ATL)"
+            },
+            "Candle": {
+                "name": "Bougie",
+                "description": "Ajoute la lumière d'une bougie pendant 1 heure (nécessite ATL)"
+            },
+            "CatsGrace": {
+                "name": "Grâce féline",
+                "description": "Avantage sur les contrôles de dextérité pendant 1 heure"
+            },
+            "ChannelDivinitySacredWeapon": {
+                "name": "Conduit divin : Arme sacré [Paladin - Serment de dévotion]",
+                "description": "Ajoutez un modificateur de charisme (minimum +1) à tous les jets d'attaque avec une arme et émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 minute (nécessite ATL)"
+            },
+            "ChannelDivinityTurnTheUnholy": {
+                "name": "Conduit divin : Renvoi des impies [Paladin - Serment de dévotion]",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "ChannelDivinityTurnUndead": {
+                "name": "onduit divin : Renvoi des morts-vivants [Clerc]",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "CharmPerson": {
+                "name": "Charme-personne",
+                "description": "Aucun effet actif et dure 1 heure"
+            },
+            "Charmed": {
+                "name": "Charmé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD inline]"
+            },
+            "Command": {
+                "name": "Injonction",
+                "description": "Aucun effet actif et dure jusqu'à la fin du prochain tour"
+            },
+            "ComprehendLanguages": {
+                "name": "Compréhension des langues",
+                "description": "Ajoute toutes les langues pendant 1 heure"
+            },
+            "Concentrating": {
+                "name": "Concentré",
+                "description": "Certains sorts nécessitent que vous mainteniez votre concentration afin de garder leur magie active"
+            },
+            "Contagion": {
+                "name": "Contagion",
+                "description": "Choisissez entre Bouille-crâne, Convulsions, Fièvre répugnante, Mal aveuglant, Mort poisseuse ou Pourriture"
+            },
+            "CoverHalf": {
+                "name": "Couverture (moitié)",
+                "description": "Ajoute 2 à la CA et aux jets de sauvegarde dextérité"
+            },
+            "CoverThreeQuarters": {
+                "name": "Couverture (trois quarts)",
+                "description": "Ajoute 5 à la CA et aux jets de sauvegarde dextérité"
+            },
+            "CoverTotal": {
+                "name": "Couverture (totale)",
+                "description": "Fait échouer automatiquement toutes les attaques"
+            },
+            "Darkvision": {
+                "name": "Vision dans le noir",
+                "description": "Améliorez la vision dans le noir à 18 mètres pendant 8 heures"
+            },
+            "Dead": {
+                "name": "Mort",
+                "description": "Aucun effet actif"
+            },
+            "Deafened": {
+                "name": "Assourdi",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY inline]"
+            },
+            "Deafness": {
+                "name": "Surdité",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "DisguiseSelf": {
+                "name": "Déguisement",
+                "description": "Aucun effet actif et dure 1 heure"
+            },
+            "DivineFavor": {
+                "name": "Faveur divine",
+                "description": "Ajoute 1d4 dégâts radiants aux attaques avec des armes pendant 1 minute"
+            },
+            "DivineWord": {
+                "name": "Parole divine",
+                "description": "Ajoute divers effets en fonction des points de vie restants",
+                "dead": "Tué instantanément",
+                "stunned": "Aveuglé, assourdi et étourdi pendant 1 heure",
+                "blinded": "Assourdi et aveuglé pendant 10 minutes",
+                "deafened": "Assourdi pendant 1 minute"
+            },
+            "Dodge": {
+                "name": "Esquiver",
+                "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour"
+            },
+            "EaglesSplendor": {
+                "name": "Splendeur de l'aigle",
+                "description": "Avantage sur les tests de charisme pendant 1 heure"
+            },
+            "Encumbered": {
+                "name": "Encombré",
+                "description": "Réduit le mouvement de 3 mètres"
+            },
+            "EnhanceAbility": {
+                "name": "Amélioration de caractéristique",
+                "description": "Choisissez entre Force du taureau, Grâce féline, Endurance de l'ours, Ruse du renard, Sagesse du hibou ou Splendeur de l'aigle"
+            },
+            "Enlarge": {
+                "name": "Agrandissement",
+                "description": "Ajoutez 1d4 aux dégâts et à l'avantage aux jets de force et de sauvegarde de force pendant 1 minute"
+            },
+            "EnlargeReduce": {
+                "name": "Agrandissement/Rapetissement",
+                "description": "Choisissez entre Agrandissement ou Rapetissement"
+            },
+            "Exhaustion1": {
+                "name": "Épuisement 1",
+                "description": "Désavantage sur les tests de caractéristiques"
+            },
+            "Exhaustion2": {
+                "name": "Épuisement 2",
+                "description": "Désavantage sur les tests de caractéristiques et vitesse réduite de moitié"
+            },
+            "Exhaustion3": {
+                "name": "Épuisement 3",
+                "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié et désavantage sur les attaques et les jets de sauvegarde"
+            },
+            "Exhaustion4": {
+                "name": "Épuisement 4",
+                "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
+            },
+            "Exhaustion5": {
+                "name": "Épuisement 5",
+                "description": "Désavantage sur les tests de caractéristiques, vitesse réduite à 0, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
+            },
+            "FaerieFire": {
+                "name": "Lueurs féeriques",
+                "description": "Accorde un avantage à tous ceux qui attaquent pendant 1 minute"
+            },
+            "FalseLife": {
+                "name": "Simulacre de vie",
+                "description": "Ajouter des points de vie temporaires 1 heure"
+            },
+            "FeatherFall": {
+                "name": "Feuille morte",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "Feeblemind": {
+                "name": "Esprit faible",
+                "description": "Réglez les scores d'intelligence et de charisme sur 1 jusqu'à leur suppression"
+            },
+            "FilthFever": {
+                "name": "Fièvre répugnante",
+                "description": "Désavantage aux jets de caractéristiques, de sauvegarde et d'attaque basés sur la Force pendant 7 jours"
+            },
+            "FindThePath": {
+                "name": "Sens de l'orientation",
+                "description": "Aucun effet actif et dure 1 jour"
+            },
+            "FireShield": {
+                "name": "Bouclier de feu",
+                "description": "Choisissez entre la résistance au froid ou au feu"
+            },
+            "FireShieldColdResistance": {
+                "name": "Bouclier de feu (résistance au froid)",
+                "description": "Ajoute une résistance aux dégâts au froid pendant 10 minutes"
+            },
+            "FireShieldFireResistance": {
+                "name": "Bouclier de feu (résistance au feu)",
+                "description": "Ajoute une résistance aux dégâts au feu pendant 10 minutes"
+            },
+            "Flanked": {
+                "name": "Pris en tenaille",
+                "description": "Accorde un avantage à tous ceux qui attaquent au corps à corps"
+            },
+            "Flanking": {
+                "name": "Tenaille",
+                "description": "Accorde un avantage sur les jets d'attaque en mêlée"
+            },
+            "FleshRot": {
+                "name": "Pourriture",
+                "description": "Désavantage aux jets de Charisme et est vulnérable à tous les types de dégâts"
+            },
+            "Fly": {
+                "name": "Vol",
+                "description": "Améliorez la vitesse de vol à 18 mètres pendant 10 minutes"
+            },
+            "Foresight": {
+                "name": "Prémonition",
+                "description": "Accorde un avantage aux jets d'attaque, de caractéristiques et de sauvegarde tout en accordant un désavantage à tous ceux qui attaquent pendant 8 heures"
+            },
+            "FoxsCunning": {
+                "name": "Ruse du renard",
+                "description": "Avantage sur les contrôles de renseignement pendant 1 heure"
+            },
+            "FreedomOfMovement": {
+                "name": "Liberté de mouvement",
+                "description": "Aucun effet actif et dure 1 heure"
+            },
+            "Frightened": {
+                "name": "Effrayé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij inline]"
+            },
+            "GlobeOfInvulnerability": {
+                "name": "Globe d'invulnérabilité",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "Grappled": {
+                "name": "Agrippé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn inline]"
+            },
+            "GreatWeaponMaster": {
+                "name": "Maître des armes à deux mains",
+                "description": "Soustrait 5 aux attaques de mêlée mais ajoute 10 aux dégâts de mêlée"
+            },
+            "GreaterInvisibility": {
+                "name": "Invisibilité suprême",
+                "description": "Accorde un avantage aux jets d'attaque tout en forçant un désavantage à tous ceux qui attaquent pendant 1 minute"
+            },
+            "Guidance": {
+                "name": "Assistance",
+                "description": "Ajoute 1d4 à un test de capacité ou de compétence pendant 1 minute"
+            },
+            "GuidingBolt": {
+                "name": "Rayon traçant",
+                "description": "Accorde un avantage au prochain attaquant ou jusqu'à la fin du prochain tour"
+            },
+            "Haste": {
+                "name": "Hâte",
+                "description": "Vitesse doublée, ajoutez 2 à la CA, et avantage sur les jets de sauvegarde de dextérité pendant 1 minute (+1 action à chaque tour)"
+            },
+            "HeavilyEncumbered": {
+                "name": "Fortement encombré",
+                "description": "Réduit le mouvement de 6 mètres, le désavantage sur tous les jets d'attaque et le désavantage sur la force, la dextérité et les sauvegardes de constitution."
+            },
+            "HeroesFeast": {
+                "name": "Festin des Héros",
+                "description": "Immunité au poison et à la peur, effectuez tous les jets de sauvegarde de sagesse avec avantage et le maximum de points de vie augmente de 2d10 pendant 24 heures."
+            },
+            "Heroism": {
+                "name": "Héroïsme",
+                "description": "Immunité à la peur pendant 1 minute"
+            },
+            "HideousLaughter": {
+                "name": "Fou rire",
+                "description": "Appliquer les effets des conditions À terre et Neutralisé pendant 1 minute"
+            },
+            "HoldMonster": {
+                "name": "Immobilisation de monstre",
+                "description": "Appliquer l'effet Paralysé pendant 1 minute"
+            },
+            "HoldPerson": {
+                "name": "Immobilisation de personne",
+                "description": "Appliquer l'effet Paralysé pendant 1 minute"
+            },
+            "HolyAura": {
+                "name": "Aura sacrée",
+                "description": "Avantage aux jets de sauvegarde, accorde un désavantage à tous ceux qui attaquent et émet une faible lumière dans un rayon de 1,5 mètres (nécessite ATL) pendant 1 minute."
+            },
+            "HoodedLantern": {
+                "name": "Lanterne à capote",
+                "description": "Ajoute une lanterne à capote pendant 6 heures (nécessite ATL)"
+            },
+            "HuntersMark": {
+                "name": "Marque du chasseur",
+                "description": "Aucun effet actif et dure jusqu'à 1 heure"
+            },
+            "Incapacitated": {
+                "name": "Neutralisé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb inline]"
+            },
+            "Inspiration": {
+                "name": "Inspiration",
+                "description": "Avantage sur tout et expire après toute action, sauvegarde, vérification ou jet de compétence"
+            },
+            "Invisibility": {
+                "name": "Invisibilité",
+                "description": "Accorde un avantage au prochain jet d'attaque tout en forçant un désavantage à tous ceux qui attaquent pendant 1 heure"
+            },
+            "Invisible": {
+                "name": "Invisible",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u inline]"
+            },
+            "IrresistibleDance": {
+                "name": "Danse irrésistible",
+                "description": "Aucun mouvement, désavantage aux jets de sauvegarde de dextérité, d'attaque et accorde un avantage à tous ceux qui attaquent pendant 1 minute."
+            },
+            "Jump": {
+                "name": "Saut",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "KiEmptyBody": {
+                "name": "Ki : Désertion de l'âme [Moine]",
+                "description": "Accorde un avantage aux jets d'attaque, désavantage à tous ceux qui attaquent et confère une résistance à tous les dégâts sauf à ceux de force pendant 1 minute"
+            },
+            "KiPatientDefense": {
+                "name": "Ki : Patience défensive [Moine]",
+                "description": "Accorde un désavantage à tous ceux qui attaquent et un avantage sur tous les jets de sauvegarde de dextérité jusqu'au prochain tour"
+            },
+            "Lantern": {
+                "name": "Lanterne",
+                "description": "Ajoute une lumière de lanterne pendant 6 heures (nécessite ATL)"
+            },
+            "Light": {
+                "name": "Lumière",
+                "description": "Émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 heure (nécessite ATL)"
+            },
+            "Longstrider": {
+                "name": "Grande foulée",
+                "description": "Augmente tous les mouvements de 3 mètres pendant 1 heure"
+            },
+            "MageArmor": {
+                "name": "Armure de mage",
+                "description": "Améliore l'armure à 13 + modificateur dex pendant 8 heures"
+            },
+            "MindBlank": {
+                "name": "Esprit impénétrable",
+                "description": "Ajoute l'immunité aux dégâts psychiques pendant 24 heures"
+            },
+            "Mindfire": {
+                "name": "Bouille-crâne",
+                "description": "Désavantage aux jets de caractéristique et de sauvegarde d'Intelligence pendant 7 jours"
+            },
+            "MirrorImage": {
+                "name": "Image miroir",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "OwlsWisdom": {
+                "name": "Sagesse du hibou",
+                "description": "Avantage sur les contrôles de sagesse pendant 1 heure"
+            },
+            "Paralyzed": {
+                "name": "Paralysé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP inline]"
+            },
+            "PassWithoutTrace": {
+                "name": "Passer sans trace",
+                "description": "Ajoutez 10 aux jets de dextérité (discrétion) pendant 1 heure"
+            },
+            "Petrified": {
+                "name": "Pétrifié",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi inline]"
+            },
+            "Poisoned": {
+                "name": "Empoisonné",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx inline]"
+            },
+            "Prone": {
+                "name": "À terre",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT inline]"
+            },
+            "ProtectionFromAcid": {
+                "name": "Protection contre l'acide",
+                "description": "Ajoute une résistance aux dommages causés par l'acide pendant 1 heure"
+            },
+            "ProtectionFromCold": {
+                "name": "Protection contre le froid",
+                "description": "Ajoute une résistance aux dégâts au froid pendant 1 heure"
+            },
+            "ProtectionFromEnergy": {
+                "name": "Protection contre l'énergie",
+                "description": "Choisissez entre la résistance à l'acide, au froid, au feu, à la foudre ou au tonnerre"
+            },
+            "ProtectionFromEvilAndGood": {
+                "name": "Protection contre le mal et le bien",
+                "description": "Aucun effet actif et dure 10 minutes"
+            },
+            "ProtectionFromFire": {
+                "name": "Protection contre le feu",
+                "description": "Ajoute une résistance aux dégâts du feu pendant 1 heure"
+            },
+            "ProtectionFromLightning": {
+                "name": "Protection contre la foudre",
+                "description": "Ajoute une résistance aux dégâts de la foudre pendant 1 heure"
+            },
+            "ProtectionFromPoison": {
+                "name": "Protection contre le poison",
+                "description": "Ajoute une résistance au poison pendant 1 heure (n'accorde pas d'avantage automatique aux jets de sauvegarde contre le poison)"
+            },
+            "ProtectionFromThunder": {
+                "name": "Protection contre le tonnerre",
+                "description": "Ajoute une résistance aux dégâts du tonnerre pendant 1 heure"
+            },
+            "Rage": {
+                "name": "Rage",
+                "description": "Avantage sur les jets de caractéristique et de sauvegarde de force, un bonus variable aux dégâts de mêlée basé sur le niveau du barbare et une résistance aux dégâts perforants, contondants et tranchants pendant 1 minute",
+                "notABarbarian": "L'acteur sélectionné n'est pas un barbare",
+                "bearTotemFeat": "Esprit totem : Ours [Barbare - Voie du guerrier totem]"
+            },
+            "RangedDisadvantage": {
+                "name": "Attaques à distance dans un combat au corps à corps",
+                "description": "Inconvénient sur les jets d'attaque à distance"
+            },
+            "RayOfFrost": {
+                "name": "Rayon de givre",
+                "description": "Réduit le mouvement de 3 mètres"
+            },
+            "Reaction": {
+                "name": "Réaction",
+                "description": "Aucun effet actif et expire au début du tour"
+            },
+            "Ready": {
+                "name": "Se tenir prêt",
+                "description": "Aucun effet actif et expire au début du tour"
+            },
+            "RecklessAttack": {
+                "name": "Attaque téméraire [Barbare]",
+                "description": "Avantage sur les attaques de mêlée pendant un tour et accorde un avantage à ceux qui attaquent pendant 1 tour"
+            },
+            "RecklessAttackAdvantageOnAttacks": {
+                "name": "Attaque téméraire (avantage sur les attaques)",
+                "description": "Avantage sur les attaques de mêlée jusqu'à la fin du tour"
+            },
+            "Reduce": {
+                "name": "Rapetissement",
+                "description": "Soustrayez 1d4 aux dégâts et désavantages aux tests de force et aux jets de sauvegarde de force pendant 1 minute"
+            },
+            "Regenerate": {
+                "name": "Régénération",
+                "description": "Récupérez 1 point de vie au début de chaque tour pendant 1 heure"
+            },
+            "ResilientSphere": {
+                "name": "Sphère résiliente",
+                "description": "Ajoute une immunité totale à tous les dégâts et à la moitié des mouvements pendant 1 minute"
+            },
+            "Resistance": {
+                "name": "Résistance",
+                "description": "Ajoutez 1d4 à un seul jet de sauvegarde dans la minute suivante"
+            },
+            "Restrained": {
+                "name": "Entravé",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc inline]"
+            },
+            "Seizure": {
+                "name": "Convulsions",
+                "description": "Désavantage aux jets de caractéristique, sauvegarde et d'attaque basés sur la dextérité pendant 7 jours"
+            },
+            "Sharpshooter": {
+                "name": "Tireur d'élite",
+                "description": "Soustrait 5 aux jets d'attaque à distance mais ajoute 10 aux dégâts de l'attaque"
+            },
+            "Shield": {
+                "name": "Bouclier",
+                "description": "Ajoutez 5 à la CA jusqu'au prochain tour"
+            },
+            "ShieldOfFaith": {
+                "name": "Bouclier de la foi",
+                "description": "Ajoute 2 à la CA pendant 10 minutes"
+            },
+            "SlimyDoom": {
+                "name": "Mort poisseusex",
+                "description": "Désavantage aux jets de caractéristiquen et de sauvegarde de constitution"
+            },
+            "Slow": {
+                "name": "Lenteur",
+                "description": "Réduit de moitié le mouvement et soustrait 2 aux jets de sauvegarde de CA et de dextérité pendant 1 minute (réduit à une seule action)"
+            },
+            "SpeakWithAnimals": {
+                "name": "Communication avec les animaux",
+                "description": "Aucun effet actif et dure 10 minutes"
+            },
+            "SpeakWithDead": {
+                "name": "Communication avec les morts",
+                "description": "Aucun effet actif et dure 10 minutes"
+            },
+            "SpeakWithPlants": {
+                "name": "Communication avec les plantes",
+                "description": "Aucun effet actif et dure 10 minutes"
+            },
+            "SpiderClimb": {
+                "name": "Pattes d'araignéee",
+                "description": "Accorde une vitesse d'escalade égale à la vitesse de marche pendant 1 heure"
+            },
+            "SpiritGuardians": {
+                "name": "Esprits gardiens",
+                "description": "Aucun effet actif et dure 10 minutes"
+            },
+            "SpiritualWeapon": {
+                "name": "Arme spirituelle",
+                "description": "Aucun effet actif et dure 1 minute"
+            },
+            "Stoneskin": {
+                "name": "Peau de pierre",
+                "description": "Ajoute de la résistance aux dégâts physiques non magiques pendant 1 heure"
+            },
+            "Stunned": {
+                "name": "Étourdi",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS inline]"
+            },
+            "Suggestion": {
+                "name": "Suggestion",
+                "description": "Aucun effet actif et dure 8 heures"
+            },
+            "Telekinesis": {
+                "name": "Télékinésie",
+                "description": "Aucun effet actif et dure 10 minutes"
+            },
+            "Torch": {
+                "name": "Torche",
+                "description": "Ajoute une lampe torche pendant 1 heure (nécessite ATL)"
+            },
+            "TrueStrike": {
+                "name": "Coup au but",
+                "description": "Accorde un avantage lors de la prochaine attaque ou jusqu'à la fin du prochain tour"
+            },
+            "Unconscious": {
+                "name": "Inconscient",
+                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd inline]"
+            },
+            "ViciousMockery": {
+                "name": "Moquerie cruelle",
+                "description": "Accorde un désavantage lors de la prochaine attaque ou jusqu'à la fin du prochain tour"
+            },
+            "WardingBond": {
+                "name": "Lien de protection",
+                "description": "Ajoute 1 à la CA et aux jets de sauvegarde et confère une résistance à tous les dégâts pendant 1 heure"
+            },
+            "WaterBreathing": {
+                "name": "Respiration aquatique",
+                "description": "Aucun effet actif et dure 24 heures"
+            },
+            "WaterWalk": {
+                "name": "Marche sur l'onde",
+                "description": "Aucun effet actif et dure 1 heure"
+            },
+            "Wounded": {
+                "name": "Blessé",
+                "description": "Aucun effet actif"
+            }
+        }
     }
-  }
 }

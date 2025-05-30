@@ -40,8 +40,11 @@
         ],
         "typeRoots": [
             "node_modules/@types",
+            "types/convenientEffects",
             "types/foundry",
-            "types/libWrapper"
+            "types/libWrapper",
+            "types/statusEffects",
+            "types/uiExtender"
         ]
     },
     "watchOptions": {

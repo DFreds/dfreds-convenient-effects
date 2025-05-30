@@ -1,4 +1,6 @@
-export const DEBUG = false;
+import moduleData from "@static/module.json" assert { type: "json" };
+
+export const MODULE_ID = moduleData.id;
 
 export const COLORS = {
     COLD_FIRE: "#389888",
@@ -10,6 +12,7 @@ export const MODULE_IDS = {
     ATE: "ATL",
     MIDI: "midi-qol",
     TOKEN_MAGIC: "tokenmagic",
+    STATUS_EFFECTS: "dfreds-status-effects",
 };
 
 export const SECONDS = {

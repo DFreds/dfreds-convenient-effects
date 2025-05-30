@@ -31,7 +31,7 @@ declare class MeasuredTemplate<
     static override RENDER_FLAGS: {
         redraw: { propagate: ["refresh"] };
         refresh: { propagate: ["refreshState", "refreshShape"]; alias: true };
-        refreshState: {};
+        refreshState: object;
         refreshShape: {
             propagate: [
                 "refreshPosition",
@@ -40,10 +40,10 @@ declare class MeasuredTemplate<
                 "refreshTemplate",
             ];
         };
-        refreshTemplate: {};
+        refreshTemplate: object;
         refreshPosition: { propagate: ["refreshGrid"] };
-        refreshGrid: {};
-        refreshText: {};
+        refreshGrid: object;
+        refreshText: object;
     };
 
     /* -------------------------------------------- */

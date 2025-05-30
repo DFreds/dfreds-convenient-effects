@@ -1,9 +1,19 @@
+import type {
+    ApplicationClosingOptions,
+    ApplicationConfiguration,
+    ApplicationFormConfiguration,
+    ApplicationHeaderControlsEntry,
+    ApplicationRenderContext,
+    ApplicationRenderOptions,
+    ApplicationTabsConfiguration,
+} from "../_types.d.ts";
+
 /** The Application class is responsible for rendering an HTMLElement into the Foundry Virtual Tabletop user interface. */
-export default class ApplicationV2<
+export default abstract class ApplicationV2<
     TConfig extends ApplicationConfiguration = ApplicationConfiguration,
     TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions,
 > {
-    constructor(options: Partial<TConfig>);
+    constructor(options?: DeepPartial<TConfig>);
 
     /**
      * Designates which upstream Application class in this class' inheritance chain is the base application.
@@ -12,7 +22,9 @@ export default class ApplicationV2<
      */
     static BASE_APPLICATION: ApplicationV2;
 
-    static DEFAULT_OPTIONS: Partial<ApplicationConfiguration>;
+    static DEFAULT_OPTIONS: DeepPartial<ApplicationConfiguration>;
+
+    static TABS: Record<string, ApplicationTabsConfiguration>;
 
     static RENDER_STATES: {
         ERROR: -3;
@@ -35,8 +47,8 @@ export default class ApplicationV2<
         close: HTMLButtonElement;
         controls: HTMLButtonElement;
         controlsDropdown: HTMLDivElement;
-        onDrag: Function;
-        onResize: Function;
+        onDrag: (event: DragEvent) => void;
+        onResize: (event: DragEvent) => void;
         pointerStartPosition: ApplicationPosition;
         pointerMoveThrottle: boolean;
     };
@@ -130,9 +142,7 @@ export default class ApplicationV2<
      * @param options  Options which configure application rendering behavior
      * @returns Context data for the render operation
      */
-    protected _prepareContext(
-        options: TRenderOptions,
-    ): Promise<ApplicationRenderContext>;
+    protected _prepareContext(options: TRenderOptions): Promise<object>;
 
     /**
      * Configure the array of header control menu options
@@ -148,7 +158,7 @@ export default class ApplicationV2<
      * @returns            The result of HTML rendering may be implementation specific.
      *                     Whatever value is returned here is passed to _replaceHTML
      */
-    protected _renderHTML(
+    protected abstract _renderHTML(
         context: ApplicationRenderContext,
         options: TRenderOptions,
     ): Promise<unknown>;
@@ -160,7 +170,7 @@ export default class ApplicationV2<
      * @param content                 The content element into which the rendered result must be inserted
      * @param options                 Options which configure application rendering behavior
      */
-    protected _replaceHTML(
+    protected abstract _replaceHTML(
         result: unknown,
         content: HTMLElement,
         options: TRenderOptions,
@@ -296,7 +306,7 @@ export default class ApplicationV2<
      * @param options      Provided render options
      */
     protected _preFirstRender(
-        context: ApplicationRenderContext,
+        context: Record<string, unknown>,
         options: TRenderOptions,
     ): Promise<void>;
 
@@ -307,9 +317,9 @@ export default class ApplicationV2<
      * @param  options                 Provided render options
      */
     protected _onFirstRender(
-        context: ApplicationRenderContext,
+        context: object,
         options: TRenderOptions,
-    ): void;
+    ): Promise<void>;
 
     /**
      * Actions performed before any render of the Application.
@@ -318,7 +328,7 @@ export default class ApplicationV2<
      * @param options      Provided render options
      */
     protected _preRender(
-        context: ApplicationRenderContext,
+        context: object,
         options: TRenderOptions,
     ): Promise<void>;
 
@@ -328,10 +338,7 @@ export default class ApplicationV2<
      * @param context      Prepared context data
      * @param options      Provided render options
      */
-    protected _onRender(
-        context: ApplicationRenderContext,
-        options: TRenderOptions,
-    ): void;
+    protected _onRender(context: object, options: TRenderOptions): void;
 
     /**
      * Actions performed before closing the Application.
@@ -415,4 +422,26 @@ export default class ApplicationV2<
         element: HTMLElement,
         timeout: number,
     ): Promise<void>;
+
+    /**
+     * Create a ContextMenu instance used in this Application.
+     * @param  handler  A handler function that provides initial context options
+     * @param selector                   A CSS selector to which the ContextMenu will be bound
+     * @param options                  Additional options which affect ContextMenu construction
+     * @param options.container        A parent HTMLElement which contains the selector target
+     * @param options.hookName         The hook name
+     * @param options.parentClassHooks Whether to call hooks for the parent classes in the inheritance chain.
+     * @returns A created ContextMenu or null if no menu items were defined
+     * @protected
+     */
+    _createContextMenu(
+        handler: () => ContextMenuEntry[],
+        selector: string,
+        options?: {
+            container?: HTMLElement;
+            hookName?: string;
+            parentClassHooks?: boolean;
+            [key: string]: any;
+        },
+    ): ContextMenu | null;
 }

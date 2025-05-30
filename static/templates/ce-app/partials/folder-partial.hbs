@@ -1,0 +1,37 @@
+<li
+    class="directory-item folder flexcol"
+    data-folder-id="{{ data.folder.id }}"
+    data-uuid="{{ data.folder.uuid }}"
+    data-folder-depth="1"
+    draggable="false"
+>
+
+    {{!-- Folder Control --}}
+    <header class="folder-header" style="background-color: {{ getFolderColor data.folder }};" data-action="toggleFolder">
+        <i class="fa-solid fa-folder-open fa-fw" inert></i>
+        <span class="folder-name ellipsis">{{ data.folder.name }}</span>
+
+        {{{convenientFolderIcons data.folder}}}
+
+        {{#unless @root.isBackup}}
+            {{#if (canCreateEffects data.folder)}}
+                <button
+                    type="button"
+                    class="create-button create-entry icon icon-plus {{ @root.sidebarIcon }}"
+                    data-tooltip data-action="createEntry"
+                    aria-label="{{ localize "SIDEBAR.Create" type=@root.label }}">
+                </button>
+            {{/if}}
+        {{/unless}}
+    </header>
+
+    {{!-- Folder Contents --}}
+    <ol
+        class="subdirectory plain"
+        style="border-left-color: {{ getFolderColor data.folder }};"
+    >
+        {{~#each data.effects}}
+            {{> (lookup @root "entryPartial") effect=this }}
+        {{/each}}
+    </ol>
+</li>

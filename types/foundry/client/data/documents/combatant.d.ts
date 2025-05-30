@@ -83,10 +83,8 @@ declare global {
         _getInitiativeFormula(): string;
     }
 
-    interface Combatant<
-        TParent extends Combat | null,
-        TTokenDocument extends TokenDocument | null = TokenDocument | null,
-    > extends ClientBaseCombatant<TParent> {
+    interface Combatant<TParent extends Combat | null>
+        extends ClientBaseCombatant<TParent> {
         _sheet: CombatantConfig<this>;
     }
 }

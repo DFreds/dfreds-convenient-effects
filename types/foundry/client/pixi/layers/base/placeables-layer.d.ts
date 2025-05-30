@@ -277,7 +277,7 @@ declare global {
          */
         updateAll(
             transformation: (document: TObject) => Record<string, unknown>,
-            condition?: Function | null,
+            condition?: ((...args: unknown[]) => boolean) | null,
             options?: DatabaseCreateOperation<TObject["document"]["parent"]>,
         ): Promise<TObject["document"][]>;
 
@@ -321,7 +321,7 @@ declare global {
          */
         protected override _onDragLeftStart(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<TObject | void>;
+        ): TObject | void;
 
         /**
          * Continue a left-click drag workflow originating from the Canvas stage.
@@ -337,7 +337,7 @@ declare global {
          */
         protected override _onDragLeftDrop(
             event: PlaceablesLayerPointerEvent<TObject>,
-        ): Promise<void>;
+        ): void;
 
         /**
          * Cancel a left-click drag workflow originating from the Canvas stage.

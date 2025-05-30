@@ -1,207 +1,38 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "./settings.ts";
 import {
-    findActorByUuid,
-    findActorByUuidSync,
+    findDocumentByUuidSync,
     findAllEffects,
     findFolder,
     findFolders,
+    findDocumentByUuid,
 } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
 import { Flags } from "./utils/flags.ts";
 import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
-import { ItemSource } from "types/foundry/common/documents/item.js";
 import {
     createConvenientEffect,
     createConvenientItem,
 } from "./utils/creates.ts";
 import Document from "types/foundry/common/abstract/document.js";
+import { Sockets } from "./sockets/sockets.ts";
 
-interface IFindEffects {
-    /**
-     * If the find should look at the backup items. Defaults to false
-     */
-    backup?: boolean;
-}
-
-interface IFindEffect {
-    /**
-     * The foundry folder (item) ID. If included, it will only search this
-     * folder
-     */
-    folderId?: string | null;
-
-    /**
-     * The foundry effect ID or the CE effect ID
-     */
-    effectId?: string | null;
-
-    /**
-     * The effect name
-     */
-    effectName?: string | null;
-
-    /**
-     * If the find should look at the backup items. Defaults to false
-     */
-    backup?: boolean;
-}
-
-interface IHasEffectApplied {
-    /**
-     * The foundry effect ID or the CE effect ID
-     */
-    effectId?: string;
-
-    /**
-     * The effect name
-     */
-    effectName?: string;
-
-    /**
-     * The UUID of the actor
-     */
-    uuid: string;
-}
-
-interface IToggleEffect {
-    /**
-     * The foundry effect ID or the CE effect ID
-     */
-    effectId?: string;
-
-    /**
-     * The effect name
-     */
-    effectName?: string;
-
-    /**
-     * The UUIDs of the actors. Set to an empty array by default
-     */
-    uuids?: string[];
-
-    /**
-     * Applies the effect as an overlay or not. Set to false by default
-     */
-    overlay?: boolean;
-
-    /**
-     * Toggles effects on targets over selected tokens if set to true. Set to
-     * false by default.
-     */
-    prioritizeTargets?: boolean;
-
-    /**
-     * The origin of the effect. If toggling off, it will only remove the effect
-     * if the origin matches.
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-interface IAddEffect {
-    /**
-     * The foundry effect ID or the CE effect ID. If defined, prioritized over
-     * `effectName` and `effectData`.
-     */
-    effectId?: string;
-
-    /**
-     * The name of the effect to add. If defined, prioritized over
-     * `effectData`.
-     */
-    effectName?: string;
-
-    /**
-     * The effect data to add. This is used to apply an effect that is NOT
-     * already defined.
-     */
-    effectData?: PreCreate<ActiveEffectSource>;
-
-    /**
-     * The UUID of the actor
-     */
-    uuid: string;
-
-    /**
-     * Applies the effect as an overlay or not. Set to false by default.
-     */
-    overlay?: boolean;
-
-    /**
-     * The origin of the effect
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-interface IRemoveEffect {
-    /**
-     * The foundry effect ID or the CE effect ID to remove. If defined,
-     * prioritized over `effectName`
-     */
-    effectId?: string;
-
-    /**
-     * The name of the effect to remove
-     */
-    effectName?: string;
-
-    /**
-     * The UUID of the actor
-     */
-    uuid: string;
-
-    /**
-     * The origin of the effect. If defined, only removes the effect if the
-     * origin matches
-     */
-    origin?: ActiveEffectOrigin | null;
-}
-
-interface ICreateNewEffects {
-    /**
-     * The ID of the existing folder to add the effects to. If defined,
-     * prioritized over `folder`
-     */
-    existingFolderId?: string;
-
-    /**
-     * The folder to add the effects to
-     */
-    newFolderData?: PreCreate<ItemSource>;
-
-    /**
-     * The effects to create
-     */
-    effectsData: PreCreate<ActiveEffectSource>[];
-}
-
-class EffectInterface {
+class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
+    #sockets: Sockets;
 
-    constructor() {
+    constructor({ sockets }: { sockets: Sockets }) {
         this.#settings = new Settings();
+        this.#sockets = sockets;
     }
 
-    /**
-     * Finds all defined effects
-     *
-     * @param params - The parameters to find effects
-     * @returns The list of active effects
-     */
     findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<
         Item<null>
     >[] {
         return findAllEffects({ backup });
     }
 
-    /**
-     * Searches through the list of available effects and returns one matching
-     * either the effect ID or effect name.
-     *
-     * @param params - The parameters to find the effect
-     * @returns The active effect or undefined if it can't be found
-     */
     findEffect({
         folderId,
         effectId,
@@ -240,24 +71,15 @@ class EffectInterface {
         return matchingEffects[0];
     }
 
-    /**
-     * Checks to see if any of the current active effects applied to the actor
-     * with the given UUID match the effect ID or name and are a convenient
-     * effect
-     *
-     * @param options - The options to determine if the effect is applied
-     * @returns true if the effect is applied to the actor and is a convenient
-     * effect, false otherwise
-     */
     hasEffectApplied({
         effectId,
         effectName,
         uuid,
     }: IHasEffectApplied): boolean {
-        const actor = findActorByUuidSync(uuid);
+        const document = findDocumentByUuidSync(uuid);
 
         return (
-            actor?.effects?.some((effect) => {
+            document?.effects?.some((effect) => {
                 const isConvenient = Flags.isConvenient(effect);
                 const isEnabled = !effect.disabled;
                 const isMatchingId = effect.id === effectId;
@@ -273,17 +95,6 @@ class EffectInterface {
         );
     }
 
-    /**
-     * Toggles the effect on the provided actor UUIDS as the GM via sockets. If
-     * no actor UUIDs are provided, it finds one of these in this priority:
-     *
-     * 1. The targeted tokens (if prioritize targets is enabled)
-     * 2. The currently selected tokens on the canvas
-     * 3. The user configured character
-     *
-     * @param options - the options for toggling an effect
-     * @returns A promise that resolves when all effects are added
-     */
     async toggleEffect({
         effectId,
         effectName,
@@ -292,12 +103,12 @@ class EffectInterface {
         prioritizeTargets = false,
         origin,
     }: IToggleEffect): Promise<void> {
-        let actorUuids = uuids;
-        if (actorUuids.length === 0) {
-            actorUuids = getActorUuids(prioritizeTargets);
+        let documentUuids = uuids;
+        if (documentUuids.length === 0) {
+            documentUuids = getActorUuids(prioritizeTargets);
         }
 
-        if (actorUuids.length === 0) {
+        if (documentUuids.length === 0) {
             ui.notifications.warn(
                 `Please select or target a token to toggle this effect`,
             );
@@ -314,7 +125,7 @@ class EffectInterface {
             return;
         }
 
-        for (const uuid of actorUuids) {
+        for (const uuid of documentUuids) {
             const hasEffectApplied = this.hasEffectApplied({
                 effectId:
                     effectDataToSend._id ??
@@ -346,13 +157,6 @@ class EffectInterface {
         }
     }
 
-    /**
-     * Adds an effect matching the given params to the actor of the given UUID.
-     * The effect adding is sent via a socket.
-     *
-     * @param options - the options for adding an effect
-     * @returns A promise that resolves when the effect is sent via the socket
-     */
     async addEffect({
         effectId,
         effectName,
@@ -372,9 +176,9 @@ class EffectInterface {
             return [];
         }
 
-        const actor = await findActorByUuid(uuid);
-        if (!actor) {
-            error(`Actor ${uuid} could not be found`);
+        const document = await findDocumentByUuid(uuid);
+        if (!document) {
+            error(`Document ${uuid} could not be found`);
             return [];
         }
 
@@ -388,20 +192,14 @@ class EffectInterface {
             effectDataToSend.origin = origin;
         }
 
-        return game.dfreds.sockets.emitAddEffect({
-            effectData: effectDataToSend,
-            uuid,
-        });
+        return (
+            this.#sockets.emitAddEffect({
+                effectData: effectDataToSend,
+                uuid,
+            }) ?? []
+        );
     }
 
-    /**
-     * Removes an effect matching the given params from an actor of the given
-     * UUID. The effect removal is sent via a socket.
-     *
-     * @param options - the options for removing an effect
-     * @returns A promise that resolves when the removal request is sent via the
-     * socket
-     */
     async removeEffect({
         effectId,
         effectName,
@@ -418,13 +216,13 @@ class EffectInterface {
             return;
         }
 
-        const actor = await findActorByUuid(uuid);
-        if (!actor) {
-            error(`Actor ${uuid} could not be found`);
+        const document = await findDocumentByUuid(uuid);
+        if (!document) {
+            error(`Document ${uuid} could not be found`);
             return;
         }
 
-        return game.dfreds.sockets.emitRemoveEffect({
+        return this.#sockets.emitRemoveEffect({
             effectId:
                 effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
             effectName: effectDataToSend.name,
@@ -433,13 +231,6 @@ class EffectInterface {
         });
     }
 
-    /**
-     * Creates effects on either an existing folder with `folderId` or on a new
-     * folder using the data provided by `folder`.
-     *
-     * @param options - the options for creating effects
-     * @returns A promise that resolves when the effect creation is complete
-     */
     async createNewEffects({
         existingFolderId,
         newFolderData,
@@ -482,12 +273,6 @@ class EffectInterface {
         }
     }
 
-    /**
-     * Completely resets the world, re-initializing all effects and re-running
-     * migrations after the forced reload.
-     *
-     * @returns A promise that resolves when the reset is complete
-     */
     async resetSystemInitialization({
         confirm = true,
     }: {
@@ -533,4 +318,4 @@ class EffectInterface {
     }
 }
 
-export { EffectInterface };
+export { EffectInterfaceImpl as EffectInterface };

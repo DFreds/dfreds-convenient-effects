@@ -4,6 +4,7 @@ export * as api from "./api/module.ts";
 export * as elements from "./elements/module.ts";
 export * as fields from "./forms/fields.ts";
 export * as sheets from "./sheets/module.ts";
+export * as sidebar from "./sidebar/module.ts";
 
 export const instances: Map<number, ApplicationV2>;
 

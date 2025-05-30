@@ -3,23 +3,26 @@
         "AppName": "Convenient Effects",
         "BackupAppName": "Backup Convenient Effects",
 
-        "SettingPlayer": "Player",
-        "SettingTrustedPlayer": "Trusted Player",
-        "SettingAssistantGM": "Assistant GM",
-        "SettingGameMaster": "Game Master",
-        "SettingNone": "None",
+        "Setting": {
+            "Player": "Player",
+            "TrustedPlayer": "Trusted Player",
+            "AssistantGM": "Assistant GM",
+            "GameMaster": "Game Master",
+            "None": "None",
 
-        "SettingAppControlsPermissionName": "App Controls Permission",
-        "SettingAppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
+            "AppControlsPermissionName": "App Controls Permission",
+            "AppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
 
-        "SettingCreateFoldersPermissionName": "Create Folders Permission",
-        "SettingCreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
+            "CreateFoldersPermissionName": "Create Folders Permission",
+            "CreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work."
+        },
 
-        "KeybindingToggleAppName": "Toggle Convenient Effects App",
-        "KeybindingToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open.",
+        "Keybinding": {
+            "ToggleAppName": "Toggle Convenient Effects App",
+            "ToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open."
+        },
 
-        "CreateFolder": "Create Folder",
-        "CreateEffect": "Create Effect",
+        "SearchEffects": "Search Effects",
         "ViewBackups": "View Backups",
         "ShowFolder": "Show Folder",
         "HideFolder": "Hide Folder",
@@ -31,33 +34,59 @@
         "DeleteEffect": "Delete Effect",
         "ShowEffect": "Show Effect",
         "HideEffect": "Hide Effect",
+        "ToggleConvenientEffect": "Toggle Convenient Effect",
         "ToggleAsOverlay": "Toggle as Overlay",
+        "ToggleStatusEffect": "Toggle Status Effect",
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
+        "SelectEffect": "Select Effect",
+        "NoPermissionToRemoveEffect": "You do not have permission to remove the effect {effectName} from {originalFolderName}. Duplicated effect onto {newFolderName}",
+        "NoPermissionToAddEffect": "You do not have permission to add effect {effectName} to folder {newFolderName}",
 
-        "ConfigLabel": "Convenient",
-        "ConfigFoundryEffectIdLabel": "Foundry Effect ID",
-        "ConfigFoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
-        "ConfigConvenientEffectIdLabel": "Convenient Effect ID",
-        "ConfigConvenientEffectIdHint": "This is the Convenient effect ID and can be used for finding, adding, or removing an effect.",
-        "ConfigTemporaryLabel": "Temporary",
-        "ConfigTemporaryHint": "If checked, this effect will always be labeled as a temporary effect, even if it doesn't have a duration or status.",
-        "ConfigViewableLabel": "Viewable",
-        "ConfigViewableHint": "If checked, this effect will always be shown in the application.",
-        "ConfigDynamicLabel": "Dynamic",
-        "ConfigDynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data. This cannot be changed and is used for very specific effect cases.",
-        "ConfigNestedEffectsLabel": "Nested Effects",
-        "ConfigNestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
-        "ConfigSubEffectsLabel": "Sub-Effects",
-        "ConfigSubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
-        "ConfigOtherEffectsLabel": "Other Effects",
-        "ConfigOtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed.",
+        "FolderHidden": "Folder Hidden",
+        "Passive": "Passive",
+        "EffectHidden": "Effect Hidden",
+        "HasNestedEffects": "Has Nested Effects",
+        "IsNestedEffect": "Is Nested Effect",
+        "StatusEffect": "Status Effect",
+        "MidiQolEffects": "Midi-QoL Effects",
+        "AtlEffects": "ATL Effects",
+        "TokenMagicEffects": "Token Magic Effects",
+
+        "Config": {
+            "Title": "Convenient Config",
+            "FoundryEffectIdLabel": "Foundry Effect ID",
+            "FoundryEffectIdHint": "This is the foundry effect ID and can be used for finding, adding, or removing an effect.",
+            "ConvenientEffectIdLabel": "Convenient Effect ID",
+            "ConvenientEffectIdHint": "This is the Convenient effect ID and can be used for finding, adding, or removing an effect.",
+            "TemporaryLabel": "Temporary",
+            "TemporaryHint": "If checked, this effect will always be labeled as a temporary effect, even if it doesn't have a duration or status.",
+            "ViewableLabel": "Viewable",
+            "ViewableHint": "If checked, this effect will always be shown in the application.",
+            "DynamicLabel": "Dynamic",
+            "DynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data. This cannot be changed and is used for very specific effect cases.",
+            "NestedEffectsLabel": "Nested Effects",
+            "NestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
+            "SubEffectsLabel": "Sub-Effects",
+            "SubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
+            "OtherEffectsLabel": "Other Effects",
+            "OtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed.",
+
+            "IDsTab": "IDs",
+            "FlagsTab": "Flags",
+            "DependentEffectsTab": "Dependent Effects"
+        },
+
+        "Initializing": "Initializing convenient effects...",
+        "FinishedInitializing": "Finished initializing convenient effects",
+
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
                 "Spells": "Spells",
                 "ClassFeatures": "Class Features",
                 "Equipment": "Equipment",
+                "MagicItems": "Magic Items",
                 "Other": "Other"
             },
             "AcidArrow": {
@@ -71,6 +100,10 @@
             "AlterSelf": {
                 "name": "Alter Self",
                 "description": "No active effects and lasts for 1 hour"
+            },
+            "AmuletOfHealth": {
+                "name": "Amulet of Health",
+                "description": "Upgrade constitution to 19"
             },
             "AntilifeShell": {
                 "name": "Antilife Shell",
@@ -116,6 +149,38 @@
                 "name": "Bear's Endurance",
                 "description": "Advantage on constitution checks and 2d6 temp hit points for 1 hour"
             },
+            "BeltOfDwarvenkind": {
+                "name": "Belt of Dwarvenkind",
+                "description": "- Adds +2 to constitution to a maximum of 20<br/>- Adds poison resistance<br/>- Adds darkvision<br/>- Adds dwarvish language"
+            },
+            "BeltOfGiantStrength": {
+                "name": "Belt of Giant Strength",
+                "description": "Choose between the Belt of Hill Giant Strength, Belt of Frost Giant Strength, Belt of Stone Giant Strength, Belt of Fire Giant Strength, Belt of Cloud Giant Strength, or Belt of Storm Giant Strength"
+            },
+            "BeltOfHillGiantStrength": {
+                "name": "Belt of Hill Giant Strength",
+                "description": "Upgrades strength to 21"
+            },
+            "BeltOfFrostGiantStrength": {
+                "name": "Belt of Frost Giant Strength",
+                "description": "Upgrades strength to 23"
+            },
+            "BeltOfStoneGiantStrength": {
+                "name": "Belt of Stone Giant Strength",
+                "description": "Upgrades strength to 23"
+            },
+            "BeltOfFireGiantStrength": {
+                "name": "Belt of Fire Giant Strength",
+                "description": "Upgrades strength to 25"
+            },
+            "BeltOfCloudGiantStrength": {
+                "name": "Belt of Cloud Giant Strength",
+                "description": "Upgrades strength to 27"
+            },
+            "BeltOfStormGiantStrength": {
+                "name": "Belt of Storm Giant Strength",
+                "description": "Upgrades strength to 29"
+            },
             "BlackTentacles": {
                 "name": "Black Tentacles",
                 "description": "Apply the effects of the restrained condition for 1 minute"
@@ -147,6 +212,26 @@
             "BonusAction": {
                 "name": "Bonus Action",
                 "description": "No active effects and expires on turn start"
+            },
+            "BootsOfElvenkind": {
+                "name": "Boots of Elvenkind",
+                "description": "Advantage on stealth checks"
+            },
+            "BootsOfTheWinterlands": {
+                "name": "Boots of the Winterlands",
+                "description": "Adds damage resistance to cold"
+            },
+            "BroochOfShielding": {
+                "name": "Brooch of Shielding",
+                "description": "Adds damage resistance to force"
+            },
+            "BracersOfArchery": {
+                "name": "Bracers of Archery",
+                "description": "- Adds +2 to ranged attack damage<br/>- Adds proficiency in longbow and shortbow"
+            },
+            "BracersOfDefense": {
+                "name": "Bracers of Defense",
+                "description": "- Adds +2 to AC"
             },
             "BullsStrength": {
                 "name": "Bull's Strength",
@@ -183,6 +268,22 @@
             "Charmed": {
                 "name": "Charmed",
                 "description": "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature."
+            },
+            "CloakOfDisplacement": {
+                "name": "Cloak of Displacement",
+                "description": "Grants disadvantage to all who attack"
+            },
+            "CloakOfElvenkind": {
+                "name": "Cloak of Elvenkind",
+                "description": "Advantage on stealth checks"
+            },
+            "CloakOfProtection": {
+                "name": "Cloak of Protection",
+                "description": "Adds +1 to AC and +1 to all saving throws"
+            },
+            "CloakOfTheMantaRay": {
+                "name": "Cloak of the Manta Ray",
+                "description": "Adds swim speed of 60 ft"
             },
             "Command": {
                 "name": "Command",
@@ -288,6 +389,10 @@
                 "name": "Exhaustion 5",
                 "description": "Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved"
             },
+            "EyesOfTheEagle": {
+                "name": "Eyes of the Eagle",
+                "description": "Advantage on perception checks"
+            },
             "FaerieFire": {
                 "name": "Faerie Fire",
                 "description": "Grants advantage to all who attack for 1 minute"
@@ -356,9 +461,17 @@
                 "name": "Frightened",
                 "description": "- A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.<br />- The creature can't willingly move closer to the source of its fear."
             },
+            "GauntletsOfOgrePower": {
+                "name": "Gauntlets of Ogre Power",
+                "description": "Upgrades strength to 19"
+            },
             "GlobeOfInvulnerability": {
                 "name": "Globe of Invulnerability",
                 "description": "No active effects and lasts for 1 minute"
+            },
+            "GogglesOfNight": {
+                "name": "Goggles of Night",
+                "description": "Adds 60 ft. of darkvision"
             },
             "Grappled": {
                 "name": "Grappled",
@@ -383,6 +496,10 @@
             "Haste": {
                 "name": "Haste",
                 "description": "Double speed, add 2 to AC, and advantage on dexterity saving throws for 1 minute"
+            },
+            "HeadbandOfIntellect": {
+                "name": "Headband of Intellect",
+                "description": "Upgrades intelligence to 19"
             },
             "HeavilyEncumbered": {
                 "name": "Heavily Encumbered",
@@ -468,6 +585,10 @@
                 "name": "Mage Armor",
                 "description": "Upgrades armor to 13 + dex modifier for 8 hours"
             },
+            "MantleOfSpellResistance": {
+                "name": "Mantle of Spell Resistance",
+                "description": "Adds advantage on saving throws against spells"
+            },
             "MindBlank": {
                 "name": "Mind Blank",
                 "description": "Adds immunity to psychic damage for 24 hours"
@@ -491,6 +612,14 @@
             "PassWithoutTrace": {
                 "name": "Pass without Trace",
                 "description": "Add 10 to stealth checks for 1 hour"
+            },
+            "PeriaptOfHealth": {
+                "name": "Periapt of Health",
+                "description": "Adds immunity to diseased"
+            },
+            "PeriaptOfProofAgainstPoison": {
+                "name": "Periapt of Proof Against Poison",
+                "description": "Adds immunity to poison damage and the poisoned condition"
             },
             "Petrified": {
                 "name": "Petrified",
@@ -586,6 +715,74 @@
                 "name": "Restrained",
                 "description": "- A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.<br />- The creature has disadvantage on Dexterity saving throws."
             },
+            "RingOfResistance": {
+                "name": "Ring of Resistance",
+                "description": "Choose between acid, cold, fire, force, lightning, necrotic, poison, psychic, radiant, or thunder resistance"
+            },
+            "RingOfAcidResistance": {
+                "name": "Ring of Acid Resistance",
+                "description": "Adds acid resistance"
+            },
+            "RingOfColdResistance": {
+                "name": "Ring of Cold Resistance",
+                "description": "Adds cold resistance"
+            },
+            "RingOfFireResistance": {
+                "name": "Ring of Fire Resistance",
+                "description": "Adds fire resistance"
+            },
+            "RingOfForceResistance": {
+                "name": "Ring of Force Resistance",
+                "description": "Adds force resistance"
+            },
+            "RingOfLightningResistance": {
+                "name": "Ring of Lightning Resistance",
+                "description": "Adds lightning resistance"
+            },
+            "RingOfNecroticResistance": {
+                "name": "Ring of Necrotic Resistance",
+                "description": "Adds necrotic resistance"
+            },
+            "RingOfPoisonResistance": {
+                "name": "Ring of Poison Resistance",
+                "description": "Adds poison resistance"
+            },
+            "RingOfPsychicResistance": {
+                "name": "Ring of Psychic Resistance",
+                "description": "Adds psychic resistance"
+            },
+            "RingOfRadiantResistance": {
+                "name": "Ring of Radiant Resistance",
+                "description": "Adds radiant resistance"
+            },
+            "RingOfThunderResistance": {
+                "name": "Ring of Thunder Resistance",
+                "description": "Adds thunder resistance"
+            },
+            "RingOfFreeAction": {
+                "name": "Ring of Free Action",
+                "description": "Adds immunity to paralyzed and restrained"
+            },
+            "RingOfSwimming": {
+                "name": "Ring of Swimming",
+                "description": "Adds swim speed of 40 ft"
+            },
+            "RingOfWarmth": {
+                "name": "Ring of Warmth",
+                "description": "Adds cold resistance"
+            },
+            "RobeOfEyes": {
+                "name": "Robe of Eyes",
+                "description": "Advantage on perception checks, upgrade darkvision to 120 ft., and upgrade truesight to 120 ft."
+            },
+            "RobeOfStars": {
+                "name": "Robe of Stars",
+                "description": "Adds +1 to all saving throws"
+            },
+            "RobeOfTheArchmagi": {
+                "name": "Robe of the Archmagi",
+                "description": "Sets base AC to 15 + dex modifier, adds advantage on saving throws against spells, and adds +2 to spell attack rolls and spell DC"
+            },
             "Seizure": {
                 "name": "Seizure",
                 "description": "Disadvantage on dexterity checks, dexterity saving throws, and attacks that use dexterity for 7 days"
@@ -637,6 +834,10 @@
             "Stoneskin": {
                 "name": "Stoneskin",
                 "description": "Adds resistance to non-magical physical damage for 1 hour"
+            },
+            "StoneOfGoodLuck": {
+                "name": "Stone of Good Luck",
+                "description": "Adds +1 to all checks and saves"
             },
             "Stunned": {
                 "name": "Stunned",

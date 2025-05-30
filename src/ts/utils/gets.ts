@@ -1,3 +1,5 @@
+import { MODULE_ID } from "../constants.ts";
+
 /**
  * Gets all UUIDs for selected or targeted tokens
  *
@@ -24,9 +26,14 @@ function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
     }
 }
 
-function getBaseType(): string {
+function getItemType(): string {
     const types = Object.keys(CONFIG.Item.typeLabels);
-    return types[0] ?? "";
+    // Use the last type in the list because the first is usually "base" and that can be problematic
+    return types[types.length - 1] ?? "";
+}
+
+function getApi(): EffectInterface {
+    return (game.modules.get(MODULE_ID) as ConvenientEffectsModule).api;
 }
 
 // function effectsByActorMappings(): {
@@ -50,4 +57,4 @@ function getBaseType(): string {
 //         });
 // }
 
-export { getActorUuids, getBaseType };
+export { getActorUuids, getItemType, getApi };

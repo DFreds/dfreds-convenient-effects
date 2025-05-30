@@ -1,53 +1,39 @@
-.integration-icon {
-    margin-right: 12px;
-    flex: none;
-    align-self: center;
+#convenientEffects {
+    .ce-inline-control {
+        color: var(--color-text-dark-5);
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        &:hover {
+            background-color: var(--color-cool-3);
+        }
+
+        &[aria-pressed="true"] {
+            color: var(--button-text-color);
+            background-color: var(--color-cool-3);
+        }
+    }
+
+    .integration-icon {
+        margin-right: 12px;
+        flex: none;
+        align-self: center;
+    }
 }
 
-.show-hidden-effects {
-    color: var(--color-text-dark-5);
-}
+#convenient-effect-config {
+    fieldset {
+        margin-bottom: 1rem;
 
-.show-hidden-effects.active {
-    color: var(--color-text-light-1);
-}
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
-.show-nested-effects {
-    color: var(--color-text-dark-5);
-}
-
-.folder-icon {
-    position: relative;
-    flex: 0 0 20px;
-    margin-left: 3px;
-    text-align: center;
-}
-
-.show-nested-effects.active {
-    color: var(--color-text-light-1);
-}
-
-.prioritize-targets {
-    color: var(--color-text-dark-5);
-}
-
-.prioritize-targets.active {
-    color: var(--color-text-light-1);
-}
-
-#nested-effects-dialog {
-    margin-bottom: 1em;
-}
-
-#nested-effects-dialog label {
-    flex: 0 0 120px;
-}
-
-#nested-effects-dialog select {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-#nested-effect-descriptions {
-    flex-direction: column;
+    .hint {
+        margin-bottom: 16px;
+    }
 }

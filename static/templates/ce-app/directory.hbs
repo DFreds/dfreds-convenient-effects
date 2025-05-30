@@ -1,0 +1,5 @@
+<ol class="directory-list plain">
+    {{#each folderData}}
+        {{> (lookup @root "folderPartial") data=this }}
+    {{/each}}
+</ol>

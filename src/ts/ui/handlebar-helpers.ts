@@ -1,52 +1,20 @@
 import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
-import { Settings } from "../settings.ts";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
+import { getApi } from "../utils/gets.ts";
 
 class HandlebarHelpers {
-    #settings: Settings;
-
-    constructor() {
-        this.#settings = new Settings();
-    }
-
     register(): void {
-        this.#registerInc();
-        this.#registerIsGm();
-        this.#registerCanCreateFolders();
         this.#registerCanCreateEffects();
         this.#registerGetCeEffectId();
         this.#registerIsTemporary();
         this.#registerIsViewable();
         this.#registerIsDynamic();
         this.#registerGetFolderColor();
-        this.#registerStripHtml();
         this.#registerConvenientFolderIcons();
         this.#registerConvenientEffectIcons();
-    }
-
-    #registerInc() {
-        Handlebars.registerHelper("inc", (value) => {
-            return parseInt(value) + 1;
-        });
-    }
-
-    #registerIsGm() {
-        Handlebars.registerHelper("isGm", () => {
-            return game.user.isGM;
-        });
-    }
-
-    #registerCanCreateFolders() {
-        Handlebars.registerHelper("canCreateFolders", () => {
-            const canCreateItems = game.user.hasPermission("ITEM_CREATE");
-            const settingEnabled =
-                game.user.role >= this.#settings.createFoldersPermission;
-
-            return canCreateItems && settingEnabled;
-        });
     }
 
     #registerCanCreateEffects() {
@@ -91,13 +59,6 @@ class HandlebarHelpers {
         });
     }
 
-    #registerStripHtml() {
-        Handlebars.registerHelper("stripHtml", (str: string) => {
-            const regExp = /<[/\w]+>/g;
-            return new Handlebars.SafeString(str.replace(regExp, ""));
-        });
-    }
-
     #registerConvenientFolderIcons() {
         Handlebars.registerHelper(
             "convenientFolderIcons",
@@ -107,7 +68,7 @@ class HandlebarHelpers {
                 if (!Flags.isViewable(folder)) {
                     icons += `
                         <div class="folder-icon">
-                            <i class="fas fa-eye-slash" title='Folder Hidden'></i>
+                            <i class="fas fa-eye-slash" data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.FolderHidden")}'></i>
                         </div>
                         `;
                 }
@@ -126,9 +87,7 @@ class HandlebarHelpers {
                 const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
                 const nestedEffects = nestedEffectIds
                     .map((id) => {
-                        return game.dfreds.effectInterface.findEffect({
-                            effectId: id,
-                        });
+                        return getApi().findEffect({ effectId: id });
                     })
                     .filter(notEmpty);
 
@@ -141,6 +100,10 @@ class HandlebarHelpers {
                     Flags.getCeEffectId(effect),
                     findAllNestedEffectIds({ backup: false }),
                 );
+
+                if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
+                    icons += this.#getStatusEffectsIcon(effect);
+                }
 
                 if (findModuleById(MODULE_IDS.MIDI)?.active) {
                     icons += this.#getMidiIcon(allChanges);
@@ -174,13 +137,13 @@ class HandlebarHelpers {
 
     #getPassiveIcon(effect: ActiveEffect<Item<null>>): string {
         return !effect.isTemporary
-            ? "<i class='fas fa-repeat integration-icon' title='Passive'></i>"
+            ? `<i class='fas fa-repeat integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.Passive")}'></i>`
             : "";
     }
 
     #getHiddenIcon(effect: ActiveEffect<Item<null>>): string {
         return !Flags.isViewable(effect)
-            ? "<i class='fas fa-eye-slash integration-icon' title='Effect Hidden'></i>"
+            ? `<i class='fas fa-eye-slash integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.EffectHidden")}'></i>`
             : "";
     }
 
@@ -188,7 +151,7 @@ class HandlebarHelpers {
         nestedEffects: ActiveEffect<Item<null>>[],
     ): string {
         return nestedEffects && nestedEffects.length > 0
-            ? "<i class='fas fa-trees integration-icon' title='Has Nested Effects'></i> "
+            ? `<i class='fas fa-trees integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.HasNestedEffects")}'></i> `
             : "";
     }
 
@@ -197,7 +160,23 @@ class HandlebarHelpers {
         nestedEffectIds: string[],
     ): string {
         return ceEffectId && nestedEffectIds?.includes(ceEffectId)
-            ? "<i class='fas fa-tree integration-icon' title='Is Nested Effect'></i> "
+            ? `<i class='fas fa-tree integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.IsNestedEffect")}'></i> `
+            : "";
+    }
+
+    #getStatusEffectsIcon(effect: ActiveEffect<Item<null>>): string {
+        const statusEffectsModule = findModuleById(
+            MODULE_IDS.STATUS_EFFECTS,
+        ) as StatusEffectsModule | undefined;
+
+        const statusEffectsApi = statusEffectsModule?.api;
+        const statusEffect = statusEffectsApi?.findStatusEffect({
+            effectId: Flags.getCeEffectId(effect),
+            effectName: effect.name,
+        });
+
+        return statusEffect
+            ? `<i class='fas fa-person-rays integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.StatusEffect")}'></i> `
             : "";
     }
 
@@ -205,13 +184,13 @@ class HandlebarHelpers {
         return changes.some((change) =>
             change.key?.startsWith("flags.midi-qol"),
         )
-            ? "<i class='fas fa-dice-d20 integration-icon' title='Midi-QoL Effects'></i> "
+            ? `<i class='fas fa-dice-d20 integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.MidiQolEffects")}'></i> `
             : "";
     }
 
     #getAteIcon(changes: DeepPartial<EffectChangeData>[]): string {
         return changes.some((change) => change.key?.startsWith("ATL"))
-            ? "<i class='fas fa-lightbulb integration-icon' title='ATL Effects'></i> "
+            ? `<i class='fas fa-lightbulb integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.AtlEffects")}'></i> `
             : "";
     }
 
@@ -219,7 +198,7 @@ class HandlebarHelpers {
         return changes.some((change) =>
             change.key?.startsWith("macro.tokenMagic"),
         )
-            ? "<i class='fas fa-wand-magic-sparkles integration-icon' title='Token Magic Effects'></i> "
+            ? `<i class='fas fa-wand-magic-sparkles integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.TokenMagicEffects")}'></i> `
             : "";
     }
 }

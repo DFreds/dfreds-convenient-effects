@@ -1,4 +1,3 @@
-import { DEBUG } from "../constants.ts";
 import { HandlebarHelpers } from "../ui/handlebar-helpers.ts";
 import { Listener } from "./index.ts";
 import { Settings } from "../settings.ts";
@@ -10,7 +9,7 @@ import { Keybindings } from "../keybindings.ts";
 const Init: Listener = {
     listen(): void {
         Hooks.once("init", () => {
-            CONFIG.debug.hooks = DEBUG;
+            CONFIG.debug.hooks = BUILD_MODE === "development";
             new Settings().register();
             new HandlebarHelpers().register();
             new Keybindings().register();

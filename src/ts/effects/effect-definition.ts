@@ -1,9 +1,8 @@
 import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
-import { log } from "../logger.ts";
-import { getBaseType } from "../utils/gets.ts";
+import { error, log } from "../logger.ts";
+import { getApi, getItemType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
-import { DEBUG } from "../constants.ts";
 import { Flags } from "../utils/flags.ts";
 
 abstract class EffectDefinition {
@@ -16,12 +15,31 @@ abstract class EffectDefinition {
     }
 
     async initialize(): Promise<void> {
-        if (DEBUG || !this.settings.hasInitialized) {
+        if (BUILD_MODE === "development") {
+            log(
+                `Debug mode is enabled, deleting any effects for ${this.systemId} and clearing migrations`,
+            );
+
+            await getApi().resetSystemInitialization({
+                confirm: false,
+            });
+
+            await this.settings.setHasInitialized(false);
+            await this.settings.clearRanMigrations();
+        }
+
+        if (!this.settings.hasInitialized) {
+            ui.notifications.info(
+                game.i18n.localize("ConvenientEffects.Initializing"),
+            );
             await this.#createItemsAndEffects({ backup: false });
             await this.#createItemsAndEffects({ backup: true });
 
             // Set initialized before migration runs
             await this.settings.setHasInitialized(true);
+            ui.notifications.info(
+                game.i18n.localize("ConvenientEffects.FinishedInitializing"),
+            );
         }
 
         await this.#runMigrations();
@@ -38,11 +56,11 @@ abstract class EffectDefinition {
     }): Promise<void> {
         const effectPromises = this.initialItemEffects.map(
             async (itemEffect) => {
-                const item = await Item.create(
+                const item = await Item.implementation.create(
                     createConvenientItem({
                         item: {
                             name: itemEffect.itemData.name,
-                            type: getBaseType(),
+                            type: getItemType(),
                         },
                         isBackup: backup,
                     }),
@@ -79,14 +97,19 @@ abstract class EffectDefinition {
                     `Running version ${migration.key} migration for ${this.systemId}`,
                 );
 
-                await migration.func();
-
-                // Save each successful migration so that if something fails
-                // before the end, it picks up at the right spot
-                await this.settings.addRanMigration(migration.key);
+                const success = await migration.func();
+                if (success) {
+                    // Save each successful migration so that if something fails
+                    // before the end, it picks up at the right spot
+                    await this.settings.addRanMigration(migration.key);
+                } else {
+                    error(
+                        `Failed to run migration ${migration.key} for ${this.systemId}`,
+                    );
+                }
             }
         } catch (e: any) {
-            log(`Something went wrong while running migrations: ${e}`);
+            error(`Something went wrong while running migrations: ${e}`);
         }
     }
 }
@@ -122,7 +145,7 @@ type MigrationType = {
     /**
      * The migration function
      */
-    func: AnyAsyncFunction;
+    func: AsyncBooleanFunction;
 };
 
 export { EffectDefinition };

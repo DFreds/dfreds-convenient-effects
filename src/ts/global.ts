@@ -1,6 +1,3 @@
-import { EffectInterface } from "./effect-interface.ts";
-import { Sockets } from "./sockets/sockets.ts";
-
 declare global {
     namespace globalThis {
         let CONFIG: Config<
@@ -28,7 +25,16 @@ declare global {
             EffectsCanvasGroup
         >;
         let canvas: Canvas;
-        let game: GameDFreds;
+        let game: Game<
+            Actor<null>,
+            Actors<Actor<null>>,
+            ChatMessage,
+            Combat,
+            Item<null>,
+            Macro,
+            Scene,
+            User<Actor<null>>
+        >;
         let ui: FoundryUI<
             ActorDirectory<Actor<null>>,
             ItemDirectory<Item<null>>,
@@ -40,45 +46,7 @@ declare global {
     }
 
     type AnyFunction = (...args: any) => any;
-    type AnyAsyncFunction = (...args: any) => Promise<any>;
+    type AsyncBooleanFunction = (...args: any) => Promise<boolean>;
 
-    type ActiveEffectOrigin =
-        | `Actor.${string}`
-        | `Scene.${string}.Token.${string}.Actor.${string}`
-        | `Compendium.${string}.Actor.${string}`
-        | `Item.${string}`
-        | `Compendium.${string}.Item.${string}`;
-
-    interface GameDFreds
-        extends Game<
-            Actor<null>,
-            Actors<Actor<null>>,
-            ChatMessage,
-            Combat,
-            Item<null>,
-            Macro,
-            Scene,
-            MyUser
-        > {
-        dfreds: {
-            effectInterface: EffectInterface;
-            sockets: Sockets;
-        };
-    }
-
-    // NOTE: Fixes issue with pf2e types. UserPermission is not actually a valid
-    // thing to pass in here
-    interface MyUser extends User<Actor<null>> {
-        hasPermission(permission: string | UserPermission): boolean;
-    }
-
-    interface String {
-        slugify({
-            replacement,
-            strict,
-        }: {
-            replacement?: string;
-            strict?: boolean;
-        }): string;
-    }
+    const BUILD_MODE: "development" | "stage" | "production";
 }

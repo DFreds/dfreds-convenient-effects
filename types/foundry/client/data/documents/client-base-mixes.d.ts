@@ -1,7 +1,10 @@
 import type {
     ApplicationV2,
+    DocumentSheetConfiguration,
     DocumentSheetV2,
 } from "../../../client-esm/applications/api/module.d.ts";
+
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 
 export declare class ClientBaseAmbientLight<
     TParent extends ClientBaseScene | null,
@@ -61,7 +64,9 @@ export declare class ClientBaseAmbientLight<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -503,7 +508,9 @@ declare class ClientBaseAmbientSound<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -948,7 +955,9 @@ export class ClientBaseActiveEffect<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -1285,7 +1294,7 @@ export class ClientBaseActor<
      * Application in this object will have its render method called by {@link Document#render}.
      * @see {@link Document#render}
      */
-    apps: { [K in number]?: Application | ApplicationV2 };
+    apps: { [K in string]?: Application | ApplicationV2 };
 
     constructor(data: object, context?: DocumentConstructionContext<TParent>);
 
@@ -1337,7 +1346,9 @@ export class ClientBaseActor<
               ClientBaseActor<CanvasBaseToken<ClientBaseScene | null> | null>
           >
         | DocumentSheetV2<
-              ClientBaseActor<CanvasBaseToken<ClientBaseScene | null> | null>
+              DocumentSheetConfiguration<
+                  ClientBaseActor<CanvasBaseToken<ClientBaseScene | null> | null>
+              >
           >;
 
     /**
@@ -1725,7 +1736,9 @@ export class ClientBaseActorDelta<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -2105,7 +2118,9 @@ export class ClientBaseAdventure extends foundry.documents.BaseAdventure {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -2487,7 +2502,9 @@ export class ClientBaseCard<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -2867,7 +2884,9 @@ export class ClientBaseCards extends foundry.documents.BaseCards {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -3247,7 +3266,9 @@ export class ClientBaseChatMessage extends foundry.documents.BaseChatMessage {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -3627,7 +3648,9 @@ export class ClientBaseCombat extends foundry.documents.BaseCombat {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -4009,7 +4032,9 @@ export class ClientBaseCombatant<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -4391,7 +4416,9 @@ declare class ClientBaseDrawing<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -5212,7 +5239,9 @@ export class ClientBaseFolder extends foundry.documents.BaseFolder {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -5595,7 +5624,9 @@ export class ClientBaseItem<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -5975,7 +6006,9 @@ export class ClientBaseJournalEntry extends foundry.documents.BaseJournalEntry {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -6357,7 +6390,9 @@ export class ClientBaseJournalEntryPage<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -6737,7 +6772,9 @@ export class ClientBaseMacro extends foundry.documents.BaseMacro {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -7119,7 +7156,9 @@ declare class ClientBaseMeasuredTemplate<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -7561,7 +7600,9 @@ declare class ClientBaseNote<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -8001,7 +8042,9 @@ export class ClientBasePlaylist extends foundry.documents.BasePlaylist {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -8383,7 +8426,9 @@ export class ClientBasePlaylistSound<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -9553,7 +9598,9 @@ export class ClientBaseRollTable extends foundry.documents.BaseRollTable {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -9933,7 +9980,9 @@ export class ClientBaseScene extends foundry.documents.BaseScene {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -10313,7 +10362,9 @@ export class ClientBaseSetting extends foundry.documents.BaseSetting {
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -10695,7 +10746,9 @@ export class ClientBaseTableResult<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -11077,7 +11130,9 @@ declare class ClientBaseTile<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -11519,7 +11574,9 @@ declare class ClientBaseToken<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -11961,7 +12018,9 @@ export class ClientBaseUser<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.
@@ -12343,7 +12402,9 @@ declare class ClientBaseWall<
     get permission(): DocumentOwnershipLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): DocumentSheet<this> | DocumentSheetV2<this>;
+    get sheet():
+        | DocumentSheet<this>
+        | DocumentSheetV2<DocumentSheetConfiguration<this>>;
 
     /**
      * A boolean indicator for whether the current game User has at least limited visibility for this Document.

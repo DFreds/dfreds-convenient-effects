@@ -1,26 +1,25 @@
-<form id="nested-effects-dialog" onsubmit="event.preventDefault();">
+<form onsubmit="event.preventDefault();">
 
     {{{parentEffect.description}}}
 
     <div class="form-group">
         <label>Chosen Effect</label>
         <div class="form-fields">
-            <select name="effect-choice">
-                {{#select effectChoice}}
-                    {{#each nestedEffects as |nestedEffect|}}
-                        <option
-                            value="{{nestedEffect.name}}"
-                        >{{nestedEffect.name}}</option>
-                    {{/each}}
-                {{/select}}
+            <select name="effect-choice" autofocus>
+                {{selectOptions
+                    nestedEffects
+                    selected=default
+                    labelAttr="name"
+                    valueAttr="name"
+                }}
             </select>
         </div>
     </div>
 
-    <div id="nested-effect-descriptions">
-        {{#each nestedEffects as |nestedEffect|}}
-            <strong>{{nestedEffect.name}}.</strong>
-                {{{nestedEffect.description}}}
-        {{/each}}
-    </div>
+    {{#each nestedEffects as |nestedEffect|}}
+        <div class="nested-effect-description">
+            <strong>{{nestedEffect.name}}</strong>
+            {{{nestedEffect.description}}}
+        </div>
+    {{/each}}
 </form>

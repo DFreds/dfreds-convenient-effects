@@ -6,38 +6,50 @@ function findModuleById(moduleId: string): Module | undefined {
 }
 
 /**
- * Gets the actor object by the actor UUID
+ * Gets the document object by the document UUID
  *
- * @param uuid The actor UUID
- * @returns the actor that was found via the UUID or undefined if not found
+ * @param uuid The document UUID
+ * @returns the document that was found via the UUID or undefined if not found
  */
-async function findActorByUuid(
+async function findDocumentByUuid(
     uuid: string,
-): Promise<Actor<TokenDocument<any> | null> | undefined> {
-    const actorToken = await fromUuid(uuid);
+): Promise<Actor<any> | Item<any> | undefined> {
+    const document = await fromUuid(uuid);
 
-    if (!actorToken) return undefined;
+    if (!document) return undefined;
 
-    if (actorToken instanceof TokenDocument) {
-        return actorToken.actor ?? undefined;
-    } else if (actorToken instanceof Actor) {
-        return actorToken;
+    if (document instanceof TokenDocument) {
+        return document.actor ?? undefined;
+    }
+
+    if (document instanceof Actor) {
+        return document;
+    }
+
+    if (document instanceof Item) {
+        return document;
     }
 
     return undefined;
 }
 
-function findActorByUuidSync(
+function findDocumentByUuidSync(
     uuid: string,
-): Actor<TokenDocument<any> | null> | undefined {
-    const actorToken = fromUuidSync(uuid);
+): Actor<any> | Item<any> | undefined {
+    const document = fromUuidSync(uuid);
 
-    if (!actorToken) return undefined;
+    if (!document) return undefined;
 
-    if (actorToken instanceof TokenDocument) {
-        return actorToken.actor ?? undefined;
-    } else if (actorToken instanceof Actor) {
-        return actorToken;
+    if (document instanceof TokenDocument) {
+        return document.actor ?? undefined;
+    }
+
+    if (document instanceof Actor) {
+        return document;
+    }
+
+    if (document instanceof Item) {
+        return document;
     }
 
     return undefined;
@@ -170,10 +182,19 @@ async function findEffectByUuid(
     return document as ActiveEffect<any>;
 }
 
+function findEffectByCeId(
+    ceId: string,
+    { backup }: FindOptions,
+): ActiveEffect<any> | undefined {
+    return findAllEffects({ backup }).find((effect) => {
+        return Flags.getCeEffectId(effect) === ceId;
+    });
+}
+
 export {
     findModuleById,
-    findActorByUuid,
-    findActorByUuidSync,
+    findDocumentByUuid,
+    findDocumentByUuidSync,
     findFolder,
     findFolders,
     findAllEffects,
@@ -182,4 +203,5 @@ export {
     findAllSubEffectIds,
     findAllOtherEffectIds,
     findEffectByUuid,
+    findEffectByCeId,
 };

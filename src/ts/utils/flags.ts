@@ -1,6 +1,8 @@
-import { id as MODULE_ID } from "@static/module.json";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
+import BaseActiveEffect, {
+    ActiveEffectSource,
+} from "types/foundry/common/documents/active-effect.js";
 import { ItemSource } from "types/foundry/common/documents/item.js";
+import { MODULE_ID } from "../constants.ts";
 
 class Flags {
     static #KEYS = {
@@ -17,7 +19,10 @@ class Flags {
     };
 
     static getCeEffectId(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
+        effect:
+            | ActiveEffect<any>
+            | BaseActiveEffect<any>
+            | PreCreate<ActiveEffectSource>,
     ): string | undefined {
         if (effect instanceof ActiveEffect) {
             return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as
@@ -27,7 +32,7 @@ class Flags {
             return foundry.utils.getProperty(
                 effect,
                 `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`,
-            );
+            ) as string | undefined;
         }
     }
 
@@ -53,7 +58,7 @@ class Flags {
             return foundry.utils.getProperty(
                 document,
                 `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
-            );
+            ) as boolean;
         }
     }
 
@@ -78,7 +83,7 @@ class Flags {
     }
 
     static async setFolderColor(
-        item: Item<any> | PreCreate<ItemSource>,
+        item: Item<any> | PreCreate<ItemSource> | object,
         color: string,
     ): Promise<any> {
         if (item instanceof Item) {
@@ -211,10 +216,10 @@ class Flags {
             );
         } else {
             return (
-                foundry.utils.getProperty(
+                (foundry.utils.getProperty(
                     document,
                     `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
-                ) ?? false
+                ) as boolean) ?? false
             );
         }
     }
@@ -257,10 +262,10 @@ class Flags {
             );
         } else {
             return (
-                foundry.utils.getProperty(
+                (foundry.utils.getProperty(
                     effect,
                     `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`,
-                ) ?? false
+                ) as boolean) ?? false
             );
         }
     }

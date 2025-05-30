@@ -1,20 +1,18 @@
-import { ChangeSidebarTab } from "./changeSidebarTab.ts";
 import { CloseActiveEffectConfig } from "./closeActiveEffectConfig.ts";
 import { CreateActiveEffect } from "./createActiveEffect.ts";
-import { CreateEffects } from "./createEffects.ts";
 import { CreateItem } from "./createItem.ts";
 import { DeleteActiveEffect } from "./deleteActiveEffect.ts";
 import { DeleteItem } from "./deleteItem.ts";
 import { DropActorSheetData } from "./dropActorSheetData.ts";
-import { GetSceneControlButtons } from "./getSceneControlButtons.ts";
+import { GetHeaderControlsActiveEffectConfig } from "./getHeaderControlsActiveEffectConfig.ts";
 import { HotbarDrop } from "./hotbarDrop.ts";
 import { Init } from "./init.ts";
 import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
 import { Ready } from "./ready.ts";
-import { RenderActiveEffectConfig } from "./renderActiveEffectConfig.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
-import { SocketlibReady } from "./socketlibReady.ts";
+import { SocketlibReady } from "./socketlib.ready.ts";
+import { UiExtenderInit } from "./uiExtender.init.ts";
 import { UpdateActiveEffect } from "./updateActiveEffect.ts";
 import { UpdateItem } from "./updateItem.ts";
 
@@ -26,11 +24,10 @@ const HooksCE = {
     listen(): void {
         const listeners: Listener[] = [
             Init,
+            UiExtenderInit,
             Setup,
             Ready,
             SocketlibReady,
-            CreateEffects,
-            GetSceneControlButtons,
             CreateItem,
             UpdateItem,
             DeleteItem,
@@ -39,11 +36,10 @@ const HooksCE = {
             UpdateActiveEffect,
             DeleteActiveEffect,
             RenderItemDirectory,
-            ChangeSidebarTab,
-            RenderActiveEffectConfig,
             CloseActiveEffectConfig,
             HotbarDrop,
             DropActorSheetData,
+            GetHeaderControlsActiveEffectConfig,
         ];
 
         for (const listener of listeners) {

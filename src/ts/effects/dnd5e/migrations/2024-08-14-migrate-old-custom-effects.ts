@@ -8,12 +8,12 @@ import { notEmpty } from "src/ts/utils/types.ts";
 const migration: MigrationType = {
     key: "2024-08-14-migrate-old-custom-effects",
     date: new Date("2024-08-14"),
-    func: async () => {
+    func: async (): Promise<boolean> => {
         const oldCustomEffect = game.items.find(
             (item) => item.name === "Custom Convenient Effects",
         );
 
-        if (!oldCustomEffect) return;
+        if (!oldCustomEffect) return true;
 
         const newItem = createConvenientItem({
             item: oldCustomEffect.toObject(),
@@ -25,6 +25,8 @@ const migration: MigrationType = {
 
         await Item.create(newItem);
         await oldCustomEffect.delete();
+
+        return true;
     },
 };
 

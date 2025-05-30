@@ -9,7 +9,7 @@ const DeleteActiveEffect: Listener = {
     listen(): void {
         Hooks.on(
             "deleteActiveEffect",
-            (activeEffect: any, _metadata, _userId) => {
+            (activeEffect: any, _metadata: any, _userId: any) => {
                 const effect = activeEffect as ActiveEffect<any>;
 
                 if (

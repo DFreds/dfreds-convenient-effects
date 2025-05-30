@@ -1,10 +1,11 @@
-import { id as MODULE_ID } from "@static/module.json";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
-import { findActorByUuid } from "../utils/finds.ts";
+import { findDocumentByUuid } from "../utils/finds.ts";
 import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
 import Document from "types/foundry/common/abstract/document.js";
+import { MODULE_ID } from "../constants.ts";
+import { getApi } from "../utils/gets.ts";
+import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 
 interface AddEffectMessageData {
     /**
@@ -13,7 +14,7 @@ interface AddEffectMessageData {
     effectData: PreCreate<ActiveEffectSource>;
 
     /**
-     * The UUID of the actor to add the effect to
+     * The UUID of the document to add the effect to
      */
     uuid: string;
 }
@@ -30,7 +31,7 @@ interface RemoveEffectMessageData {
     effectName?: string;
 
     /**
-     * The UUID of the actor to remove the effect from
+     * The UUID of the document to remove the effect from
      */
     uuid: string;
 
@@ -60,23 +61,25 @@ class Sockets {
         effectData,
         uuid,
     }: AddEffectMessageData): Promise<Document[]> {
-        const actor = await findActorByUuid(uuid);
+        const document = await findDocumentByUuid(uuid);
         const activeEffectsToApply = [effectData];
 
-        if (!actor) return []; // This should already be checked for before the socket
+        if (!document) return []; // This should already be checked for before the socket
 
         const isDynamic = Flags.isDynamic(effectData);
         if (isDynamic) {
             const mapping = new Mapping();
             const systemDefinition = mapping.findSystemDefinitionForSystemId();
 
-            await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(
-                effectData,
-                actor,
-            );
+            if (document instanceof Actor) {
+                await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(
+                    effectData,
+                    document,
+                );
+            }
         }
 
-        const createdEffects = await actor.createEmbeddedDocuments(
+        const createdEffects = await document.createEmbeddedDocuments(
             "ActiveEffect",
             activeEffectsToApply,
         );
@@ -85,7 +88,7 @@ class Sockets {
         if (subEffectIds && subEffectIds.length > 0) {
             // Apply all sub-effects with the original effect being the origin
             for (const subEffectId of subEffectIds) {
-                await game.dfreds.effectInterface.addEffect({
+                await getApi().addEffect({
                     effectId: subEffectId,
                     uuid,
                     origin: createdEffects[0].id as ActiveEffectOrigin,
@@ -97,14 +100,16 @@ class Sockets {
         if (otherEffectIds && otherEffectIds.length > 0) {
             // Apply all other effects with no origin
             for (const otherEffectId of otherEffectIds) {
-                await game.dfreds.effectInterface.addEffect({
+                await getApi().addEffect({
                     effectId: otherEffectId,
                     uuid,
                 });
             }
         }
 
-        log(`Added effect ${effectData.name} to ${actor.name} - ${actor.id}`);
+        log(
+            `Added effect ${effectData.name} to ${document.name} - ${document.id}`,
+        );
 
         return createdEffects;
     }
@@ -122,30 +127,34 @@ class Sockets {
         uuid,
         origin,
     }: RemoveEffectMessageData): Promise<void> {
-        const actor = await findActorByUuid(uuid);
+        const document = await findDocumentByUuid(uuid);
 
-        if (!actor) return; // This should already be checked for before the socket
+        if (!document) return; // This should already be checked for before the socket
 
-        const effectToRemove = actor.effects.find((activeEffect) => {
-            const isConvenient = Flags.isConvenient(activeEffect);
-            const isMatchingId = activeEffect.id === effectId;
-            const isMatchingName = activeEffect.name === effectName;
-            const isMatchingCeId =
-                Flags.getCeEffectId(activeEffect) === effectId;
+        const effectToRemove = (document.effects as any).find(
+            (activeEffect: ActiveEffect<any>) => {
+                const isConvenient = Flags.isConvenient(activeEffect);
+                const isMatchingId = activeEffect.id === effectId;
+                const isMatchingName = activeEffect.name === effectName;
+                const isMatchingCeId =
+                    Flags.getCeEffectId(activeEffect) === effectId;
 
-            const matches =
-                isConvenient &&
-                (isMatchingId || isMatchingName || isMatchingCeId);
+                const matches =
+                    isConvenient &&
+                    (isMatchingId || isMatchingName || isMatchingCeId);
 
-            return origin ? matches && activeEffect.origin === origin : matches;
-        });
+                return origin
+                    ? matches && activeEffect.origin === origin
+                    : matches;
+            },
+        );
 
         if (!effectToRemove) return;
 
         await effectToRemove.delete();
 
         log(
-            `Removed effect ${effectToRemove.name} from ${actor.name} - ${actor.id}`,
+            `Removed effect ${effectToRemove.name} from ${document.name} - ${document.id}`,
         );
     }
 }

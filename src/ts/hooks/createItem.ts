@@ -7,7 +7,7 @@ import { Listener } from "./index.ts";
  */
 const CreateItem: Listener = {
     listen(): void {
-        Hooks.on("createItem", (item: any, _metadata, _userId) => {
+        Hooks.on("createItem", (item: any, _metadata: any, _userId: any) => {
             const itemType = item as Item<any>;
 
             if (Flags.isConvenient(itemType)) {

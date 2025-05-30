@@ -1,0 +1,102 @@
+<header class="directory-header flexcol">
+
+    {{! Header Actions }}
+    <div class="header-actions action-buttons flexrow">
+        {{#if canCreateFolder}}
+            <button
+                type="button"
+                class="create-folder"
+                data-action="createFolder"
+            >
+                <i class="{{folderIcon}}" inert></i>
+                <span>{{localize "SIDEBAR.ACTIONS.CREATE.Folder"}}</span>
+            </button>
+        {{/if}}
+
+        {{#if canViewBackups}}
+            <button
+                type="button"
+                class="view-backups"
+                data-action="viewBackups"
+            >
+                <i class="fa-solid fa-arrow-rotate-left" inert></i>
+                <span>{{localize "ConvenientEffects.ViewBackups"}}</span>
+            </button>
+        {{/if}}
+    </div>
+
+    {{#if isBackup}}
+        <search>
+            <button
+                type="button"
+                class="inline-control ce-inline-control icon fa-solid fa-magnifying-glass"
+            ></button>
+
+            {{! Search Input }}
+            <input
+                type="search"
+                name="search"
+                autocomplete="off"
+                placeholder="{{localize 'ConvenientEffects.SearchEffects'}}"
+                aria-label="{{localize 'ConvenientEffects.SearchEffects'}}"
+            />
+
+            {{! Reset System Effects }}
+            <button
+                type="button"
+                class="inline-control collapse-all icon fa-solid fa-arrow-rotate-left"
+                data-action="resetSystemEffects"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.ResetSystemEffects'}}"
+            ></button>
+        </search>
+    {{else}}
+        {{! Search & Sort }}
+        <search>
+            {{! Show Hidden Effects }}
+            <button
+                type="button"
+                class="inline-control ce-inline-control icon fa-solid fa-eye"
+                data-action="toggleHiddenEffects"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.ShowHiddenEffects'}}"
+            ></button>
+
+            {{! Show Nested Effects }}
+            <button
+                type="button"
+                class="inline-control ce-inline-control icon fa-solid fa-tree"
+                data-action="toggleNestedEffects"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.ShowNestedEffects'}}"
+            ></button>
+
+            {{! Search Input }}
+            <input
+                type="search"
+                name="search"
+                autocomplete="off"
+                placeholder="{{localize 'ConvenientEffects.SearchEffects'}}"
+                aria-label="{{localize 'ConvenientEffects.SearchEffects'}}"
+            />
+
+            {{! Collapse All }}
+            <button
+                type="button"
+                class="inline-control collapse-all icon fa-solid fa-folder-tree"
+                data-action="collapseFolders"
+                data-tooltip
+                aria-label="{{localize 'FOLDER.Collapse'}}"
+            ></button>
+
+            {{! Prioritize Targets }}
+            <button
+                type="button"
+                class="inline-control ce-inline-control icon fa-solid fa-bullseye"
+                data-action="togglePrioritizeTargets"
+                data-tooltip
+                aria-label="{{localize 'ConvenientEffects.PrioritizeTargets'}}"
+            ></button>
+        </search>
+    {{/if}}
+</header>
