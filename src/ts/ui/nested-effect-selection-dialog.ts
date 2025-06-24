@@ -23,7 +23,7 @@ async function getNestedEffectSelection(
         },
     );
 
-    const choice = (await DialogV2.wait({
+    const choice = (await DialogV2.prompt({
         id: "nested-effect-selection-dialog",
         window: {
             title: effectData.name,
@@ -36,24 +36,18 @@ async function getNestedEffectSelection(
             return null;
         },
         content,
-        buttons: [
-            {
-                action: "ok",
-                label: "ConvenientEffects.SelectEffect",
-                icon: "fa-solid fa-check",
-                callback: async (
-                    _event: PointerEvent | SubmitEvent,
-                    _button: HTMLButtonElement,
-                    dialog: HTMLDialogElement,
-                ) => {
-                    const htmlChoice = $(dialog)
-                        .find('select[name="effect-choice"]')
-                        .val();
-                    return htmlChoice;
-                },
-                default: true,
+        ok: {
+            action: "ok",
+            label: "ConvenientEffects.SelectEffect",
+            icon: "fa-solid fa-check",
+            callback: async (_event, _button, dialog) => {
+                const htmlChoice = $(dialog.element)
+                    .find('select[name="effect-choice"]')
+                    .val();
+                return htmlChoice;
             },
-        ],
+            default: true,
+        },
     })) as string | undefined;
 
     return nestedEffects.find((nestedEffect) => nestedEffect.name === choice);
