@@ -19,7 +19,9 @@
 
         "Keybinding": {
             "ToggleAppName": "Toggle Convenient Effects App",
-            "ToggleAppHint": "This will either open the Convenient Effects app if it is closed or close it if it is currently open."
+            "ToggleAppHint": "This will activate the Convenient Effects app in the sidebar.",
+            "ToggleAppPopoutName": "Toggle Convenient Effects App Popout",
+            "ToggleAppPopoutHint": "This will either open the Convenient Effects app popout if it is closed or close it if it is currently open."
         },
 
         "SearchEffects": "Search Effects",

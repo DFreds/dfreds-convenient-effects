@@ -3,9 +3,11 @@ import { MODULE_ID } from "./constants.ts";
 
 class Keybindings {
     #TOGGLE_CONVENIENT_EFFECTS_APP = "toggleConvenientEffectsApp";
+    #TOGGLE_CONVENIENT_EFFECTS_APP_POPOUT = "toggleConvenientEffectsAppPopout";
 
     register(): void {
         this.#registerToggleConvenientEffectsApp();
+        this.#registerToggleConvenientEffectsAppPopout();
     }
 
     #registerToggleConvenientEffectsApp(): void {
@@ -20,13 +22,49 @@ class Keybindings {
 
                     const convenientEffectsV2 = applications.get(
                         // @ts-expect-error The types provided by pf2e think this is a number
-                        "convenient-effects-v2",
+                        ConvenientEffectsV2.tabName,
                     );
 
-                    if (convenientEffectsV2) {
-                        (convenientEffectsV2 as ConvenientEffectsV2).close();
+                    if (!convenientEffectsV2) {
+                        return;
+                    }
+
+                    const ceApp = convenientEffectsV2 as ConvenientEffectsV2;
+                    if (ceApp.active) {
+                        // @ts-expect-error foundry.ui is not defined
+                        foundry.ui.sidebar.toggleExpanded();
                     } else {
-                        new ConvenientEffectsV2().render({ force: true });
+                        ceApp.activate();
+                    }
+                },
+            },
+        );
+    }
+
+    #registerToggleConvenientEffectsAppPopout(): void {
+        game.keybindings.register(
+            MODULE_ID,
+            this.#TOGGLE_CONVENIENT_EFFECTS_APP_POPOUT,
+            {
+                name: "ConvenientEffects.Keybinding.ToggleAppPopoutName",
+                hint: "ConvenientEffects.Keybinding.ToggleAppPopoutHint",
+                onDown: async () => {
+                    const applications = foundry.applications.instances;
+
+                    const convenientEffectsV2 = applications.get(
+                        // @ts-expect-error The types provided by pf2e think this is a number
+                        ConvenientEffectsV2.tabName,
+                    );
+
+                    if (!convenientEffectsV2) {
+                        return;
+                    }
+
+                    const ceApp = convenientEffectsV2 as ConvenientEffectsV2;
+                    if (ceApp.popout?.rendered) {
+                        ceApp.popout.close();
+                    } else {
+                        ceApp.renderPopout();
                     }
                 },
             },
