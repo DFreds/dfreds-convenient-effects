@@ -7,18 +7,6 @@ declare global {
         api: EffectInterface;
     }
 
-    interface Game {
-        /**
-         * @deprecated Use `game.modules.get(MODULE_ID)` instead
-         */
-        dfreds?: {
-            /**
-             * @deprecated Use `game.modules.get(MODULE_ID).api` instead
-             */
-            effectInterface?: EffectInterface;
-        };
-    }
-
     type ActiveEffectOrigin =
         | `Actor.${string}`
         | `Scene.${string}.Token.${string}.Actor.${string}`
