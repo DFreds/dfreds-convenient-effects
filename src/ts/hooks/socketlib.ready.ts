@@ -8,11 +8,14 @@ const SocketlibReady: Listener = {
         Hooks.once("socketlib.ready", () => {
             const sockets = new Sockets();
 
+            // @ts-expect-error dfreds is untyped
             game.dfreds = game.dfreds || {};
+            // @ts-expect-error dfreds is untyped
             game.dfreds.effectInterface = new EffectInterface({
                 sockets,
             });
-            (game.modules.get(MODULE_ID) as ConvenientEffectsModule).api =
+
+            (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule).api =
                 new EffectInterface({
                     sockets,
                 });

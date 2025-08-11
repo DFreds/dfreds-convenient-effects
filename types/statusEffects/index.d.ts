@@ -1,4 +1,5 @@
-import Document from "types/foundry/common/abstract/document.js";
+import Document from "@common/abstract/document.mjs";
+import { Module } from "@client/packages/_module.mjs";
 
 export {};
 

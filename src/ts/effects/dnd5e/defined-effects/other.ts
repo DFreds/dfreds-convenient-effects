@@ -1,6 +1,4 @@
-import { createConvenientEffect } from "src/ts/utils/creates.ts";
 import { ItemEffects } from "../../effect-definition.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { acCover, movement } from "../changes/attributes.ts";
 import { abilitySaveBonus } from "../changes/abilities.ts";
 import { tokenMagic } from "../changes/macros.ts";
@@ -15,6 +13,8 @@ import {
     grantFailAttack,
 } from "../changes/midi-qol.ts";
 import { attackBonus, damageBonus } from "../changes/bonuses.ts";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
+import { createConvenientEffect } from "../../../utils/creates.ts";
 
 function other(): ItemEffects {
     return {

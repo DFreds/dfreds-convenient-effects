@@ -1,13 +1,13 @@
 import { libWrapper } from "@static/lib/shim.ts";
 import { Listener } from "./index.ts";
 import { Flags } from "../utils/flags.ts";
-import { ItemSource } from "types/foundry/common/documents/item.js";
 import { notEmpty } from "../utils/types.ts";
 import {
     createConvenientEffect,
     createConvenientItem,
 } from "../utils/creates.ts";
 import { MODULE_ID } from "../constants.ts";
+import { ItemSource } from "@client/documents/_module.mjs";
 
 const Setup: Listener = {
     listen(): void {
@@ -17,7 +17,7 @@ const Setup: Listener = {
                 "ActiveEffect.prototype.isTemporary",
                 function (
                     this: ActiveEffect<any>,
-                    wrapped: AnyFunction,
+                    wrapped: (...args: any) => boolean,
                     ...args: any
                 ) {
                     const result = wrapped(args) as boolean;
@@ -30,7 +30,7 @@ const Setup: Listener = {
                 "Item.prototype.importFromJSON",
                 async function (
                     this: Item<any>,
-                    wrapped: AnyFunction,
+                    wrapped: (...args: any) => void,
                     ...args: any
                 ) {
                     // `this` is the item that will be replaced with data

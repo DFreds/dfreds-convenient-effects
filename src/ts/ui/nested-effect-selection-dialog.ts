@@ -1,8 +1,10 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { getApi } from "../utils/gets.ts";
+import { ActiveEffectSource } from "@common/documents/active-effect.mjs";
+
 const { DialogV2 } = foundry.applications.api;
+const { renderTemplate } = foundry.applications.handlebars;
 
 async function getNestedEffectSelection(
     effectData: PreCreate<ActiveEffectSource>,

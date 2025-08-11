@@ -1,8 +1,4 @@
-import { createConvenientEffect } from "src/ts/utils/creates.ts";
 import { ItemEffects } from "../../effect-definition.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
-import { Flags } from "src/ts/utils/flags.ts";
-import { notEmpty } from "src/ts/utils/types.ts";
 import { movement, exhaustion } from "../changes/attributes.ts";
 import {
     advantageAttack,
@@ -19,6 +15,10 @@ import {
     addAllDamageResistance,
     addDamageImmunity,
 } from "../changes/traits.ts";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
+import { createConvenientEffect } from "../../../utils/creates.ts";
+import { Flags } from "../../../utils/flags.ts";
+import { notEmpty } from "../../../utils/types.ts";
 
 function conditions(): ItemEffects {
     return {

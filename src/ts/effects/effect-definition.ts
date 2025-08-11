@@ -1,9 +1,9 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "../settings.ts";
 import { error, log } from "../logger.ts";
 import { getApi, getItemType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
 import { Flags } from "../utils/flags.ts";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -145,7 +145,7 @@ type MigrationType = {
     /**
      * The migration function
      */
-    func: AsyncBooleanFunction;
+    func: () => Promise<boolean>;
 };
 
 export { EffectDefinition };

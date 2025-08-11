@@ -1,3 +1,4 @@
+import { Module } from "@client/packages/_module.mjs";
 import { Flags } from "./flags.ts";
 import { notEmpty } from "./types.ts";
 

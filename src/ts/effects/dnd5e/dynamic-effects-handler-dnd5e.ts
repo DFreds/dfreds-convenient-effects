@@ -1,7 +1,7 @@
-import { SECONDS, SIZES_ORDERED } from "src/ts/constants.ts";
+import { ActiveEffectSource, BaseItem } from "@client/documents/_module.mjs";
 import { DynamicEffectsHandler } from "../dynamic-effects-handler.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
-import { getApi } from "src/ts/utils/gets.ts";
+import { getApi } from "../../utils/gets.ts";
+import { SECONDS, SIZES_ORDERED } from "../../constants.ts";
 
 class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     override systemId: string = "dnd5e";
@@ -192,7 +192,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     #addResistancesIfBearTotem(
         effect: PreCreate<ActiveEffectSource>,
         actor: Actor<any>,
-        barbarianClass: Item<Actor<null>>,
+        barbarianClass: BaseItem<Actor<null>>,
     ) {
         const isTotemWarrior =
             (barbarianClass as any).subclass?.identifier ===
@@ -267,7 +267,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
     #determineIfPersistentRage(
         effect: PreCreate<ActiveEffectSource>,
-        barbarianClass: Item<Actor<null>>,
+        barbarianClass: BaseItem<Actor<null>>,
     ) {
         if ((barbarianClass.system as any).levels > 14) {
             effect.duration = effect.duration ?? {};

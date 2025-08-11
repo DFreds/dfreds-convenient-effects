@@ -1,3 +1,4 @@
+import { ItemDirectory } from "@client/applications/sidebar/tabs/_module.mjs";
 import { removeConvenientItemsFromSidebar } from "../ui/remove-convenient-items-from-sidebar.ts";
 import { Listener } from "./index.ts";
 

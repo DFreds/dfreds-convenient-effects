@@ -1,4 +1,4 @@
-import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
+import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
 function advantage(): Partial<EffectChangeData> {
     return {

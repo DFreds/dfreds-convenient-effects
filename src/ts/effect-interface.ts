@@ -1,4 +1,3 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Settings } from "./settings.ts";
 import {
     findDocumentByUuidSync,
@@ -15,8 +14,9 @@ import {
     createConvenientEffect,
     createConvenientItem,
 } from "./utils/creates.ts";
-import Document from "types/foundry/common/abstract/document.js";
 import { Sockets } from "./sockets/sockets.ts";
+import Document from "@common/abstract/document.mjs";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
 class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
@@ -290,6 +290,7 @@ class EffectInterfaceImpl implements EffectInterface {
         await this.#settings.clearRanMigrations();
 
         if (confirm) {
+            // @ts-expect-error Complains about failed to resolve module specifier
             await SettingsConfig.reloadConfirm({ world: false });
         }
     }

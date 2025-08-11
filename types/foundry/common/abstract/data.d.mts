@@ -35,6 +35,8 @@ export default abstract class DataModel<
     /** Configure the data model instance before validation and initialization workflows are performed. */
     protected _configure(): void;
 
+    isOwner: boolean;
+
     /* ---------------------------------------- */
     /*  Data Schema                             */
     /* ---------------------------------------- */

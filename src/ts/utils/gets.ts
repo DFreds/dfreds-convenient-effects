@@ -1,3 +1,4 @@
+import { ActorUUID } from "@common/documents/_module.mjs";
 import { MODULE_ID } from "../constants.ts";
 
 /**
@@ -20,7 +21,7 @@ function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
         return Array.from(game.user.targets).map((token) => token.actor!.uuid);
     } else if (game.user.character) {
         // Use the default character for the user
-        return [game.user.character.uuid];
+        return [game.user.character.uuid as ActorUUID];
     } else {
         return [];
     }
@@ -33,7 +34,7 @@ function getItemType(): string {
 }
 
 function getApi(): EffectInterface {
-    return (game.modules.get(MODULE_ID) as ConvenientEffectsModule).api;
+    return (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule).api;
 }
 
 // function effectsByActorMappings(): {

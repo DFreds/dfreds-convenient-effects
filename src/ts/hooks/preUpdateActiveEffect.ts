@@ -1,4 +1,3 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 import { createCeEffectId } from "../utils/creates.ts";
@@ -8,6 +7,7 @@ import {
     updateOldSubIds,
 } from "../utils/updates.ts";
 import { findAllEffects } from "../utils/finds.ts";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
 const PreUpdateActiveEffect: Listener = {
     listen(): void {

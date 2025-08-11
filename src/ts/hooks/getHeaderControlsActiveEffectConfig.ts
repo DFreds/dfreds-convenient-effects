@@ -1,16 +1,15 @@
-import { ApplicationHeaderControlsEntry } from "types/foundry/client-esm/applications/_types.js";
 import { Listener } from "./index.ts";
 import { ConvenientEffectConfigV2 } from "../ui/ce-config/convenient-effect-config.ts";
 import { Flags } from "../utils/flags.ts";
+import { ApplicationHeaderControlsEntry } from "@client/applications/_module.mjs";
+import DocumentSheetConfig from "@client/applications/apps/document-sheet-config.mjs";
 
 const GetHeaderControlsActiveEffectConfig: Listener = {
     listen(): void {
         Hooks.on(
             "getHeaderControlsActiveEffectConfig",
             (config: any, controls: any) => {
-                const configTyped = config as ActiveEffectConfig<
-                    ActiveEffect<any>
-                >;
+                const configTyped = config as DocumentSheetConfig
                 const controlsTyped =
                     controls as ApplicationHeaderControlsEntry[];
 
@@ -21,7 +20,7 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                     visible: () => {
                         const parent = configTyped.document.parent;
                         const isItem = parent instanceof Item;
-                        const isConvenientItem = Flags.isConvenient(parent);
+                        const isConvenientItem = Flags.isConvenient(parent as any);
                         const isOwner = configTyped.document.isOwner;
                         const isGM = game.user.isGM;
 
@@ -29,7 +28,8 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                     },
                     onClick: () => {
                         new ConvenientEffectConfigV2({
-                            document: configTyped.document,
+                            // TODO this any is because of some circular dependencies with ActiveEffect
+                            document: configTyped.document as any,
                         }).render({ force: true });
                     },
                 });

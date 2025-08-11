@@ -2,10 +2,10 @@ import { findDocumentByUuid } from "../utils/finds.ts";
 import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
-import Document from "types/foundry/common/abstract/document.js";
 import { MODULE_ID } from "../constants.ts";
 import { getApi } from "../utils/gets.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
+import Document from "@common/abstract/document.mjs";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
 interface AddEffectMessageData {
     /**

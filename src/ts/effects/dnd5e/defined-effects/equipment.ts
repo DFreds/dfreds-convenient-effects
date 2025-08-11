@@ -1,8 +1,8 @@
-import { COLORS, SECONDS } from "src/ts/constants.ts";
-import { createConvenientEffect } from "src/ts/utils/creates.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { ItemEffects } from "../../effect-definition.ts";
 import { atlLight } from "../changes/atl.ts";
+import { createConvenientEffect } from "../../../utils/creates.ts";
+import { COLORS, SECONDS } from "../../../constants.ts";
 
 function equipment(): ItemEffects {
     return {

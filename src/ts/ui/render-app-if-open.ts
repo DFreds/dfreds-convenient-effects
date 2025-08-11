@@ -9,7 +9,7 @@ function renderAppIfOpen(): void {
     const convenientEffectsV2 = applications.get(
         // @ts-expect-error The types provided by pf2e think this is a number
         ConvenientEffectsV2.tabName,
-    ) as ConvenientEffectsV2;
+    ) as unknown as ConvenientEffectsV2;
 
     if (convenientEffectsV2 && convenientEffectsV2.active) {
         convenientEffectsV2.render();
@@ -22,7 +22,7 @@ function renderApp(): void {
     const convenientEffectsV2 = applications.get(
         // @ts-expect-error The types provided by pf2e think this is a number
         ConvenientEffectsV2.tabName,
-    ) as ConvenientEffectsV2;
+    ) as unknown as ConvenientEffectsV2;
 
     if (convenientEffectsV2) {
         convenientEffectsV2.render();

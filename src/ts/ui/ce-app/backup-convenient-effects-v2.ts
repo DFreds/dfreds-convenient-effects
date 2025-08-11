@@ -1,7 +1,4 @@
-import {
-    ApplicationConfiguration,
-    ApplicationRenderOptions,
-} from "types/foundry/client-esm/applications/_types.js";
+import { ApplicationConfiguration } from "@client/applications/_types.mjs";
 import {
     findAllEffects,
     findAllNestedEffectIds,
@@ -11,10 +8,11 @@ import {
     findFolders,
 } from "../../utils/finds.ts";
 import { getApi } from "../../utils/gets.ts";
-import { MODULE_ID } from "src/ts/constants.ts";
-import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
-import { Flags } from "src/ts/utils/flags.ts";
-import { Settings } from "src/ts/settings.ts";
+import { Settings } from "../../settings.ts";
+import { MODULE_ID } from "../../constants.ts";
+import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+import { HandlebarsRenderOptions } from "@client/applications/api/_module.mjs";
+import { Flags } from "../../utils/flags.ts";
 
 const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } =
     foundry.applications.api;
@@ -147,19 +145,19 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
     protected override async _onFirstRender(
         context: object,
-        options: ApplicationRenderOptions,
+        options: HandlebarsRenderOptions,
     ): Promise<void> {
         await super._onFirstRender(context, options);
         this._createContextMenus();
     }
 
-    protected override _onRender(
+    protected override async _onRender(
         context: object,
-        options: ApplicationRenderOptions,
-    ): void {
-        super._onRender(context, options);
+        options: HandlebarsRenderOptions,
+    ): Promise<void> {
+        await super._onRender(context, options);
+
         if (options.parts?.includes("header")) {
-            // @ts-expect-error not typed
             new foundry.applications.ux.SearchFilter({
                 inputSelector: "search input",
                 contentSelector: ".directory-list",
@@ -174,7 +172,6 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         }
 
         if (options.parts?.includes("directory")) {
-            // @ts-expect-error not typed
             new foundry.applications.ux.DragDrop.implementation({
                 dragSelector: ".directory-item.entry",
                 dropSelector: ".directory-list",
@@ -192,7 +189,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     protected override async _prepareContext(
-        options: ApplicationRenderOptions,
+        options: HandlebarsRenderOptions,
     ): Promise<object> {
         const context = await super._prepareContext(options);
         Object.assign(context, {
@@ -467,8 +464,8 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _onSearchFilter(
         _event: KeyboardEvent,
         query: string,
-        rgx: RegExp,
-        html: HTMLElement,
+        rgx: RegExp | undefined,
+        html: HTMLElement | null | undefined,
     ): void {
         const entryIds = new Set<string>();
         const folderIds = new Set<string>();
@@ -491,7 +488,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         }
 
         // Toggle each directory entry.
-        for (const el of html.querySelectorAll(".directory-item")) {
+        for (const el of html?.querySelectorAll(".directory-item") ?? []) {
             const elHtml = el as HTMLElement;
             if (elHtml.hidden) continue;
             if (elHtml.classList.contains("folder")) {
@@ -548,7 +545,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     _matchSearchEntries(
-        query: RegExp,
+        query: RegExp | undefined,
         entryIds: Set<string>,
         folderIds: Set<string>,
         autoExpandIds: Set<string>,
@@ -574,8 +571,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
             // Otherwise, if we are searching by name, match the entry name
             else if (
                 nameOnlySearch &&
-                query.test(
-                    // @ts-expect-error no types for this yet
+                query?.test(
                     foundry.applications.ux.SearchFilter.cleanQuery(entry.name),
                 )
             ) {
@@ -599,7 +595,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     _matchSearchFolders(
-        query: RegExp,
+        query: RegExp | undefined,
         folderIds: Set<string>,
         autoExpandIds: Set<string>,
         _options: object = {},
@@ -610,8 +606,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         for (const folder of folders) {
             if (
-                query.test(
-                    // @ts-expect-error no types for this yet
+                query?.test(
                     foundry.applications.ux.SearchFilter.cleanQuery(
                         folder.name,
                     ),

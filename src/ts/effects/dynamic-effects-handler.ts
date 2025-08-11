@@ -1,4 +1,4 @@
-import { ActiveEffectSource } from "types/foundry/common/documents/module.js";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { Settings } from "../settings.ts";
 
 abstract class DynamicEffectsHandler {

@@ -1,7 +1,4 @@
-import { createConvenientEffect } from "src/ts/utils/creates.ts";
 import { ItemEffects } from "../../effect-definition.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
-import { COLORS, SECONDS } from "src/ts/constants.ts";
 import { attackBonus, damageBonus, saveBonus } from "../changes/bonuses.ts";
 import {
     blinded,
@@ -13,8 +10,6 @@ import {
     prone,
     restrained,
 } from "./conditions.ts";
-import { Flags } from "src/ts/utils/flags.ts";
-import { notEmpty } from "src/ts/utils/types.ts";
 import {
     acBonus,
     acCalc,
@@ -54,6 +49,11 @@ import {
 import { atlLight, atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 import { skillCheckBonus } from "../changes/skills.ts";
 import { initiativeAdv } from "../changes/dnd5e.ts";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
+import { createConvenientEffect } from "../../../utils/creates.ts";
+import { COLORS, SECONDS } from "../../../constants.ts";
+import { Flags } from "../../../utils/flags.ts";
+import { notEmpty } from "../../../utils/types.ts";
 
 function spells(): ItemEffects {
     return {

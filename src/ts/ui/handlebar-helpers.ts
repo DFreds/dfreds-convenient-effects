@@ -1,9 +1,9 @@
-import { EffectChangeData } from "types/foundry/common/documents/active-effect.js";
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
 import { getApi } from "../utils/gets.ts";
+import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
 class HandlebarHelpers {
     register(): void {

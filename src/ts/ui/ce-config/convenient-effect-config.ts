@@ -1,12 +1,12 @@
 import { Flags } from "../../utils/flags.ts";
 import { findAllEffects } from "../../utils/finds.ts";
+import { MODULE_ID } from "../../constants.ts";
 import {
     ApplicationConfiguration,
-    ApplicationRenderOptions,
     ApplicationTabsConfiguration,
-} from "types/foundry/client-esm/applications/_types.js";
-import { MODULE_ID } from "../../constants.ts";
-import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
+} from "@client/applications/_module.mjs";
+import { HandlebarsRenderOptions } from "@client/applications/api/_module.mjs";
+import { FormDataExtended } from "@client/applications/ux/_module.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -26,16 +26,18 @@ interface ConvenientEffectConfigData {
     otherEffectsData: MultiSelectData[];
 }
 
-class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
+// TODO this any is because of some circular dependencies with ActiveEffect
+class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
     ApplicationV2<ConvenientEffectConfigOptions>,
-) {
+) as any) {
     #document?: ActiveEffect<any> | null;
 
     constructor(options?: DeepPartial<ConvenientEffectConfigOptions>) {
         super(options);
-        this.#document = options?.document;
+        this.#document = options?.document as ActiveEffect<any> | null;
     }
 
+    // @ts-expect-error any is because of some circular dependencies with ActiveEffect
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectConfigOptions> =
         {
             id: "convenient-effect-config",
@@ -58,6 +60,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
             },
         };
 
+    // @ts-expect-error any is because of some circular dependencies with ActiveEffect
     static override PARTS = {
         header: {
             template: `modules/${MODULE_ID}/templates/ce-config/header.hbs`,
@@ -82,6 +85,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         },
     };
 
+    // @ts-expect-error any is because of some circular dependencies with ActiveEffect
     static override TABS: Record<string, ApplicationTabsConfiguration> = {
         sheet: {
             tabs: [
@@ -109,15 +113,16 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         return this.#document as ActiveEffect<any>;
     }
 
+    // @ts-expect-error any is because of some circular dependencies with ActiveEffect
     protected override async _prepareContext(
-        _options: ApplicationRenderOptions,
+        _options: HandlebarsRenderOptions,
     ): Promise<object> {
         const context = await super._prepareContext(_options);
 
         Object.assign(context, {
             effect: this.document,
             source: this.document._source,
-            fields: this.document.schema.fields,
+            fields: (this.document.schema as any).fields,
             rootId: this.document.id,
             ...this.#prepareContext(),
         });
@@ -125,6 +130,7 @@ class ConvenientEffectConfigV2 extends HandlebarsApplicationMixin(
         return context;
     }
 
+    // @ts-expect-error any is because of some circular dependencies with ActiveEffect
     protected override async _preparePartContext(
         partId: string,
         context: object,

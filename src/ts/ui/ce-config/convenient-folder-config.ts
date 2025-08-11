@@ -1,12 +1,11 @@
-import {
-    ApplicationConfiguration,
-    ApplicationRenderOptions,
-} from "types/foundry/client-esm/applications/_types.js";
 import { Flags } from "../../utils/flags.ts";
 import { MODULE_ID } from "../../constants.ts";
-import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
 import { getItemType } from "../../utils/gets.ts";
 import { createConvenientItem } from "../../utils/creates.ts";
+import { HandlebarsRenderOptions } from "@client/applications/api/handlebars-application.mjs";
+import { FormDataExtended } from "@client/applications/ux/_module.mjs";
+import { DatabaseUpdateOperation } from "@common/abstract/_module.mjs";
+import { ApplicationConfiguration } from "@client/applications/_module.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -21,7 +20,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
 
     constructor(options?: DeepPartial<ConvenientFolderConfigOptions>) {
         super(options);
-        this.#document = options?.document;
+        this.#document = options?.document as Item<any> | null;
     }
 
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientFolderConfigOptions> =
@@ -64,7 +63,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
     }
 
     protected override async _prepareContext(
-        _options: ApplicationRenderOptions,
+        _options: HandlebarsRenderOptions,
     ): Promise<object> {
         const context = await super._prepareContext(_options);
 
@@ -83,7 +82,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
                     : this.document,
             fields:
                 this.document instanceof Item
-                    ? this.document.schema.fields
+                    ? (this.document.schema as any).fields
                     : {},
             rootId:
                 this.document?._id && game.items.get(this.document._id)

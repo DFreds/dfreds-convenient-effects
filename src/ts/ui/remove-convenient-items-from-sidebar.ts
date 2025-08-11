@@ -1,3 +1,4 @@
+import { ItemDirectory } from "@client/applications/sidebar/tabs/_module.mjs";
 import { findFolders } from "../utils/finds.ts";
 
 function removeConvenientItemsFromSidebar(

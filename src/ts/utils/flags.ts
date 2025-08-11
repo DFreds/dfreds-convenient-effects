@@ -1,7 +1,4 @@
-import BaseActiveEffect, {
-    ActiveEffectSource,
-} from "types/foundry/common/documents/active-effect.js";
-import { ItemSource } from "types/foundry/common/documents/item.js";
+import { ActiveEffectSource, BaseActiveEffect, ItemSource } from "@client/documents/_module.mjs";
 import { MODULE_ID } from "../constants.ts";
 
 class Flags {

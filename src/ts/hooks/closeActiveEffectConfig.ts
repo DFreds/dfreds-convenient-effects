@@ -7,8 +7,7 @@ const CloseActiveEffectConfig: Listener = {
         Hooks.on(
             "closeActiveEffectConfig",
             (activeEffectConfig: any, _html: any) => {
-                const config = activeEffectConfig as ActiveEffectConfig<any>;
-                const effect = config.document as ActiveEffect<any>;
+                const effect = activeEffectConfig.document as ActiveEffect<any>;
 
                 if (
                     Flags.isConvenient(effect) &&

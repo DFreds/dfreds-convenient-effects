@@ -1,31 +1,48 @@
+import type ActorDirectory from "@client/applications/sidebar/tabs/actor-directory.d.mts";
+import type ChatLog from "@client/applications/sidebar/tabs/chat.d.mts";
+import type CombatTracker from "@client/applications/sidebar/tabs/combat-tracker.d.mts";
+import type CompendiumDirectory from "@client/applications/sidebar/tabs/compendium-directory.d.mts";
+import type ItemDirectory from "@client/applications/sidebar/tabs/item-directory.d.mts";
+import type Hotbar from "@client/applications/ui/hotbar.d.mts";
+import type Canvas from "@client/canvas/board.d.mts";
+import type EffectsCanvasGroup from "@client/canvas/groups/effects.d.mts";
+import type Config from "@client/config.d.mts";
+import type Actors from "@client/documents/collections/actors.d.mts";
+import type WallDocument from "@client/documents/wall.d.mts";
+import type Game from "@client/game.d.mts";
+import type { FoundryUI } from "@client/ui.d.mts";
+
+type ConfiguredConfig = Config<
+    AmbientLightDocument<Scene | null>,
+    ActiveEffect<Actor | Item | null>,
+    Actor,
+    ActorDelta<TokenDocument>,
+    ChatLog,
+    ChatMessage,
+    Combat,
+    Combatant<Combat | null, TokenDocument>,
+    CombatTracker<Combat | null>,
+    CompendiumDirectory,
+    Hotbar<Macro>,
+    Item,
+    Macro,
+    MeasuredTemplateDocument,
+    RegionDocument,
+    RegionBehavior,
+    TileDocument<Scene | null>,
+    TokenDocument,
+    WallDocument<Scene | null>,
+    Scene,
+    User,
+    EffectsCanvasGroup
+>;
+
 declare global {
+    const CONFIG: ConfiguredConfig;
+    const canvas: Canvas;
+
     namespace globalThis {
-        let CONFIG: Config<
-            AmbientLightDocument<Scene | null>,
-            ActiveEffect<null>,
-            Actor<null>,
-            ActorDelta<null>,
-            ChatLog,
-            ChatMessage,
-            Combat,
-            Combatant<null, null>,
-            CombatTracker<null>,
-            CompendiumDirectory,
-            Hotbar,
-            Item<null>,
-            Macro,
-            MeasuredTemplateDocument<null>,
-            RegionDocument<null>,
-            RegionBehavior<null>,
-            TileDocument<null>,
-            TokenDocument<Scene | null>,
-            WallDocument<null>,
-            Scene,
-            User<Actor<null>>,
-            EffectsCanvasGroup
-        >;
-        let canvas: Canvas;
-        let game: Game<
+        const game: Game<
             Actor<null>,
             Actors<Actor<null>>,
             ChatMessage,
@@ -33,20 +50,18 @@ declare global {
             Item<null>,
             Macro,
             Scene,
-            User<Actor<null>>
+            User
         >;
-        let ui: FoundryUI<
-            ActorDirectory<Actor<null>>,
-            ItemDirectory<Item<null>>,
+
+        const ui: FoundryUI<
+            ActorDirectory,
+            ItemDirectory,
             ChatLog,
             CompendiumDirectory,
-            CombatTracker<Combat | null>,
-            Hotbar
+            CombatTracker,
+            Hotbar<Macro>
         >;
     }
-
-    type AnyFunction = (...args: any) => any;
-    type AsyncBooleanFunction = (...args: any) => Promise<boolean>;
 
     const BUILD_MODE: "development" | "stage" | "production";
 }

@@ -1,26 +1,25 @@
+
+import { ApplicationConfiguration } from "@client/applications/_types.mjs";
 import {
-    ApplicationConfiguration,
-    ApplicationRenderOptions,
-} from "types/foundry/client-esm/applications/_types.js";
+    findAllEffects,
+    findAllNestedEffectIds,
+    findEffectByCeId,
+    findEffectByUuid,
+    findEffectsByFolder,
+    findFolder,
+    findFolders,
+    findModuleById,
+} from "../../utils/finds.ts";
+import { getApi, getItemType } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
 import { MODULE_ID, MODULE_IDS } from "../../constants.ts";
-import {
-    findEffectByCeId,
-    findFolder,
-    findModuleById,
-    findEffectByUuid,
-    findFolders,
-    findEffectsByFolder,
-    findAllNestedEffectIds,
-    findAllEffects,
-} from "../../utils/finds.ts";
+import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
+import { HandlebarsRenderOptions } from "@client/applications/api/_module.mjs";
 import { ConvenientFolderConfig } from "../ce-config/convenient-folder-config.ts";
-import { Flags } from "../../utils/flags.ts";
 import { createConvenientEffect } from "../../utils/creates.ts";
+import { Flags } from "../../utils/flags.ts";
+import { error } from "../../logger.ts";
 import { BackupConvenientEffectsV2 } from "./backup-convenient-effects-v2.ts";
-import { getApi, getItemType } from "src/ts/utils/gets.ts";
-import { error } from "src/ts/logger.ts";
-import { HandlebarsRenderOptions } from "types/foundry/client-esm/applications/api/handlebars-application.ts";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { AbstractSidebarTab } = foundry.applications.sidebar;
@@ -148,7 +147,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     });
 
                     // todo force: true when this is app v2 type
-                    effect?.sheet.render(true);
+                    effect?.sheet?.render(true);
                 },
             },
             {
@@ -276,7 +275,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     );
 
                     // todo force: true when this is app v2 type
-                    clone.sheet.render(true);
+                    clone?.sheet?.render(true);
                 },
             },
             {
@@ -330,7 +329,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     if (!folder) return;
 
                     const folderConfig = new ConvenientFolderConfig({
-                        document: folder,
+                        // TODO: this any is because of some circular dependencies with ActiveEffect
+                        document: folder as any,
                     });
 
                     folderConfig.render({ force: true });
@@ -455,21 +455,20 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
     protected override async _onFirstRender(
         context: object,
-        options: ApplicationRenderOptions,
+        options: HandlebarsRenderOptions,
     ): Promise<void> {
         await super._onFirstRender(context, options);
         this._createContextMenus();
     }
 
-    protected override _onRender(
+    protected override async _onRender(
         context: object,
-        options: ApplicationRenderOptions,
-    ): void {
-        super._onRender(context, options);
+        options: HandlebarsRenderOptions,
+    ): Promise<void> {
+        await super._onRender(context, options);
 
         // Search
         if (options.parts?.includes("header")) {
-            // @ts-expect-error not typed
             new foundry.applications.ux.SearchFilter({
                 inputSelector: "search input",
                 contentSelector: ".directory-list",
@@ -484,7 +483,6 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         // Drag-drop
         if (options.parts?.includes("directory")) {
-            // @ts-expect-error not typed
             new foundry.applications.ux.DragDrop.implementation({
                 dragSelector: ".directory-item",
                 dropSelector: ".directory-list",
@@ -564,7 +562,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     protected override async _prepareContext(
-        options: ApplicationRenderOptions,
+        options: HandlebarsRenderOptions,
     ): Promise<object> {
         const context = await super._prepareContext(options);
         Object.assign(context, {
@@ -828,8 +826,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _onSearchFilter(
         _event: KeyboardEvent,
         query: string,
-        rgx: RegExp,
-        html: HTMLElement,
+        rgx: RegExp | undefined,
+        html: HTMLElement | null | undefined,
     ): void {
         const entryIds = new Set<string>();
         const folderIds = new Set<string>();
@@ -852,7 +850,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         }
 
         // Toggle each directory entry.
-        for (const el of html.querySelectorAll(".directory-item")) {
+        for (const el of html?.querySelectorAll(".directory-item") ?? []) {
             const elHtml = el as HTMLElement;
             if (elHtml.hidden) continue;
             if (elHtml.classList.contains("folder")) {
@@ -909,7 +907,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     _matchSearchEntries(
-        query: RegExp,
+        query: RegExp | undefined,
         entryIds: Set<string>,
         folderIds: Set<string>,
         autoExpandIds: Set<string>,
@@ -935,8 +933,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             // Otherwise, if we are searching by name, match the entry name
             else if (
                 nameOnlySearch &&
-                query.test(
-                    // @ts-expect-error no types for this yet
+                query?.test(
                     foundry.applications.ux.SearchFilter.cleanQuery(entry.name),
                 )
             ) {
@@ -960,7 +957,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     _matchSearchFolders(
-        query: RegExp,
+        query: RegExp | undefined,
         folderIds: Set<string>,
         autoExpandIds: Set<string>,
         _options: object = {},
@@ -971,8 +968,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         for (const folder of folders) {
             if (
-                query.test(
-                    // @ts-expect-error no types for this yet
+                query?.test(
                     foundry.applications.ux.SearchFilter.cleanQuery(
                         folder.name,
                     ),
@@ -1044,7 +1040,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         if (effects[0]) {
             // todo force: true when this is app v2 type
-            (effects[0] as ActiveEffect<Item<null>>).sheet.render(true);
+            (effects[0] as ActiveEffect<Item<null>>)?.sheet?.render(true);
         } else {
             error("Failed to create effect");
         }
@@ -1063,10 +1059,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         event.stopPropagation();
 
         const folderConfig = new ConvenientFolderConfig({
+            // TODO this is because of circular dependencies in ActiveEffect
             document: new Item.implementation({
                 name: game.i18n.localize("SIDEBAR.ACTIONS.CREATE.Folder"),
                 type: getItemType(),
-            }),
+            }) as any,
         });
 
         folderConfig.render({ force: true });
@@ -1090,6 +1087,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const isHiddenEffects = this.#settings.showHiddenEffects;
         buttonHtml.setAttribute("aria-pressed", isHiddenEffects.toString());
 
+        // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });
     }
 
@@ -1111,6 +1109,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const isNestedEffects = this.#settings.showNestedEffects;
         buttonHtml.setAttribute("aria-pressed", isNestedEffects.toString());
 
+        // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });
     }
 
@@ -1132,6 +1131,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const isPrioritizeTargets = this.#settings.prioritizeTargets;
         buttonHtml.setAttribute("aria-pressed", isPrioritizeTargets.toString());
 
+        // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });
     }
 
@@ -1307,7 +1307,6 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     async _onDrop(event: DragEvent): Promise<void> {
-        // @ts-expect-error not typed
         const data = foundry.applications.ux.TextEditor.getDragEventData(event);
 
         const target =

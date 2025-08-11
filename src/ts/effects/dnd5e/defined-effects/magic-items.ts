@@ -1,8 +1,4 @@
-import { createConvenientEffect } from "src/ts/utils/creates.ts";
-import { ActiveEffectSource } from "types/foundry/common/documents/active-effect.js";
 import { ItemEffects } from "../../effect-definition.ts";
-import { Flags } from "src/ts/utils/flags.ts";
-import { notEmpty } from "src/ts/utils/types.ts";
 import {
     addAbility,
     downgradeAbility,
@@ -37,6 +33,10 @@ import {
     grantDisadvantageAttack,
     magicResistanceSaves,
 } from "../changes/midi-qol.ts";
+import { ActiveEffectSource } from "@client/documents/_module.mjs";
+import { createConvenientEffect } from "../../../utils/creates.ts";
+import { Flags } from "../../../utils/flags.ts";
+import { notEmpty } from "../../../utils/types.ts";
 
 function magicItems(): ItemEffects {
     return {
