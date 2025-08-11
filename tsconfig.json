@@ -1,13 +1,13 @@
 {
-    "exclude": ["build/**/*"],
     "compilerOptions": {
         "target": "ES2022",
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "lib": [
-            "esnext",
-            "dom",
-            "dom.iterable"
+            "ES2023",
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
         ],
         "noEmit": true,
         "strict": true,
@@ -22,8 +22,6 @@
         "esModuleInterop": true,
         "sourceMap": true,
         "isolatedModules": true,
-        "baseUrl": ".",
-        "rootDir": ".",
         "outDir": "dist",
         "allowUnusedLabels": false,
         "removeComments": false,
@@ -31,26 +29,41 @@
         "useDefineForClassFields": true,
         "noErrorTruncation": true,
         "paths": {
-            "@static/*": ["static/*"],
+            "@static/*": ["./static/*"],
+            "@common/*": [
+                "./types/foundry/common/*"
+            ],
+            "@client/*": [
+                "./types/foundry/client/*"
+            ]
         },
         "types": [
             "jest",
             "jquery",
-            "node",
+            "node"
         ],
         "typeRoots": [
-            "node_modules/@types",
-            "types/convenientEffects",
-            "types/foundry",
-            "types/libWrapper",
-            "types/statusEffects",
-            "types/uiExtender"
+            "./node_modules/@types",
+            "./types/foundry"
         ]
     },
+    "include": [
+        "./src/**/*",
+        "./tests/**/*.ts",
+        "./types/foundry/global-external.d.mts",
+        "./types/convenientEffects/index.d.ts",
+        "./types/libWrapper/index.d.ts",
+        "./types/socketlib/index.d.ts",
+        "./types/statusEffects/index.d.ts",
+        "./types/uiExtender/index.d.ts",
+        "./vite.config.ts"
+    ],
     "watchOptions": {
+        "fallbackPolling": "dynamicpriority",
         "excludeDirectories": [
-            "packs/",
-            "static/packs/"
+            "dist",
+            "packs",
+            "static"
         ]
     }
 }
