@@ -9,7 +9,9 @@ import { Keybindings } from "../keybindings.ts";
 const Init: Listener = {
     listen(): void {
         Hooks.once("init", () => {
-            CONFIG.debug.hooks = BUILD_MODE === "development";
+            if (BUILD_MODE === "development") {
+                CONFIG.debug.hooks = true;
+            }
             new Settings().register();
             new HandlebarHelpers().register();
             new Keybindings().register();
