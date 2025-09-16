@@ -1175,7 +1175,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     entry,
                 ]);
 
-                if (originalFolder?.isOwner) {
+                if (!originalFolder) return;
+
+                if (originalFolder.isOwner) {
                     await entry.delete();
                 } else {
                     ui.notifications.warn(
