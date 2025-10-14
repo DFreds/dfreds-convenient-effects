@@ -504,7 +504,7 @@ function restrained(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                advantageAttack({
+                grantAdvantageAttack({
                     attackType: "all",
                 }),
                 movement({
