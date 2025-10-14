@@ -1,13 +1,11 @@
 import { ItemEffects } from "../../effect-definition.ts";
 import { acCover, movement } from "../changes/attributes.ts";
-import { abilitySaveBonus } from "../changes/abilities.ts";
+import { abilitySaveBonus, abilitySaveMode } from "../changes/abilities.ts";
 import { tokenMagic } from "../changes/macros.ts";
 import {
     advantage,
     advantageAttack,
-    advantageAbilitySave,
     disadvantageAttack,
-    disadvantageAbilitySave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
     grantFailAttack,
@@ -150,9 +148,7 @@ function dodge(): PreCreate<ActiveEffectSource> {
                 grantDisadvantageAttack({
                     attackType: "all",
                 }),
-                advantageAbilitySave({
-                    saveType: "dex",
-                }),
+                abilitySaveMode({ ability: "dex", value: "1" }),
                 tokenMagic({
                     value: "Evade Stance",
                 }),
@@ -245,15 +241,9 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageAbilitySave({
-                    saveType: "str",
-                }),
-                disadvantageAbilitySave({
-                    saveType: "dex",
-                }),
-                disadvantageAbilitySave({
-                    saveType: "con",
-                }),
+                abilitySaveMode({ ability: "str", value: "-1" }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
+                abilitySaveMode({ ability: "con", value: "-1" }),
             ],
         },
     });

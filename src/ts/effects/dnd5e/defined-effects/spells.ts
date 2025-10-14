@@ -18,15 +18,11 @@ import {
     movement,
     upgradeMovement,
     multiplyEncumbrance,
+    initiativeMode,
+    deathMode,
 } from "../changes/attributes.ts";
 import {
-    advantageAbility,
-    advantageAbilityCheck,
-    advantageAbilitySave,
     advantageAttack,
-    advantageDeathSave,
-    disadvantageAbilityCheck,
-    disadvantageAbilitySave,
     disadvantageAttack,
     grantAdvantageAttack,
     grantDisadvantageAttack,
@@ -36,7 +32,12 @@ import {
     optionalSkill,
 } from "../changes/midi-qol.ts";
 import { tokenMagic } from "../changes/macros.ts";
-import { abilitySaveBonus, downgradeAbility } from "../changes/abilities.ts";
+import {
+    abilitySaveBonus,
+    downgradeAbility,
+    abilitySaveMode,
+    abilityCheckMode,
+} from "../changes/abilities.ts";
 import {
     addAllDamageImmunity,
     addAllDamageResistance,
@@ -47,8 +48,7 @@ import {
     addDamageResistance,
 } from "../changes/traits.ts";
 import { atlLight, atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
-import { skillCheckBonus } from "../changes/skills.ts";
-import { initiativeAdv } from "../changes/dnd5e.ts";
+import { skillCheckBonus, skillCheckMode } from "../changes/skills.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
@@ -304,10 +304,8 @@ function beaconOfHope(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                advantageAbilitySave({
-                    saveType: "wis",
-                }),
-                advantageDeathSave(),
+                abilitySaveMode({ ability: "wis", value: "1" }),
+                deathMode({ value: "1" }),
             ],
         },
     });
@@ -516,12 +514,8 @@ function contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                disadvantageAbilitySave({
-                    saveType: "wis",
-                }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "wis",
-                }),
+                abilitySaveMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
                 ...(blinded().changes ?? []),
             ],
         },
@@ -538,12 +532,8 @@ function contagionFilthFever(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                disadvantageAbilitySave({
-                    saveType: "str",
-                }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "str",
-                }),
+                abilitySaveMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "str", value: "-1" }),
                 disadvantageAttack({
                     attackType: "str",
                 }),
@@ -562,9 +552,7 @@ function contagionFleshRot(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                disadvantageAbilityCheck({
-                    abilityCheckType: "cha",
-                }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
                 addAllDamageVulnerability(),
             ],
         },
@@ -581,12 +569,8 @@ function contagionMindfire(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                disadvantageAbilitySave({
-                    saveType: "int",
-                }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "int",
-                }),
+                abilitySaveMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
             ],
         },
     });
@@ -602,12 +586,8 @@ function contagionSeizure(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                disadvantageAbilitySave({
-                    saveType: "dex",
-                }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "dex",
-                }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
                 disadvantageAttack({
                     attackType: "dex",
                 }),
@@ -626,12 +606,8 @@ function contagionSlimyDoom(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_WEEK },
             changes: [
-                disadvantageAbilitySave({
-                    saveType: "con",
-                }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "con",
-                }),
+                abilitySaveMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
             ],
         },
     });
@@ -745,11 +721,7 @@ function enhanceAbilityBearsEndurance(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
-            changes: [
-                advantageAbilityCheck({
-                    abilityCheckType: "con",
-                }),
-            ],
+            changes: [abilityCheckMode({ ability: "con", value: "1" })],
         },
     });
 }
@@ -766,9 +738,7 @@ function enhanceAbilityBullsStrength(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
             changes: [
-                advantageAbilityCheck({
-                    abilityCheckType: "str",
-                }),
+                abilityCheckMode({ ability: "str", value: "1" }),
                 multiplyEncumbrance({
                     value: "2",
                     priority: 5,
@@ -787,11 +757,7 @@ function enhanceAbilityCatsGrace(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
-            changes: [
-                advantageAbilityCheck({
-                    abilityCheckType: "dex",
-                }),
-            ],
+            changes: [abilityCheckMode({ ability: "dex", value: "1" })],
         },
     });
 }
@@ -807,11 +773,7 @@ function enhanceAbilityEaglesSplendor(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
-            changes: [
-                advantageAbilityCheck({
-                    abilityCheckType: "cha",
-                }),
-            ],
+            changes: [abilityCheckMode({ ability: "cha", value: "1" })],
         },
     });
 }
@@ -825,11 +787,7 @@ function enhanceAbilityFoxsCunning() {
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
-            changes: [
-                advantageAbilityCheck({
-                    abilityCheckType: "int",
-                }),
-            ],
+            changes: [abilityCheckMode({ ability: "int", value: "1" })],
         },
     });
 }
@@ -843,11 +801,7 @@ function enhanceAbilityOwlsWisdom() {
             ),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { seconds: SECONDS.IN_ONE_HOUR },
-            changes: [
-                advantageAbilityCheck({
-                    abilityCheckType: "wis",
-                }),
-            ],
+            changes: [abilityCheckMode({ ability: "wis", value: "1" })],
         },
     });
 }
@@ -884,12 +838,8 @@ function enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
                     damageType: "weapon",
                     value: "+1d4",
                 }),
-                advantageAbilityCheck({
-                    abilityCheckType: "str",
-                }),
-                advantageAbilitySave({
-                    saveType: "str",
-                }),
+                abilityCheckMode({ ability: "str", value: "1" }),
+                abilitySaveMode({ ability: "str", value: "1" }),
             ],
         },
         isDynamic: true,
@@ -910,12 +860,8 @@ function enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
                     damageType: "weapon",
                     value: "-1d4",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "str",
-                }),
-                disadvantageAbilitySave({
-                    saveType: "str",
-                }),
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilitySaveMode({ ability: "str", value: "-1" }),
             ],
         },
         isDynamic: true,
@@ -1161,13 +1107,39 @@ function foresight(): PreCreate<ActiveEffectSource> {
                 advantageAttack({
                     attackType: "all",
                 }),
-                advantageAbility({
-                    abilityType: "all",
+                abilityCheckMode({ ability: "str", value: "1" }),
+                abilityCheckMode({ ability: "dex", value: "1" }),
+                abilityCheckMode({ ability: "con", value: "1" }),
+                abilityCheckMode({ ability: "int", value: "1" }),
+                abilityCheckMode({ ability: "wis", value: "1" }),
+                abilityCheckMode({ ability: "cha", value: "1" }),
+                abilitySaveMode({ ability: "str", value: "1" }),
+                abilitySaveMode({ ability: "dex", value: "1" }),
+                abilitySaveMode({ ability: "con", value: "1" }),
+                abilitySaveMode({ ability: "int", value: "1" }),
+                abilitySaveMode({ ability: "wis", value: "1" }),
+                abilitySaveMode({ ability: "cha", value: "1" }),
+                skillCheckMode({ skillType: "acr", value: "1" }),
+                skillCheckMode({ skillType: "ani", value: "1" }),
+                skillCheckMode({ skillType: "arc", value: "1" }),
+                skillCheckMode({ skillType: "ath", value: "1" }),
+                skillCheckMode({ skillType: "dec", value: "1" }),
+                skillCheckMode({ skillType: "his", value: "1" }),
+                skillCheckMode({ skillType: "ins", value: "1" }),
+                skillCheckMode({ skillType: "inv", value: "1" }),
+                skillCheckMode({ skillType: "itm", value: "1" }),
+                skillCheckMode({ skillType: "med", value: "1" }),
+                skillCheckMode({ skillType: "nat", value: "1" }),
+                skillCheckMode({ skillType: "per", value: "1" }),
+                skillCheckMode({ skillType: "prc", value: "1" }),
+                skillCheckMode({ skillType: "prf", value: "1" }),
+                skillCheckMode({ skillType: "rel", value: "1" }),
+                skillCheckMode({ skillType: "slt", value: "1" }),
+                skillCheckMode({ skillType: "ste", value: "1" }),
+                skillCheckMode({ skillType: "sur", value: "1" }),
+                initiativeMode({
+                    value: "1",
                 }),
-                advantageAbilitySave({
-                    saveType: "all",
-                }),
-                initiativeAdv(),
                 grantDisadvantageAttack({
                     attackType: "all",
                 }),
@@ -1292,8 +1264,9 @@ function haste(): PreCreate<ActiveEffectSource> {
                 acBonus({
                     value: "+2",
                 }),
-                advantageAbilitySave({
-                    saveType: "dex",
+                abilitySaveMode({
+                    ability: "dex",
+                    value: "1",
                 }),
                 movement({
                     movementType: "all",
@@ -1321,8 +1294,9 @@ function heroesFeast(): PreCreate<ActiveEffectSource> {
                 addConditionImmunity({
                     condition: "frightened",
                 }),
-                advantageAbilitySave({
-                    saveType: "wis",
+                abilitySaveMode({
+                    ability: "wis",
+                    value: "1",
                 }),
             ],
         },
@@ -1420,9 +1394,12 @@ function holyAura(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                advantageAbilitySave({
-                    saveType: "all",
-                }),
+                abilitySaveMode({ ability: "str", value: "1" }),
+                abilitySaveMode({ ability: "dex", value: "1" }),
+                abilitySaveMode({ ability: "con", value: "1" }),
+                abilitySaveMode({ ability: "int", value: "1" }),
+                abilitySaveMode({ ability: "wis", value: "1" }),
+                abilitySaveMode({ ability: "cha", value: "1" }),
                 grantDisadvantageAttack({
                     attackType: "all",
                 }),
@@ -1495,9 +1472,7 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
                     value: "0",
                     priority: 25,
                 }),
-                disadvantageAbilitySave({
-                    saveType: "dex",
-                }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
                 disadvantageAttack({
                     attackType: "all",
                 }),

@@ -1,16 +1,13 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import { movement, exhaustion } from "../changes/attributes.ts";
+import { movement, exhaustion, initiativeMode } from "../changes/attributes.ts";
 import {
     advantageAttack,
-    disadvantageAbilityCheck,
     disadvantageAttack,
-    disadvantageAbilitySave,
-    failAbilitySave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
     grantCriticalRange,
+    failAbilitySave,
 } from "../changes/midi-qol.ts";
-import { initiativeDisadv } from "../changes/dnd5e.ts";
 import {
     addAllDamageResistance,
     addDamageImmunity,
@@ -19,6 +16,7 @@ import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
+import { abilityCheckMode, abilitySaveMode } from "../changes/abilities.ts";
 
 function conditions(): ItemEffects {
     return {
@@ -143,10 +141,15 @@ function exhaustion1(): PreCreate<ActiveEffectSource> {
                 exhaustion({
                     value: "1",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
+                initiativeMode({
+                    value: "-1",
                 }),
-                initiativeDisadv(),
             ],
         },
     });
@@ -166,10 +169,15 @@ function exhaustion2(): PreCreate<ActiveEffectSource> {
                 exhaustion({
                     value: "2",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
+                initiativeMode({
+                    value: "-1",
                 }),
-                initiativeDisadv(),
                 movement({
                     movementType: "all",
                     value: "*0.5",
@@ -194,10 +202,15 @@ function exhaustion3(): PreCreate<ActiveEffectSource> {
                 exhaustion({
                     value: "3",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
+                initiativeMode({
+                    value: "-1",
                 }),
-                initiativeDisadv(),
                 movement({
                     movementType: "all",
                     value: "*0.5",
@@ -206,9 +219,12 @@ function exhaustion3(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageAbilitySave({
-                    saveType: "all",
-                }),
+                abilitySaveMode({ ability: "str", value: "-1" }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
+                abilitySaveMode({ ability: "con", value: "-1" }),
+                abilitySaveMode({ ability: "int", value: "-1" }),
+                abilitySaveMode({ ability: "wis", value: "-1" }),
+                abilitySaveMode({ ability: "cha", value: "-1" }),
             ],
         },
     });
@@ -228,10 +244,15 @@ function exhaustion4(): PreCreate<ActiveEffectSource> {
                 exhaustion({
                     value: "4",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
+                initiativeMode({
+                    value: "-1",
                 }),
-                initiativeDisadv(),
                 movement({
                     movementType: "all",
                     value: "*0.5",
@@ -240,9 +261,12 @@ function exhaustion4(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageAbilitySave({
-                    saveType: "all",
-                }),
+                abilitySaveMode({ ability: "str", value: "-1" }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
+                abilitySaveMode({ ability: "con", value: "-1" }),
+                abilitySaveMode({ ability: "int", value: "-1" }),
+                abilitySaveMode({ ability: "wis", value: "-1" }),
+                abilitySaveMode({ ability: "cha", value: "-1" }),
             ],
         },
     });
@@ -262,10 +286,15 @@ function exhaustion5(): PreCreate<ActiveEffectSource> {
                 exhaustion({
                     value: "5",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
+                initiativeMode({
+                    value: "-1",
                 }),
-                initiativeDisadv(),
                 movement({
                     movementType: "all",
                     value: "0",
@@ -274,9 +303,12 @@ function exhaustion5(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageAbilitySave({
-                    saveType: "all",
-                }),
+                abilitySaveMode({ ability: "str", value: "-1" }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
+                abilitySaveMode({ ability: "con", value: "-1" }),
+                abilitySaveMode({ ability: "int", value: "-1" }),
+                abilitySaveMode({ ability: "wis", value: "-1" }),
+                abilitySaveMode({ ability: "cha", value: "-1" }),
             ],
         },
     });
@@ -295,9 +327,12 @@ function frightened(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
-                }),
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
             ],
         },
     });
@@ -445,9 +480,12 @@ function poisoned(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                disadvantageAbilityCheck({
-                    abilityCheckType: "all",
-                }),
+                abilityCheckMode({ ability: "str", value: "-1" }),
+                abilityCheckMode({ ability: "dex", value: "-1" }),
+                abilityCheckMode({ ability: "con", value: "-1" }),
+                abilityCheckMode({ ability: "int", value: "-1" }),
+                abilityCheckMode({ ability: "wis", value: "-1" }),
+                abilityCheckMode({ ability: "cha", value: "-1" }),
             ],
         },
     });
@@ -498,9 +536,7 @@ function restrained(): PreCreate<ActiveEffectSource> {
             ),
             img: "modules/dfreds-convenient-effects/images/restrained.svg",
             changes: [
-                disadvantageAbilitySave({
-                    saveType: "dex",
-                }),
+                abilitySaveMode({ ability: "dex", value: "-1" }),
                 disadvantageAttack({
                     attackType: "all",
                 }),

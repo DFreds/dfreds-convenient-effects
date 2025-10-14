@@ -29,7 +29,6 @@ import {
 } from "../changes/attributes.ts";
 import { atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 import {
-    advantageSkill,
     grantDisadvantageAttack,
     magicResistanceSaves,
 } from "../changes/midi-qol.ts";
@@ -37,6 +36,7 @@ import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
+import { skillCheckMode } from "../changes/skills.ts";
 
 function magicItems(): ItemEffects {
     return {
@@ -328,7 +328,7 @@ function bootsOfElvenkind(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BootsOfElvenkind.description",
             ),
             img: "icons/equipment/feet/boots-pointed-cloth-green.webp",
-            changes: [advantageSkill({ skillType: "ste" })],
+            changes: [skillCheckMode({ skillType: "ste", value: "1" })],
         },
         isTemporary: false,
     });
@@ -439,7 +439,7 @@ function cloakOfElvenkind(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.CloakOfElvenkind.description",
             ),
             img: "icons/equipment/back/cloak-collared-feathers-green.webp",
-            changes: [advantageSkill({ skillType: "ste" })],
+            changes: [skillCheckMode({ skillType: "ste", value: "1" })],
         },
         isTemporary: false,
     });
@@ -731,8 +731,9 @@ function eyesOfTheEagle(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/head/goggles-leather-blue.webp",
             changes: [
-                advantageSkill({
+                skillCheckMode({
                     skillType: "prc",
+                    value: "1",
                 }),
             ],
         },
@@ -807,8 +808,9 @@ function robeOfEyes(): PreCreate<ActiveEffectSource> {
             ),
             img: "icons/equipment/head/hood-red.webp",
             changes: [
-                advantageSkill({
+                skillCheckMode({
                     skillType: "prc",
+                    value: "1",
                 }),
                 upgradeDarkvision({
                     value: "120",

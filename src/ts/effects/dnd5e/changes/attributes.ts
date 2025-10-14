@@ -185,6 +185,51 @@ function multiplyEncumbrance({
     };
 }
 
+function initiativeMode({
+    value,
+    priority,
+}: {
+    value: "-1" | "0" | "1";
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.attributes.init.roll.mode`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
+function concentrationMode({
+    value,
+    priority,
+}: {
+    value: "-1" | "0" | "1";
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.attributes.concentration.roll.mode`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
+function deathMode({
+    value,
+    priority,
+}: {
+    value: "-1" | "0" | "1";
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.attributes.death.roll.mode`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value,
+        priority,
+    };
+}
+
 export {
     acBonus,
     acCalc,
@@ -197,4 +242,7 @@ export {
     upgradeTrueSight,
     multiplyEncumbrance,
     addDarkvision,
+    initiativeMode,
+    concentrationMode,
+    deathMode,
 };

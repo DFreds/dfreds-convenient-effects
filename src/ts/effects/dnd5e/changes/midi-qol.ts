@@ -16,14 +16,6 @@ function disadvantage(): Partial<EffectChangeData> {
     };
 }
 
-function advantageDeathSave(): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.advantage.deathSave`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
 function advantageAttack({
     attackType,
 }: {
@@ -72,66 +64,6 @@ function grantDisadvantageAttack({
     };
 }
 
-function advantageAbility({
-    abilityType,
-}: {
-    abilityType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
-}): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.advantage.ability.${abilityType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
-function advantageAbilityCheck({
-    abilityCheckType,
-}: {
-    abilityCheckType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
-}): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.advantage.ability.check.${abilityCheckType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
-function disadvantageAbilityCheck({
-    abilityCheckType,
-}: {
-    abilityCheckType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
-}): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.disadvantage.ability.check.${abilityCheckType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
-function advantageAbilitySave({
-    saveType,
-}: {
-    saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
-}): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.advantage.ability.save.${saveType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
-function disadvantageAbilitySave({
-    saveType,
-}: {
-    saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
-}): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.disadvantage.ability.save.${saveType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
 function failAbilitySave({
     saveType,
 }: {
@@ -139,18 +71,6 @@ function failAbilitySave({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.fail.ability.save.${saveType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
-        value: "1",
-    };
-}
-
-function advantageSkill({
-    skillType,
-}: {
-    skillType: "ste" | "prc";
-}): Partial<EffectChangeData> {
-    return {
-        key: `flags.midi-qol.advantage.skill.${skillType}`,
         mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
         value: "1",
     };
@@ -268,19 +188,12 @@ function magicResistanceSaves(): Partial<EffectChangeData> {
 
 export {
     advantage,
-    advantageDeathSave,
     disadvantage,
     advantageAttack,
     disadvantageAttack,
     grantAdvantageAttack,
     grantDisadvantageAttack,
-    advantageAbility,
-    advantageAbilityCheck,
-    disadvantageAbilityCheck,
-    advantageAbilitySave,
-    disadvantageAbilitySave,
     failAbilitySave,
-    advantageSkill,
     grantCriticalRange,
     grantFailAttack,
     optionalLabel,

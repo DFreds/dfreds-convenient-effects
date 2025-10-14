@@ -1,8 +1,6 @@
 import { tokenMagic } from "../changes/macros.ts";
 import {
-    advantageAbilityCheck,
     advantageAttack,
-    advantageAbilitySave,
     grantAdvantageAttack,
     grantDisadvantageAttack,
     optionalAttack,
@@ -20,6 +18,7 @@ import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
 import { createConvenientEffect } from "../../../utils/creates.ts";
+import { abilityCheckMode, abilitySaveMode } from "../changes/abilities.ts";
 
 function classFeatures(): ItemEffects {
     return {
@@ -333,7 +332,7 @@ function kiPatientDefense(): PreCreate<ActiveEffectSource> {
             flags: { dae: { specialDuration: ["turnStart"] } },
             changes: [
                 grantDisadvantageAttack({ attackType: "all" }),
-                advantageAbilitySave({ saveType: "dex" }),
+                abilitySaveMode({ ability: "dex", value: "1" }),
             ],
         },
     });
@@ -349,8 +348,8 @@ function rage(): PreCreate<ActiveEffectSource> {
             img: "icons/creatures/abilities/mouth-teeth-human.webp",
             duration: { seconds: SECONDS.IN_ONE_MINUTE },
             changes: [
-                advantageAbilityCheck({ abilityCheckType: "str" }),
-                advantageAbilitySave({ saveType: "str" }),
+                abilityCheckMode({ ability: "str", value: "1" }),
+                abilitySaveMode({ ability: "str", value: "1" }),
                 addDamageResistance({ damageType: "slashing" }),
                 addDamageResistance({ damageType: "piercing" }),
                 addDamageResistance({ damageType: "bludgeoning" }),
