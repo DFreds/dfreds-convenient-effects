@@ -7,7 +7,6 @@ function renderAppIfOpen(): void {
     const applications = foundry.applications.instances;
 
     const convenientEffectsV2 = applications.get(
-        // @ts-expect-error The types provided by pf2e think this is a number
         ConvenientEffectsV2.tabName,
     ) as unknown as ConvenientEffectsV2;
 
@@ -20,7 +19,6 @@ function renderApp(): void {
     const applications = foundry.applications.instances;
 
     const convenientEffectsV2 = applications.get(
-        // @ts-expect-error The types provided by pf2e think this is a number
         ConvenientEffectsV2.tabName,
     ) as unknown as ConvenientEffectsV2;
 

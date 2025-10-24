@@ -63,6 +63,8 @@ export default abstract class DataModel<
         joint: foundry.data.validation.DataModelValidationFailure | null;
     };
 
+    static LOCALIZATION_PREFIXES: string[];
+
     /* ---------------------------------------- */
     /*  Data Cleaning Methods                   */
     /* ---------------------------------------- */
