@@ -15,10 +15,13 @@ const SocketlibReady: Listener = {
                 sockets,
             });
 
-            (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule).api =
-                new EffectInterface({
-                    sockets,
-                });
+            (
+                game.modules.get(
+                    MODULE_ID,
+                ) as unknown as ConvenientEffectsModule
+            ).api = new EffectInterface({
+                sockets,
+            });
         });
     },
 };

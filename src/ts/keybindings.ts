@@ -28,7 +28,8 @@ class Keybindings {
                         return;
                     }
 
-                    const ceApp = convenientEffectsV2 as unknown as ConvenientEffectsV2;
+                    const ceApp =
+                        convenientEffectsV2 as unknown as ConvenientEffectsV2;
                     if (ceApp.active) {
                         foundry.ui.sidebar.toggleExpanded();
                     } else {
@@ -57,7 +58,8 @@ class Keybindings {
                         return;
                     }
 
-                    const ceApp = convenientEffectsV2 as unknown as ConvenientEffectsV2;
+                    const ceApp =
+                        convenientEffectsV2 as unknown as ConvenientEffectsV2;
                     if (ceApp.popout?.rendered) {
                         ceApp.popout.close();
                     } else {

@@ -1,4 +1,8 @@
-import { ActiveEffectSource, BaseActiveEffect, ItemSource } from "@client/documents/_module.mjs";
+import {
+    ActiveEffectSource,
+    BaseActiveEffect,
+    ItemSource,
+} from "@client/documents/_module.mjs";
 import { MODULE_ID } from "../constants.ts";
 
 class Flags {

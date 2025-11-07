@@ -8,7 +8,6 @@
 
 import { Flags } from "../utils/flags.ts";
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 async function createMacro(
     effect: ActiveEffect<any>,
     slot?: number | string,

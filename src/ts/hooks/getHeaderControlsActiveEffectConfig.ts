@@ -9,7 +9,7 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
         Hooks.on(
             "getHeaderControlsActiveEffectConfig",
             (config: any, controls: any) => {
-                const configTyped = config as DocumentSheetConfig
+                const configTyped = config as DocumentSheetConfig;
                 const controlsTyped =
                     controls as ApplicationHeaderControlsEntry[];
 
@@ -20,7 +20,9 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                     visible: () => {
                         const parent = configTyped.document.parent;
                         const isItem = parent instanceof Item;
-                        const isConvenientItem = Flags.isConvenient(parent as any);
+                        const isConvenientItem = Flags.isConvenient(
+                            parent as any,
+                        );
                         const isOwner = configTyped.document.isOwner;
                         const isGM = game.user.isGM;
 

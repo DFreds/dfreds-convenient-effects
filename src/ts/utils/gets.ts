@@ -34,7 +34,8 @@ function getItemType(): string {
 }
 
 function getApi(): EffectInterface {
-    return (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule).api;
+    return (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule)
+        .api;
 }
 
 // function effectsByActorMappings(): {

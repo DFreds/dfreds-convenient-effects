@@ -1,4 +1,3 @@
-
 import { ApplicationConfiguration } from "@client/applications/_types.mjs";
 import {
     findAllEffects,
@@ -265,7 +264,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
                     if (!original) return;
 
-                    const clone = await original.clone(
+                    const clone = original.clone(
                         {
                             name: game.i18n.format("DOCUMENT.CopyOf", {
                                 name: original._source.name,
