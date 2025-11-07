@@ -16,10 +16,10 @@
         "update-types": "tsx ./build/update-pf2e-types.ts && tsx ./build/copy-pf2e-types.ts",
         "test": "jest",
         "lint": "npm run lint:ts && npm run lint:json && npm run prettier:scss",
-        "lint:ts": "eslint ./src ./types --ext .ts",
+        "lint:ts": "eslint ./src --ext .ts",
         "prettier:scss": "prettier --check src/styles",
         "lint:json": "eslint ./static --ext .json --no-eslintrc --plugin json --rule \"json/*: error\" --rule \"linebreak-style: error\"",
-        "lint:fix": "eslint ./src ./types --ext .ts --fix && prettier --write src/styles"
+        "lint:fix": "eslint ./src --ext .ts --fix && prettier --write src/styles"
     },
     "author": "DFreds (https://github.com/DFreds)",
     "license": "MIT",
