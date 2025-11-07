@@ -3,6 +3,10 @@ import { ApplicationV2 } from "types/foundry/client-esm/applications/_types.js";
 export {};
 
 declare global {
+    interface Window {
+        uiExtender: UiExtender;
+    }
+
     /**
      * The UiExtender class
      */
@@ -24,21 +28,6 @@ declare global {
          * @param input The directory input
          */
         registerDirectory(input: DirectoryInput): void;
-
-        /**
-         * Get the scene controls. Meant for internal use only.
-         */
-        get _sceneControls(): SceneControlInput[];
-
-        /**
-         * Get the HUD buttons. Meant for internal use only.
-         */
-        get _hudButtons(): HudButtonInput[];
-
-        /**
-         * Get the directories. Meant for internal use only.
-         */
-        get _directories(): DirectoryInput[];
     }
 
     export interface SceneControlInput {
@@ -270,4 +259,6 @@ declare global {
         function once(...args: HookParamsUiExtenderInit): number;
         function once(...args: HookParamsUiExtenderSetup): number;
     }
+
+    let uiExtender: UiExtender;
 }
