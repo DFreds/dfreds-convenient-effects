@@ -1,7 +1,6 @@
 import {
     EffectDefinition,
     ItemEffects,
-    MigrationType,
 } from "../effect-definition.ts";
 import { migrateOldCustomEffects } from "./migrations/2024-08-14-migrate-old-custom-effects.ts";
 import { classFeatures } from "./defined-effects/class-features.ts";

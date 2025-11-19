@@ -17,6 +17,7 @@ import {
 import { Sockets } from "./sockets/sockets.ts";
 import Document from "@common/abstract/document.mjs";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
+import { MODULE_ID } from "./constants.ts";
 
 class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
@@ -287,7 +288,7 @@ class EffectInterfaceImpl implements EffectInterface {
         await Item.deleteDocuments(backupFolders.map((item) => item.id));
 
         await this.#settings.setHasInitialized(false);
-        await this.#settings.clearRanMigrations();
+        await migrations.clearAllRan({ moduleId: MODULE_ID });
 
         if (confirm) {
             // @ts-expect-error Complains about failed to resolve module specifier

@@ -7,6 +7,7 @@ import { DropActorSheetData } from "./dropActorSheetData.ts";
 import { GetHeaderControlsActiveEffectConfig } from "./getHeaderControlsActiveEffectConfig.ts";
 import { HotbarDrop } from "./hotbarDrop.ts";
 import { Init } from "./init.ts";
+import { MigrationsSetup } from "./migrations.setup.ts";
 import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
 import { Ready } from "./ready.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
@@ -26,6 +27,7 @@ const HooksCE = {
             Init,
             UiExtenderInit,
             Setup,
+            MigrationsSetup,
             Ready,
             SocketlibReady,
             CreateItem,

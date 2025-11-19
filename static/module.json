@@ -26,6 +26,13 @@
                 "compatibility": {
                     "verified": "2.1.1"
                 }
+            },
+            {
+                "id": "lib-dfreds-migrations",
+                "type": "module",
+                "compatibility": {
+                    "verified": "1.0.1"
+                }
             }
         ]
     },

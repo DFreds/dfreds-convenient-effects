@@ -3,7 +3,6 @@ import {
     createConvenientItem,
 } from "../../../utils/creates.ts";
 import { notEmpty } from "../../../utils/types.ts";
-import { MigrationType } from "../../effect-definition.ts";
 
 const migration: MigrationType = {
     key: "2024-08-14-migrate-old-custom-effects",

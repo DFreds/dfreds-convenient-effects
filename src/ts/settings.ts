@@ -12,7 +12,6 @@ class Settings {
     #SHOW_HIDDEN_EFFECTS = "showHiddenEffects";
     #SHOW_NESTED_EFFECTS = "showNestedEffects";
     #HAS_INITIALIZED = "hasInitialized";
-    #RAN_MIGRATIONS = "ranMigrations";
     #PRIORITIZE_TARGETS = "prioritizeTargets";
 
     constructor() {
@@ -49,7 +48,6 @@ class Settings {
         this.#registerShowNestedEffects();
         this.#registerPrioritizeTargets();
         this.#registerHasInitialized();
-        this.#registerRanMigrations();
     }
 
     #registerAppControlsPermission(): void {
@@ -125,16 +123,6 @@ class Settings {
             config: false,
             default: false,
             type: Boolean,
-        });
-    }
-
-    #registerRanMigrations(): void {
-        game.settings.register(MODULE_ID, this.#RAN_MIGRATIONS, {
-            name: "Ran Migrations",
-            scope: "world",
-            config: false,
-            default: [],
-            type: Array,
         });
     }
 
@@ -257,48 +245,6 @@ class Settings {
         return game.settings.set(MODULE_ID, this.#HAS_INITIALIZED, value);
     }
 
-    /**
-     * Returns the game setting for the ran migration keys
-     *
-     * @returns the migration keys of all ran migrations
-     */
-    get ranMigrations(): string[] {
-        const effectVersionsRun = game.settings.get(
-            MODULE_ID,
-            this.#RAN_MIGRATIONS,
-        ) as string[];
-
-        return effectVersionsRun;
-    }
-
-    /**
-     * Adds a given migration key to the saved ran migrations
-     *
-     * @param migrationKey - the key to add to the ran migrations
-     * @returns a promise that resolves when the settings update is complete
-     */
-    async addRanMigration(migrationKey: string): Promise<unknown> {
-        let ranMigrations = this.ranMigrations;
-
-        ranMigrations.push(migrationKey);
-
-        ranMigrations = [...new Set(ranMigrations)]; // remove duplicates
-
-        return game.settings.set(
-            MODULE_ID,
-            this.#RAN_MIGRATIONS,
-            ranMigrations,
-        );
-    }
-
-    /**
-     * Clears all saved migrations
-     *
-     * @returns a promise that resolves when the settings update is complete
-     */
-    async clearRanMigrations(): Promise<unknown> {
-        return game.settings.set(MODULE_ID, this.#RAN_MIGRATIONS, []);
-    }
 }
 
 export { Settings };

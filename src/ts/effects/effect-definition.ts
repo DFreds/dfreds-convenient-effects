@@ -4,6 +4,7 @@ import { getApi, getItemType } from "../utils/gets.ts";
 import { createConvenientItem } from "../utils/creates.ts";
 import { Flags } from "../utils/flags.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
+import { MODULE_ID } from "../constants.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -23,9 +24,6 @@ abstract class EffectDefinition {
             await getApi().resetSystemInitialization({
                 confirm: false,
             });
-
-            await this.settings.setHasInitialized(false);
-            await this.settings.clearRanMigrations();
         }
 
         if (!this.settings.hasInitialized) {
@@ -42,7 +40,12 @@ abstract class EffectDefinition {
             );
         }
 
-        await this.#runMigrations();
+        migrations.addMigrations({ moduleId: MODULE_ID, migrations: this.migrations });
+
+        const result = await migrations.runAll({ moduleId: MODULE_ID });
+        if (!result) {
+            error(`Failed to run migrations for ${this.systemId}`);
+        }
     }
 
     abstract get initialItemEffects(): ItemEffects[];
@@ -80,38 +83,6 @@ abstract class EffectDefinition {
 
         await Promise.all(effectPromises);
     }
-
-    async #runMigrations(): Promise<void> {
-        try {
-            const migrationsRun = this.settings.ranMigrations;
-            const sortedMigrations = this.migrations.sort(
-                (a: MigrationType, b: MigrationType) => {
-                    return a.date.getTime() - b.date.getTime();
-                },
-            );
-
-            for (const migration of sortedMigrations) {
-                if (migrationsRun.includes(migration.key)) continue; // Don't run a migration that already ran
-
-                log(
-                    `Running version ${migration.key} migration for ${this.systemId}`,
-                );
-
-                const success = await migration.func();
-                if (success) {
-                    // Save each successful migration so that if something fails
-                    // before the end, it picks up at the right spot
-                    await this.settings.addRanMigration(migration.key);
-                } else {
-                    error(
-                        `Failed to run migration ${migration.key} for ${this.systemId}`,
-                    );
-                }
-            }
-        } catch (e: any) {
-            error(`Something went wrong while running migrations: ${e}`);
-        }
-    }
 }
 
 type ItemData = {
@@ -130,23 +101,5 @@ type ItemEffects = {
     effects: PreCreate<ActiveEffectSource>[];
 };
 
-type MigrationType = {
-    /**
-     * The identifier for the migration. Successfully run migrations are saved
-     * using this key
-     */
-    key: string;
-
-    /**
-     * The date of the migration. Migrations run from oldest to newest in order
-     */
-    date: Date;
-
-    /**
-     * The migration function
-     */
-    func: () => Promise<boolean>;
-};
-
 export { EffectDefinition };
-export type { ItemData, ItemEffects, MigrationType };
+export type { ItemData, ItemEffects };
