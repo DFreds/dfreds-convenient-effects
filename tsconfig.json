@@ -56,6 +56,7 @@
         "./types/socketlib/index.d.ts",
         "./types/statusEffects/index.d.ts",
         "./types/uiExtender/index.d.ts",
+        "./types/migrations/index.d.ts",
         "./vite.config.ts"
     ],
     "watchOptions": {
