@@ -5,7 +5,7 @@ on:
     types: [released]
 
 jobs:
-  github-releases-to-discord:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,3 +18,10 @@ jobs:
           username: "DFreds Convenient Effects - Release"
           content: "<@&1200173776898371635> <@&1200173086708871238>"
           footer_timestamp: true
+
+      - name: Publish Module to FoundryVTT Website
+        id: publish-to-foundry-website
+        uses: cs96and/FoundryVTT-release-package@v1
+        with:
+          package-token: ${{ secrets.PACKAGE_TOKEN }}
+          manifest-url: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.json
