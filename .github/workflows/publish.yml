@@ -1,4 +1,4 @@
-name: Send to Discord
+name: Publish
 
 on:
   release:
