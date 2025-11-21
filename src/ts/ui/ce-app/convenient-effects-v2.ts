@@ -608,8 +608,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             .filter((folder) => {
                 const isViewable = Flags.isViewable(folder) ?? true;
                 const showHiddenEffects = this.#settings.showHiddenEffects;
+                const hasPermission = folder.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
 
-                return showHiddenEffects || isViewable;
+                return hasPermission && (showHiddenEffects || isViewable);
             })
             .map((folder) => {
                 const viewableEffects = findEffectsByFolder(folder.id, {
