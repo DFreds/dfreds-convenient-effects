@@ -152,8 +152,14 @@ declare global {
          * @param event The click event
          * @param button The button element
          * @param data The data for the item with the HUD
+         * @param hud The base placeable HUD instance
          */
-        onClick?: (event: JQuery.ClickEvent, button: JQuery, data: any) => void;
+        onClick?: (
+            event: JQuery.ClickEvent,
+            button: JQuery,
+            data: any,
+            hud: BasePlaceableHUD<any>,
+        ) => void;
 
         /**
          * The right-click handler
@@ -161,11 +167,13 @@ declare global {
          * @param event The context menu event
          * @param button The button element
          * @param data The data for the item with the HUD
+         * @param hud The base placeable HUD instance
          */
         onRightClick?: (
             event: JQuery.ContextMenuEvent,
             button: JQuery,
             data: any,
+            hud: BasePlaceableHUD<any>,
         ) => void;
 
         /**
