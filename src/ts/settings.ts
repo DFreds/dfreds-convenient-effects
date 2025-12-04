@@ -244,7 +244,6 @@ class Settings {
     async setHasInitialized(value: boolean): Promise<unknown> {
         return game.settings.set(MODULE_ID, this.#HAS_INITIALIZED, value);
     }
-
 }
 
 export { Settings };

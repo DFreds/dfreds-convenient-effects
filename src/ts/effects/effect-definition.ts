@@ -40,7 +40,10 @@ abstract class EffectDefinition {
             );
         }
 
-        migrations.addMigrations({ moduleId: MODULE_ID, migrations: this.migrations });
+        migrations.addMigrations({
+            moduleId: MODULE_ID,
+            migrations: this.migrations,
+        });
 
         const result = await migrations.runAll({ moduleId: MODULE_ID });
         if (!result) {
