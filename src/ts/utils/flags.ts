@@ -75,9 +75,17 @@ class Flags {
         }
     }
 
-    static getFolderColor(item: Item<null>): string {
-        return (item.getFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR) ??
-            "") as string;
+    static getFolderColor(item: Item<null> | PreCreate<ItemSource>): string | undefined {
+        if (item instanceof Item) {
+            return item.getFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR) as
+                | string
+                | undefined;
+        } else {
+            return foundry.utils.getProperty(
+                item,
+                `flags.${MODULE_ID}.${this.#KEYS.FOLDER_COLOR}`,
+            ) as string | undefined;
+        }
     }
 
     static async setFolderColor(

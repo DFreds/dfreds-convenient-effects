@@ -28,10 +28,7 @@ function createConvenientItem({
     Flags.setIsConvenient(item, true);
     Flags.setIsBackup(item, Flags.isBackup(item) ?? isBackup);
     Flags.setIsViewable(item, Flags.isViewable(item) ?? isViewable);
-
-    if (color) {
-        Flags.setFolderColor(item, color);
-    }
+    Flags.setFolderColor(item, Flags.getFolderColor(item) ?? color ?? "");
 
     item.name = isBackup ? `${item.name} - Backup` : item.name;
     item.img =
@@ -58,13 +55,22 @@ function createConvenientEffect({
     Flags.setIsDynamic(effect, Flags.isDynamic(effect) ?? isDynamic);
 
     if (nestedEffectIds) {
-        Flags.setNestedEffectIds(effect, nestedEffectIds);
+        Flags.setNestedEffectIds(
+            effect,
+            Flags.getNestedEffectIds(effect) ?? nestedEffectIds,
+        );
     }
     if (subEffectIds) {
-        Flags.setSubEffectIds(effect, subEffectIds);
+        Flags.setSubEffectIds(
+            effect,
+            Flags.getSubEffectIds(effect) ?? subEffectIds,
+        );
     }
     if (otherEffectIds) {
-        Flags.setOtherEffectIds(effect, otherEffectIds);
+        Flags.setOtherEffectIds(
+            effect,
+            Flags.getOtherEffectIds(effect) ?? otherEffectIds,
+        );
     }
 
     effect.description = effect.description
