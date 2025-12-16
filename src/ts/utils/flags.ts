@@ -47,19 +47,16 @@ class Flags {
 
     static isBackup(
         document: ActiveEffect<any> | Item<null> | object,
-    ): boolean {
+    ): boolean | undefined {
         if (document instanceof ActiveEffect || document instanceof Item) {
-            return (
-                (document.getFlag(
-                    MODULE_ID,
-                    this.#KEYS.IS_BACKUP,
-                ) as boolean) ?? false
-            );
+            return document.getFlag(MODULE_ID, this.#KEYS.IS_BACKUP) as
+                | boolean
+                | undefined;
         } else {
             return foundry.utils.getProperty(
                 document,
                 `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
-            ) as boolean;
+            ) as boolean | undefined;
         }
     }
 
@@ -208,20 +205,16 @@ class Flags {
      */
     static isConvenient(
         document: ActiveEffect<any> | Item<null> | object,
-    ): boolean {
+    ): boolean | undefined {
         if (document instanceof ActiveEffect || document instanceof Item) {
-            return (
-                (document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as
-                    | boolean
-                    | undefined) ?? false
-            );
+            return document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as
+                | boolean
+                | undefined;
         } else {
-            return (
-                (foundry.utils.getProperty(
-                    document,
-                    `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
-                ) as boolean) ?? false
-            );
+            return foundry.utils.getProperty(
+                document,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
+            ) as boolean | undefined;
         }
     }
 
@@ -233,12 +226,19 @@ class Flags {
         );
     }
 
-    static isTemporary(effect: ActiveEffect<any>): boolean {
-        return (
-            (effect.getFlag(MODULE_ID, this.#KEYS.IS_TEMPORARY) as
+    static isTemporary(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
+    ): boolean | undefined {
+        if (effect instanceof ActiveEffect) {
+            return effect.getFlag(MODULE_ID, this.#KEYS.IS_TEMPORARY) as
                 | boolean
-                | undefined) ?? false
-        );
+                | undefined;
+        } else {
+            return foundry.utils.getProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`,
+            ) as boolean | undefined;
+        }
     }
 
     static setIsTemporary(
@@ -254,20 +254,16 @@ class Flags {
 
     static isDynamic(
         effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): boolean {
+    ): boolean | undefined {
         if (effect instanceof ActiveEffect) {
-            return (
-                (effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as
-                    | boolean
-                    | undefined) ?? false
-            );
+            return effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as
+                | boolean
+                | undefined;
         } else {
-            return (
-                (foundry.utils.getProperty(
-                    effect,
-                    `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`,
-                ) as boolean) ?? false
-            );
+            return foundry.utils.getProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`,
+            ) as boolean | undefined;
         }
     }
 
@@ -279,11 +275,22 @@ class Flags {
         );
     }
 
-    static isViewable(document: ActiveEffect<any> | Item<null>): boolean {
-        return (
-            (document.getFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE) as boolean) ??
-            false
-        );
+    static isViewable(
+        document:
+            | ActiveEffect<any>
+            | Item<null>
+            | PreCreate<ActiveEffectSource>,
+    ): boolean | undefined {
+        if (document instanceof ActiveEffect || document instanceof Item) {
+            return document.getFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE) as
+                | boolean
+                | undefined;
+        } else {
+            return foundry.utils.getProperty(
+                document,
+                `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`,
+            ) as boolean | undefined;
+        }
     }
 
     static async setIsViewable(

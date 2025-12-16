@@ -81,7 +81,7 @@ class EffectInterfaceImpl implements EffectInterface {
 
         return (
             document?.effects?.some((effect) => {
-                const isConvenient = Flags.isConvenient(effect);
+                const isConvenient = Flags.isConvenient(effect) ?? false;
                 const isEnabled = !effect.disabled;
                 const isMatchingId = effect.id === effectId;
                 const isMatchingName = effect.name === effectName;

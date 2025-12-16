@@ -63,9 +63,9 @@ interface FindOptions {
 function findFolders({ backup }: FindOptions): Item<null>[] {
     return game.items
         .filter((folder) => {
-            return (
-                Flags.isConvenient(folder) && backup === Flags.isBackup(folder)
-            );
+            const isConvenient = Flags.isConvenient(folder) ?? false;
+            const isBackup = Flags.isBackup(folder) ?? false;
+            return isConvenient && backup === isBackup;
         })
         .sort((folderA, folderB) => {
             const nameA = folderA.name.toUpperCase(); // ignore upper and lowercase
@@ -87,11 +87,9 @@ function findFolder(
     { backup }: FindOptions,
 ): Item<null> | undefined {
     return game.items.find((folder) => {
-        return (
-            folder.id === folderId &&
-            Flags.isConvenient(folder) &&
-            backup === Flags.isBackup(folder)
-        );
+        const isConvenient = Flags.isConvenient(folder) ?? false;
+        const isBackup = Flags.isBackup(folder) ?? false;
+        return folder.id === folderId && isConvenient && backup === isBackup;
     });
 }
 

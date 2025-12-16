@@ -26,8 +26,8 @@ function createConvenientItem({
     color,
 }: ICreateItemAddOns): PreCreate<ItemSource> {
     Flags.setIsConvenient(item, true);
-    Flags.setIsBackup(item, isBackup);
-    Flags.setIsViewable(item, isViewable);
+    Flags.setIsBackup(item, Flags.isBackup(item) ?? isBackup);
+    Flags.setIsViewable(item, Flags.isViewable(item) ?? isViewable);
 
     if (color) {
         Flags.setFolderColor(item, color);
@@ -52,10 +52,10 @@ function createConvenientEffect({
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     Flags.setCeEffectId(effect, createCeEffectId(effect.name));
     Flags.setIsConvenient(effect, true);
-    Flags.setIsBackup(effect, isBackup);
-    Flags.setIsTemporary(effect, isTemporary);
-    Flags.setIsViewable(effect, isViewable);
-    Flags.setIsDynamic(effect, isDynamic);
+    Flags.setIsBackup(effect, Flags.isBackup(effect) ?? isBackup);
+    Flags.setIsTemporary(effect, Flags.isTemporary(effect) ?? isTemporary);
+    Flags.setIsViewable(effect, Flags.isViewable(effect) ?? isViewable);
+    Flags.setIsDynamic(effect, Flags.isDynamic(effect) ?? isDynamic);
 
     if (nestedEffectIds) {
         Flags.setNestedEffectIds(effect, nestedEffectIds);

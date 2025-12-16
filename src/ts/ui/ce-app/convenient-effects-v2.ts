@@ -1343,7 +1343,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         if (!folder) return false;
 
-        return Flags.isViewable(folder);
+        return Flags.isViewable(folder) ?? false;
     }
 
     #isEffectViewable(li: HTMLElement): boolean {
@@ -1362,7 +1362,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
         if (!effect) return false;
 
-        return Flags.isViewable(effect);
+        return Flags.isViewable(effect) ?? false;
     }
 
     async #setFolderViewable(
