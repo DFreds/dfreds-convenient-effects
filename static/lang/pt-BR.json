@@ -19,9 +19,12 @@
 
         "Keybinding": {
             "ToggleAppName": "Alternar Aplicativo Efeitos Convenientes",
-            "ToggleAppHint": "Isso abrirá o aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento."
+            "ToggleAppHint": "Isso abrirá o aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento.",
+            "ToggleAppPopoutName": "Alternar Popup do Aplicativo Efeitos Convenientes",
+            "ToggleAppPopoutHint": "Isso abrirá o popup do aplicativo Efeitos Convenientes, caso esteja fechado, ou o fechará caso esteja aberto no momento."
         },
 
+        "SearchEffects": "Pesquisar Efeitos",
         "ViewBackups": "Visualizar Backups",
         "ShowFolder": "Mostrar Pasta",
         "HideFolder": "Esconder Pasta",
@@ -30,12 +33,30 @@
         "PrioritizeTargets": "Priorizar Alvos",
         "NewEffect": "Novo Efeito",
         "EditEffect": "Editar Efeito",
+        "AddEffect": "Adicionar Efeito",
+        "RemoveEffect": "Remover Efeito",
         "DeleteEffect": "Deletar Efeito",
         "ShowEffect": "Mostrar Efeito",
         "HideEffect": "Ocultar Efeito",
+        "ToggleConvenientEffect": "Alternar Efeito Conveniente",
         "ToggleAsOverlay": "Alternar como Sobreposição",
+        "ToggleStatusEffect": "Alternar Efeito de Status",
         "ResetSystemEffects": "Redefinir Efeitos do Sistema",
         "ResetSystemEffectsWarning": "Isso redefinirá completamente os efeitos integrados, desfazendo quaisquer criações, exclusões ou edições personalizadas que foram feitas.",
+        "SelectEffect": "Selecionar Efeito",
+        "NoPermissionToRemoveEffect": "Você não tem permissão para remover o efeito {effectName} de {originalFolderName}. Efeito duplicado em {newFolderName}",
+        "NoPermissionToAddEffect": "Você não tem permissão para adicionar o efeito {effectName} à pasta {newFolderName}",
+
+        "FolderHidden": "Pasta Ocultada",
+        "Passive": "Passivo",
+        "EffectHidden": "Efeito Ocultado",
+        "HasNestedEffects": "Tem Efeitos Aninhados",
+        "IsNestedEffect": "É um Efeito Aninhado",
+        "StatusEffect": "Efeito de Status",
+        "MidiQolEffects": "Efeitos Midi-QoL",
+        "StackableDaeEffect": "Efeito DAE Empilhável",
+        "AtlEffects": "Efeitos ATL",
+        "TokenMagicEffects": "Efeitos Token Magic",
 
         "Config": {
             "Title": "Configuração de Efeitos Convenientes",
@@ -61,6 +82,9 @@
             "DependentEffectsTab": "Efeitos Dependentes"
         },
 
+        "Initializing": "Inicializando efeitos convenientes...",
+        "FinishedInitializing": "Inicialização dos efeitos convenientes concluída",
+
         "Dnd": {
             "Folders": {
                 "Conditions": "Condições",
@@ -80,6 +104,10 @@
             "AlterSelf": {
                 "name": "Alterar-se",
                 "description": "Sem efeitos ativos e dura 1 hora"
+            },
+            "AmuletOfHealth": {
+                "name": "Amuleto de Saúde",
+                "description": "Aumenta a constituição para 19"
             },
             "AntilifeShell": {
                 "name": "Cúpula Antivida",
@@ -125,6 +153,38 @@
                 "name": "Vigor do Urso",
                 "description": "Vantagem em testes de constituição e 2d6 pontos de vida temporários por 1 hora"
             },
+            "BeltOfDwarvenkind": {
+                "name": "Cinto Anão",
+                "description": "- Adiciona +2 à constituição até um máximo de 20<br/>- Adiciona resistência a veneno<br/>- Adiciona visão no escuro<br/>- Adiciona idioma anão"
+            },
+            "BeltOfGiantStrength": {
+                "name": "Cinto de Força de Gigante",
+                "description": "Escolha entre o Cinto de Força de Gigante das Colinas, Cinto de Força de Gigante do Gelo, Cinto de Força de Gigante de Pedra, Cinto de Força de Gigante de Fogo, Cinto de Força de Gigante das Nuvens ou Cinto de Força de Gigante das Tempestades"
+            },
+            "BeltOfHillGiantStrength": {
+                "name": "Cinto de Força de Gigante das Colinas",
+                "description": "Aumenta a força para 21"
+            },
+            "BeltOfFrostGiantStrength": {
+                "name": "Cinto de Força de Gigante do Gelo",
+                "description": "Aumenta a força para 23"
+            },
+            "BeltOfStoneGiantStrength": {
+                "name": "Cinto de Força de Gigante de Pedra",
+                "description": "Aumenta a força para 23"
+            },
+            "BeltOfFireGiantStrength": {
+                "name": "Cinto de Força de Gigante de Fogo",
+                "description": "Aumenta a força para 25"
+            },
+            "BeltOfCloudGiantStrength": {
+                "name": "Cinto de Força de Gigante das Nuvens",
+                "description": "Aumenta a força para 27"
+            },
+            "BeltOfStormGiantStrength": {
+                "name": "Cinto de Força de Gigante das Tempestades",
+                "description": "Aumenta a força para 29"
+            },
             "BlackTentacles": {
                 "name": "Tentáculos Negros",
                 "description": "Aplica os efeitos de impedido por 1 minuto"
@@ -156,6 +216,26 @@
             "BonusAction": {
                 "name": "Ação Bônus",
                 "description": "Sem efeitos ativos e expira no início do turno"
+            },
+            "BootsOfElvenkind": {
+                "name": "Botas Élficas",
+                "description": "Vantagem em testes de furtividade"
+            },
+            "BootsOfTheWinterlands": {
+                "name": "Botas das Terras Invernais",
+                "description": "Adiciona resistência a danos de frio"
+            },
+            "BroochOfShielding": {
+                "name": "Broche de Proteção",
+                "description": "Adiciona resistência a danos de força"
+            },
+            "BracersOfArchery": {
+                "name": "Braçadeiras de Arqueiria",
+                "description": "- Adiciona +2 ao dano de ataques à distância<br/>- Adiciona proficiência em arco longo e arco curto"
+            },
+            "BracersOfDefense": {
+                "name": "Braçadeiras de Defesa",
+                "description": "- Adiciona +2 à CA"
             },
             "BullsStrength": {
                 "name": "Força do Touro",
@@ -192,6 +272,22 @@
             "Charmed": {
                 "name": "Enfeitiçado",
                 "description": "- Uma criatura encantada não pode atacar o encantador ou alvejá-lo com habilidades prejudiciais ou efeitos mágicos.<br/>- O encantador tem vantagem em qualquer teste de habilidade para interagir socialmente com a criatura."
+            },
+            "CloakOfDisplacement": {
+                "name": "Manto de Deslocamento",
+                "description": "Concede desvantagem a todos que atacam"
+            },
+            "CloakOfElvenkind": {
+                "name": "Manto Élfico",
+                "description": "Vantagem em testes de furtividade"
+            },
+            "CloakOfProtection": {
+                "name": "Manto de Proteção",
+                "description": "Adiciona +1 à CA e +1 a todos os testes de resistência"
+            },
+            "CloakOfTheMantaRay": {
+                "name": "Manto da Arraia",
+                "description": "Adiciona velocidade de natação de 60 pés"
             },
             "Command": {
                 "name": "Comando",
@@ -297,6 +393,10 @@
                 "name": "Exaustão 5",
                 "description": "Desvantagem em testes de habilidade, deslocamento reduzido a 0, desvantagem em ataques e testes de resistência e máximo de pontos de vida reduzido pela metade"
             },
+            "EyesOfTheEagle": {
+                "name": "Olhos da Águia",
+                "description": "Vantagem em testes de percepção"
+            },
             "FaerieFire": {
                 "name": "Fogo das Fadas",
                 "description": "Concede vantagem a todos que atacam por 1 minuto"
@@ -365,9 +465,17 @@
                 "name": "Amedrontado",
                 "description": "- Uma criatura amedrontada tem desvantagem em testes de habilidade e jogadas de ataque enquanto a fonte de seu medo estiver dentro da linha de visão.<br />- A criatura não pode se aproximar voluntariamente da fonte de seu medo."
             },
+            "GauntletsOfOgrePower": {
+                "name": "Manoplas de Poder de Ogro",
+                "description": "Aumenta a força para 19"
+            },
             "GlobeOfInvulnerability": {
                 "name": "Globo de Invulnerabilidade",
                 "description": "Sem efeitos ativos e dura 1 minuto"
+            },
+            "GogglesOfNight": {
+                "name": "Óculos Noturnos",
+                "description": "Adiciona 60 pés de visão no escuro"
             },
             "Grappled": {
                 "name": "Agarrado",
@@ -392,6 +500,10 @@
             "Haste": {
                 "name": "Velocidade",
                 "description": "Dobra o deslocamento, adiciona 2 à CA e vantagem em testes de resistência de destreza por 1 minuto"
+            },
+            "HeadbandOfIntellect": {
+                "name": "Bandana de Intelecto",
+                "description": "Aumenta a inteligência para 19"
             },
             "HeavilyEncumbered": {
                 "name": "Pesadamente Sobrecarregado",
@@ -477,6 +589,10 @@
                 "name": "Armadura Arcana",
                 "description": "Aumenta a armadura para 13 + modificador de destreza por 8 horas"
             },
+            "MantleOfSpellResistance": {
+                "name": "Manto de Resistência a Magias",
+                "description": "Adiciona vantagem em testes de resistência contra magias"
+            },
             "MindBlank": {
                 "name": "Limpar a Mente",
                 "description": "Adiciona imunidade a danos psíquicos por 24 horas"
@@ -500,6 +616,14 @@
             "PassWithoutTrace": {
                 "name": "Passos sem Pegadas",
                 "description": "Adiciona 10 aos testes de furtividade por 1 hora"
+            },
+            "PeriaptOfHealth": {
+                "name": "Periápto de Saúde",
+                "description": "Adiciona imunidade a doenças"
+            },
+            "PeriaptOfProofAgainstPoison": {
+                "name": "Periápto de Proteção Contra Veneno",
+                "description": "Adiciona imunidade a danos de veneno e à condição envenenado"
             },
             "Petrified": {
                 "name": "Petrificado",
@@ -595,6 +719,74 @@
                 "name": "Impedido",
                 "description": "- A velocidade de uma criatura impedida se torna 0, e ela não pode se beneficiar de nenhum bônus em sua velocidade.<br />- As jogadas de ataque contra a criatura têm vantagem, e as jogadas de ataque da criatura têm desvantagem.<br />- A criatura tem desvantagem em testes de resistência de Destreza."
             },
+            "RingOfResistance": {
+                "name": "Anel de Resistência",
+                "description": "Escolha entre resistência a ácido, frio, fogo, força, elétrico, necrótico, veneno, psíquico, radiante ou trovejante"
+            },
+            "RingOfAcidResistance": {
+                "name": "Anel de Resistência a Ácido",
+                "description": "Adiciona resistência a ácido"
+            },
+            "RingOfColdResistance": {
+                "name": "Anel de Resistência a Frio",
+                "description": "Adiciona resistência a frio"
+            },
+            "RingOfFireResistance": {
+                "name": "Anel de Resistência a Fogo",
+                "description": "Adiciona resistência a fogo"
+            },
+            "RingOfForceResistance": {
+                "name": "Anel de Resistência a Força",
+                "description": "Adiciona resistência a força"
+            },
+            "RingOfLightningResistance": {
+                "name": "Anel de Resistência a Elétrico",
+                "description": "Adiciona resistência a elétrico"
+            },
+            "RingOfNecroticResistance": {
+                "name": "Anel de Resistência Necrótica",
+                "description": "Adiciona resistência necrótica"
+            },
+            "RingOfPoisonResistance": {
+                "name": "Anel de Resistência a Veneno",
+                "description": "Adiciona resistência a veneno"
+            },
+            "RingOfPsychicResistance": {
+                "name": "Anel de Resistência Psíquica",
+                "description": "Adiciona resistência psíquica"
+            },
+            "RingOfRadiantResistance": {
+                "name": "Anel de Resistência Radiante",
+                "description": "Adiciona resistência radiante"
+            },
+            "RingOfThunderResistance": {
+                "name": "Anel de Resistência Trovejante",
+                "description": "Adiciona resistência trovejante"
+            },
+            "RingOfFreeAction": {
+                "name": "Anel de Ação Livre",
+                "description": "Adiciona imunidade a paralisado e impedido"
+            },
+            "RingOfSwimming": {
+                "name": "Anel de Natação",
+                "description": "Adiciona velocidade de natação de 40 pés"
+            },
+            "RingOfWarmth": {
+                "name": "Anel de Calor",
+                "description": "Adiciona resistência a frio"
+            },
+            "RobeOfEyes": {
+                "name": "Veste dos Olhos",
+                "description": "Vantagem em testes de percepção, aumenta a visão no escuro para 120 pés e a visão verdadeira para 120 pés"
+            },
+            "RobeOfStars": {
+                "name": "Veste das Estrelas",
+                "description": "Adiciona +1 a todos os testes de resistência"
+            },
+            "RobeOfTheArchmagi": {
+                "name": "Veste do Arquimago",
+                "description": "Define a CA base como 15 + modificador de destreza, adiciona vantagem em testes de resistência contra magias e adiciona +2 a jogadas de ataque com magias e CD de magias"
+            },
             "Seizure": {
                 "name": "Tremedeira",
                 "description": "Desvantagem em testes de destreza, testes de resistência de destreza e ataques que usam destreza por 7 dias"
@@ -646,6 +838,10 @@
             "Stoneskin": {
                 "name": "Pele de Pedra",
                 "description": "Adiciona resistência a danos físicos não mágicos por 1 hora"
+            },
+            "StoneOfGoodLuck": {
+                "name": "Pedra da Boa Sorte",
+                "description": "Adiciona +1 a todos os testes e testes de resistência"
             },
             "Stunned": {
                 "name": "Atordoado",

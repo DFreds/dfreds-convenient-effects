@@ -19,9 +19,12 @@
 
         "Keybinding": {
             "ToggleAppName": "应用效果的方式",
-            "ToggleAppHint": "如果便捷效果应用程序关闭，则打开它；如果它已打开，则关闭它。"
+            "ToggleAppHint": "如果便捷效果应用程序关闭，则打开它；如果它已打开，则关闭它。",
+            "ToggleAppPopoutName": "切换便捷效果应用弹出窗口",
+            "ToggleAppPopoutHint": "如果便捷效果应用弹出窗口已关闭，则打开它；如果它当前已打开，则关闭它。"
         },
 
+        "SearchEffects": "搜索效果",
         "ViewBackups": "查看备份",
         "ShowFolder": "显示文件夹",
         "HideFolder": "隐藏文件夹",
@@ -30,12 +33,30 @@
         "PrioritizeTargets": "优先目标",
         "NewEffect": "新效果",
         "EditEffect": "编辑效果",
+        "AddEffect": "添加效果",
+        "RemoveEffect": "移除效果",
         "DeleteEffect": "删除效果",
         "ShowEffect": "显示效果",
         "HideEffect": "隐藏效果",
+        "ToggleConvenientEffect": "切换便捷效果",
         "ToggleAsOverlay": "应用效果",
+        "ToggleStatusEffect": "切换状态效果",
         "ResetSystemEffects": "重置所有效果",
         "ResetSystemEffectsWarning": "这将完全重置为内置效果，删除任何（新增、编辑、删除）自定义的效果。",
+        "SelectEffect": "选择效果",
+        "NoPermissionToRemoveEffect": "您没有权限从 {originalFolderName} 中移除效果 {effectName}。已将效果复制到 {newFolderName}",
+        "NoPermissionToAddEffect": "您没有权限将效果 {effectName} 添加到文件夹 {newFolderName}",
+
+        "FolderHidden": "文件夹已隐藏",
+        "Passive": "被动",
+        "EffectHidden": "效果已隐藏",
+        "HasNestedEffects": "具有嵌套效果",
+        "IsNestedEffect": "是嵌套效果",
+        "StatusEffect": "状态效果",
+        "MidiQolEffects": "Midi-QoL 效果",
+        "StackableDaeEffect": "可堆叠 DAE 效果",
+        "AtlEffects": "ATL 效果",
+        "TokenMagicEffects": "Token Magic 效果",
 
         "Config": {
             "Title": "便捷效果高级选项",
@@ -54,8 +75,15 @@
             "SubEffectsLabel": "子效果",
             "SubEffectsHint": "与此效果相关的子效果。如果此效果被移除，所有子效果也会自动移除。（参考鲁莽攻击Reckless Attack）",
             "OtherEffectsLabel": "其他效果",
-            "OtherEffectsHint": "与此效果相关的其他效果。如果此效果被移除，其他效果不会自动移除。"
+            "OtherEffectsHint": "与此效果相关的其他效果。如果此效果被移除，其他效果不会自动移除。",
+
+            "IDsTab": "IDs",
+            "FlagsTab": "标志",
+            "DependentEffectsTab": "依赖效果"
         },
+
+        "Initializing": "正在初始化便捷效果...",
+        "FinishedInitializing": "便捷效果初始化完成",
 
         "Dnd": {
             "Folders": {
@@ -76,6 +104,10 @@
             "AlterSelf": {
                 "name": "变身术 Alter Self",
                 "description": "专注，至多 1 小时"
+            },
+            "AmuletOfHealth": {
+                "name": "健康护符 Amulet of Health",
+                "description": "将体质提升至 19"
             },
             "AntilifeShell": {
                 "name": "防活物护罩 Antilife Shell",
@@ -121,6 +153,38 @@
                 "name": "熊之坚韧Bear's Endurance",
                 "description": "熊之坚韧Bear's Endurance：体质检定时具有优势，目标同时获得 2d6 的临时生命值，并维持至法术终止。专注，至多 1 小时"
             },
+            "BeltOfDwarvenkind": {
+                "name": "矮人腰带 Belt of Dwarvenkind",
+                "description": "- 体质+2，最高20<br/>- 毒素抗性<br/>- 黑暗视觉<br/>- 矮人语"
+            },
+            "BeltOfGiantStrength": {
+                "name": "巨人力量腰带 Belt of Giant Strength",
+                "description": "在山丘巨人力量腰带、霜巨人力量腰带、石巨人力量腰带、火巨人力量腰带、云巨人力量腰带或风暴巨人力量腰带之间选择"
+            },
+            "BeltOfHillGiantStrength": {
+                "name": "山丘巨人力量腰带 Belt of Hill Giant Strength",
+                "description": "将力量提升至 21"
+            },
+            "BeltOfFrostGiantStrength": {
+                "name": "霜巨人力量腰带 Belt of Frost Giant Strength",
+                "description": "将力量提升至 23"
+            },
+            "BeltOfStoneGiantStrength": {
+                "name": "石巨人力量腰带 Belt of Stone Giant Strength",
+                "description": "将力量提升至 23"
+            },
+            "BeltOfFireGiantStrength": {
+                "name": "火巨人力量腰带 Belt of Fire Giant Strength",
+                "description": "将力量提升至 25"
+            },
+            "BeltOfCloudGiantStrength": {
+                "name": "云巨人力量腰带 Belt of Cloud Giant Strength",
+                "description": "将力量提升至 27"
+            },
+            "BeltOfStormGiantStrength": {
+                "name": "风暴巨人力量腰带 Belt of Storm Giant Strength",
+                "description": "将力量提升至 29"
+            },
             "BlackTentacles": {
                 "name": "艾伐黑触手 Black Tentacles",
                 "description": "20 尺方形困难地形，专注，最长 1 分钟"
@@ -152,6 +216,26 @@
             "BonusAction": {
                 "name": "附赠动作",
                 "description": "添加已使用附赠动作的状态"
+            },
+            "BootsOfElvenkind": {
+                "name": "精灵靴 Boots of Elvenkind",
+                "description": "潜行检定时具有优势"
+            },
+            "BootsOfTheWinterlands": {
+                "name": "冬地靴 Boots of the Winterlands",
+                "description": "添加冷冻伤害抗性"
+            },
+            "BroochOfShielding": {
+                "name": "防护胸针 Brooch of Shielding",
+                "description": "添加力场伤害抗性"
+            },
+            "BracersOfArchery": {
+                "name": "射手套甲 Bracers of Archery",
+                "description": "- 远程攻击伤害+2<br/>- 长弓和短弓熟练"
+            },
+            "BracersOfDefense": {
+                "name": "防御护腕 Bracers of Defense",
+                "description": "- AC+2"
             },
             "BullsStrength": {
                 "name": "牛之悍力Bull's Strength",
@@ -188,6 +272,22 @@
             "Charmed": {
                 "name": "魅惑",
                 "description": "被魅惑生物不能攻击魅惑者，其造成伤害的能力或魔法效应也不能以魅惑者为目标。<br/>魅惑者对被魅惑生物进行任何与社交相关的属性检定时具有优势。"
+            },
+            "CloakOfDisplacement": {
+                "name": "移位斗篷 Cloak of Displacement",
+                "description": "对所有攻击者造成劣势"
+            },
+            "CloakOfElvenkind": {
+                "name": "精灵斗篷 Cloak of Elvenkind",
+                "description": "潜行检定时具有优势"
+            },
+            "CloakOfProtection": {
+                "name": "防护斗篷 Cloak of Protection",
+                "description": "AC+1，所有豁免+1"
+            },
+            "CloakOfTheMantaRay": {
+                "name": "蝠鲼斗篷 Cloak of the Manta Ray",
+                "description": "添加 60 尺游泳速度"
             },
             "Command": {
                 "name": "命令术 Command",
@@ -293,6 +393,10 @@
                 "name": "力竭Lv5",
                 "description": "力竭Lv5：速度降为0"
             },
+            "EyesOfTheEagle": {
+                "name": "鹰眼护目镜 Eyes of the Eagle",
+                "description": "感知检定时具有优势"
+            },
             "FaerieFire": {
                 "name": "妖火 Faerie Fire",
                 "description": "击者对其发动的攻击检定具有优势。专注，至多 1 分钟"
@@ -361,9 +465,17 @@
                 "name": "恐慌",
                 "description": "造成恐慌的源头仍在被恐慌生物视线范围内时，其所有属性检定和攻击检定具有劣势。<br/>被恐慌生物不能自主向造成恐慌的源头移动。"
             },
+            "GauntletsOfOgrePower": {
+                "name": "食人魔力量护手 Gauntlets of Ogre Power",
+                "description": "将力量提升至 19"
+            },
             "GlobeOfInvulnerability": {
                 "name": "法术无效结界 Globe of Invulnerability",
                 "description": "持续时间： 1 分钟"
+            },
+            "GogglesOfNight": {
+                "name": "夜视镜 Goggles of Night",
+                "description": "添加 60 尺黑暗视觉"
             },
             "Grappled": {
                 "name": "擒抱",
@@ -388,6 +500,10 @@
             "Haste": {
                 "name": "加速术 Haste",
                 "description": "AC获得+2加值，敏捷豁免具有优势，1个额外的战斗动作，专注，至多 1 分钟"
+            },
+            "HeadbandOfIntellect": {
+                "name": "智力头带 Headband of Intellect",
+                "description": "将智力提升至 19"
             },
             "HeavilyEncumbered": {
                 "name": "超载",
@@ -473,6 +589,10 @@
                 "name": "法师护甲 Mage Armor",
                 "description": "基础AC变为13+敏捷调整值，持续时间：8 小时"
             },
+            "MantleOfSpellResistance": {
+                "name": "法术抗性斗篷 Mantle of Spell Resistance",
+                "description": "对抗法术的豁免检定时具有优势"
+            },
             "MindBlank": {
                 "name": "心灵屏障 Mind Blank",
                 "description": "免疫：心灵伤害、侦测思想、预言法术、魅惑状态，持续时间：24 小时"
@@ -496,6 +616,14 @@
             "PassWithoutTrace": {
                 "name": "行动无踪 Pass without Trace",
                 "description": "敏捷（隐匿）检定时具有+10 加值，专注，至多 1 小时"
+            },
+            "PeriaptOfHealth": {
+                "name": "健康护符 Periapt of Health",
+                "description": "添加疾病免疫"
+            },
+            "PeriaptOfProofAgainstPoison": {
+                "name": "防毒护符 Periapt of Proof Against Poison",
+                "description": "添加毒素伤害免疫和中毒状态免疫"
             },
             "Petrified": {
                 "name": "石化",
@@ -642,6 +770,10 @@
             "Stoneskin": {
                 "name": "石肤术 Stoneskin",
                 "description": "对非魔法的钝击、穿刺、挥砍伤害具有抗性，专注，至多 1 小时"
+            },
+            "StoneOfGoodLuck": {
+                "name": "幸运石 Stone of Good Luck",
+                "description": "所有检定和豁免+1"
             },
             "Stunned": {
                 "name": "震慑",

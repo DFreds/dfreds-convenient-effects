@@ -19,9 +19,12 @@
 
         "Keybinding": {
             "ToggleAppName": "Basculer l'application d'effets pratiques",
-            "ToggleAppHint": "Cela ouvrira l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte."
+            "ToggleAppHint": "Cela ouvrira l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte.",
+            "ToggleAppPopoutName": "Basculer la fenêtre popup de l'application d'effets pratiques",
+            "ToggleAppPopoutHint": "Cela ouvrira la fenêtre popup de l'application Practical Effects si elle est fermée ou la fermera si elle est actuellement ouverte."
         },
 
+        "SearchEffects": "Rechercher des effets",
         "ViewBackups": "Afficher les sauvegardes",
         "ShowFolder": "Afficher le dossier",
         "HideFolder": "Masquer le dossier",
@@ -30,12 +33,30 @@
         "PrioritizeTargets": "Prioriser les cibles",
         "NewEffect": "Nouvel effet",
         "EditEffect": "Modifier l'effet",
+        "AddEffect": "Ajouter un effet",
+        "RemoveEffect": "Retirer un effet",
         "DeleteEffect": "Supprimer l'effet",
         "ShowEffect": "Afficher l'effet",
         "HideEffect": "Masquer l'effet",
+        "ToggleConvenientEffect": "Basculer l'effet pratique",
         "ToggleAsOverlay": "Basculer en superposition",
+        "ToggleStatusEffect": "Basculer l'effet de statut",
         "ResetSystemEffects": "Réinitialiser les effets du système",
         "ResetSystemEffectsWarning": "Cela réinitialisera complètement les effets intégrés, annulant toutes les créations, suppressions ou modifications personnalisées effectuées.",
+        "SelectEffect": "Sélectionner un effet",
+        "NoPermissionToRemoveEffect": "Vous n'avez pas la permission de retirer l'effet {effectName} de {originalFolderName}. Effet dupliqué dans {newFolderName}",
+        "NoPermissionToAddEffect": "Vous n'avez pas la permission d'ajouter l'effet {effectName} au dossier {newFolderName}",
+
+        "FolderHidden": "Dossier masqué",
+        "Passive": "Passif",
+        "EffectHidden": "Effet masqué",
+        "HasNestedEffects": "A des effets imbriqués",
+        "IsNestedEffect": "Est un effet imbriqué",
+        "StatusEffect": "Effet de statut",
+        "MidiQolEffects": "Effets Midi-QoL",
+        "StackableDaeEffect": "Effet DAE empilable",
+        "AtlEffects": "Effets ATL",
+        "TokenMagicEffects": "Effets Token Magic",
 
         "Config": {
             "Title": "Convenient",
@@ -61,6 +82,9 @@
             "DependentEffectsTab": "Effets dépendants"
         },
 
+        "Initializing": "Initialisation des effets pratiques...",
+        "FinishedInitializing": "Initialisation des effets pratiques terminée",
+
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
@@ -80,6 +104,10 @@
             "AlterSelf": {
                 "name": "Modification d'apparence",
                 "description": "Aucun effet actif et dure 1 heure"
+            },
+            "AmuletOfHealth": {
+                "name": "Amulette de santé",
+                "description": "Améliore la constitution à 19"
             },
             "AntilifeShell": {
                 "name": "Coquille antivie",
@@ -125,6 +153,38 @@
                 "name": "Endurance de l'ours",
                 "description": "Avantage sur les jets de constitution et 2d6 points de vie temporaires pendant 1 heure"
             },
+            "BeltOfDwarvenkind": {
+                "name": "Ceinture de nain",
+                "description": "- Ajoute +2 à la constitution jusqu'à un maximum de 20<br/>- Ajoute une résistance au poison<br/>- Ajoute la vision dans le noir<br/>- Ajoute la langue naine"
+            },
+            "BeltOfGiantStrength": {
+                "name": "Ceinture de force de géant",
+                "description": "Choisissez entre la Ceinture de force de géant des collines, Ceinture de force de géant des glaces, Ceinture de force de géant de pierre, Ceinture de force de géant de feu, Ceinture de force de géant des nuages ou Ceinture de force de géant des tempêtes"
+            },
+            "BeltOfHillGiantStrength": {
+                "name": "Ceinture de force de géant des collines",
+                "description": "Améliore la force à 21"
+            },
+            "BeltOfFrostGiantStrength": {
+                "name": "Ceinture de force de géant des glaces",
+                "description": "Améliore la force à 23"
+            },
+            "BeltOfStoneGiantStrength": {
+                "name": "Ceinture de force de géant de pierre",
+                "description": "Améliore la force à 23"
+            },
+            "BeltOfFireGiantStrength": {
+                "name": "Ceinture de force de géant de feu",
+                "description": "Améliore la force à 25"
+            },
+            "BeltOfCloudGiantStrength": {
+                "name": "Ceinture de force de géant des nuages",
+                "description": "Améliore la force à 27"
+            },
+            "BeltOfStormGiantStrength": {
+                "name": "Ceinture de force de géant des tempêtes",
+                "description": "Améliore la force à 29"
+            },
             "BlackTentacles": {
                 "name": "Tentacules noirs",
                 "description": "Appliquer les effets de la condition de entravée pendant 1 minute"
@@ -156,6 +216,26 @@
             "BonusAction": {
                 "name": "Action bonus",
                 "description": "Aucun effet actif et expire au début du tour"
+            },
+            "BootsOfElvenkind": {
+                "name": "Bottes elfiques",
+                "description": "Avantage sur les jets de discrétion"
+            },
+            "BootsOfTheWinterlands": {
+                "name": "Bottes des terres hivernales",
+                "description": "Ajoute une résistance aux dégâts de froid"
+            },
+            "BroochOfShielding": {
+                "name": "Broche de protection",
+                "description": "Ajoute une résistance aux dégâts de force"
+            },
+            "BracersOfArchery": {
+                "name": "Brassards d'archerie",
+                "description": "- Ajoute +2 aux dégâts d'attaque à distance<br/>- Ajoute la maîtrise de l'arc long et de l'arc court"
+            },
+            "BracersOfDefense": {
+                "name": "Brassards de défense",
+                "description": "- Ajoute +2 à la CA"
             },
             "BullsStrength": {
                 "name": "Force du taureau",
@@ -192,6 +272,22 @@
             "Charmed": {
                 "name": "Charmé",
                 "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD inline]"
+            },
+            "CloakOfDisplacement": {
+                "name": "Cape de déplacement",
+                "description": "Accorde un désavantage à tous ceux qui attaquent"
+            },
+            "CloakOfElvenkind": {
+                "name": "Cape elfique",
+                "description": "Avantage sur les jets de discrétion"
+            },
+            "CloakOfProtection": {
+                "name": "Cape de protection",
+                "description": "Ajoute +1 à la CA et +1 à tous les jets de sauvegarde"
+            },
+            "CloakOfTheMantaRay": {
+                "name": "Cape de la raie manta",
+                "description": "Ajoute une vitesse de nage de 18 mètres"
             },
             "Command": {
                 "name": "Injonction",
@@ -297,6 +393,10 @@
                 "name": "Épuisement 5",
                 "description": "Désavantage sur les tests de caractéristiques, vitesse réduite à 0, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
             },
+            "EyesOfTheEagle": {
+                "name": "Yeux de l'aigle",
+                "description": "Avantage sur les jets de perception"
+            },
             "FaerieFire": {
                 "name": "Lueurs féeriques",
                 "description": "Accorde un avantage à tous ceux qui attaquent pendant 1 minute"
@@ -365,9 +465,17 @@
                 "name": "Effrayé",
                 "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij inline]"
             },
+            "GauntletsOfOgrePower": {
+                "name": "Gantelets de force d'ogre",
+                "description": "Améliore la force à 19"
+            },
             "GlobeOfInvulnerability": {
                 "name": "Globe d'invulnérabilité",
                 "description": "Aucun effet actif et dure 1 minute"
+            },
+            "GogglesOfNight": {
+                "name": "Lunettes de vision nocturne",
+                "description": "Ajoute 18 mètres de vision dans le noir"
             },
             "Grappled": {
                 "name": "Agrippé",
@@ -392,6 +500,10 @@
             "Haste": {
                 "name": "Hâte",
                 "description": "Vitesse doublée, ajoutez 2 à la CA, et avantage sur les jets de sauvegarde de dextérité pendant 1 minute (+1 action à chaque tour)"
+            },
+            "HeadbandOfIntellect": {
+                "name": "Bandeau d'intelligence",
+                "description": "Améliore l'intelligence à 19"
             },
             "HeavilyEncumbered": {
                 "name": "Fortement encombré",
@@ -477,6 +589,10 @@
                 "name": "Armure de mage",
                 "description": "Améliore l'armure à 13 + modificateur dex pendant 8 heures"
             },
+            "MantleOfSpellResistance": {
+                "name": "Manteau de résistance aux sorts",
+                "description": "Ajoute un avantage sur les jets de sauvegarde contre les sorts"
+            },
             "MindBlank": {
                 "name": "Esprit impénétrable",
                 "description": "Ajoute l'immunité aux dégâts psychiques pendant 24 heures"
@@ -500,6 +616,14 @@
             "PassWithoutTrace": {
                 "name": "Passer sans trace",
                 "description": "Ajoutez 10 aux jets de dextérité (discrétion) pendant 1 heure"
+            },
+            "PeriaptOfHealth": {
+                "name": "Périapte de santé",
+                "description": "Ajoute l'immunité aux maladies"
+            },
+            "PeriaptOfProofAgainstPoison": {
+                "name": "Périapte de preuve contre le poison",
+                "description": "Ajoute l'immunité aux dégâts de poison et à la condition empoisonné"
             },
             "Petrified": {
                 "name": "Pétrifié",
@@ -595,6 +719,74 @@
                 "name": "Entravé",
                 "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc inline]"
             },
+            "RingOfResistance": {
+                "name": "Anneau de résistance",
+                "description": "Choisissez entre la résistance à l'acide, au froid, au feu, à la force, à la foudre, nécrotique, au poison, psychique, radiante ou au tonnerre"
+            },
+            "RingOfAcidResistance": {
+                "name": "Anneau de résistance à l'acide",
+                "description": "Ajoute une résistance à l'acide"
+            },
+            "RingOfColdResistance": {
+                "name": "Anneau de résistance au froid",
+                "description": "Ajoute une résistance au froid"
+            },
+            "RingOfFireResistance": {
+                "name": "Anneau de résistance au feu",
+                "description": "Ajoute une résistance au feu"
+            },
+            "RingOfForceResistance": {
+                "name": "Anneau de résistance à la force",
+                "description": "Ajoute une résistance à la force"
+            },
+            "RingOfLightningResistance": {
+                "name": "Anneau de résistance à la foudre",
+                "description": "Ajoute une résistance à la foudre"
+            },
+            "RingOfNecroticResistance": {
+                "name": "Anneau de résistance nécrotique",
+                "description": "Ajoute une résistance nécrotique"
+            },
+            "RingOfPoisonResistance": {
+                "name": "Anneau de résistance au poison",
+                "description": "Ajoute une résistance au poison"
+            },
+            "RingOfPsychicResistance": {
+                "name": "Anneau de résistance psychique",
+                "description": "Ajoute une résistance psychique"
+            },
+            "RingOfRadiantResistance": {
+                "name": "Anneau de résistance radiante",
+                "description": "Ajoute une résistance radiante"
+            },
+            "RingOfThunderResistance": {
+                "name": "Anneau de résistance au tonnerre",
+                "description": "Ajoute une résistance au tonnerre"
+            },
+            "RingOfFreeAction": {
+                "name": "Anneau d'action libre",
+                "description": "Ajoute l'immunité à paralysé et entravé"
+            },
+            "RingOfSwimming": {
+                "name": "Anneau de nage",
+                "description": "Ajoute une vitesse de nage de 12 mètres"
+            },
+            "RingOfWarmth": {
+                "name": "Anneau de chaleur",
+                "description": "Ajoute une résistance au froid"
+            },
+            "RobeOfEyes": {
+                "name": "Robe des yeux",
+                "description": "Avantage sur les jets de perception, améliore la vision dans le noir à 36 mètres et la vision véritable à 36 mètres"
+            },
+            "RobeOfStars": {
+                "name": "Robe des étoiles",
+                "description": "Ajoute +1 à tous les jets de sauvegarde"
+            },
+            "RobeOfTheArchmagi": {
+                "name": "Robe de l'archimage",
+                "description": "Définit la CA de base à 15 + modificateur de dex, ajoute un avantage sur les jets de sauvegarde contre les sorts et ajoute +2 aux jets d'attaque de sorts et au DD des sorts"
+            },
             "Seizure": {
                 "name": "Convulsions",
                 "description": "Désavantage aux jets de caractéristique, sauvegarde et d'attaque basés sur la dextérité pendant 7 jours"
@@ -646,6 +838,10 @@
             "Stoneskin": {
                 "name": "Peau de pierre",
                 "description": "Ajoute de la résistance aux dégâts physiques non magiques pendant 1 heure"
+            },
+            "StoneOfGoodLuck": {
+                "name": "Pierre de bonne fortune",
+                "description": "Ajoute +1 à tous les tests et sauvegardes"
             },
             "Stunned": {
                 "name": "Étourdi",
