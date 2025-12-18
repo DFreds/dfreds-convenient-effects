@@ -3,7 +3,7 @@ import { log } from "../logger.ts";
 import { Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
 import { MODULE_ID } from "../constants.ts";
-import { getApi } from "../utils/gets.ts";
+import { getApi, isStackableDaeEffect } from "../utils/gets.ts";
 import Document from "@common/abstract/document.mjs";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
@@ -139,9 +139,17 @@ class Sockets {
                 const isMatchingCeId =
                     Flags.getCeEffectId(activeEffect) === effectId;
 
+                const isStackable = isStackableDaeEffect({
+                    effectName,
+                    effect: activeEffect,
+                });
+
                 const matches =
                     isConvenient &&
-                    (isMatchingId || isMatchingName || isMatchingCeId);
+                    (isMatchingId ||
+                        isMatchingName ||
+                        isMatchingCeId ||
+                        isStackable);
 
                 return origin
                     ? matches && activeEffect.origin === origin

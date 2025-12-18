@@ -2,7 +2,7 @@ import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
-import { getApi } from "../utils/gets.ts";
+import { getApi, isStackableDaeEffect } from "../utils/gets.ts";
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
 class HandlebarHelpers {
@@ -109,6 +109,10 @@ class HandlebarHelpers {
                     icons += this.#getMidiIcon(allChanges);
                 }
 
+                if (findModuleById(MODULE_IDS.DAE)?.active) {
+                    icons += this.#getStackableDaeIcon(effect);
+                }
+
                 if (findModuleById(MODULE_IDS.ATE)?.active) {
                     icons += this.#getAteIcon(allChanges);
                 }
@@ -185,6 +189,15 @@ class HandlebarHelpers {
             change.key?.startsWith("flags.midi-qol"),
         )
             ? `<i class='fas fa-dice-d20 integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.MidiQolEffects")}'></i> `
+            : "";
+    }
+
+    #getStackableDaeIcon(effect: ActiveEffect<Item<null>>): string {
+        return isStackableDaeEffect({
+            effectName: effect.name,
+            effect: effect as ActiveEffect<any>,
+        })
+            ? `<i class='fas fa-layer-group integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.StackableDaeEffect")}'></i> `
             : "";
     }
 

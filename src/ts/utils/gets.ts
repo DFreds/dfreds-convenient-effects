@@ -1,5 +1,5 @@
 import { ActorUUID } from "@common/documents/_module.mjs";
-import { MODULE_ID } from "../constants.ts";
+import { MODULE_IDS, MODULE_ID } from "../constants.ts";
 
 /**
  * Gets all UUIDs for selected or targeted tokens
@@ -38,6 +38,25 @@ function getApi(): EffectInterface {
         .api;
 }
 
+function isStackableDaeEffect({
+    effectName,
+    effect,
+}: {
+    effectName?: string;
+    effect: ActiveEffect<any>;
+}): boolean {
+    if (!effectName) return false;
+
+    const startsWithName = effect.name.startsWith(effectName);
+    const stackableFlag = effect.getFlag(MODULE_IDS.DAE, "stackable");
+    return (
+        startsWithName &&
+        (stackableFlag === "multi" ||
+            stackableFlag === "count" ||
+            stackableFlag === "countDeleteDecrement")
+    );
+}
+
 // function effectsByActorMappings(): {
 //     actor: Actor<any>;
 //     effects: ActiveEffect<Actor<any>>;
@@ -59,4 +78,4 @@ function getApi(): EffectInterface {
 //         });
 // }
 
-export { getActorUuids, getItemType, getApi };
+export { getActorUuids, getItemType, getApi, isStackableDaeEffect };
