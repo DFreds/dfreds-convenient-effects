@@ -33,6 +33,8 @@
         "PrioritizeTargets": "Prioritize Targets",
         "NewEffect": "New Effect",
         "EditEffect": "Edit Effect",
+        "AddEffect": "Add Effect",
+        "RemoveEffect": "Remove Effect",
         "DeleteEffect": "Delete Effect",
         "ShowEffect": "Show Effect",
         "HideEffect": "Hide Effect",
@@ -52,6 +54,7 @@
         "IsNestedEffect": "Is Nested Effect",
         "StatusEffect": "Status Effect",
         "MidiQolEffects": "Midi-QoL Effects",
+        "StackableDaeEffect": "Stackable DAE Effect",
         "AtlEffects": "ATL Effects",
         "TokenMagicEffects": "Token Magic Effects",
 

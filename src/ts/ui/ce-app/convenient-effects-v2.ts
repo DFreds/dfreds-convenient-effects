@@ -9,7 +9,7 @@ import {
     findFolders,
     findModuleById,
 } from "../../utils/finds.ts";
-import { getApi, getItemType } from "../../utils/gets.ts";
+import { getActorUuids, getApi, getItemType } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
 import { MODULE_ID, MODULE_IDS } from "../../constants.ts";
 import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
@@ -174,6 +174,68 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     });
 
                     await effect?.deleteDialog();
+                },
+            },
+            {
+                name: "ConvenientEffects.AddEffect",
+                icon: '<i class="fa-regular fa-plus"></i>',
+                callback: async (li) => {
+                    const effectHtml = li.closest(
+                        "[data-ce-effect-id]",
+                    ) as HTMLElement;
+                    const effectId = effectHtml.dataset.ceEffectId;
+
+                    if (!effectId) return;
+
+                    const documentUuids = getActorUuids(
+                        this.#settings.prioritizeTargets,
+                    );
+                    if (documentUuids.length === 0) {
+                        ui.notifications.warn(
+                            `Please select or target a token to add this effect`,
+                        );
+                        return;
+                    }
+
+                    const promises = documentUuids.map(async (uuid) => {
+                        return getApi().addEffect({
+                            effectId,
+                            uuid,
+                        });
+                    });
+
+                    await Promise.all(promises);
+                },
+            },
+            {
+                name: "ConvenientEffects.RemoveEffect",
+                icon: '<i class="fa-regular fa-minus"></i>',
+                callback: async (li) => {
+                    const effectHtml = li.closest(
+                        "[data-ce-effect-id]",
+                    ) as HTMLElement;
+                    const effectId = effectHtml.dataset.ceEffectId;
+
+                    if (!effectId) return;
+
+                    const documentUuids = getActorUuids(
+                        this.#settings.prioritizeTargets,
+                    );
+                    if (documentUuids.length === 0) {
+                        ui.notifications.warn(
+                            `Please select or target a token to remove this effect`,
+                        );
+                        return;
+                    }
+
+                    const promises = documentUuids.map(async (uuid) => {
+                        return getApi().removeEffect({
+                            effectId,
+                            uuid,
+                        });
+                    });
+
+                    await Promise.all(promises);
                 },
             },
             {
