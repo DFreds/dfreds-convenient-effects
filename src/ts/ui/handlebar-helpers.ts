@@ -2,7 +2,7 @@ import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
-import { getApi, isStackableDaeEffect } from "../utils/gets.ts";
+import { getApi, isStackableDae } from "../utils/gets.ts";
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
 class HandlebarHelpers {
@@ -193,11 +193,11 @@ class HandlebarHelpers {
     }
 
     #getStackableDaeIcon(effect: ActiveEffect<Item<null>>): string {
-        return isStackableDaeEffect({
+        return isStackableDae({
             effectName: effect.name,
             effect: effect as ActiveEffect<any>,
         })
-            ? `<i class='fas fa-layer-group integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.StackableDaeEffect")}'></i> `
+            ? `<i class='fas fa-layer-group integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.StackableDae")}'></i> `
             : "";
     }
 

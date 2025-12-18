@@ -54,7 +54,7 @@
         "IsNestedEffect": "是嵌套效果",
         "StatusEffect": "状态效果",
         "MidiQolEffects": "Midi-QoL 效果",
-        "StackableDaeEffect": "可堆叠 DAE 效果",
+        "StackableDae": "可堆叠 DAE",
         "AtlEffects": "ATL 效果",
         "TokenMagicEffects": "Token Magic 效果",
 

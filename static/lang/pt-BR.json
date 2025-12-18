@@ -54,7 +54,7 @@
         "IsNestedEffect": "É um Efeito Aninhado",
         "StatusEffect": "Efeito de Status",
         "MidiQolEffects": "Efeitos Midi-QoL",
-        "StackableDaeEffect": "Efeito DAE Empilhável",
+        "StackableDae": "DAE Empilhável",
         "AtlEffects": "Efeitos ATL",
         "TokenMagicEffects": "Efeitos Token Magic",
 

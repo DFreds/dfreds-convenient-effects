@@ -38,7 +38,7 @@ function getApi(): EffectInterface {
         .api;
 }
 
-function isStackableDaeEffect({
+function isStackableDae({
     effectName,
     effect,
 }: {
@@ -78,4 +78,4 @@ function isStackableDaeEffect({
 //         });
 // }
 
-export { getActorUuids, getItemType, getApi, isStackableDaeEffect };
+export { getActorUuids, getItemType, getApi, isStackableDae };
