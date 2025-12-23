@@ -1,5 +1,5 @@
 import { ActorUUID } from "@common/documents/_module.mjs";
-import { MODULE_IDS, MODULE_ID } from "../constants.ts";
+import { MODULE_ID } from "../constants.ts";
 import { Flags } from "./flags.ts";
 
 /**
