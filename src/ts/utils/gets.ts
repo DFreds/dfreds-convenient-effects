@@ -1,5 +1,6 @@
 import { ActorUUID } from "@common/documents/_module.mjs";
 import { MODULE_IDS, MODULE_ID } from "../constants.ts";
+import { Flags } from "./flags.ts";
 
 /**
  * Gets all UUIDs for selected or targeted tokens
@@ -48,7 +49,7 @@ function isStackableDae({
     if (!effectName) return false;
 
     const startsWithName = effect.name.startsWith(effectName);
-    const stackableFlag = effect.getFlag(MODULE_IDS.DAE, "stackable");
+    const stackableFlag = Flags.getStackableDae(effect);
     return (
         startsWithName &&
         (stackableFlag === "multi" ||

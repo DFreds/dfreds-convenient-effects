@@ -3,7 +3,7 @@ import {
     BaseActiveEffect,
     ItemSource,
 } from "@client/documents/_module.mjs";
-import { MODULE_ID } from "../constants.ts";
+import { MODULE_ID, MODULE_IDS } from "../constants.ts";
 
 class Flags {
     static #KEYS = {
@@ -17,6 +17,9 @@ class Flags {
         SUB_EFFECT_IDS: "subEffectIds",
         OTHER_EFFECT_IDS: "otherEffectIds",
         FOLDER_COLOR: "folderColor",
+
+        // DAE
+        STACKABLE: "stackable",
     };
 
     static getCeEffectId(
@@ -75,7 +78,9 @@ class Flags {
         }
     }
 
-    static getFolderColor(item: Item<null> | PreCreate<ItemSource>): string | undefined {
+    static getFolderColor(
+        item: Item<null> | PreCreate<ItemSource>,
+    ): string | undefined {
         if (item instanceof Item) {
             return item.getFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR) as
                 | string
@@ -314,6 +319,15 @@ class Flags {
                 value,
             );
         }
+    }
+
+    static getStackableDae(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
+    ): string | undefined {
+        return foundry.utils.getProperty(
+            effect,
+            `flags.${MODULE_IDS.DAE}.${this.#KEYS.STACKABLE}`,
+        ) as string | undefined;
     }
 }
 
