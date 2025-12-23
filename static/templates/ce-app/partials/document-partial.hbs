@@ -2,6 +2,7 @@
     class="directory-item entry document {{@root.documentCls}} flexrow"
     data-entry-id="{{effect.id}}"
     data-ce-effect-id="{{getCeEffectId effect}}"
+    data-action="activateEntry"
     draggable="true"
 >
     {{#if effect.img}}
@@ -12,10 +13,7 @@
             loading="lazy"
         />
     {{/if}}
-    <a
-        class="entry-name ellipsis"
-        data-action="activateEntry"
-    >{{effect.name}}</a>
+    <a class="entry-name ellipsis">{{effect.name}}</a>
 
     {{{convenientEffectIcons effect}}}
 </li>
