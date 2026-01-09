@@ -104,6 +104,12 @@ export default abstract class Document<
     /** A Universally Unique Identifier (uuid) for this Document instance. */
     get uuid(): DocumentUUID | null;
 
+    /**
+     * A boolean indicator for whether the current game User has ownership rights for this Document.
+     * Different Document types may have more specialized rules for what constitutes ownership.
+     */
+    get isOwner(): boolean;
+
     /* ---------------------------------------- */
     /*  Model Permissions                       */
     /* ---------------------------------------- */
