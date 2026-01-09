@@ -335,7 +335,6 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                         { save: true, addSource: true },
                     );
 
-                    // todo force: true when this is app v2 type
                     clone?.sheet?.render(true);
                 },
             },
@@ -627,7 +626,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     ): Promise<object> {
         const context = await super._prepareContext(options);
         Object.assign(context, {
-            folderIcon: CONFIG.Folder.sidebarIcon,
+            folderIcon: CONFIG.Folder.sidebarIcon ?? "fa-solid fa-folder",
             label: game.i18n.localize("DOCUMENT.ActiveEffect"),
             labelPlural: game.i18n.localize("DOCUMENT.ActiveEffects"),
             sidebarIcon: "fa-solid fa-hand-sparkles",
@@ -1236,8 +1235,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             ]);
         } else {
             if (newFolder?.isOwner) {
+                const convenientEffect = createConvenientEffect({
+                    effect: entry.toObject(),
+                });
                 await newFolder.createEmbeddedDocuments("ActiveEffect", [
-                    entry,
+                    convenientEffect,
                 ]);
 
                 if (!originalFolder) return;
