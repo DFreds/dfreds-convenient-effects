@@ -116,8 +116,8 @@ export default class ClientSettings {
     get(namespace: "core", key: "noCanvas"): boolean;
     get(namespace: "core", key: "rollMode"): RollMode;
     get(namespace: "core", key: "uiConfig"): { colorScheme: { applications: string; interface: string } };
-    get(namespace: string, key: string, options?: { document?: boolean }): unknown;
     get(namespace: string, key: string, options?: { document: true }): Setting;
+    get(namespace: string, key: string, options?: { document?: boolean }): unknown;
 
     /**
      * Get the value of a game setting for a certain module and setting key

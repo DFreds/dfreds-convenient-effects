@@ -130,14 +130,14 @@ class Settings {
         return game.settings.get(
             MODULE_ID,
             this.#APP_CONTROLS_PERMISSION,
-        ) as number;
+        ) as unknown as number;
     }
 
     get createFoldersPermission(): number {
         return game.settings.get(
             MODULE_ID,
             this.#CREATE_FOLDERS_PERMISSION,
-        ) as number;
+        ) as unknown as number;
     }
 
     /**
@@ -146,7 +146,7 @@ class Settings {
      * @returns the IDs of all of the saved expanded folders
      */
     get expandedFolders(): string[] {
-        return game.settings.get(MODULE_ID, this.#EXPANDED_FOLDERS) as string[];
+        return game.settings.get(MODULE_ID, this.#EXPANDED_FOLDERS) as unknown as string[];
     }
 
     /**
@@ -208,7 +208,7 @@ class Settings {
         return game.settings.get(
             MODULE_ID,
             this.#SHOW_HIDDEN_EFFECTS,
-        ) as boolean;
+        ) as unknown as boolean;
     }
 
     async setShowHiddenEffects(value: boolean): Promise<unknown> {
@@ -219,7 +219,7 @@ class Settings {
         return game.settings.get(
             MODULE_ID,
             this.#SHOW_NESTED_EFFECTS,
-        ) as boolean;
+        ) as unknown as boolean;
     }
 
     async setShowNestedEffects(value: boolean): Promise<unknown> {
@@ -230,7 +230,7 @@ class Settings {
         return game.settings.get(
             MODULE_ID,
             this.#PRIORITIZE_TARGETS,
-        ) as boolean;
+        ) as unknown as boolean;
     }
 
     async setPrioritizeTargets(value: boolean): Promise<unknown> {
@@ -238,7 +238,7 @@ class Settings {
     }
 
     get hasInitialized(): boolean {
-        return game.settings.get(MODULE_ID, this.#HAS_INITIALIZED) as boolean;
+        return game.settings.get(MODULE_ID, this.#HAS_INITIALIZED) as unknown as boolean;
     }
 
     async setHasInitialized(value: boolean): Promise<unknown> {
