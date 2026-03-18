@@ -1,6 +1,7 @@
 import moduleData from "@static/module.json" with { type: "json" };
 
 export const MODULE_ID = moduleData.id;
+export const SE_MODULE_ID = "dfreds-status-effects";
 
 export const COLORS = {
     COLD_FIRE: "#389888",

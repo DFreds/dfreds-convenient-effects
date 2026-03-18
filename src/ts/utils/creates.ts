@@ -30,6 +30,9 @@ function createConvenientItem({
     Flags.setIsViewable(item, Flags.isViewable(item) ?? isViewable);
     Flags.setFolderColor(item, Flags.getFolderColor(item) ?? color ?? "");
 
+    // Prevent the item from being imported into a status effect item
+    Flags.setIsStatusEffect(item, false);
+
     item.name = isBackup ? `${item.name} - Backup` : item.name;
     item.img =
         item.img ?? "modules/dfreds-convenient-effects/images/magic-palm.svg";
@@ -53,6 +56,9 @@ function createConvenientEffect({
     Flags.setIsTemporary(effect, Flags.isTemporary(effect) ?? isTemporary);
     Flags.setIsViewable(effect, Flags.isViewable(effect) ?? isViewable);
     Flags.setIsDynamic(effect, Flags.isDynamic(effect) ?? isDynamic);
+
+    // Prevent the item from being imported into a status effect item
+    Flags.setIsStatusEffect(effect, false);
 
     if (nestedEffectIds) {
         Flags.setNestedEffectIds(
