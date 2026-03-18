@@ -30,6 +30,12 @@ function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
 
 function getItemType(): string {
     const types = Object.keys(CONFIG.Item.typeLabels);
+    const system = game.system.id;
+
+    if (system === "dnd5e") {
+        return "weapon";
+    }
+
     // Use the last type in the list because the first is usually "base" and that can be problematic
     return types[types.length - 1] ?? "";
 }
