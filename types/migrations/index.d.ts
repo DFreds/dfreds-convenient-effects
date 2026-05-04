@@ -1,4 +1,4 @@
-export {};
+export { };
 
 declare global {
     interface Window {
@@ -13,21 +13,21 @@ declare global {
          * Register a module to the migrations system
          * @param moduleId The ID of the module registering the migrations
          */
-        register({moduleId}: {moduleId: string}): void;
+        register({ moduleId }: { moduleId: string }): void;
 
         /**
          * Add a migration to the migrations list
          * @param moduleId The ID of the module registering the migration
          * @param migration The migration to register
          */
-        addMigration({moduleId, migration}: {moduleId: string, migration: MigrationType}): void;
+        addMigration({ moduleId, migration }: { moduleId: string, migration: MigrationType }): void;
 
         /**
          * Add multiple migrations to the migrations list
          * @param moduleId The ID of the module registering the migration
          * @param migrations The migrations to register
          */
-        addMigrations({moduleId, migrations}: {moduleId: string, migrations: MigrationType[]}): void;
+        addMigrations({ moduleId, migrations }: { moduleId: string, migrations: MigrationType[] }): void;
 
         /**
          * Check if a migration has been run
@@ -35,27 +35,27 @@ declare global {
          * @param key The key of the migration
          * @returns true if the migration has been run, false otherwise
          */
-        hasRan({moduleId, key}: {moduleId: string, key: string}): boolean;
+        hasRan({ moduleId, key }: { moduleId: string, key: string }): boolean;
 
         /**
          * Run the migrations
          * @param moduleId The ID of the module registering the migrations
          * @returns true if all the migrations were successfully run, false otherwise
          */
-        runAll({moduleId}: {moduleId: string}): Promise<boolean>;
+        runAll({ moduleId }: { moduleId: string }): Promise<boolean>;
 
         /**
          * Clear all ran migrations
          * @param moduleId The ID of the module registering the migrations
          */
-        clearAllRan({moduleId}: {moduleId: string}): Promise<void>;
+        clearAllRan({ moduleId }: { moduleId: string }): Promise<void>;
 
         /**
          * Get the ran migrations
          * @param moduleId The ID of the module registering the migrations
          * @returns the ran migrations
          */
-        getRanMigrations({moduleId}: {moduleId: string}): string[];
+        getRanMigrations({ moduleId }: { moduleId: string }): string[];
     }
 
     export interface MigrationType {
