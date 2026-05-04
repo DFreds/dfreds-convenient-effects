@@ -14,7 +14,7 @@ function addConditionImmunity({
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.ci.value",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value: condition,
     };
 }
@@ -26,7 +26,7 @@ function addDamageImmunity({
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.di.value",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value: damageType,
     };
 }
@@ -34,7 +34,7 @@ function addDamageImmunity({
 function addAllDamageImmunity(): Partial<EffectChangeData> {
     return {
         key: "system.traits.di.all",
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -59,7 +59,7 @@ function addDamageResistance({
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.dr.value",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value: damageType,
     };
 }
@@ -67,7 +67,7 @@ function addDamageResistance({
 function addAllDamageResistance(): Partial<EffectChangeData> {
     return {
         key: "system.traits.dr.all",
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -75,7 +75,7 @@ function addAllDamageResistance(): Partial<EffectChangeData> {
 function addAllDamageVulnerability(): Partial<EffectChangeData> {
     return {
         key: "system.traits.dv.all",
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -87,7 +87,7 @@ function addLanguage({
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.languages.value",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value: language,
     };
 }
@@ -99,7 +99,7 @@ function addWeaponProficiency({
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.weaponProf.value",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value: weapon,
     };
 }
@@ -107,7 +107,7 @@ function addWeaponProficiency({
 function addAllLanguages(): Partial<EffectChangeData> {
     return {
         key: "system.traits.languages.all",
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }

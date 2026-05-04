@@ -11,7 +11,7 @@ function atlLight({
 }): Partial<EffectChangeData> {
     return {
         key: `ATL.light.${lightType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
         priority,
     };
@@ -26,7 +26,7 @@ function atlSightRange({
 }): Partial<EffectChangeData> {
     return {
         key: `ATL.sight.range`,
-        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        type: "upgrade",
         value,
         priority,
     };
@@ -41,7 +41,7 @@ function atlSightVisionMode({
 }): Partial<EffectChangeData> {
     return {
         key: `ATL.sight.visionMode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
         priority,
     };

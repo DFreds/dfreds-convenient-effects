@@ -23,10 +23,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     }
 
     override get migrations(): MigrationType[] {
-        return [
-            migrateOldCustomEffects,
-            migrateDnd5eItemType,
-        ];
+        return [migrateOldCustomEffects, migrateDnd5eItemType];
     }
 }
 

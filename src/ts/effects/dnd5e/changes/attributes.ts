@@ -1,5 +1,20 @@
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
+function acMin({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.ac.min",
+        type: "upgrade",
+        value,
+        priority,
+    };
+}
+
 function acBonus({
     value,
     priority,
@@ -9,7 +24,7 @@ function acBonus({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.bonus",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -24,7 +39,7 @@ function acCalc({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.calc",
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
         priority,
     };
@@ -39,7 +54,7 @@ function acCover({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.cover",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -54,7 +69,7 @@ function acFormula({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.formula",
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
         priority,
     };
@@ -69,7 +84,7 @@ function addDarkvision({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.darkvision",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -84,7 +99,7 @@ function upgradeDarkvision({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.darkvision",
-        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        type: "upgrade",
         value,
         priority,
     };
@@ -99,7 +114,7 @@ function upgradeTrueSight({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.truesight",
-        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        type: "upgrade",
         value,
         priority,
     };
@@ -114,7 +129,7 @@ function exhaustion({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.exhaustion",
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
         priority,
     };
@@ -139,7 +154,7 @@ function movement({
 }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.movement.${movementType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value,
         priority,
     };
@@ -164,7 +179,7 @@ function upgradeMovement({
 }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.movement.${movementType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        type: "upgrade",
         value,
         priority,
     };
@@ -179,7 +194,7 @@ function multiplyEncumbrance({
 }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.encumbrance.max",
-        mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+        type: "multiply",
         value,
         priority,
     };
@@ -194,7 +209,7 @@ function initiativeMode({
 }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.init.roll.mode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -209,7 +224,7 @@ function concentrationMode({
 }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.concentration.roll.mode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -224,13 +239,14 @@ function deathMode({
 }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.death.roll.mode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
 }
 
 export {
+    acMin,
     acBonus,
     acCalc,
     acCover,

@@ -28,7 +28,7 @@ function tokenMagic({
 }): Partial<EffectChangeData> {
     return {
         key: "macro.tokenMagic",
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value,
         priority,
     };

@@ -112,7 +112,9 @@ export interface ApplicationHeaderControlsEntry {
     /** The action name triggered by clicking the control button */
     action: string;
     /** Is the control button visible for the current client? */
-    visible: boolean;
+    visible: boolean | (() => boolean);
+
+    onClick: () => void;
 }
 
 export interface ApplicationConstructorParams {

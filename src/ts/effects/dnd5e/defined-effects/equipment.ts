@@ -29,7 +29,7 @@ function bullseyeLantern(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BullseyeLantern.description",
             ),
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
-            duration: { seconds: SECONDS.IN_SIX_HOURS },
+            duration: { value: SECONDS.IN_SIX_HOURS, units: "seconds" },
             changes: [
                 atlLight({
                     lightType: "angle",
@@ -68,7 +68,7 @@ function candle(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.Candle.description",
             ),
             img: "icons/sundries/lights/candle-unlit-white.webp",
-            duration: { seconds: SECONDS.IN_ONE_HOUR },
+            duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
             changes: [
                 atlLight({
                     lightType: "dim",
@@ -105,7 +105,7 @@ function hoodedLantern(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.HoodedLantern.description",
             ),
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
-            duration: { seconds: SECONDS.IN_SIX_HOURS },
+            duration: { value: SECONDS.IN_SIX_HOURS, units: "seconds" },
             changes: [
                 atlLight({
                     lightType: "dim",
@@ -140,7 +140,7 @@ function lantern(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.Lantern.description",
             ),
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
-            duration: { seconds: SECONDS.IN_SIX_HOURS },
+            duration: { value: SECONDS.IN_SIX_HOURS, units: "seconds" },
             changes: [
                 atlLight({
                     lightType: "dim",
@@ -175,7 +175,7 @@ function torch(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.Torch.description",
             ),
             img: "icons/sundries/lights/torch-black.webp",
-            duration: { seconds: SECONDS.IN_ONE_HOUR },
+            duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
             changes: [
                 atlLight({
                     lightType: "dim",

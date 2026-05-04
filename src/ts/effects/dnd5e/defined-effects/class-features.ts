@@ -63,7 +63,7 @@ function bardicInspiration(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BardicInspiration.description",
             ),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
-            duration: { seconds: SECONDS.IN_TEN_MINUTES },
+            duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
         },
         nestedEffectIds,
     });
@@ -79,7 +79,7 @@ function bardicInspirationD6(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BardicInspirationD6.description",
             ),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
-            duration: { seconds: SECONDS.IN_TEN_MINUTES },
+            duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
                 optionalLabel({
                     key: "bardic-inspiration",
@@ -115,7 +115,7 @@ function bardicInspirationD8(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BardicInspirationD8.description",
             ),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
-            duration: { seconds: SECONDS.IN_TEN_MINUTES },
+            duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
                 optionalLabel({
                     key: "bardic-inspiration",
@@ -151,7 +151,7 @@ function bardicInspirationD10(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BardicInspirationD10.description",
             ),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
-            duration: { seconds: SECONDS.IN_TEN_MINUTES },
+            duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
                 optionalLabel({
                     key: "bardic-inspiration",
@@ -187,7 +187,7 @@ function bardicInspirationD12(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.BardicInspirationD12.description",
             ),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
-            duration: { seconds: SECONDS.IN_TEN_MINUTES },
+            duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
                 optionalLabel({
                     key: "bardic-inspiration",
@@ -223,7 +223,7 @@ function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.ChannelDivinitySacredWeapon.description",
             ),
             img: "icons/weapons/swords/sword-gold-holy.webp",
-            duration: { seconds: SECONDS.IN_ONE_MINUTE },
+            duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
                 attackBonus({
                     attackType: "mwak",
@@ -268,7 +268,7 @@ function channelDivinityTurnTheUnholy(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.ChannelDivinityTurnTheUnholy.description",
             ),
             img: "icons/magic/fire/explosion-embers-evade-silhouette.webp",
-            duration: { seconds: SECONDS.IN_ONE_MINUTE },
+            duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             flags: { dae: { specialDuration: ["isDamaged"] } },
         },
     });
@@ -284,7 +284,7 @@ function channelDivinityTurnUndead(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.ChannelDivinityTurnUndead.description",
             ),
             img: "icons/magic/fire/flame-burning-creature-skeleton.webp",
-            duration: { seconds: SECONDS.IN_ONE_MINUTE },
+            duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             flags: { dae: { specialDuration: ["isDamaged"] } },
         },
     });
@@ -298,7 +298,7 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.KiEmptyBody.description",
             ),
             img: "icons/magic/perception/silhouette-stealth-shadow.webp",
-            duration: { seconds: SECONDS.IN_ONE_MINUTE },
+            duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
                 ...(invisible().changes ?? []),
                 addDamageResistance({ damageType: "bludgeoning" }),
@@ -346,7 +346,7 @@ function rage(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.Rage.description",
             ),
             img: "icons/creatures/abilities/mouth-teeth-human.webp",
-            duration: { seconds: SECONDS.IN_ONE_MINUTE },
+            duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
                 abilityCheckMode({ ability: "str", value: "1" }),
                 abilitySaveMode({ ability: "str", value: "1" }),
@@ -394,7 +394,7 @@ function recklessAttackAdvantage(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.RecklessAttackAdvantageOnAttacks.description",
             ),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
-            duration: { turns: 1 },
+            duration: { value: 1, units: "turns" },
             changes: [advantageAttack({ attackType: "mwak" })],
         },
         isViewable: false,

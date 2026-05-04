@@ -26,7 +26,6 @@ type ConfiguredConfig = Config<
     Hotbar<Macro>,
     Item,
     Macro,
-    MeasuredTemplateDocument,
     RegionDocument,
     RegionBehavior,
     TileDocument<Scene | null>,

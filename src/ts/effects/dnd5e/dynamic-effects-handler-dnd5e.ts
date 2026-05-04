@@ -84,7 +84,8 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 "ConvenientEffects.Dnd.DivineWord.stunned",
             );
             effect.duration = effect.duration ?? {};
-            effect.duration.seconds = SECONDS.IN_ONE_HOUR;
+            effect.duration.value = SECONDS.IN_ONE_HOUR;
+            effect.duration.units = "seconds";
         } else if (remainingHp <= 40) {
             await getApi().addEffect({
                 effectName: game.i18n.localize(
@@ -104,7 +105,8 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 "ConvenientEffects.Dnd.DivineWord.blinded",
             );
             effect.duration = effect.duration ?? {};
-            effect.duration.seconds = SECONDS.IN_TEN_MINUTES;
+            effect.duration.value = SECONDS.IN_TEN_MINUTES;
+            effect.duration.units = "seconds";
         } else if (remainingHp <= 50) {
             await getApi().addEffect({
                 effectName: game.i18n.localize(
@@ -117,7 +119,8 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 "ConvenientEffects.Dnd.DivineWord.deafened",
             );
             effect.duration = effect.duration ?? {};
-            effect.duration.seconds = SECONDS.IN_ONE_MINUTE;
+            effect.duration.value = SECONDS.IN_ONE_MINUTE;
+            effect.duration.units = "seconds";
         }
     }
 
@@ -157,17 +160,17 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         effect.changes.push(
             {
                 key: "system.traits.size",
-                mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                type: "override",
                 value: size,
             },
             {
                 key: "ATL.width",
-                mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                type: "override",
                 value: tokenSize,
             },
             {
                 key: "ATL.height",
-                mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+                type: "override",
                 value: tokenSize,
             },
         );
@@ -212,52 +215,52 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 ...[
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "acid",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "cold",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "fire",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "force",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "lightning",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "necrotic",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "poison",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "physical",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "radiant",
                     },
                     {
                         key: "system.traits.dr.value",
-                        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                        type: "add",
                         value: "thunder",
                     },
                 ],
@@ -271,9 +274,8 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     ) {
         if ((barbarianClass.system as any).levels > 14) {
             effect.duration = effect.duration ?? {};
-            effect.duration.seconds = null;
-            effect.duration.rounds = null;
-            effect.duration.turns = null;
+            effect.duration.value = null;
+            effect.duration.units = null;
         }
     }
 }

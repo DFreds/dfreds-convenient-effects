@@ -31,7 +31,7 @@ function skillCheckBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.skills.${skillType}.bonuses.check`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -48,7 +48,7 @@ function skillCheckMode({
 }): Partial<EffectChangeData> {
     return {
         key: `system.skills.${skillType}.roll.mode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };

@@ -414,6 +414,8 @@ export interface MergeObjectOptions {
      * A privately used parameter to track recursion depth.
      */
     _d?: number;
+
+    performDeletions?: boolean;
 }
 
 /**

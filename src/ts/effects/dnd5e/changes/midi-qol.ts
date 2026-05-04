@@ -3,7 +3,7 @@ import { EffectChangeData } from "@common/documents/active-effect.mjs";
 function advantage(): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.advantage.all`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -11,7 +11,7 @@ function advantage(): Partial<EffectChangeData> {
 function disadvantage(): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.disadvantage.all`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -23,7 +23,7 @@ function advantageAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.advantage.attack.${attackType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -35,7 +35,7 @@ function disadvantageAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.disadvantage.attack.${attackType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -47,7 +47,7 @@ function grantAdvantageAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.advantage.attack.${attackType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -59,7 +59,7 @@ function grantDisadvantageAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.disadvantage.attack.${attackType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -71,7 +71,7 @@ function failAbilitySave({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.fail.ability.save.${saveType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -83,7 +83,7 @@ function grantCriticalRange({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.critical.range`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value: range,
     };
 }
@@ -95,7 +95,7 @@ function grantFailAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.attack.fail.${attackType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }
@@ -109,7 +109,7 @@ function optionalLabel({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.optional.${key}.label`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value: label,
     };
 }
@@ -125,7 +125,7 @@ function optionalAttack({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.optional.${key}.attack.${attackType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
     };
 }
@@ -141,7 +141,7 @@ function optionalSave({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.optional.${key}.save.${saveType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
     };
 }
@@ -157,7 +157,7 @@ function optionalAbilityCheck({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.optional.${key}.check.${abilityCheckType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
     };
 }
@@ -173,7 +173,7 @@ function optionalSkill({
 }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.optional.${key}.skill.${skillType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value,
     };
 }
@@ -181,7 +181,7 @@ function optionalSkill({
 function magicResistanceSaves(): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.magicResistance.save.all`,
-        mode: CONST.ACTIVE_EFFECT_MODES.CUSTOM,
+        type: "custom",
         value: "1",
     };
 }

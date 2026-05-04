@@ -13,7 +13,7 @@ function addAbility({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.value`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -30,7 +30,7 @@ function downgradeAbility({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.value`,
-        mode: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE,
+        type: "downgrade",
         value,
         priority,
     };
@@ -47,7 +47,7 @@ function upgradeAbility({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.value`,
-        mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+        type: "upgrade",
         value,
         priority,
     };
@@ -64,7 +64,7 @@ function abilitySaveBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.bonuses.save`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -81,7 +81,7 @@ function abilityCheckMode({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.check.roll.mode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -98,7 +98,7 @@ function abilitySaveMode({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.save.roll.mode`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -115,7 +115,7 @@ function abilitySaveMax({
 }): Partial<EffectChangeData> {
     return {
         key: `system.abilities.${ability}.save.roll.max`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };

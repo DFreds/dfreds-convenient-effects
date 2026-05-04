@@ -19,7 +19,7 @@ function attackBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.${attackType}.attack`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -34,7 +34,7 @@ function spellDcBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.spell.dc`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -49,7 +49,7 @@ function checkBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.abilities.check`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -75,7 +75,7 @@ function damageBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.${damageType}.damage`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };
@@ -90,7 +90,7 @@ function saveBonus({
 }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.abilities.save`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        type: "add",
         value,
         priority,
     };

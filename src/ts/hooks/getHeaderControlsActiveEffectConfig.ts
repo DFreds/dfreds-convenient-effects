@@ -20,9 +20,8 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                     visible: () => {
                         const parent = configTyped.document.parent;
                         const isItem = parent instanceof Item;
-                        const isConvenientItem = Flags.isConvenient(
-                            parent as any,
-                        ) ?? false;
+                        const isConvenientItem =
+                            Flags.isConvenient(parent as any) ?? false;
                         const isOwner = configTyped.document.isOwner;
                         const isGM = game.user.isGM;
 

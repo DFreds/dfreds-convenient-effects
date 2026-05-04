@@ -104,6 +104,8 @@ export default abstract class Document<
     /** A Universally Unique Identifier (uuid) for this Document instance. */
     get uuid(): DocumentUUID | null;
 
+    get isOwner(): boolean;
+
     /* ---------------------------------------- */
     /*  Model Permissions                       */
     /* ---------------------------------------- */
@@ -742,6 +744,7 @@ declare global {
     interface DocumentCloneContext extends Omit<DocumentConstructionContext<null>, "parent"> {
         save?: boolean;
         keepId?: boolean;
+        addSource?: boolean;
     }
 
     interface DocumentSourceUpdateContext extends Omit<DatabaseUpdateOperation<null>, "parent"> {

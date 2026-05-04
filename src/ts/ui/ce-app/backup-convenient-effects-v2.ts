@@ -121,13 +121,13 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _getFolderContextOptions(): ContextMenuEntry[] {
         return [
             {
-                name: "SIDEBAR.Export",
+                label: "SIDEBAR.Export",
                 icon: '<i class="fa-solid fa-file-export"></i>',
-                condition: (_header) => {
+                visible: (_html: HTMLElement) => {
                     return game.user.isGM;
                 },
-                callback: (header) => {
-                    const folderHtml = header.closest(
+                onClick: (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folder = findFolder(

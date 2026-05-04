@@ -122,18 +122,18 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _getEntryContextOptions(): ContextMenuEntry[] {
         return [
             {
-                name: "ConvenientEffects.EditEffect",
+                label: "ConvenientEffects.EditEffect",
                 icon: '<i class="fa-regular fa-pen-to-square"></i>',
-                condition: (li) => {
-                    return this.#isUserFolderOwner(li);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: (li) => {
-                    const folderHtml = li.closest(
+                onClick: (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folderId = folderHtml.dataset.folderId;
 
-                    const effectHtml = li.closest(
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -150,18 +150,18 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.DeleteEffect",
+                label: "ConvenientEffects.DeleteEffect",
                 icon: '<i class="fa-regular fa-trash"></i>',
-                condition: (li) => {
-                    return this.#isUserFolderOwner(li);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: async (li) => {
-                    const folderHtml = li.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folderId = folderHtml.dataset.folderId;
 
-                    const effectHtml = li.closest(
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -177,10 +177,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.AddEffect",
+                label: "ConvenientEffects.AddEffect",
                 icon: '<i class="fa-regular fa-plus"></i>',
-                callback: async (li) => {
-                    const effectHtml = li.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -208,10 +208,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.RemoveEffect",
+                label: "ConvenientEffects.RemoveEffect",
                 icon: '<i class="fa-regular fa-minus"></i>',
-                callback: async (li) => {
-                    const effectHtml = li.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -239,10 +239,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.ToggleAsOverlay",
+                label: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="fa-regular fa-dot-circle"></i>',
-                callback: async (li) => {
-                    const effectHtml = li.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -257,13 +257,13 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.ToggleStatusEffect",
+                label: "ConvenientEffects.ToggleStatusEffect",
                 icon: '<i class="fa-regular fa-person-rays"></i>',
-                condition: (_li) => {
+                visible: (_html: HTMLElement) => {
                     return !!findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active;
                 },
-                callback: async (li) => {
-                    const effectHtml = li.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const ceEffectId = effectHtml.dataset.ceEffectId;
@@ -301,18 +301,18 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "SIDEBAR.Duplicate",
+                label: "SIDEBAR.Duplicate",
                 icon: '<i class="fa-regular fa-copy"></i>',
-                condition: (li) => {
-                    return this.#isUserFolderOwner(li);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: async (li) => {
-                    const folderHtml = li.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folderId = folderHtml.dataset.folderId;
 
-                    const effectHtml = li.closest(
+                    const effectHtml = target.closest(
                         "[data-ce-effect-id]",
                     ) as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -328,7 +328,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
                     const clone = original.clone(
                         {
-                            name: game.i18n.format("DOCUMENT.CopyOf", {
+                            name: game.i18n.localize("DOCUMENT.CopyOf", {
                                 name: original._source.name,
                             }),
                         },
@@ -339,29 +339,29 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.ShowEffect",
+                label: "ConvenientEffects.ShowEffect",
                 icon: '<i class="fa-regular fa-eye"></i>',
-                condition: (li) => {
+                visible: (html: HTMLElement) => {
                     return (
-                        this.#isUserFolderOwner(li) &&
-                        !this.#isEffectViewable(li)
+                        this.#isUserFolderOwner(html) &&
+                        !this.#isEffectViewable(html)
                     );
                 },
-                callback: (li) => {
-                    this.#setEffectViewable(li, true);
+                onClick: (_event: PointerEvent, target: HTMLElement) => {
+                    this.#setEffectViewable(target, true);
                 },
             },
             {
-                name: "ConvenientEffects.HideEffect",
+                label: "ConvenientEffects.HideEffect",
                 icon: '<i class="fa-regular fa-eye-slash"></i>',
-                condition: (li) => {
+                visible: (html: HTMLElement) => {
                     return (
-                        this.#isUserFolderOwner(li) &&
-                        this.#isEffectViewable(li)
+                        this.#isUserFolderOwner(html) &&
+                        this.#isEffectViewable(html)
                     );
                 },
-                callback: (li) => {
-                    this.#setEffectViewable(li, false);
+                onClick: (_event: PointerEvent, target: HTMLElement) => {
+                    this.#setEffectViewable(target, false);
                 },
             },
         ];
@@ -370,13 +370,13 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _getFolderContextOptions(): ContextMenuEntry[] {
         return [
             {
-                name: "FOLDER.Edit",
+                label: "FOLDER.Edit",
                 icon: '<i class="fa-solid fa-pen-to-square"></i>',
-                condition: (header) => {
-                    return this.#isUserFolderOwner(header);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: async (header) => {
-                    const folderHtml = header.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folder = findFolder(
@@ -397,13 +397,13 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "FOLDER.Delete",
+                label: "FOLDER.Delete",
                 icon: '<i class="fa-solid fa-dumpster"></i>',
-                condition: (header) => {
-                    return this.#isUserFolderOwner(header);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: async (header) => {
-                    const folderHtml = header.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folder = findFolder(
@@ -417,11 +417,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "OWNERSHIP.Configure",
+                label: "OWNERSHIP.Configure",
                 icon: '<i class="fa-solid fa-lock"></i>',
-                condition: () => game.user.isGM,
-                callback: (header) => {
-                    const folderHtml = header.closest(
+                visible: () => game.user.isGM,
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folder = findFolder(
@@ -445,39 +445,39 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "ConvenientEffects.ShowFolder",
+                label: "ConvenientEffects.ShowFolder",
                 icon: '<i class="fas fa-eye fa-fw"></i>',
-                condition: (header) => {
+                visible: (html: HTMLElement) => {
                     return (
-                        this.#isUserFolderOwner(header) &&
-                        !this.#isFolderViewable(header)
+                        this.#isUserFolderOwner(html) &&
+                        !this.#isFolderViewable(html)
                     );
                 },
-                callback: (header) => {
-                    this.#setFolderViewable(header, true);
+                onClick: (_event: PointerEvent, target: HTMLElement) => {
+                    this.#setFolderViewable(target, true);
                 },
             },
             {
-                name: "ConvenientEffects.HideFolder",
+                label: "ConvenientEffects.HideFolder",
                 icon: '<i class="fas fa-eye-slash fa-fw"></i>',
-                condition: (header) => {
+                visible: (html: HTMLElement) => {
                     return (
-                        this.#isUserFolderOwner(header) &&
-                        this.#isFolderViewable(header)
+                        this.#isUserFolderOwner(html) &&
+                        this.#isFolderViewable(html)
                     );
                 },
-                callback: (header) => {
-                    this.#setFolderViewable(header, false);
+                onClick: (_event: PointerEvent, target: HTMLElement) => {
+                    this.#setFolderViewable(target, false);
                 },
             },
             {
-                name: "SIDEBAR.Export",
+                label: "SIDEBAR.Export",
                 icon: '<i class="fa-solid fa-file-export"></i>',
-                condition: (header) => {
-                    return this.#isUserFolderOwner(header);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: (header) => {
-                    const folderHtml = header.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folder = findFolder(
@@ -491,13 +491,13 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             },
             {
-                name: "SIDEBAR.Import",
+                label: "SIDEBAR.Import",
                 icon: '<i class="fa-solid fa-file-import"></i>',
-                condition: (header) => {
-                    return this.#isUserFolderOwner(header);
+                visible: (html: HTMLElement) => {
+                    return this.#isUserFolderOwner(html);
                 },
-                callback: async (header) => {
-                    const folderHtml = header.closest(
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const folderHtml = target.closest(
                         ".directory-item.folder",
                     ) as HTMLElement;
                     const folder = findFolder(
@@ -1248,7 +1248,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     await entry.delete();
                 } else {
                     ui.notifications.warn(
-                        game.i18n.format(
+                        game.i18n.localize(
                             "ConvenientEffects.NoPermissionToRemoveEffect",
                             {
                                 effectName: entry.name,
@@ -1260,7 +1260,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 }
             } else {
                 ui.notifications.warn(
-                    game.i18n.format(
+                    game.i18n.localize(
                         "ConvenientEffects.NoPermissionToAddEffect",
                         {
                             effectName: entry.name,

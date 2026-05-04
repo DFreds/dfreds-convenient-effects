@@ -262,6 +262,7 @@ export default interface Config<
     Folder: {
         documentClass: typeof documents.Folder;
         collection: typeof collections.Folders;
+        sidebarIcon: string | undefined;
     };
 
     /** Configuration for the ChatMessage document */

@@ -79,9 +79,11 @@ type ActiveEffectSchema = {
     showIcon: fields.NumberField<ActiveEffectShowIcon, ActiveEffectShowIcon, true, false, true>;
     flags: fields.DocumentFlagsField;
     _stats: fields.DocumentStatsField;
+    changes: fields.ArrayField<fields.SchemaField<EffectChangeSchema>>;
 };
 
 type EffectChangeSchema = {
+    key: fields.StringField<string, string, true, false, true>;
     type: fields.StringField<string, string, true, false, true>;
     value: fields.AnyField;
     phase: fields.StringField<string, string, true, false, true>;

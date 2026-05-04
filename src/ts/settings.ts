@@ -146,7 +146,10 @@ class Settings {
      * @returns the IDs of all of the saved expanded folders
      */
     get expandedFolders(): string[] {
-        return game.settings.get(MODULE_ID, this.#EXPANDED_FOLDERS) as unknown as string[];
+        return game.settings.get(
+            MODULE_ID,
+            this.#EXPANDED_FOLDERS,
+        ) as unknown as string[];
     }
 
     /**
@@ -238,7 +241,10 @@ class Settings {
     }
 
     get hasInitialized(): boolean {
-        return game.settings.get(MODULE_ID, this.#HAS_INITIALIZED) as unknown as boolean;
+        return game.settings.get(
+            MODULE_ID,
+            this.#HAS_INITIALIZED,
+        ) as unknown as boolean;
     }
 
     async setHasInitialized(value: boolean): Promise<unknown> {

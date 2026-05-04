@@ -13,12 +13,17 @@ const migration: MigrationType = {
             const backupItems = findFolders({ backup: true });
             const convenientItems = findFolders({ backup: false });
 
-            const promises = [...backupItems, ...convenientItems].map(async (item) => {
-                if (item.type === "weapon") return;
+            const promises = [...backupItems, ...convenientItems].map(
+                async (item) => {
+                    if (item.type === "weapon") return;
 
-                item.clone({ type: "weapon" }, { save: true, keepId: true });
-                await item.delete();
-            });
+                    item.clone(
+                        { type: "weapon" },
+                        { save: true, keepId: true },
+                    );
+                    await item.delete();
+                },
+            );
 
             await Promise.all(promises);
             log(`Migrated ${promises.length} items`);
