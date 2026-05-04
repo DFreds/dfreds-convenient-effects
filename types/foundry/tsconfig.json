@@ -1,33 +1,40 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "strict": true,
-    "skipLibCheck": false,
-    "noImplicitOverride": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "paths": {
-      "@common/*": [
-        "./common/*"
-      ],
-      "@client/*": [
-        "./client/*"
-      ]
-    }
-  },
-  "include": [
-    "common/**/*",
-    "client/**/*.d.mts",
-    "util.d.mts",
-    "client/canvas/groups/canvas-group-mixin.mts",
-    "client/applications/sheets/token/mixin.mts",
-    "client/packages/client-package.mts"
-  ]
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "strict": true,
+        "skipLibCheck": false,
+        "noImplicitOverride": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "paths": {
+            "@common/*": [
+                "./common/*"
+            ],
+            "@client/*": [
+                "./client/*"
+            ]
+        },
+        "types": [
+            "jquery"
+        ],
+        "typeRoots": [
+            "../../node_modules/@types"
+        ]
+    },
+    "include": [
+        "common/**/*.d.mts",
+        "client/**/*.d.mts",
+        "global-external.d.mts",
+        "util.d.mts",
+        "client/canvas/groups/canvas-group-mixin.mts",
+        "client/applications/sheets/token/mixin.mts",
+        "client/packages/client-package.mts"
+    ]
 }

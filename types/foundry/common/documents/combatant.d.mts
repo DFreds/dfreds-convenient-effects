@@ -11,8 +11,7 @@ export default class BaseCombatant<TParent extends BaseCombat | null> extends Do
 }
 
 export default interface BaseCombatant<TParent extends BaseCombat | null>
-    extends Document<TParent, CombatantSchema>,
-        fields.ModelPropsFromSchema<CombatantSchema> {
+    extends Document<TParent, CombatantSchema>, fields.ModelPropsFromSchema<CombatantSchema> {
     get documentName(): CombatantMetadata["name"];
 }
 
@@ -30,9 +29,8 @@ type CombatantSchema = {
     actorId: fields.ForeignDocumentField<string>;
     /** The _id of a Token associated with this Combatant */
     tokenId: fields.ForeignDocumentField<string>;
-    /** A customized name which replaces the name of the Token in the tracker */
     sceneId: fields.ForeignDocumentField<string>;
-    /** A customized image which replaces the Token image in the tracker */
+    /** A customized name which replaces the name of the Token in the tracker */
     name: fields.StringField<string, string, false, false, true>;
     /** A customized image which replaces the Token image in the tracker */
     img: fields.FilePathField<ImageFilePath>;

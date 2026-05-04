@@ -25,6 +25,7 @@ import {
 import { DocumentUUID } from "@client/utils/helpers.mjs";
 import { DatabaseCreateOperation } from "@common/abstract/_types.mjs";
 import Document from "@common/abstract/document.mjs";
+import { ProseMirrorDropDownConfig } from "@common/prosemirror/_types.mjs";
 import type ApplicationV2 from "../applications/api/application.mjs";
 import type TokenHUD from "../applications/hud/token-hud.mjs";
 import { ChatLog, CompendiumDirectory, ItemDirectory, Settings } from "../applications/sidebar/tabs/_module.mjs";
@@ -54,6 +55,7 @@ type HookParamsGetChatLogEntryContext = HookParameters<"getChatLogEntryContext",
 type HookParamsGetSceneControlButtons = HookParameters<"getSceneControlButtons", [Record<string, SceneControl>]>;
 type HookParamsHotbarDrop = HookParameters<"hotbarDrop", [Hotbar<Macro>, DropCanvasData, string]>;
 type HookParamsLightingRefresh = HookParameters<"lightingRefresh", [LightingLayer]>;
+type HookParamsOpenDetachedWindow = HookParameters<"openDetachedWindow", [string, Window]>;
 type HookParamsPreCreateItem = HookParameters<
     "preCreateItem",
     [PreCreate<foundry.documents.ItemSource>, DatabaseCreateOperation<Actor | null>, string]
@@ -113,6 +115,7 @@ export default class Hooks {
     static on(...args: HookParamsGetSceneControlButtons): number;
     static on(...args: HookParamsHotbarDrop): number;
     static on(...args: HookParamsLightingRefresh): number;
+    static on(...args: HookParamsOpenDetachedWindow): number;
     static on(...args: HookParamsPreCreateItem): number;
     static on(...args: HooksParamsPreUpdateCombat): number;
     static on(...args: HookParamsPreUpdateToken): number;
@@ -196,7 +199,6 @@ export default class Hooks {
      * @param hook  The unique name of the hooked event
      * @param fn    The function, or ID number for the function, that should be turned off
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static off(hook: string, fn: ((...args: any[]) => boolean | void | Promise<boolean | void>) | number): void;
 
     /**

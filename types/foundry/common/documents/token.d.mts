@@ -1,10 +1,18 @@
-import { ElevatedPoint, TokenDimensions, TokenPosition } from "@common/_types.mjs";
+import { TerrainData } from "@client/data/terrain-data.mjs";
+import { ElevatedPoint } from "@common/_types.mjs";
 import Document, { DocumentMetadata } from "@common/abstract/document.mjs";
-import { ImageFilePath, TokenDisplayMode, TokenDisposition, VideoFilePath } from "@common/constants.mjs";
+import {
+    ImageFilePath,
+    TokenDisplayMode,
+    TokenDisposition,
+    TokenShapeType,
+    VideoFilePath,
+} from "@common/constants.mjs";
 import { GridOffset3D } from "@common/grid/_types.mjs";
 import * as data from "../data/data.mjs";
 import * as fields from "../data/fields.mjs";
 import { BaseActorDelta, BaseScene } from "./_module.mjs";
+import { TokenDimensions, TokenPosition } from "./_types.mjs";
 
 /**
  * The Token document model.
@@ -71,8 +79,7 @@ export default class BaseToken<TParent extends BaseScene | null = BaseScene | nu
 }
 
 export default interface BaseToken<TParent extends BaseScene | null = BaseScene | null>
-    extends Document<TParent, TokenSchema>,
-        fields.ModelPropsFromSchema<TokenSchema> {
+    extends Document<TParent, TokenSchema>, fields.ModelPropsFromSchema<TokenSchema> {
     delta: BaseActorDelta<this> | null;
     light: data.LightData<this>;
 }
@@ -103,32 +110,28 @@ type TokenSchema = {
      * The ActorDelta embedded document which stores the differences between this token and the base actor it
      * represents.
      */
-    // delta: ActorDeltaField;
-    appendNumber: fields.BooleanField;
-    prependAdjective: fields.BooleanField;
+    delta: ActorDeltaField;
+    /** The x-coordinate of the top-left corner of the Token */
+    x: fields.NumberField<number, number, true, false, true>;
+    /** The y-coordinate of the top-left corner of the Token */
+    y: fields.NumberField<number, number, true, false, true>;
+    /** The vertical elevation of the Token, in distance units */
+    elevation: fields.NumberField<number, number, true, false, true>;
     /** The width of the Token in grid units */
-    width: fields.NumberField<number, number, true, false>;
+    width: fields.NumberField<number, number, true, false, true>;
     /** The height of the Token in grid units */
-    height: fields.NumberField<number, number, true, false>;
+    height: fields.NumberField<number, number, true, false, true>;
+    depth: fields.NumberField<number, number, true, false, true>;
+    shape: fields.NumberField<TokenShapeType, TokenShapeType, false, true, true>;
+    level: fields.DocumentIdField<string, true, false, true>;
     /** The token's texture on the canvas. */
     texture: data.TextureData;
-    hexagonalShape: fields.NumberField;
-    /** The x-coordinate of the top-left corner of the Token */
-    x: fields.NumberField<number, number, true, false>;
-    /** The y-coordinate of the top-left corner of the Token */
-    y: fields.NumberField<number, number, true, false>;
-    /** The vertical elevation of the Token, in distance units */
-    elevation: fields.NumberField<number, number, true, false>;
     sort: fields.NumberField<number, number, true, false, true>;
     locked: fields.BooleanField;
     /** Prevent the Token image from visually rotating? */
     lockRotation: fields.BooleanField;
     /** The rotation of the Token in degrees, from 0 to 360. A value of 0 represents a southward-facing Token. */
     rotation: fields.AngleField;
-    /** An array of effect icon paths which are displayed on the Token */
-    effects: fields.ArrayField<
-        fields.FilePathField<ImageFilePath | VideoFilePath, ImageFilePath | VideoFilePath, true, false>
-    >;
     /** The opacity of the token image */
     alpha: fields.AlphaField;
     /** Is the Token currently hidden from player view? */
@@ -171,10 +174,8 @@ type TokenSchema = {
         contrast: fields.NumberField<number, number, true, false>;
     }>;
     /** An array of detection modes which are available to this Token */
-    detectionModes: fields.ArrayField<
+    detectionModes: fields.TypedObjectField<
         fields.SchemaField<{
-            /** The id of the detection mode, a key from CONFIG.Canvas.detectionModes */
-            id: fields.StringField<string>;
             /** Whether or not this detection mode is presently enabled */
             enabled: fields.BooleanField;
             /** The maximum range in distance units at which this mode can detect targets */
@@ -203,19 +204,39 @@ type TokenSchema = {
         disposition: fields.BooleanField;
     }>;
     movementAction: fields.StringField<string, string, true, true, true>;
-
+    /** @internal */
+    _movementHistory: fields.ArrayField<
+        fields.SchemaField<{
+            x: fields.NumberField<number, number, true, false, true>;
+            y: fields.NumberField<number, number, true, false, true>;
+            elevation: fields.NumberField<number, number, true, false, true>;
+            width: fields.NumberField<number, number, true, false, true>;
+            height: fields.NumberField<number, number, true, false, true>;
+            depth: fields.NumberField<number, number, true, false, true>;
+            shape: fields.NumberField<TokenShapeType, TokenShapeType, false, true, true>;
+            action: fields.StringField<string, string, true, false, false>;
+            terrain: fields.EmbeddedDataField<TerrainData, true, true, false>;
+            snapped: fields.BooleanField<boolean, boolean, true, false, false>;
+            explicit: fields.BooleanField<boolean, boolean, true, false, false>;
+            checkpoint: fields.BooleanField<boolean, boolean, true, false, false>;
+            intermediate: fields.BooleanField<boolean, boolean, true, false, false>;
+            userId: fields.ForeignDocumentField<string, true, true, false>;
+            subpathId: fields.StringField<string, string, true, false, false>;
+            cost: fields.NumberField<number, number, true, true, false>;
+        }>
+    >;
+    /** @internal */
+    _regions: fields.ArrayField<fields.ForeignDocumentField<string>>;
     /** An object of optional key/value flags */
     flags: fields.DocumentFlagsField;
 };
 
 export type TokenSource = fields.SourceFromSchema<TokenSchema>;
 
-export class ActorDeltaField<
-    TDocument extends BaseActorDelta<BaseToken> = BaseActorDelta<BaseToken>,
-> extends fields.EmbeddedDocumentField<TDocument> {
+export class ActorDeltaField extends fields.EmbeddedDocumentField<Document> {
     override initialize(
-        value: fields.MaybeSchemaProp<TDocument["_source"], true, true, true>,
-        model?: TDocument | null,
-        options?: object,
-    ): fields.MaybeSchemaProp<TDocument, true, true, true>;
+        value: fields.MaybeSchemaProp<object, true, true, true>,
+        model?: Document,
+        options?: Record<string, unknown>,
+    ): fields.MaybeSchemaProp<BaseActorDelta<BaseToken>, true, true, true>;
 }

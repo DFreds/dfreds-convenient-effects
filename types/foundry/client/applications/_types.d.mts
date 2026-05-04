@@ -112,9 +112,7 @@ export interface ApplicationHeaderControlsEntry {
     /** The action name triggered by clicking the control button */
     action: string;
     /** Is the control button visible for the current client? */
-    visible: boolean | (() => boolean);
-    /** A custom click handler function. Asynchronous functions are not awaited. */
-    onClick?: (event: PointerEvent) => void | Promise<void>;
+    visible: boolean;
 }
 
 export interface ApplicationConstructorParams {
@@ -197,12 +195,12 @@ export interface FormNode {
 }
 
 export interface FormFooterButton {
-    type: string;
+    type: "button" | "reset" | "submit";
     name?: string;
     icon?: string;
     label?: string;
+    tooltip?: string;
     action?: string;
     cssClass?: string;
-    /** @default false */
     disabled?: boolean;
 }

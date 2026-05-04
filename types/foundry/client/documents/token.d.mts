@@ -1,6 +1,6 @@
 import { TokenAnimationOptions, TokenConstrainMovementPathOptions } from "@client/_module.mjs";
 import TokenConfig from "@client/applications/sheets/token/token-config.mjs";
-import { DocumentConstructionContext, ElevatedPoint, TokenDimensions, TokenPosition } from "@common/_types.mjs";
+import { DocumentConstructionContext, ElevatedPoint } from "@common/_types.mjs";
 import {
     DatabaseCreateCallbackOptions,
     DatabaseCreateOperation,
@@ -14,11 +14,13 @@ import {
 import Document from "@common/abstract/document.mjs";
 import { ImageFilePath } from "@common/constants.mjs";
 import { SchemaField } from "@common/data/fields.mjs";
+import { TokenDimensions, TokenPosition } from "@common/documents/_types.mjs";
 import { GridMeasurePathResult } from "@common/grid/_types.mjs";
 import Collection from "@common/utils/collection.mjs";
 import Token, { TokenResourceData } from "../canvas/placeables/token.mjs";
 import {
     Actor,
+    ActorDelta,
     BaseToken,
     BaseUser,
     Combat,
@@ -43,6 +45,7 @@ import {
     User,
 } from "./_module.mjs";
 import { CanvasDocument, CanvasDocumentStatic } from "./abstract/canvas-document.mjs";
+import Level from "./level.mjs";
 
 interface CanvasBaseTokenStatic extends Omit<typeof BaseToken, "new">, CanvasDocumentStatic {}
 
@@ -54,15 +57,36 @@ interface CanvasBaseToken<TParent extends Scene | null> extends InstanceType<typ
 
 export default class TokenDocument<TParent extends Scene | null = Scene | null> extends CanvasBaseToken<TParent> {
     /**
+     * A semantically-intuitive alias of {@link TokenDocument#parent}
+     */
+    get scene(): TParent;
+
+    /**
      * The current movement data of this Token document.
      */
     get movement(): DeepReadonly<TokenMovementData>;
+
+    /** @internal */
+    _movement: TokenMovementData;
 
     /**
      * The movement continuation state of this Token document.
      * @internal
      */
     _movementContinuation: TokenMovementContinuationData;
+
+    /**
+     * The movement promises with their resolvers.
+     * @internal
+     */
+    _returnedMovementPromises: Map<string, Promise<boolean>>;
+
+    /* -------------------------------------------- */
+
+    /**
+     * The attachments of this Token.
+     */
+    readonly attachments: { readonly regions: ReadonlySet<RegionDocument<NonNullable<TParent>>> };
 
     /* -------------------------------------------- */
     /*  Properties                                  */
@@ -72,9 +96,6 @@ export default class TokenDocument<TParent extends Scene | null = Scene | null> 
      * A singleton collection which holds a reference to the synthetic token actor by its base actor's ID.
      */
     actors: Collection<string, Actor>;
-
-    /** The Regions this Token is currently in. */
-    regions: Set<RegionDocument<NonNullable<TParent>>>;
 
     /**
      * A reference to the Actor this Token modifies.
@@ -92,6 +113,23 @@ export default class TokenDocument<TParent extends Scene | null = Scene | null> 
      * An indicator for whether the current User has full control over this Token document.
      */
     get isOwner(): boolean;
+
+    /**
+     * Test whether this TokenDocument would produce an ActorDelta if materialized.
+     */
+    get isLazyDelta(): boolean;
+
+    /**
+     * Force construction of the ActorDelta for this unlinked TokenDocument, bypassing the initialization guard.
+     * @internal
+     */
+    _forceDeltaActor(): Actor<this> | null;
+
+    /**
+     * A workflow which occurs when the ActorDelta for an unlinked TokenDocument is materialized for the first time.
+     * At the point this method is called, the delta property has transitioned from a lazy getter to a concrete value.
+     */
+    protected _onDeltaMaterialized(): void;
 
     /**
      * A convenient reference for whether this TokenDocument is linked to the Actor it represents, or is a synthetic copy
@@ -124,9 +162,14 @@ export default class TokenDocument<TParent extends Scene | null = Scene | null> 
      */
     get hasDistinctSubjectTexture(): boolean;
 
+    /** The Regions this Token is currently in. */
+    regions: Set<RegionDocument<NonNullable<TParent>>>;
+
     /* -------------------------------------------- */
     /*  Methods                                     */
     /* -------------------------------------------- */
+
+    override includedInLevel(level: string | Level): boolean;
 
     protected override _initializeSource(
         data: object,
@@ -134,6 +177,8 @@ export default class TokenDocument<TParent extends Scene | null = Scene | null> 
     ): this["_source"];
 
     protected override _initialize(options?: Record<string, unknown>): void;
+
+    override prepareData(): void;
 
     override prepareBaseData(): void;
 
@@ -151,6 +196,11 @@ export default class TokenDocument<TParent extends Scene | null = Scene | null> 
      * The default implementation returns `CONFIG.Token.movement.defaultAction`.
      */
     protected _inferMovementAction(): string;
+
+    /**
+     * Extend data in attribute-bar properties.
+     */
+    protected _prepareBars(): void;
 
     /**
      * Prepare detection modes which are available to the Token.
@@ -609,6 +659,30 @@ export default class TokenDocument<TParent extends Scene | null = Scene | null> 
         options?: Partial<DatabaseOperation<Document | null>>,
     ): void;
 
+    /**
+     * Refresh this TokenDocument's overrides and transmit changes, if any, to its PlaceableObject for rendering.
+     * @param phase The application phase under which changes are to be applied
+     */
+    applyActiveEffects(phase: string): void;
+
+    /**
+     * Send emulated update data to the Token PlaceableObject
+     * @param priorOverrides Overrides prior to data reinitialization
+     */
+    protected _renderActiveEffectChanges(priorOverrides: object): void;
+
+    /**
+     * Callback invoked when {@link _onRelatedUpdate} detects overrides of at least one Token dimension. Enacting such
+     * changes requires a server update and may involve nuances particular to a given system. While this method is async,
+     * it is not awaited by the caller.
+     */
+    protected _onOverrideSize(changes: Partial<TokenDimensions>): Promise<void>;
+
+    /**
+     * Get replacement data for ActiveEffect change application to this Token.
+     */
+    protected _getReplacementData(): object;
+
     /** Get an Array of attribute choices which could be tracked for Actors in the Combat Tracker */
     static getTrackedAttributes(data?: object, _path?: string[]): TrackedAttributesDescription;
 
@@ -642,6 +716,8 @@ export default interface TokenDocument<TParent extends Scene | null = Scene | nu
     get sheet(): TokenConfig;
     get uuid(): TokenDocumentUUID;
 
+    delta: ActorDelta<this> | null;
+
     update(
         data: Record<string, unknown>,
         operation?: Partial<TokenUpdateOperation<TParent>>,
@@ -663,7 +739,9 @@ export interface TokenUpdateOperation<TParent extends Scene | null> extends Data
     animation?: TokenAnimationOptions;
 }
 
-export interface TokenUpdateCallbackOptions
-    extends Omit<TokenUpdateOperation<null>, "action" | "pack" | "parent" | "restoreDelta" | "noHook" | "updates"> {}
+export interface TokenUpdateCallbackOptions extends Omit<
+    TokenUpdateOperation<null>,
+    "action" | "pack" | "parent" | "restoreDelta" | "noHook" | "updates"
+> {}
 
 export {};

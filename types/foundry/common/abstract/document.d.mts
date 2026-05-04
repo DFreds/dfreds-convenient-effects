@@ -2,7 +2,7 @@ import { DocumentUUID } from "@client/utils/helpers.mjs";
 import { DocumentConstructionContext } from "@common/_types.mjs";
 import {
     DocumentOwnershipLevel,
-    DocumentOwnershipString,
+    DocumentOwnershipNumber,
     UserAction,
     UserPermission,
     UserRoleName,
@@ -104,12 +104,6 @@ export default abstract class Document<
     /** A Universally Unique Identifier (uuid) for this Document instance. */
     get uuid(): DocumentUUID | null;
 
-    /**
-     * A boolean indicator for whether the current game User has ownership rights for this Document.
-     * Different Document types may have more specialized rules for what constitutes ownership.
-     */
-    get isOwner(): boolean;
-
     /* ---------------------------------------- */
     /*  Model Permissions                       */
     /* ---------------------------------------- */
@@ -134,7 +128,7 @@ export default abstract class Document<
      * @param user The User being tested
      * @returns A numeric permission level from CONST.DOCUMENT_OWNERSHIP_LEVELS
      */
-    getUserLevel(user: BaseUser): DocumentOwnershipLevel;
+    getUserLevel(user: BaseUser): DocumentOwnershipNumber;
 
     /**
      * Test whether a certain User has a requested permission level (or greater) over the Document
@@ -144,11 +138,7 @@ export default abstract class Document<
      * @param [options.exact=false] Require the exact permission level requested?
      * @return Does the user have this permission level over the Document?
      */
-    testUserPermission(
-        user: BaseUser,
-        permission: DocumentOwnershipString | DocumentOwnershipLevel,
-        { exact }?: { exact?: boolean },
-    ): boolean;
+    testUserPermission(user: BaseUser, permission: DocumentOwnershipLevel, { exact }?: { exact?: boolean }): boolean;
 
     /**
      * Test whether a given User has permission to perform some action on this Document
@@ -213,7 +203,6 @@ export default abstract class Document<
      * @param user The User being tested
      * @returns A numeric permission level from CONST.DOCUMENT_OWNERSHIP_LEVELS or null
      */
-    getUserLevel(user: BaseUser): DocumentOwnershipLevel | null;
 
     /* -------------------------------------------- */
     /*  Database Operations                         */
@@ -753,7 +742,6 @@ declare global {
     interface DocumentCloneContext extends Omit<DocumentConstructionContext<null>, "parent"> {
         save?: boolean;
         keepId?: boolean;
-        addSource?: boolean;
     }
 
     interface DocumentSourceUpdateContext extends Omit<DatabaseUpdateOperation<null>, "parent"> {
