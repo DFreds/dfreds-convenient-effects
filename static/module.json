@@ -4,9 +4,9 @@
     "description": "Adds easy to use toggleable active effects for common use cases",
     "version": "7.0.0",
     "compatibility": {
-        "minimum": 13,
-        "verified": 13,
-        "maximum": 13
+        "minimum": 14,
+        "verified": 14,
+        "maximum": 14
     },
     "esmodules": ["dfreds-convenient-effects.mjs"],
     "scripts": [],
@@ -24,14 +24,14 @@
                 "id": "lib-dfreds-ui-extender",
                 "type": "module",
                 "compatibility": {
-                    "verified": "2.2.0"
+                    "verified": "2.3.0"
                 }
             },
             {
                 "id": "lib-dfreds-migrations",
                 "type": "module",
                 "compatibility": {
-                    "verified": "1.0.2"
+                    "verified": "1.0.3"
                 }
             }
         ]
