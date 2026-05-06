@@ -8,7 +8,6 @@ import {
     optionalSave,
     optionalSkill,
 } from "../changes/midi-qol.ts";
-import { atlLight } from "../changes/atl.ts";
 import { attackBonus, damageBonus } from "../changes/bonuses.ts";
 import { addDamageResistance } from "../changes/traits.ts";
 import { invisible } from "./conditions.ts";
@@ -19,6 +18,7 @@ import { notEmpty } from "../../../utils/types.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { abilityCheckMode, abilitySaveMode } from "../changes/abilities.ts";
+import { tokenLight, tokenLightAnimationAttribute, tokenLightAnimationType } from "../changes/token.ts";
 
 function classFeatures(): ItemEffects {
     return {
@@ -233,25 +233,32 @@ function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
                     attackType: "rwak",
                     value: "+max(1, @abilities.cha.mod)",
                 }),
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "40",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "20",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.WHITE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.25",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "2",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "4",
+                }),
+                tokenLightAnimationType({
+                    type: "sunburst",
                 }),
             ],
         },

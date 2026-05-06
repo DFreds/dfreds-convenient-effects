@@ -1,8 +1,8 @@
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { ItemEffects } from "../../effect-definition.ts";
-import { atlLight } from "../changes/atl.ts";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
+import { tokenLight, tokenLightAnimationAttribute, tokenLightAnimationType } from "../changes/token.ts";
 
 function equipment(): ItemEffects {
     return {
@@ -31,29 +31,36 @@ function bullseyeLantern(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { value: SECONDS.IN_SIX_HOURS, units: "seconds" },
             changes: [
-                atlLight({
-                    lightType: "angle",
+                tokenLight({
+                    attribute: "angle",
                     value: "60",
                 }),
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "120",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "60",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.4",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "1",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
             ],
         },
@@ -70,25 +77,32 @@ function candle(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/candle-unlit-white.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
             changes: [
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "10",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "5",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.2",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "1",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
             ],
         },
@@ -107,25 +121,32 @@ function hoodedLantern(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { value: SECONDS.IN_SIX_HOURS, units: "seconds" },
             changes: [
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "5",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "0",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.4",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "1",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
             ],
         },
@@ -142,25 +163,32 @@ function lantern(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/lantern-iron-yellow.webp",
             duration: { value: SECONDS.IN_SIX_HOURS, units: "seconds" },
             changes: [
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "60",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "30",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.4",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "1",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
             ],
         },
@@ -177,25 +205,32 @@ function torch(): PreCreate<ActiveEffectSource> {
             img: "icons/sundries/lights/torch-black.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
             changes: [
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "40",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "20",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.4",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch","speed": 1,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "1",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
             ],
         },

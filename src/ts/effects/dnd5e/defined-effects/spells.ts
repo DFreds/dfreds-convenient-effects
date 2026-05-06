@@ -47,13 +47,13 @@ import {
     addDamageImmunity,
     addDamageResistance,
 } from "../changes/traits.ts";
-import { atlLight, atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 import { skillCheckBonus, skillCheckMode } from "../changes/skills.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
+import { tokenLight, tokenLightAnimationAttribute, tokenLightAnimationType, tokenSight } from "../changes/token.ts";
 
 function spells(): ItemEffects {
     return {
@@ -622,14 +622,22 @@ function darkvision(): PreCreate<ActiveEffectSource> {
                     value: "60",
                     priority: 5,
                 }),
-                atlSightRange({
+                tokenSight({
+                    attribute: "range",
                     value: "60",
                     priority: 5,
                 }),
-                atlSightVisionMode({
+                tokenSight({
+                    attribute: "visionMode",
                     value: "darkvision",
                     priority: 5,
                 }),
+                tokenSight({
+                    attribute: "saturation",
+                    value: "-1",
+                    priority: 5,
+                }),
+                // TODO not updating detectionModes yet
             ],
         },
     });
@@ -876,21 +884,28 @@ function faerieFire(): PreCreate<ActiveEffectSource> {
                 grantAdvantageAttack({
                     attackType: "all",
                 }),
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "10",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.WHITE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.25",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "pulse","speed": 1,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "1",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "pulse",
                 }),
                 tokenMagic({
                     value: "glow",
@@ -984,25 +999,32 @@ function fireShieldColdResistance(): PreCreate<ActiveEffectSource> {
                 addDamageResistance({
                     damageType: "cold",
                 }),
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "20",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "10",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.25",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch", "speed": 3, "intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "3",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
                 tokenMagic({
                     value: "fire",
@@ -1027,25 +1049,32 @@ function fireShieldFireResistance(): PreCreate<ActiveEffectSource> {
                 addDamageResistance({
                     damageType: "fire",
                 }),
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "20",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "10",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.COLD_FIRE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.25",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "torch", "speed": 3, "intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "3",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "flame",
                 }),
                 tokenMagic({
                     value: "Fire v2 (coldfire)",
@@ -1398,21 +1427,28 @@ function holyAura(): PreCreate<ActiveEffectSource> {
                 grantDisadvantageAttack({
                     attackType: "all",
                 }),
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "5",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.WHITE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.25",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "sunburst", "speed": 2,"intensity": 4}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "2",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "4",
+                }),
+                tokenLightAnimationType({
+                    type: "sunburst",
                 }),
             ],
         },
@@ -1502,25 +1538,32 @@ function light(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
             changes: [
-                atlLight({
-                    lightType: "dim",
+                tokenLight({
+                    attribute: "dim",
                     value: "40",
                 }),
-                atlLight({
-                    lightType: "bright",
+                tokenLight({
+                    attribute: "bright",
                     value: "20",
                 }),
-                atlLight({
-                    lightType: "color",
+                tokenLight({
+                    attribute: "color",
                     value: COLORS.WHITE,
                 }),
-                atlLight({
-                    lightType: "alpha",
+                tokenLight({
+                    attribute: "alpha",
                     value: "0.25",
                 }),
-                atlLight({
-                    lightType: "animation",
-                    value: '{"type": "pulse", "speed": 3,"intensity": 1}',
+                tokenLightAnimationAttribute({
+                    attribute: "speed",
+                    value: "3",
+                }),
+                tokenLightAnimationAttribute({
+                    attribute: "intensity",
+                    value: "1",
+                }),
+                tokenLightAnimationType({
+                    type: "pulse",
                 }),
             ],
         },

@@ -27,7 +27,6 @@ import {
     upgradeMovement,
     upgradeTrueSight,
 } from "../changes/attributes.ts";
-import { atlSightRange, atlSightVisionMode } from "../changes/atl.ts";
 import {
     grantDisadvantageAttack,
     magicResistanceSaves,
@@ -37,6 +36,7 @@ import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
 import { skillCheckMode } from "../changes/skills.ts";
+import { tokenSight } from "../changes/token.ts";
 
 function magicItems(): ItemEffects {
     return {
@@ -139,14 +139,22 @@ function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
                     value: "60",
                     priority: 5,
                 }),
-                atlSightRange({
+                tokenSight({
+                    attribute: "range",
                     value: "60",
                     priority: 5,
                 }),
-                atlSightVisionMode({
+                tokenSight({
+                    attribute: "visionMode",
                     value: "darkvision",
                     priority: 5,
                 }),
+                tokenSight({
+                    attribute: "saturation",
+                    value: "-1",
+                    priority: 5,
+                }),
+                // TODO not updating detectionModes yet
                 addLanguage({
                     language: "dwarvish",
                 }),
