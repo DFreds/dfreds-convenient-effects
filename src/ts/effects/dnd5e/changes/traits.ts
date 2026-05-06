@@ -50,6 +50,7 @@ function addDamageResistance({
         | "force"
         | "lightning"
         | "necrotic"
+        | "physical"
         | "piercing"
         | "poison"
         | "psychic"
@@ -112,6 +113,18 @@ function addAllLanguages(): Partial<EffectChangeData> {
     };
 }
 
+function addSize({
+    value,
+}: {
+    value: string;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.size",
+        type: "override",
+        value,
+    };
+}
+
 export {
     addConditionImmunity,
     addAllDamageImmunity,
@@ -122,4 +135,5 @@ export {
     addWeaponProficiency,
     addAllLanguages,
     addAllDamageVulnerability,
+    addSize,
 };

@@ -2,6 +2,8 @@ import { ActiveEffectSource, BaseItem } from "@client/documents/_module.mjs";
 import { DynamicEffectsHandler } from "../dynamic-effects-handler.ts";
 import { getApi } from "../../utils/gets.ts";
 import { SECONDS, SIZES_ORDERED } from "../../constants.ts";
+import { addDamageResistance, addSize } from "./changes/traits.ts";
+import { tokenTexture } from "./changes/token.ts";
 
 class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     override systemId: string = "dnd5e";
@@ -153,26 +155,14 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     ) {
         const size = SIZES_ORDERED[sizeIndex];
         const actorSizeObject = (CONFIG as any).DND5E.actorSizes[size];
-        const tokenSize = actorSizeObject.token ?? 1;
+        const tokenSize = actorSizeObject.token ?? actorSizeObject.dynamicTokenScale ?? 1;
 
         effect.changes = effect.changes ?? [];
 
         effect.changes.push(
-            {
-                key: "system.traits.size",
-                type: "override",
-                value: size,
-            },
-            {
-                key: "ATL.width",
-                type: "override",
-                value: tokenSize,
-            },
-            {
-                key: "ATL.height",
-                type: "override",
-                value: tokenSize,
-            },
+            addSize({ value: size }),
+            tokenTexture({ attribute: "scaleX", value: tokenSize }),
+            tokenTexture({ attribute: "scaleY", value: tokenSize }),
         );
     }
 
@@ -204,65 +194,25 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             (item) =>
                 item.type === "feat" &&
                 item.name ===
-                    game.i18n.localize(
-                        "ConvenientEffects.Dnd.Rage.bearTotemFeat",
-                    ),
+                game.i18n.localize(
+                    "ConvenientEffects.Dnd.Rage.bearTotemFeat",
+                ),
         );
 
         if (isTotemWarrior && hasBearTotemSpirit) {
             effect.changes = effect.changes ?? [];
             effect.changes.push(
                 ...[
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "acid",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "cold",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "fire",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "force",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "lightning",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "necrotic",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "poison",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "physical",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "radiant",
-                    },
-                    {
-                        key: "system.traits.dr.value",
-                        type: "add",
-                        value: "thunder",
-                    },
+                    addDamageResistance({ damageType: "acid" }),
+                    addDamageResistance({ damageType: "cold" }),
+                    addDamageResistance({ damageType: "fire" }),
+                    addDamageResistance({ damageType: "force" }),
+                    addDamageResistance({ damageType: "lightning" }),
+                    addDamageResistance({ damageType: "necrotic" }),
+                    addDamageResistance({ damageType: "poison" }),
+                    addDamageResistance({ damageType: "physical" }),
+                    addDamageResistance({ damageType: "radiant" }),
+                    addDamageResistance({ damageType: "thunder" }),
                 ],
             );
         }
