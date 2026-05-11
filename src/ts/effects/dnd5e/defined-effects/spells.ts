@@ -453,7 +453,7 @@ function command(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.Command.description",
             ),
             img: "icons/magic/fire/explosion-fireball-small-purple.webp",
-            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "turns" },
+            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
         },
     });
 }
@@ -1264,7 +1264,7 @@ function guidingBolt(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.GuidingBolt.description",
             ),
             img: "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
-            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "turns" },
+            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["isAttacked"] } },
             changes: [
                 grantAdvantageAttack({
@@ -1854,7 +1854,7 @@ function rayOfFrost(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.RayOfFrost.description",
             ),
             img: "icons/magic/light/beam-rays-blue-small.webp",
-            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "turns" },
+            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             changes: [
                 movement({
                     movementType: "all",
@@ -1941,7 +1941,7 @@ function shield(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.Shield.description",
             ),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
-            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "turns" },
+            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["turnStart"] } },
             changes: [
                 acBonus({
@@ -2162,7 +2162,7 @@ function trueStrike(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.TrueStrike.description",
             ),
             img: "icons/magic/fire/dagger-rune-enchant-blue-gray.webp",
-            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "turns" },
+            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["1Attack"] } },
             changes: [
                 advantageAttack({
@@ -2183,7 +2183,7 @@ function viciousMockery(): PreCreate<ActiveEffectSource> {
                 "ConvenientEffects.Dnd.ViciousMockery.description",
             ),
             img: "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
-            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "turns" },
+            duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["1Attack"] } },
             changes: [
                 disadvantageAttack({
