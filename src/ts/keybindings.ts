@@ -11,63 +11,49 @@ class Keybindings {
     }
 
     #registerToggleConvenientEffectsApp(): void {
-        game.keybindings.register(
-            MODULE_ID,
-            this.#TOGGLE_CONVENIENT_EFFECTS_APP,
-            {
-                name: "ConvenientEffects.Keybinding.ToggleAppName",
-                hint: "ConvenientEffects.Keybinding.ToggleAppHint",
-                onDown: async () => {
-                    const applications = foundry.applications.instances;
+        game.keybindings.register(MODULE_ID, this.#TOGGLE_CONVENIENT_EFFECTS_APP, {
+            name: "ConvenientEffects.Keybinding.ToggleAppName",
+            hint: "ConvenientEffects.Keybinding.ToggleAppHint",
+            onDown: async () => {
+                const applications = foundry.applications.instances;
 
-                    const convenientEffectsV2 = applications.get(
-                        ConvenientEffectsV2.tabName,
-                    );
+                const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName);
 
-                    if (!convenientEffectsV2) {
-                        return;
-                    }
+                if (!convenientEffectsV2) {
+                    return;
+                }
 
-                    const ceApp =
-                        convenientEffectsV2 as unknown as ConvenientEffectsV2;
-                    if (ceApp.active) {
-                        foundry.ui.sidebar.toggleExpanded();
-                    } else {
-                        ceApp.activate();
-                    }
-                },
+                const ceApp = convenientEffectsV2 as unknown as ConvenientEffectsV2;
+                if (ceApp.active) {
+                    foundry.ui.sidebar.toggleExpanded();
+                } else {
+                    ceApp.activate();
+                }
             },
-        );
+        });
     }
 
     #registerToggleConvenientEffectsAppPopout(): void {
-        game.keybindings.register(
-            MODULE_ID,
-            this.#TOGGLE_CONVENIENT_EFFECTS_APP_POPOUT,
-            {
-                name: "ConvenientEffects.Keybinding.ToggleAppPopoutName",
-                hint: "ConvenientEffects.Keybinding.ToggleAppPopoutHint",
-                onDown: async () => {
-                    const applications = foundry.applications.instances;
+        game.keybindings.register(MODULE_ID, this.#TOGGLE_CONVENIENT_EFFECTS_APP_POPOUT, {
+            name: "ConvenientEffects.Keybinding.ToggleAppPopoutName",
+            hint: "ConvenientEffects.Keybinding.ToggleAppPopoutHint",
+            onDown: async () => {
+                const applications = foundry.applications.instances;
 
-                    const convenientEffectsV2 = applications.get(
-                        ConvenientEffectsV2.tabName,
-                    );
+                const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName);
 
-                    if (!convenientEffectsV2) {
-                        return;
-                    }
+                if (!convenientEffectsV2) {
+                    return;
+                }
 
-                    const ceApp =
-                        convenientEffectsV2 as unknown as ConvenientEffectsV2;
-                    if (ceApp.popout?.rendered) {
-                        ceApp.popout.close();
-                    } else {
-                        ceApp.renderPopout();
-                    }
-                },
+                const ceApp = convenientEffectsV2 as unknown as ConvenientEffectsV2;
+                if (ceApp.popout?.rendered) {
+                    ceApp.popout.close();
+                } else {
+                    ceApp.renderPopout();
+                }
             },
-        );
+        });
     }
 }
 

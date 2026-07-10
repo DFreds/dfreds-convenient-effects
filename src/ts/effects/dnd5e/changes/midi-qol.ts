@@ -76,11 +76,7 @@ function failAbilitySave({
     };
 }
 
-function grantCriticalRange({
-    range,
-}: {
-    range: string;
-}): Partial<EffectChangeData> {
+function grantCriticalRange({ range }: { range: string }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.critical.range`,
         type: "override",
@@ -88,11 +84,7 @@ function grantCriticalRange({
     };
 }
 
-function grantFailAttack({
-    attackType,
-}: {
-    attackType: "all";
-}): Partial<EffectChangeData> {
+function grantFailAttack({ attackType }: { attackType: "all" }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.grants.attack.fail.${attackType}`,
         type: "custom",
@@ -100,13 +92,7 @@ function grantFailAttack({
     };
 }
 
-function optionalLabel({
-    key,
-    label,
-}: {
-    key: string;
-    label: string;
-}): Partial<EffectChangeData> {
+function optionalLabel({ key, label }: { key: string; label: string }): Partial<EffectChangeData> {
     return {
         key: `flags.midi-qol.optional.${key}.label`,
         type: "override",

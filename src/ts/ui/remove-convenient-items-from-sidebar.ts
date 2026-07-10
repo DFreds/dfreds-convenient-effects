@@ -1,15 +1,9 @@
 import { ItemDirectory } from "@client/applications/sidebar/tabs/_module.mjs";
 import { findFolders } from "../utils/finds.ts";
 
-function removeConvenientItemsFromSidebar(
-    directory: ItemDirectory<Item<null>>,
-): void {
-    const nonBackupFolders = findFolders({ backup: false }).map(
-        (folder) => folder.id,
-    );
-    const backupFolderIds = findFolders({ backup: true }).map(
-        (folder) => folder.id,
-    );
+function removeConvenientItemsFromSidebar(directory: ItemDirectory<Item<null>>): void {
+    const nonBackupFolders = findFolders({ backup: false }).map((folder) => folder.id);
+    const backupFolderIds = findFolders({ backup: true }).map((folder) => folder.id);
 
     const folderIds = [...nonBackupFolders, ...backupFolderIds];
 

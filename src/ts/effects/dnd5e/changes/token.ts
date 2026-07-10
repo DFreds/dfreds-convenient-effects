@@ -38,7 +38,30 @@ function tokenLightAnimationType({
     type,
     priority,
 }: {
-    type: "flame" | "torch" | "revolving" | "siren" | "pulse" | "reactivepulse" | "chroma" | "wave" | "fog" | "sunburst" | "dome" | "emanation" | "hexa" | "ghost" | "energy" | "vortex" | "witchwave" | "rainbowswirl" | "radialrainbow" | "fairy" | "grid" | "starlight" | "smokepatch";
+    type:
+        | "flame"
+        | "torch"
+        | "revolving"
+        | "siren"
+        | "pulse"
+        | "reactivepulse"
+        | "chroma"
+        | "wave"
+        | "fog"
+        | "sunburst"
+        | "dome"
+        | "emanation"
+        | "hexa"
+        | "ghost"
+        | "energy"
+        | "vortex"
+        | "witchwave"
+        | "rainbowswirl"
+        | "radialrainbow"
+        | "fairy"
+        | "grid"
+        | "starlight"
+        | "smokepatch";
     priority?: number;
 }): Partial<EffectChangeData> {
     return {

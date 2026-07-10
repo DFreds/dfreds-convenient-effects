@@ -1,16 +1,6 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import {
-    addAbility,
-    downgradeAbility,
-    upgradeAbility,
-} from "../changes/abilities.ts";
-import {
-    attackBonus,
-    checkBonus,
-    damageBonus,
-    saveBonus,
-    spellDcBonus,
-} from "../changes/bonuses.ts";
+import { addAbility, downgradeAbility, upgradeAbility } from "../changes/abilities.ts";
+import { attackBonus, checkBonus, damageBonus, saveBonus, spellDcBonus } from "../changes/bonuses.ts";
 import {
     addConditionImmunity,
     addDamageImmunity,
@@ -27,10 +17,7 @@ import {
     upgradeMovement,
     upgradeTrueSight,
 } from "../changes/attributes.ts";
-import {
-    grantDisadvantageAttack,
-    magicResistanceSaves,
-} from "../changes/midi-qol.ts";
+import { grantDisadvantageAttack, magicResistanceSaves } from "../changes/midi-qol.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
@@ -41,9 +28,7 @@ import { tokenSight } from "../changes/token.ts";
 function magicItems(): ItemEffects {
     return {
         itemData: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.Folders.MagicItems",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Folders.MagicItems"),
         },
         effects: [
             amuletOfHealth(),
@@ -103,12 +88,8 @@ function magicItems(): ItemEffects {
 function amuletOfHealth(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.AmuletOfHealth.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.AmuletOfHealth.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.AmuletOfHealth.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.AmuletOfHealth.description"),
             img: "icons/equipment/neck/pendant-faceted-red.webp",
             changes: [
                 upgradeAbility({
@@ -124,12 +105,8 @@ function amuletOfHealth(): PreCreate<ActiveEffectSource> {
 function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfDwarvenkind.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfDwarvenkind.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfDwarvenkind.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfDwarvenkind.description"),
             img: "icons/equipment/waist/belt-armored-steel.webp",
             changes: [
                 addDamageResistance({
@@ -187,12 +164,8 @@ function beltOfGiantStrength(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfGiantStrength.description"),
             img: "icons/equipment/waist/belt-armored-steel.webp",
         },
         nestedEffectIds,
@@ -203,12 +176,8 @@ function beltOfGiantStrength(): PreCreate<ActiveEffectSource> {
 function beltOfHillGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfHillGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfHillGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfHillGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfHillGiantStrength.description"),
             img: "icons/equipment/waist/belt-buckle-square-leather-brown.webp",
             changes: [
                 upgradeAbility({
@@ -224,12 +193,8 @@ function beltOfHillGiantStrength(): PreCreate<ActiveEffectSource> {
 function beltOfStoneGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfStoneGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfStoneGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfStoneGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfStoneGiantStrength.description"),
             img: "icons/equipment/waist/belt-armored-steel.webp",
             changes: [
                 upgradeAbility({
@@ -245,12 +210,8 @@ function beltOfStoneGiantStrength(): PreCreate<ActiveEffectSource> {
 function beltOfFrostGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfFrostGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfFrostGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfFrostGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfFrostGiantStrength.description"),
             img: "icons/equipment/waist/cloth-sash-purple.webp",
             changes: [
                 upgradeAbility({
@@ -266,12 +227,8 @@ function beltOfFrostGiantStrength(): PreCreate<ActiveEffectSource> {
 function beltOfFireGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfFireGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfFireGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfFireGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfFireGiantStrength.description"),
             img: "icons/equipment/waist/belt-coiled-leather-steel.webp",
             changes: [
                 upgradeAbility({
@@ -287,12 +244,8 @@ function beltOfFireGiantStrength(): PreCreate<ActiveEffectSource> {
 function beltOfCloudGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfCloudGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfCloudGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfCloudGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfCloudGiantStrength.description"),
             img: "icons/equipment/waist/belt-thick-gemmed-steel-grey.webp",
             changes: [
                 upgradeAbility({
@@ -308,12 +261,8 @@ function beltOfCloudGiantStrength(): PreCreate<ActiveEffectSource> {
 function beltOfStormGiantStrength(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfStormGiantStrength.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BeltOfStormGiantStrength.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BeltOfStormGiantStrength.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BeltOfStormGiantStrength.description"),
             img: "icons/equipment/waist/sash-cloth-gold-purple.webp",
             changes: [
                 upgradeAbility({
@@ -329,12 +278,8 @@ function beltOfStormGiantStrength(): PreCreate<ActiveEffectSource> {
 function bootsOfElvenkind(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BootsOfElvenkind.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BootsOfElvenkind.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BootsOfElvenkind.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BootsOfElvenkind.description"),
             img: "icons/equipment/feet/boots-pointed-cloth-green.webp",
             changes: [skillCheckMode({ skillType: "ste", value: "1" })],
         },
@@ -345,12 +290,8 @@ function bootsOfElvenkind(): PreCreate<ActiveEffectSource> {
 function bootsOfTheWinterlands(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BootsOfTheWinterlands.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BootsOfTheWinterlands.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BootsOfTheWinterlands.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BootsOfTheWinterlands.description"),
             img: "icons/equipment/feet/boots-leather-banded-furred.webp",
             changes: [addDamageResistance({ damageType: "cold" })],
         },
@@ -361,12 +302,8 @@ function bootsOfTheWinterlands(): PreCreate<ActiveEffectSource> {
 function bracersOfArchery(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BracersOfArchery.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BracersOfArchery.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BracersOfArchery.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BracersOfArchery.description"),
             img: "icons/equipment/wrist/bracer-banded-leather.webp",
             changes: [
                 damageBonus({
@@ -388,12 +325,8 @@ function bracersOfArchery(): PreCreate<ActiveEffectSource> {
 function bracersOfDefense(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BracersOfDefense.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BracersOfDefense.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BracersOfDefense.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BracersOfDefense.description"),
             img: "icons/equipment/wrist/bracer-yellow-fancy.webp",
             changes: [
                 acBonus({
@@ -408,12 +341,8 @@ function bracersOfDefense(): PreCreate<ActiveEffectSource> {
 function broochOfShielding(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BroochOfShielding.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BroochOfShielding.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BroochOfShielding.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BroochOfShielding.description"),
             img: "icons/equipment/neck/pendant-bronze-gem-blue.webp",
             changes: [addDamageResistance({ damageType: "force" })],
         },
@@ -424,12 +353,8 @@ function broochOfShielding(): PreCreate<ActiveEffectSource> {
 function cloakOfDisplacement(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfDisplacement.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfDisplacement.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CloakOfDisplacement.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CloakOfDisplacement.description"),
             img: "icons/equipment/back/cloak-brown-accent-brown-layered-collared-fur.webp",
             changes: [grantDisadvantageAttack({ attackType: "all" })],
         },
@@ -440,12 +365,8 @@ function cloakOfDisplacement(): PreCreate<ActiveEffectSource> {
 function cloakOfElvenkind(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfElvenkind.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfElvenkind.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CloakOfElvenkind.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CloakOfElvenkind.description"),
             img: "icons/equipment/back/cloak-collared-feathers-green.webp",
             changes: [skillCheckMode({ skillType: "ste", value: "1" })],
         },
@@ -456,12 +377,8 @@ function cloakOfElvenkind(): PreCreate<ActiveEffectSource> {
 function cloakOfProtection(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfProtection.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfProtection.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CloakOfProtection.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CloakOfProtection.description"),
             img: "icons/equipment/back/cloak-heavy-fur-blue.webp",
             changes: [
                 acBonus({
@@ -479,12 +396,8 @@ function cloakOfProtection(): PreCreate<ActiveEffectSource> {
 function cloakOfTheMantaRay(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfTheMantaRay.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CloakOfTheMantaRay.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CloakOfTheMantaRay.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CloakOfTheMantaRay.description"),
             img: "icons/equipment/head/hood-cloth-teal-gold.webp",
             changes: [
                 upgradeMovement({
@@ -515,12 +428,8 @@ function ringOfResistance(): PreCreate<ActiveEffectSource> {
 
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfResistance.description"),
             img: "icons/equipment/finger/ring-faceted-silver-orange.webp",
         },
         nestedEffectIds,
@@ -531,12 +440,8 @@ function ringOfResistance(): PreCreate<ActiveEffectSource> {
 function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfAcidResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfAcidResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfAcidResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfAcidResistance.description"),
             img: "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
             changes: [
                 addDamageResistance({
@@ -551,12 +456,8 @@ function ringOfAcidResistance(): PreCreate<ActiveEffectSource> {
 function ringOfColdResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfColdResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfColdResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfColdResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfColdResistance.description"),
             img: "icons/equipment/finger/ring-faceted-silver-orange.webp",
             changes: [
                 addDamageResistance({
@@ -571,12 +472,8 @@ function ringOfColdResistance(): PreCreate<ActiveEffectSource> {
 function ringOfFireResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfFireResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfFireResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfFireResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfFireResistance.description"),
             img: "icons/equipment/finger/ring-cabochon-gold-orange.webp",
             changes: [
                 addDamageResistance({
@@ -591,12 +488,8 @@ function ringOfFireResistance(): PreCreate<ActiveEffectSource> {
 function ringOfForceResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfForceResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfForceResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfForceResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfForceResistance.description"),
             img: "icons/equipment/finger/ring-faceted-gold-purple.webp",
             changes: [
                 addDamageResistance({
@@ -611,12 +504,8 @@ function ringOfForceResistance(): PreCreate<ActiveEffectSource> {
 function ringOfLightningResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfLightningResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfLightningResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfLightningResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfLightningResistance.description"),
             img: "icons/equipment/finger/ring-cabochon-gold-orange.webp",
             changes: [
                 addDamageResistance({
@@ -631,12 +520,8 @@ function ringOfLightningResistance(): PreCreate<ActiveEffectSource> {
 function ringOfNecroticResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfNecroticResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfNecroticResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfNecroticResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfNecroticResistance.description"),
             img: "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
             changes: [
                 addDamageResistance({
@@ -651,12 +536,8 @@ function ringOfNecroticResistance(): PreCreate<ActiveEffectSource> {
 function ringOfPoisonResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfPoisonResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfPoisonResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfPoisonResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfPoisonResistance.description"),
             img: "icons/equipment/finger/ring-faceted-gold-purple.webp",
             changes: [
                 addDamageResistance({
@@ -671,12 +552,8 @@ function ringOfPoisonResistance(): PreCreate<ActiveEffectSource> {
 function ringOfPsychicResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfPsychicResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfPsychicResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfPsychicResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfPsychicResistance.description"),
             img: "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
             changes: [
                 addDamageResistance({
@@ -691,12 +568,8 @@ function ringOfPsychicResistance(): PreCreate<ActiveEffectSource> {
 function ringOfRadiantResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfRadiantResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfRadiantResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfRadiantResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfRadiantResistance.description"),
             img: "icons/equipment/finger/ring-inlay-red.webp",
             changes: [
                 addDamageResistance({
@@ -711,12 +584,8 @@ function ringOfRadiantResistance(): PreCreate<ActiveEffectSource> {
 function ringOfThunderResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfThunderResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfThunderResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfThunderResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfThunderResistance.description"),
             img: "icons/equipment/finger/ring-faceted-silver-orange.webp",
             changes: [
                 addDamageResistance({
@@ -731,12 +600,8 @@ function ringOfThunderResistance(): PreCreate<ActiveEffectSource> {
 function eyesOfTheEagle(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.EyesOfTheEagle.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.EyesOfTheEagle.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.EyesOfTheEagle.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.EyesOfTheEagle.description"),
             img: "icons/equipment/head/goggles-leather-blue.webp",
             changes: [
                 skillCheckMode({
@@ -752,12 +617,8 @@ function eyesOfTheEagle(): PreCreate<ActiveEffectSource> {
 function gauntletsOfOgrePower(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.GauntletsOfOgrePower.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.GauntletsOfOgrePower.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.GauntletsOfOgrePower.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.GauntletsOfOgrePower.description"),
             img: "icons/equipment/hand/gauntlet-armored-steel-grey.webp",
             changes: [
                 upgradeAbility({
@@ -773,12 +634,8 @@ function gauntletsOfOgrePower(): PreCreate<ActiveEffectSource> {
 function gogglesOfNight(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.GogglesOfNight.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.GogglesOfNight.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.GogglesOfNight.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.GogglesOfNight.description"),
             img: "icons/equipment/head/goggles-leather-blue.webp",
             changes: [addDarkvision({ value: "60" })],
         },
@@ -789,12 +646,8 @@ function gogglesOfNight(): PreCreate<ActiveEffectSource> {
 function headbandOfIntellect(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.HeadbandOfIntellect.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.HeadbandOfIntellect.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HeadbandOfIntellect.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.HeadbandOfIntellect.description"),
             img: "icons/equipment/finger/ring-cabochon-silver-gold-red.webp",
             changes: [
                 upgradeAbility({
@@ -811,9 +664,7 @@ function robeOfEyes(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.RobeOfEyes.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RobeOfEyes.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RobeOfEyes.description"),
             img: "icons/equipment/head/hood-red.webp",
             changes: [
                 skillCheckMode({
@@ -836,9 +687,7 @@ function robeOfStars(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.RobeOfStars.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RobeOfStars.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RobeOfStars.description"),
             img: "icons/equipment/back/cloak-plain-blue.webp",
             changes: [
                 saveBonus({
@@ -853,12 +702,8 @@ function robeOfStars(): PreCreate<ActiveEffectSource> {
 function robeOfTheArchmagi(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RobeOfTheArchmagi.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RobeOfTheArchmagi.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RobeOfTheArchmagi.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RobeOfTheArchmagi.description"),
             img: "icons/equipment/back/cloak-plain-white.webp",
             changes: [
                 acCalc({
@@ -884,12 +729,8 @@ function robeOfTheArchmagi(): PreCreate<ActiveEffectSource> {
 function mantleOfSpellResistance(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.MantleOfSpellResistance.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.MantleOfSpellResistance.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.MantleOfSpellResistance.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.MantleOfSpellResistance.description"),
             img: "icons/equipment/back/cape-layered-violet-white-swirl.webp",
             changes: [magicResistanceSaves()],
         },
@@ -900,12 +741,8 @@ function mantleOfSpellResistance(): PreCreate<ActiveEffectSource> {
 function periaptOfHealth(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.PeriaptOfHealth.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.PeriaptOfHealth.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.PeriaptOfHealth.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.PeriaptOfHealth.description"),
             img: "icons/equipment/neck/pendant-faceted-red.webp",
             changes: [
                 addConditionImmunity({
@@ -920,12 +757,8 @@ function periaptOfHealth(): PreCreate<ActiveEffectSource> {
 function periaptOfProofAgainstPoison(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.PeriaptOfProofAgainstPoison.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.PeriaptOfProofAgainstPoison.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.PeriaptOfProofAgainstPoison.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.PeriaptOfProofAgainstPoison.description"),
             img: "icons/equipment/neck/necklace-hook-brown.webp",
             changes: [
                 addConditionImmunity({
@@ -943,12 +776,8 @@ function periaptOfProofAgainstPoison(): PreCreate<ActiveEffectSource> {
 function stoneOfGoodLuck(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.StoneOfGoodLuck.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.StoneOfGoodLuck.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.StoneOfGoodLuck.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.StoneOfGoodLuck.description"),
             img: "icons/commodities/gems/gem-rough-rectangle-red.webp",
             changes: [
                 saveBonus({
@@ -966,12 +795,8 @@ function stoneOfGoodLuck(): PreCreate<ActiveEffectSource> {
 function ringOfFreeAction(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfFreeAction.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfFreeAction.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfFreeAction.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfFreeAction.description"),
             img: "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
             changes: [
                 addConditionImmunity({
@@ -989,12 +814,8 @@ function ringOfFreeAction(): PreCreate<ActiveEffectSource> {
 function ringOfSwimming(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfSwimming.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfSwimming.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RingOfSwimming.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfSwimming.description"),
             img: "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
             changes: [
                 upgradeMovement({
@@ -1011,9 +832,7 @@ function ringOfWarmth(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.RingOfWarmth.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RingOfWarmth.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RingOfWarmth.description"),
             img: "icons/equipment/finger/ring-cabochon-gold-orange.webp",
             changes: [
                 addDamageResistance({

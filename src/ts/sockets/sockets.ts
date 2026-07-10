@@ -52,15 +52,10 @@ class Sockets {
     }
 
     async emitAddEffect(message: AddEffectMessageData): Promise<Document[]> {
-        return this.#socket.executeAsGM("addEffect", message) as Promise<
-            Document[]
-        >;
+        return this.#socket.executeAsGM("addEffect", message) as Promise<Document[]>;
     }
 
-    async #onAddEffect({
-        effectData,
-        uuid,
-    }: AddEffectMessageData): Promise<Document[]> {
+    async #onAddEffect({ effectData, uuid }: AddEffectMessageData): Promise<Document[]> {
         const document = await findDocumentByUuid(uuid);
         const activeEffectsToApply = [effectData];
 
@@ -72,17 +67,11 @@ class Sockets {
             const systemDefinition = mapping.findSystemDefinitionForSystemId();
 
             if (document instanceof Actor) {
-                await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(
-                    effectData,
-                    document,
-                );
+                await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(effectData, document);
             }
         }
 
-        const createdEffects = await document.createEmbeddedDocuments(
-            "ActiveEffect",
-            activeEffectsToApply,
-        );
+        const createdEffects = await document.createEmbeddedDocuments("ActiveEffect", activeEffectsToApply);
 
         const subEffectIds = Flags.getSubEffectIds(effectData);
         if (subEffectIds && subEffectIds.length > 0) {
@@ -107,63 +96,41 @@ class Sockets {
             }
         }
 
-        log(
-            `Added effect ${effectData.name} to ${document.name} - ${document.id}`,
-        );
+        log(`Added effect ${effectData.name} to ${document.name} - ${document.id}`);
 
         return createdEffects;
     }
 
     async emitRemoveEffect(message: RemoveEffectMessageData): Promise<void> {
-        return this.#socket.executeAsGM(
-            "removeEffect",
-            message,
-        ) as Promise<void>;
+        return this.#socket.executeAsGM("removeEffect", message) as Promise<void>;
     }
 
-    async #onRemoveEffect({
-        effectId,
-        effectName,
-        uuid,
-        origin,
-    }: RemoveEffectMessageData): Promise<void> {
+    async #onRemoveEffect({ effectId, effectName, uuid, origin }: RemoveEffectMessageData): Promise<void> {
         const document = await findDocumentByUuid(uuid);
 
         if (!document) return; // This should already be checked for before the socket
 
-        const effectToRemove = (document.effects as any).find(
-            (activeEffect: ActiveEffect<any>) => {
-                const isConvenient = Flags.isConvenient(activeEffect);
-                const isMatchingId = activeEffect.id === effectId;
-                const isMatchingName = activeEffect.name === effectName;
-                const isMatchingCeId =
-                    Flags.getCeEffectId(activeEffect) === effectId;
+        const effectToRemove = (document.effects as any).find((activeEffect: ActiveEffect<any>) => {
+            const isConvenient = Flags.isConvenient(activeEffect);
+            const isMatchingId = activeEffect.id === effectId;
+            const isMatchingName = activeEffect.name === effectName;
+            const isMatchingCeId = Flags.getCeEffectId(activeEffect) === effectId;
 
-                const isStackable = isStackableDae({
-                    effectName,
-                    effect: activeEffect,
-                });
+            const isStackable = isStackableDae({
+                effectName,
+                effect: activeEffect,
+            });
 
-                const matches =
-                    isConvenient &&
-                    (isMatchingId ||
-                        isMatchingName ||
-                        isMatchingCeId ||
-                        isStackable);
+            const matches = isConvenient && (isMatchingId || isMatchingName || isMatchingCeId || isStackable);
 
-                return origin
-                    ? matches && activeEffect.origin === origin
-                    : matches;
-            },
-        );
+            return origin ? matches && activeEffect.origin === origin : matches;
+        });
 
         if (!effectToRemove) return;
 
         await effectToRemove.delete();
 
-        log(
-            `Removed effect ${effectToRemove.name} from ${document.name} - ${document.id}`,
-        );
+        log(`Removed effect ${effectToRemove.name} from ${document.name} - ${document.id}`);
     }
 }
 

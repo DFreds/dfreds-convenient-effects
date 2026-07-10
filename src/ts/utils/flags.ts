@@ -1,8 +1,4 @@
-import {
-    ActiveEffectSource,
-    BaseActiveEffect,
-    ItemSource,
-} from "@client/documents/_module.mjs";
+import { ActiveEffectSource, BaseActiveEffect, ItemSource } from "@client/documents/_module.mjs";
 import { MODULE_ID, MODULE_IDS, SE_MODULE_ID } from "../constants.ts";
 
 class Flags {
@@ -26,103 +22,64 @@ class Flags {
     };
 
     static getCeEffectId(
-        effect:
-            | ActiveEffect<any>
-            | BaseActiveEffect<any>
-            | PreCreate<ActiveEffectSource>,
+        effect: ActiveEffect<any> | BaseActiveEffect<any> | PreCreate<ActiveEffectSource>,
     ): string | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as string | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`) as
                 | string
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`,
-            ) as string | undefined;
         }
     }
 
     static setCeEffectId(effect: object, ceEffectId: string): boolean {
-        return foundry.utils.setProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`,
-            ceEffectId,
-        );
+        return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`, ceEffectId);
     }
 
-    static isBackup(
-        document: ActiveEffect<any> | Item<null> | object,
-    ): boolean | undefined {
+    static isBackup(document: ActiveEffect<any> | Item<null> | object): boolean | undefined {
         if (document instanceof ActiveEffect || document instanceof Item) {
-            return document.getFlag(MODULE_ID, this.#KEYS.IS_BACKUP) as
+            return document.getFlag(MODULE_ID, this.#KEYS.IS_BACKUP) as boolean | undefined;
+        } else {
+            return foundry.utils.getProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`) as
                 | boolean
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                document,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
-            ) as boolean | undefined;
         }
     }
 
-    static async setIsBackup(
-        document: ActiveEffect<any> | Item<null> | object,
-        value: boolean,
-    ): Promise<any> {
+    static async setIsBackup(document: ActiveEffect<any> | Item<null> | object, value: boolean): Promise<any> {
         if (document instanceof ActiveEffect || document instanceof Item) {
             return document.setFlag(MODULE_ID, this.#KEYS.IS_BACKUP, value);
         } else {
-            return foundry.utils.setProperty(
-                document,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`,
-                value,
-            );
+            return foundry.utils.setProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`, value);
         }
     }
 
-    static getFolderColor(
-        item: Item<null> | PreCreate<ItemSource>,
-    ): string | undefined {
+    static getFolderColor(item: Item<null> | PreCreate<ItemSource>): string | undefined {
         if (item instanceof Item) {
-            return item.getFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR) as
+            return item.getFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR) as string | undefined;
+        } else {
+            return foundry.utils.getProperty(item, `flags.${MODULE_ID}.${this.#KEYS.FOLDER_COLOR}`) as
                 | string
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                item,
-                `flags.${MODULE_ID}.${this.#KEYS.FOLDER_COLOR}`,
-            ) as string | undefined;
         }
     }
 
-    static async setFolderColor(
-        item: Item<any> | PreCreate<ItemSource> | object,
-        color: string,
-    ): Promise<any> {
+    static async setFolderColor(item: Item<any> | PreCreate<ItemSource> | object, color: string): Promise<any> {
         if (item instanceof Item) {
             return item.setFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR, color);
         } else if (item instanceof Object) {
-            return foundry.utils.setProperty(
-                item,
-                `flags.${MODULE_ID}.${this.#KEYS.FOLDER_COLOR}`,
-                color,
-            );
+            return foundry.utils.setProperty(item, `flags.${MODULE_ID}.${this.#KEYS.FOLDER_COLOR}`, color);
         }
     }
 
-    static getNestedEffectIds(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): string[] | undefined {
+    static getNestedEffectIds(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string[] | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECT_IDS) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECT_IDS) as string[] | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECT_IDS}`) as
                 | string[]
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECT_IDS}`,
-            ) as string[] | undefined;
         }
     }
 
@@ -131,11 +88,7 @@ class Flags {
         nestedEffectIds: string[],
     ): Promise<any> {
         if (effect instanceof ActiveEffect) {
-            return effect.setFlag(
-                MODULE_ID,
-                this.#KEYS.NESTED_EFFECT_IDS,
-                nestedEffectIds,
-            );
+            return effect.setFlag(MODULE_ID, this.#KEYS.NESTED_EFFECT_IDS, nestedEffectIds);
         } else {
             return foundry.utils.setProperty(
                 effect,
@@ -145,18 +98,13 @@ class Flags {
         }
     }
 
-    static getSubEffectIds(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): string[] | undefined {
+    static getSubEffectIds(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string[] | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECT_IDS) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECT_IDS) as string[] | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`) as
                 | string[]
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`,
-            ) as string[] | undefined;
         }
     }
 
@@ -165,32 +113,19 @@ class Flags {
         subEffectIds: string[],
     ): Promise<any> {
         if (effect instanceof ActiveEffect) {
-            return effect.setFlag(
-                MODULE_ID,
-                this.#KEYS.SUB_EFFECT_IDS,
-                subEffectIds,
-            );
+            return effect.setFlag(MODULE_ID, this.#KEYS.SUB_EFFECT_IDS, subEffectIds);
         } else {
-            return foundry.utils.setProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`,
-                subEffectIds,
-            );
+            return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`, subEffectIds);
         }
     }
 
-    static getOtherEffectIds(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): string[] | undefined {
+    static getOtherEffectIds(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string[] | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.OTHER_EFFECT_IDS) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.OTHER_EFFECT_IDS) as string[] | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`) as
                 | string[]
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`,
-            ) as string[] | undefined;
         }
     }
 
@@ -199,17 +134,9 @@ class Flags {
         otherEffects: string[],
     ): Promise<any> {
         if (effect instanceof ActiveEffect) {
-            return effect.setFlag(
-                MODULE_ID,
-                this.#KEYS.OTHER_EFFECT_IDS,
-                otherEffects,
-            );
+            return effect.setFlag(MODULE_ID, this.#KEYS.OTHER_EFFECT_IDS, otherEffects);
         } else {
-            return foundry.utils.setProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`,
-                otherEffects,
-            );
+            return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`, otherEffects);
         }
     }
 
@@ -219,130 +146,75 @@ class Flags {
      * @param effect - The effect to check
      * @returns true if it is convenient, false otherwise
      */
-    static isConvenient(
-        document: ActiveEffect<any> | Item<null> | object,
-    ): boolean | undefined {
+    static isConvenient(document: ActiveEffect<any> | Item<null> | object): boolean | undefined {
         if (document instanceof ActiveEffect || document instanceof Item) {
-            return document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as
+            return document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as boolean | undefined;
+        } else {
+            return foundry.utils.getProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`) as
                 | boolean
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                document,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
-            ) as boolean | undefined;
         }
     }
 
     static setIsConvenient(document: object, value: boolean): boolean {
-        return foundry.utils.setProperty(
-            document,
-            `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`,
-            value,
-        );
+        return foundry.utils.setProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`, value);
     }
 
-    static isTemporary(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): boolean | undefined {
+    static isTemporary(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): boolean | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.IS_TEMPORARY) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.IS_TEMPORARY) as boolean | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`) as
                 | boolean
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`,
-            ) as boolean | undefined;
         }
     }
 
-    static setIsTemporary(
-        effect: PreCreate<ActiveEffectSource>,
-        value: boolean,
-    ): boolean {
-        return foundry.utils.setProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`,
-            value,
-        );
+    static setIsTemporary(effect: PreCreate<ActiveEffectSource>, value: boolean): boolean {
+        return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`, value);
     }
 
-    static isDynamic(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): boolean | undefined {
+    static isDynamic(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): boolean | undefined {
         if (effect instanceof ActiveEffect) {
-            return effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as
+            return effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as boolean | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`) as
                 | boolean
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                effect,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`,
-            ) as boolean | undefined;
         }
     }
 
     static setIsDynamic(effect: object, value: boolean): boolean {
-        return foundry.utils.setProperty(
-            effect,
-            `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`,
-            value,
-        );
+        return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`, value);
     }
 
-    static isViewable(
-        document:
-            | ActiveEffect<any>
-            | Item<null>
-            | PreCreate<ActiveEffectSource>,
-    ): boolean | undefined {
+    static isViewable(document: ActiveEffect<any> | Item<null> | PreCreate<ActiveEffectSource>): boolean | undefined {
         if (document instanceof ActiveEffect || document instanceof Item) {
-            return document.getFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE) as
+            return document.getFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE) as boolean | undefined;
+        } else {
+            return foundry.utils.getProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`) as
                 | boolean
                 | undefined;
-        } else {
-            return foundry.utils.getProperty(
-                document,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`,
-            ) as boolean | undefined;
         }
     }
 
-    static async setIsViewable(
-        document: ActiveEffect<any> | Item<null> | object,
-        value: boolean,
-    ): Promise<any> {
+    static async setIsViewable(document: ActiveEffect<any> | Item<null> | object, value: boolean): Promise<any> {
         if (document instanceof ActiveEffect || document instanceof Item) {
             return document.setFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE, value);
         } else {
-            return foundry.utils.setProperty(
-                document,
-                `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`,
-                value,
-            );
+            return foundry.utils.setProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`, value);
         }
     }
 
-    static getStackableDae(
-        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
-    ): string | undefined {
-        return foundry.utils.getProperty(
-            effect,
-            `flags.${MODULE_IDS.DAE}.${this.#KEYS.STACKABLE}`,
-        ) as string | undefined;
+    static getStackableDae(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string | undefined {
+        return foundry.utils.getProperty(effect, `flags.${MODULE_IDS.DAE}.${this.#KEYS.STACKABLE}`) as
+            | string
+            | undefined;
     }
 
-    static setIsStatusEffect(
-        document: PreCreate<ItemSource> | PreCreate<ActiveEffectSource>,
-        value: boolean,
-    ): boolean {
+    static setIsStatusEffect(document: PreCreate<ItemSource> | PreCreate<ActiveEffectSource>, value: boolean): boolean {
         if (document.flags?.[SE_MODULE_ID]) {
-            return foundry.utils.setProperty(
-                document,
-                `flags.${SE_MODULE_ID}.${this.#KEYS.IS_STATUS_EFFECT}`,
-                value,
-            );
+            return foundry.utils.setProperty(document, `flags.${SE_MODULE_ID}.${this.#KEYS.IS_STATUS_EFFECT}`, value);
         }
         return false;
     }

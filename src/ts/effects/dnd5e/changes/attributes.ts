@@ -1,12 +1,6 @@
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
-function acMin({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function acMin({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.min",
         type: "upgrade",
@@ -15,13 +9,7 @@ function acMin({
     };
 }
 
-function acBonus({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function acBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.bonus",
         type: "add",
@@ -30,13 +18,7 @@ function acBonus({
     };
 }
 
-function acCalc({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function acCalc({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.calc",
         type: "override",
@@ -45,13 +27,7 @@ function acCalc({
     };
 }
 
-function acCover({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function acCover({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.cover",
         type: "add",
@@ -60,13 +36,7 @@ function acCover({
     };
 }
 
-function acFormula({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function acFormula({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.ac.formula",
         type: "override",
@@ -75,13 +45,7 @@ function acFormula({
     };
 }
 
-function addDarkvision({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function addDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.darkvision",
         type: "add",
@@ -90,13 +54,7 @@ function addDarkvision({
     };
 }
 
-function upgradeDarkvision({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function upgradeDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.darkvision",
         type: "upgrade",
@@ -105,13 +63,7 @@ function upgradeDarkvision({
     };
 }
 
-function upgradeTrueSight({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function upgradeTrueSight({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.senses.truesight",
         type: "upgrade",
@@ -120,13 +72,7 @@ function upgradeTrueSight({
     };
 }
 
-function exhaustion({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function exhaustion({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.exhaustion",
         type: "override",
@@ -140,15 +86,7 @@ function movement({
     value,
     priority,
 }: {
-    movementType:
-        | "all"
-        | "burrow"
-        | "climb"
-        | "fly"
-        | "hover"
-        | "swim"
-        | "units"
-        | "walk";
+    movementType: "all" | "burrow" | "climb" | "fly" | "hover" | "swim" | "units" | "walk";
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
@@ -165,15 +103,7 @@ function upgradeMovement({
     value,
     priority,
 }: {
-    movementType:
-        | "all"
-        | "burrow"
-        | "climb"
-        | "fly"
-        | "hover"
-        | "swim"
-        | "units"
-        | "walk";
+    movementType: "all" | "burrow" | "climb" | "fly" | "hover" | "swim" | "units" | "walk";
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
@@ -185,13 +115,7 @@ function upgradeMovement({
     };
 }
 
-function multiplyEncumbrance({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function multiplyEncumbrance({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.encumbrance.max",
         type: "multiply",
@@ -230,13 +154,7 @@ function concentrationMode({
     };
 }
 
-function deathMode({
-    value,
-    priority,
-}: {
-    value: "-1" | "0" | "1";
-    priority?: number;
-}): Partial<EffectChangeData> {
+function deathMode({ value, priority }: { value: "-1" | "0" | "1"; priority?: number }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.death.roll.mode`,
         type: "add",

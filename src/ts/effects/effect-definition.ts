@@ -17,9 +17,7 @@ abstract class EffectDefinition {
 
     async initialize(): Promise<void> {
         if (BUILD_MODE === "development") {
-            log(
-                `Debug mode is enabled, deleting any effects for ${this.systemId} and clearing migrations`,
-            );
+            log(`Debug mode is enabled, deleting any effects for ${this.systemId} and clearing migrations`);
 
             await getApi().resetSystemInitialization({
                 confirm: false,
@@ -27,17 +25,13 @@ abstract class EffectDefinition {
         }
 
         if (!this.settings.hasInitialized) {
-            ui.notifications.info(
-                game.i18n.localize("ConvenientEffects.Initializing"),
-            );
+            ui.notifications.info(game.i18n.localize("ConvenientEffects.Initializing"));
             await this.#createItemsAndEffects({ backup: false });
             await this.#createItemsAndEffects({ backup: true });
 
             // Set initialized before migration runs
             await this.settings.setHasInitialized(true);
-            ui.notifications.info(
-                game.i18n.localize("ConvenientEffects.FinishedInitializing"),
-            );
+            ui.notifications.info(game.i18n.localize("ConvenientEffects.FinishedInitializing"));
         }
 
         migrations.addMigrations({
@@ -55,34 +49,28 @@ abstract class EffectDefinition {
 
     abstract get migrations(): MigrationType[];
 
-    async #createItemsAndEffects({
-        backup,
-    }: {
-        backup: boolean;
-    }): Promise<void> {
-        const effectPromises = this.initialItemEffects.map(
-            async (itemEffect) => {
-                const item = await Item.implementation.create(
-                    createConvenientItem({
-                        item: {
-                            name: itemEffect.itemData.name,
-                            type: getItemType(),
-                        },
-                        isBackup: backup,
-                    }),
-                );
+    async #createItemsAndEffects({ backup }: { backup: boolean }): Promise<void> {
+        const effectPromises = this.initialItemEffects.map(async (itemEffect) => {
+            const item = await Item.implementation.create(
+                createConvenientItem({
+                    item: {
+                        name: itemEffect.itemData.name,
+                        type: getItemType(),
+                    },
+                    isBackup: backup,
+                }),
+            );
 
-                if (!item) return; // type safety, shouldn't occur
+            if (!item) return; // type safety, shouldn't occur
 
-                return item.createEmbeddedDocuments(
-                    "ActiveEffect",
-                    itemEffect.effects.map((effect) => {
-                        Flags.setIsBackup(effect, backup);
-                        return effect;
-                    }),
-                );
-            },
-        );
+            return item.createEmbeddedDocuments(
+                "ActiveEffect",
+                itemEffect.effects.map((effect) => {
+                    Flags.setIsBackup(effect, backup);
+                    return effect;
+                }),
+            );
+        });
 
         await Promise.all(effectPromises);
     }

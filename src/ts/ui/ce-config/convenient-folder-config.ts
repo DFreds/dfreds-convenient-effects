@@ -13,9 +13,7 @@ interface ConvenientFolderConfigOptions extends ApplicationConfiguration {
     document: Item<any> | null;
 }
 
-class ConvenientFolderConfig extends HandlebarsApplicationMixin(
-    ApplicationV2<ConvenientFolderConfigOptions>,
-) {
+class ConvenientFolderConfig extends HandlebarsApplicationMixin(ApplicationV2<ConvenientFolderConfigOptions>) {
     #document?: Item<any> | null;
 
     constructor(options?: DeepPartial<ConvenientFolderConfigOptions>) {
@@ -23,25 +21,24 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
         this.#document = options?.document as Item<any> | null;
     }
 
-    static override DEFAULT_OPTIONS: DeepPartial<ConvenientFolderConfigOptions> =
-        {
-            id: "convenient-folder-config",
-            classes: ["sheet", "folder-config"],
-            tag: "form",
-            document: null,
-            window: {
-                contentClasses: ["standard-form"],
-                icon: "fa-solid fa-folder",
-            },
-            position: {
-                width: 480,
-            },
-            form: {
-                handler: this.#onSubmit,
-                submitOnChange: false,
-                closeOnSubmit: true,
-            },
-        };
+    static override DEFAULT_OPTIONS: DeepPartial<ConvenientFolderConfigOptions> = {
+        id: "convenient-folder-config",
+        classes: ["sheet", "folder-config"],
+        tag: "form",
+        document: null,
+        window: {
+            contentClasses: ["standard-form"],
+            icon: "fa-solid fa-folder",
+        },
+        position: {
+            width: 480,
+        },
+        form: {
+            handler: this.#onSubmit,
+            submitOnChange: false,
+            closeOnSubmit: true,
+        },
+    };
 
     static override PARTS = {
         body: {
@@ -62,32 +59,20 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
         return this.#document as Item<any>;
     }
 
-    protected override async _prepareContext(
-        _options: HandlebarsRenderOptions,
-    ): Promise<object> {
+    protected override async _prepareContext(_options: HandlebarsRenderOptions): Promise<object> {
         const context = await super._prepareContext(_options);
 
         const data = {
-            color: this.document?._id
-                ? Flags.getFolderColor(this.document)
-                : "",
+            color: this.document?._id ? Flags.getFolderColor(this.document) : "",
             namePlaceholder: game.i18n.localize("DOCUMENT.Folder"),
         };
 
         Object.assign(context, {
             document: this.document,
-            source:
-                this.document instanceof Item
-                    ? this.document._source
-                    : this.document,
-            fields:
-                this.document instanceof Item
-                    ? (this.document.schema as any).fields
-                    : {},
+            source: this.document instanceof Item ? this.document._source : this.document,
+            fields: this.document instanceof Item ? (this.document.schema as any).fields : {},
             rootId:
-                this.document?._id && game.items.get(this.document._id)
-                    ? this.document._id
-                    : foundry.utils.randomID(),
+                this.document?._id && game.items.get(this.document._id) ? this.document._id : foundry.utils.randomID(),
             ...data,
         });
 
@@ -99,11 +84,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
         context: object,
         options: HandlebarsRenderOptions,
     ): Promise<object> {
-        const partContext = await super._preparePartContext(
-            partId,
-            context,
-            options,
-        );
+        const partContext = await super._preparePartContext(partId, context, options);
 
         switch (partId) {
             case "footer":
@@ -120,9 +101,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
                 {
                     type: "submit",
                     icon: "fa-solid fa-floppy-disk",
-                    label: this.document?._id
-                        ? "FOLDER.Update"
-                        : "SIDEBAR.ACTIONS.CREATE.Folder",
+                    label: this.document?._id ? "FOLDER.Update" : "SIDEBAR.ACTIONS.CREATE.Folder",
                 },
             ],
         });
@@ -167,10 +146,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
         const document = thisClass.document;
 
         if (game.items.get(document._id ?? "")) {
-            await document.update(
-                submitData as Record<string, unknown>,
-                options,
-            );
+            await document.update(submitData as Record<string, unknown>, options);
         } else {
             const operation = Object.assign(options ?? {}, {
                 parent: document.parent,
@@ -182,9 +158,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
                 foundry.utils.mergeObject(
                     createConvenientItem({
                         item: {
-                            name: game.i18n.localize(
-                                "SIDEBAR.ACTIONS.CREATE.Folder",
-                            ),
+                            name: game.i18n.localize("SIDEBAR.ACTIONS.CREATE.Folder"),
                             type: getItemType(),
                         },
                     }),
@@ -212,19 +186,9 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(
         const { updateData, ...updateOptions } = options ?? {};
 
         const thisClass = this as unknown as ConvenientFolderConfig;
-        const submitData = await thisClass.#prepareSubmitData(
-            event,
-            form,
-            formData,
-            updateData,
-        );
+        const submitData = await thisClass.#prepareSubmitData(event, form, formData, updateData);
 
-        await thisClass.#processSubmitData(
-            event,
-            form,
-            submitData,
-            updateOptions,
-        );
+        await thisClass.#processSubmitData(event, form, submitData, updateOptions);
     }
 }
 

@@ -24,21 +24,15 @@ class HandlebarHelpers {
     }
 
     #registerGetCeEffectId() {
-        Handlebars.registerHelper(
-            "getCeEffectId",
-            (effect: ActiveEffect<any>) => {
-                return Flags.getCeEffectId(effect);
-            },
-        );
+        Handlebars.registerHelper("getCeEffectId", (effect: ActiveEffect<any>) => {
+            return Flags.getCeEffectId(effect);
+        });
     }
 
     #registerIsTemporary() {
-        Handlebars.registerHelper(
-            "isTemporary",
-            (effect: ActiveEffect<any>) => {
-                return Flags.isTemporary(effect);
-            },
-        );
+        Handlebars.registerHelper("isTemporary", (effect: ActiveEffect<any>) => {
+            return Flags.isTemporary(effect);
+        });
     }
 
     #registerIsViewable() {
@@ -60,81 +54,69 @@ class HandlebarHelpers {
     }
 
     #registerConvenientFolderIcons() {
-        Handlebars.registerHelper(
-            "convenientFolderIcons",
-            (folder: Item<any>) => {
-                let icons = "";
+        Handlebars.registerHelper("convenientFolderIcons", (folder: Item<any>) => {
+            let icons = "";
 
-                if (!Flags.isViewable(folder)) {
-                    icons += `
+            if (!Flags.isViewable(folder)) {
+                icons += `
                         <div class="folder-icon">
                             <i class="fas fa-eye-slash" data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.FolderHidden")}'></i>
                         </div>
                         `;
-                }
+            }
 
-                return icons;
-            },
-        );
+            return icons;
+        });
     }
 
     #registerConvenientEffectIcons() {
-        Handlebars.registerHelper(
-            "convenientEffectIcons",
-            (effect: ActiveEffect<any>) => {
-                let icons = "";
+        Handlebars.registerHelper("convenientEffectIcons", (effect: ActiveEffect<any>) => {
+            let icons = "";
 
-                const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
-                const nestedEffects = nestedEffectIds
-                    .map((id) => {
-                        return getApi().findEffect({ effectId: id });
-                    })
-                    .filter(notEmpty);
+            const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
+            const nestedEffects = nestedEffectIds
+                .map((id) => {
+                    return getApi().findEffect({ effectId: id });
+                })
+                .filter(notEmpty);
 
-                const allChanges = this.#getAllChanges(effect, nestedEffects);
+            const allChanges = this.#getAllChanges(effect, nestedEffects);
 
-                icons += this.#getPassiveIcon(effect);
-                icons += this.#getHiddenIcon(effect);
-                icons += this.#getHasNestedEffectsIcon(nestedEffects);
-                icons += this.#getIsNestedEffectsIcon(
-                    Flags.getCeEffectId(effect),
-                    findAllNestedEffectIds({ backup: false }),
-                );
+            icons += this.#getPassiveIcon(effect);
+            icons += this.#getHiddenIcon(effect);
+            icons += this.#getHasNestedEffectsIcon(nestedEffects);
+            icons += this.#getIsNestedEffectsIcon(
+                Flags.getCeEffectId(effect),
+                findAllNestedEffectIds({ backup: false }),
+            );
 
-                if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
-                    icons += this.#getStatusEffectsIcon(effect);
-                }
+            if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
+                icons += this.#getStatusEffectsIcon(effect);
+            }
 
-                if (findModuleById(MODULE_IDS.MIDI)?.active) {
-                    icons += this.#getMidiIcon(allChanges);
-                }
+            if (findModuleById(MODULE_IDS.MIDI)?.active) {
+                icons += this.#getMidiIcon(allChanges);
+            }
 
-                if (findModuleById(MODULE_IDS.DAE)?.active) {
-                    icons += this.#getStackableDaeIcon(effect);
-                }
+            if (findModuleById(MODULE_IDS.DAE)?.active) {
+                icons += this.#getStackableDaeIcon(effect);
+            }
 
-                if (findModuleById(MODULE_IDS.ATE)?.active) {
-                    icons += this.#getAteIcon(allChanges);
-                }
+            if (findModuleById(MODULE_IDS.ATE)?.active) {
+                icons += this.#getAteIcon(allChanges);
+            }
 
-                if (findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active) {
-                    icons += this.#getTokenMagicIcon(allChanges);
-                }
+            if (findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active) {
+                icons += this.#getTokenMagicIcon(allChanges);
+            }
 
-                return icons;
-            },
-        );
+            return icons;
+        });
     }
 
-    #getAllChanges(
-        effect: ActiveEffect<any>,
-        nestedEffects: ActiveEffect<any>[],
-    ): DeepPartial<EffectChangeData>[] {
-        const effectChanges = (effect.changes ??
-            []) as DeepPartial<EffectChangeData>[];
-        const nestedChanges = nestedEffects
-            .flatMap((nestedEffect) => nestedEffect.changes)
-            .filter(notEmpty);
+    #getAllChanges(effect: ActiveEffect<any>, nestedEffects: ActiveEffect<any>[]): DeepPartial<EffectChangeData>[] {
+        const effectChanges = (effect.changes ?? []) as DeepPartial<EffectChangeData>[];
+        const nestedChanges = nestedEffects.flatMap((nestedEffect) => nestedEffect.changes).filter(notEmpty);
 
         return [...effectChanges, ...nestedChanges];
     }
@@ -151,27 +133,20 @@ class HandlebarHelpers {
             : "";
     }
 
-    #getHasNestedEffectsIcon(
-        nestedEffects: ActiveEffect<Item<null>>[],
-    ): string {
+    #getHasNestedEffectsIcon(nestedEffects: ActiveEffect<Item<null>>[]): string {
         return nestedEffects && nestedEffects.length > 0
             ? `<i class='fas fa-trees integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.HasNestedEffects")}'></i> `
             : "";
     }
 
-    #getIsNestedEffectsIcon(
-        ceEffectId: string | undefined,
-        nestedEffectIds: string[],
-    ): string {
+    #getIsNestedEffectsIcon(ceEffectId: string | undefined, nestedEffectIds: string[]): string {
         return ceEffectId && nestedEffectIds?.includes(ceEffectId)
             ? `<i class='fas fa-tree integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.IsNestedEffect")}'></i> `
             : "";
     }
 
     #getStatusEffectsIcon(effect: ActiveEffect<Item<null>>): string {
-        const statusEffectsModule = findModuleById(
-            MODULE_IDS.STATUS_EFFECTS,
-        ) as StatusEffectsModule | undefined;
+        const statusEffectsModule = findModuleById(MODULE_IDS.STATUS_EFFECTS) as StatusEffectsModule | undefined;
 
         const statusEffectsApi = statusEffectsModule?.api;
         const statusEffect = statusEffectsApi?.findStatusEffect({
@@ -185,9 +160,7 @@ class HandlebarHelpers {
     }
 
     #getMidiIcon(changes: DeepPartial<EffectChangeData>[]): string {
-        return changes.some((change) =>
-            change.key?.startsWith("flags.midi-qol"),
-        )
+        return changes.some((change) => change.key?.startsWith("flags.midi-qol"))
             ? `<i class='fas fa-dice-d20 integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.MidiQolEffects")}'></i> `
             : "";
     }
@@ -208,9 +181,7 @@ class HandlebarHelpers {
     }
 
     #getTokenMagicIcon(changes: DeepPartial<EffectChangeData>[]): string {
-        return changes.some((change) =>
-            change.key?.startsWith("macro.tokenMagic"),
-        )
+        return changes.some((change) => change.key?.startsWith("macro.tokenMagic"))
             ? `<i class='fas fa-wand-magic-sparkles integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.TokenMagicEffects")}'></i> `
             : "";
     }

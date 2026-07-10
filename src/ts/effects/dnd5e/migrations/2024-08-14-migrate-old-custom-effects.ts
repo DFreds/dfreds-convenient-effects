@@ -1,16 +1,11 @@
-import {
-    createConvenientEffect,
-    createConvenientItem,
-} from "../../../utils/creates.ts";
+import { createConvenientEffect, createConvenientItem } from "../../../utils/creates.ts";
 import { notEmpty } from "../../../utils/types.ts";
 
 const migration: MigrationType = {
     key: "2024-08-14-migrate-old-custom-effects",
     date: new Date("2024-08-14"),
     func: async (): Promise<boolean> => {
-        const oldCustomEffect = game.items.find(
-            (item) => item.name === "Custom Convenient Effects",
-        );
+        const oldCustomEffect = game.items.find((item) => item.name === "Custom Convenient Effects");
 
         if (!oldCustomEffect) return true;
 

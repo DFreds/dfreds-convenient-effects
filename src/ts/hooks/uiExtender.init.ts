@@ -16,8 +16,7 @@ const UiExtenderInit: Listener = {
                 applicationClass: ConvenientEffectsV2,
                 predicate: () => {
                     const settings = new Settings();
-                    const hasAppPermission =
-                        game.user.role >= settings.appControlsPermission;
+                    const hasAppPermission = game.user.role >= settings.appControlsPermission;
                     return hasAppPermission;
                 },
             });

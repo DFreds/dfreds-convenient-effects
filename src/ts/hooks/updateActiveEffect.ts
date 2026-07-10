@@ -7,21 +7,16 @@ import { renderAppIfOpen } from "../ui/render-app-if-open.ts";
  */
 const UpdateActiveEffect: Listener = {
     listen(): void {
-        Hooks.on(
-            "updateActiveEffect",
-            (activeEffect: any, _data: any, _metadata: any, _userId: any) => {
-                const effect = activeEffect as ActiveEffect<any>;
+        Hooks.on("updateActiveEffect", (activeEffect: any, _data: any, _metadata: any, _userId: any) => {
+            const effect = activeEffect as ActiveEffect<any>;
 
-                const isConvenient =
-                    Flags.isConvenient(effect) &&
-                    effect.parent instanceof Item &&
-                    Flags.isConvenient(effect.parent);
+            const isConvenient =
+                Flags.isConvenient(effect) && effect.parent instanceof Item && Flags.isConvenient(effect.parent);
 
-                if (isConvenient) {
-                    renderAppIfOpen();
-                }
-            },
-        );
+            if (isConvenient) {
+                renderAppIfOpen();
+            }
+        });
     },
 };
 

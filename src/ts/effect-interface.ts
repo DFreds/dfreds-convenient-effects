@@ -1,19 +1,10 @@
 import { Settings } from "./settings.ts";
-import {
-    findDocumentByUuidSync,
-    findAllEffects,
-    findFolder,
-    findFolders,
-    findDocumentByUuid,
-} from "./utils/finds.ts";
+import { findAllEffects, findDocumentByUuid, findDocumentByUuidSync, findFolder, findFolders } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";
 import { Flags } from "./utils/flags.ts";
 import { getNestedEffectSelection } from "./ui/nested-effect-selection-dialog.ts";
-import {
-    createConvenientEffect,
-    createConvenientItem,
-} from "./utils/creates.ts";
+import { createConvenientEffect, createConvenientItem } from "./utils/creates.ts";
 import { Sockets } from "./sockets/sockets.ts";
 import Document from "@common/abstract/document.mjs";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
@@ -28,18 +19,11 @@ class EffectInterfaceImpl implements EffectInterface {
         this.#sockets = sockets;
     }
 
-    findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<
-        Item<null>
-    >[] {
+    findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<Item<null>>[] {
         return findAllEffects({ backup });
     }
 
-    findEffect({
-        folderId,
-        effectId,
-        effectName,
-        backup = false,
-    }: IFindEffect): ActiveEffect<Item<null>> | undefined {
+    findEffect({ folderId, effectId, effectName, backup = false }: IFindEffect): ActiveEffect<Item<null>> | undefined {
         const folders = findFolders({ backup });
 
         if (!folders) return;
@@ -57,26 +41,17 @@ class EffectInterfaceImpl implements EffectInterface {
                 const isMatchingCeId = Flags.getCeEffectId(effect) === effectId;
                 const isMatchingName = effect.name === effectName;
 
-                return (
-                    isConvenient &&
-                    (isMatchingId || isMatchingName || isMatchingCeId)
-                );
+                return isConvenient && (isMatchingId || isMatchingName || isMatchingCeId);
             });
 
         if (matchingEffects.length > 1) {
-            log(
-                `Found more than one matching effect for effectId: ${effectId} and effectName: ${effectName}`,
-            );
+            log(`Found more than one matching effect for effectId: ${effectId} and effectName: ${effectName}`);
         }
 
         return matchingEffects[0];
     }
 
-    hasEffectApplied({
-        effectId,
-        effectName,
-        uuid,
-    }: IHasEffectApplied): boolean {
+    hasEffectApplied({ effectId, effectName, uuid }: IHasEffectApplied): boolean {
         const document = findDocumentByUuidSync(uuid);
 
         return (
@@ -87,11 +62,7 @@ class EffectInterfaceImpl implements EffectInterface {
                 const isMatchingName = effect.name === effectName;
                 const isMatchingCeId = Flags.getCeEffectId(effect) === effectId;
 
-                return (
-                    isConvenient &&
-                    isEnabled &&
-                    (isMatchingId || isMatchingName || isMatchingCeId)
-                );
+                return isConvenient && isEnabled && (isMatchingId || isMatchingName || isMatchingCeId);
             }) ?? false
         );
     }
@@ -110,9 +81,7 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         if (documentUuids.length === 0) {
-            ui.notifications.warn(
-                `Please select or target a token to toggle this effect`,
-            );
+            ui.notifications.warn(`Please select or target a token to toggle this effect`);
             return;
         }
 
@@ -128,27 +97,21 @@ class EffectInterfaceImpl implements EffectInterface {
 
         for (const uuid of documentUuids) {
             const hasEffectApplied = this.hasEffectApplied({
-                effectId:
-                    effectDataToSend._id ??
-                    Flags.getCeEffectId(effectDataToSend),
+                effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
                 effectName: effectDataToSend.name,
                 uuid,
             });
 
             if (hasEffectApplied) {
                 await this.removeEffect({
-                    effectId:
-                        effectDataToSend._id ??
-                        Flags.getCeEffectId(effectDataToSend),
+                    effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
                     effectName: effectDataToSend.name,
                     uuid,
                     origin,
                 });
             } else {
                 await this.addEffect({
-                    effectId:
-                        effectDataToSend._id ??
-                        Flags.getCeEffectId(effectDataToSend),
+                    effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
                     effectName: effectDataToSend.name,
                     uuid,
                     overlay,
@@ -183,11 +146,7 @@ class EffectInterfaceImpl implements EffectInterface {
             return [];
         }
 
-        foundry.utils.setProperty(
-            effectDataToSend,
-            `flags.core.overlay`,
-            overlay,
-        );
+        foundry.utils.setProperty(effectDataToSend, `flags.core.overlay`, overlay);
 
         if (origin) {
             effectDataToSend.origin = origin;
@@ -201,12 +160,7 @@ class EffectInterfaceImpl implements EffectInterface {
         );
     }
 
-    async removeEffect({
-        effectId,
-        effectName,
-        uuid,
-        origin,
-    }: IRemoveEffect): Promise<void> {
+    async removeEffect({ effectId, effectName, uuid, origin }: IRemoveEffect): Promise<void> {
         const effectDataToSend = await this.#getEffectDataToSend({
             effectId,
             effectName,
@@ -224,19 +178,14 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         return this.#sockets.emitRemoveEffect({
-            effectId:
-                effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
+            effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
             effectName: effectDataToSend.name,
             uuid,
             origin,
         });
     }
 
-    async createNewEffects({
-        existingFolderId,
-        newFolderData,
-        effectsData,
-    }: ICreateNewEffects): Promise<void> {
+    async createNewEffects({ existingFolderId, newFolderData, effectsData }: ICreateNewEffects): Promise<void> {
         if (!game.user.isGM) return;
 
         if (!existingFolderId && !newFolderData) {
@@ -256,10 +205,7 @@ class EffectInterfaceImpl implements EffectInterface {
         });
 
         if (existingFolder) {
-            await existingFolder.createEmbeddedDocuments(
-                "ActiveEffect",
-                newEffectsData,
-            );
+            await existingFolder.createEmbeddedDocuments("ActiveEffect", newEffectsData);
         } else if (newFolderData) {
             const newFolder = await Item.create(
                 createConvenientItem({
@@ -267,10 +213,7 @@ class EffectInterfaceImpl implements EffectInterface {
                 }),
             );
 
-            await newFolder?.createEmbeddedDocuments(
-                "ActiveEffect",
-                newEffectsData,
-            );
+            await newFolder?.createEmbeddedDocuments("ActiveEffect", newEffectsData);
         }
     }
 
@@ -311,8 +254,7 @@ class EffectInterfaceImpl implements EffectInterface {
         if (effectDataToSend) {
             const nestedEffectIds = Flags.getNestedEffectIds(effectDataToSend);
             if (nestedEffectIds && nestedEffectIds.length > 0) {
-                effectDataToSend =
-                    await getNestedEffectSelection(effectDataToSend);
+                effectDataToSend = await getNestedEffectSelection(effectDataToSend);
             }
         }
 

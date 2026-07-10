@@ -1,10 +1,7 @@
 import { Flags } from "../../utils/flags.ts";
 import { findAllEffects } from "../../utils/finds.ts";
 import { MODULE_ID } from "../../constants.ts";
-import {
-    ApplicationConfiguration,
-    ApplicationTabsConfiguration,
-} from "@client/applications/_module.mjs";
+import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_module.mjs";
 import { HandlebarsRenderOptions } from "@client/applications/api/_module.mjs";
 import { FormDataExtended } from "@client/applications/ux/_module.mjs";
 
@@ -38,27 +35,26 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
     }
 
     // @ts-expect-error any is because of some circular dependencies with ActiveEffect
-    static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectConfigOptions> =
-        {
-            id: "convenient-effect-config",
-            classes: ["sheet"],
-            tag: "form",
-            document: null,
-            window: {
-                contentClasses: ["standard-form"],
-                icon: "fas fa-hand-sparkles",
-                title: "ConvenientEffects.Config.Title",
-                resizable: true,
-            },
-            position: {
-                width: 580,
-            },
-            form: {
-                handler: this.#onSubmit,
-                submitOnChange: false,
-                closeOnSubmit: true,
-            },
-        };
+    static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectConfigOptions> = {
+        id: "convenient-effect-config",
+        classes: ["sheet"],
+        tag: "form",
+        document: null,
+        window: {
+            contentClasses: ["standard-form"],
+            icon: "fas fa-hand-sparkles",
+            title: "ConvenientEffects.Config.Title",
+            resizable: true,
+        },
+        position: {
+            width: 580,
+        },
+        form: {
+            handler: this.#onSubmit,
+            submitOnChange: false,
+            closeOnSubmit: true,
+        },
+    };
 
     // @ts-expect-error any is because of some circular dependencies with ActiveEffect
     static override PARTS = {
@@ -114,9 +110,7 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
     }
 
     // @ts-expect-error any is because of some circular dependencies with ActiveEffect
-    protected override async _prepareContext(
-        _options: HandlebarsRenderOptions,
-    ): Promise<object> {
+    protected override async _prepareContext(_options: HandlebarsRenderOptions): Promise<object> {
         const context = await super._prepareContext(_options);
 
         Object.assign(context, {
@@ -136,11 +130,7 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
         context: object,
         options: HandlebarsRenderOptions,
     ): Promise<object> {
-        const partContext = await super._preparePartContext(
-            partId,
-            context,
-            options,
-        );
+        const partContext = await super._preparePartContext(partId, context, options);
 
         // Check if tabs exists in the context and if the partId matches a tab
         const contextWithTabs = partContext as {
@@ -169,11 +159,9 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
             return {
                 id: availableId,
                 label: effect.name,
-                selected: currentNestedEffectIds?.some(
-                    (currentNestedEffectId) => {
-                        return availableId === currentNestedEffectId;
-                    },
-                )
+                selected: currentNestedEffectIds?.some((currentNestedEffectId) => {
+                    return availableId === currentNestedEffectId;
+                })
                     ? "selected"
                     : "",
             };
@@ -193,8 +181,7 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
             };
         });
 
-        const currentOtherEffectIds =
-            Flags.getOtherEffectIds(this.document) ?? [];
+        const currentOtherEffectIds = Flags.getOtherEffectIds(this.document) ?? [];
         const otherEffectsData = allEffects.map((effect) => {
             const availableId = Flags.getCeEffectId(effect);
             return {
@@ -229,11 +216,7 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
         });
     }
 
-    #prepareSubmitData(
-        _event: SubmitEvent | Event,
-        _form: HTMLFormElement,
-        formData: FormDataExtended,
-    ): object {
+    #prepareSubmitData(_event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended): object {
         const data = foundry.utils.expandObject(formData.object);
 
         if (Object.hasOwn(data, "temporary")) {

@@ -5,15 +5,7 @@ function attackBonus({
     value,
     priority,
 }: {
-    attackType:
-        | "heal"
-        | "msak"
-        | "mwak"
-        | "rsak"
-        | "rwak"
-        | "spell"
-        | "swak"
-        | "weapon";
+    attackType: "heal" | "msak" | "mwak" | "rsak" | "rwak" | "spell" | "swak" | "weapon";
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
@@ -25,13 +17,7 @@ function attackBonus({
     };
 }
 
-function spellDcBonus({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function spellDcBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.spell.dc`,
         type: "add",
@@ -40,13 +26,7 @@ function spellDcBonus({
     };
 }
 
-function checkBonus({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function checkBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.abilities.check`,
         type: "add",
@@ -60,16 +40,7 @@ function damageBonus({
     value,
     priority,
 }: {
-    damageType:
-        | "check"
-        | "heal"
-        | "msak"
-        | "mwak"
-        | "rsak"
-        | "rwak"
-        | "save"
-        | "spell"
-        | "weapon";
+    damageType: "check" | "heal" | "msak" | "mwak" | "rsak" | "rwak" | "save" | "spell" | "weapon";
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
@@ -81,13 +52,7 @@ function damageBonus({
     };
 }
 
-function saveBonus({
-    value,
-    priority,
-}: {
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
+function saveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.abilities.save`,
         type: "add",

@@ -76,9 +76,7 @@ function updateOldCeEffectIds({
         .forEach(async (effectWithOldAsNested) => {
             const ids = flagGetter(effectWithOldAsNested) ?? [];
 
-            const indexToReplace = ids?.findIndex(
-                (effectId) => effectId === oldCeEffectId,
-            );
+            const indexToReplace = ids?.findIndex((effectId) => effectId === oldCeEffectId);
 
             if (indexToReplace !== -1) {
                 const updatedIds = [...ids];

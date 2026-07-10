@@ -7,12 +7,9 @@ import { Listener } from "./index.ts";
  */
 const RenderItemDirectory: Listener = {
     listen(): void {
-        Hooks.on(
-            "renderItemDirectory",
-            (directory: ItemDirectory<Item<null>>) => {
-                removeConvenientItemsFromSidebar(directory);
-            },
-        );
+        Hooks.on("renderItemDirectory", (directory: ItemDirectory<Item<null>>) => {
+            removeConvenientItemsFromSidebar(directory);
+        });
     },
 };
 

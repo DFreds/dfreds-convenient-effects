@@ -11,9 +11,7 @@ import { Flags } from "./flags.ts";
 function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
     if (isPrioritizeTargets && game.user.targets.size !== 0) {
         // Start with targets if prioritized
-        return Array.from(game.user.targets).map(
-            (target) => target.actor!.uuid,
-        );
+        return Array.from(game.user.targets).map((target) => target.actor!.uuid);
     } else if (canvas.tokens.controlled.length !== 0) {
         // Use controlled tokens if targets aren't prioritized
         return canvas.tokens.controlled.map((token) => token.actor!.uuid);
@@ -41,26 +39,17 @@ function getItemType(): string {
 }
 
 function getApi(): EffectInterface {
-    return (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule)
-        .api;
+    return (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule).api;
 }
 
-function isStackableDae({
-    effectName,
-    effect,
-}: {
-    effectName?: string;
-    effect: ActiveEffect<any>;
-}): boolean {
+function isStackableDae({ effectName, effect }: { effectName?: string; effect: ActiveEffect<any> }): boolean {
     if (!effectName) return false;
 
     const startsWithName = effect.name.startsWith(effectName);
     const stackableFlag = Flags.getStackableDae(effect);
     return (
         startsWithName &&
-        (stackableFlag === "multi" ||
-            stackableFlag === "count" ||
-            stackableFlag === "countDeleteDecrement")
+        (stackableFlag === "multi" || stackableFlag === "count" || stackableFlag === "countDeleteDecrement")
     );
 }
 

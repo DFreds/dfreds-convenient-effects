@@ -41,9 +41,7 @@ interface FolderData {
     effects: ActiveEffect<Item<null>>[];
 }
 
-class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
-    AbstractSidebarTab<ConvenientEffectsOptions>,
-) {
+class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<ConvenientEffectsOptions>) {
     #settings: Settings;
 
     constructor(options?: DeepPartial<ConvenientEffectsOptions>) {
@@ -67,8 +65,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             createFolder: ConvenientEffectsV2.#onCreateFolder,
             toggleHiddenEffects: ConvenientEffectsV2.#onToggleHiddenEffects,
             toggleNestedEffects: ConvenientEffectsV2.#onToggleNestedEffects,
-            togglePrioritizeTargets:
-                ConvenientEffectsV2.#onTogglePrioritizeTargets,
+            togglePrioritizeTargets: ConvenientEffectsV2.#onTogglePrioritizeTargets,
             viewBackups: ConvenientEffectsV2.#onViewBackups,
         },
         convenientEffects: {
@@ -86,35 +83,23 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         },
         directory: {
             template: `modules/${MODULE_ID}/templates/ce-app/directory.hbs`,
-            templates: [
-                ConvenientEffectsV2._entryPartial,
-                ConvenientEffectsV2._folderPartial,
-            ],
+            templates: [ConvenientEffectsV2._entryPartial, ConvenientEffectsV2._folderPartial],
             scrollable: [""],
         },
     };
 
     _createContextMenus(): void {
-        this._createContextMenu(
-            this._getFolderContextOptions,
-            ".folder .folder-header",
-            {
-                fixed: true,
-            },
-        );
-        this._createContextMenu(
-            this._getEntryContextOptions,
-            ".directory-item[data-entry-id]",
-            {
-                fixed: true,
-            },
-        );
+        this._createContextMenu(this._getFolderContextOptions, ".folder .folder-header", {
+            fixed: true,
+        });
+        this._createContextMenu(this._getEntryContextOptions, ".directory-item[data-entry-id]", {
+            fixed: true,
+        });
     }
 
     _canCreateFolder(): boolean {
         const canCreateItems = game.user.hasPermission("ITEM_CREATE");
-        const settingEnabled =
-            game.user.role >= this.#settings.createFoldersPermission;
+        const settingEnabled = game.user.role >= this.#settings.createFoldersPermission;
 
         return canCreateItems && settingEnabled;
     }
@@ -128,14 +113,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
                     const folderId = folderHtml.dataset.folderId;
 
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
 
                     if (!folderId || !effectId) return;
@@ -156,14 +137,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
                     const folderId = folderHtml.dataset.folderId;
 
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
 
                     if (!folderId || !effectId) return;
@@ -180,20 +157,14 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.AddEffect",
                 icon: '<i class="fa-regular fa-plus"></i>',
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
 
                     if (!effectId) return;
 
-                    const documentUuids = getActorUuids(
-                        this.#settings.prioritizeTargets,
-                    );
+                    const documentUuids = getActorUuids(this.#settings.prioritizeTargets);
                     if (documentUuids.length === 0) {
-                        ui.notifications.warn(
-                            `Please select or target a token to add this effect`,
-                        );
+                        ui.notifications.warn(`Please select or target a token to add this effect`);
                         return;
                     }
 
@@ -211,20 +182,14 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.RemoveEffect",
                 icon: '<i class="fa-regular fa-minus"></i>',
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
 
                     if (!effectId) return;
 
-                    const documentUuids = getActorUuids(
-                        this.#settings.prioritizeTargets,
-                    );
+                    const documentUuids = getActorUuids(this.#settings.prioritizeTargets);
                     if (documentUuids.length === 0) {
-                        ui.notifications.warn(
-                            `Please select or target a token to remove this effect`,
-                        );
+                        ui.notifications.warn(`Please select or target a token to remove this effect`);
                         return;
                     }
 
@@ -242,9 +207,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="fa-regular fa-dot-circle"></i>',
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
 
                     if (!effectId) return;
@@ -263,9 +226,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return !!findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active;
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const ceEffectId = effectHtml.dataset.ceEffectId;
 
                     if (!ceEffectId) return;
@@ -275,9 +236,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     });
                     if (!ceEffect) return;
 
-                    const statusEffectsModule = findModuleById(
-                        MODULE_IDS.STATUS_EFFECTS,
-                    ) as StatusEffectsModule | undefined;
+                    const statusEffectsModule = findModuleById(MODULE_IDS.STATUS_EFFECTS) as
+                        | StatusEffectsModule
+                        | undefined;
                     if (!statusEffectsModule?.active) return;
 
                     const statusEffectsApi = statusEffectsModule.api;
@@ -307,14 +268,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
                     const folderId = folderHtml.dataset.folderId;
 
-                    const effectHtml = target.closest(
-                        "[data-ce-effect-id]",
-                    ) as HTMLElement;
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
 
                     if (!folderId || !effectId) return;
@@ -342,10 +299,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.ShowEffect",
                 icon: '<i class="fa-regular fa-eye"></i>',
                 visible: (html: HTMLElement) => {
-                    return (
-                        this.#isUserFolderOwner(html) &&
-                        !this.#isEffectViewable(html)
-                    );
+                    return this.#isUserFolderOwner(html) && !this.#isEffectViewable(html);
                 },
                 onClick: (_event: PointerEvent, target: HTMLElement) => {
                     this.#setEffectViewable(target, true);
@@ -355,10 +309,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.HideEffect",
                 icon: '<i class="fa-regular fa-eye-slash"></i>',
                 visible: (html: HTMLElement) => {
-                    return (
-                        this.#isUserFolderOwner(html) &&
-                        this.#isEffectViewable(html)
-                    );
+                    return this.#isUserFolderOwner(html) && this.#isEffectViewable(html);
                 },
                 onClick: (_event: PointerEvent, target: HTMLElement) => {
                     this.#setEffectViewable(target, false);
@@ -376,15 +327,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
-                    const folder = findFolder(
-                        folderHtml.dataset.folderId ?? "",
-                        {
-                            backup: this.options.convenientEffects.backup,
-                        },
-                    );
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
+                    const folder = findFolder(folderHtml.dataset.folderId ?? "", {
+                        backup: this.options.convenientEffects.backup,
+                    });
 
                     if (!folder) return;
 
@@ -403,15 +349,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
-                    const folder = findFolder(
-                        folderHtml.dataset.folderId ?? "",
-                        {
-                            backup: this.options.convenientEffects.backup,
-                        },
-                    );
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
+                    const folder = findFolder(folderHtml.dataset.folderId ?? "", {
+                        backup: this.options.convenientEffects.backup,
+                    });
 
                     await folder?.deleteDialog();
                 },
@@ -421,24 +362,16 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 icon: '<i class="fa-solid fa-lock"></i>',
                 visible: () => game.user.isGM,
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
-                    const folder = findFolder(
-                        folderHtml.dataset.folderId ?? "",
-                        {
-                            backup: this.options.convenientEffects.backup,
-                        },
-                    );
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
+                    const folder = findFolder(folderHtml.dataset.folderId ?? "", {
+                        backup: this.options.convenientEffects.backup,
+                    });
 
                     // @ts-expect-error Not type defined
                     new DocumentOwnershipConfig({
                         document: folder,
                         position: {
-                            top: Math.min(
-                                folderHtml.offsetTop,
-                                window.innerHeight - 350,
-                            ),
+                            top: Math.min(folderHtml.offsetTop, window.innerHeight - 350),
                             left: window.innerWidth - 720,
                         },
                     }).render({ force: true });
@@ -448,10 +381,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.ShowFolder",
                 icon: '<i class="fas fa-eye fa-fw"></i>',
                 visible: (html: HTMLElement) => {
-                    return (
-                        this.#isUserFolderOwner(html) &&
-                        !this.#isFolderViewable(html)
-                    );
+                    return this.#isUserFolderOwner(html) && !this.#isFolderViewable(html);
                 },
                 onClick: (_event: PointerEvent, target: HTMLElement) => {
                     this.#setFolderViewable(target, true);
@@ -461,10 +391,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 label: "ConvenientEffects.HideFolder",
                 icon: '<i class="fas fa-eye-slash fa-fw"></i>',
                 visible: (html: HTMLElement) => {
-                    return (
-                        this.#isUserFolderOwner(html) &&
-                        this.#isFolderViewable(html)
-                    );
+                    return this.#isUserFolderOwner(html) && this.#isFolderViewable(html);
                 },
                 onClick: (_event: PointerEvent, target: HTMLElement) => {
                     this.#setFolderViewable(target, false);
@@ -477,15 +404,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
-                    const folder = findFolder(
-                        folderHtml.dataset.folderId ?? "",
-                        {
-                            backup: this.options.convenientEffects.backup,
-                        },
-                    );
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
+                    const folder = findFolder(folderHtml.dataset.folderId ?? "", {
+                        backup: this.options.convenientEffects.backup,
+                    });
 
                     folder?.exportToJSON();
                 },
@@ -497,15 +419,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return this.#isUserFolderOwner(html);
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
-                    const folder = findFolder(
-                        folderHtml.dataset.folderId ?? "",
-                        {
-                            backup: this.options.convenientEffects.backup,
-                        },
-                    );
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
+                    const folder = findFolder(folderHtml.dataset.folderId ?? "", {
+                        backup: this.options.convenientEffects.backup,
+                    });
 
                     await folder?.importFromJSONDialog();
                 },
@@ -513,18 +430,12 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         ];
     }
 
-    protected override async _onFirstRender(
-        context: object,
-        options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    protected override async _onFirstRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
         await super._onFirstRender(context, options);
         this._createContextMenus();
     }
 
-    protected override async _onRender(
-        context: object,
-        options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    protected override async _onRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
         await super._onRender(context, options);
 
         // Search
@@ -533,11 +444,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 inputSelector: "search input",
                 contentSelector: ".directory-list",
                 callback: this._onSearchFilter.bind(this),
-                initial: (
-                    this.element.querySelector(
-                        "search input",
-                    ) as HTMLInputElement
-                ).value,
+                initial: (this.element.querySelector("search input") as HTMLInputElement).value,
             }).bind(this.element);
         }
 
@@ -557,18 +464,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 },
             }).bind(this.element);
 
-            this.element
-                .querySelectorAll(".directory-item.folder")
-                .forEach((folder) => {
-                    folder.addEventListener(
-                        "dragenter",
-                        this._onDragHighlight.bind(this) as EventListener,
-                    );
-                    folder.addEventListener(
-                        "dragleave",
-                        this._onDragHighlight.bind(this) as EventListener,
-                    );
-                });
+            this.element.querySelectorAll(".directory-item.folder").forEach((folder) => {
+                folder.addEventListener("dragenter", this._onDragHighlight.bind(this) as EventListener);
+                folder.addEventListener("dragleave", this._onDragHighlight.bind(this) as EventListener);
+            });
         }
 
         // Toggle buttons
@@ -585,35 +484,24 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
 
             if (showHiddenEffectsButton) {
                 const showHiddenEffects = this.#settings.showHiddenEffects;
-                showHiddenEffectsButton.setAttribute(
-                    "aria-pressed",
-                    showHiddenEffects.toString(),
-                );
+                showHiddenEffectsButton.setAttribute("aria-pressed", showHiddenEffects.toString());
             }
 
             if (showNestedEffectsButton) {
                 const showNestedEffects = this.#settings.showNestedEffects;
-                showNestedEffectsButton.setAttribute(
-                    "aria-pressed",
-                    showNestedEffects.toString(),
-                );
+                showNestedEffectsButton.setAttribute("aria-pressed", showNestedEffects.toString());
             }
 
             if (prioritizeTargetsButton) {
                 const prioritizeTargets = this.#settings.prioritizeTargets;
-                prioritizeTargetsButton.setAttribute(
-                    "aria-pressed",
-                    prioritizeTargets.toString(),
-                );
+                prioritizeTargetsButton.setAttribute("aria-pressed", prioritizeTargets.toString());
             }
         }
 
         // Expand folders
         if (options.parts?.includes("directory")) {
             this.#settings.expandedFolders.forEach((folderId) => {
-                const folderHtml = this.element.querySelector(
-                    `[data-folder-id="${folderId}"]`,
-                ) as HTMLElement;
+                const folderHtml = this.element.querySelector(`[data-folder-id="${folderId}"]`) as HTMLElement;
                 if (folderHtml) {
                     folderHtml.classList.add("expanded");
                 }
@@ -621,9 +509,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         }
     }
 
-    protected override async _prepareContext(
-        options: HandlebarsRenderOptions,
-    ): Promise<object> {
+    protected override async _prepareContext(options: HandlebarsRenderOptions): Promise<object> {
         const context = await super._prepareContext(options);
         Object.assign(context, {
             folderIcon: CONFIG.Folder.sidebarIcon ?? "fa-solid fa-folder",
@@ -654,10 +540,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return context;
     }
 
-    async _prepareDirectoryContext(
-        context: object,
-        _options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    async _prepareDirectoryContext(context: object, _options: HandlebarsRenderOptions): Promise<void> {
         const folders = findFolders({
             backup: this.options.convenientEffects.backup,
         });
@@ -669,10 +552,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             .filter((folder) => {
                 const isViewable = Flags.isViewable(folder) ?? true;
                 const showHiddenEffects = this.#settings.showHiddenEffects;
-                const hasPermission = folder.testUserPermission(
-                    game.user,
-                    CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
-                );
+                const hasPermission = folder.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED);
 
                 return hasPermission && (showHiddenEffects || isViewable);
             })
@@ -742,13 +622,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         });
     }
 
-    async _prepareHeaderContext(
-        context: object,
-        _options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    async _prepareHeaderContext(context: object, _options: HandlebarsRenderOptions): Promise<void> {
         Object.assign(context, {
-            canViewBackups:
-                game.user.isGM && !this.options.convenientEffects.backup,
+            canViewBackups: game.user.isGM && !this.options.convenientEffects.backup,
             canCreateFolder: this._canCreateFolder(),
             isBackup: this.options.convenientEffects.backup,
             // searchMode:
@@ -786,9 +662,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const stateTyped = state as { query?: string };
 
         if (partId === "header") {
-            const searchInput = priorElement.querySelector(
-                "search input",
-            ) as HTMLInputElement;
+            const searchInput = priorElement.querySelector("search input") as HTMLInputElement;
 
             if (searchInput) {
                 stateTyped.query = searchInput.value;
@@ -808,9 +682,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const stateTyped = state as { query?: string };
 
         if (partId === "header" && stateTyped.query) {
-            const searchInput = newElement.querySelector(
-                "search input",
-            ) as HTMLInputElement;
+            const searchInput = newElement.querySelector("search input") as HTMLInputElement;
 
             if (searchInput) {
                 searchInput.value = stateTyped.query;
@@ -819,9 +691,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     async collapseAll(): Promise<void> {
-        for (const el of this.element.querySelectorAll(
-            ".directory-item.folder",
-        )) {
+        for (const el of this.element.querySelectorAll(".directory-item.folder")) {
             el.classList.remove("expanded");
         }
 
@@ -841,13 +711,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onToggleFolder(event, target);
     }
 
-    async _onToggleFolder(
-        _event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
-        const folderHtml = target.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+    async _onToggleFolder(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
         folderHtml.classList.toggle("expanded");
 
         const folderId = folderHtml.dataset.folderId;
@@ -874,17 +739,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     //     this.render();
     // }
 
-    _onMatchSearchEntry(
-        query: string,
-        entryIds: Set<string>,
-        element: HTMLElement,
-        _options: object,
-    ): void {
+    _onMatchSearchEntry(query: string, entryIds: Set<string>, element: HTMLElement, _options: object): void {
         const entryId = element.dataset.entryId;
         if (!entryId) return;
 
-        element.style.display =
-            !query || entryIds.has(entryId) ? "flex" : "none";
+        element.style.display = !query || entryIds.has(entryId) ? "flex" : "none";
     }
 
     _onSearchFilter(
@@ -904,13 +763,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             this._matchSearchFolders(rgx, folderIds, autoExpandIds, options);
 
             // Next match entries.
-            this._matchSearchEntries(
-                rgx,
-                entryIds,
-                folderIds,
-                autoExpandIds,
-                options,
-            );
+            this._matchSearchEntries(rgx, entryIds, folderIds, autoExpandIds, options);
         }
 
         // Toggle each directory entry.
@@ -927,10 +780,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 if (autoExpandIds.has(folderId ?? "")) {
                     if (query && match) elHtml.classList.add("expanded");
                 } else {
-                    elHtml.classList.toggle(
-                        "expanded",
-                        this.#settings.isFolderExpanded(folderId),
-                    );
+                    elHtml.classList.toggle("expanded", this.#settings.isFolderExpanded(folderId));
                 }
             } else {
                 this._onMatchSearchEntry(query, entryIds, elHtml, options);
@@ -995,12 +845,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 entryIds.add(entryId);
             }
             // Otherwise, if we are searching by name, match the entry name
-            else if (
-                nameOnlySearch &&
-                query?.test(
-                    foundry.applications.ux.SearchFilter.cleanQuery(entry.name),
-                )
-            ) {
+            else if (nameOnlySearch && query?.test(foundry.applications.ux.SearchFilter.cleanQuery(entry.name))) {
                 entryIds.add(entryId);
                 this.#onMatchFolder(entry.parent, folderIds, autoExpandIds);
             }
@@ -1031,13 +876,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         });
 
         for (const folder of folders) {
-            if (
-                query?.test(
-                    foundry.applications.ux.SearchFilter.cleanQuery(
-                        folder.name,
-                    ),
-                )
-            ) {
+            if (query?.test(foundry.applications.ux.SearchFilter.cleanQuery(folder.name))) {
                 this.#onMatchFolder(folder, folderIds, autoExpandIds, {
                     autoExpand: false,
                 });
@@ -1051,12 +890,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onClickEntry(event, target);
     }
 
-    async _onClickEntry(
-        _event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
-        const effectId = (target.closest("[data-ce-effect-id]") as HTMLElement)
-            ?.dataset.ceEffectId;
+    async _onClickEntry(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        const effectId = (target.closest("[data-ce-effect-id]") as HTMLElement)?.dataset.ceEffectId;
 
         if (!effectId) return;
 
@@ -1072,15 +907,10 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onCreateEntry(event, target);
     }
 
-    async _onCreateEntry(
-        event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
+    async _onCreateEntry(event: PointerEvent, target: HTMLElement): Promise<void> {
         event.stopPropagation();
 
-        const folderHtml = target.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+        const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
         const folderId = folderHtml.dataset.folderId;
 
         if (!folderId) return;
@@ -1098,9 +928,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             },
         });
 
-        const effects = await folder.createEmbeddedDocuments("ActiveEffect", [
-            newEffect,
-        ]);
+        const effects = await folder.createEmbeddedDocuments("ActiveEffect", [newEffect]);
 
         if (effects[0]) {
             // todo force: true when this is app v2 type
@@ -1116,10 +944,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onCreateFolder(event, target);
     }
 
-    async _onCreateFolder(
-        event: PointerEvent,
-        _target: HTMLElement,
-    ): Promise<void> {
+    async _onCreateFolder(event: PointerEvent, _target: HTMLElement): Promise<void> {
         event.stopPropagation();
 
         const folderConfig = new ConvenientFolderConfig({
@@ -1139,13 +964,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onToggleHiddenEffects(event, target);
     }
 
-    async _onToggleHiddenEffects(
-        _event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
-        await this.#settings.setShowHiddenEffects(
-            !this.#settings.showHiddenEffects,
-        );
+    async _onToggleHiddenEffects(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        await this.#settings.setShowHiddenEffects(!this.#settings.showHiddenEffects);
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
         const isHiddenEffects = this.#settings.showHiddenEffects;
@@ -1161,13 +981,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onToggleNestedEffects(event, target);
     }
 
-    async _onToggleNestedEffects(
-        _event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
-        await this.#settings.setShowNestedEffects(
-            !this.#settings.showNestedEffects,
-        );
+    async _onToggleNestedEffects(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        await this.#settings.setShowNestedEffects(!this.#settings.showNestedEffects);
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
         const isNestedEffects = this.#settings.showNestedEffects;
@@ -1183,13 +998,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onTogglePrioritizeTargets(event, target);
     }
 
-    async _onTogglePrioritizeTargets(
-        _event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
-        await this.#settings.setPrioritizeTargets(
-            !this.#settings.prioritizeTargets,
-        );
+    async _onTogglePrioritizeTargets(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        await this.#settings.setPrioritizeTargets(!this.#settings.prioritizeTargets);
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
         const isPrioritizeTargets = this.#settings.prioritizeTargets;
@@ -1205,10 +1015,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onViewBackups(event, target);
     }
 
-    async _onViewBackups(
-        _event: PointerEvent,
-        _target: HTMLElement,
-    ): Promise<void> {
+    async _onViewBackups(_event: PointerEvent, _target: HTMLElement): Promise<void> {
         new BackupConvenientEffectsV2().render({ force: true });
     }
 
@@ -1230,17 +1037,13 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         if (isFromBackup) {
             const effectObject = entry.toObject();
             Flags.setIsBackup(effectObject, false);
-            await newFolder?.createEmbeddedDocuments("ActiveEffect", [
-                effectObject,
-            ]);
+            await newFolder?.createEmbeddedDocuments("ActiveEffect", [effectObject]);
         } else {
             if (newFolder?.isOwner) {
                 const convenientEffect = createConvenientEffect({
                     effect: entry.toObject(),
                 });
-                await newFolder.createEmbeddedDocuments("ActiveEffect", [
-                    convenientEffect,
-                ]);
+                await newFolder.createEmbeddedDocuments("ActiveEffect", [convenientEffect]);
 
                 if (!originalFolder) return;
 
@@ -1248,42 +1051,30 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     await entry.delete();
                 } else {
                     ui.notifications.warn(
-                        game.i18n.localize(
-                            "ConvenientEffects.NoPermissionToRemoveEffect",
-                            {
-                                effectName: entry.name,
-                                originalFolderName: originalFolder?.name ?? "",
-                                newFolderName: newFolder?.name ?? "",
-                            },
-                        ),
+                        game.i18n.localize("ConvenientEffects.NoPermissionToRemoveEffect", {
+                            effectName: entry.name,
+                            originalFolderName: originalFolder?.name ?? "",
+                            newFolderName: newFolder?.name ?? "",
+                        }),
                     );
                 }
             } else {
                 ui.notifications.warn(
-                    game.i18n.localize(
-                        "ConvenientEffects.NoPermissionToAddEffect",
-                        {
-                            effectName: entry.name,
-                            newFolderName: newFolder?.name ?? "",
-                        },
-                    ),
+                    game.i18n.localize("ConvenientEffects.NoPermissionToAddEffect", {
+                        effectName: entry.name,
+                        newFolderName: newFolder?.name ?? "",
+                    }),
                 );
             }
         }
     }
 
-    _entryBelongsToFolder(
-        entry: ActiveEffect<Item<null>>,
-        folder?: Item<null>,
-    ): boolean {
+    _entryBelongsToFolder(entry: ActiveEffect<Item<null>>, folder?: Item<null>): boolean {
         if (!folder) return false;
         return entry.parent.id === folder.id;
     }
 
-    async _getDroppedEntryFromData(data: {
-        uuid?: string;
-        effectId?: string;
-    }): Promise<ActiveEffect<any> | undefined> {
+    async _getDroppedEntryFromData(data: { uuid?: string; effectId?: string }): Promise<ActiveEffect<any> | undefined> {
         return data.uuid
             ? await findEffectByUuid(data.uuid)
             : data.effectId
@@ -1316,9 +1107,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
             effectId?: string;
         },
     ): Promise<void> {
-        const closestFolder = target.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+        const closestFolder = target.closest(".directory-item.folder") as HTMLElement;
         closestFolder.classList.remove("droptarget");
         const folderId = closestFolder.dataset.folderId;
         if (!data || !folderId) return;
@@ -1346,17 +1135,11 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 el.classList.remove("droptarget");
             }
         }
-        if (
-            event.type === "dragleave" &&
-            (event.currentTarget as HTMLElement)?.contains(event.target as Node)
-        ) {
+        if (event.type === "dragleave" && (event.currentTarget as HTMLElement)?.contains(event.target as Node)) {
             return;
         }
 
-        (event.currentTarget as HTMLElement).classList.toggle(
-            "droptarget",
-            event.type === "dragenter",
-        );
+        (event.currentTarget as HTMLElement).classList.toggle("droptarget", event.type === "dragenter");
     }
 
     _onDragOver(_event: DragEvent): void {}
@@ -1364,9 +1147,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _onDragStart(event: DragEvent): void {
         if (!event.currentTarget) return;
 
-        const entryHtml = (event.currentTarget as HTMLElement).closest(
-            ".directory-item.entry",
-        ) as HTMLElement;
+        const entryHtml = (event.currentTarget as HTMLElement).closest(".directory-item.entry") as HTMLElement;
         const effectId = entryHtml.dataset.ceEffectId;
 
         if (!effectId) return;
@@ -1378,18 +1159,14 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     async _onDrop(event: DragEvent): Promise<void> {
         const data = foundry.applications.ux.TextEditor.getDragEventData(event);
 
-        const target =
-            (event.target as HTMLElement).closest(".directory-item.folder") ??
-            null;
+        const target = (event.target as HTMLElement).closest(".directory-item.folder") ?? null;
         if (!target) return;
 
         return this._handleDroppedEntry(target as HTMLElement, data);
     }
 
     #isUserFolderOwner(header: HTMLElement): boolean {
-        const folderHtml = header.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+        const folderHtml = header.closest(".directory-item.folder") as HTMLElement;
         const folder = findFolder(folderHtml.dataset.folderId ?? "", {
             backup: this.options.convenientEffects.backup,
         });
@@ -1398,9 +1175,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     #isFolderViewable(header: HTMLElement): boolean {
-        const folderHtml = header.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+        const folderHtml = header.closest(".directory-item.folder") as HTMLElement;
         const folder = findFolder(folderHtml.dataset.folderId ?? "", {
             backup: this.options.convenientEffects.backup,
         });
@@ -1429,13 +1204,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return Flags.isViewable(effect) ?? false;
     }
 
-    async #setFolderViewable(
-        header: HTMLElement,
-        value: boolean,
-    ): Promise<void> {
-        const folderHtml = header.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+    async #setFolderViewable(header: HTMLElement, value: boolean): Promise<void> {
+        const folderHtml = header.closest(".directory-item.folder") as HTMLElement;
         const folder = findFolder(folderHtml.dataset.folderId ?? "", {
             backup: this.options.convenientEffects.backup,
         });

@@ -34,8 +34,7 @@ function createConvenientItem({
     Flags.setIsStatusEffect(item, false);
 
     item.name = isBackup ? `${item.name} - Backup` : item.name;
-    item.img =
-        item.img ?? "modules/dfreds-convenient-effects/images/magic-palm.svg";
+    item.img = item.img ?? "modules/dfreds-convenient-effects/images/magic-palm.svg";
 
     return item;
 }
@@ -61,22 +60,13 @@ function createConvenientEffect({
     Flags.setIsStatusEffect(effect, false);
 
     if (nestedEffectIds) {
-        Flags.setNestedEffectIds(
-            effect,
-            Flags.getNestedEffectIds(effect) ?? nestedEffectIds,
-        );
+        Flags.setNestedEffectIds(effect, Flags.getNestedEffectIds(effect) ?? nestedEffectIds);
     }
     if (subEffectIds) {
-        Flags.setSubEffectIds(
-            effect,
-            Flags.getSubEffectIds(effect) ?? subEffectIds,
-        );
+        Flags.setSubEffectIds(effect, Flags.getSubEffectIds(effect) ?? subEffectIds);
     }
     if (otherEffectIds) {
-        Flags.setOtherEffectIds(
-            effect,
-            Flags.getOtherEffectIds(effect) ?? otherEffectIds,
-        );
+        Flags.setOtherEffectIds(effect, Flags.getOtherEffectIds(effect) ?? otherEffectIds);
     }
 
     effect.description = effect.description

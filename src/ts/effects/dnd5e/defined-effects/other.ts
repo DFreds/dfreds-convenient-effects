@@ -43,9 +43,7 @@ function bonusAction(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.BonusAction.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BonusAction.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BonusAction.description"),
             img: "modules/dfreds-convenient-effects/images/bonus-action.svg",
             flags: {
                 dae: {
@@ -60,9 +58,7 @@ function coverHalf(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.CoverHalf.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CoverHalf.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CoverHalf.description"),
             img: "modules/dfreds-convenient-effects/images/broken-wall.svg",
             tint: "#dae34f",
             changes: [
@@ -81,12 +77,8 @@ function coverHalf(): PreCreate<ActiveEffectSource> {
 function coverThreeQuarters(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.CoverThreeQuarters.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CoverThreeQuarters.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.CoverThreeQuarters.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CoverThreeQuarters.description"),
             img: "modules/dfreds-convenient-effects/images/brick-wall.svg",
             changes: [
                 acCover({
@@ -105,9 +97,7 @@ function coverTotal(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.CoverTotal.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.CoverTotal.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.CoverTotal.description"),
             img: "modules/dfreds-convenient-effects/images/castle.svg",
             changes: [grantFailAttack({ attackType: "all" })],
         },
@@ -118,9 +108,7 @@ function encumbered(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Encumbered.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Encumbered.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Encumbered.description"),
             img: "icons/svg/down.svg",
             statuses: ["encumbered"],
             changes: [
@@ -138,9 +126,7 @@ function dodge(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Dodge.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Dodge.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Dodge.description"),
             img: "modules/dfreds-convenient-effects/images/dodging.svg",
             statuses: ["dodging"],
             flags: { dae: { specialDuration: ["turnStart"] } },
@@ -161,9 +147,7 @@ function flanked(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Flanked.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Flanked.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Flanked.description"),
             img: "modules/dfreds-convenient-effects/images/encirclement.svg",
             changes: [
                 grantAdvantageAttack({
@@ -181,9 +165,7 @@ function flanking(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Flanking.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Flanking.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Flanking.description"),
             img: "icons/svg/sword.svg",
             changes: [
                 advantageAttack({
@@ -200,12 +182,8 @@ function flanking(): PreCreate<ActiveEffectSource> {
 function greatWeaponMaster(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.GreatWeaponMaster.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.GreatWeaponMaster.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.GreatWeaponMaster.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.GreatWeaponMaster.description"),
             img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
             changes: [
                 attackBonus({
@@ -224,12 +202,8 @@ function greatWeaponMaster(): PreCreate<ActiveEffectSource> {
 function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.HeavilyEncumbered.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.HeavilyEncumbered.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.HeavilyEncumbered.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.HeavilyEncumbered.description"),
             img: "icons/svg/downgrade.svg",
             statuses: ["heavilyEncumbered"],
             changes: [
@@ -253,18 +227,11 @@ function inspiration(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Inspiration.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Inspiration.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Inspiration.description"),
             img: "icons/magic/control/buff-luck-fortune-green.webp",
             flags: {
                 dae: {
-                    specialDuration: [
-                        "1Action",
-                        "isSave",
-                        "isCheck",
-                        "isSkill",
-                    ],
+                    specialDuration: ["1Action", "isSave", "isCheck", "isSkill"],
                 },
             },
             changes: [advantage()],
@@ -275,12 +242,8 @@ function inspiration(): PreCreate<ActiveEffectSource> {
 function rangedDisadvantage(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RangedDisadvantage.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RangedDisadvantage.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RangedDisadvantage.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RangedDisadvantage.description"),
             img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
             changes: [
                 disadvantageAttack({
@@ -298,9 +261,7 @@ function reaction(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Reaction.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Reaction.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Reaction.description"),
             img: "modules/dfreds-convenient-effects/images/reaction.svg",
             flags: {
                 dae: {
@@ -315,9 +276,7 @@ function ready(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Ready.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Ready.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Ready.description"),
             img: "modules/dfreds-convenient-effects/images/ready.svg",
             flags: { dae: { specialDuration: ["turnStart"] } },
         },
@@ -328,9 +287,7 @@ function sharpshooter(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Sharpshooter.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Sharpshooter.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Sharpshooter.description"),
             img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
             changes: [
                 attackBonus({

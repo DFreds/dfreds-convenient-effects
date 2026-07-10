@@ -3,14 +3,7 @@ import { EffectChangeData } from "@common/documents/active-effect.mjs";
 function addConditionImmunity({
     condition,
 }: {
-    condition:
-        | "diseased"
-        | "frightened"
-        | "paralyzed"
-        | "poisoned"
-        | "stunned"
-        | "unconscious"
-        | "restrained";
+    condition: "diseased" | "frightened" | "paralyzed" | "poisoned" | "stunned" | "unconscious" | "restrained";
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.ci.value",
@@ -19,11 +12,7 @@ function addConditionImmunity({
     };
 }
 
-function addDamageImmunity({
-    damageType,
-}: {
-    damageType: "poison" | "psychic";
-}): Partial<EffectChangeData> {
+function addDamageImmunity({ damageType }: { damageType: "poison" | "psychic" }): Partial<EffectChangeData> {
     return {
         key: "system.traits.di.value",
         type: "add",
@@ -81,11 +70,7 @@ function addAllDamageVulnerability(): Partial<EffectChangeData> {
     };
 }
 
-function addLanguage({
-    language,
-}: {
-    language: string;
-}): Partial<EffectChangeData> {
+function addLanguage({ language }: { language: string }): Partial<EffectChangeData> {
     return {
         key: "system.traits.languages.value",
         type: "add",
@@ -93,11 +78,7 @@ function addLanguage({
     };
 }
 
-function addWeaponProficiency({
-    weapon,
-}: {
-    weapon: string;
-}): Partial<EffectChangeData> {
+function addWeaponProficiency({ weapon }: { weapon: string }): Partial<EffectChangeData> {
     return {
         key: "system.traits.weaponProf.value",
         type: "add",
@@ -113,11 +94,7 @@ function addAllLanguages(): Partial<EffectChangeData> {
     };
 }
 
-function addSize({
-    value,
-}: {
-    value: string;
-}): Partial<EffectChangeData> {
+function addSize({ value }: { value: string }): Partial<EffectChangeData> {
     return {
         key: "system.traits.size",
         type: "override",

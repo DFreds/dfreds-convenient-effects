@@ -14,8 +14,7 @@ import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
 import { HandlebarsRenderOptions } from "@client/applications/api/_module.mjs";
 import { Flags } from "../../utils/flags.ts";
 
-const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } =
-    foundry.applications.api;
+const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 
 interface ConvenientEffectsOptions extends ApplicationConfiguration {
     convenientEffects: {
@@ -35,9 +34,7 @@ interface FolderData {
     effects: ActiveEffect<Item<null>>[];
 }
 
-class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
-    ApplicationV2<ConvenientEffectsOptions>,
-) {
+class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(ApplicationV2<ConvenientEffectsOptions>) {
     #settings: Settings;
 
     constructor(options?: DeepPartial<ConvenientEffectsOptions>) {
@@ -48,13 +45,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectsOptions> = {
         id: "backup-convenient-effects-v2",
         tag: "section",
-        classes: [
-            "tab",
-            "sidebar-tab",
-            "directory",
-            "flexcol",
-            "sidebar-popout",
-        ],
+        classes: ["tab", "sidebar-tab", "directory", "flexcol", "sidebar-popout"],
         window: {
             title: "ConvenientEffects.BackupAppName",
             icon: "fa-solid fa-hand-sparkles",
@@ -85,29 +76,18 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         },
         directory: {
             template: `modules/${MODULE_ID}/templates/ce-app/directory.hbs`,
-            templates: [
-                BackupConvenientEffectsV2._entryPartial,
-                BackupConvenientEffectsV2._folderPartial,
-            ],
+            templates: [BackupConvenientEffectsV2._entryPartial, BackupConvenientEffectsV2._folderPartial],
             scrollable: [""],
         },
     };
 
     _createContextMenus(): void {
-        this._createContextMenu(
-            this._getFolderContextOptions,
-            ".folder .folder-header",
-            {
-                fixed: true,
-            },
-        );
-        this._createContextMenu(
-            this._getEntryContextOptions,
-            ".directory-item[data-entry-id]",
-            {
-                fixed: true,
-            },
-        );
+        this._createContextMenu(this._getFolderContextOptions, ".folder .folder-header", {
+            fixed: true,
+        });
+        this._createContextMenu(this._getEntryContextOptions, ".directory-item[data-entry-id]", {
+            fixed: true,
+        });
     }
 
     _canCreateFolder(): boolean {
@@ -127,15 +107,10 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
                     return game.user.isGM;
                 },
                 onClick: (_event: PointerEvent, target: HTMLElement) => {
-                    const folderHtml = target.closest(
-                        ".directory-item.folder",
-                    ) as HTMLElement;
-                    const folder = findFolder(
-                        folderHtml.dataset.folderId ?? "",
-                        {
-                            backup: this.options.convenientEffects.backup,
-                        },
-                    );
+                    const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
+                    const folder = findFolder(folderHtml.dataset.folderId ?? "", {
+                        backup: this.options.convenientEffects.backup,
+                    });
 
                     folder?.exportToJSON();
                 },
@@ -143,18 +118,12 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         ];
     }
 
-    protected override async _onFirstRender(
-        context: object,
-        options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    protected override async _onFirstRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
         await super._onFirstRender(context, options);
         this._createContextMenus();
     }
 
-    protected override async _onRender(
-        context: object,
-        options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    protected override async _onRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
         await super._onRender(context, options);
 
         if (options.parts?.includes("header")) {
@@ -162,12 +131,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 inputSelector: "search input",
                 contentSelector: ".directory-list",
                 callback: this._onSearchFilter.bind(this),
-                initial:
-                    (
-                        this.element.querySelector(
-                            "search input",
-                        ) as HTMLInputElement
-                    )?.value ?? "",
+                initial: (this.element.querySelector("search input") as HTMLInputElement)?.value ?? "",
             }).bind(this.element);
         }
 
@@ -188,9 +152,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         }
     }
 
-    protected override async _prepareContext(
-        options: HandlebarsRenderOptions,
-    ): Promise<object> {
+    protected override async _prepareContext(options: HandlebarsRenderOptions): Promise<object> {
         const context = await super._prepareContext(options);
         Object.assign(context, {
             folderIcon: CONFIG.Folder.sidebarIcon,
@@ -221,10 +183,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return context;
     }
 
-    async _prepareDirectoryContext(
-        context: object,
-        _options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    async _prepareDirectoryContext(context: object, _options: HandlebarsRenderOptions): Promise<void> {
         const folders = findFolders({
             backup: this.options.convenientEffects.backup,
         });
@@ -305,13 +264,9 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         });
     }
 
-    async _prepareHeaderContext(
-        context: object,
-        _options: HandlebarsRenderOptions,
-    ): Promise<void> {
+    async _prepareHeaderContext(context: object, _options: HandlebarsRenderOptions): Promise<void> {
         Object.assign(context, {
-            canViewBackups:
-                game.user.isGM && !this.options.convenientEffects.backup,
+            canViewBackups: game.user.isGM && !this.options.convenientEffects.backup,
             canCreateFolder: this._canCreateFolder(),
             isBackup: this.options.convenientEffects.backup,
             // searchMode:
@@ -349,9 +304,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const stateTyped = state as { query?: string };
 
         if (partId === "header") {
-            const searchInput = priorElement.querySelector(
-                "search input",
-            ) as HTMLInputElement;
+            const searchInput = priorElement.querySelector("search input") as HTMLInputElement;
 
             if (searchInput) {
                 stateTyped.query = searchInput.value;
@@ -371,9 +324,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         const stateTyped = state as { query?: string };
 
         if (partId === "header" && stateTyped.query) {
-            const searchInput = newElement.querySelector(
-                "search input",
-            ) as HTMLInputElement;
+            const searchInput = newElement.querySelector("search input") as HTMLInputElement;
 
             if (searchInput) {
                 searchInput.value = stateTyped.query;
@@ -382,9 +333,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     }
 
     async collapseAll(): Promise<void> {
-        for (const el of this.element.querySelectorAll(
-            ".directory-item.folder",
-        )) {
+        for (const el of this.element.querySelectorAll(".directory-item.folder")) {
             el.classList.remove("expanded");
         }
 
@@ -404,13 +353,8 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onToggleFolder(event, target);
     }
 
-    async _onToggleFolder(
-        _event: PointerEvent,
-        target: HTMLElement,
-    ): Promise<void> {
-        const folderHtml = target.closest(
-            ".directory-item.folder",
-        ) as HTMLElement;
+    async _onToggleFolder(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        const folderHtml = target.closest(".directory-item.folder") as HTMLElement;
         folderHtml.classList.toggle("expanded");
 
         // const expanded = folder.classList.contains("expanded");
@@ -448,17 +392,11 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     //     this.render();
     // }
 
-    _onMatchSearchEntry(
-        query: string,
-        entryIds: Set<string>,
-        element: HTMLElement,
-        _options: object,
-    ): void {
+    _onMatchSearchEntry(query: string, entryIds: Set<string>, element: HTMLElement, _options: object): void {
         const entryId = element.dataset.entryId;
         if (!entryId) return;
 
-        element.style.display =
-            !query || entryIds.has(entryId) ? "flex" : "none";
+        element.style.display = !query || entryIds.has(entryId) ? "flex" : "none";
     }
 
     _onSearchFilter(
@@ -478,13 +416,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
             this._matchSearchFolders(rgx, folderIds, autoExpandIds, options);
 
             // Next match entries.
-            this._matchSearchEntries(
-                rgx,
-                entryIds,
-                folderIds,
-                autoExpandIds,
-                options,
-            );
+            this._matchSearchEntries(rgx, entryIds, folderIds, autoExpandIds, options);
         }
 
         // Toggle each directory entry.
@@ -501,10 +433,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 if (autoExpandIds.has(folderId ?? "")) {
                     if (query && match) elHtml.classList.add("expanded");
                 } else {
-                    elHtml.classList.toggle(
-                        "expanded",
-                        this.#settings.isFolderExpanded(folderId),
-                    );
+                    elHtml.classList.toggle("expanded", this.#settings.isFolderExpanded(folderId));
                 }
             } else {
                 this._onMatchSearchEntry(query, entryIds, elHtml, options);
@@ -569,12 +498,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
                 entryIds.add(entryId);
             }
             // Otherwise, if we are searching by name, match the entry name
-            else if (
-                nameOnlySearch &&
-                query?.test(
-                    foundry.applications.ux.SearchFilter.cleanQuery(entry.name),
-                )
-            ) {
+            else if (nameOnlySearch && query?.test(foundry.applications.ux.SearchFilter.cleanQuery(entry.name))) {
                 entryIds.add(entryId);
                 this.#onMatchFolder(entry.parent, folderIds, autoExpandIds);
             }
@@ -605,13 +529,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         });
 
         for (const folder of folders) {
-            if (
-                query?.test(
-                    foundry.applications.ux.SearchFilter.cleanQuery(
-                        folder.name,
-                    ),
-                )
-            ) {
+            if (query?.test(foundry.applications.ux.SearchFilter.cleanQuery(folder.name))) {
                 this.#onMatchFolder(folder, folderIds, autoExpandIds, {
                     autoExpand: false,
                 });
@@ -644,9 +562,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
     _onDragStart(event: DragEvent): void {
         if (!event.currentTarget) return;
 
-        const entryHtml = (event.currentTarget as HTMLElement).closest(
-            ".directory-item.entry",
-        ) as HTMLElement;
+        const entryHtml = (event.currentTarget as HTMLElement).closest(".directory-item.entry") as HTMLElement;
         const effectId = entryHtml.dataset.ceEffectId;
 
         if (!effectId) return;
@@ -665,15 +581,10 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(
         return thisClass._onResetSystemEffects(event, target);
     }
 
-    async _onResetSystemEffects(
-        _event: PointerEvent,
-        _target: HTMLElement,
-    ): Promise<void> {
+    async _onResetSystemEffects(_event: PointerEvent, _target: HTMLElement): Promise<void> {
         const proceed = await DialogV2.confirm({
             window: {
-                title: game.i18n.localize(
-                    "ConvenientEffects.ResetSystemEffects",
-                ),
+                title: game.i18n.localize("ConvenientEffects.ResetSystemEffects"),
             },
             content: `<strong>${game.i18n.localize("AreYouSure")}</strong><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
         });

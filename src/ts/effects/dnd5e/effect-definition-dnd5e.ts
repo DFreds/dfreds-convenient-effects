@@ -12,14 +12,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
 
     override get initialItemEffects(): ItemEffects[] {
-        return [
-            conditions(),
-            spells(),
-            classFeatures(),
-            equipment(),
-            magicItems(),
-            other(),
-        ];
+        return [conditions(), spells(), classFeatures(), equipment(), magicItems(), other()];
     }
 
     override get migrations(): MigrationType[] {

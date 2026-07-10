@@ -7,16 +7,13 @@ import { Listener } from "./index.ts";
  */
 const UpdateItem: Listener = {
     listen(): void {
-        Hooks.on(
-            "updateItem",
-            (item: any, _data: any, _metadata: any, _userId: any) => {
-                const itemType = item as Item<any>;
+        Hooks.on("updateItem", (item: any, _data: any, _metadata: any, _userId: any) => {
+            const itemType = item as Item<any>;
 
-                if (Flags.isConvenient(itemType)) {
-                    renderAppIfOpen();
-                }
-            },
-        );
+            if (Flags.isConvenient(itemType)) {
+                renderAppIfOpen();
+            }
+        });
     },
 };
 

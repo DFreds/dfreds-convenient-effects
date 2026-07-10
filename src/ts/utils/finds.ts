@@ -12,9 +12,7 @@ function findModuleById(moduleId: string): Module | undefined {
  * @param uuid The document UUID
  * @returns the document that was found via the UUID or undefined if not found
  */
-async function findDocumentByUuid(
-    uuid: string,
-): Promise<Actor<any> | Item<any> | undefined> {
+async function findDocumentByUuid(uuid: string): Promise<Actor<any> | Item<any> | undefined> {
     const document = await fromUuid(uuid);
 
     if (!document) return undefined;
@@ -34,9 +32,7 @@ async function findDocumentByUuid(
     return undefined;
 }
 
-function findDocumentByUuidSync(
-    uuid: string,
-): Actor<any> | Item<any> | undefined {
+function findDocumentByUuidSync(uuid: string): Actor<any> | Item<any> | undefined {
     const document = fromUuidSync(uuid);
 
     if (!document) return undefined;
@@ -82,10 +78,7 @@ function findFolders({ backup }: FindOptions): Item<null>[] {
         });
 }
 
-function findFolder(
-    folderId: string,
-    { backup }: FindOptions,
-): Item<null> | undefined {
+function findFolder(folderId: string, { backup }: FindOptions): Item<null> | undefined {
     return game.items.find((folder) => {
         const isConvenient = Flags.isConvenient(folder) ?? false;
         const isBackup = Flags.isBackup(folder) ?? false;
@@ -111,10 +104,7 @@ function findAllEffects({ backup }: FindOptions): ActiveEffect<Item<null>>[] {
         });
 }
 
-function findEffectsByFolder(
-    folderId: string,
-    { backup }: FindOptions,
-): ActiveEffect<Item<null>>[] {
+function findEffectsByFolder(folderId: string, { backup }: FindOptions): ActiveEffect<Item<null>>[] {
     const folder = findFolder(folderId, { backup });
 
     if (!folder) return [];
@@ -122,9 +112,7 @@ function findEffectsByFolder(
     return folder.effects
         .map((effect) => effect as ActiveEffect<Item<null>>)
         .filter((effect) => {
-            return (
-                Flags.isConvenient(effect) && backup === Flags.isBackup(effect)
-            );
+            return Flags.isConvenient(effect) && backup === Flags.isBackup(effect);
         })
         .sort((effectA, effectB) => {
             const nameA = effectA.name.toUpperCase(); // ignore upper and lowercase
@@ -171,9 +159,7 @@ function findAllOtherEffectIds({ backup }: FindOptions): string[] {
     return otherEffectIds;
 }
 
-async function findEffectByUuid(
-    uuid: string,
-): Promise<ActiveEffect<any> | undefined> {
+async function findEffectByUuid(uuid: string): Promise<ActiveEffect<any> | undefined> {
     const document = await fromUuid(uuid);
 
     if (!(document instanceof ActiveEffect)) return;
@@ -181,10 +167,7 @@ async function findEffectByUuid(
     return document as ActiveEffect<any>;
 }
 
-function findEffectByCeId(
-    ceId: string,
-    { backup }: FindOptions,
-): ActiveEffect<any> | undefined {
+function findEffectByCeId(ceId: string, { backup }: FindOptions): ActiveEffect<any> | undefined {
     return findAllEffects({ backup }).find((effect) => {
         return Flags.getCeEffectId(effect) === ceId;
     });

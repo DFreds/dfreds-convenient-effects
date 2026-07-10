@@ -16,14 +16,11 @@ async function getNestedEffectSelection(
         })
         .filter(notEmpty);
 
-    const content = await renderTemplate(
-        "modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs",
-        {
-            parentEffect: effectData,
-            nestedEffects,
-            default: nestedEffects[0].name,
-        },
-    );
+    const content = await renderTemplate("modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs", {
+        parentEffect: effectData,
+        nestedEffects,
+        default: nestedEffects[0].name,
+    });
 
     const choice = (await DialogV2.prompt({
         id: "nested-effect-selection-dialog",
@@ -43,9 +40,7 @@ async function getNestedEffectSelection(
             label: "ConvenientEffects.SelectEffect",
             icon: "fa-solid fa-check",
             callback: async (_event, _button, dialog) => {
-                const htmlChoice = $(dialog.element)
-                    .find('select[name="effect-choice"]')
-                    .val();
+                const htmlChoice = $(dialog.element).find('select[name="effect-choice"]').val();
                 return htmlChoice;
             },
             default: true,

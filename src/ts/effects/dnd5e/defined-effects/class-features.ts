@@ -23,9 +23,7 @@ import { tokenLight, tokenLightAnimationAttribute, tokenLightAnimationType } fro
 function classFeatures(): ItemEffects {
     return {
         itemData: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.Folders.ClassFeatures",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Folders.ClassFeatures"),
         },
         effects: [
             bardicInspiration(),
@@ -56,12 +54,8 @@ function bardicInspiration(): PreCreate<ActiveEffectSource> {
         .filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspiration.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspiration.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BardicInspiration.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspiration.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
         },
@@ -72,12 +66,8 @@ function bardicInspiration(): PreCreate<ActiveEffectSource> {
 function bardicInspirationD6(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD6.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD6.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD6.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD6.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
@@ -108,12 +98,8 @@ function bardicInspirationD6(): PreCreate<ActiveEffectSource> {
 function bardicInspirationD8(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD8.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD8.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD8.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD8.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
@@ -144,12 +130,8 @@ function bardicInspirationD8(): PreCreate<ActiveEffectSource> {
 function bardicInspirationD10(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD10.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD10.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD10.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD10.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
@@ -180,12 +162,8 @@ function bardicInspirationD10(): PreCreate<ActiveEffectSource> {
 function bardicInspirationD12(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD12.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.BardicInspirationD12.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD12.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD12.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
@@ -216,12 +194,8 @@ function bardicInspirationD12(): PreCreate<ActiveEffectSource> {
 function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.ChannelDivinitySacredWeapon.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.ChannelDivinitySacredWeapon.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinitySacredWeapon.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinitySacredWeapon.description"),
             img: "icons/weapons/swords/sword-gold-holy.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
@@ -268,12 +242,8 @@ function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
 function channelDivinityTurnTheUnholy(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.ChannelDivinityTurnTheUnholy.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.ChannelDivinityTurnTheUnholy.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinityTurnTheUnholy.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinityTurnTheUnholy.description"),
             img: "icons/magic/fire/explosion-embers-evade-silhouette.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             flags: { dae: { specialDuration: ["isDamaged"] } },
@@ -284,12 +254,8 @@ function channelDivinityTurnTheUnholy(): PreCreate<ActiveEffectSource> {
 function channelDivinityTurnUndead(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.ChannelDivinityTurnUndead.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.ChannelDivinityTurnUndead.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinityTurnUndead.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinityTurnUndead.description"),
             img: "icons/magic/fire/flame-burning-creature-skeleton.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             flags: { dae: { specialDuration: ["isDamaged"] } },
@@ -301,9 +267,7 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.KiEmptyBody.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.KiEmptyBody.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.KiEmptyBody.description"),
             img: "icons/magic/perception/silhouette-stealth-shadow.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
@@ -329,18 +293,11 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
 function kiPatientDefense(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.KiPatientDefense.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.KiPatientDefense.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.KiPatientDefense.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.KiPatientDefense.description"),
             img: "icons/magic/defensive/shield-barrier-glowing-blue.webp",
             flags: { dae: { specialDuration: ["turnStart"] } },
-            changes: [
-                grantDisadvantageAttack({ attackType: "all" }),
-                abilitySaveMode({ ability: "dex", value: "1" }),
-            ],
+            changes: [grantDisadvantageAttack({ attackType: "all" }), abilitySaveMode({ ability: "dex", value: "1" })],
         },
     });
 }
@@ -349,9 +306,7 @@ function rage(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Rage.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Rage.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Rage.description"),
             img: "icons/creatures/abilities/mouth-teeth-human.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
@@ -372,17 +327,11 @@ function rage(): PreCreate<ActiveEffectSource> {
 }
 
 function recklessAttack(): PreCreate<ActiveEffectSource> {
-    const subEffectIds = [recklessAttackAdvantage()]
-        .map((effect) => Flags.getCeEffectId(effect))
-        .filter(notEmpty);
+    const subEffectIds = [recklessAttackAdvantage()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RecklessAttack.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RecklessAttack.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RecklessAttack.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RecklessAttack.description"),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
             flags: { dae: { specialDuration: ["turnStart"] } },
             changes: [grantAdvantageAttack({ attackType: "all" })],
@@ -394,12 +343,8 @@ function recklessAttack(): PreCreate<ActiveEffectSource> {
 function recklessAttackAdvantage(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.RecklessAttackAdvantageOnAttacks.name",
-            ),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.RecklessAttackAdvantageOnAttacks.description",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.RecklessAttackAdvantageOnAttacks.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.RecklessAttackAdvantageOnAttacks.description"),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
             duration: { value: 1, units: "turns" },
             changes: [advantageAttack({ attackType: "mwak" })],

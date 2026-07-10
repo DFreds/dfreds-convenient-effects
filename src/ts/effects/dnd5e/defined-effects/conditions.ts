@@ -1,17 +1,14 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import { movement, exhaustion, initiativeMode } from "../changes/attributes.ts";
+import { exhaustion, initiativeMode, movement } from "../changes/attributes.ts";
 import {
     advantageAttack,
     disadvantageAttack,
-    grantAdvantageAttack,
-    grantDisadvantageAttack,
-    grantCriticalRange,
     failAbilitySave,
+    grantAdvantageAttack,
+    grantCriticalRange,
+    grantDisadvantageAttack,
 } from "../changes/midi-qol.ts";
-import {
-    addAllDamageResistance,
-    addDamageImmunity,
-} from "../changes/traits.ts";
+import { addAllDamageResistance, addDamageImmunity } from "../changes/traits.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
@@ -21,9 +18,7 @@ import { abilityCheckMode, abilitySaveMode } from "../changes/abilities.ts";
 function conditions(): ItemEffects {
     return {
         itemData: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.Folders.Conditions",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Folders.Conditions"),
         },
         effects: [
             blinded(),
@@ -56,9 +51,7 @@ function blinded(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Blinded.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Blinded.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Blinded.description"),
             img: "modules/dfreds-convenient-effects/images/blinded.svg",
             statuses: ["blinded"],
             changes: [
@@ -78,9 +71,7 @@ function charmed(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Charmed.name"),
             statuses: ["charmed"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Charmed.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Charmed.description"),
             img: "modules/dfreds-convenient-effects/images/charmed.svg",
         },
     });
@@ -89,13 +80,9 @@ function charmed(): PreCreate<ActiveEffectSource> {
 function concentrating(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.Concentrating.name",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Concentrating.name"),
             statuses: ["concentrating"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Concentrating.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Concentrating.description"),
             img: "modules/dfreds-convenient-effects/images/concentrating.svg",
         },
     });
@@ -106,9 +93,7 @@ function dead(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Dead.name"),
             statuses: ["dead"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Dead.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Dead.description"),
             img: "icons/svg/skull.svg",
         },
     });
@@ -119,9 +104,7 @@ function deafened(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
             statuses: ["deafened"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Deafened.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Deafened.description"),
             img: "modules/dfreds-convenient-effects/images/deafened.svg",
         },
     });
@@ -132,9 +115,7 @@ function exhaustion1(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.name"),
             statuses: ["exhaustion"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Exhaustion1.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
             flags: { dnd5e: { exhaustionLevel: 1 } },
             changes: [
@@ -160,9 +141,7 @@ function exhaustion2(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.name"),
             statuses: ["exhaustion"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Exhaustion2.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion2.svg",
             flags: { dnd5e: { exhaustionLevel: 2 } },
             changes: [
@@ -193,9 +172,7 @@ function exhaustion3(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.name"),
             statuses: ["exhaustion"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Exhaustion3.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion3.svg",
             flags: { dnd5e: { exhaustionLevel: 3 } },
             changes: [
@@ -235,9 +212,7 @@ function exhaustion4(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.name"),
             statuses: ["exhaustion"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Exhaustion4.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion4.svg",
             flags: { dnd5e: { exhaustionLevel: 4 } },
             changes: [
@@ -277,9 +252,7 @@ function exhaustion5(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.name"),
             statuses: ["exhaustion"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Exhaustion5.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion5.svg",
             flags: { dnd5e: { exhaustionLevel: 5 } },
             changes: [
@@ -319,9 +292,7 @@ function frightened(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Frightened.name"),
             statuses: ["frightened"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Frightened.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Frightened.description"),
             img: "modules/dfreds-convenient-effects/images/frightened.svg",
             changes: [
                 disadvantageAttack({
@@ -343,9 +314,7 @@ function grappled(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Grappled.name"),
             statuses: ["grappled"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Grappled.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Grappled.description"),
             img: "modules/dfreds-convenient-effects/images/grappled.svg",
             changes: [
                 movement({
@@ -361,13 +330,9 @@ function grappled(): PreCreate<ActiveEffectSource> {
 function incapacitated(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
-            name: game.i18n.localize(
-                "ConvenientEffects.Dnd.Incapacitated.name",
-            ),
+            name: game.i18n.localize("ConvenientEffects.Dnd.Incapacitated.name"),
             statuses: ["incapacitated"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Incapacitated.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Incapacitated.description"),
             img: "modules/dfreds-convenient-effects/images/incapacitated.svg",
         },
     });
@@ -378,9 +343,7 @@ function invisible(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Invisible.name"),
             statuses: ["invisible"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Invisible.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Invisible.description"),
             img: "modules/dfreds-convenient-effects/images/invisible.svg",
             changes: [
                 advantageAttack({
@@ -395,15 +358,11 @@ function invisible(): PreCreate<ActiveEffectSource> {
 }
 
 function paralyzed(): PreCreate<ActiveEffectSource> {
-    const subEffectIds = [incapacitated()]
-        .map((effect) => Flags.getCeEffectId(effect))
-        .filter(notEmpty);
+    const subEffectIds = [incapacitated()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Paralyzed.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Paralyzed.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Paralyzed.description"),
             img: "modules/dfreds-convenient-effects/images/paralyzed.svg",
             statuses: ["paralyzed"],
             changes: [
@@ -431,16 +390,12 @@ function paralyzed(): PreCreate<ActiveEffectSource> {
 }
 
 function petrified(): PreCreate<ActiveEffectSource> {
-    const subEffectIds = [incapacitated()]
-        .map((effect) => Flags.getCeEffectId(effect))
-        .filter(notEmpty);
+    const subEffectIds = [incapacitated()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Petrified.name"),
             statuses: ["petrified"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Petrified.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Petrified.description"),
             img: "modules/dfreds-convenient-effects/images/petrified.svg",
             changes: [
                 grantAdvantageAttack({
@@ -472,9 +427,7 @@ function poisoned(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Poisoned.name"),
             statuses: ["poisoned"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Poisoned.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Poisoned.description"),
             img: "modules/dfreds-convenient-effects/images/poisoned.svg",
             changes: [
                 disadvantageAttack({
@@ -496,9 +449,7 @@ function prone(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Prone.name"),
             statuses: ["prone"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Prone.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Prone.description"),
             img: "modules/dfreds-convenient-effects/images/prone.svg",
             changes: [
                 grantAdvantageAttack({
@@ -531,9 +482,7 @@ function restrained(): PreCreate<ActiveEffectSource> {
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Restrained.name"),
             statuses: ["restrained"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Restrained.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Restrained.description"),
             img: "modules/dfreds-convenient-effects/images/restrained.svg",
             changes: [
                 abilitySaveMode({ ability: "dex", value: "-1" }),
@@ -554,16 +503,12 @@ function restrained(): PreCreate<ActiveEffectSource> {
 }
 
 function stunned(): PreCreate<ActiveEffectSource> {
-    const subEffectIds = [incapacitated()]
-        .map((effect) => Flags.getCeEffectId(effect))
-        .filter(notEmpty);
+    const subEffectIds = [incapacitated()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Stunned.name"),
             statuses: ["stunned"],
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Stunned.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Stunned.description"),
             img: "modules/dfreds-convenient-effects/images/stunned.svg",
             changes: [
                 failAbilitySave({
@@ -582,16 +527,12 @@ function stunned(): PreCreate<ActiveEffectSource> {
 }
 
 function unconscious(): PreCreate<ActiveEffectSource> {
-    const subEffectIds = [incapacitated()]
-        .map((effect) => Flags.getCeEffectId(effect))
-        .filter(notEmpty);
+    const subEffectIds = [incapacitated()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
     return createConvenientEffect({
         effect: {
             statuses: ["unconscious"],
             name: game.i18n.localize("ConvenientEffects.Dnd.Unconscious.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Unconscious.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Unconscious.description"),
             img: "icons/svg/unconscious.svg",
             changes: [
                 failAbilitySave({
@@ -621,9 +562,7 @@ function wounded(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Wounded.name"),
-            description: game.i18n.localize(
-                "ConvenientEffects.Dnd.Wounded.description",
-            ),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Wounded.description"),
             img: "modules/dfreds-convenient-effects/images/wounded.svg",
         },
     });

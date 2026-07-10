@@ -4,20 +4,13 @@ import { Listener } from "./index.ts";
 
 const CloseActiveEffectConfig: Listener = {
     listen(): void {
-        Hooks.on(
-            "closeActiveEffectConfig",
-            (activeEffectConfig: any, _html: any) => {
-                const effect = activeEffectConfig.document as ActiveEffect<any>;
+        Hooks.on("closeActiveEffectConfig", (activeEffectConfig: any, _html: any) => {
+            const effect = activeEffectConfig.document as ActiveEffect<any>;
 
-                if (
-                    Flags.isConvenient(effect) &&
-                    effect.parent instanceof Item &&
-                    Flags.isConvenient(effect.parent)
-                ) {
-                    renderAppIfOpen();
-                }
-            },
-        );
+            if (Flags.isConvenient(effect) && effect.parent instanceof Item && Flags.isConvenient(effect.parent)) {
+                renderAppIfOpen();
+            }
+        });
     },
 };
 

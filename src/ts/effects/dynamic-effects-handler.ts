@@ -10,10 +10,7 @@ abstract class DynamicEffectsHandler {
         this.settings = new Settings();
     }
 
-    abstract handleDynamicEffects(
-        effect: PreCreate<ActiveEffectSource>,
-        actor: Actor<any>,
-    ): Promise<void> | void;
+    abstract handleDynamicEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> | void;
 }
 
 export { DynamicEffectsHandler };

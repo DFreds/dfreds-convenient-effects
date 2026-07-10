@@ -179,9 +179,7 @@ declare global {
          * @param params - The parameters to find effects
          * @returns The list of active effects
          */
-        findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<
-            Item<null>
-        >[];
+        findEffects({ backup = false }: IFindEffects = {}): ActiveEffect<Item<null>>[];
 
         /**
          * Searches through the list of available effects and returns one matching
@@ -206,11 +204,7 @@ declare global {
          * @returns true if the effect is applied to the document and is a convenient
          * effect, false otherwise
          */
-        hasEffectApplied({
-            effectId,
-            effectName,
-            uuid,
-        }: IHasEffectApplied): boolean;
+        hasEffectApplied({ effectId, effectName, uuid }: IHasEffectApplied): boolean;
 
         /**
          * Toggles the effect on the provided document UUIDs as the GM via sockets. If
@@ -239,14 +233,7 @@ declare global {
          * @param params - the parameters for adding an effect
          * @returns A promise that resolves when the effect is sent via the socket
          */
-        addEffect({
-            effectId,
-            effectName,
-            effectData,
-            uuid,
-            overlay = false,
-            origin,
-        }: IAddEffect): Promise<Document[]>;
+        addEffect({ effectId, effectName, effectData, uuid, overlay = false, origin }: IAddEffect): Promise<Document[]>;
 
         /**
          * Removes an effect matching the given params from a document of the given
@@ -256,12 +243,7 @@ declare global {
          * @returns A promise that resolves when the removal request is sent via the
          * socket
          */
-        removeEffect({
-            effectId,
-            effectName,
-            uuid,
-            origin,
-        }: IRemoveEffect): Promise<void>;
+        removeEffect({ effectId, effectName, uuid, origin }: IRemoveEffect): Promise<void>;
 
         /**
          * Creates effects on either an existing folder with `folderId` or on a new
@@ -270,11 +252,7 @@ declare global {
          * @param params - the parameters for creating effects
          * @returns A promise that resolves when the effect creation is complete
          */
-        createNewEffects({
-            existingFolderId,
-            newFolderData,
-            effectsData,
-        }: ICreateNewEffects): Promise<void>;
+        createNewEffects({ existingFolderId, newFolderData, effectsData }: ICreateNewEffects): Promise<void>;
 
         /**
          * Completely resets the world, re-initializing all effects and re-running
@@ -290,8 +268,7 @@ declare global {
     }
 
     namespace Hooks {
-        type HookParamsConvenientEffectsReady =
-            HookParameters<"dfreds-convenient-effects.ready">;
+        type HookParamsConvenientEffectsReady = HookParameters<"dfreds-convenient-effects.ready">;
 
         /**
          * Register a callback handler which should be triggered when a hook is triggered.

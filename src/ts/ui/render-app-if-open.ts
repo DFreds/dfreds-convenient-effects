@@ -6,9 +6,7 @@ import { ConvenientEffectsV2 } from "./ce-app/convenient-effects-v2.ts";
 function renderAppIfOpen(): void {
     const applications = foundry.applications.instances;
 
-    const convenientEffectsV2 = applications.get(
-        ConvenientEffectsV2.tabName,
-    ) as unknown as ConvenientEffectsV2;
+    const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName) as unknown as ConvenientEffectsV2;
 
     if (convenientEffectsV2 && convenientEffectsV2.active) {
         convenientEffectsV2.render();
@@ -18,9 +16,7 @@ function renderAppIfOpen(): void {
 function renderApp(): void {
     const applications = foundry.applications.instances;
 
-    const convenientEffectsV2 = applications.get(
-        ConvenientEffectsV2.tabName,
-    ) as unknown as ConvenientEffectsV2;
+    const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName) as unknown as ConvenientEffectsV2;
 
     if (convenientEffectsV2) {
         convenientEffectsV2.render();

@@ -7,20 +7,13 @@ import { Listener } from "./index.ts";
  */
 const CreateActiveEffect: Listener = {
     listen(): void {
-        Hooks.on(
-            "createActiveEffect",
-            (activeEffect: any, _metadata: any, _userId: any) => {
-                const effect = activeEffect as ActiveEffect<any>;
+        Hooks.on("createActiveEffect", (activeEffect: any, _metadata: any, _userId: any) => {
+            const effect = activeEffect as ActiveEffect<any>;
 
-                if (
-                    Flags.isConvenient(effect) &&
-                    effect.parent instanceof Item &&
-                    Flags.isConvenient(effect.parent)
-                ) {
-                    renderAppIfOpen();
-                }
-            },
-        );
+            if (Flags.isConvenient(effect) && effect.parent instanceof Item && Flags.isConvenient(effect.parent)) {
+                renderAppIfOpen();
+            }
+        });
     },
 };
 
