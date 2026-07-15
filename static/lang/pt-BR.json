@@ -88,6 +88,7 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "Condições",
+                "Conditions2024": "Condições (2024)",
                 "Spells": "Magias",
                 "ClassFeatures": "Características de Classe",
                 "Equipment": "Equipmento",
@@ -377,21 +378,41 @@
                 "name": "Exaustão 1",
                 "description": "Desvantagem em testes de habilidade"
             },
+            "Exhaustion12024": {
+                "name": "Exaustão 1 (2024)",
+                "description": "-2 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -5 pés de deslocamento"
+            },
             "Exhaustion2": {
                 "name": "Exaustão 2",
                 "description": "Desvantagem em testes de habilidade e deslocamento reduzido pela metade"
+            },
+            "Exhaustion22024": {
+                "name": "Exaustão 2 (2024)",
+                "description": "-4 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -10 pés de deslocamento"
             },
             "Exhaustion3": {
                 "name": "Exaustão 3",
                 "description": "Desvantagem em testes de habilidade, deslocamento reduzido pela metade e desvantagem em ataques e testes de resistência"
             },
+            "Exhaustion32024": {
+                "name": "Exaustão 3 (2024)",
+                "description": "-6 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -15 pés de deslocamento"
+            },
             "Exhaustion4": {
                 "name": "Exaustão 4",
                 "description": "Desvantagem em testes de habilidade, deslocamento reduzido pela metade, desvantagem em ataques e testes de resistência e máximo de pontos de vida reduzido pela metade"
             },
+            "Exhaustion42024": {
+                "name": "Exaustão 4 (2024)",
+                "description": "-8 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -20 pés de deslocamento"
+            },
             "Exhaustion5": {
                 "name": "Exaustão 5",
                 "description": "Desvantagem em testes de habilidade, deslocamento reduzido a 0, desvantagem em ataques e testes de resistência e máximo de pontos de vida reduzido pela metade"
+            },
+            "Exhaustion52024": {
+                "name": "Exaustão 5 (2024)",
+                "description": "-10 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -25 pés de deslocamento. Atingir o nível 6 de exaustão é fatal."
             },
             "EyesOfTheEagle": {
                 "name": "Olhos da Águia",
@@ -480,6 +501,10 @@
             "Grappled": {
                 "name": "Agarrado",
                 "description": "- O deslocamento de uma criatura agarrada se torna 0, e ela não pode se beneficiar de nenhum bônus em seu deslocamento.<br />- A condição termina se o agarrador for incapacitado.<br />- A condição também termina se um efeito remover a criatura agarrada do alcance do agarrador ou do efeito de agarrar."
+            },
+            "Grappled2024": {
+                "name": "Agarrado (2024)",
+                "description": "- O deslocamento de uma criatura agarrada se torna 0, e ela não pode se beneficiar de nenhum bônus em seu deslocamento.<br />- A criatura tem desvantagem em jogadas de ataque contra qualquer alvo que não seja o agarrador."
             },
             "GreatWeaponMaster": {
                 "name": "Mestre de Armas Grandes",

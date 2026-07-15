@@ -1,6 +1,7 @@
 import { EffectDefinition, ItemEffects } from "../effect-definition.ts";
 import { classFeatures } from "./defined-effects/class-features.ts";
 import { conditions } from "./defined-effects/conditions.ts";
+import { conditions2024 } from "./defined-effects/conditions-2024.ts";
 import { equipment } from "./defined-effects/equipment.ts";
 import { magicItems } from "./defined-effects/magic-items.ts";
 import { other } from "./defined-effects/other.ts";
@@ -12,7 +13,7 @@ class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
 
     override get initialItemEffects(): ItemEffects[] {
-        return [conditions(), spells(), classFeatures(), equipment(), magicItems(), other()];
+        return [conditions(), conditions2024(), spells(), classFeatures(), equipment(), magicItems(), other()];
     }
 
     override get migrations(): MigrationType[] {

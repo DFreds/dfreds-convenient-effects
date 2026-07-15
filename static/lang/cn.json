@@ -88,6 +88,7 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "02状态",
+                "Conditions2024": "02状态(2024)",
                 "Spells": "01法术",
                 "ClassFeatures": "03职业特性",
                 "Equipment": "04工具",
@@ -377,21 +378,41 @@
                 "name": "力竭Lv1",
                 "description": "力竭Lv1：属性检定具有劣势"
             },
+            "Exhaustion12024": {
+                "name": "力竭Lv1(2024)",
+                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-2，速度 -5尺"
+            },
             "Exhaustion2": {
                 "name": "力竭Lv2",
                 "description": "力竭Lv2：所有速度减半"
+            },
+            "Exhaustion22024": {
+                "name": "力竭Lv2(2024)",
+                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-4，速度 -10尺"
             },
             "Exhaustion3": {
                 "name": "力竭Lv3",
                 "description": "力竭Lv3：攻击检定和豁免检定具有劣势"
             },
+            "Exhaustion32024": {
+                "name": "力竭Lv3(2024)",
+                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-6，速度 -15尺"
+            },
             "Exhaustion4": {
                 "name": "力竭Lv4",
                 "description": "力竭Lv4：生命值上限减半"
             },
+            "Exhaustion42024": {
+                "name": "力竭Lv4(2024)",
+                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-8，速度 -20尺"
+            },
             "Exhaustion5": {
                 "name": "力竭Lv5",
                 "description": "力竭Lv5：速度降为0"
+            },
+            "Exhaustion52024": {
+                "name": "力竭Lv5(2024)",
+                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-10，速度 -25尺。力竭达到6级将导致死亡。"
             },
             "EyesOfTheEagle": {
                 "name": "鹰眼护目镜 Eyes of the Eagle",
@@ -476,6 +497,10 @@
             "GogglesOfNight": {
                 "name": "夜视镜 Goggles of Night",
                 "description": "添加 60 尺黑暗视觉"
+            },
+            "Grappled2024": {
+                "name": "擒抱(2024)",
+                "description": "被擒抱生物的速度变为0，且无法受益于任何速度加值。<br/>该生物对除擒抱者以外的目标进行攻击检定时具有劣势。"
             },
             "Grappled": {
                 "name": "擒抱",

@@ -88,6 +88,7 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
+                "Conditions2024": "Conditions (2024)",
                 "Spells": "Sorts",
                 "ClassFeatures": "Capacités des classes",
                 "Equipment": "Équipement",
@@ -377,21 +378,41 @@
                 "name": "Épuisement 1",
                 "description": "Désavantage sur les tests de caractéristiques"
             },
+            "Exhaustion12024": {
+                "name": "Épuisement 1 (2024)",
+                "description": "-2 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -1,5 mètres de vitesse"
+            },
             "Exhaustion2": {
                 "name": "Épuisement 2",
                 "description": "Désavantage sur les tests de caractéristiques et vitesse réduite de moitié"
+            },
+            "Exhaustion22024": {
+                "name": "Épuisement 2 (2024)",
+                "description": "-4 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -3 mètres de vitesse"
             },
             "Exhaustion3": {
                 "name": "Épuisement 3",
                 "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié et désavantage sur les attaques et les jets de sauvegarde"
             },
+            "Exhaustion32024": {
+                "name": "Épuisement 3 (2024)",
+                "description": "-6 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -4,5 mètres de vitesse"
+            },
             "Exhaustion4": {
                 "name": "Épuisement 4",
                 "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
             },
+            "Exhaustion42024": {
+                "name": "Épuisement 4 (2024)",
+                "description": "-8 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -6 mètres de vitesse"
+            },
             "Exhaustion5": {
                 "name": "Épuisement 5",
                 "description": "Désavantage sur les tests de caractéristiques, vitesse réduite à 0, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
+            },
+            "Exhaustion52024": {
+                "name": "Épuisement 5 (2024)",
+                "description": "-10 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -7,5 mètres de vitesse. Atteindre le niveau d'épuisement 6 est fatal."
             },
             "EyesOfTheEagle": {
                 "name": "Yeux de l'aigle",
@@ -480,6 +501,10 @@
             "Grappled": {
                 "name": "Agrippé",
                 "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn inline]"
+            },
+            "Grappled2024": {
+                "name": "Agrippé (2024)",
+                "description": "- La vitesse d'une créature agrippée devient 0, et elle ne peut bénéficier d'aucun bonus à sa vitesse.<br />- La créature a un désavantage aux jets d'attaque contre toute cible autre que l'agrippeur."
             },
             "GreatWeaponMaster": {
                 "name": "Maître des armes à deux mains",

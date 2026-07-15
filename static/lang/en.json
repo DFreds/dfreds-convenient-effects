@@ -88,6 +88,7 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
+                "Conditions2024": "Conditions (2024)",
                 "Spells": "Spells",
                 "ClassFeatures": "Class Features",
                 "Equipment": "Equipment",
@@ -378,21 +379,41 @@
                 "name": "Exhaustion 1",
                 "description": "Disadvantage on ability checks"
             },
+            "Exhaustion12024": {
+                "name": "Exhaustion 1 (2024)",
+                "description": "-2 to all d20 Tests (ability checks, saving throws, and attack rolls) and -5 ft. Speed"
+            },
             "Exhaustion2": {
                 "name": "Exhaustion 2",
                 "description": "Disadvantage on ability checks and speed halved"
+            },
+            "Exhaustion22024": {
+                "name": "Exhaustion 2 (2024)",
+                "description": "-4 to all d20 Tests (ability checks, saving throws, and attack rolls) and -10 ft. Speed"
             },
             "Exhaustion3": {
                 "name": "Exhaustion 3",
                 "description": "Disadvantage on ability checks, speed halved, and disadvantage on attacks and saving throws"
             },
+            "Exhaustion32024": {
+                "name": "Exhaustion 3 (2024)",
+                "description": "-6 to all d20 Tests (ability checks, saving throws, and attack rolls) and -15 ft. Speed"
+            },
             "Exhaustion4": {
                 "name": "Exhaustion 4",
                 "description": "Disadvantage on ability checks, speed halved, disadvantage on attacks and saving throws, and hit point maximum halved"
             },
+            "Exhaustion42024": {
+                "name": "Exhaustion 4 (2024)",
+                "description": "-8 to all d20 Tests (ability checks, saving throws, and attack rolls) and -20 ft. Speed"
+            },
             "Exhaustion5": {
                 "name": "Exhaustion 5",
                 "description": "Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved"
+            },
+            "Exhaustion52024": {
+                "name": "Exhaustion 5 (2024)",
+                "description": "-10 to all d20 Tests (ability checks, saving throws, and attack rolls) and -25 ft. Speed. Reaching exhaustion level 6 is fatal."
             },
             "EyesOfTheEagle": {
                 "name": "Eyes of the Eagle",
@@ -481,6 +502,10 @@
             "Grappled": {
                 "name": "Grappled",
                 "description": "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- The condition ends if the grappler is incapacitated.<br />- The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect."
+            },
+            "Grappled2024": {
+                "name": "Grappled (2024)",
+                "description": "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- The creature has disadvantage on attack rolls against any target other than the grappler."
             },
             "GreatWeaponMaster": {
                 "name": "Great Weapon Master",
