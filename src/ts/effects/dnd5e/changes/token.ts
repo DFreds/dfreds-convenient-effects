@@ -22,7 +22,7 @@ function tokenLightAnimationAttribute({
     value,
     priority,
 }: {
-    attribute: "speed" | "intensity" | "speed";
+    attribute: "speed" | "intensity";
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {

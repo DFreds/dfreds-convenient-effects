@@ -145,6 +145,9 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             effect.changes = effect.changes ?? [];
             effect.changes.push(
                 ...[
+                    addDamageResistance({ damageType: "bludgeoning" }),
+                    addDamageResistance({ damageType: "piercing" }),
+                    addDamageResistance({ damageType: "slashing" }),
                     addDamageResistance({ damageType: "acid" }),
                     addDamageResistance({ damageType: "cold" }),
                     addDamageResistance({ damageType: "fire" }),
@@ -152,7 +155,6 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                     addDamageResistance({ damageType: "lightning" }),
                     addDamageResistance({ damageType: "necrotic" }),
                     addDamageResistance({ damageType: "poison" }),
-                    addDamageResistance({ damageType: "physical" }),
                     addDamageResistance({ damageType: "radiant" }),
                     addDamageResistance({ damageType: "thunder" }),
                 ],

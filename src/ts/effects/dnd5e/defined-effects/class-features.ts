@@ -6,7 +6,7 @@ import {
     optionalAttack,
     optionalLabel,
     optionalSave,
-    optionalSkill,
+    optionalSkill
 } from "../changes/midi-qol.ts";
 import { attackBonus, damageBonus } from "../changes/bonuses.ts";
 import { addDamageResistance } from "../changes/traits.ts";
@@ -283,7 +283,6 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
                 addDamageResistance({ damageType: "poison" }),
                 addDamageResistance({ damageType: "psychic" }),
                 addDamageResistance({ damageType: "radiant" }),
-                addDamageResistance({ damageType: "slashing" }),
                 addDamageResistance({ damageType: "thunder" }),
             ],
         },
