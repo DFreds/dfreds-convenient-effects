@@ -9,6 +9,7 @@ import { Sockets } from "./sockets/sockets.ts";
 import Document from "@common/abstract/document.mjs";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { MODULE_ID } from "./constants.ts";
+import { Mapping } from "./effects/mapping.ts";
 
 class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
@@ -236,6 +237,25 @@ class EffectInterfaceImpl implements EffectInterface {
         if (confirm) {
             // @ts-expect-error Complains about failed to resolve module specifier
             await SettingsConfig.reloadConfirm({ world: false });
+        }
+    }
+
+    async resetBackupEffects(): Promise<void> {
+        if (!game.user.isGM) return;
+
+        const backupConvenientEffectsV2 = foundry.applications.instances.get("backup-convenient-effects-v2");
+        if (backupConvenientEffectsV2) {
+            await backupConvenientEffectsV2.close();
+        }
+
+        const backupFolders = findFolders({ backup: true });
+        await Item.deleteDocuments(backupFolders.map((item) => item.id));
+
+        const systemDefinition = new Mapping().findSystemDefinitionForSystemId();
+        await systemDefinition?.effectDefinition?.createItemsAndEffects({ backup: true });
+
+        if (systemDefinition?.effectDefinition) {
+            await this.#settings.setBackupEffectsVersion(systemDefinition.effectDefinition.version);
         }
     }
 

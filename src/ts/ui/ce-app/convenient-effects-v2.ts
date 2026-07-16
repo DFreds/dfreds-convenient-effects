@@ -7,7 +7,7 @@ import {
     findEffectsByFolder,
     findFolder,
     findFolders,
-    findModuleById,
+    findModuleById
 } from "../../utils/finds.ts";
 import { getActorUuids, getApi, getItemType } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
@@ -42,17 +42,21 @@ interface FolderData {
 }
 
 class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<ConvenientEffectsOptions>) {
+    refresh: () => void;
+
     #settings: Settings;
 
     constructor(options?: DeepPartial<ConvenientEffectsOptions>) {
         super(options);
         this.#settings = new Settings();
+
+        this.refresh = foundry.utils.debounce(this.render.bind(this), 100);
     }
 
     static override tabName: string = "convenientEffects";
 
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectsOptions> = {
-        classes: ["directory", "flexcol"],
+        classes: ["directory", "flexcol", "convenient-effects-app"],
         window: {
             title: "ConvenientEffects.AppName",
             icon: "fa-solid fa-hand-sparkles",
@@ -627,6 +631,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             canViewBackups: game.user.isGM && !this.options.convenientEffects.backup,
             canCreateFolder: this._canCreateFolder(),
             isBackup: this.options.convenientEffects.backup,
+            effectsVersion: this.#settings.effectsVersion,
             // searchMode:
             //     this.collection.searchMode === CONST.DIRECTORY_SEARCH_MODES.NAME
             //         ? {

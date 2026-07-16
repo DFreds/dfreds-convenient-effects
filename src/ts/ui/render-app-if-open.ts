@@ -9,7 +9,7 @@ function renderAppIfOpen(): void {
     const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName) as unknown as ConvenientEffectsV2;
 
     if (convenientEffectsV2 && convenientEffectsV2.active) {
-        convenientEffectsV2.render();
+        convenientEffectsV2.refresh();
     }
 }
 

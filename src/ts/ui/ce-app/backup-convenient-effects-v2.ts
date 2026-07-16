@@ -45,7 +45,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(ApplicationV2
     static override DEFAULT_OPTIONS: DeepPartial<ConvenientEffectsOptions> = {
         id: "backup-convenient-effects-v2",
         tag: "section",
-        classes: ["tab", "sidebar-tab", "directory", "flexcol", "sidebar-popout"],
+        classes: ["tab", "sidebar-tab", "directory", "flexcol", "sidebar-popout", "convenient-effects-app"],
         window: {
             title: "ConvenientEffects.BackupAppName",
             icon: "fa-solid fa-hand-sparkles",
@@ -269,6 +269,7 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(ApplicationV2
             canViewBackups: game.user.isGM && !this.options.convenientEffects.backup,
             canCreateFolder: this._canCreateFolder(),
             isBackup: this.options.convenientEffects.backup,
+            effectsVersion: this.#settings.backupEffectsVersion,
             // searchMode:
             //     this.collection.searchMode === CONST.DIRECTORY_SEARCH_MODES.NAME
             //         ? {

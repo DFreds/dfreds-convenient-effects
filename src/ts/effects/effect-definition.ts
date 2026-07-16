@@ -11,6 +11,8 @@ abstract class EffectDefinition {
 
     abstract systemId: string;
 
+    abstract version: number;
+
     constructor() {
         this.settings = new Settings();
     }
@@ -26,12 +28,17 @@ abstract class EffectDefinition {
 
         if (!this.settings.hasInitialized) {
             ui.notifications.info(game.i18n.localize("ConvenientEffects.Initializing"));
-            await this.#createItemsAndEffects({ backup: false });
-            await this.#createItemsAndEffects({ backup: true });
+            await this.createItemsAndEffects({ backup: false });
+            await this.createItemsAndEffects({ backup: true });
 
             // Set initialized before migration runs
             await this.settings.setHasInitialized(true);
+            await this.settings.setEffectsVersion(this.version);
+            await this.settings.setBackupEffectsVersion(this.version);
             ui.notifications.info(game.i18n.localize("ConvenientEffects.FinishedInitializing"));
+        } else if (this.settings.backupEffectsVersion !== this.version) {
+            await getApi().resetBackupEffects();
+            ui.notifications.info(game.i18n.localize("ConvenientEffects.BackupsUpdated", { version: this.version }));
         }
 
         migrations.addMigrations({
@@ -49,7 +56,7 @@ abstract class EffectDefinition {
 
     abstract get migrations(): MigrationType[];
 
-    async #createItemsAndEffects({ backup }: { backup: boolean }): Promise<void> {
+    async createItemsAndEffects({ backup }: { backup: boolean }): Promise<void> {
         const effectPromises = this.initialItemEffects.map(async (itemEffect) => {
             const item = await Item.implementation.create(
                 createConvenientItem({

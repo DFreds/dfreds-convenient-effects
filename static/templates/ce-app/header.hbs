@@ -99,4 +99,20 @@
             ></button>
         </search>
     {{/if}}
+
+    {{#if isBackup}}
+        <span
+            class="ce-version"
+            data-tooltip="{{localize 'ConvenientEffects.BackupEffectsVersionTooltip'}}"
+        >
+            {{localize "ConvenientEffects.EffectsVersionLabel"}} {{effectsVersion}}
+        </span>
+    {{else}}
+        <span
+            class="ce-version"
+            data-tooltip="{{localize 'ConvenientEffects.EffectsVersionTooltip'}}"
+        >
+            {{localize "ConvenientEffects.EffectsVersionLabel"}} {{effectsVersion}}
+        </span>
+    {{/if}}
 </header>

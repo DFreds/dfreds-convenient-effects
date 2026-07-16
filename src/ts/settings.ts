@@ -13,6 +13,8 @@ class Settings {
     #SHOW_NESTED_EFFECTS = "showNestedEffects";
     #HAS_INITIALIZED = "hasInitialized";
     #PRIORITIZE_TARGETS = "prioritizeTargets";
+    #EFFECTS_VERSION = "effectsVersion";
+    #BACKUP_EFFECTS_VERSION = "backupEffectsVersion";
 
     constructor() {
         this.#USER_ROLES[CONST.USER_ROLES.PLAYER] = game.i18n.localize("ConvenientEffects.Setting.Player");
@@ -38,6 +40,8 @@ class Settings {
         this.#registerShowNestedEffects();
         this.#registerPrioritizeTargets();
         this.#registerHasInitialized();
+        this.#registerEffectsVersion();
+        this.#registerBackupEffectsVersion();
     }
 
     #registerAppControlsPermission(): void {
@@ -113,6 +117,26 @@ class Settings {
             config: false,
             default: false,
             type: Boolean,
+        });
+    }
+
+    #registerEffectsVersion(): void {
+        game.settings.register(MODULE_ID, this.#EFFECTS_VERSION, {
+            name: "Effects Version",
+            scope: "world",
+            config: false,
+            default: 0,
+            type: Number,
+        });
+    }
+
+    #registerBackupEffectsVersion(): void {
+        game.settings.register(MODULE_ID, this.#BACKUP_EFFECTS_VERSION, {
+            name: "Backup Effects Version",
+            scope: "world",
+            config: false,
+            default: 0,
+            type: Number,
         });
     }
 
@@ -208,6 +232,22 @@ class Settings {
 
     async setHasInitialized(value: boolean): Promise<unknown> {
         return game.settings.set(MODULE_ID, this.#HAS_INITIALIZED, value);
+    }
+
+    get effectsVersion(): number {
+        return game.settings.get(MODULE_ID, this.#EFFECTS_VERSION) as unknown as number;
+    }
+
+    async setEffectsVersion(value: number): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#EFFECTS_VERSION, value);
+    }
+
+    get backupEffectsVersion(): number {
+        return game.settings.get(MODULE_ID, this.#BACKUP_EFFECTS_VERSION) as unknown as number;
+    }
+
+    async setBackupEffectsVersion(value: number): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#BACKUP_EFFECTS_VERSION, value);
     }
 }
 

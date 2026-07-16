@@ -265,6 +265,14 @@ declare global {
         }: {
             confirm?: boolean;
         } = {}): Promise<void>;
+
+        /**
+         * Resets the effect backups, deleting them and re-creating them from the
+         * built-in definitions. Does not affect the active (non-backup) effects.
+         *
+         * @returns A promise that resolves when the reset is complete
+         */
+        resetBackupEffects(): Promise<void>;
     }
 
     namespace Hooks {
