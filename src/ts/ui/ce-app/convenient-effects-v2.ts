@@ -50,7 +50,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
         super(options);
         this.#settings = new Settings();
 
-        this.refresh = foundry.utils.debounce(this.render.bind(this), 100);
+        this.refresh = foundry.utils.debounce(this.render.bind(this), 50);
     }
 
     static override tabName: string = "convenientEffects";
