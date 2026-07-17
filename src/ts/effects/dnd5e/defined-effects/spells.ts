@@ -448,10 +448,10 @@ function contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BlindingSickness.description"),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
+            statuses: ["blinded"],
             changes: [
                 abilitySaveMode({ ability: "wis", value: "-1" }),
                 abilityCheckMode({ ability: "wis", value: "-1" }),
-                ...(blinded().changes ?? []),
             ],
         },
     });
