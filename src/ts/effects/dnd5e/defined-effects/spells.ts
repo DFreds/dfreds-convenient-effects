@@ -1157,6 +1157,9 @@ function heroesFeast(): PreCreate<ActiveEffectSource> {
                 addConditionImmunity({
                     condition: "frightened",
                 }),
+                addConditionImmunity({
+                    condition: "poisoned",
+                }),
                 abilitySaveMode({
                     ability: "wis",
                     value: "1",

@@ -3,7 +3,25 @@ import { EffectChangeData } from "@common/documents/active-effect.mjs";
 function addConditionImmunity({
     condition,
 }: {
-    condition: "diseased" | "frightened" | "paralyzed" | "poisoned" | "stunned" | "unconscious" | "restrained";
+    condition:
+        | "blinded"
+        | "charmed"
+        | "deafened"
+        | "diseased"
+        | "exhaustion"
+        | "frightened"
+        | "grappled"
+        | "incapacitated"
+        | "invisible"
+        | "paralyzed"
+        | "petrified"
+        | "poisoned"
+        | "prone"
+        | "restrained"
+        | "silenced"
+        | "stunned"
+        | "surprised"
+        | "unconscious";
 }): Partial<EffectChangeData> {
     return {
         key: "system.traits.ci.value",
