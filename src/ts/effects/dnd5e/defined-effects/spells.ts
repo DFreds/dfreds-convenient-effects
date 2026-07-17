@@ -392,7 +392,7 @@ function charmPerson(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.CharmPerson.description"),
             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: charmed().changes,
+            statuses: ["charmed"],
         },
     });
 }
