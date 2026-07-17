@@ -6,11 +6,10 @@ import {
     optionalAttack,
     optionalLabel,
     optionalSave,
-    optionalSkill
+    optionalSkill,
 } from "../changes/midi-qol.ts";
 import { attackBonus, damageBonus } from "../changes/bonuses.ts";
 import { addDamageResistance } from "../changes/traits.ts";
-import { invisible } from "./conditions.ts";
 import { ItemEffects } from "../../effect-definition.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { Flags } from "../../../utils/flags.ts";
@@ -270,8 +269,8 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.KiEmptyBody.description"),
             img: "icons/magic/perception/silhouette-stealth-shadow.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
+            statuses: ["invisible"],
             changes: [
-                ...(invisible().changes ?? []),
                 addDamageResistance({ damageType: "bludgeoning" }),
                 addDamageResistance({ damageType: "piercing" }),
                 addDamageResistance({ damageType: "slashing" }),
