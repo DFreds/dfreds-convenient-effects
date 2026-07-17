@@ -1193,7 +1193,8 @@ function hideousLaughter(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.HideousLaughter.description"),
             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [...(incapacitated().changes ?? []), ...(prone().changes ?? [])],
+            statuses: ["incapacitated", "prone"],
+            changes: prone().changes,
         },
     });
 }
