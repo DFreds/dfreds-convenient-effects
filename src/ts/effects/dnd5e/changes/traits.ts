@@ -62,6 +62,14 @@ function addAllDamageResistance(): Partial<EffectChangeData> {
     };
 }
 
+function addDamageBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.dr.bypasses",
+        type: "add",
+        value: bypass,
+    };
+}
+
 function addAllDamageVulnerability(): Partial<EffectChangeData> {
     return {
         key: "system.traits.dv.all",
@@ -106,6 +114,7 @@ export {
     addConditionImmunity,
     addAllDamageImmunity,
     addAllDamageResistance,
+    addDamageBypass,
     addDamageImmunity,
     addDamageResistance,
     addLanguage,

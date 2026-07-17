@@ -31,6 +31,7 @@ import {
     addAllDamageVulnerability,
     addAllLanguages,
     addConditionImmunity,
+    addDamageBypass,
     addDamageImmunity,
     addDamageResistance,
 } from "../changes/traits.ts";
@@ -1838,6 +1839,9 @@ function stoneskin(): PreCreate<ActiveEffectSource> {
                 }),
                 addDamageResistance({
                     damageType: "slashing",
+                }),
+                addDamageBypass({
+                    bypass: "mgc",
                 }),
                 tokenMagic({
                     value: "oldfilm",
