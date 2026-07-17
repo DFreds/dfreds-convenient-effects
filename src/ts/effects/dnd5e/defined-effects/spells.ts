@@ -285,6 +285,7 @@ function blackTentacles(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BlackTentacles.description"),
             img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
+            statuses: ["restrained"],
             changes: restrained().changes,
         },
     });
