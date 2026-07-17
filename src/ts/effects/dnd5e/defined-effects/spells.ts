@@ -1425,6 +1425,9 @@ function mindBlank(): PreCreate<ActiveEffectSource> {
                 addDamageImmunity({
                     damageType: "psychic",
                 }),
+                addConditionImmunity({
+                    condition: "charmed",
+                }),
             ],
         },
     });
