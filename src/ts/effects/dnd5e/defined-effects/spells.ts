@@ -9,6 +9,7 @@ import {
     initiativeMode,
     movement,
     multiplyEncumbrance,
+    tempMaxHp,
     upgradeDarkvision,
     upgradeMovement,
 } from "../changes/attributes.ts";
@@ -174,6 +175,11 @@ function aid(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Aid.description"),
             img: "icons/magic/life/heart-cross-blue.webp",
             duration: { value: SECONDS.IN_EIGHT_HOURS, units: "seconds" },
+            changes: [
+                tempMaxHp({
+                    value: "+5",
+                }),
+            ],
         },
     });
 }

@@ -81,6 +81,15 @@ function exhaustion({ value, priority }: { value: string; priority?: number }): 
     };
 }
 
+function tempMaxHp({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.hp.tempmax",
+        type: "add",
+        value,
+        priority,
+    };
+}
+
 function movement({
     movementType,
     value,
@@ -179,4 +188,5 @@ export {
     initiativeMode,
     concentrationMode,
     deathMode,
+    tempMaxHp,
 };
