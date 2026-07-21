@@ -35,6 +35,8 @@
         "EditEffect": "Modifier l'effet",
         "AddEffect": "Ajouter un effet",
         "RemoveEffect": "Retirer un effet",
+        "Increment": "Augmenter",
+        "Decrement": "Diminuer",
         "DeleteEffect": "Supprimer l'effet",
         "ShowEffect": "Afficher l'effet",
         "HideEffect": "Masquer l'effet",
@@ -54,8 +56,10 @@
         "FolderHidden": "Dossier masqué",
         "Passive": "Passif",
         "EffectHidden": "Effet masqué",
+        "Incrementable": "Incrémentable (cliquez pour augmenter, maj + clic pour diminuer)",
         "HasNestedEffects": "A des effets imbriqués",
         "IsNestedEffect": "Est un effet imbriqué",
+        "IsIncrementEffect": "Est un effet incrémentiel",
         "StatusEffect": "Effet de statut",
         "MidiQolEffects": "Effets Midi-QoL",
         "StackableDae": "DAE empilable",
@@ -74,12 +78,18 @@
             "ViewableHint": "Si cette case est cochée, cet effet sera toujours affiché dans l'application.",
             "DynamicLabel": "Dynamique",
             "DynamicHint": "Si cette case est cochée, cet effet aura des effets dynamiques appliqués en fonction des données de l'acteur. ",
+            "UpdatesActorLabel": "Met à jour l'acteur",
+            "UpdatesActorHint": "Si cette case est cochée, cet effet met uniquement à jour les données de l'acteur et ne lui ajoute jamais d'effet. Cela ne peut pas être modifié et est utilisé pour des cas d'effets très spécifiques.",
             "NestedEffectsLabel": "Effets imbriqués",
             "NestedEffectsHint": "Les effets imbriqués qui seront affichés sous forme d'options lorsque l'effet est ajouté ou supprimé.",
             "SubEffectsLabel": "Sous-effets",
             "SubEffectsHint": "Les sous-effets qui seront appliqués en relation avec cet effet. ",
             "OtherEffectsLabel": "Autres effets",
             "OtherEffectsHint": "Les autres effets qui seront appliqués en relation avec cet effet. ",
+            "IncrementEffectsLabel": "Effets incrémentiels",
+            "IncrementEffectsHint": "La liste ordonnée des effets enfants qui composent une chaîne incrémentielle. Cliquer sur cet effet fait défiler les membres dans l'ordre (maj + clic pour reculer), et cliquer sur un membre saute directement à ce niveau. Utilisez les flèches pour réordonner les membres.",
+            "IncrementMoveUp": "Monter",
+            "IncrementMoveDown": "Descendre",
 
             "IDsTab": "IDs",
             "FlagsTab": "Indicateurs",
@@ -92,7 +102,6 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
-                "Conditions2024": "Conditions (2024)",
                 "Spells": "Sorts",
                 "ClassFeatures": "Capacités des classes",
                 "Equipment": "Équipement",
@@ -378,45 +387,33 @@
                 "name": "Agrandissement/Rapetissement",
                 "description": "Choisissez entre Agrandissement ou Rapetissement"
             },
+            "Exhaustion": {
+                "name": "Épuisement",
+                "description": "Cliquez pour augmenter le niveau d'épuisement de 1 ; maj + clic pour le diminuer. Cliquez sur un niveau précis pour y accéder directement, ou sur le niveau actuel pour l'effacer. Le système applique automatiquement les pénalités selon la version des règles du monde."
+            },
             "Exhaustion1": {
                 "name": "Épuisement 1",
-                "description": "Désavantage sur les tests de caractéristiques"
-            },
-            "Exhaustion12024": {
-                "name": "Épuisement 1 (2024)",
-                "description": "-2 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -1,5 mètres de vitesse"
+                "description": "Épuisement niveau 1. Le système applique automatiquement les pénalités selon la version des règles du monde."
             },
             "Exhaustion2": {
                 "name": "Épuisement 2",
-                "description": "Désavantage sur les tests de caractéristiques et vitesse réduite de moitié"
-            },
-            "Exhaustion22024": {
-                "name": "Épuisement 2 (2024)",
-                "description": "-4 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -3 mètres de vitesse"
+                "description": "Épuisement niveau 2. Le système applique automatiquement les pénalités selon la version des règles du monde."
             },
             "Exhaustion3": {
                 "name": "Épuisement 3",
-                "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié et désavantage sur les attaques et les jets de sauvegarde"
-            },
-            "Exhaustion32024": {
-                "name": "Épuisement 3 (2024)",
-                "description": "-6 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -4,5 mètres de vitesse"
+                "description": "Épuisement niveau 3. Le système applique automatiquement les pénalités selon la version des règles du monde."
             },
             "Exhaustion4": {
                 "name": "Épuisement 4",
-                "description": "Désavantage sur les tests de caractéristiques, vitesse réduite de moitié, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
-            },
-            "Exhaustion42024": {
-                "name": "Épuisement 4 (2024)",
-                "description": "-8 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -6 mètres de vitesse"
+                "description": "Épuisement niveau 4. Le système applique automatiquement les pénalités selon la version des règles du monde."
             },
             "Exhaustion5": {
                 "name": "Épuisement 5",
-                "description": "Désavantage sur les tests de caractéristiques, vitesse réduite à 0, désavantage sur les attaques et les jets de sauvegarde et point de vie maximum réduit de moitié"
+                "description": "Épuisement niveau 5. Le système applique automatiquement les pénalités selon la version des règles du monde."
             },
-            "Exhaustion52024": {
-                "name": "Épuisement 5 (2024)",
-                "description": "-10 à tous les tests de d20 (tests de caractéristiques, jets de sauvegarde et jets d'attaque) et -7,5 mètres de vitesse. Atteindre le niveau d'épuisement 6 est fatal."
+            "Exhaustion6": {
+                "name": "Épuisement 6",
+                "description": "Épuisement niveau 6. Dans les règles modernes, cela correspond à la mort."
             },
             "EyesOfTheEagle": {
                 "name": "Yeux de l'aigle",
@@ -504,11 +501,7 @@
             },
             "Grappled": {
                 "name": "Agrippé",
-                "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn inline]"
-            },
-            "Grappled2024": {
-                "name": "Agrippé (2024)",
-                "description": "- La vitesse d'une créature agrippée devient 0, et elle ne peut bénéficier d'aucun bonus à sa vitesse.<br />- La créature a un désavantage aux jets d'attaque contre toute cible autre que l'agrippeur."
+                "description": "La vitesse d'une créature agrippée devient 0, et elle ne peut bénéficier d'aucun bonus à sa vitesse. Le système applique automatiquement la pénalité ; les effets supplémentaires dépendent de la version des règles du monde."
             },
             "GreatWeaponMaster": {
                 "name": "Maître des armes à deux mains",

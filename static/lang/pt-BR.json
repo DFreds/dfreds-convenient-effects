@@ -35,6 +35,8 @@
         "EditEffect": "Editar Efeito",
         "AddEffect": "Adicionar Efeito",
         "RemoveEffect": "Remover Efeito",
+        "Increment": "Aumentar",
+        "Decrement": "Diminuir",
         "DeleteEffect": "Deletar Efeito",
         "ShowEffect": "Mostrar Efeito",
         "HideEffect": "Ocultar Efeito",
@@ -54,8 +56,10 @@
         "FolderHidden": "Pasta Ocultada",
         "Passive": "Passivo",
         "EffectHidden": "Efeito Ocultado",
+        "Incrementable": "Incrementável (clique para aumentar, shift + clique para diminuir)",
         "HasNestedEffects": "Tem Efeitos Aninhados",
         "IsNestedEffect": "É um Efeito Aninhado",
+        "IsIncrementEffect": "É um Efeito Incremental",
         "StatusEffect": "Efeito de Status",
         "MidiQolEffects": "Efeitos Midi-QoL",
         "StackableDae": "DAE Empilhável",
@@ -74,12 +78,18 @@
             "ViewableHint": "Se marcado, esse efeito estará sempre visível no aplicativo.",
             "DynamicLabel": "Dinâmico",
             "DynamicHint": "Se marcado, este efeito terá efeitos dinâmicos aplicados com base nos dados do ator. Isso não pode ser alterado e é usado para casos de efeitos muito específicos.",
+            "UpdatesActorLabel": "Atualiza o Ator",
+            "UpdatesActorHint": "Se marcado, este efeito apenas atualiza os dados do ator e nunca adiciona um efeito a ele. Isso não pode ser alterado e é usado para casos de efeitos muito específicos.",
             "NestedEffectsLabel": "Efeitos Aninhados",
             "NestedEffectsHint": "Os efeitos aninhados que serão mostrados como opções quando o efeito for adicionado ou removido.",
             "SubEffectsLabel": "Subefeitos",
             "SubEffectsHint": "Os subefeitos que serão aplicados em relação a este efeito. Se este efeito for removido, todos os subefeitos serão removidos automaticamente também.",
             "OtherEffectsLabel": "Outros Efeitos",
             "OtherEffectsHint": "Os outros efeitos que serão aplicados em relação a este efeito. Se este efeito for removido, os outros efeitos não serão removidos automaticamente.",
+            "IncrementEffectsLabel": "Efeitos Incrementais",
+            "IncrementEffectsHint": "A lista ordenada de efeitos filhos que compõem uma cadeia incremental. Clicar neste efeito avança pelos membros em ordem (shift + clique para retroceder), e clicar em um membro salta diretamente para aquele nível. Use as setas para reordenar os membros.",
+            "IncrementMoveUp": "Mover para cima",
+            "IncrementMoveDown": "Mover para baixo",
 
             "IDsTab": "IDs",
             "FlagsTab": "Sinalizadores",
@@ -92,7 +102,6 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "Condições",
-                "Conditions2024": "Condições (2024)",
                 "Spells": "Magias",
                 "ClassFeatures": "Características de Classe",
                 "Equipment": "Equipmento",
@@ -378,45 +387,33 @@
                 "name": "Aumentar/Reduzir",
                 "description": "Escolha entre Aumentar ou Reduzir"
             },
+            "Exhaustion": {
+                "name": "Exaustão",
+                "description": "Clique para aumentar o nível de exaustão em 1; shift + clique para diminuí-lo. Clique em um nível específico para ir direto a ele, ou clique no nível atual para limpá-lo. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
+            },
             "Exhaustion1": {
                 "name": "Exaustão 1",
-                "description": "Desvantagem em testes de habilidade"
-            },
-            "Exhaustion12024": {
-                "name": "Exaustão 1 (2024)",
-                "description": "-2 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -5 pés de deslocamento"
+                "description": "Exaustão nível 1. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
             },
             "Exhaustion2": {
                 "name": "Exaustão 2",
-                "description": "Desvantagem em testes de habilidade e deslocamento reduzido pela metade"
-            },
-            "Exhaustion22024": {
-                "name": "Exaustão 2 (2024)",
-                "description": "-4 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -10 pés de deslocamento"
+                "description": "Exaustão nível 2. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
             },
             "Exhaustion3": {
                 "name": "Exaustão 3",
-                "description": "Desvantagem em testes de habilidade, deslocamento reduzido pela metade e desvantagem em ataques e testes de resistência"
-            },
-            "Exhaustion32024": {
-                "name": "Exaustão 3 (2024)",
-                "description": "-6 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -15 pés de deslocamento"
+                "description": "Exaustão nível 3. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
             },
             "Exhaustion4": {
                 "name": "Exaustão 4",
-                "description": "Desvantagem em testes de habilidade, deslocamento reduzido pela metade, desvantagem em ataques e testes de resistência e máximo de pontos de vida reduzido pela metade"
-            },
-            "Exhaustion42024": {
-                "name": "Exaustão 4 (2024)",
-                "description": "-8 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -20 pés de deslocamento"
+                "description": "Exaustão nível 4. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
             },
             "Exhaustion5": {
                 "name": "Exaustão 5",
-                "description": "Desvantagem em testes de habilidade, deslocamento reduzido a 0, desvantagem em ataques e testes de resistência e máximo de pontos de vida reduzido pela metade"
+                "description": "Exaustão nível 5. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
             },
-            "Exhaustion52024": {
-                "name": "Exaustão 5 (2024)",
-                "description": "-10 em todos os Testes de d20 (testes de habilidade, testes de resistência e jogadas de ataque) e -25 pés de deslocamento. Atingir o nível 6 de exaustão é fatal."
+            "Exhaustion6": {
+                "name": "Exaustão 6",
+                "description": "Exaustão nível 6. Nas regras modernas, isso é a morte."
             },
             "EyesOfTheEagle": {
                 "name": "Olhos da Águia",
@@ -504,11 +501,7 @@
             },
             "Grappled": {
                 "name": "Agarrado",
-                "description": "- O deslocamento de uma criatura agarrada se torna 0, e ela não pode se beneficiar de nenhum bônus em seu deslocamento.<br />- A condição termina se o agarrador for incapacitado.<br />- A condição também termina se um efeito remover a criatura agarrada do alcance do agarrador ou do efeito de agarrar."
-            },
-            "Grappled2024": {
-                "name": "Agarrado (2024)",
-                "description": "- O deslocamento de uma criatura agarrada se torna 0, e ela não pode se beneficiar de nenhum bônus em seu deslocamento.<br />- A criatura tem desvantagem em jogadas de ataque contra qualquer alvo que não seja o agarrador."
+                "description": "O deslocamento de uma criatura agarrada se torna 0, e ela não pode se beneficiar de nenhum bônus em seu deslocamento. O sistema aplica a penalidade automaticamente; efeitos adicionais dependem da versão das regras do mundo."
             },
             "GreatWeaponMaster": {
                 "name": "Mestre de Armas Grandes",

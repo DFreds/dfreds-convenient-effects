@@ -35,6 +35,8 @@
         "EditEffect": "编辑效果",
         "AddEffect": "添加效果",
         "RemoveEffect": "移除效果",
+        "Increment": "增加",
+        "Decrement": "减少",
         "DeleteEffect": "删除效果",
         "ShowEffect": "显示效果",
         "HideEffect": "隐藏效果",
@@ -54,8 +56,10 @@
         "FolderHidden": "文件夹已隐藏",
         "Passive": "被动",
         "EffectHidden": "效果已隐藏",
+        "Incrementable": "可增减（点击+1，Shift+点击-1）",
         "HasNestedEffects": "具有嵌套效果",
         "IsNestedEffect": "是嵌套效果",
+        "IsIncrementEffect": "是增量效果",
         "StatusEffect": "状态效果",
         "MidiQolEffects": "Midi-QoL 效果",
         "StackableDae": "可堆叠 DAE",
@@ -74,12 +78,18 @@
             "ViewableHint": "如果选中，此效果将始终在窗口中显示，否则将会隐藏",
             "DynamicLabel": "动态",
             "DynamicHint": "如果选中，此效果将基于角色数据应用动态效果，确定后无法更改，仅在非常特定的情况启用。",
+            "UpdatesActorLabel": "更新角色",
+            "UpdatesActorHint": "如果选中，此效果只会更新角色数据，而不会向其添加效果。此项无法更改，仅在非常特定的情况启用。",
             "NestedEffectsLabel": "嵌套效果",
             "NestedEffectsHint": "当效果被添加或移除时，将显示为选项的嵌套效果。（参考诗人激励Bardic Inspiration）",
             "SubEffectsLabel": "子效果",
             "SubEffectsHint": "与此效果相关的子效果。如果此效果被移除，所有子效果也会自动移除。（参考鲁莽攻击Reckless Attack）",
             "OtherEffectsLabel": "其他效果",
             "OtherEffectsHint": "与此效果相关的其他效果。如果此效果被移除，其他效果不会自动移除。",
+            "IncrementEffectsLabel": "增量效果",
+            "IncrementEffectsHint": "构成增量链的有序子效果列表。点击此效果会按顺序逐级切换成员（Shift+点击可后退一级），点击某个成员可直接跳到该等级。使用箭头调整成员顺序。",
+            "IncrementMoveUp": "上移",
+            "IncrementMoveDown": "下移",
 
             "IDsTab": "IDs",
             "FlagsTab": "标志",
@@ -92,7 +102,6 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "02状态",
-                "Conditions2024": "02状态(2024)",
                 "Spells": "01法术",
                 "ClassFeatures": "03职业特性",
                 "Equipment": "04工具",
@@ -378,45 +387,33 @@
                 "name": "变巨/缩小术 Enlarge/Reduce",
                 "description": "生物或物件的大小和重量发生改变，变巨Enlarge、缩小Reduce"
             },
-            "Exhaustion1": {
-                "name": "力竭Lv1",
-                "description": "力竭Lv1：属性检定具有劣势"
+            "Exhaustion": {
+                "name": "力竭",
+                "description": "点击使力竭等级+1；Shift+点击使其-1。点击某个等级可直接跳到该等级，点击当前等级可清除。系统会根据世界的规则版本自动应用相应减益。"
             },
-            "Exhaustion12024": {
-                "name": "力竭Lv1(2024)",
-                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-2，速度 -5尺"
+            "Exhaustion1": {
+                "name": "力竭 1",
+                "description": "力竭 1 级。系统会根据世界的规则版本自动应用相应减益。"
             },
             "Exhaustion2": {
-                "name": "力竭Lv2",
-                "description": "力竭Lv2：所有速度减半"
-            },
-            "Exhaustion22024": {
-                "name": "力竭Lv2(2024)",
-                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-4，速度 -10尺"
+                "name": "力竭 2",
+                "description": "力竭 2 级。系统会根据世界的规则版本自动应用相应减益。"
             },
             "Exhaustion3": {
-                "name": "力竭Lv3",
-                "description": "力竭Lv3：攻击检定和豁免检定具有劣势"
-            },
-            "Exhaustion32024": {
-                "name": "力竭Lv3(2024)",
-                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-6，速度 -15尺"
+                "name": "力竭 3",
+                "description": "力竭 3 级。系统会根据世界的规则版本自动应用相应减益。"
             },
             "Exhaustion4": {
-                "name": "力竭Lv4",
-                "description": "力竭Lv4：生命值上限减半"
-            },
-            "Exhaustion42024": {
-                "name": "力竭Lv4(2024)",
-                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-8，速度 -20尺"
+                "name": "力竭 4",
+                "description": "力竭 4 级。系统会根据世界的规则版本自动应用相应减益。"
             },
             "Exhaustion5": {
-                "name": "力竭Lv5",
-                "description": "力竭Lv5：速度降为0"
+                "name": "力竭 5",
+                "description": "力竭 5 级。系统会根据世界的规则版本自动应用相应减益。"
             },
-            "Exhaustion52024": {
-                "name": "力竭Lv5(2024)",
-                "description": "所有d20检定（属性检定、豁免检定、攻击检定）-10，速度 -25尺。力竭达到6级将导致死亡。"
+            "Exhaustion6": {
+                "name": "力竭 6",
+                "description": "力竭 6 级。在新版规则中即为死亡。"
             },
             "EyesOfTheEagle": {
                 "name": "鹰眼护目镜 Eyes of the Eagle",
@@ -502,13 +499,9 @@
                 "name": "夜视镜 Goggles of Night",
                 "description": "添加 60 尺黑暗视觉"
             },
-            "Grappled2024": {
-                "name": "擒抱(2024)",
-                "description": "被擒抱生物的速度变为0，且无法受益于任何速度加值。<br/>该生物对除擒抱者以外的目标进行攻击检定时具有劣势。"
-            },
             "Grappled": {
                 "name": "擒抱",
-                "description": "被擒抱生物的速度变为0，且无法受益于任何速度加值。<br/>如果擒抱者陷入失能状态（见“失能”），则擒抱状态结束。<br/>如果某种效应将被擒抱生物移动到擒抱者或擒抱效果的接触范围之外，则其擒抱状态结束"
+                "description": "被擒抱生物的速度变为0，且无法受益于任何速度加值。系统会自动应用该减益；其余效果取决于世界的规则版本。"
             },
             "GreatWeaponMaster": {
                 "name": "巨武器大师",

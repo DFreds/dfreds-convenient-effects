@@ -35,6 +35,8 @@
         "EditEffect": "Edit Effect",
         "AddEffect": "Add Effect",
         "RemoveEffect": "Remove Effect",
+        "Increment": "Increment",
+        "Decrement": "Decrement",
         "DeleteEffect": "Delete Effect",
         "ShowEffect": "Show Effect",
         "HideEffect": "Hide Effect",
@@ -54,8 +56,10 @@
         "FolderHidden": "Folder Hidden",
         "Passive": "Passive",
         "EffectHidden": "Effect Hidden",
+        "Incrementable": "Incrementable (click to increase, shift + click to decrease)",
         "HasNestedEffects": "Has Nested Effects",
         "IsNestedEffect": "Is Nested Effect",
+        "IsIncrementEffect": "Is Incremental Effect",
         "StatusEffect": "Status Effect",
         "MidiQolEffects": "Midi-QoL Effects",
         "StackableDae": "Stackable DAE",
@@ -74,12 +78,18 @@
             "ViewableHint": "If checked, this effect will always be shown in the application.",
             "DynamicLabel": "Dynamic",
             "DynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data. This cannot be changed and is used for very specific effect cases.",
+            "UpdatesActorLabel": "Updates Actor",
+            "UpdatesActorHint": "If checked, this effect only updates the actor's data and never adds an effect to it. This cannot be changed and is used for very specific effect cases.",
             "NestedEffectsLabel": "Nested Effects",
             "NestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
             "SubEffectsLabel": "Sub-Effects",
             "SubEffectsHint": "The sub-effects that will be applied in relation to this effect. If this effect is removed, all sub-effects are automatically removed as well.",
             "OtherEffectsLabel": "Other Effects",
             "OtherEffectsHint": "The other effects that will be applied in relation to this effect. If this effect is removed, the other effects will not be automatically removed.",
+            "IncrementEffectsLabel": "Incremental Effects",
+            "IncrementEffectsHint": "The ordered list of child effects that make up an incremental chain. Clicking this effect steps through the members in order (shift + click to step back), and clicking a member jumps directly to that level. Use the arrows to reorder the members.",
+            "IncrementMoveUp": "Move up",
+            "IncrementMoveDown": "Move down",
 
             "IDsTab": "IDs",
             "FlagsTab": "Flags",
@@ -92,7 +102,6 @@
         "Dnd": {
             "Folders": {
                 "Conditions": "Conditions",
-                "Conditions2024": "Conditions (2024)",
                 "Spells": "Spells",
                 "ClassFeatures": "Class Features",
                 "Equipment": "Equipment",
@@ -379,45 +388,33 @@
                 "name": "Enlarge/Reduce",
                 "description": "Choose between Enlarge or Reduce"
             },
+            "Exhaustion": {
+                "name": "Exhaustion",
+                "description": "Click to increase the exhaustion level by 1; shift + click to decrease it. Click a specific level to jump straight to it, or click the current level to clear it. The system applies the penalties automatically based on the world's rules version."
+            },
             "Exhaustion1": {
                 "name": "Exhaustion 1",
-                "description": "Disadvantage on ability checks"
-            },
-            "Exhaustion12024": {
-                "name": "Exhaustion 1 (2024)",
-                "description": "-2 to all d20 Tests (ability checks, saving throws, and attack rolls) and -5 ft. Speed"
+                "description": "Level 1 exhaustion. The system applies the penalties automatically based on the world's rules version."
             },
             "Exhaustion2": {
                 "name": "Exhaustion 2",
-                "description": "Disadvantage on ability checks and speed halved"
-            },
-            "Exhaustion22024": {
-                "name": "Exhaustion 2 (2024)",
-                "description": "-4 to all d20 Tests (ability checks, saving throws, and attack rolls) and -10 ft. Speed"
+                "description": "Level 2 exhaustion. The system applies the penalties automatically based on the world's rules version."
             },
             "Exhaustion3": {
                 "name": "Exhaustion 3",
-                "description": "Disadvantage on ability checks, speed halved, and disadvantage on attacks and saving throws"
-            },
-            "Exhaustion32024": {
-                "name": "Exhaustion 3 (2024)",
-                "description": "-6 to all d20 Tests (ability checks, saving throws, and attack rolls) and -15 ft. Speed"
+                "description": "Level 3 exhaustion. The system applies the penalties automatically based on the world's rules version."
             },
             "Exhaustion4": {
                 "name": "Exhaustion 4",
-                "description": "Disadvantage on ability checks, speed halved, disadvantage on attacks and saving throws, and hit point maximum halved"
-            },
-            "Exhaustion42024": {
-                "name": "Exhaustion 4 (2024)",
-                "description": "-8 to all d20 Tests (ability checks, saving throws, and attack rolls) and -20 ft. Speed"
+                "description": "Level 4 exhaustion. The system applies the penalties automatically based on the world's rules version."
             },
             "Exhaustion5": {
                 "name": "Exhaustion 5",
-                "description": "Disadvantage on ability checks, speed reduced to 0, disadvantage on attacks and saving throws, and hit point maximum halved"
+                "description": "Level 5 exhaustion. The system applies the penalties automatically based on the world's rules version."
             },
-            "Exhaustion52024": {
-                "name": "Exhaustion 5 (2024)",
-                "description": "-10 to all d20 Tests (ability checks, saving throws, and attack rolls) and -25 ft. Speed. Reaching exhaustion level 6 is fatal."
+            "Exhaustion6": {
+                "name": "Exhaustion 6",
+                "description": "Level 6 exhaustion. In the modern rules this is death."
             },
             "EyesOfTheEagle": {
                 "name": "Eyes of the Eagle",
@@ -505,11 +502,7 @@
             },
             "Grappled": {
                 "name": "Grappled",
-                "description": "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- The condition ends if the grappler is incapacitated.<br />- The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect."
-            },
-            "Grappled2024": {
-                "name": "Grappled (2024)",
-                "description": "- A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.<br />- The creature has disadvantage on attack rolls against any target other than the grappler."
+                "description": "A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed. The system applies the penalty automatically; further effects depend on the world's rules version."
             },
             "GreatWeaponMaster": {
                 "name": "Great Weapon Master",
