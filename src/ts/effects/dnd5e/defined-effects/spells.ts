@@ -1,12 +1,11 @@
 import { ItemEffects } from "../../effect-definition.ts";
 import { attackBonus, damageBonus, saveBonus } from "../changes/bonuses.ts";
-import { blinded, charmed, deafened, incapacitated, invisible, paralyzed, prone, restrained } from "./conditions.ts";
+import { blinded, deafened, invisible, paralyzed, prone, restrained } from "./conditions.ts";
 import {
     acBonus,
     acCalc,
     acMin,
     deathMode,
-    initiativeMode,
     movement,
     multiplyEncumbrance,
     tempMaxHp,
@@ -35,7 +34,7 @@ import {
     addDamageImmunity,
     addDamageResistance,
 } from "../changes/traits.ts";
-import { skillCheckBonus, skillCheckMode } from "../changes/skills.ts";
+import { skillCheckBonus } from "../changes/skills.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
@@ -1005,27 +1004,6 @@ function foresight(): PreCreate<ActiveEffectSource> {
                 abilitySaveMode({ ability: "int", value: "1" }),
                 abilitySaveMode({ ability: "wis", value: "1" }),
                 abilitySaveMode({ ability: "cha", value: "1" }),
-                skillCheckMode({ skillType: "acr", value: "1" }),
-                skillCheckMode({ skillType: "ani", value: "1" }),
-                skillCheckMode({ skillType: "arc", value: "1" }),
-                skillCheckMode({ skillType: "ath", value: "1" }),
-                skillCheckMode({ skillType: "dec", value: "1" }),
-                skillCheckMode({ skillType: "his", value: "1" }),
-                skillCheckMode({ skillType: "ins", value: "1" }),
-                skillCheckMode({ skillType: "inv", value: "1" }),
-                skillCheckMode({ skillType: "itm", value: "1" }),
-                skillCheckMode({ skillType: "med", value: "1" }),
-                skillCheckMode({ skillType: "nat", value: "1" }),
-                skillCheckMode({ skillType: "per", value: "1" }),
-                skillCheckMode({ skillType: "prc", value: "1" }),
-                skillCheckMode({ skillType: "prf", value: "1" }),
-                skillCheckMode({ skillType: "rel", value: "1" }),
-                skillCheckMode({ skillType: "slt", value: "1" }),
-                skillCheckMode({ skillType: "ste", value: "1" }),
-                skillCheckMode({ skillType: "sur", value: "1" }),
-                initiativeMode({
-                    value: "1",
-                }),
                 grantDisadvantageAttack({
                     attackType: "all",
                 }),
