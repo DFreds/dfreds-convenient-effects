@@ -57,5 +57,36 @@
             </multi-select>
         </div>
         <p class="hint">{{localize "ConvenientEffects.Config.IncrementEffectsHint"}}</p>
+        {{#if incrementOrder.length}}
+            <ol class="increment-order-list">
+                {{#each incrementOrder as |orderedEffect|}}
+                    <li class="increment-order-item" data-id="{{orderedEffect.id}}">
+                        <span class="increment-order-label">{{orderedEffect.label}}</span>
+                        <div class="increment-order-controls">
+                            <button
+                                type="button"
+                                class="icon"
+                                data-action="incrementMoveUp"
+                                data-id="{{orderedEffect.id}}"
+                                data-tooltip
+                                aria-label="{{localize "ConvenientEffects.Config.IncrementMoveUp"}}"
+                            >
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </button>
+                            <button
+                                type="button"
+                                class="icon"
+                                data-action="incrementMoveDown"
+                                data-id="{{orderedEffect.id}}"
+                                data-tooltip
+                                aria-label="{{localize "ConvenientEffects.Config.IncrementMoveDown"}}"
+                            >
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </button>
+                        </div>
+                    </li>
+                {{/each}}
+            </ol>
+        {{/if}}
     </div>
 </section>

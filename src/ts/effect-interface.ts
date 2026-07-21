@@ -5,7 +5,7 @@ import {
     findDocumentByUuidSync,
     findFolder,
     findFolders,
-    findIncrementParentOf
+    findIncrementParentOf,
 } from "./utils/finds.ts";
 import { getActorUuids } from "./utils/gets.ts";
 import { error, log } from "./logger.ts";

@@ -1,5 +1,6 @@
 import { Flags } from "../../utils/flags.ts";
 import { findAllEffects } from "../../utils/finds.ts";
+import { notEmpty } from "../../utils/types.ts";
 import { MODULE_ID } from "../../constants.ts";
 import { ApplicationConfiguration, ApplicationTabsConfiguration } from "@client/applications/_module.mjs";
 import { HandlebarsRenderOptions } from "@client/applications/api/_module.mjs";
@@ -17,17 +18,28 @@ interface MultiSelectData {
     selected: string;
 }
 
+interface OrderedEffectData {
+    id?: string;
+    label?: string;
+}
+
 interface ConvenientEffectConfigData {
     nestedEffectsData: MultiSelectData[];
     subEffectsData: MultiSelectData[];
     otherEffectsData: MultiSelectData[];
+    incrementEffectsData: MultiSelectData[];
+    incrementOrder: OrderedEffectData[];
 }
 
 // TODO this any is because of some circular dependencies with ActiveEffect
 class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
     ApplicationV2<ConvenientEffectConfigOptions>,
 ) as any) {
-    #document?: ActiveEffect<any> | null;
+    readonly #document?: ActiveEffect<any> | null;
+
+    // Holds ordering of increment chain members. `<multi-select>` loses stored order on re-render, so
+    // the ordered list below it (reordered via the arrow actions) is the source of truth until the form is submitted.
+    #incrementOrder?: string[];
 
     constructor(options?: DeepPartial<ConvenientEffectConfigOptions>) {
         super(options);
@@ -53,6 +65,10 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
             handler: this.#onSubmit,
             submitOnChange: false,
             closeOnSubmit: true,
+        },
+        actions: {
+            incrementMoveUp: this.#onIncrementMoveUp,
+            incrementMoveDown: this.#onIncrementMoveDown,
         },
     };
 
@@ -195,13 +211,111 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
             };
         });
 
-        const configData: ConvenientEffectConfigData = {
+        const storedIncrementIds = this.#incrementOrder ?? Flags.getIncrementEffectIds(this.document) ?? [];
+        const effectByCeId = new Map(allEffects.map((effect) => [Flags.getCeEffectId(effect), effect]));
+
+        const orderedSelectedEffects = storedIncrementIds.map((id) => effectByCeId.get(id)).filter(notEmpty);
+
+        const selectedIncrementData: MultiSelectData[] = orderedSelectedEffects.map((effect) => {
+            return {
+                id: Flags.getCeEffectId(effect),
+                label: effect.name,
+                selected: "selected",
+            };
+        });
+
+        const unselectedIncrementData: MultiSelectData[] = allEffects
+            .filter((effect) => !storedIncrementIds.includes(Flags.getCeEffectId(effect) ?? ""))
+            .map((effect) => {
+                return {
+                    id: Flags.getCeEffectId(effect),
+                    label: effect.name,
+                    selected: "",
+                };
+            });
+
+        const incrementEffectsData = [...selectedIncrementData, ...unselectedIncrementData];
+
+        const incrementOrder: OrderedEffectData[] = orderedSelectedEffects.map((effect) => {
+            return {
+                id: Flags.getCeEffectId(effect),
+                label: effect.name,
+            };
+        });
+
+        return {
             nestedEffectsData,
             subEffectsData,
             otherEffectsData,
+            incrementEffectsData,
+            incrementOrder,
         };
+    }
 
-        return configData;
+    // @ts-expect-error any is because of some circular dependencies with ActiveEffect
+    protected override async _onRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
+        await super._onRender(context, options);
+
+        const form = this.element as HTMLFormElement;
+        const incrementMultiSelect = form.querySelector('multi-select[name="incrementEffectIds"]');
+        incrementMultiSelect?.addEventListener("change", this.#onIncrementSelectionChange);
+    }
+
+    #onIncrementSelectionChange = async (): Promise<void> => {
+        const form = this.element as HTMLFormElement;
+        this.#incrementOrder = this.#currentIncrementOrder(form);
+        await this.render({ parts: ["dependentEffects"] });
+    };
+
+    #currentIncrementOrder(form: HTMLFormElement): string[] {
+        const multiSelect = form.querySelector('multi-select[name="incrementEffectIds"]') as
+            | (HTMLElement & { value?: string[] })
+            | null;
+        const selected = multiSelect?.value ? [...multiSelect.value] : [];
+
+        const listIds = Array.from(form.querySelectorAll<HTMLElement>(".increment-order-item")).map(
+            (item) => item.dataset.id ?? "",
+        );
+
+        const ordered = listIds.filter((id) => selected.includes(id));
+        for (const id of selected) {
+            if (!ordered.includes(id)) {
+                ordered.push(id);
+            }
+        }
+
+        return ordered;
+    }
+
+    async #moveIncrementMember(target: HTMLElement, offset: -1 | 1): Promise<void> {
+        const id = target.dataset.id;
+        if (!id) return;
+
+        const form = this.element as HTMLFormElement;
+        const order = this.#currentIncrementOrder(form);
+
+        const index = order.indexOf(id);
+        if (index === -1) return;
+
+        const swapIndex = index + offset;
+        if (swapIndex < 0 || swapIndex >= order.length) return;
+
+        [order[index], order[swapIndex]] = [order[swapIndex], order[index]];
+
+        this.#incrementOrder = order;
+        await this.render({ parts: ["dependentEffects"] });
+    }
+
+    static async #onIncrementMoveUp(...args: any[]): Promise<void> {
+        const [, target] = args as [PointerEvent, HTMLElement];
+        const thisClass = this as unknown as ConvenientEffectConfigV2;
+        await thisClass.#moveIncrementMember(target, -1);
+    }
+
+    static async #onIncrementMoveDown(...args: any[]): Promise<void> {
+        const [, target] = args as [PointerEvent, HTMLElement];
+        const thisClass = this as unknown as ConvenientEffectConfigV2;
+        await thisClass.#moveIncrementMember(target, 1);
     }
 
     #prepareFooterContext(context: object): void {
@@ -216,7 +330,11 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
         });
     }
 
-    #prepareSubmitData(_event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended): object {
+    async #prepareSubmitData(
+        _event: SubmitEvent | Event,
+        form: HTMLFormElement,
+        formData: FormDataExtended,
+    ): Promise<object> {
         const data = foundry.utils.expandObject(formData.object);
 
         if (Object.hasOwn(data, "temporary")) {
@@ -224,20 +342,39 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
         }
 
         if (Object.hasOwn(data, "viewable")) {
-            Flags.setIsViewable(data, data.viewable as boolean);
+            await Flags.setIsViewable(data, data.viewable as boolean);
         }
 
         if (data.nestedEffectIds && data.nestedEffectIds instanceof Array) {
-            Flags.setNestedEffectIds(data, data.nestedEffectIds as string[]);
+            await Flags.setNestedEffectIds(data, data.nestedEffectIds as string[]);
         }
 
         if (data.subEffectIds && data.subEffectIds instanceof Array) {
-            Flags.setSubEffectIds(data, data.subEffectIds as string[]);
+            await Flags.setSubEffectIds(data, data.subEffectIds as string[]);
         }
 
         if (data.otherEffectIds && data.otherEffectIds instanceof Array) {
-            Flags.setOtherEffectIds(data, data.otherEffectIds as string[]);
+            await Flags.setOtherEffectIds(data, data.otherEffectIds as string[]);
         }
+
+        const selectedIncrementIds =
+            data.incrementEffectIds instanceof Array
+                ? (data.incrementEffectIds as string[])
+                : data.incrementEffectIds
+                  ? [data.incrementEffectIds as string]
+                  : [];
+
+        const orderedIncrementIds = Array.from(form.querySelectorAll<HTMLElement>(".increment-order-item"))
+            .map((item) => item.dataset.id ?? "")
+            .filter((id) => selectedIncrementIds.includes(id));
+
+        for (const id of selectedIncrementIds) {
+            if (!orderedIncrementIds.includes(id)) {
+                orderedIncrementIds.push(id);
+            }
+        }
+
+        await Flags.setIncrementEffectIds(data, orderedIncrementIds);
 
         return data;
     }
@@ -248,7 +385,7 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
         formData: FormDataExtended,
     ): Promise<void> {
         const thisClass = this as unknown as ConvenientEffectConfigV2;
-        const submitData = thisClass.#prepareSubmitData(event, form, formData);
+        const submitData = await thisClass.#prepareSubmitData(event, form, formData);
         await thisClass.document.update(submitData as Record<string, unknown>);
     }
 }
