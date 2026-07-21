@@ -1,19 +1,16 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import { exhaustion, initiativeMode, movement } from "../changes/attributes.ts";
 import {
-    advantageAttack,
     disadvantageAttack,
     failAbilitySave,
     grantAdvantageAttack,
     grantCriticalRange,
     grantDisadvantageAttack,
 } from "../changes/midi-qol.ts";
-import { addAllDamageResistance, addDamageImmunity } from "../changes/traits.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
-import { abilityCheckMode, abilitySaveMode } from "../changes/abilities.ts";
+import { abilityCheckMode } from "../changes/abilities.ts";
 
 /**
  * NOTE: These exclude any changes that dnd5e (or midi-qol) handles automatically
@@ -59,14 +56,6 @@ function blinded(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Blinded.description"),
             img: "modules/dfreds-convenient-effects/images/blinded.svg",
             statuses: ["blinded"],
-            changes: [
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-            ],
         },
     });
 }
@@ -233,13 +222,6 @@ function grappled(): PreCreate<ActiveEffectSource> {
             statuses: ["grappled"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Grappled.description"),
             img: "modules/dfreds-convenient-effects/images/grappled.svg",
-            changes: [
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
-                }),
-            ],
         },
     });
 }
@@ -262,14 +244,6 @@ function invisible(): PreCreate<ActiveEffectSource> {
             statuses: ["invisible"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Invisible.description"),
             img: "modules/dfreds-convenient-effects/images/invisible.svg",
-            changes: [
-                advantageAttack({
-                    attackType: "all",
-                }),
-                grantDisadvantageAttack({
-                    attackType: "all",
-                }),
-            ],
         },
     });
 }
@@ -295,11 +269,6 @@ function paralyzed(): PreCreate<ActiveEffectSource> {
                 grantCriticalRange({
                     range: "5",
                 }),
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
-                }),
             ],
         },
         subEffectIds,
@@ -324,15 +293,6 @@ function petrified(): PreCreate<ActiveEffectSource> {
                 failAbilitySave({
                     saveType: "dex",
                 }),
-                addDamageImmunity({
-                    damageType: "poison",
-                }),
-                addAllDamageResistance(),
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
-                }),
             ],
         },
         subEffectIds,
@@ -350,12 +310,6 @@ function poisoned(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
             ],
         },
     });
@@ -384,11 +338,6 @@ function prone(): PreCreate<ActiveEffectSource> {
                 disadvantageAttack({
                     attackType: "all",
                 }),
-                movement({
-                    movementType: "all",
-                    value: "*0.5",
-                    priority: 25,
-                }),
             ],
         },
     });
@@ -402,17 +351,11 @@ function restrained(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Restrained.description"),
             img: "modules/dfreds-convenient-effects/images/restrained.svg",
             changes: [
-                abilitySaveMode({ ability: "dex", value: "-1" }),
                 disadvantageAttack({
                     attackType: "all",
                 }),
                 grantAdvantageAttack({
                     attackType: "all",
-                }),
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
                 }),
             ],
         },
@@ -463,11 +406,6 @@ function unconscious(): PreCreate<ActiveEffectSource> {
                 }),
                 grantCriticalRange({
                     range: "5",
-                }),
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
                 }),
             ],
         },
