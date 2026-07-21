@@ -4,27 +4,50 @@ import { getApi } from "../../utils/gets.ts";
 import { SECONDS, SIZES_ORDERED } from "../../constants.ts";
 import { addDamageResistance, addSize } from "./changes/traits.ts";
 import { tokenTexture } from "./changes/token.ts";
+import { Flags } from "../../utils/flags.ts";
+import { findIncrementParentOf } from "../../utils/finds.ts";
 
 class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     override systemId: string = "dnd5e";
 
     override async handleDynamicEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> {
-        if (!effect.name) return;
+        const ceEffectId = Flags.getCeEffectId(effect);
+        if (!ceEffectId) return;
 
-        switch (effect.name.toLowerCase()) {
-            case game.i18n.localize("ConvenientEffects.Dnd.DivineWord.name").toLowerCase():
+        switch (ceEffectId) {
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.DivineWord.name"):
                 await this.#addDivineWordEffects(effect, actor);
                 break;
-            case game.i18n.localize("ConvenientEffects.Dnd.Enlarge.name").toLowerCase():
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Enlarge.name"):
                 this.#addEnlargeEffects(effect, actor);
                 break;
-            case game.i18n.localize("ConvenientEffects.Dnd.Rage.name").toLowerCase():
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Rage.name"):
                 this.#addRageEffects(effect, actor);
                 break;
-            case game.i18n.localize("ConvenientEffects.Dnd.Reduce.name").toLowerCase():
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Reduce.name"):
                 this.#addReduceEffects(effect, actor);
                 break;
         }
+    }
+
+    override async handleActorUpdates(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+        { direction = 1 }: { direction?: 1 | -1 },
+    ): Promise<void> {
+        const ceEffectId = Flags.getCeEffectId(effect);
+        if (!ceEffectId) return;
+
+        switch (ceEffectId) {
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Exhaustion.name"):
+                await this.#handleExhaustionUpdate(effect, actor, { direction });
+                break;
+        }
+    }
+
+    #ceEffectIdForName(nameKey: string): string | undefined {
+        const definedEffect = getApi().findEffect({ effectName: game.i18n.localize(nameKey) });
+        return definedEffect ? Flags.getCeEffectId(definedEffect) : undefined;
     }
 
     async #addDivineWordEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> {
@@ -168,6 +191,57 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             effect.duration.value = null;
             effect.duration.units = null;
         }
+    }
+
+    async #handleExhaustionUpdate(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+        { direction }: { direction: 1 | -1 },
+    ): Promise<void> {
+        const ceEffectId = Flags.getCeEffectId(effect);
+        if (!ceEffectId) return;
+
+        const exhaustionId = this.#ceEffectIdForName("ConvenientEffects.Dnd.Exhaustion.name");
+        if (!exhaustionId) return;
+
+        if (ceEffectId === exhaustionId) {
+            await this.#modifyExhaustion(actor, direction);
+            return;
+        }
+
+        const incrementParent = findIncrementParentOf(ceEffectId, { backup: false });
+        if (!incrementParent || Flags.getCeEffectId(incrementParent) !== exhaustionId) return;
+
+        const memberIds = Flags.getIncrementEffectIds(incrementParent) ?? [];
+        const memberIndex = memberIds.indexOf(ceEffectId);
+        if (memberIndex === -1) return;
+
+        await this.#jumpExhaustion(actor, memberIndex + 1);
+    }
+
+    async #modifyExhaustion(actor: Actor<any>, direction: 1 | -1): Promise<void> {
+        const maxLevel = ((CONFIG as any).DND5E?.conditionTypes?.exhaustion?.levels as number | undefined) ?? 6;
+        const currentLevel = (foundry.utils.getProperty(actor, "system.attributes.exhaustion") as number) ?? 0;
+        const newLevel = Math.min(Math.max(currentLevel + direction, 0), maxLevel);
+
+        if (newLevel === currentLevel) return;
+
+        await actor.update({
+            "system.attributes.exhaustion": newLevel,
+        });
+    }
+
+    async #jumpExhaustion(actor: Actor<any>, level: number): Promise<void> {
+        const maxLevel = ((CONFIG as any).DND5E?.conditionTypes?.exhaustion?.levels as number | undefined) ?? 6;
+        const currentLevel = (foundry.utils.getProperty(actor, "system.attributes.exhaustion") as number) ?? 0;
+        const targetLevel = Math.min(Math.max(level, 0), maxLevel);
+        const newLevel = currentLevel === targetLevel ? 0 : targetLevel;
+
+        if (newLevel === currentLevel) return;
+
+        await actor.update({
+            "system.attributes.exhaustion": newLevel,
+        });
     }
 }
 

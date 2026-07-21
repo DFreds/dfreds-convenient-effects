@@ -11,6 +11,12 @@ abstract class DynamicEffectsHandler {
     }
 
     abstract handleDynamicEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> | void;
+
+    abstract handleActorUpdates(
+        effect: PreCreate<ActiveEffectSource>,
+        actor: Actor<any>,
+        options: { direction?: 1 | -1 },
+    ): Promise<void> | void;
 }
 
 export { DynamicEffectsHandler };

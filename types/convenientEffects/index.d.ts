@@ -93,6 +93,13 @@ declare global {
          * if the origin matches.
          */
         origin?: ActiveEffectOrigin | null;
+
+        /**
+         * For increment chain parents, the direction of the update (1 to
+         * increment, -1 to decrement). Ignored for other effects. Set to 1 by
+         * default.
+         */
+        direction?: 1 | -1;
     }
 
     interface IAddEffect {
@@ -128,6 +135,13 @@ declare global {
          * The origin of the effect
          */
         origin?: ActiveEffectOrigin | null;
+
+        /**
+         * For increment chain parents, the direction of the update (1 to
+         * increment, -1 to decrement). Ignored for other effects. Set to 1 by
+         * default.
+         */
+        direction?: 1 | -1;
     }
 
     interface IRemoveEffect {
@@ -224,6 +238,7 @@ declare global {
             overlay = false,
             prioritizeTargets = false,
             origin,
+            direction = 1,
         }: IToggleEffect): Promise<void>;
 
         /**
@@ -233,7 +248,15 @@ declare global {
          * @param params - the parameters for adding an effect
          * @returns A promise that resolves when the effect is sent via the socket
          */
-        addEffect({ effectId, effectName, effectData, uuid, overlay = false, origin }: IAddEffect): Promise<Document[]>;
+        addEffect({
+            effectId,
+            effectName,
+            effectData,
+            uuid,
+            overlay = false,
+            origin,
+            direction = 1,
+        }: IAddEffect): Promise<Document[]>;
 
         /**
          * Removes an effect matching the given params from a document of the given

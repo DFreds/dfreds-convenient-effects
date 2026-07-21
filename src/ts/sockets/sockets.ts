@@ -17,6 +17,12 @@ interface AddEffectMessageData {
      * The UUID of the document to add the effect to
      */
     uuid: string;
+
+    /**
+     * For increment chain parents, the direction of the update (1 to increment,
+     * -1 to decrement)
+     */
+    direction?: 1 | -1;
 }
 
 interface RemoveEffectMessageData {
@@ -55,20 +61,27 @@ class Sockets {
         return this.#socket.executeAsGM("addEffect", message) as Promise<Document[]>;
     }
 
-    async #onAddEffect({ effectData, uuid }: AddEffectMessageData): Promise<Document[]> {
+    async #onAddEffect({ effectData, uuid, direction }: AddEffectMessageData): Promise<Document[]> {
         const document = await findDocumentByUuid(uuid);
         const activeEffectsToApply = [effectData];
 
         if (!document) return []; // This should already be checked for before the socket
 
-        const isDynamic = Flags.isDynamic(effectData);
-        if (isDynamic) {
-            const mapping = new Mapping();
-            const systemDefinition = mapping.findSystemDefinitionForSystemId();
+        const systemDefinition = new Mapping().findSystemDefinitionForSystemId();
 
+        // Actor updater effects only modify the actor and never create an effect document.
+        if (Flags.isUpdatesActor(effectData)) {
             if (document instanceof Actor) {
-                await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(effectData, document);
+                await systemDefinition?.dynamicEffectsHandler?.handleActorUpdates(effectData, document, {
+                    direction: direction ?? 1,
+                });
+                log(`Applied actor update for ${effectData.name} to ${document.name} - ${document.id}`);
             }
+            return [];
+        }
+
+        if (Flags.isDynamic(effectData) && document instanceof Actor) {
+            await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(effectData, document);
         }
 
         const createdEffects = await document.createEmbeddedDocuments("ActiveEffect", activeEffectsToApply);

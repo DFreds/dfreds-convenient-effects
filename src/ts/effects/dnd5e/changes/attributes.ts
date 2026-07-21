@@ -72,15 +72,6 @@ function upgradeTrueSight({ value, priority }: { value: string; priority?: numbe
     };
 }
 
-function exhaustion({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
-    return {
-        key: "system.attributes.exhaustion",
-        type: "override",
-        value,
-        priority,
-    };
-}
-
 function tempMaxHp({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.hp.tempmax",
@@ -178,7 +169,6 @@ export {
     acCalc,
     acCover,
     acFormula,
-    exhaustion,
     movement,
     upgradeMovement,
     upgradeDarkvision,

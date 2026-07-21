@@ -15,6 +15,9 @@ import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
 import { abilityCheckMode, abilitySaveMode } from "../changes/abilities.ts";
 
+/**
+ * NOTE: These exclude any changes that dnd5e (or midi-qol) handles automatically
+ */
 function conditions(): ItemEffects {
     return {
         itemData: {
@@ -26,11 +29,13 @@ function conditions(): ItemEffects {
             concentrating(),
             dead(),
             deafened(),
+            exhaustion(),
             exhaustion1(),
             exhaustion2(),
             exhaustion3(),
             exhaustion4(),
             exhaustion5(),
+            exhaustion6(),
             frightened(),
             grappled(),
             incapacitated(),
@@ -110,29 +115,37 @@ function deafened(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function exhaustion(): PreCreate<ActiveEffectSource> {
+    const incrementEffectIds = [
+        exhaustion1(),
+        exhaustion2(),
+        exhaustion3(),
+        exhaustion4(),
+        exhaustion5(),
+        exhaustion6(),
+    ]
+        .map((effect) => Flags.getCeEffectId(effect))
+        .filter(notEmpty);
+
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion.description"),
+            img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
+        },
+        updatesActor: true,
+        incrementEffectIds,
+    });
+}
+
 function exhaustion1(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.name"),
-            statuses: ["exhaustion"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
-            flags: { dnd5e: { exhaustionLevel: 1 } },
-            changes: [
-                exhaustion({
-                    value: "1",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
-                initiativeMode({
-                    value: "-1",
-                }),
-            ],
         },
+        updatesActor: true,
     });
 }
 
@@ -140,30 +153,10 @@ function exhaustion2(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.name"),
-            statuses: ["exhaustion"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion2.svg",
-            flags: { dnd5e: { exhaustionLevel: 2 } },
-            changes: [
-                exhaustion({
-                    value: "2",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
-                initiativeMode({
-                    value: "-1",
-                }),
-                movement({
-                    movementType: "all",
-                    value: "*0.5",
-                    priority: 25,
-                }),
-            ],
         },
+        updatesActor: true,
     });
 }
 
@@ -171,39 +164,10 @@ function exhaustion3(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.name"),
-            statuses: ["exhaustion"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion3.svg",
-            flags: { dnd5e: { exhaustionLevel: 3 } },
-            changes: [
-                exhaustion({
-                    value: "3",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
-                initiativeMode({
-                    value: "-1",
-                }),
-                movement({
-                    movementType: "all",
-                    value: "*0.5",
-                    priority: 25,
-                }),
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                abilitySaveMode({ ability: "str", value: "-1" }),
-                abilitySaveMode({ ability: "dex", value: "-1" }),
-                abilitySaveMode({ ability: "con", value: "-1" }),
-                abilitySaveMode({ ability: "int", value: "-1" }),
-                abilitySaveMode({ ability: "wis", value: "-1" }),
-                abilitySaveMode({ ability: "cha", value: "-1" }),
-            ],
         },
+        updatesActor: true,
     });
 }
 
@@ -211,39 +175,10 @@ function exhaustion4(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.name"),
-            statuses: ["exhaustion"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion4.svg",
-            flags: { dnd5e: { exhaustionLevel: 4 } },
-            changes: [
-                exhaustion({
-                    value: "4",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
-                initiativeMode({
-                    value: "-1",
-                }),
-                movement({
-                    movementType: "all",
-                    value: "*0.5",
-                    priority: 25,
-                }),
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                abilitySaveMode({ ability: "str", value: "-1" }),
-                abilitySaveMode({ ability: "dex", value: "-1" }),
-                abilitySaveMode({ ability: "con", value: "-1" }),
-                abilitySaveMode({ ability: "int", value: "-1" }),
-                abilitySaveMode({ ability: "wis", value: "-1" }),
-                abilitySaveMode({ ability: "cha", value: "-1" }),
-            ],
         },
+        updatesActor: true,
     });
 }
 
@@ -251,39 +186,21 @@ function exhaustion5(): PreCreate<ActiveEffectSource> {
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.name"),
-            statuses: ["exhaustion"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion5.svg",
-            flags: { dnd5e: { exhaustionLevel: 5 } },
-            changes: [
-                exhaustion({
-                    value: "5",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
-                initiativeMode({
-                    value: "-1",
-                }),
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
-                }),
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                abilitySaveMode({ ability: "str", value: "-1" }),
-                abilitySaveMode({ ability: "dex", value: "-1" }),
-                abilitySaveMode({ ability: "con", value: "-1" }),
-                abilitySaveMode({ ability: "int", value: "-1" }),
-                abilitySaveMode({ ability: "wis", value: "-1" }),
-                abilitySaveMode({ ability: "cha", value: "-1" }),
-            ],
         },
+        updatesActor: true,
+    });
+}
+
+function exhaustion6(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion6.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion6.description"),
+            img: "icons/svg/skull.svg",
+        },
+        updatesActor: true,
     });
 }
 
@@ -575,11 +492,13 @@ export {
     concentrating,
     dead,
     deafened,
+    exhaustion,
     exhaustion1,
     exhaustion2,
     exhaustion3,
     exhaustion4,
     exhaustion5,
+    exhaustion6,
     frightened,
     grappled,
     incapacitated,

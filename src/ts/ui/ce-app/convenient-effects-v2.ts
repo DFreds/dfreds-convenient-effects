@@ -1,13 +1,14 @@
 import { ApplicationConfiguration } from "@client/applications/_types.mjs";
 import {
     findAllEffects,
+    findAllIncrementEffectIds,
     findAllNestedEffectIds,
     findEffectByCeId,
     findEffectByUuid,
     findEffectsByFolder,
     findFolder,
     findFolders,
-    findModuleById
+    findModuleById,
 } from "../../utils/finds.ts";
 import { getActorUuids, getApi, getItemType } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
@@ -160,6 +161,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             {
                 label: "ConvenientEffects.AddEffect",
                 icon: '<i class="fa-regular fa-plus"></i>',
+                visible: (html: HTMLElement) => {
+                    return !this.#isEffectIncrementable(html);
+                },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
                     const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -185,6 +189,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             {
                 label: "ConvenientEffects.RemoveEffect",
                 icon: '<i class="fa-regular fa-minus"></i>',
+                visible: (html: HTMLElement) => {
+                    return !this.#isEffectIncrementable(html);
+                },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
                     const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -208,8 +215,49 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
                 },
             },
             {
+                label: "ConvenientEffects.Increment",
+                icon: '<i class="fa-regular fa-circle-plus"></i>',
+                visible: (html: HTMLElement) => {
+                    return this.#isEffectIncrementable(html);
+                },
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
+                    const effectId = effectHtml.dataset.ceEffectId;
+
+                    if (!effectId) return;
+
+                    await getApi().toggleEffect({
+                        effectId,
+                        prioritizeTargets: this.#settings.prioritizeTargets,
+                        direction: 1,
+                    });
+                },
+            },
+            {
+                label: "ConvenientEffects.Decrement",
+                icon: '<i class="fa-regular fa-circle-minus"></i>',
+                visible: (html: HTMLElement) => {
+                    return this.#isEffectIncrementable(html);
+                },
+                onClick: async (_event: PointerEvent, target: HTMLElement) => {
+                    const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
+                    const effectId = effectHtml.dataset.ceEffectId;
+
+                    if (!effectId) return;
+
+                    await getApi().toggleEffect({
+                        effectId,
+                        prioritizeTargets: this.#settings.prioritizeTargets,
+                        direction: -1,
+                    });
+                },
+            },
+            {
                 label: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="fa-regular fa-dot-circle"></i>',
+                visible: (html: HTMLElement) => {
+                    return !this.#isEffectIncrementable(html);
+                },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
                     const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
@@ -549,6 +597,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             backup: this.options.convenientEffects.backup,
         });
         const nestedEffectIds = findAllNestedEffectIds({
+            backup: this.options.convenientEffects.backup,
+        });
+        const incrementEffectIds = findAllIncrementEffectIds({
             backup: this.options.convenientEffects.backup,
         });
 
@@ -896,14 +947,24 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
         return thisClass._onClickEntry(event, target);
     }
 
-    async _onClickEntry(_event: PointerEvent, target: HTMLElement): Promise<void> {
+    async _onClickEntry(event: PointerEvent, target: HTMLElement): Promise<void> {
         const effectId = (target.closest("[data-ce-effect-id]") as HTMLElement)?.dataset.ceEffectId;
 
         if (!effectId) return;
 
+        // Shift-click decrements increment chain parents; a plain click increments them
+        let direction: 1 | -1 = 1;
+        if (event.shiftKey) {
+            const effect = getApi().findEffect({ effectId });
+            if (effect && (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0) {
+                direction = -1;
+            }
+        }
+
         await getApi().toggleEffect({
             effectId,
             prioritizeTargets: this.#settings.prioritizeTargets,
+            direction,
         });
     }
 
@@ -1208,6 +1269,25 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
         if (!effect) return false;
 
         return Flags.isViewable(effect) ?? false;
+    }
+
+    #isEffectIncrementable(li: HTMLElement): boolean {
+        const folderHtml = li.closest(".directory-item.folder") as HTMLElement;
+        const folderId = folderHtml.dataset.folderId;
+
+        const effectHtml = li.closest("[data-ce-effect-id]") as HTMLElement;
+        const effectId = effectHtml.dataset.ceEffectId;
+
+        if (!folderId || !effectId) return false;
+
+        const effect = getApi().findEffect({
+            folderId,
+            effectId,
+        });
+
+        if (!effect) return false;
+
+        return (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0;
     }
 
     async #setFolderViewable(header: HTMLElement, value: boolean): Promise<void> {
