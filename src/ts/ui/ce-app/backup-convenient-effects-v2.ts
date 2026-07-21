@@ -5,7 +5,7 @@ import {
     findEffectByCeId,
     findEffectsByFolder,
     findFolder,
-    findFolders,
+    findFolders
 } from "../../utils/finds.ts";
 import { getApi } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
@@ -235,15 +235,15 @@ class BackupConvenientEffectsV2 extends HandlebarsApplicationMixin(ApplicationV2
                     const isViewable = Flags.isViewable(effect) ?? true;
                     const isNestedEffect = nestedEffectIds.includes(ceEffectId);
                     const showHiddenEffects = this.#settings.showHiddenEffects;
-                    const showNestedEffects = this.#settings.showNestedEffects;
+                    const showChildEffects = this.#settings.showChildEffects;
 
-                    if (showHiddenEffects && showNestedEffects) {
+                    if (showHiddenEffects && showChildEffects) {
                         return true; // all
-                    } else if (showHiddenEffects && !showNestedEffects) {
+                    } else if (showHiddenEffects && !showChildEffects) {
                         return !isNestedEffect;
-                    } else if (!showHiddenEffects && showNestedEffects) {
+                    } else if (!showHiddenEffects && showChildEffects) {
                         return isViewable;
-                    } else if (!showHiddenEffects && !showNestedEffects) {
+                    } else if (!showHiddenEffects && !showChildEffects) {
                         return isViewable && !isNestedEffect;
                     }
 

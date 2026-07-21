@@ -29,7 +29,7 @@
         "ShowFolder": "Show Folder",
         "HideFolder": "Hide Folder",
         "ShowHiddenEffects": "Show Hidden Effects",
-        "ShowNestedEffects": "Show Nested Effects",
+        "ShowChildEffects": "Show Child Effects",
         "PrioritizeTargets": "Prioritize Targets",
         "NewEffect": "New Effect",
         "EditEffect": "Edit Effect",

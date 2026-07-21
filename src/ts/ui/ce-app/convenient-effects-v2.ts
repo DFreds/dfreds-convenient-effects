@@ -68,7 +68,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             createEntry: ConvenientEffectsV2.#onCreateEntry,
             createFolder: ConvenientEffectsV2.#onCreateFolder,
             toggleHiddenEffects: ConvenientEffectsV2.#onToggleHiddenEffects,
-            toggleNestedEffects: ConvenientEffectsV2.#onToggleNestedEffects,
+            toggleChildEffects: ConvenientEffectsV2.#onToggleChildEffects,
             togglePrioritizeTargets: ConvenientEffectsV2.#onTogglePrioritizeTargets,
             viewBackups: ConvenientEffectsV2.#onViewBackups,
         },
@@ -479,8 +479,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             const showHiddenEffectsButton = this.element.querySelector(
                 "[data-action='toggleHiddenEffects']",
             ) as HTMLButtonElement;
-            const showNestedEffectsButton = this.element.querySelector(
-                "[data-action='toggleNestedEffects']",
+            const showChildEffectsButton = this.element.querySelector(
+                "[data-action='toggleChildEffects']",
             ) as HTMLButtonElement;
             const prioritizeTargetsButton = this.element.querySelector(
                 "[data-action='togglePrioritizeTargets']",
@@ -491,9 +491,9 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
                 showHiddenEffectsButton.setAttribute("aria-pressed", showHiddenEffects.toString());
             }
 
-            if (showNestedEffectsButton) {
-                const showNestedEffects = this.#settings.showNestedEffects;
-                showNestedEffectsButton.setAttribute("aria-pressed", showNestedEffects.toString());
+            if (showChildEffectsButton) {
+                const showChildEffects = this.#settings.showChildEffects;
+                showChildEffectsButton.setAttribute("aria-pressed", showChildEffects.toString());
             }
 
             if (prioritizeTargetsButton) {
@@ -571,42 +571,43 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
                     // Filter only if not backup
 
                     /*
-                    if show hidden and show nested
+                    if show hidden and show child
                         - isViewable can be true or false
-                        - Can be included in nested or not
+                        - Can be included in child or not
                         - Show all effects
 
-                    if show hidden and not show nested
+                    if show hidden and not show child
                         - isViewable can be true or false
-                        - Cannot be included in nested
-                        - Show all effects minus nested effects
+                        - Cannot be included in child
+                        - Show all effects minus child effects
 
-                    if not show hidden and show nested
+                    if not show hidden and show child
                         - isViewable must be true
-                        - Can be included in nested or not
+                        - Can be included in child or not
                         - Show all effects minus hidden effects
 
-                    if not show hidden and not show nested
+                    if not show hidden and not show child
                         - isViewable must be true
-                        - Cannot be included in nested
-                        - Show all effects minus hidden and minus nested
+                        - Cannot be included in child
+                        - Show all effects minus hidden and minus child
                     */
                     const ceEffectId = Flags.getCeEffectId(effect);
                     if (!ceEffectId) return false;
 
                     const isViewable = Flags.isViewable(effect) ?? true;
-                    const isNestedEffect = nestedEffectIds.includes(ceEffectId);
+                    const isChildEffect =
+                        nestedEffectIds.includes(ceEffectId) || incrementEffectIds.includes(ceEffectId);
                     const showHiddenEffects = this.#settings.showHiddenEffects;
-                    const showNestedEffects = this.#settings.showNestedEffects;
+                    const showChildEffects = this.#settings.showChildEffects;
 
-                    if (showHiddenEffects && showNestedEffects) {
+                    if (showHiddenEffects && showChildEffects) {
                         return true; // all
-                    } else if (showHiddenEffects && !showNestedEffects) {
-                        return !isNestedEffect;
-                    } else if (!showHiddenEffects && showNestedEffects) {
+                    } else if (showHiddenEffects && !showChildEffects) {
+                        return !isChildEffect;
+                    } else if (!showHiddenEffects && showChildEffects) {
                         return isViewable;
-                    } else if (!showHiddenEffects && !showNestedEffects) {
-                        return isViewable && !isNestedEffect;
+                    } else if (!showHiddenEffects && !showChildEffects) {
+                        return isViewable && !isChildEffect;
                     }
 
                     return false;
@@ -980,18 +981,18 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
         this.render({ parts: ["header", "directory"] });
     }
 
-    static async #onToggleNestedEffects(...args: any[]): Promise<void> {
+    static async #onToggleChildEffects(...args: any[]): Promise<void> {
         const [event, target] = args as [PointerEvent, HTMLElement];
         const thisClass = this as unknown as ConvenientEffectsV2;
-        return thisClass._onToggleNestedEffects(event, target);
+        return thisClass._onToggleChildEffects(event, target);
     }
 
-    async _onToggleNestedEffects(_event: PointerEvent, target: HTMLElement): Promise<void> {
-        await this.#settings.setShowNestedEffects(!this.#settings.showNestedEffects);
+    async _onToggleChildEffects(_event: PointerEvent, target: HTMLElement): Promise<void> {
+        await this.#settings.setShowChildEffects(!this.#settings.showChildEffects);
 
         const buttonHtml = target.closest("button") as HTMLButtonElement;
-        const isNestedEffects = this.#settings.showNestedEffects;
-        buttonHtml.setAttribute("aria-pressed", isNestedEffects.toString());
+        const isChildEffects = this.#settings.showChildEffects;
+        buttonHtml.setAttribute("aria-pressed", isChildEffects.toString());
 
         // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });

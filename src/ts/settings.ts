@@ -10,7 +10,7 @@ class Settings {
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
     #SHOW_HIDDEN_EFFECTS = "showHiddenEffects";
-    #SHOW_NESTED_EFFECTS = "showNestedEffects";
+    #SHOW_CHILD_EFFECTS = "showChildEffects";
     #HAS_INITIALIZED = "hasInitialized";
     #PRIORITIZE_TARGETS = "prioritizeTargets";
     #EFFECTS_VERSION = "effectsVersion";
@@ -37,7 +37,7 @@ class Settings {
     #registerNonConfigSettings(): void {
         this.#registerExpandedFolders();
         this.#registerShowHiddenEffects();
-        this.#registerShowNestedEffects();
+        this.#registerShowChildEffects();
         this.#registerPrioritizeTargets();
         this.#registerHasInitialized();
         this.#registerEffectsVersion();
@@ -90,9 +90,9 @@ class Settings {
         });
     }
 
-    #registerShowNestedEffects(): void {
-        game.settings.register(MODULE_ID, this.#SHOW_NESTED_EFFECTS, {
-            name: "Show Nested Effects",
+    #registerShowChildEffects(): void {
+        game.settings.register(MODULE_ID, this.#SHOW_CHILD_EFFECTS, {
+            name: "Show Child Effects",
             scope: "client",
             config: false,
             default: false,
@@ -210,12 +210,12 @@ class Settings {
         return game.settings.set(MODULE_ID, this.#SHOW_HIDDEN_EFFECTS, value);
     }
 
-    get showNestedEffects(): boolean {
-        return game.settings.get(MODULE_ID, this.#SHOW_NESTED_EFFECTS) as unknown as boolean;
+    get showChildEffects(): boolean {
+        return game.settings.get(MODULE_ID, this.#SHOW_CHILD_EFFECTS) as unknown as boolean;
     }
 
-    async setShowNestedEffects(value: boolean): Promise<unknown> {
-        return game.settings.set(MODULE_ID, this.#SHOW_NESTED_EFFECTS, value);
+    async setShowChildEffects(value: boolean): Promise<unknown> {
+        return game.settings.set(MODULE_ID, this.#SHOW_CHILD_EFFECTS, value);
     }
 
     get prioritizeTargets(): boolean {

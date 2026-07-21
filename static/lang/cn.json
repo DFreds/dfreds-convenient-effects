@@ -29,7 +29,7 @@
         "ShowFolder": "显示文件夹",
         "HideFolder": "隐藏文件夹",
         "ShowHiddenEffects": "显示隐藏效果",
-        "ShowNestedEffects": "显示嵌套效果",
+        "ShowChildEffects": "显示子效果",
         "PrioritizeTargets": "优先目标",
         "NewEffect": "新效果",
         "EditEffect": "编辑效果",

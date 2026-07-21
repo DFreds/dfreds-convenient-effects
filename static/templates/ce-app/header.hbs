@@ -51,7 +51,7 @@
             ></button>
         </search>
     {{else}}
-        {{! Search & Sort }}
+    {{! Search & Sort }}
         <search>
             {{! Show Hidden Effects }}
             <button
@@ -62,13 +62,13 @@
                 aria-label="{{localize 'ConvenientEffects.ShowHiddenEffects'}}"
             ></button>
 
-            {{! Show Nested Effects }}
+            {{! Show Child Effects }}
             <button
                 type="button"
-                class="inline-control ce-inline-control icon fa-solid fa-tree"
-                data-action="toggleNestedEffects"
+                class="inline-control ce-inline-control icon fa-solid fa-sitemap"
+                data-action="toggleChildEffects"
                 data-tooltip
-                aria-label="{{localize 'ConvenientEffects.ShowNestedEffects'}}"
+                aria-label="{{localize 'ConvenientEffects.ShowChildEffects'}}"
             ></button>
 
             {{! Search Input }}

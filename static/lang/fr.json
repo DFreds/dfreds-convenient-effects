@@ -29,7 +29,7 @@
         "ShowFolder": "Afficher le dossier",
         "HideFolder": "Masquer le dossier",
         "ShowHiddenEffects": "Afficher les effets cachés",
-        "ShowNestedEffects": "Afficher les effets imbriqués",
+        "ShowChildEffects": "Afficher les effets enfants",
         "PrioritizeTargets": "Prioriser les cibles",
         "NewEffect": "Nouvel effet",
         "EditEffect": "Modifier l'effet",

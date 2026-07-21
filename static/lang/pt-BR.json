@@ -29,7 +29,7 @@
         "ShowFolder": "Mostrar Pasta",
         "HideFolder": "Esconder Pasta",
         "ShowHiddenEffects": "Mostrar Efeitos Ocultos",
-        "ShowNestedEffects": "Mostrar Efeitos Aninhados",
+        "ShowChildEffects": "Mostrar Efeitos Filhos",
         "PrioritizeTargets": "Priorizar Alvos",
         "NewEffect": "Novo Efeito",
         "EditEffect": "Editar Efeito",
