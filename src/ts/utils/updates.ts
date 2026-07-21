@@ -54,6 +54,24 @@ function updateOldOtherIds(
     });
 }
 
+function updateOldIncrementIds(
+    allEffects: ActiveEffect<Item<null>>[],
+    oldCeEffectId: string | undefined,
+    newCeEffectId: string,
+): void {
+    updateOldCeEffectIds({
+        allEffects,
+        oldCeEffectId,
+        newCeEffectId,
+        flagGetter: (effect) => {
+            return Flags.getIncrementEffectIds(effect);
+        },
+        flagSetter: async (effect, newIds) => {
+            await Flags.setIncrementEffectIds(effect, newIds);
+        },
+    });
+}
+
 function updateOldCeEffectIds({
     allEffects,
     oldCeEffectId,
@@ -87,4 +105,4 @@ function updateOldCeEffectIds({
         });
 }
 
-export { updateOldNestedIds, updateOldSubIds, updateOldOtherIds };
+export { updateOldNestedIds, updateOldSubIds, updateOldOtherIds, updateOldIncrementIds };

@@ -14,9 +14,11 @@ interface ICreateEffectAddOns {
     isTemporary?: boolean;
     isViewable?: boolean;
     isDynamic?: boolean;
+    updatesActor?: boolean;
     nestedEffectIds?: string[];
     subEffectIds?: string[];
     otherEffectIds?: string[];
+    incrementEffectIds?: string[];
 }
 
 function createConvenientItem({
@@ -45,9 +47,11 @@ function createConvenientEffect({
     isTemporary = true,
     isViewable = true,
     isDynamic = false,
+    updatesActor = false,
     nestedEffectIds,
     subEffectIds,
     otherEffectIds,
+    incrementEffectIds,
 }: ICreateEffectAddOns): PreCreate<ActiveEffectSource> {
     Flags.setCeEffectId(effect, createCeEffectId(effect.name));
     Flags.setIsConvenient(effect, true);
@@ -55,6 +59,7 @@ function createConvenientEffect({
     Flags.setIsTemporary(effect, Flags.isTemporary(effect) ?? isTemporary);
     Flags.setIsViewable(effect, Flags.isViewable(effect) ?? isViewable);
     Flags.setIsDynamic(effect, Flags.isDynamic(effect) ?? isDynamic);
+    Flags.setUpdatesActor(effect, Flags.isUpdatesActor(effect) ?? updatesActor);
 
     // Prevent the item from being imported into a status effect item
     Flags.setIsStatusEffect(effect, false);
@@ -67,6 +72,9 @@ function createConvenientEffect({
     }
     if (otherEffectIds) {
         Flags.setOtherEffectIds(effect, Flags.getOtherEffectIds(effect) ?? otherEffectIds);
+    }
+    if (incrementEffectIds) {
+        Flags.setIncrementEffectIds(effect, Flags.getIncrementEffectIds(effect) ?? incrementEffectIds);
     }
 
     effect.description = effect.description

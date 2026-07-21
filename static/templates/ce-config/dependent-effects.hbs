@@ -43,4 +43,19 @@
         </div>
         <p class="hint">{{localize "ConvenientEffects.Config.OtherEffectsHint"}}</p>
     </div>
+
+    <div class="form-group">
+        <label>{{localize "ConvenientEffects.Config.IncrementEffectsLabel"}}</label>
+        <div class="form-fields">
+            <multi-select name="incrementEffectIds">
+                {{#each incrementEffectsData as |incrementEffectData|}}
+                    <option
+                        value="{{incrementEffectData.id}}"
+                        {{incrementEffectData.selected}}
+                    >{{incrementEffectData.label}}</option>
+                {{/each}}
+            </multi-select>
+        </div>
+        <p class="hint">{{localize "ConvenientEffects.Config.IncrementEffectsHint"}}</p>
+    </div>
 </section>

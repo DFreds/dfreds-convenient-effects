@@ -173,6 +173,24 @@ function findEffectByCeId(ceId: string, { backup }: FindOptions): ActiveEffect<a
     });
 }
 
+function findIncrementParentOf(ceEffectId: string | undefined, { backup }: FindOptions): ActiveEffect<any> | undefined {
+    if (!ceEffectId) return undefined;
+
+    return findAllEffects({ backup }).find((effect) => {
+        return Flags.getIncrementEffectIds(effect)?.includes(ceEffectId);
+    });
+}
+
+function findAllIncrementEffectIds({ backup }: FindOptions): string[] {
+    let incrementEffectIds = findAllEffects({ backup })
+        .flatMap((effect) => Flags.getIncrementEffectIds(effect))
+        .filter(notEmpty);
+
+    incrementEffectIds = [...new Set(incrementEffectIds)];
+
+    return incrementEffectIds;
+}
+
 export {
     findModuleById,
     findDocumentByUuid,
@@ -186,4 +204,6 @@ export {
     findAllOtherEffectIds,
     findEffectByUuid,
     findEffectByCeId,
+    findIncrementParentOf,
+    findAllIncrementEffectIds,
 };

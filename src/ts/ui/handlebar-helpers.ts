@@ -1,6 +1,6 @@
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
-import { findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
+import { findAllIncrementEffectIds, findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
 import { getApi, isStackableDae } from "../utils/gets.ts";
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
@@ -12,6 +12,7 @@ class HandlebarHelpers {
         this.#registerIsTemporary();
         this.#registerIsViewable();
         this.#registerIsDynamic();
+        this.#registerIsUpdatesActor();
         this.#registerGetFolderColor();
         this.#registerConvenientFolderIcons();
         this.#registerConvenientEffectIcons();
@@ -44,6 +45,12 @@ class HandlebarHelpers {
     #registerIsDynamic() {
         Handlebars.registerHelper("isDynamic", (effect: ActiveEffect<any>) => {
             return Flags.isDynamic(effect);
+        });
+    }
+
+    #registerIsUpdatesActor() {
+        Handlebars.registerHelper("isUpdatesActor", (effect: ActiveEffect<any>) => {
+            return Flags.isUpdatesActor(effect);
         });
     }
 
@@ -84,10 +91,15 @@ class HandlebarHelpers {
 
             icons += this.#getPassiveIcon(effect);
             icons += this.#getHiddenIcon(effect);
+            icons += this.#getIncrementableIcon(effect);
             icons += this.#getHasNestedEffectsIcon(nestedEffects);
             icons += this.#getIsNestedEffectsIcon(
                 Flags.getCeEffectId(effect),
                 findAllNestedEffectIds({ backup: false }),
+            );
+            icons += this.#getIsIncrementEffectIcon(
+                Flags.getCeEffectId(effect),
+                findAllIncrementEffectIds({ backup: false }),
             );
 
             if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
@@ -133,6 +145,12 @@ class HandlebarHelpers {
             : "";
     }
 
+    #getIncrementableIcon(effect: ActiveEffect<Item<null>>): string {
+        return (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0
+            ? `<i class='fas fa-plus-minus integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.Incrementable")}'></i> `
+            : "";
+    }
+
     #getHasNestedEffectsIcon(nestedEffects: ActiveEffect<Item<null>>[]): string {
         return nestedEffects && nestedEffects.length > 0
             ? `<i class='fas fa-trees integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.HasNestedEffects")}'></i> `
@@ -142,6 +160,12 @@ class HandlebarHelpers {
     #getIsNestedEffectsIcon(ceEffectId: string | undefined, nestedEffectIds: string[]): string {
         return ceEffectId && nestedEffectIds?.includes(ceEffectId)
             ? `<i class='fas fa-tree integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.IsNestedEffect")}'></i> `
+            : "";
+    }
+
+    #getIsIncrementEffectIcon(ceEffectId: string | undefined, incrementEffectIds: string[]): string {
+        return ceEffectId && incrementEffectIds?.includes(ceEffectId)
+            ? `<i class='fas fa-plus integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.IsIncrementEffect")}'></i> `
             : "";
     }
 

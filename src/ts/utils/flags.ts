@@ -9,9 +9,11 @@ class Flags {
         IS_TEMPORARY: "isTemporary",
         IS_DYNAMIC: "isDynamic",
         IS_VIEWABLE: "isViewable",
+        UPDATES_ACTOR: "updatesActor",
         NESTED_EFFECT_IDS: "nestedEffectIds",
         SUB_EFFECT_IDS: "subEffectIds",
         OTHER_EFFECT_IDS: "otherEffectIds",
+        INCREMENT_EFFECT_IDS: "incrementEffectIds",
         FOLDER_COLOR: "folderColor",
 
         // DAE
@@ -143,7 +145,7 @@ class Flags {
     /**
      * Checks if the document is flagged as convenient
      *
-     * @param effect - The effect to check
+     * @param document - The effect to check
      * @returns true if it is convenient, false otherwise
      */
     static isConvenient(document: ActiveEffect<any> | Item<null> | object): boolean | undefined {
@@ -186,6 +188,45 @@ class Flags {
 
     static setIsDynamic(effect: object, value: boolean): boolean {
         return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`, value);
+    }
+
+    static getIncrementEffectIds(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string[] | undefined {
+        if (effect instanceof ActiveEffect) {
+            return effect.getFlag(MODULE_ID, this.#KEYS.INCREMENT_EFFECT_IDS) as string[] | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.INCREMENT_EFFECT_IDS}`) as
+                | string[]
+                | undefined;
+        }
+    }
+
+    static async setIncrementEffectIds(
+        effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>,
+        incrementEffectIds: string[],
+    ): Promise<any> {
+        if (effect instanceof ActiveEffect) {
+            return effect.setFlag(MODULE_ID, this.#KEYS.INCREMENT_EFFECT_IDS, incrementEffectIds);
+        } else {
+            return foundry.utils.setProperty(
+                effect,
+                `flags.${MODULE_ID}.${this.#KEYS.INCREMENT_EFFECT_IDS}`,
+                incrementEffectIds,
+            );
+        }
+    }
+
+    static isUpdatesActor(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): boolean | undefined {
+        if (effect instanceof ActiveEffect) {
+            return effect.getFlag(MODULE_ID, this.#KEYS.UPDATES_ACTOR) as boolean | undefined;
+        } else {
+            return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.UPDATES_ACTOR}`) as
+                | boolean
+                | undefined;
+        }
+    }
+
+    static setUpdatesActor(effect: object, value: boolean): boolean {
+        return foundry.utils.setProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.UPDATES_ACTOR}`, value);
     }
 
     static isViewable(document: ActiveEffect<any> | Item<null> | PreCreate<ActiveEffectSource>): boolean | undefined {
