@@ -114,10 +114,6 @@ class HandlebarHelpers {
                 icons += this.#getStackableDaeIcon(effect);
             }
 
-            if (findModuleById(MODULE_IDS.ATE)?.active) {
-                icons += this.#getAteIcon(allChanges);
-            }
-
             if (findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active) {
                 icons += this.#getTokenMagicIcon(allChanges);
             }
@@ -195,12 +191,6 @@ class HandlebarHelpers {
             effect: effect as ActiveEffect<any>,
         })
             ? `<i class='fas fa-layer-group integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.StackableDae")}'></i> `
-            : "";
-    }
-
-    #getAteIcon(changes: DeepPartial<EffectChangeData>[]): string {
-        return changes.some((change) => change.key?.startsWith("ATL"))
-            ? `<i class='fas fa-lightbulb integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.AtlEffects")}'></i> `
             : "";
     }
 

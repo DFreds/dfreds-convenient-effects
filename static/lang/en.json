@@ -63,7 +63,6 @@
         "StatusEffect": "Status Effect",
         "MidiQolEffects": "Midi-QoL Effects",
         "StackableDae": "Stackable DAE",
-        "AtlEffects": "ATL Effects",
         "TokenMagicEffects": "Token Magic Effects",
 
         "Config": {
@@ -258,11 +257,11 @@
             },
             "BullseyeLantern": {
                 "name": "Bullseye Lantern",
-                "description": "Adds lantern light in a 60 degree cone for 6 hours (requires ATL)"
+                "description": "Adds lantern light in a 60 degree cone for 6 hours"
             },
             "Candle": {
                 "name": "Candle",
-                "description": "Adds candle light for 1 hour (requires ATL)"
+                "description": "Adds candle light for 1 hour"
             },
             "CatsGrace": {
                 "name": "Cat's Grace",
@@ -270,7 +269,7 @@
             },
             "ChannelDivinitySacredWeapon": {
                 "name": "Channel Divinity: Sacred Weapon",
-                "description": "Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute (requires ATL)"
+                "description": "Add charisma modifier (minimum +1) to all weapon attack rolls and emits 20/40 light for 1 minute"
             },
             "ChannelDivinityTurnTheUnholy": {
                 "name": "Channel Divinity: Turn the Unholy",
@@ -554,11 +553,11 @@
             },
             "HolyAura": {
                 "name": "Holy Aura",
-                "description": "Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius (requires ATL) for 1 minute"
+                "description": "Advantage on saving throws, grant disadvantage to all who attack, and emit dim light in 5 radius for 1 minute"
             },
             "HoodedLantern": {
                 "name": "Hooded Lantern",
-                "description": "Adds hooded lantern light for 6 hours (requires ATL)"
+                "description": "Adds hooded lantern light for 6 hours"
             },
             "HuntersMark": {
                 "name": "Hunter's Mark",
@@ -598,11 +597,11 @@
             },
             "Lantern": {
                 "name": "Lantern",
-                "description": "Adds lantern light for 6 hours (requires ATL)"
+                "description": "Adds lantern light for 6 hours"
             },
             "Light": {
                 "name": "Light",
-                "description": "Emits 20/40 light for 1 hour (requires ATL)"
+                "description": "Emits 20/40 light for 1 hour"
             },
             "Longstrider": {
                 "name": "Longstrider",
@@ -880,7 +879,7 @@
             },
             "Torch": {
                 "name": "Torch",
-                "description": "Adds torch light for 1 hour (requires ATL)"
+                "description": "Adds torch light for 1 hour"
             },
             "TrueStrike": {
                 "name": "True Strike",

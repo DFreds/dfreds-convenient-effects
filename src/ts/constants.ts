@@ -10,7 +10,6 @@ export const COLORS = {
 };
 
 export const MODULE_IDS = {
-    ATE: "ATL",
     DAE: "dae",
     MIDI: "midi-qol",
     TOKEN_MAGIC: "tokenmagic",

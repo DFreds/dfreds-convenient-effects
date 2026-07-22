@@ -63,7 +63,6 @@
         "StatusEffect": "Effet de statut",
         "MidiQolEffects": "Effets Midi-QoL",
         "StackableDae": "DAE empilable",
-        "AtlEffects": "Effets ATL",
         "TokenMagicEffects": "Effets Token Magic",
 
         "Config": {
@@ -257,11 +256,11 @@
             },
             "BullseyeLantern": {
                 "name": "Lanterne sourde",
-                "description": "Ajoute une lumière de lanterne dans un cône de 18 mètres pendant 6 heures (nécessite ATL)"
+                "description": "Ajoute une lumière de lanterne dans un cône de 18 mètres pendant 6 heures"
             },
             "Candle": {
                 "name": "Bougie",
-                "description": "Ajoute la lumière d'une bougie pendant 1 heure (nécessite ATL)"
+                "description": "Ajoute la lumière d'une bougie pendant 1 heure"
             },
             "CatsGrace": {
                 "name": "Grâce féline",
@@ -269,7 +268,7 @@
             },
             "ChannelDivinitySacredWeapon": {
                 "name": "Conduit divin : Arme sacré [Paladin - Serment de dévotion]",
-                "description": "Ajoutez un modificateur de charisme (minimum +1) à tous les jets d'attaque avec une arme et émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 minute (nécessite ATL)"
+                "description": "Ajoutez un modificateur de charisme (minimum +1) à tous les jets d'attaque avec une arme et émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 minute"
             },
             "ChannelDivinityTurnTheUnholy": {
                 "name": "Conduit divin : Renvoi des impies [Paladin - Serment de dévotion]",
@@ -553,11 +552,11 @@
             },
             "HolyAura": {
                 "name": "Aura sacrée",
-                "description": "Avantage aux jets de sauvegarde, accorde un désavantage à tous ceux qui attaquent et émet une faible lumière dans un rayon de 1,5 mètres (nécessite ATL) pendant 1 minute."
+                "description": "Avantage aux jets de sauvegarde, accorde un désavantage à tous ceux qui attaquent et émet une faible lumière dans un rayon de 1,5 mètres pendant 1 minute."
             },
             "HoodedLantern": {
                 "name": "Lanterne à capote",
-                "description": "Ajoute une lanterne à capote pendant 6 heures (nécessite ATL)"
+                "description": "Ajoute une lanterne à capote pendant 6 heures"
             },
             "HuntersMark": {
                 "name": "Marque du chasseur",
@@ -597,11 +596,11 @@
             },
             "Lantern": {
                 "name": "Lanterne",
-                "description": "Ajoute une lumière de lanterne pendant 6 heures (nécessite ATL)"
+                "description": "Ajoute une lumière de lanterne pendant 6 heures"
             },
             "Light": {
                 "name": "Lumière",
-                "description": "Émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 heure (nécessite ATL)"
+                "description": "Émet une lumière vive dans un rayon de 6 mètres et une lumière faible sur 6 mètres supplémentaires pendant 1 heure"
             },
             "Longstrider": {
                 "name": "Grande foulée",
@@ -879,7 +878,7 @@
             },
             "Torch": {
                 "name": "Torche",
-                "description": "Ajoute une lampe torche pendant 1 heure (nécessite ATL)"
+                "description": "Ajoute une lampe torche pendant 1 heure"
             },
             "TrueStrike": {
                 "name": "Coup au but",

@@ -63,7 +63,6 @@
         "StatusEffect": "Efeito de Status",
         "MidiQolEffects": "Efeitos Midi-QoL",
         "StackableDae": "DAE Empilhável",
-        "AtlEffects": "Efeitos ATL",
         "TokenMagicEffects": "Efeitos Token Magic",
 
         "Config": {
@@ -257,11 +256,11 @@
             },
             "BullseyeLantern": {
                 "name": "Lanterna Furta-Fogo",
-                "description": "Adiciona luz de lanterna em um cone de 60 graus por 6 horas (requer ATL)"
+                "description": "Adiciona luz de lanterna em um cone de 60 graus por 6 horas"
             },
             "Candle": {
                 "name": "Vela",
-                "description": "Adiciona luz de vela por 1 hora (requer ATL)"
+                "description": "Adiciona luz de vela por 1 hora"
             },
             "CatsGrace": {
                 "name": "Agilidade do Gato",
@@ -269,7 +268,7 @@
             },
             "ChannelDivinitySacredWeapon": {
                 "name": "Canalizar Divindade: Arma Sagrada",
-                "description": "Adiciona modificador de carisma (mínimo +1) a todas as jogadas de ataque com arma e emite luz 20/40 por 1 minuto (requer ATL)"
+                "description": "Adiciona modificador de carisma (mínimo +1) a todas as jogadas de ataque com arma e emite luz 20/40 por 1 minuto"
             },
             "ChannelDivinityTurnTheUnholy": {
                 "name": "Canalizar Divindade: Expulsar o Profano",
@@ -553,11 +552,11 @@
             },
             "HolyAura": {
                 "name": "Aura Sagrada",
-                "description": "Vantagem em testes de resistência, concede desvantagem a todos que atacam e emite luz fraca em um raio de 5 pés (requer ATL) por 1 minuto"
+                "description": "Vantagem em testes de resistência, concede desvantagem a todos que atacam e emite luz fraca em um raio de 5 pés por 1 minuto"
             },
             "HoodedLantern": {
                 "name": "Lanterna Coberta",
-                "description": "Adiciona luz de lanterna coberta por 6 horas (requer ATL)"
+                "description": "Adiciona luz de lanterna coberta por 6 horas"
             },
             "HuntersMark": {
                 "name": "Marca do Caçador",
@@ -597,11 +596,11 @@
             },
             "Lantern": {
                 "name": "Lanterna",
-                "description": "Adiciona luz de lanterna por 6 horas (requer ATL)"
+                "description": "Adiciona luz de lanterna por 6 horas"
             },
             "Light": {
                 "name": "Luz",
-                "description": "Emite luz 20/40 por 1 hora (requer ATL)"
+                "description": "Emite luz 20/40 por 1 hora"
             },
             "Longstrider": {
                 "name": "Passos Longos",
@@ -879,7 +878,7 @@
             },
             "Torch": {
                 "name": "Tocha",
-                "description": "Adiciona luz de tocha por 1 hora (requer ATL)"
+                "description": "Adiciona luz de tocha por 1 hora"
             },
             "TrueStrike": {
                 "name": "Ataque Certeiro",
