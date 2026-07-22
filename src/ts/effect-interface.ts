@@ -110,6 +110,7 @@ class EffectInterfaceImpl implements EffectInterface {
                     effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
                     effectName: effectDataToSend.name,
                     uuid,
+                    overlay,
                     origin,
                     direction,
                 });
@@ -123,6 +124,7 @@ class EffectInterfaceImpl implements EffectInterface {
                     parentData: effectDataToSend,
                     uuid,
                     direction,
+                    overlay,
                     origin,
                 });
                 continue;
@@ -135,6 +137,7 @@ class EffectInterfaceImpl implements EffectInterface {
                     parent: incrementParent,
                     memberData: effectDataToSend,
                     uuid,
+                    overlay,
                     origin,
                 });
                 continue;
@@ -198,6 +201,7 @@ class EffectInterfaceImpl implements EffectInterface {
                     parentData: effectDataToSend,
                     uuid,
                     direction,
+                    overlay,
                     origin,
                 });
                 return [];
@@ -321,11 +325,13 @@ class EffectInterfaceImpl implements EffectInterface {
         parentData,
         uuid,
         direction,
+        overlay,
         origin,
     }: {
         parentData: PreCreate<ActiveEffectSource>;
         uuid: string;
         direction: 1 | -1;
+        overlay: boolean;
         origin?: ActiveEffectOrigin | null;
     }): Promise<void> {
         const memberIds = Flags.getIncrementEffectIds(parentData) ?? [];
@@ -334,17 +340,30 @@ class EffectInterfaceImpl implements EffectInterface {
         const lastIndex = memberIds.length - 1;
         const appliedIndex = memberIds.findIndex((memberId) => this.hasEffectApplied({ effectId: memberId, uuid }));
 
+        const effectiveOverlay =
+            appliedIndex === -1 ? overlay : this.#isAppliedAsOverlay({ effectId: memberIds[appliedIndex], uuid });
+
         if (direction === 1) {
             if (appliedIndex === -1) {
-                await this.addEffect({ effectId: memberIds[0], uuid, origin });
+                await this.addEffect({ effectId: memberIds[0], uuid, overlay: effectiveOverlay, origin });
             } else if (appliedIndex < lastIndex) {
                 await this.removeEffect({ effectId: memberIds[appliedIndex], uuid });
-                await this.addEffect({ effectId: memberIds[appliedIndex + 1], uuid, origin });
+                await this.addEffect({
+                    effectId: memberIds[appliedIndex + 1],
+                    uuid,
+                    overlay: effectiveOverlay,
+                    origin,
+                });
             }
         } else {
             if (appliedIndex > 0) {
                 await this.removeEffect({ effectId: memberIds[appliedIndex], uuid });
-                await this.addEffect({ effectId: memberIds[appliedIndex - 1], uuid, origin });
+                await this.addEffect({
+                    effectId: memberIds[appliedIndex - 1],
+                    uuid,
+                    overlay: effectiveOverlay,
+                    origin,
+                });
             } else if (appliedIndex === 0) {
                 await this.removeEffect({ effectId: memberIds[0], uuid });
             }
@@ -355,11 +374,13 @@ class EffectInterfaceImpl implements EffectInterface {
         parent,
         memberData,
         uuid,
+        overlay,
         origin,
     }: {
         parent: ActiveEffect<any>;
         memberData: PreCreate<ActiveEffectSource>;
         uuid: string;
+        overlay: boolean;
         origin?: ActiveEffectOrigin | null;
     }): Promise<void> {
         const memberCeId = Flags.getCeEffectId(memberData);
@@ -371,13 +392,30 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         const memberIds = Flags.getIncrementEffectIds(parent) ?? [];
+        let effectiveOverlay = overlay;
         for (const siblingId of memberIds) {
             if (siblingId !== memberCeId && this.hasEffectApplied({ effectId: siblingId, uuid })) {
+                effectiveOverlay = this.#isAppliedAsOverlay({ effectId: siblingId, uuid });
                 await this.removeEffect({ effectId: siblingId, uuid });
             }
         }
 
-        await this.addEffect({ effectId: memberCeId, uuid, origin });
+        await this.addEffect({ effectId: memberCeId, uuid, overlay: effectiveOverlay, origin });
+    }
+
+    #isAppliedAsOverlay({ effectId, uuid }: { effectId: string; uuid: string }): boolean {
+        const document = findDocumentByUuidSync(uuid);
+
+        const effect = (document?.effects as any)?.find((effect: ActiveEffect<any>) => {
+            const isConvenient = Flags.isConvenient(effect) ?? false;
+            const isEnabled = !effect.disabled;
+            const isMatchingId = effect.id === effectId;
+            const isMatchingCeId = Flags.getCeEffectId(effect) === effectId;
+
+            return isConvenient && isEnabled && (isMatchingId || isMatchingCeId);
+        }) as ActiveEffect<any> | undefined;
+
+        return (effect?.getFlag("core", "overlay") as boolean) ?? false;
     }
 
     async #getEffectDataToSend({

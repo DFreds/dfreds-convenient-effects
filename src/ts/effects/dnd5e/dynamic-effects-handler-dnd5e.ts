@@ -204,8 +204,13 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         const exhaustionId = this.#ceEffectIdForName("ConvenientEffects.Dnd.Exhaustion.name");
         if (!exhaustionId) return;
 
+        // Exhaustion is applied by updating the actor, so dnd5e (not CE) creates
+        // the status effect. Carry the requested overlay through so it can be
+        // applied to that effect once dnd5e syncs it.
+        const overlay = !!foundry.utils.getProperty(effect, "flags.core.overlay");
+
         if (ceEffectId === exhaustionId) {
-            await this.#modifyExhaustion(actor, direction);
+            await this.#modifyExhaustion(actor, direction, overlay);
             return;
         }
 
@@ -216,22 +221,20 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         const memberIndex = memberIds.indexOf(ceEffectId);
         if (memberIndex === -1) return;
 
-        await this.#jumpExhaustion(actor, memberIndex + 1);
+        await this.#jumpExhaustion(actor, memberIndex + 1, overlay);
     }
 
-    async #modifyExhaustion(actor: Actor<any>, direction: 1 | -1): Promise<void> {
+    async #modifyExhaustion(actor: Actor<any>, direction: 1 | -1, overlay: boolean): Promise<void> {
         const maxLevel = ((CONFIG as any).DND5E?.conditionTypes?.exhaustion?.levels as number | undefined) ?? 6;
         const currentLevel = (foundry.utils.getProperty(actor, "system.attributes.exhaustion") as number) ?? 0;
         const newLevel = Math.min(Math.max(currentLevel + direction, 0), maxLevel);
 
         if (newLevel === currentLevel) return;
 
-        await actor.update({
-            "system.attributes.exhaustion": newLevel,
-        });
+        await this.#updateExhaustionLevel(actor, newLevel, overlay);
     }
 
-    async #jumpExhaustion(actor: Actor<any>, level: number): Promise<void> {
+    async #jumpExhaustion(actor: Actor<any>, level: number, overlay: boolean): Promise<void> {
         const maxLevel = ((CONFIG as any).DND5E?.conditionTypes?.exhaustion?.levels as number | undefined) ?? 6;
         const currentLevel = (foundry.utils.getProperty(actor, "system.attributes.exhaustion") as number) ?? 0;
         const targetLevel = Math.min(Math.max(level, 0), maxLevel);
@@ -239,9 +242,43 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
         if (newLevel === currentLevel) return;
 
-        await actor.update({
-            "system.attributes.exhaustion": newLevel,
+        await this.#updateExhaustionLevel(actor, newLevel, overlay);
+    }
+
+    async #updateExhaustionLevel(actor: Actor<any>, newLevel: number, overlay: boolean): Promise<void> {
+        // dnd5e keeps its own overlay flag across level changes, so a non-overlay
+        // update leaves any existing overlay untouched (letting it persist until
+        // exhaustion is fully removed). Only act when overlay is requested.
+        if (!overlay || newLevel < 1) {
+            await actor.update({ "system.attributes.exhaustion": newLevel });
+            return;
+        }
+
+        // dnd5e (re)creates its exhaustion effect asynchronously in response to
+        // the level change and never marks it as an overlay. Flag it ourselves,
+        // whether it already exists (raising the level) or is newly created.
+        const flagIfExhaustion = (candidate: ActiveEffect<any>): boolean => {
+            const isExhaustion = candidate.parent === actor && !!(candidate as any).statuses?.has("exhaustion");
+            if (isExhaustion) {
+                void candidate.update({ "flags.core.overlay": true });
+            }
+            return isExhaustion;
+        };
+
+        const hookId = Hooks.on("createActiveEffect", (candidate: unknown) => {
+            if (flagIfExhaustion(candidate as ActiveEffect<any>)) Hooks.off("createActiveEffect", hookId);
         });
+
+        await actor.update({ "system.attributes.exhaustion": newLevel });
+
+        // If the effect already existed, no creation hook fires; flag it directly.
+        const existing = (actor.effects as any).find((e: ActiveEffect<any>) => (e as any).statuses?.has("exhaustion"));
+        if (existing && flagIfExhaustion(existing)) {
+            Hooks.off("createActiveEffect", hookId);
+        }
+
+        // Safety cleanup so the hook never lingers if creation never happens.
+        globalThis.setTimeout(() => Hooks.off("createActiveEffect", hookId), 2000);
     }
 }
 

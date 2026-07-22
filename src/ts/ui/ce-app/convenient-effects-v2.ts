@@ -255,9 +255,6 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
             {
                 label: "ConvenientEffects.ToggleAsOverlay",
                 icon: '<i class="fa-regular fa-dot-circle"></i>',
-                visible: (html: HTMLElement) => {
-                    return !this.#isEffectIncrementable(html);
-                },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
                     const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
                     const effectId = effectHtml.dataset.ceEffectId;
