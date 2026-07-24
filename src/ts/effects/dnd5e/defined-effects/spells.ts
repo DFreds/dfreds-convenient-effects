@@ -181,6 +181,7 @@ function aid(): PreCreate<ActiveEffectSource> {
                 }),
             ],
         },
+        isDynamic: true,
     });
 }
 

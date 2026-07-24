@@ -15,6 +15,9 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         if (!ceEffectId) return;
 
         switch (ceEffectId) {
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Aid.name"):
+                await this.#addAidEffects(effect, actor);
+                break;
             case this.#ceEffectIdForName("ConvenientEffects.Dnd.DivineWord.name"):
                 await this.#addDivineWordEffects(effect, actor);
                 break;
@@ -45,9 +48,53 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         }
     }
 
+    override async handleEffectDeletion(effect: ActiveEffect<any>, actor: Actor<any>): Promise<void> {
+        const ceEffectId = Flags.getCeEffectId(effect);
+        if (!ceEffectId) return;
+
+        switch (ceEffectId) {
+            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Aid.name"):
+                await this.#clampHpToMax(actor);
+                break;
+        }
+    }
+
     #ceEffectIdForName(nameKey: string): string | undefined {
         const definedEffect = getApi().findEffect({ effectName: game.i18n.localize(nameKey) });
         return definedEffect ? Flags.getCeEffectId(definedEffect) : undefined;
+    }
+
+    async #addAidEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> {
+        const tempMaxIncrease = this.#getTempMaxHpIncrease(effect);
+        if (!tempMaxIncrease) return;
+
+        const currentHp = foundry.utils.getProperty(actor, "system.attributes.hp.value") as number | undefined;
+        if (typeof currentHp !== "number") return;
+
+        await actor.update({
+            "system.attributes.hp.value": currentHp + tempMaxIncrease,
+        });
+    }
+
+    #getTempMaxHpIncrease(effect: PreCreate<ActiveEffectSource>): number {
+        return (effect.changes ?? [])
+            .filter((change) => change.key === "system.attributes.hp.tempmax")
+            .reduce((total, change) => {
+                const value = Number(change.value);
+                return Number.isFinite(value) ? total + value : total;
+            }, 0);
+    }
+
+    async #clampHpToMax(actor: Actor<any>): Promise<void> {
+        const storedHp = foundry.utils.getProperty(actor._source, "system.attributes.hp.value") as number | undefined;
+        const preparedHp = foundry.utils.getProperty(actor, "system.attributes.hp.value") as number | undefined;
+
+        if (typeof storedHp !== "number" || typeof preparedHp !== "number") return;
+        if (storedHp <= preparedHp) return;
+
+        await actor.update({
+            "system.attributes.hp.value": preparedHp,
+        });
     }
 
     async #addDivineWordEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> {

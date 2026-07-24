@@ -11,7 +11,7 @@ import { migrateDnd5eItemType } from "./migrations/2026-03-18-migrate-dnd5e-item
 class EffectDefinitionDnd5e extends EffectDefinition {
     override systemId: string = "dnd5e";
 
-    override version: number = 2;
+    override version: number = 3;
 
     override get initialItemEffects(): ItemEffects[] {
         return [conditions(), spells(), classFeatures(), equipment(), magicItems(), other()];

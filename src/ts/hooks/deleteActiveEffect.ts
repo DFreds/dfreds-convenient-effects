@@ -1,6 +1,7 @@
 import { renderAppIfOpen } from "../ui/render-app-if-open.ts";
 import { Listener } from "./index.ts";
 import { Flags } from "../utils/flags.ts";
+import { Mapping } from "../effects/mapping.ts";
 
 /**
  * Handle removing any actor data changes when an active effect is deleted from an actor
@@ -23,6 +24,12 @@ const DeleteActiveEffect: Listener = {
 
                 if (effectIdsFromThisEffect && effectIdsFromThisEffect.length > 0) {
                     actor.deleteEmbeddedDocuments("ActiveEffect", effectIdsFromThisEffect);
+                }
+
+                // Undo any actor data changes that were made when applied
+                if (Flags.isConvenient(effect)) {
+                    const systemDefinition = new Mapping().findSystemDefinitionForSystemId();
+                    systemDefinition?.dynamicEffectsHandler?.handleEffectDeletion?.(effect, actor);
                 }
             }
         });

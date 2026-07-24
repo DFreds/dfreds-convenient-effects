@@ -17,6 +17,8 @@ abstract class DynamicEffectsHandler {
         actor: Actor<any>,
         options: { direction?: 1 | -1 },
     ): Promise<void> | void;
+
+    abstract handleEffectDeletion?(effect: ActiveEffect<any>, actor: Actor<any>): Promise<void> | void;
 }
 
 export { DynamicEffectsHandler };
