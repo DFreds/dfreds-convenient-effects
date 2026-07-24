@@ -1,4 +1,3 @@
-
 import * as Vite from "vite";
 import checker from "vite-plugin-checker";
 import esbuild from "esbuild";
@@ -9,17 +8,10 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 const MODULE_ID = "dfreds-convenient-effects";
 
 const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
-    const buildMode =
-        mode === "production"
-            ? "production"
-            : mode === "stage"
-                ? "stage"
-                : "development";
+    const buildMode = mode === "production" ? "production" : mode === "stage" ? "stage" : "development";
     const outDir = "dist";
 
-    const plugins = [
-        checker({ typescript: true })
-    ];
+    const plugins = [checker({ typescript: true })];
 
     console.log(`Build mode: ${buildMode}`);
 
@@ -48,14 +40,10 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
 
     // Create dummy files for vite dev server
     if (command === "serve") {
-        const message =
-            "This file is for a running vite dev server and is not copied to a build";
+        const message = "This file is for a running vite dev server and is not copied to a build";
         fs.writeFileSync("./index.html", `<h1>${message}</h1>\n`);
         if (!fs.existsSync("./styles")) fs.mkdirSync("./styles");
-        fs.writeFileSync(
-            `./styles/${MODULE_ID}.css`,
-            `/** ${message} */\n`,
-        );
+        fs.writeFileSync(`./styles/${MODULE_ID}.css`, `/** ${message} */\n`);
         fs.writeFileSync(
             `./${MODULE_ID}.mjs`,
             `/** ${message} */\n\nwindow.global = window;\nimport "./src/ts/module.ts";\n`,
@@ -66,18 +54,17 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
     const codeSplitting: Vite.Rolldown.CodeSplittingOptions =
         buildMode === "production" || buildMode === "stage"
             ? {
-                groups: [
-                    {
-                        name: "vendor",
-                        test: /node_modules/,
-                    },
-                ],
-            }
+                  groups: [
+                      {
+                          name: "vendor",
+                          test: /node_modules/,
+                      },
+                  ],
+              }
             : {};
 
     return {
-        base:
-            command === "build" ? "./" : `/modules/${MODULE_ID}/`,
+        base: command === "build" ? "./" : `/modules/${MODULE_ID}/`,
         publicDir: "static",
         define: {
             BUILD_MODE: JSON.stringify(buildMode),
@@ -127,8 +114,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             port: 30001,
             open: false,
             proxy: {
-                "^(?!/modules/dfreds-convenient-effects/)":
-                    "http://localhost:30000/",
+                "^(?!/modules/dfreds-convenient-effects/)": "http://localhost:30000/",
                 "/socket.io": {
                     target: "ws://localhost:30000",
                     ws: true,
@@ -150,11 +136,11 @@ function minifyPlugin(): Vite.Plugin {
             async handler(code, chunk) {
                 return chunk.fileName.endsWith(".mjs")
                     ? esbuild.transform(code, {
-                        keepNames: true,
-                        minifyIdentifiers: false,
-                        minifySyntax: true,
-                        minifyWhitespace: true,
-                    })
+                          keepNames: true,
+                          minifyIdentifiers: false,
+                          minifySyntax: true,
+                          minifyWhitespace: true,
+                      })
                     : code;
             },
         },
@@ -169,10 +155,7 @@ function deleteLockFilePlugin(): Vite.Plugin {
         },
         writeBundle(outputOptions) {
             const outDir = outputOptions.dir ?? "";
-            const lockFile = path.resolve(
-                outDir,
-                `${MODULE_ID}.lock`,
-            );
+            const lockFile = path.resolve(outDir, `${MODULE_ID}.lock`);
             fs.rmSync(lockFile);
         },
     };

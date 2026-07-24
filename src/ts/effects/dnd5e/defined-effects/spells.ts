@@ -2,11 +2,14 @@ import { ItemEffects } from "../../effect-definition.ts";
 import { attackBonus, damageBonus, saveBonus } from "../changes/bonuses.ts";
 import { blinded, deafened, invisible, paralyzed, prone, restrained } from "./conditions.ts";
 import {
+    MOVEMENT_TYPES,
     acBonus,
     acCalc,
     acMin,
     deathMode,
-    movement,
+    movementBonus,
+    movementMultiply,
+    movementOverride,
     multiplyEncumbrance,
     tempMaxHp,
     upgradeDarkvision,
@@ -1113,11 +1116,7 @@ function haste(): PreCreate<ActiveEffectSource> {
                     ability: "dex",
                     value: "1",
                 }),
-                movement({
-                    movementType: "all",
-                    value: "*2",
-                    priority: 25,
-                }),
+                ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "2" })),
             ],
         },
     });
@@ -1292,11 +1291,7 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
-                movement({
-                    movementType: "all",
-                    value: "0",
-                    priority: 25,
-                }),
+                ...MOVEMENT_TYPES.map((movementType) => movementOverride({ movementType, value: "0" })),
                 abilitySaveMode({ ability: "dex", value: "-1" }),
                 disadvantageAttack({
                     attackType: "all",
@@ -1368,10 +1363,8 @@ function longstrider(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/air/wind-stream-blue-gray.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             changes: [
-                movement({
-                    movementType: "all",
+                movementBonus({
                     value: "+10",
-                    priority: 25,
                 }),
             ],
         },
@@ -1603,10 +1596,8 @@ function rayOfFrost(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/beam-rays-blue-small.webp",
             duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             changes: [
-                movement({
-                    movementType: "all",
+                movementBonus({
                     value: "-10",
-                    priority: 25,
                 }),
             ],
         },
@@ -1639,11 +1630,7 @@ function resilientSphere(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/light/explosion-star-large-pink.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
-                movement({
-                    movementType: "all",
-                    value: "*0.5",
-                    priority: 25,
-                }),
+                ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "0.5" })),
                 addAllDamageImmunity(),
             ],
         },
@@ -1727,11 +1714,7 @@ function slow(): PreCreate<ActiveEffectSource> {
                     ability: "dex",
                     value: "-2",
                 }),
-                movement({
-                    movementType: "all",
-                    value: "*0.5",
-                    priority: 25,
-                }),
+                ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "0.5" })),
             ],
         },
     });

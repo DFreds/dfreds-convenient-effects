@@ -81,18 +81,52 @@ function tempMaxHp({ value, priority }: { value: string; priority?: number }): P
     };
 }
 
-function movement({
+/**
+ * Every movement speed dnd5e derives. Map over this to build a change per speed
+ * for effects that alter movement as a whole.
+ */
+const MOVEMENT_TYPES = ["burrow", "climb", "fly", "swim", "walk"] as const;
+
+type MovementType = (typeof MOVEMENT_TYPES)[number];
+
+function movementBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.movement.bonus",
+        type: "add",
+        value,
+        priority,
+    };
+}
+
+function movementOverride({
     movementType,
     value,
     priority,
 }: {
-    movementType: "all" | "burrow" | "climb" | "fly" | "hover" | "swim" | "units" | "walk";
+    movementType: MovementType;
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
     return {
         key: `system.attributes.movement.${movementType}`,
-        type: "custom",
+        type: "override",
+        value,
+        priority,
+    };
+}
+
+function movementMultiply({
+    movementType,
+    value,
+    priority,
+}: {
+    movementType: MovementType;
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.attributes.movement.${movementType}`,
+        type: "multiply",
         value,
         priority,
     };
@@ -103,7 +137,7 @@ function upgradeMovement({
     value,
     priority,
 }: {
-    movementType: "all" | "burrow" | "climb" | "fly" | "hover" | "swim" | "units" | "walk";
+    movementType: MovementType;
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
@@ -117,7 +151,7 @@ function upgradeMovement({
 
 function multiplyEncumbrance({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
-        key: "system.attributes.encumbrance.max",
+        key: "system.attributes.encumbrance.multipliers.overall",
         type: "multiply",
         value,
         priority,
@@ -164,12 +198,15 @@ function deathMode({ value, priority }: { value: "-1" | "0" | "1"; priority?: nu
 }
 
 export {
+    MOVEMENT_TYPES,
     acMin,
     acBonus,
     acCalc,
     acCover,
     acFormula,
-    movement,
+    movementBonus,
+    movementMultiply,
+    movementOverride,
     upgradeMovement,
     upgradeDarkvision,
     upgradeTrueSight,

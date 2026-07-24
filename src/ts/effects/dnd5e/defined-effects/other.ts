@@ -1,5 +1,5 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import { acCover, movement } from "../changes/attributes.ts";
+import { acCover } from "../changes/attributes.ts";
 import { abilitySaveBonus, abilitySaveMode } from "../changes/abilities.ts";
 import { tokenMagic } from "../changes/macros.ts";
 import {
@@ -110,14 +110,8 @@ function encumbered(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.Encumbered.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Encumbered.description"),
             img: "icons/svg/down.svg",
+            // The speed reduction comes from dnd5e's handling of the status
             statuses: ["encumbered"],
-            changes: [
-                movement({
-                    movementType: "all",
-                    value: "-10",
-                    priority: 25,
-                }),
-            ],
         },
     });
 }
@@ -205,13 +199,9 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.HeavilyEncumbered.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.HeavilyEncumbered.description"),
             img: "icons/svg/downgrade.svg",
+            // The speed reduction comes from dnd5e's handling of the status
             statuses: ["heavilyEncumbered"],
             changes: [
-                movement({
-                    movementType: "all",
-                    value: "-20",
-                    priority: 25,
-                }),
                 disadvantageAttack({
                     attackType: "all",
                 }),
