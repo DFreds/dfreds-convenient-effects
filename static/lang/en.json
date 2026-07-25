@@ -845,6 +845,10 @@
                 "name": "Slimy Doom",
                 "description": "Disadvantage on constitution checks and constitution saving throws for 7 days"
             },
+            "Sleeping": {
+                "name": "Sleeping",
+                "description": "Applies the incapacitated and unconscious conditions"
+            },
             "Slow": {
                 "name": "Slow",
                 "description": "Halves movement and and subtract 2 from AC and dexterity saving throws for 1 minute"
@@ -888,6 +892,10 @@
             "Suggestion": {
                 "name": "Suggestion",
                 "description": "No active effects and lasts for 8 hours"
+            },
+            "Surprised": {
+                "name": "Surprised",
+                "description": "Disadvantage on initiative under the 2024 rules"
             },
             "Telekinesis": {
                 "name": "Telekinesis",

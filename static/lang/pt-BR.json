@@ -844,6 +844,10 @@
                 "name": "Perdição Pegajosa",
                 "description": "Desvantagem em testes de constituição e testes de resistência de constituição por 7 dias"
             },
+            "Sleeping": {
+                "name": "Sleeping",
+                "description": "Applies the incapacitated and unconscious conditions"
+            },
             "Slow": {
                 "name": "Lentidão",
                 "description": "Reduz o deslocamento pela metade e subtrai 2 da CA e testes de resistência de destreza por 1 minuto"
@@ -887,6 +891,10 @@
             "Suggestion": {
                 "name": "Sugestão",
                 "description": "Sem efeitos ativos e dura 8 horas"
+            },
+            "Surprised": {
+                "name": "Surprised",
+                "description": "Disadvantage on initiative under the 2024 rules"
             },
             "Telekinesis": {
                 "name": "Telecinésia",

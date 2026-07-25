@@ -844,6 +844,10 @@
                 "name": "Mort poisseusex",
                 "description": "Désavantage aux jets de caractéristiquen et de sauvegarde de constitution"
             },
+            "Sleeping": {
+                "name": "Sleeping",
+                "description": "Applies the incapacitated and unconscious conditions"
+            },
             "Slow": {
                 "name": "Lenteur",
                 "description": "Réduit de moitié le mouvement et soustrait 2 aux jets de sauvegarde de CA et de dextérité pendant 1 minute (réduit à une seule action)"
@@ -887,6 +891,10 @@
             "Suggestion": {
                 "name": "Suggestion",
                 "description": "Aucun effet actif et dure 8 heures"
+            },
+            "Surprised": {
+                "name": "Surprised",
+                "description": "Disadvantage on initiative under the 2024 rules"
             },
             "Telekinesis": {
                 "name": "Télékinésie",

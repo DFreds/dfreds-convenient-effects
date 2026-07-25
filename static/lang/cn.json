@@ -776,6 +776,10 @@
                 "name": "恶心症Slimy Doom",
                 "description": "恶心症Slimy Doom：患病生物进行体质检定和体质豁免时具有劣势。另外每当该生物受到伤害时都会陷入震慑状态，直至其下一回合结束。 持续时间：7 日"
             },
+            "Sleeping": {
+                "name": "Sleeping",
+                "description": "Applies the incapacitated and unconscious conditions"
+            },
             "Slow": {
                 "name": "缓慢术 Slow",
                 "description": "所有移动速度减半，AC和敏捷豁免具有-2减值，专注，至多 1 分钟"
@@ -819,6 +823,10 @@
             "Suggestion": {
                 "name": "暗示术 Suggestion",
                 "description": "专注，至多 8 小时"
+            },
+            "Surprised": {
+                "name": "Surprised",
+                "description": "Disadvantage on initiative under the 2024 rules"
             },
             "Telekinesis": {
                 "name": "心灵遥控 Telekinesis",
