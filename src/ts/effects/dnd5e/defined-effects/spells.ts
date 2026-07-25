@@ -569,7 +569,12 @@ function darkvision(): PreCreate<ActiveEffectSource> {
                     value: "darkvision",
                     priority: 5,
                 }),
-                // TODO not updating detectionModes yet
+                // Core only derives basicSight from sight.range when the token
+                // has no entry of its own, so set it explicitly.
+                ...tokenDetectionMode({
+                    id: "basicSight",
+                    range: 60,
+                }),
             ],
         },
     });
