@@ -45,37 +45,84 @@ function acFormula({ value, priority }: { value: string; priority?: number }): P
     };
 }
 
-function addDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+type SenseType = "blindsight" | "darkvision" | "tremorsense" | "truesight";
+
+function addSense({
+    sense,
+    value,
+    priority,
+}: {
+    sense: SenseType;
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
     return {
-        key: "system.attributes.senses.darkvision",
+        key: `system.attributes.senses.ranges.${sense}`,
         type: "add",
         value,
         priority,
     };
 }
 
-function upgradeDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function upgradeSense({
+    sense,
+    value,
+    priority,
+}: {
+    sense: SenseType;
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
     return {
-        key: "system.attributes.senses.darkvision",
+        key: `system.attributes.senses.ranges.${sense}`,
         type: "upgrade",
         value,
         priority,
     };
 }
 
+function addDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return addSense({ sense: "darkvision", value, priority });
+}
+
+function upgradeDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return upgradeSense({ sense: "darkvision", value, priority });
+}
+
 function upgradeTrueSight({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
-    return {
-        key: "system.attributes.senses.truesight",
-        type: "upgrade",
-        value,
-        priority,
-    };
+    return upgradeSense({ sense: "truesight", value, priority });
 }
 
 function tempMaxHp({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.hp.tempmax",
         type: "add",
+        value,
+        priority,
+    };
+}
+
+function hpBonus({
+    bonusType,
+    value,
+    priority,
+}: {
+    bonusType: "level" | "overall";
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.attributes.hp.bonuses.${bonusType}`,
+        type: "add",
+        value,
+        priority,
+    };
+}
+
+function acFlat({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.ac.flat",
+        type: "override",
         value,
         priority,
     };
@@ -149,6 +196,30 @@ function upgradeMovement({
     };
 }
 
+function movementHover({ value, priority }: { value: boolean; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.movement.hover",
+        type: "override",
+        value,
+        priority,
+    };
+}
+
+function ignoreDifficultTerrain({
+    movementType,
+    priority,
+}: {
+    movementType: MovementType;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.movement.ignoredDifficultTerrain",
+        type: "add",
+        value: movementType,
+        priority,
+    };
+}
+
 function multiplyEncumbrance({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: "system.attributes.encumbrance.multipliers.overall",
@@ -197,23 +268,50 @@ function deathMode({ value, priority }: { value: "-1" | "0" | "1"; priority?: nu
     };
 }
 
+function concentrationSaveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.concentration.bonuses.save",
+        type: "add",
+        value,
+        priority,
+    };
+}
+
+function deathSaveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "system.attributes.death.bonuses.save",
+        type: "add",
+        value,
+        priority,
+    };
+}
+
 export {
     MOVEMENT_TYPES,
-    acMin,
     acBonus,
     acCalc,
     acCover,
+    acFlat,
     acFormula,
+    acMin,
+    addDarkvision,
+    addSense,
+    concentrationMode,
+    concentrationSaveBonus,
+    deathMode,
+    deathSaveBonus,
+    hpBonus,
+    ignoreDifficultTerrain,
+    initiativeMode,
     movementBonus,
+    movementHover,
     movementMultiply,
     movementOverride,
-    upgradeMovement,
-    upgradeDarkvision,
-    upgradeTrueSight,
     multiplyEncumbrance,
-    addDarkvision,
-    initiativeMode,
-    concentrationMode,
-    deathMode,
     tempMaxHp,
+    upgradeDarkvision,
+    upgradeMovement,
+    upgradeSense,
+    upgradeTrueSight,
 };
+export type { MovementType, SenseType };
