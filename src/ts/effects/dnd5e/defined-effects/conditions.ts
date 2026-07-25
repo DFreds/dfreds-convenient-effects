@@ -42,7 +42,9 @@ function conditions(): ItemEffects {
             poisoned(),
             prone(),
             restrained(),
+            sleeping(),
             stunned(),
+            surprised(),
             unconscious(),
             wounded(),
         ],
@@ -362,6 +364,33 @@ function restrained(): PreCreate<ActiveEffectSource> {
     });
 }
 
+function sleeping(): PreCreate<ActiveEffectSource> {
+    // Unconscious already nests Incapacitated, so nesting it here too would
+    // apply Incapacitated twice
+    const subEffectIds = [unconscious()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
+
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Sleeping.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Sleeping.description"),
+            img: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
+            statuses: ["sleeping"],
+        },
+        subEffectIds,
+    });
+}
+
+function surprised(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Surprised.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Surprised.description"),
+            img: "systems/dnd5e/icons/svg/statuses/surprised.svg",
+            statuses: ["surprised"],
+        },
+    });
+}
+
 function stunned(): PreCreate<ActiveEffectSource> {
     const subEffectIds = [incapacitated()].map((effect) => Flags.getCeEffectId(effect)).filter(notEmpty);
     return createConvenientEffect({
@@ -446,7 +475,9 @@ export {
     poisoned,
     prone,
     restrained,
+    sleeping,
     stunned,
+    surprised,
     unconscious,
     wounded,
 };
