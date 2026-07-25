@@ -30,7 +30,7 @@ import { createConvenientEffect } from "../../../utils/creates.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
 import { skillCheckMode } from "../changes/skills.ts";
-import { tokenSight } from "../changes/token.ts";
+import { tokenDetectionMode, tokenSight } from "../changes/token.ts";
 
 function magicItems(): ItemEffects {
     return {
@@ -138,7 +138,10 @@ function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
                     value: "-1",
                     priority: 5,
                 }),
-                // TODO not updating detectionModes yet
+                ...tokenDetectionMode({
+                    id: "basicSight",
+                    range: 60,
+                }),
                 addLanguage({
                     language: "dwarvish",
                 }),
