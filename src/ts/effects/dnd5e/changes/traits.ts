@@ -1,28 +1,51 @@
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
-function addConditionImmunity({
-    condition,
-}: {
-    condition:
-        | "blinded"
-        | "charmed"
-        | "deafened"
-        | "diseased"
-        | "exhaustion"
-        | "frightened"
-        | "grappled"
-        | "incapacitated"
-        | "invisible"
-        | "paralyzed"
-        | "petrified"
-        | "poisoned"
-        | "prone"
-        | "restrained"
-        | "silenced"
-        | "stunned"
-        | "surprised"
-        | "unconscious";
-}): Partial<EffectChangeData> {
+const ALL = "ALL";
+
+type DamageType =
+    | "acid"
+    | "bludgeoning"
+    | "cold"
+    | "fire"
+    | "force"
+    | "lightning"
+    | "necrotic"
+    | "piercing"
+    | "poison"
+    | "psychic"
+    | "radiant"
+    | "slashing"
+    | "thunder";
+
+type ConditionType =
+    | "bleeding"
+    | "blinded"
+    | "burning"
+    | "charmed"
+    | "cursed"
+    | "deafened"
+    | "dehydration"
+    | "diseased"
+    | "exhaustion"
+    | "falling"
+    | "frightened"
+    | "grappled"
+    | "incapacitated"
+    | "invisible"
+    | "malnutrition"
+    | "paralyzed"
+    | "petrified"
+    | "poisoned"
+    | "prone"
+    | "restrained"
+    | "silenced"
+    | "stunned"
+    | "suffocation"
+    | "surprised"
+    | "transformed"
+    | "unconscious";
+
+function addConditionImmunity({ condition }: { condition: ConditionType }): Partial<EffectChangeData> {
     return {
         key: "system.traits.ci.value",
         type: "add",
@@ -30,7 +53,7 @@ function addConditionImmunity({
     };
 }
 
-function addDamageImmunity({ damageType }: { damageType: "poison" | "psychic" }): Partial<EffectChangeData> {
+function addDamageImmunity({ damageType }: { damageType: DamageType }): Partial<EffectChangeData> {
     return {
         key: "system.traits.di.value",
         type: "add",
@@ -40,31 +63,13 @@ function addDamageImmunity({ damageType }: { damageType: "poison" | "psychic" })
 
 function addAllDamageImmunity(): Partial<EffectChangeData> {
     return {
-        key: "system.traits.di.all",
-        type: "custom",
-        value: "1",
+        key: "system.traits.di.value",
+        type: "add",
+        value: ALL,
     };
 }
 
-function addDamageResistance({
-    damageType,
-}: {
-    damageType:
-        | "acid"
-        | "bludgeoning"
-        | "cold"
-        | "fire"
-        | "force"
-        | "lightning"
-        | "necrotic"
-        | "physical"
-        | "piercing"
-        | "poison"
-        | "psychic"
-        | "radiant"
-        | "slashing"
-        | "thunder";
-}): Partial<EffectChangeData> {
+function addDamageResistance({ damageType }: { damageType: DamageType }): Partial<EffectChangeData> {
     return {
         key: "system.traits.dr.value",
         type: "add",
@@ -74,9 +79,9 @@ function addDamageResistance({
 
 function addAllDamageResistance(): Partial<EffectChangeData> {
     return {
-        key: "system.traits.dr.all",
-        type: "custom",
-        value: "1",
+        key: "system.traits.dr.value",
+        type: "add",
+        value: ALL,
     };
 }
 
@@ -88,11 +93,19 @@ function addDamageBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial
     };
 }
 
+function addDamageVulnerability({ damageType }: { damageType: DamageType }): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.dv.value",
+        type: "add",
+        value: damageType,
+    };
+}
+
 function addAllDamageVulnerability(): Partial<EffectChangeData> {
     return {
-        key: "system.traits.dv.all",
-        type: "custom",
-        value: "1",
+        key: "system.traits.dv.value",
+        type: "add",
+        value: ALL,
     };
 }
 
@@ -104,6 +117,14 @@ function addLanguage({ language }: { language: string }): Partial<EffectChangeDa
     };
 }
 
+function addAllLanguages(): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.languages.value",
+        type: "add",
+        value: ALL,
+    };
+}
+
 function addWeaponProficiency({ weapon }: { weapon: string }): Partial<EffectChangeData> {
     return {
         key: "system.traits.weaponProf.value",
@@ -112,11 +133,44 @@ function addWeaponProficiency({ weapon }: { weapon: string }): Partial<EffectCha
     };
 }
 
-function addAllLanguages(): Partial<EffectChangeData> {
+function addWeaponMastery({ weapon }: { weapon: string }): Partial<EffectChangeData> {
     return {
-        key: "system.traits.languages.all",
-        type: "custom",
-        value: "1",
+        key: "system.traits.weaponProf.mastery.value",
+        type: "add",
+        value: weapon,
+    };
+}
+
+function addArmorProficiency({ armor }: { armor: "lgt" | "med" | "hvy" | "shl" }): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.armorProf.value",
+        type: "add",
+        value: armor,
+    };
+}
+
+function damageModification({
+    damageType,
+    value,
+    priority,
+}: {
+    damageType: DamageType;
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.traits.dm.amount.${damageType}`,
+        type: "add",
+        value,
+        priority,
+    };
+}
+
+function damageModificationBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial<EffectChangeData> {
+    return {
+        key: "system.traits.dm.bypasses",
+        type: "add",
+        value: bypass,
     };
 }
 
@@ -129,15 +183,22 @@ function addSize({ value }: { value: string }): Partial<EffectChangeData> {
 }
 
 export {
-    addConditionImmunity,
+    ALL,
     addAllDamageImmunity,
     addAllDamageResistance,
+    addAllDamageVulnerability,
+    addAllLanguages,
+    addArmorProficiency,
+    addConditionImmunity,
     addDamageBypass,
     addDamageImmunity,
     addDamageResistance,
+    addDamageVulnerability,
     addLanguage,
-    addWeaponProficiency,
-    addAllLanguages,
-    addAllDamageVulnerability,
     addSize,
+    addWeaponMastery,
+    addWeaponProficiency,
+    damageModification,
+    damageModificationBypass,
 };
+export type { ConditionType, DamageType };
