@@ -1,6 +1,5 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import { acCover } from "../changes/attributes.ts";
-import { abilitySaveBonus, abilitySaveMode } from "../changes/abilities.ts";
+import { abilitySaveMode } from "../changes/abilities.ts";
 import { tokenMagic } from "../changes/macros.ts";
 import {
     advantage,
@@ -67,15 +66,7 @@ function coverHalf(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.CoverHalf.description"),
             img: "modules/dfreds-convenient-effects/images/broken-wall.svg",
             tint: "#dae34f",
-            changes: [
-                acCover({
-                    value: "+2",
-                }),
-                abilitySaveBonus({
-                    ability: "dex",
-                    value: "+2",
-                }),
-            ],
+            statuses: ["coverHalf"],
         },
     });
 }
@@ -86,15 +77,7 @@ function coverThreeQuarters(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.CoverThreeQuarters.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.CoverThreeQuarters.description"),
             img: "modules/dfreds-convenient-effects/images/brick-wall.svg",
-            changes: [
-                acCover({
-                    value: "+5",
-                }),
-                abilitySaveBonus({
-                    ability: "dex",
-                    value: "+5",
-                }),
-            ],
+            statuses: ["coverThreeQuarters"],
         },
     });
 }
@@ -105,6 +88,7 @@ function coverTotal(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.CoverTotal.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.CoverTotal.description"),
             img: "modules/dfreds-convenient-effects/images/castle.svg",
+            statuses: ["coverTotal"],
             changes: [grantFailAttack({ attackType: "all" })],
         },
     });
