@@ -5,7 +5,7 @@ import {
     findEffectByCeId,
     findEffectsByFolder,
     findFolder,
-    findFolders
+    findFolders,
 } from "../../utils/finds.ts";
 import { getApi } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
