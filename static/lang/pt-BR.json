@@ -282,6 +282,10 @@
                 "name": "Enfeitiçar Pessoa",
                 "description": "Sem efeitos ativos e dura 1 hora"
             },
+            "Burrowing": {
+                "name": "Burrowing",
+                "description": "Applies the burrowing status, which hides the token from all vision and detection"
+            },
             "Charmed": {
                 "name": "Enfeitiçado",
                 "description": "- Uma criatura encantada não pode atacar o encantador ou alvejá-lo com habilidades prejudiciais ou efeitos mágicos.<br/>- O encantador tem vantagem em qualquer teste de habilidade para interagir socialmente com a criatura."
@@ -386,6 +390,10 @@
                 "name": "Aumentar/Reduzir",
                 "description": "Escolha entre Aumentar ou Reduzir"
             },
+            "ExceedingCarryingCapacity": {
+                "name": "Exceeding Carrying Capacity",
+                "description": "Reduces speed to 5 feet and forces crawling"
+            },
             "Exhaustion": {
                 "name": "Exaustão",
                 "description": "Clique para aumentar o nível de exaustão em 1; shift + clique para diminuí-lo. Clique em um nível específico para ir direto a ele, ou clique no nível atual para limpá-lo. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
@@ -469,6 +477,10 @@
             "Fly": {
                 "name": "Voo",
                 "description": "Aumente o deslocamento de voo para 60 pés por 10 minutos"
+            },
+            "Flying": {
+                "name": "Flying",
+                "description": "Applies the flying status, which defeats tremorsense"
             },
             "Foresight": {
                 "name": "Sexto Sentido",
@@ -557,6 +569,10 @@
             "HoodedLantern": {
                 "name": "Lanterna Coberta",
                 "description": "Adiciona luz de lanterna coberta por 6 horas"
+            },
+            "Hovering": {
+                "name": "Hovering",
+                "description": "Applies the hovering status, which defeats tremorsense"
             },
             "HuntersMark": {
                 "name": "Marca do Caçador",

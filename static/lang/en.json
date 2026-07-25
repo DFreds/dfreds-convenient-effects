@@ -283,6 +283,10 @@
                 "name": "Charm Person",
                 "description": "No active effects and lasts for 1 hour"
             },
+            "Burrowing": {
+                "name": "Burrowing",
+                "description": "Applies the burrowing status, which hides the token from all vision and detection"
+            },
             "Charmed": {
                 "name": "Charmed",
                 "description": "- A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.<br/>- The charmer has advantage on any ability check to interact socially with the creature."
@@ -387,6 +391,10 @@
                 "name": "Enlarge/Reduce",
                 "description": "Choose between Enlarge or Reduce"
             },
+            "ExceedingCarryingCapacity": {
+                "name": "Exceeding Carrying Capacity",
+                "description": "Reduces speed to 5 feet and forces crawling"
+            },
             "Exhaustion": {
                 "name": "Exhaustion",
                 "description": "Click to increase the exhaustion level by 1; shift + click to decrease it. Click a specific level to jump straight to it, or click the current level to clear it. The system applies the penalties automatically based on the world's rules version."
@@ -470,6 +478,10 @@
             "Fly": {
                 "name": "Fly",
                 "description": "Upgrade flying speed to 60 ft. for 10 minutes"
+            },
+            "Flying": {
+                "name": "Flying",
+                "description": "Applies the flying status, which defeats tremorsense"
             },
             "Foresight": {
                 "name": "Foresight",
@@ -558,6 +570,10 @@
             "HoodedLantern": {
                 "name": "Hooded Lantern",
                 "description": "Adds hooded lantern light for 6 hours"
+            },
+            "Hovering": {
+                "name": "Hovering",
+                "description": "Applies the hovering status, which defeats tremorsense"
             },
             "HuntersMark": {
                 "name": "Hunter's Mark",

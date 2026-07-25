@@ -282,6 +282,10 @@
                 "name": "Charme-personne",
                 "description": "Aucun effet actif et dure 1 heure"
             },
+            "Burrowing": {
+                "name": "Burrowing",
+                "description": "Applies the burrowing status, which hides the token from all vision and detection"
+            },
             "Charmed": {
                 "name": "Charmé",
                 "description": "@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD inline]"
@@ -386,6 +390,10 @@
                 "name": "Agrandissement/Rapetissement",
                 "description": "Choisissez entre Agrandissement ou Rapetissement"
             },
+            "ExceedingCarryingCapacity": {
+                "name": "Exceeding Carrying Capacity",
+                "description": "Reduces speed to 5 feet and forces crawling"
+            },
             "Exhaustion": {
                 "name": "Épuisement",
                 "description": "Cliquez pour augmenter le niveau d'épuisement de 1 ; maj + clic pour le diminuer. Cliquez sur un niveau précis pour y accéder directement, ou sur le niveau actuel pour l'effacer. Le système applique automatiquement les pénalités selon la version des règles du monde."
@@ -469,6 +477,10 @@
             "Fly": {
                 "name": "Vol",
                 "description": "Améliorez la vitesse de vol à 18 mètres pendant 10 minutes"
+            },
+            "Flying": {
+                "name": "Flying",
+                "description": "Applies the flying status, which defeats tremorsense"
             },
             "Foresight": {
                 "name": "Prémonition",
@@ -557,6 +569,10 @@
             "HoodedLantern": {
                 "name": "Lanterne à capote",
                 "description": "Ajoute une lanterne à capote pendant 6 heures"
+            },
+            "Hovering": {
+                "name": "Hovering",
+                "description": "Applies the hovering status, which defeats tremorsense"
             },
             "HuntersMark": {
                 "name": "Marque du chasseur",

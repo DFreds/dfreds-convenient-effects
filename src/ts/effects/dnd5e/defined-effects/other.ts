@@ -11,6 +11,8 @@ import {
     grantFailAttack,
 } from "../changes/midi-qol.ts";
 import { attackBonus, damageBonus } from "../changes/bonuses.ts";
+import { movementHover } from "../changes/attributes.ts";
+import { tokenMovementAction } from "../changes/token.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { createConvenientEffect } from "../../../utils/creates.ts";
 
@@ -21,15 +23,19 @@ function other(): ItemEffects {
         },
         effects: [
             bonusAction(),
+            burrowing(),
             coverHalf(),
             coverThreeQuarters(),
             coverTotal(),
             encumbered(),
             dodge(),
+            exceedingCarryingCapacity(),
             flanked(),
             flanking(),
+            flying(),
             greatWeaponMaster(),
             heavilyEncumbered(),
+            hovering(),
             inspiration(),
             rangedDisadvantage(),
             reaction(),
@@ -112,6 +118,53 @@ function encumbered(): PreCreate<ActiveEffectSource> {
             img: "icons/svg/down.svg",
             // The speed reduction comes from dnd5e's handling of the status
             statuses: ["encumbered"],
+        },
+    });
+}
+
+function exceedingCarryingCapacity(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.ExceedingCarryingCapacity.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.ExceedingCarryingCapacity.description"),
+            img: "icons/svg/downgrade.svg",
+            statuses: ["exceedingCarryingCapacity"],
+        },
+    });
+}
+
+function burrowing(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Burrowing.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Burrowing.description"),
+            img: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
+            statuses: ["burrowing"],
+            changes: [tokenMovementAction({ value: "burrow" })],
+        },
+    });
+}
+
+function flying(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Flying.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Flying.description"),
+            img: "systems/dnd5e/icons/svg/statuses/flying.svg",
+            statuses: ["flying"],
+            changes: [tokenMovementAction({ value: "fly" })],
+        },
+    });
+}
+
+function hovering(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.Hovering.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.Hovering.description"),
+            img: "systems/dnd5e/icons/svg/statuses/hovering.svg",
+            statuses: ["hovering"],
+            changes: [movementHover({ value: true })],
         },
     });
 }

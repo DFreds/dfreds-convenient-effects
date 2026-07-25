@@ -282,6 +282,10 @@
                 "name": "魅惑人类 Charm Person",
                 "description": "被魅惑状态，专注，最长 1 小时"
             },
+            "Burrowing": {
+                "name": "Burrowing",
+                "description": "Applies the burrowing status, which hides the token from all vision and detection"
+            },
             "Charmed": {
                 "name": "魅惑",
                 "description": "被魅惑生物不能攻击魅惑者，其造成伤害的能力或魔法效应也不能以魅惑者为目标。<br/>魅惑者对被魅惑生物进行任何与社交相关的属性检定时具有优势。"
@@ -386,6 +390,10 @@
                 "name": "变巨/缩小术 Enlarge/Reduce",
                 "description": "生物或物件的大小和重量发生改变，变巨Enlarge、缩小Reduce"
             },
+            "ExceedingCarryingCapacity": {
+                "name": "Exceeding Carrying Capacity",
+                "description": "Reduces speed to 5 feet and forces crawling"
+            },
             "Exhaustion": {
                 "name": "力竭",
                 "description": "点击使力竭等级+1；Shift+点击使其-1。点击某个等级可直接跳到该等级，点击当前等级可清除。系统会根据世界的规则版本自动应用相应减益。"
@@ -469,6 +477,10 @@
             "Fly": {
                 "name": "飞行术 Fly",
                 "description": "获得 60 尺的飞行速度。持续时间：专注，至多 10 分钟"
+            },
+            "Flying": {
+                "name": "Flying",
+                "description": "Applies the flying status, which defeats tremorsense"
             },
             "Foresight": {
                 "name": "预警术 Foresight",
@@ -557,6 +569,10 @@
             "HoodedLantern": {
                 "name": "附盖提灯 Hooded Lantern Off",
                 "description": "放下盖子：一盏附盖提灯可以为其身边30尺半径范围提供明亮光照，以及该范围外30尺的微光光照，点亮的提灯每6小时消耗一扁瓶的灯油（1品脱），你可以使用一个动作放下盖子，使其光照减弱为5尺范围的微光照明"
+            },
+            "Hovering": {
+                "name": "Hovering",
+                "description": "Applies the hovering status, which defeats tremorsense"
             },
             "HuntersMark": {
                 "name": "猎人印记 Hunter's Mark",
