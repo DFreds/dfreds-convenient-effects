@@ -3,7 +3,7 @@ import { DynamicEffectsHandler } from "../dynamic-effects-handler.ts";
 import { getApi } from "../../utils/gets.ts";
 import { SECONDS, SIZES_ORDERED } from "../../constants.ts";
 import { addDamageResistance, addSize } from "./changes/traits.ts";
-import { tokenTexture } from "./changes/token.ts";
+import { multiplyTokenScale } from "./changes/token.ts";
 import { Flags } from "../../utils/flags.ts";
 import { findIncrementParentOf } from "../../utils/finds.ts";
 
@@ -161,31 +161,41 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     }
 
     #addEnlargeEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
-        const size = (actor.system as any).traits.size;
-        const index = SIZES_ORDERED.indexOf(size);
+        const index = this.#currentSizeIndex(actor);
 
-        this.#addSizeChangeEffects(effect, Math.min(SIZES_ORDERED.length - 1, index + 1));
+        this.#addSizeChangeEffects(effect, index, Math.min(SIZES_ORDERED.length - 1, index + 1));
     }
 
     #addReduceEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
-        const size = (actor.system as any).traits.size;
-        const index = SIZES_ORDERED.indexOf(size);
-
-        this.#addSizeChangeEffects(effect, Math.max(0, index - 1));
+        const index = this.#currentSizeIndex(actor);
+        this.#addSizeChangeEffects(effect, index, Math.max(0, index - 1));
     }
 
-    #addSizeChangeEffects(effect: PreCreate<ActiveEffectSource>, sizeIndex: number) {
-        const size = SIZES_ORDERED[sizeIndex];
+    #currentSizeIndex(actor: Actor<any>): number {
+        const size = (actor.system as any).traits?.size;
+        const index = SIZES_ORDERED.indexOf(size);
+
+        return index === -1 ? SIZES_ORDERED.indexOf("med") : index;
+    }
+
+    #drawnSizeOf(size: string): number {
         const actorSizeObject = (CONFIG as any).DND5E.actorSizes[size];
-        const tokenSize = actorSizeObject.token ?? actorSizeObject.dynamicTokenScale ?? 1;
+        if (!actorSizeObject) return 1;
+
+        return (actorSizeObject.token ?? 1) * (actorSizeObject.dynamicTokenScale ?? 1);
+    }
+
+    #addSizeChangeEffects(effect: PreCreate<ActiveEffectSource>, fromIndex: number, toIndex: number) {
+        const toSize = SIZES_ORDERED[toIndex];
 
         effect.changes = effect.changes ?? [];
+        effect.changes.push(addSize({ value: toSize }));
 
-        effect.changes.push(
-            addSize({ value: size }),
-            tokenTexture({ attribute: "scaleX", value: tokenSize }),
-            tokenTexture({ attribute: "scaleY", value: tokenSize }),
-        );
+        // Scale to relative size we started with
+        const scale = this.#drawnSizeOf(toSize) / this.#drawnSizeOf(SIZES_ORDERED[fromIndex]);
+        if (scale === 1) return;
+
+        effect.changes.push(...multiplyTokenScale({ value: scale }));
     }
 
     #addRageEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
@@ -213,21 +223,21 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
         if (isTotemWarrior && hasBearTotemSpirit) {
             effect.changes = effect.changes ?? [];
+
+            const additionalDamageTypeResistances = [
+                "acid",
+                "cold",
+                "fire",
+                "force",
+                "lightning",
+                "necrotic",
+                "poison",
+                "radiant",
+                "thunder",
+            ] as const;
+
             effect.changes.push(
-                ...[
-                    addDamageResistance({ damageType: "bludgeoning" }),
-                    addDamageResistance({ damageType: "piercing" }),
-                    addDamageResistance({ damageType: "slashing" }),
-                    addDamageResistance({ damageType: "acid" }),
-                    addDamageResistance({ damageType: "cold" }),
-                    addDamageResistance({ damageType: "fire" }),
-                    addDamageResistance({ damageType: "force" }),
-                    addDamageResistance({ damageType: "lightning" }),
-                    addDamageResistance({ damageType: "necrotic" }),
-                    addDamageResistance({ damageType: "poison" }),
-                    addDamageResistance({ damageType: "radiant" }),
-                    addDamageResistance({ damageType: "thunder" }),
-                ],
+                ...additionalDamageTypeResistances.map((damageType) => addDamageResistance({ damageType })),
             );
         }
     }
@@ -251,9 +261,6 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         const exhaustionId = this.#ceEffectIdForName("ConvenientEffects.Dnd.Exhaustion.name");
         if (!exhaustionId) return;
 
-        // Exhaustion is applied by updating the actor, so dnd5e (not CE) creates
-        // the status effect. Carry the requested overlay through so it can be
-        // applied to that effect once dnd5e syncs it.
         const overlay = !!foundry.utils.getProperty(effect, "flags.core.overlay");
 
         if (ceEffectId === exhaustionId) {
@@ -293,17 +300,11 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     }
 
     async #updateExhaustionLevel(actor: Actor<any>, newLevel: number, overlay: boolean): Promise<void> {
-        // dnd5e keeps its own overlay flag across level changes, so a non-overlay
-        // update leaves any existing overlay untouched (letting it persist until
-        // exhaustion is fully removed). Only act when overlay is requested.
         if (!overlay || newLevel < 1) {
             await actor.update({ "system.attributes.exhaustion": newLevel });
             return;
         }
 
-        // dnd5e (re)creates its exhaustion effect asynchronously in response to
-        // the level change and never marks it as an overlay. Flag it ourselves,
-        // whether it already exists (raising the level) or is newly created.
         const flagIfExhaustion = (candidate: ActiveEffect<any>): boolean => {
             const isExhaustion = candidate.parent === actor && !!(candidate as any).statuses?.has("exhaustion");
             if (isExhaustion) {
@@ -318,13 +319,11 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
 
         await actor.update({ "system.attributes.exhaustion": newLevel });
 
-        // If the effect already existed, no creation hook fires; flag it directly.
         const existing = (actor.effects as any).find((e: ActiveEffect<any>) => (e as any).statuses?.has("exhaustion"));
         if (existing && flagIfExhaustion(existing)) {
             Hooks.off("createActiveEffect", hookId);
         }
 
-        // Safety cleanup so the hook never lingers if creation never happens.
         globalThis.setTimeout(() => Hooks.off("createActiveEffect", hookId), 2000);
     }
 }
