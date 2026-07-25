@@ -1,6 +1,13 @@
 import { ItemEffects } from "../../effect-definition.ts";
 import { addAbility, downgradeAbility, upgradeAbility } from "../changes/abilities.ts";
-import { attackBonus, checkBonus, damageBonus, saveBonus, spellDcBonus } from "../changes/bonuses.ts";
+import {
+    SPELL_ACTION_TYPES,
+    attackBonuses,
+    checkBonus,
+    damageBonus,
+    saveBonus,
+    spellDcBonus,
+} from "../changes/bonuses.ts";
 import {
     addConditionImmunity,
     addDamageImmunity,
@@ -307,7 +314,7 @@ function bracersOfArchery(): PreCreate<ActiveEffectSource> {
             img: "icons/equipment/wrist/bracer-banded-leather.webp",
             changes: [
                 damageBonus({
-                    damageType: "rwak",
+                    actionType: "rwak",
                     value: "2",
                 }),
                 addWeaponProficiency({
@@ -713,8 +720,8 @@ function robeOfTheArchmagi(): PreCreate<ActiveEffectSource> {
                     value: "15 + @abilities.dex.mod",
                 }),
                 magicResistanceSaves(),
-                attackBonus({
-                    attackType: "spell",
+                ...attackBonuses({
+                    actionTypes: SPELL_ACTION_TYPES,
                     value: "+2",
                 }),
                 spellDcBonus({

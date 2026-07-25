@@ -218,11 +218,11 @@ function greatWeaponMaster(): PreCreate<ActiveEffectSource> {
             img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
             changes: [
                 attackBonus({
-                    attackType: "mwak",
+                    actionType: "mwak",
                     value: "-5",
                 }),
                 damageBonus({
-                    damageType: "mwak",
+                    actionType: "mwak",
                     value: "+10",
                 }),
             ],
@@ -318,11 +318,11 @@ function sharpshooter(): PreCreate<ActiveEffectSource> {
             img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
             changes: [
                 attackBonus({
-                    attackType: "rwak",
+                    actionType: "rwak",
                     value: "-5",
                 }),
                 damageBonus({
-                    damageType: "rwak",
+                    actionType: "rwak",
                     value: "+10",
                 }),
             ],

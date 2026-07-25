@@ -1,5 +1,5 @@
 import { ItemEffects } from "../../effect-definition.ts";
-import { attackBonus, damageBonus, saveBonus } from "../changes/bonuses.ts";
+import { WEAPON_ACTION_TYPES, attackBonus, damageBonuses, saveBonus } from "../changes/bonuses.ts";
 import { blinded, deafened, invisible, paralyzed, prone, restrained } from "./conditions.ts";
 import {
     MOVEMENT_TYPES,
@@ -233,19 +233,19 @@ function bane(): PreCreate<ActiveEffectSource> {
                     value: "-1d4",
                 }),
                 attackBonus({
-                    attackType: "mwak",
+                    actionType: "mwak",
                     value: "-1d4",
                 }),
                 attackBonus({
-                    attackType: "msak",
+                    actionType: "msak",
                     value: "-1d4",
                 }),
                 attackBonus({
-                    attackType: "rsak",
+                    actionType: "rsak",
                     value: "-1d4",
                 }),
                 attackBonus({
-                    attackType: "rwak",
+                    actionType: "rwak",
                     value: "-1d4",
                 }),
             ],
@@ -306,19 +306,19 @@ function bless(): PreCreate<ActiveEffectSource> {
                     value: "+1d4",
                 }),
                 attackBonus({
-                    attackType: "msak",
+                    actionType: "msak",
                     value: "+1d4",
                 }),
                 attackBonus({
-                    attackType: "mwak",
+                    actionType: "mwak",
                     value: "+1d4",
                 }),
                 attackBonus({
-                    attackType: "rsak",
+                    actionType: "rsak",
                     value: "+1d4",
                 }),
                 attackBonus({
-                    attackType: "rwak",
+                    actionType: "rwak",
                     value: "+1d4",
                 }),
                 tokenMagic({
@@ -589,12 +589,10 @@ function divineFavor(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.DivineFavor.description"),
             img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                damageBonus({
-                    damageType: "weapon",
-                    value: "+1d4[radiant]",
-                }),
-            ],
+            changes: damageBonuses({
+                actionTypes: WEAPON_ACTION_TYPES,
+                value: "+1d4[radiant]",
+            }),
         },
     });
 }
@@ -731,8 +729,8 @@ function enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
-                damageBonus({
-                    damageType: "weapon",
+                ...damageBonuses({
+                    actionTypes: WEAPON_ACTION_TYPES,
                     value: "+1d4",
                 }),
                 abilityCheckMode({ ability: "str", value: "1" }),
@@ -751,8 +749,8 @@ function enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
-                damageBonus({
-                    damageType: "weapon",
+                ...damageBonuses({
+                    actionTypes: WEAPON_ACTION_TYPES,
                     value: "-1d4",
                 }),
                 abilityCheckMode({ ability: "str", value: "-1" }),

@@ -1,20 +1,67 @@
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
+type ActionType = "mwak" | "rwak" | "msak" | "rsak";
+
+const WEAPON_ACTION_TYPES = ["mwak", "rwak"] as const;
+const SPELL_ACTION_TYPES = ["msak", "rsak"] as const;
+const ALL_ACTION_TYPES = ["mwak", "rwak", "msak", "rsak"] as const;
+
 function attackBonus({
-    attackType,
+    actionType,
     value,
     priority,
 }: {
-    attackType: "heal" | "msak" | "mwak" | "rsak" | "rwak" | "spell" | "swak" | "weapon";
+    actionType: ActionType;
     value: string;
     priority?: number;
 }): Partial<EffectChangeData> {
     return {
-        key: `system.bonuses.${attackType}.attack`,
+        key: `system.bonuses.${actionType}.attack`,
         type: "add",
         value,
         priority,
     };
+}
+
+function damageBonus({
+    actionType,
+    value,
+    priority,
+}: {
+    actionType: ActionType;
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: `system.bonuses.${actionType}.damage`,
+        type: "add",
+        value,
+        priority,
+    };
+}
+
+function attackBonuses({
+    actionTypes,
+    value,
+    priority,
+}: {
+    actionTypes: readonly ActionType[];
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData>[] {
+    return actionTypes.map((actionType) => attackBonus({ actionType, value, priority }));
+}
+
+function damageBonuses({
+    actionTypes,
+    value,
+    priority,
+}: {
+    actionTypes: readonly ActionType[];
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeData>[] {
+    return actionTypes.map((actionType) => damageBonus({ actionType, value, priority }));
 }
 
 function spellDcBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
@@ -35,23 +82,6 @@ function checkBonus({ value, priority }: { value: string; priority?: number }): 
     };
 }
 
-function damageBonus({
-    damageType,
-    value,
-    priority,
-}: {
-    damageType: "check" | "heal" | "msak" | "mwak" | "rsak" | "rwak" | "save" | "spell" | "weapon";
-    value: string;
-    priority?: number;
-}): Partial<EffectChangeData> {
-    return {
-        key: `system.bonuses.${damageType}.damage`,
-        type: "add",
-        value,
-        priority,
-    };
-}
-
 function saveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
     return {
         key: `system.bonuses.abilities.save`,
@@ -61,4 +91,26 @@ function saveBonus({ value, priority }: { value: string; priority?: number }): P
     };
 }
 
-export { attackBonus, checkBonus, damageBonus, saveBonus, spellDcBonus };
+function skillBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: `system.bonuses.abilities.skill`,
+        type: "add",
+        value,
+        priority,
+    };
+}
+
+export {
+    ALL_ACTION_TYPES,
+    SPELL_ACTION_TYPES,
+    WEAPON_ACTION_TYPES,
+    attackBonus,
+    attackBonuses,
+    checkBonus,
+    damageBonus,
+    damageBonuses,
+    saveBonus,
+    skillBonus,
+    spellDcBonus,
+};
+export type { ActionType };

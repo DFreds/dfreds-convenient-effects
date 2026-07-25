@@ -199,11 +199,11 @@ function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             changes: [
                 attackBonus({
-                    attackType: "mwak",
+                    actionType: "mwak",
                     value: "+max(1, @abilities.cha.mod)",
                 }),
                 attackBonus({
-                    attackType: "rwak",
+                    actionType: "rwak",
                     value: "+max(1, @abilities.cha.mod)",
                 }),
                 tokenLight({
@@ -314,7 +314,7 @@ function rage(): PreCreate<ActiveEffectSource> {
                 addDamageResistance({ damageType: "piercing" }),
                 addDamageResistance({ damageType: "bludgeoning" }),
                 damageBonus({
-                    damageType: "mwak",
+                    actionType: "mwak",
                     value: "+ @scale.barbarian.rage-damage",
                 }),
                 tokenMagic({ value: "outline" }),
