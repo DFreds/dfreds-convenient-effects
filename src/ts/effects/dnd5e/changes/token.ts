@@ -92,18 +92,88 @@ function tokenSight({
 function tokenTexture({
     attribute,
     value,
+    type = "override",
     priority,
 }: {
     attribute: "scaleX" | "scaleY";
-    value: string;
+    value: string | number;
+    type?: "override" | "multiply";
     priority?: number;
 }): Partial<EffectChangeData> {
     return {
         key: `token.texture.${attribute}`,
+        type,
+        value,
+        priority,
+    };
+}
+
+function multiplyTokenScale({ value, priority }: { value: number; priority?: number }): Partial<EffectChangeData>[] {
+    return [
+        tokenTexture({ attribute: "scaleX", value, type: "multiply", priority }),
+        tokenTexture({ attribute: "scaleY", value, type: "multiply", priority }),
+    ];
+}
+
+function tokenAlpha({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+    return {
+        key: "token.alpha",
         type: "override",
         value,
         priority,
     };
 }
 
-export { tokenLight, tokenLightAnimationAttribute, tokenLightAnimationType, tokenSight, tokenTexture };
+function tokenMovementAction({
+    value,
+    priority,
+}: {
+    value: "blink" | "burrow" | "climb" | "crawl" | "displace" | "fly" | "jump" | "swim" | "walk";
+    priority?: number;
+}): Partial<EffectChangeData> {
+    return {
+        key: "token.movementAction",
+        type: "override",
+        value,
+        priority,
+    };
+}
+
+function tokenDetectionMode({
+    id,
+    range,
+    enabled = true,
+    priority,
+}: {
+    id: string;
+    range: number;
+    enabled?: boolean;
+    priority?: number;
+}): Partial<EffectChangeData>[] {
+    return [
+        {
+            key: `token.detectionModes.${id}.range`,
+            type: "override",
+            value: range,
+            priority,
+        },
+        {
+            key: `token.detectionModes.${id}.enabled`,
+            type: "override",
+            value: enabled,
+            priority,
+        },
+    ];
+}
+
+export {
+    multiplyTokenScale,
+    tokenAlpha,
+    tokenDetectionMode,
+    tokenLight,
+    tokenLightAnimationAttribute,
+    tokenLightAnimationType,
+    tokenMovementAction,
+    tokenSight,
+    tokenTexture,
+};
