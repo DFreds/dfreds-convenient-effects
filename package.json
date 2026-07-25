@@ -18,9 +18,9 @@
         "update-types": "tsx ./build/update-pf2e-types.ts && tsx ./build/copy-pf2e-types.ts",
         "test": "jest",
         "lint": "npm run lint:ts && npm run prettier:scss",
-        "lint:ts": "eslint ./src --ext .ts",
+        "lint:ts": "eslint ./src",
         "prettier:scss": "prettier --check src/styles",
-        "lint:fix": "eslint ./src --ext .ts --fix && prettier --write src/styles"
+        "lint:fix": "eslint ./src --fix && prettier --write src/styles"
     },
     "author": "DFreds (https://github.com/DFreds)",
     "license": "MIT",
