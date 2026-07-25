@@ -647,7 +647,28 @@ function gogglesOfNight(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.GogglesOfNight.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.GogglesOfNight.description"),
             img: "icons/equipment/head/goggles-leather-blue.webp",
-            changes: [addDarkvision({ value: "60" })],
+            changes: [
+                addDarkvision({ value: "60" }),
+                tokenSight({
+                    attribute: "range",
+                    value: "60",
+                    priority: 5,
+                }),
+                tokenSight({
+                    attribute: "visionMode",
+                    value: "darkvision",
+                    priority: 5,
+                }),
+                tokenSight({
+                    attribute: "saturation",
+                    value: "-1",
+                    priority: 5,
+                }),
+                ...tokenDetectionMode({
+                    id: "basicSight",
+                    range: 60,
+                }),
+            ],
         },
         isTemporary: false,
     });
