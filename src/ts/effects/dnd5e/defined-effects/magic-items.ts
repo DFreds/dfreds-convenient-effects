@@ -708,6 +708,25 @@ function robeOfEyes(): PreCreate<ActiveEffectSource> {
                 upgradeTrueSight({
                     value: "120",
                 }),
+                tokenSight({
+                    attribute: "range",
+                    value: "120",
+                    priority: 5,
+                }),
+                // Overriding visionMode pulls in the mode's own sight defaults
+                // (including saturation) via TokenDocument#_inflateVisionModeChange,
+                // so those do not need setting individually.
+                tokenSight({
+                    attribute: "visionMode",
+                    value: "darkvision",
+                    priority: 5,
+                }),
+                // Truesight detects everything darkvision would at the same
+                // range, so a separate basicSight mode would be redundant.
+                ...tokenDetectionMode({
+                    id: "seeAll",
+                    range: 120,
+                }),
             ],
         },
         isTemporary: false,
