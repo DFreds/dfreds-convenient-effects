@@ -133,11 +133,6 @@ function beltOfDwarvenkind(): PreCreate<ActiveEffectSource> {
                     value: "darkvision",
                     priority: 5,
                 }),
-                tokenSight({
-                    attribute: "saturation",
-                    value: "-1",
-                    priority: 5,
-                }),
                 ...tokenDetectionMode({
                     id: "basicSight",
                     range: 60,
@@ -657,11 +652,6 @@ function gogglesOfNight(): PreCreate<ActiveEffectSource> {
                 tokenSight({
                     attribute: "visionMode",
                     value: "darkvision",
-                    priority: 5,
-                }),
-                tokenSight({
-                    attribute: "saturation",
-                    value: "-1",
                     priority: 5,
                 }),
                 ...tokenDetectionMode({

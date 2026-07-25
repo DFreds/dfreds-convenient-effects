@@ -569,11 +569,6 @@ function darkvision(): PreCreate<ActiveEffectSource> {
                     value: "darkvision",
                     priority: 5,
                 }),
-                tokenSight({
-                    attribute: "saturation",
-                    value: "-1",
-                    priority: 5,
-                }),
                 // TODO not updating detectionModes yet
             ],
         },
