@@ -832,6 +832,10 @@
                 "name": "Tireur d'élite",
                 "description": "Soustrait 5 aux jets d'attaque à distance mais ajoute 10 aux dégâts de l'attaque"
             },
+            "SeeInvisibility": {
+                "name": "See Invisibility",
+                "description": "Grants 30 feet of see invisibility for 1 hour"
+            },
             "Shield": {
                 "name": "Bouclier",
                 "description": "Ajoutez 5 à la CA jusqu'au prochain tour"
@@ -903,6 +907,10 @@
             "Torch": {
                 "name": "Torche",
                 "description": "Ajoute une lampe torche pendant 1 heure"
+            },
+            "TrueSeeing": {
+                "name": "True Seeing",
+                "description": "Grants 120 feet of truesight for 1 hour"
             },
             "TrueStrike": {
                 "name": "Coup au but",

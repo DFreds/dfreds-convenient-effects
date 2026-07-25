@@ -764,6 +764,10 @@
                 "name": "神射手",
                 "description": "攻击最大射程内的敌人时，你的远程武器攻击检定不会因为超过常规射程具有劣势<br/> 你的远程武器攻击忽视半身掩护和四分之三掩护状态<br/>攻击检定承受 -5 减值，伤害掷骰获得 +10 加值"
             },
+            "SeeInvisibility": {
+                "name": "See Invisibility",
+                "description": "Grants 30 feet of see invisibility for 1 hour"
+            },
             "Shield": {
                 "name": "护盾术 Shield",
                 "description": "AC具有+5加值，持续时间：一回合开始前"
@@ -835,6 +839,10 @@
             "Torch": {
                 "name": "火把 Torch",
                 "description": "一支火把可以为其身边20尺半径范围提供明亮光照，以及其外20尺范围的微光光照，火把的照明效果可以持续1小时，你还可以使用一支燃烧的火把发动一次近战攻击，命中时，该攻击可以造成1点火焰伤害"
+            },
+            "TrueSeeing": {
+                "name": "True Seeing",
+                "description": "Grants 120 feet of truesight for 1 hour"
             },
             "TrueStrike": {
                 "name": "克敌机先 True Strike",

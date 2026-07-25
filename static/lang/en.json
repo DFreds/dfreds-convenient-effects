@@ -833,6 +833,10 @@
                 "name": "Sharpshooter",
                 "description": "Subtracts 5 from ranged attacks but adds 10 to ranged damage"
             },
+            "SeeInvisibility": {
+                "name": "See Invisibility",
+                "description": "Grants 30 feet of see invisibility for 1 hour"
+            },
             "Shield": {
                 "name": "Shield",
                 "description": "Add 5 to AC until next turn"
@@ -904,6 +908,10 @@
             "Torch": {
                 "name": "Torch",
                 "description": "Adds torch light for 1 hour"
+            },
+            "TrueSeeing": {
+                "name": "True Seeing",
+                "description": "Grants 120 feet of truesight for 1 hour"
             },
             "TrueStrike": {
                 "name": "True Strike",

@@ -832,6 +832,10 @@
                 "name": "Atirador Aguçado",
                 "description": "Subtrai 5 de ataques à distância, mas adiciona 10 ao dano à distância"
             },
+            "SeeInvisibility": {
+                "name": "See Invisibility",
+                "description": "Grants 30 feet of see invisibility for 1 hour"
+            },
             "Shield": {
                 "name": "Escudo Mágico",
                 "description": "Adiciona 5 à CA até o próximo turno"
@@ -903,6 +907,10 @@
             "Torch": {
                 "name": "Tocha",
                 "description": "Adiciona luz de tocha por 1 hora"
+            },
+            "TrueSeeing": {
+                "name": "True Seeing",
+                "description": "Grants 120 feet of truesight for 1 hour"
             },
             "TrueStrike": {
                 "name": "Ataque Certeiro",

@@ -14,6 +14,7 @@ import {
     tempMaxHp,
     upgradeDarkvision,
     upgradeMovement,
+    upgradeSense,
 } from "../changes/attributes.ts";
 import {
     advantageAttack,
@@ -43,7 +44,13 @@ import { createConvenientEffect } from "../../../utils/creates.ts";
 import { COLORS, SECONDS } from "../../../constants.ts";
 import { Flags } from "../../../utils/flags.ts";
 import { notEmpty } from "../../../utils/types.ts";
-import { tokenLight, tokenLightAnimationAttribute, tokenLightAnimationType, tokenSight } from "../changes/token.ts";
+import {
+    tokenDetectionMode,
+    tokenLight,
+    tokenLightAnimationAttribute,
+    tokenLightAnimationType,
+    tokenSight,
+} from "../changes/token.ts";
 
 function spells(): ItemEffects {
     return {
@@ -133,6 +140,7 @@ function spells(): ItemEffects {
             regenerate(),
             resilientSphere(),
             resistance(),
+            seeInvisibility(),
             shield(),
             shieldOfFaith(),
             slow(),
@@ -145,6 +153,7 @@ function spells(): ItemEffects {
             stoneskin(),
             suggestion(),
             telekinesis(),
+            trueSeeing(),
             trueStrike(),
             viciousMockery(),
             wardingBond(),
@@ -1747,6 +1756,48 @@ function speakWithPlants(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.SpeakWithPlants.description"),
             img: "icons/magic/nature/leaf-glow-teal.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
+        },
+    });
+}
+
+function seeInvisibility(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.SeeInvisibility.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.SeeInvisibility.description"),
+            img: "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
+            duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
+            changes: tokenDetectionMode({
+                id: "seeInvisibility",
+                range: 30,
+            }),
+        },
+    });
+}
+
+function trueSeeing(): PreCreate<ActiveEffectSource> {
+    return createConvenientEffect({
+        effect: {
+            name: game.i18n.localize("ConvenientEffects.Dnd.TrueSeeing.name"),
+            description: game.i18n.localize("ConvenientEffects.Dnd.TrueSeeing.description"),
+            img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
+            duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
+            changes: [
+                upgradeSense({
+                    sense: "truesight",
+                    value: "120",
+                    priority: 5,
+                }),
+                ...tokenDetectionMode({
+                    id: "seeAll",
+                    range: 120,
+                }),
+                tokenSight({
+                    attribute: "range",
+                    value: "120",
+                    priority: 5,
+                }),
+            ],
         },
     });
 }
