@@ -40,7 +40,7 @@
 
 ## Features
 
-- Adds a new application to the token scene controls
+- Adds a new application as a sidebar directory
 - Provides a repository to create and share easy-to-use toggleable active effects
 - Includes dozens of pre-built effects for the DND5e and SW5e systems
 - First-class support for popular modules, such as Midi-QoL, Times Up, DAE, Active Token Lighting, and Token Magic FX
