@@ -1,6 +1,4 @@
-import { ApplicationV2 } from "types/foundry/client-esm/applications/_types.js";
-
-export { };
+export {};
 
 declare global {
     interface Window {
@@ -39,15 +37,7 @@ declare global {
         /**
          * The name of the control layer
          */
-        name:
-        | "tokens"
-        | "tiles"
-        | "drawings"
-        | "walls"
-        | "lighting"
-        | "sounds"
-        | "regions"
-        | "notes";
+        name: "tokens" | "tiles" | "drawings" | "walls" | "lighting" | "sounds" | "regions" | "notes";
 
         /**
          * The predicate to determine if the control should be visible
@@ -76,7 +66,7 @@ declare global {
         visible?: boolean;
         /** Is the tool an on-or-off toggle? */
         toggle?: boolean;
-        /** Is the tool the currently the active one? Not applicable to toggles or buttons. */
+        /** Is the tool currently the active one? Not applicable to toggles or buttons. */
         active?: boolean;
         /** Is the tool a "button" in the sense of immediately resolving on click without becoming the active tool? */
         button?: boolean;
@@ -168,12 +158,7 @@ declare global {
          * @param data The data for the item with the HUD
          * @param hud The base placeable HUD instance
          */
-        onClick?: (
-            event: JQuery.ClickEvent,
-            button: JQuery,
-            data: any,
-            hud: BasePlaceableHUD<any>,
-        ) => void;
+        onClick?: (event: JQuery.ClickEvent, button: JQuery, data: any, hud: BasePlaceableHUD<any>) => void;
 
         /**
          * The right-click handler
@@ -183,25 +168,16 @@ declare global {
          * @param data The data for the item with the HUD
          * @param hud The base placeable HUD instance
          */
-        onRightClick?: (
-            event: JQuery.ContextMenuEvent,
-            button: JQuery,
-            data: any,
-            hud: BasePlaceableHUD<any>,
-        ) => void;
+        onRightClick?: (event: JQuery.ContextMenuEvent, button: JQuery, data: any, hud: BasePlaceableHUD<any>) => void;
 
         /**
          * The render complete handler
          *
          * @param hud The base placeable HUD instance
-         * @param html The html for the HUD
+         * @param html The HTML for the HUD
          * @param data The data for the HUD
          */
-        onRenderComplete?: (
-            hud: BasePlaceableHUD<any>,
-            html: JQuery,
-            data: object,
-        ) => void;
+        onRenderComplete?: (hud: BasePlaceableHUD<any>, html: JQuery, data: object) => void;
     }
 
     export interface DirectoryInput {
@@ -234,8 +210,25 @@ declare global {
         documentName?: string;
 
         /**
-         * The order of the directory. If not provided, the directory will be
-         * added to the end of the sidebar.
+         * The ID of the directory to insert this one before. Takes precedence
+         * over both `after` and `order`. If no directory with this ID exists,
+         * falls back to `after`, then `order`, then the end of the sidebar.
+         */
+        before?: string;
+
+        /**
+         * The ID of the directory to insert this one after. Takes precedence
+         * over `order`. If no directory with this ID exists, falls back to
+         * `order`, then the end of the sidebar.
+         */
+        after?: string;
+
+        /**
+         * The positional index of the directory, evaluated after any other
+         * modules' directories have been inserted. Prefer `before` or `after`
+         * when the position depends on another directory, since the index of
+         * that directory shifts as other modules register. If not provided, the
+         * directory will be added to the end of the sidebar.
          */
         order?: number;
 
@@ -258,20 +251,13 @@ declare global {
     }
 
     namespace Hooks {
-        type HookParamsUiExtenderInit = HookParameters<
-            "uiExtender.init",
-            UiExtender
-        >;
-        type HookParamsUiExtenderSetup = HookParameters<
-            "uiExtender.setup",
-            UiExtender
-        >;
+        type HookParamsUiExtenderInit = HookParameters<"uiExtender.init", UiExtender>;
+        type HookParamsUiExtenderSetup = HookParameters<"uiExtender.setup", UiExtender>;
 
         /**
          * Register a callback handler which should be triggered when a hook is triggered.
          *
-         * @param hook The unique name of the hooked event
-         * @param fn   The callback function which should be triggered when the hook event occurs
+         * @param args
          */
         function on(...args: HookParamsUiExtenderInit): number;
         function on(...args: HookParamsUiExtenderSetup): number;
@@ -280,8 +266,7 @@ declare global {
          * Register a callback handler for an event which is only triggered once the first time the event occurs.
          * After a "once" hook is triggered the hook is automatically removed.
          *
-         * @param hook  The unique name of the hooked event
-         * @param fn    The callback function which should be triggered when the hook event occurs
+         * @param args
          */
         function once(...args: HookParamsUiExtenderInit): number;
         function once(...args: HookParamsUiExtenderSetup): number;
