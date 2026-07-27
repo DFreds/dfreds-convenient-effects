@@ -12,7 +12,7 @@ const UiExtenderInit: Listener = {
                 id: ConvenientEffectsV2.tabName,
                 tooltip: "ConvenientEffects.AppName",
                 icon: "fas fa-hand-sparkles",
-                order: 5,
+                after: "items",
                 applicationClass: ConvenientEffectsV2,
                 predicate: () => {
                     const settings = new Settings();
