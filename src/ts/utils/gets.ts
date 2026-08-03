@@ -26,12 +26,16 @@ function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
     }
 }
 
+const PREFERRED_ITEM_TYPES: Record<string, string> = {
+    dnd5e: "weapon",
+};
+
 function getItemType(): string {
     const types = Object.keys(CONFIG.Item.typeLabels);
-    const system = game.system.id;
 
-    if (system === "dnd5e") {
-        return "weapon";
+    const preferredType = PREFERRED_ITEM_TYPES[game.system.id];
+    if (preferredType && types.includes(preferredType)) {
+        return preferredType;
     }
 
     // Use the last type in the list because the first is usually "base" and that can be problematic
