@@ -5,6 +5,7 @@ import { notEmpty } from "../utils/types.ts";
 import { createConvenientEffect, createConvenientItem } from "../utils/creates.ts";
 import { MODULE_ID } from "../constants.ts";
 import { ItemSource } from "@client/documents/_module.mjs";
+import { getItemType } from "../utils/gets.ts";
 
 const Setup: Listener = {
     listen(): void {
@@ -32,6 +33,9 @@ const Setup: Listener = {
                     const [json] = args;
 
                     const item = Item.fromJSON(json).toObject() as PreCreate<ItemSource>;
+
+                    // The exported item type may not exist in this system
+                    item.type = getItemType();
 
                     const convenientItem = createConvenientItem({
                         item,
