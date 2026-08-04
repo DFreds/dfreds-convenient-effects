@@ -118,7 +118,7 @@ class ConvenientFolderConfig extends HandlebarsApplicationMixin(ApplicationV2<Co
         if (updateData) {
             foundry.utils.mergeObject(submitData, updateData, {
                 inplace: true,
-                performDeletions: true,
+                applyOperators: true,
             });
         }
 
