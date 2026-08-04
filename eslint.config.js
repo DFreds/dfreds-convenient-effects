@@ -68,17 +68,6 @@ export default defineConfig(
         },
     },
     {
-        files: ["types/foundry/**/*.mts"],
-        languageOptions: {
-            ecmaVersion: 2024,
-            parserOptions: { project: "types/foundry/tsconfig.json" },
-        },
-        rules: {
-            "@typescript-eslint/no-explicit-any": "off",
-            "@typescript-eslint/no-unsafe-function-type": "off",
-        },
-    },
-    {
         files: ["tests/**/*"],
         rules: { "global-require": "off" },
     },

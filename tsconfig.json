@@ -37,16 +37,15 @@
         "noErrorTruncation": true,
         "paths": {
             "@static/*": ["./static/*"],
-            "@common/*": ["./types/foundry/common/*"],
-            "@client/*": ["./types/foundry/client/*"]
+            "@common/*": ["./node_modules/@dfreds/foundry-types/common/*"],
+            "@client/*": ["./node_modules/@dfreds/foundry-types/client/*"]
         },
         "types": ["jest", "jquery", "node"],
-        "typeRoots": ["./node_modules/@types", "./types/foundry"]
+        "typeRoots": ["./node_modules/@types"]
     },
     "include": [
         "./src/**/*",
         "./tests/**/*.ts",
-        "./types/foundry/global-external.d.mts",
         "./types/convenientEffects/index.d.ts",
         "./types/libWrapper/index.d.ts",
         "./types/socketlib/index.d.ts",
