@@ -6,7 +6,6 @@ import { addDamageResistance, addSize } from "./changes/traits.ts";
 import { multiplyTokenScale } from "./changes/token.ts";
 import { Flags } from "../../utils/flags.ts";
 import { findIncrementParentOf } from "../../utils/finds.ts";
-import { effectSystem } from "../../utils/types.ts";
 
 class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     override systemId: string = "dnd5e";
@@ -78,7 +77,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     }
 
     #getTempMaxHpIncrease(effect: PreCreate<ActiveEffectSource>): number {
-        return (effectSystem(effect).changes ?? [])
+        return (effect.system?.changes ?? [])
             .filter((change) => change.key === "system.attributes.hp.tempmax")
             .reduce((total, change) => {
                 const value = Number(change.value);
@@ -189,7 +188,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     #addSizeChangeEffects(effect: PreCreate<ActiveEffectSource>, fromIndex: number, toIndex: number) {
         const toSize = SIZES_ORDERED[toIndex];
 
-        const system = effectSystem(effect);
+        const system = (effect.system ??= {});
         system.changes = system.changes ?? [];
         system.changes.push(addSize({ value: toSize }));
 
@@ -224,7 +223,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         );
 
         if (isTotemWarrior && hasBearTotemSpirit) {
-            const system = effectSystem(effect);
+            const system = (effect.system ??= {});
             system.changes = system.changes ?? [];
 
             const additionalDamageTypeResistances = [

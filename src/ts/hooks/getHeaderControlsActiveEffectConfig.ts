@@ -18,7 +18,7 @@ const GetHeaderControlsActiveEffectConfig: Listener = {
                     const parent = configTyped.document.parent;
                     const isItem = parent instanceof Item;
                     const isConvenientItem = Flags.isConvenient(parent as any) ?? false;
-                    const isOwner = configTyped.document.isOwner;
+                    const isOwner = (configTyped.document as ActiveEffect<any>).isOwner;
                     const isGM = game.user.isGM;
 
                     return (isOwner || isGM) && isItem && isConvenientItem;

@@ -27,7 +27,6 @@ import {
     optionalSkill,
 } from "../changes/midi-qol.ts";
 import { tokenMagic } from "../changes/macros.ts";
-import { effectSystem } from "../../../utils/types.ts";
 import { abilityCheckMode, abilitySaveBonus, abilitySaveMode, downgradeAbility } from "../changes/abilities.ts";
 import {
     addAllDamageImmunity,
@@ -310,7 +309,7 @@ function blackTentacles(): PreCreate<ActiveEffectSource> {
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             statuses: ["restrained"],
             system: {
-                changes: effectSystem(restrained()).changes,
+                changes: restrained().system?.changes,
             },
         },
     });
@@ -1255,7 +1254,7 @@ function hideousLaughter(): PreCreate<ActiveEffectSource> {
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             statuses: ["incapacitated", "prone"],
             system: {
-                changes: effectSystem(prone()).changes,
+                changes: prone().system?.changes,
             },
         },
     });
