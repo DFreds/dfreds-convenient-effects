@@ -27,6 +27,7 @@ import {
     optionalSkill,
 } from "../changes/midi-qol.ts";
 import { tokenMagic } from "../changes/macros.ts";
+import { effectSystem } from "../../../utils/types.ts";
 import { abilityCheckMode, abilitySaveBonus, abilitySaveMode, downgradeAbility } from "../changes/abilities.ts";
 import {
     addAllDamageImmunity,
@@ -169,13 +170,15 @@ function acidArrow(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.AcidArrow.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.AcidArrow.description"),
             img: "icons/magic/acid/projectile-bolts-salvo-green.webp",
-            changes: [
-                {
-                    key: `flags.midi-qol.OverTime`,
-                    type: "add",
-                    value: "turn=end,removeCondition=true,damageRoll=2d4,damageType=acid,label=Acid Arrow",
-                },
-            ],
+            system: {
+                changes: [
+                    {
+                        key: `flags.midi-qol.OverTime`,
+                        type: "add",
+                        value: "turn=end,removeCondition=true,damageRoll=2d4,damageType=acid,label=Acid Arrow",
+                    },
+                ],
+            },
         },
     });
 }
@@ -187,11 +190,13 @@ function aid(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Aid.description"),
             img: "icons/magic/life/heart-cross-blue.webp",
             duration: { value: SECONDS.IN_EIGHT_HOURS, units: "seconds" },
-            changes: [
-                tempMaxHp({
-                    value: "+5",
-                }),
-            ],
+            system: {
+                changes: [
+                    tempMaxHp({
+                        value: "+5",
+                    }),
+                ],
+            },
         },
         isDynamic: true,
     });
@@ -237,27 +242,29 @@ function bane(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Bane.description"),
             img: "icons/magic/unholy/strike-beam-blood-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                saveBonus({
-                    value: "-1d4",
-                }),
-                attackBonus({
-                    actionType: "mwak",
-                    value: "-1d4",
-                }),
-                attackBonus({
-                    actionType: "msak",
-                    value: "-1d4",
-                }),
-                attackBonus({
-                    actionType: "rsak",
-                    value: "-1d4",
-                }),
-                attackBonus({
-                    actionType: "rwak",
-                    value: "-1d4",
-                }),
-            ],
+            system: {
+                changes: [
+                    saveBonus({
+                        value: "-1d4",
+                    }),
+                    attackBonus({
+                        actionType: "mwak",
+                        value: "-1d4",
+                    }),
+                    attackBonus({
+                        actionType: "msak",
+                        value: "-1d4",
+                    }),
+                    attackBonus({
+                        actionType: "rsak",
+                        value: "-1d4",
+                    }),
+                    attackBonus({
+                        actionType: "rwak",
+                        value: "-1d4",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -269,11 +276,13 @@ function barkskin(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Barkskin.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                acMin({
-                    value: "16",
-                }),
-            ],
+            system: {
+                changes: [
+                    acMin({
+                        value: "16",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -285,7 +294,9 @@ function beaconOfHope(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BeaconOfHope.description"),
             img: "icons/magic/light/explosion-star-large-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [abilitySaveMode({ ability: "wis", value: "1" }), deathMode({ value: "1" })],
+            system: {
+                changes: [abilitySaveMode({ ability: "wis", value: "1" }), deathMode({ value: "1" })],
+            },
         },
     });
 }
@@ -298,7 +309,9 @@ function blackTentacles(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             statuses: ["restrained"],
-            changes: restrained().changes,
+            system: {
+                changes: effectSystem(restrained()).changes,
+            },
         },
     });
 }
@@ -310,30 +323,32 @@ function bless(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Bless.description"),
             img: "icons/magic/control/buff-flight-wings-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                saveBonus({
-                    value: "+1d4",
-                }),
-                attackBonus({
-                    actionType: "msak",
-                    value: "+1d4",
-                }),
-                attackBonus({
-                    actionType: "mwak",
-                    value: "+1d4",
-                }),
-                attackBonus({
-                    actionType: "rsak",
-                    value: "+1d4",
-                }),
-                attackBonus({
-                    actionType: "rwak",
-                    value: "+1d4",
-                }),
-                tokenMagic({
-                    value: "bloom",
-                }),
-            ],
+            system: {
+                changes: [
+                    saveBonus({
+                        value: "+1d4",
+                    }),
+                    attackBonus({
+                        actionType: "msak",
+                        value: "+1d4",
+                    }),
+                    attackBonus({
+                        actionType: "mwak",
+                        value: "+1d4",
+                    }),
+                    attackBonus({
+                        actionType: "rsak",
+                        value: "+1d4",
+                    }),
+                    attackBonus({
+                        actionType: "rwak",
+                        value: "+1d4",
+                    }),
+                    tokenMagic({
+                        value: "bloom",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -385,14 +400,16 @@ function blur(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Blur.description"),
             img: "icons/magic/air/air-burst-spiral-blue-gray.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                grantDisadvantageAttack({
-                    attackType: "all",
-                }),
-                tokenMagic({
-                    value: "blur",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantDisadvantageAttack({
+                        attackType: "all",
+                    }),
+                    tokenMagic({
+                        value: "blur",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -427,7 +444,9 @@ function comprehendLanguages(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ComprehendLanguages.description"),
             img: "icons/magic/symbols/runes-triangle-orange-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [addAllLanguages()],
+            system: {
+                changes: [addAllLanguages()],
+            },
         },
     });
 }
@@ -461,10 +480,12 @@ function contagionBlindingSickness(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
             statuses: ["blinded"],
-            changes: [
-                abilitySaveMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-            ],
+            system: {
+                changes: [
+                    abilitySaveMode({ ability: "wis", value: "-1" }),
+                    abilityCheckMode({ ability: "wis", value: "-1" }),
+                ],
+            },
         },
     });
 }
@@ -476,13 +497,15 @@ function contagionFilthFever(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.FilthFever.description"),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
-            changes: [
-                abilitySaveMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                disadvantageAttack({
-                    attackType: "str",
-                }),
-            ],
+            system: {
+                changes: [
+                    abilitySaveMode({ ability: "str", value: "-1" }),
+                    abilityCheckMode({ ability: "str", value: "-1" }),
+                    disadvantageAttack({
+                        attackType: "str",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -494,7 +517,9 @@ function contagionFleshRot(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.FleshRot.description"),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
-            changes: [abilityCheckMode({ ability: "cha", value: "-1" }), addAllDamageVulnerability()],
+            system: {
+                changes: [abilityCheckMode({ ability: "cha", value: "-1" }), addAllDamageVulnerability()],
+            },
         },
     });
 }
@@ -506,10 +531,12 @@ function contagionMindfire(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Mindfire.description"),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
-            changes: [
-                abilitySaveMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-            ],
+            system: {
+                changes: [
+                    abilitySaveMode({ ability: "int", value: "-1" }),
+                    abilityCheckMode({ ability: "int", value: "-1" }),
+                ],
+            },
         },
     });
 }
@@ -521,13 +548,15 @@ function contagionSeizure(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Seizure.description"),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
-            changes: [
-                abilitySaveMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                disadvantageAttack({
-                    attackType: "dex",
-                }),
-            ],
+            system: {
+                changes: [
+                    abilitySaveMode({ ability: "dex", value: "-1" }),
+                    abilityCheckMode({ ability: "dex", value: "-1" }),
+                    disadvantageAttack({
+                        attackType: "dex",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -539,10 +568,12 @@ function contagionSlimyDoom(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.SlimyDoom.description"),
             img: "icons/magic/unholy/strike-beam-blood-large-red-purple.webp",
             duration: { value: SECONDS.IN_ONE_WEEK, units: "seconds" },
-            changes: [
-                abilitySaveMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-            ],
+            system: {
+                changes: [
+                    abilitySaveMode({ ability: "con", value: "-1" }),
+                    abilityCheckMode({ ability: "con", value: "-1" }),
+                ],
+            },
         },
     });
 }
@@ -554,28 +585,30 @@ function darkvision(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Darkvision.description"),
             img: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
             duration: { value: SECONDS.IN_EIGHT_HOURS, units: "seconds" },
-            changes: [
-                upgradeDarkvision({
-                    value: "60",
-                    priority: 5,
-                }),
-                tokenSight({
-                    attribute: "range",
-                    value: "60",
-                    priority: 5,
-                }),
-                tokenSight({
-                    attribute: "visionMode",
-                    value: "darkvision",
-                    priority: 5,
-                }),
-                // Core only derives basicSight from sight.range when the token
-                // has no entry of its own, so set it explicitly.
-                ...tokenDetectionMode({
-                    id: "basicSight",
-                    range: 60,
-                }),
-            ],
+            system: {
+                changes: [
+                    upgradeDarkvision({
+                        value: "60",
+                        priority: 5,
+                    }),
+                    tokenSight({
+                        attribute: "range",
+                        value: "60",
+                        priority: 5,
+                    }),
+                    tokenSight({
+                        attribute: "visionMode",
+                        value: "darkvision",
+                        priority: 5,
+                    }),
+                    // Core only derives basicSight from sight.range when the token
+                    // has no entry of its own, so set it explicitly.
+                    ...tokenDetectionMode({
+                        id: "basicSight",
+                        range: 60,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -598,10 +631,12 @@ function divineFavor(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.DivineFavor.description"),
             img: "icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: damageBonuses({
-                actionTypes: WEAPON_ACTION_TYPES,
-                value: "+1d4[radiant]",
-            }),
+            system: {
+                changes: damageBonuses({
+                    actionTypes: WEAPON_ACTION_TYPES,
+                    value: "+1d4[radiant]",
+                }),
+            },
         },
     });
 }
@@ -645,7 +680,9 @@ function enhanceAbilityBearsEndurance(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BearsEndurance.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [abilityCheckMode({ ability: "con", value: "1" })],
+            system: {
+                changes: [abilityCheckMode({ ability: "con", value: "1" })],
+            },
         },
     });
 }
@@ -657,13 +694,15 @@ function enhanceAbilityBullsStrength(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BullsStrength.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                abilityCheckMode({ ability: "str", value: "1" }),
-                multiplyEncumbrance({
-                    value: "2",
-                    priority: 5,
-                }),
-            ],
+            system: {
+                changes: [
+                    abilityCheckMode({ ability: "str", value: "1" }),
+                    multiplyEncumbrance({
+                        value: "2",
+                        priority: 5,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -675,7 +714,9 @@ function enhanceAbilityCatsGrace(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.CatsGrace.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [abilityCheckMode({ ability: "dex", value: "1" })],
+            system: {
+                changes: [abilityCheckMode({ ability: "dex", value: "1" })],
+            },
         },
     });
 }
@@ -687,7 +728,9 @@ function enhanceAbilityEaglesSplendor(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.EaglesSplendor.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [abilityCheckMode({ ability: "cha", value: "1" })],
+            system: {
+                changes: [abilityCheckMode({ ability: "cha", value: "1" })],
+            },
         },
     });
 }
@@ -699,7 +742,9 @@ function enhanceAbilityFoxsCunning() {
             description: game.i18n.localize("ConvenientEffects.Dnd.FoxsCunning.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [abilityCheckMode({ ability: "int", value: "1" })],
+            system: {
+                changes: [abilityCheckMode({ ability: "int", value: "1" })],
+            },
         },
     });
 }
@@ -711,7 +756,9 @@ function enhanceAbilityOwlsWisdom() {
             description: game.i18n.localize("ConvenientEffects.Dnd.OwlsWisdom.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [abilityCheckMode({ ability: "wis", value: "1" })],
+            system: {
+                changes: [abilityCheckMode({ ability: "wis", value: "1" })],
+            },
         },
     });
 }
@@ -737,14 +784,16 @@ function enlargeReduceEnlarge(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Enlarge.description"),
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                ...damageBonuses({
-                    actionTypes: WEAPON_ACTION_TYPES,
-                    value: "+1d4",
-                }),
-                abilityCheckMode({ ability: "str", value: "1" }),
-                abilitySaveMode({ ability: "str", value: "1" }),
-            ],
+            system: {
+                changes: [
+                    ...damageBonuses({
+                        actionTypes: WEAPON_ACTION_TYPES,
+                        value: "+1d4",
+                    }),
+                    abilityCheckMode({ ability: "str", value: "1" }),
+                    abilitySaveMode({ ability: "str", value: "1" }),
+                ],
+            },
         },
         isDynamic: true,
     });
@@ -757,14 +806,16 @@ function enlargeReduceReduce(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Reduce.description"),
             img: "icons/magic/control/energy-stream-link-large-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                ...damageBonuses({
-                    actionTypes: WEAPON_ACTION_TYPES,
-                    value: "-1d4",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilitySaveMode({ ability: "str", value: "-1" }),
-            ],
+            system: {
+                changes: [
+                    ...damageBonuses({
+                        actionTypes: WEAPON_ACTION_TYPES,
+                        value: "-1d4",
+                    }),
+                    abilityCheckMode({ ability: "str", value: "-1" }),
+                    abilitySaveMode({ ability: "str", value: "-1" }),
+                ],
+            },
         },
         isDynamic: true,
     });
@@ -777,37 +828,39 @@ function faerieFire(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.FaerieFire.description"),
             img: "icons/magic/fire/projectile-meteor-salvo-strong-teal.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-                tokenLight({
-                    attribute: "dim",
-                    value: "10",
-                }),
-                tokenLight({
-                    attribute: "color",
-                    value: COLORS.WHITE,
-                }),
-                tokenLight({
-                    attribute: "alpha",
-                    value: "0.25",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "speed",
-                    value: "1",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "intensity",
-                    value: "1",
-                }),
-                tokenLightAnimationType({
-                    type: "pulse",
-                }),
-                tokenMagic({
-                    value: "glow",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                    tokenLight({
+                        attribute: "dim",
+                        value: "10",
+                    }),
+                    tokenLight({
+                        attribute: "color",
+                        value: COLORS.WHITE,
+                    }),
+                    tokenLight({
+                        attribute: "alpha",
+                        value: "0.25",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "speed",
+                        value: "1",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "intensity",
+                        value: "1",
+                    }),
+                    tokenLightAnimationType({
+                        type: "pulse",
+                    }),
+                    tokenMagic({
+                        value: "glow",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -840,18 +893,20 @@ function feeblemind(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.Feeblemind.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Feeblemind.description"),
             img: "icons/magic/light/explosion-star-large-teal-purple.webp",
-            changes: [
-                downgradeAbility({
-                    ability: "int",
-                    value: "1",
-                    priority: 25,
-                }),
-                downgradeAbility({
-                    ability: "cha",
-                    value: "1",
-                    priority: 25,
-                }),
-            ],
+            system: {
+                changes: [
+                    downgradeAbility({
+                        ability: "int",
+                        value: "1",
+                        priority: 25,
+                    }),
+                    downgradeAbility({
+                        ability: "cha",
+                        value: "1",
+                        priority: 25,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -877,41 +932,43 @@ function fireShieldColdResistance(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.FireShieldColdResistance.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "cold",
-                }),
-                tokenLight({
-                    attribute: "dim",
-                    value: "20",
-                }),
-                tokenLight({
-                    attribute: "bright",
-                    value: "10",
-                }),
-                tokenLight({
-                    attribute: "color",
-                    value: COLORS.FIRE,
-                }),
-                tokenLight({
-                    attribute: "alpha",
-                    value: "0.25",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "speed",
-                    value: "3",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "intensity",
-                    value: "1",
-                }),
-                tokenLightAnimationType({
-                    type: "flame",
-                }),
-                tokenMagic({
-                    value: "fire",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "cold",
+                    }),
+                    tokenLight({
+                        attribute: "dim",
+                        value: "20",
+                    }),
+                    tokenLight({
+                        attribute: "bright",
+                        value: "10",
+                    }),
+                    tokenLight({
+                        attribute: "color",
+                        value: COLORS.FIRE,
+                    }),
+                    tokenLight({
+                        attribute: "alpha",
+                        value: "0.25",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "speed",
+                        value: "3",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "intensity",
+                        value: "1",
+                    }),
+                    tokenLightAnimationType({
+                        type: "flame",
+                    }),
+                    tokenMagic({
+                        value: "fire",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -923,41 +980,43 @@ function fireShieldFireResistance(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.FireShieldFireResistance.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "fire",
-                }),
-                tokenLight({
-                    attribute: "dim",
-                    value: "20",
-                }),
-                tokenLight({
-                    attribute: "bright",
-                    value: "10",
-                }),
-                tokenLight({
-                    attribute: "color",
-                    value: COLORS.COLD_FIRE,
-                }),
-                tokenLight({
-                    attribute: "alpha",
-                    value: "0.25",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "speed",
-                    value: "3",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "intensity",
-                    value: "1",
-                }),
-                tokenLightAnimationType({
-                    type: "flame",
-                }),
-                tokenMagic({
-                    value: "Fire v2 (coldfire)",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "fire",
+                    }),
+                    tokenLight({
+                        attribute: "dim",
+                        value: "20",
+                    }),
+                    tokenLight({
+                        attribute: "bright",
+                        value: "10",
+                    }),
+                    tokenLight({
+                        attribute: "color",
+                        value: COLORS.COLD_FIRE,
+                    }),
+                    tokenLight({
+                        attribute: "alpha",
+                        value: "0.25",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "speed",
+                        value: "3",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "intensity",
+                        value: "1",
+                    }),
+                    tokenLightAnimationType({
+                        type: "flame",
+                    }),
+                    tokenMagic({
+                        value: "Fire v2 (coldfire)",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -981,13 +1040,15 @@ function fly(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/control/energy-stream-link-white.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
             statuses: ["flying"],
-            changes: [
-                upgradeMovement({
-                    movementType: "fly",
-                    value: "60",
-                    priority: 25,
-                }),
-            ],
+            system: {
+                changes: [
+                    upgradeMovement({
+                        movementType: "fly",
+                        value: "60",
+                        priority: 25,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -999,26 +1060,28 @@ function foresight(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Foresight.description"),
             img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
             duration: { value: SECONDS.IN_EIGHT_HOURS, units: "seconds" },
-            changes: [
-                advantageAttack({
-                    attackType: "all",
-                }),
-                abilityCheckMode({ ability: "str", value: "1" }),
-                abilityCheckMode({ ability: "dex", value: "1" }),
-                abilityCheckMode({ ability: "con", value: "1" }),
-                abilityCheckMode({ ability: "int", value: "1" }),
-                abilityCheckMode({ ability: "wis", value: "1" }),
-                abilityCheckMode({ ability: "cha", value: "1" }),
-                abilitySaveMode({ ability: "str", value: "1" }),
-                abilitySaveMode({ ability: "dex", value: "1" }),
-                abilitySaveMode({ ability: "con", value: "1" }),
-                abilitySaveMode({ ability: "int", value: "1" }),
-                abilitySaveMode({ ability: "wis", value: "1" }),
-                abilitySaveMode({ ability: "cha", value: "1" }),
-                grantDisadvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    advantageAttack({
+                        attackType: "all",
+                    }),
+                    abilityCheckMode({ ability: "str", value: "1" }),
+                    abilityCheckMode({ ability: "dex", value: "1" }),
+                    abilityCheckMode({ ability: "con", value: "1" }),
+                    abilityCheckMode({ ability: "int", value: "1" }),
+                    abilityCheckMode({ ability: "wis", value: "1" }),
+                    abilityCheckMode({ ability: "cha", value: "1" }),
+                    abilitySaveMode({ ability: "str", value: "1" }),
+                    abilitySaveMode({ ability: "dex", value: "1" }),
+                    abilitySaveMode({ ability: "con", value: "1" }),
+                    abilitySaveMode({ ability: "int", value: "1" }),
+                    abilitySaveMode({ ability: "wis", value: "1" }),
+                    abilitySaveMode({ ability: "cha", value: "1" }),
+                    grantDisadvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1041,11 +1104,13 @@ function globeOfInvulnerability(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.GlobeOfInvulnerability.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                tokenMagic({
-                    value: "warp-field",
-                }),
-            ],
+            system: {
+                changes: [
+                    tokenMagic({
+                        value: "warp-field",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1071,22 +1136,24 @@ function guidance(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Guidance.description"),
             img: "icons/magic/control/buff-flight-wings-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                optionalLabel({
-                    key: "guidance",
-                    label: "Guidance",
-                }),
-                optionalAbilityCheck({
-                    key: "guidance",
-                    abilityCheckType: "all",
-                    value: "+1d4",
-                }),
-                optionalSkill({
-                    key: "guidance",
-                    skillType: "all",
-                    value: "+1d4",
-                }),
-            ],
+            system: {
+                changes: [
+                    optionalLabel({
+                        key: "guidance",
+                        label: "Guidance",
+                    }),
+                    optionalAbilityCheck({
+                        key: "guidance",
+                        abilityCheckType: "all",
+                        value: "+1d4",
+                    }),
+                    optionalSkill({
+                        key: "guidance",
+                        skillType: "all",
+                        value: "+1d4",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1099,11 +1166,13 @@ function guidingBolt(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/fire/projectile-fireball-smoke-large-blue.webp",
             duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["isAttacked"] } },
-            changes: [
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1115,16 +1184,18 @@ function haste(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Haste.description"),
             img: "icons/magic/control/buff-flight-wings-runes-purple.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                acBonus({
-                    value: "+2",
-                }),
-                abilitySaveMode({
-                    ability: "dex",
-                    value: "1",
-                }),
-                ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "2" })),
-            ],
+            system: {
+                changes: [
+                    acBonus({
+                        value: "+2",
+                    }),
+                    abilitySaveMode({
+                        ability: "dex",
+                        value: "1",
+                    }),
+                    ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "2" })),
+                ],
+            },
         },
     });
 }
@@ -1136,21 +1207,23 @@ function heroesFeast(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.HeroesFeast.description"),
             img: "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
             duration: { value: SECONDS.IN_ONE_DAY, units: "seconds" },
-            changes: [
-                addDamageImmunity({
-                    damageType: "poison",
-                }),
-                addConditionImmunity({
-                    condition: "frightened",
-                }),
-                addConditionImmunity({
-                    condition: "poisoned",
-                }),
-                abilitySaveMode({
-                    ability: "wis",
-                    value: "1",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageImmunity({
+                        damageType: "poison",
+                    }),
+                    addConditionImmunity({
+                        condition: "frightened",
+                    }),
+                    addConditionImmunity({
+                        condition: "poisoned",
+                    }),
+                    abilitySaveMode({
+                        ability: "wis",
+                        value: "1",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1162,11 +1235,13 @@ function heroism(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Heroism.description"),
             img: "icons/magic/life/heart-cross-strong-blue.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                addConditionImmunity({
-                    condition: "frightened",
-                }),
-            ],
+            system: {
+                changes: [
+                    addConditionImmunity({
+                        condition: "frightened",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1179,7 +1254,9 @@ function hideousLaughter(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/fire/explosion-fireball-medium-purple-pink.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             statuses: ["incapacitated", "prone"],
-            changes: prone().changes,
+            system: {
+                changes: effectSystem(prone()).changes,
+            },
         },
     });
 }
@@ -1192,11 +1269,13 @@ function holdMonster(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.HoldMonster.description"),
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                tokenMagic({
-                    value: "mantle-of-madness",
-                }),
-            ],
+            system: {
+                changes: [
+                    tokenMagic({
+                        value: "mantle-of-madness",
+                    }),
+                ],
+            },
         },
         subEffectIds,
     });
@@ -1210,11 +1289,13 @@ function holdPerson(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.HoldPerson.description"),
             img: "icons/magic/control/debuff-chains-ropes-purple.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                tokenMagic({
-                    value: "mantle-of-madness",
-                }),
-            ],
+            system: {
+                changes: [
+                    tokenMagic({
+                        value: "mantle-of-madness",
+                    }),
+                ],
+            },
         },
         subEffectIds,
     });
@@ -1227,40 +1308,42 @@ function holyAura(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.HolyAura.description"),
             img: "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                abilitySaveMode({ ability: "str", value: "1" }),
-                abilitySaveMode({ ability: "dex", value: "1" }),
-                abilitySaveMode({ ability: "con", value: "1" }),
-                abilitySaveMode({ ability: "int", value: "1" }),
-                abilitySaveMode({ ability: "wis", value: "1" }),
-                abilitySaveMode({ ability: "cha", value: "1" }),
-                grantDisadvantageAttack({
-                    attackType: "all",
-                }),
-                tokenLight({
-                    attribute: "dim",
-                    value: "5",
-                }),
-                tokenLight({
-                    attribute: "color",
-                    value: COLORS.WHITE,
-                }),
-                tokenLight({
-                    attribute: "alpha",
-                    value: "0.25",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "speed",
-                    value: "2",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "intensity",
-                    value: "4",
-                }),
-                tokenLightAnimationType({
-                    type: "sunburst",
-                }),
-            ],
+            system: {
+                changes: [
+                    abilitySaveMode({ ability: "str", value: "1" }),
+                    abilitySaveMode({ ability: "dex", value: "1" }),
+                    abilitySaveMode({ ability: "con", value: "1" }),
+                    abilitySaveMode({ ability: "int", value: "1" }),
+                    abilitySaveMode({ ability: "wis", value: "1" }),
+                    abilitySaveMode({ ability: "cha", value: "1" }),
+                    grantDisadvantageAttack({
+                        attackType: "all",
+                    }),
+                    tokenLight({
+                        attribute: "dim",
+                        value: "5",
+                    }),
+                    tokenLight({
+                        attribute: "color",
+                        value: COLORS.WHITE,
+                    }),
+                    tokenLight({
+                        attribute: "alpha",
+                        value: "0.25",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "speed",
+                        value: "2",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "intensity",
+                        value: "4",
+                    }),
+                    tokenLightAnimationType({
+                        type: "sunburst",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1297,16 +1380,18 @@ function irresistibleDance(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.IrresistibleDance.description"),
             img: "icons/magic/control/debuff-chains-ropes-red.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                ...MOVEMENT_TYPES.map((movementType) => movementOverride({ movementType, value: "0" })),
-                abilitySaveMode({ ability: "dex", value: "-1" }),
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    ...MOVEMENT_TYPES.map((movementType) => movementOverride({ movementType, value: "0" })),
+                    abilitySaveMode({ ability: "dex", value: "-1" }),
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1329,35 +1414,37 @@ function light(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Light.description"),
             img: "icons/magic/light/explosion-star-small-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                tokenLight({
-                    attribute: "dim",
-                    value: "40",
-                }),
-                tokenLight({
-                    attribute: "bright",
-                    value: "20",
-                }),
-                tokenLight({
-                    attribute: "color",
-                    value: COLORS.WHITE,
-                }),
-                tokenLight({
-                    attribute: "alpha",
-                    value: "0.25",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "speed",
-                    value: "3",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "intensity",
-                    value: "1",
-                }),
-                tokenLightAnimationType({
-                    type: "pulse",
-                }),
-            ],
+            system: {
+                changes: [
+                    tokenLight({
+                        attribute: "dim",
+                        value: "40",
+                    }),
+                    tokenLight({
+                        attribute: "bright",
+                        value: "20",
+                    }),
+                    tokenLight({
+                        attribute: "color",
+                        value: COLORS.WHITE,
+                    }),
+                    tokenLight({
+                        attribute: "alpha",
+                        value: "0.25",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "speed",
+                        value: "3",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "intensity",
+                        value: "1",
+                    }),
+                    tokenLightAnimationType({
+                        type: "pulse",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1369,11 +1456,13 @@ function longstrider(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Longstrider.description"),
             img: "icons/magic/air/wind-stream-blue-gray.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                movementBonus({
-                    value: "+10",
-                }),
-            ],
+            system: {
+                changes: [
+                    movementBonus({
+                        value: "+10",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1385,12 +1474,14 @@ function mageArmor(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.MageArmor.description"),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp",
             duration: { value: SECONDS.IN_EIGHT_HOURS, units: "seconds" },
-            changes: [
-                acCalc({
-                    value: "mage",
-                    priority: 5,
-                }),
-            ],
+            system: {
+                changes: [
+                    acCalc({
+                        value: "mage",
+                        priority: 5,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1402,14 +1493,16 @@ function mindBlank(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.MindBlank.description"),
             img: "icons/magic/air/air-burst-spiral-large-blue.webp",
             duration: { value: SECONDS.IN_ONE_DAY, units: "seconds" },
-            changes: [
-                addDamageImmunity({
-                    damageType: "psychic",
-                }),
-                addConditionImmunity({
-                    condition: "charmed",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageImmunity({
+                        damageType: "psychic",
+                    }),
+                    addConditionImmunity({
+                        condition: "charmed",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1421,11 +1514,13 @@ function mirrorImage(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.MirrorImage.description"),
             img: "icons/magic/control/debuff-energy-hold-levitate-pink.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                tokenMagic({
-                    value: "images",
-                }),
-            ],
+            system: {
+                changes: [
+                    tokenMagic({
+                        value: "images",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1437,15 +1532,17 @@ function passWithoutTrace(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.PassWithoutTrace.description"),
             img: "icons/magic/air/fog-gas-smoke-brown.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                skillCheckBonus({
-                    skillType: "ste",
-                    value: "+10",
-                }),
-                tokenMagic({
-                    value: "fog",
-                }),
-            ],
+            system: {
+                changes: [
+                    skillCheckBonus({
+                        skillType: "ste",
+                        value: "+10",
+                    }),
+                    tokenMagic({
+                        value: "fog",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1477,14 +1574,16 @@ function protectionFromEnergyAcid(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ProtectionFromAcid.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "acid",
-                }),
-                tokenMagic({
-                    value: "clover",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "acid",
+                    }),
+                    tokenMagic({
+                        value: "clover",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1496,14 +1595,16 @@ function protectionFromEnergyCold(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ProtectionFromCold.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "cold",
-                }),
-                tokenMagic({
-                    value: "pure-ice-aura",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "cold",
+                    }),
+                    tokenMagic({
+                        value: "pure-ice-aura",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1515,14 +1616,16 @@ function protectionFromEnergyFire(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ProtectionFromFire.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-red.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "fire",
-                }),
-                tokenMagic({
-                    value: "pure-fire-aura",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "fire",
+                    }),
+                    tokenMagic({
+                        value: "pure-fire-aura",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1534,14 +1637,16 @@ function protectionFromEnergyLightning(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ProtectionFromLightning.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "lightning",
-                }),
-                tokenMagic({
-                    value: "electric",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "lightning",
+                    }),
+                    tokenMagic({
+                        value: "electric",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1553,14 +1658,16 @@ function protectionFromEnergyThunder(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ProtectionFromThunder.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-teal-purple.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "thunder",
-                }),
-                tokenMagic({
-                    value: "shockwave",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "thunder",
+                    }),
+                    tokenMagic({
+                        value: "shockwave",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1572,14 +1679,16 @@ function protectionFromPoison(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ProtectionFromPoison.description"),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "poison",
-                }),
-                tokenMagic({
-                    value: "bevel",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "poison",
+                    }),
+                    tokenMagic({
+                        value: "bevel",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1602,11 +1711,13 @@ function rayOfFrost(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.RayOfFrost.description"),
             img: "icons/magic/light/beam-rays-blue-small.webp",
             duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
-            changes: [
-                movementBonus({
-                    value: "-10",
-                }),
-            ],
+            system: {
+                changes: [
+                    movementBonus({
+                        value: "-10",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1618,13 +1729,15 @@ function regenerate(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Regenerate.description"),
             img: "icons/magic/life/heart-cross-strong-flame-green.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                {
-                    key: `flags.midi-qol.OverTime.regenerate`,
-                    type: "override",
-                    value: "label=Regenerate,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max",
-                },
-            ],
+            system: {
+                changes: [
+                    {
+                        key: `flags.midi-qol.OverTime.regenerate`,
+                        type: "override",
+                        value: "label=Regenerate,turn=start,damageRoll=1,damageType=healing,condition=@attributes.hp.value > 0 && @attributes.hp.value < @attributes.hp.max",
+                    },
+                ],
+            },
         },
     });
 }
@@ -1636,10 +1749,12 @@ function resilientSphere(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ResilientSphere.description"),
             img: "icons/magic/light/explosion-star-large-pink.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "0.5" })),
-                addAllDamageImmunity(),
-            ],
+            system: {
+                changes: [
+                    ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "0.5" })),
+                    addAllDamageImmunity(),
+                ],
+            },
         },
     });
 }
@@ -1651,17 +1766,19 @@ function resistance(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Resistance.description"),
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                optionalLabel({
-                    key: "resistance",
-                    label: "Resistance",
-                }),
-                optionalSave({
-                    key: "resistance",
-                    saveType: "all",
-                    value: "+1d4",
-                }),
-            ],
+            system: {
+                changes: [
+                    optionalLabel({
+                        key: "resistance",
+                        label: "Resistance",
+                    }),
+                    optionalSave({
+                        key: "resistance",
+                        saveType: "all",
+                        value: "+1d4",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1674,15 +1791,17 @@ function shield(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp",
             duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["turnStart"] } },
-            changes: [
-                acBonus({
-                    value: "+5",
-                    priority: 5,
-                }),
-                tokenMagic({
-                    value: "water-field",
-                }),
-            ],
+            system: {
+                changes: [
+                    acBonus({
+                        value: "+5",
+                        priority: 5,
+                    }),
+                    tokenMagic({
+                        value: "water-field",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1694,14 +1813,16 @@ function shieldOfFaith(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ShieldOfFaith.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                acBonus({
-                    value: "+2",
-                }),
-                tokenMagic({
-                    value: "bloom",
-                }),
-            ],
+            system: {
+                changes: [
+                    acBonus({
+                        value: "+2",
+                    }),
+                    tokenMagic({
+                        value: "bloom",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1713,16 +1834,18 @@ function slow(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Slow.description"),
             img: "icons/magic/air/fog-gas-smoke-dense-pink.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                acBonus({
-                    value: "-2",
-                }),
-                abilitySaveBonus({
-                    ability: "dex",
-                    value: "-2",
-                }),
-                ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "0.5" })),
-            ],
+            system: {
+                changes: [
+                    acBonus({
+                        value: "-2",
+                    }),
+                    abilitySaveBonus({
+                        ability: "dex",
+                        value: "-2",
+                    }),
+                    ...MOVEMENT_TYPES.map((movementType) => movementMultiply({ movementType, value: "0.5" })),
+                ],
+            },
         },
     });
 }
@@ -1767,10 +1890,12 @@ function seeInvisibility(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.SeeInvisibility.description"),
             img: "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: tokenDetectionMode({
-                id: "seeInvisibility",
-                range: 30,
-            }),
+            system: {
+                changes: tokenDetectionMode({
+                    id: "seeInvisibility",
+                    range: 30,
+                }),
+            },
         },
     });
 }
@@ -1782,22 +1907,24 @@ function trueSeeing(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.TrueSeeing.description"),
             img: "icons/magic/perception/eye-ringed-glow-angry-large-teal.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                upgradeSense({
-                    sense: "truesight",
-                    value: "120",
-                    priority: 5,
-                }),
-                ...tokenDetectionMode({
-                    id: "seeAll",
-                    range: 120,
-                }),
-                tokenSight({
-                    attribute: "range",
-                    value: "120",
-                    priority: 5,
-                }),
-            ],
+            system: {
+                changes: [
+                    upgradeSense({
+                        sense: "truesight",
+                        value: "120",
+                        priority: 5,
+                    }),
+                    ...tokenDetectionMode({
+                        id: "seeAll",
+                        range: 120,
+                    }),
+                    tokenSight({
+                        attribute: "range",
+                        value: "120",
+                        priority: 5,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1809,13 +1936,15 @@ function spiderClimb(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.SpiderClimb.description"),
             img: "icons/magic/control/debuff-chains-blue.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                upgradeMovement({
-                    movementType: "climb",
-                    value: "@attributes.movement.walk",
-                    priority: 25,
-                }),
-            ],
+            system: {
+                changes: [
+                    upgradeMovement({
+                        movementType: "climb",
+                        value: "@attributes.movement.walk",
+                        priority: 25,
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1849,23 +1978,25 @@ function stoneskin(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Stoneskin.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                addDamageResistance({
-                    damageType: "bludgeoning",
-                }),
-                addDamageResistance({
-                    damageType: "piercing",
-                }),
-                addDamageResistance({
-                    damageType: "slashing",
-                }),
-                addDamageBypass({
-                    bypass: "mgc",
-                }),
-                tokenMagic({
-                    value: "oldfilm",
-                }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({
+                        damageType: "bludgeoning",
+                    }),
+                    addDamageResistance({
+                        damageType: "piercing",
+                    }),
+                    addDamageResistance({
+                        damageType: "slashing",
+                    }),
+                    addDamageBypass({
+                        bypass: "mgc",
+                    }),
+                    tokenMagic({
+                        value: "oldfilm",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1900,11 +2031,13 @@ function trueStrike(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/fire/dagger-rune-enchant-blue-gray.webp",
             duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["1Attack"] } },
-            changes: [
-                advantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    advantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1917,11 +2050,13 @@ function viciousMockery(): PreCreate<ActiveEffectSource> {
             img: "icons/skills/toxins/cup-goblet-poisoned-spilled.webp",
             duration: { value: SECONDS.IN_ONE_ROUND_DND5E, units: "seconds" },
             flags: { dae: { specialDuration: ["1Attack"] } },
-            changes: [
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -1933,15 +2068,17 @@ function wardingBond(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.WardingBond.description"),
             img: "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
             duration: { value: SECONDS.IN_ONE_HOUR, units: "seconds" },
-            changes: [
-                acBonus({
-                    value: "+1",
-                }),
-                saveBonus({
-                    value: "+1",
-                }),
-                addAllDamageResistance(),
-            ],
+            system: {
+                changes: [
+                    acBonus({
+                        value: "+1",
+                    }),
+                    saveBonus({
+                        value: "+1",
+                    }),
+                    addAllDamageResistance(),
+                ],
+            },
         },
     });
 }

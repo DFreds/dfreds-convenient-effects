@@ -69,27 +69,29 @@ function bardicInspirationD6(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD6.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                optionalLabel({
-                    key: "bardic-inspiration",
-                    label: "Bardic Inspiration",
-                }),
-                optionalAttack({
-                    key: "bardic-inspiration",
-                    attackType: "all",
-                    value: "+1d6",
-                }),
-                optionalSave({
-                    key: "bardic-inspiration",
-                    saveType: "all",
-                    value: "+1d6",
-                }),
-                optionalSkill({
-                    key: "bardic-inspiration",
-                    skillType: "all",
-                    value: "+1d6",
-                }),
-            ],
+            system: {
+                changes: [
+                    optionalLabel({
+                        key: "bardic-inspiration",
+                        label: "Bardic Inspiration",
+                    }),
+                    optionalAttack({
+                        key: "bardic-inspiration",
+                        attackType: "all",
+                        value: "+1d6",
+                    }),
+                    optionalSave({
+                        key: "bardic-inspiration",
+                        saveType: "all",
+                        value: "+1d6",
+                    }),
+                    optionalSkill({
+                        key: "bardic-inspiration",
+                        skillType: "all",
+                        value: "+1d6",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -101,27 +103,29 @@ function bardicInspirationD8(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD8.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                optionalLabel({
-                    key: "bardic-inspiration",
-                    label: "Bardic Inspiration",
-                }),
-                optionalAttack({
-                    key: "bardic-inspiration",
-                    attackType: "all",
-                    value: "+1d8",
-                }),
-                optionalSave({
-                    key: "bardic-inspiration",
-                    saveType: "all",
-                    value: "+1d8",
-                }),
-                optionalSkill({
-                    key: "bardic-inspiration",
-                    skillType: "all",
-                    value: "+1d8",
-                }),
-            ],
+            system: {
+                changes: [
+                    optionalLabel({
+                        key: "bardic-inspiration",
+                        label: "Bardic Inspiration",
+                    }),
+                    optionalAttack({
+                        key: "bardic-inspiration",
+                        attackType: "all",
+                        value: "+1d8",
+                    }),
+                    optionalSave({
+                        key: "bardic-inspiration",
+                        saveType: "all",
+                        value: "+1d8",
+                    }),
+                    optionalSkill({
+                        key: "bardic-inspiration",
+                        skillType: "all",
+                        value: "+1d8",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -133,27 +137,29 @@ function bardicInspirationD10(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD10.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                optionalLabel({
-                    key: "bardic-inspiration",
-                    label: "Bardic Inspiration",
-                }),
-                optionalAttack({
-                    key: "bardic-inspiration",
-                    attackType: "all",
-                    value: "+1d10",
-                }),
-                optionalSave({
-                    key: "bardic-inspiration",
-                    saveType: "all",
-                    value: "+1d10",
-                }),
-                optionalSkill({
-                    key: "bardic-inspiration",
-                    skillType: "all",
-                    value: "+1d10",
-                }),
-            ],
+            system: {
+                changes: [
+                    optionalLabel({
+                        key: "bardic-inspiration",
+                        label: "Bardic Inspiration",
+                    }),
+                    optionalAttack({
+                        key: "bardic-inspiration",
+                        attackType: "all",
+                        value: "+1d10",
+                    }),
+                    optionalSave({
+                        key: "bardic-inspiration",
+                        saveType: "all",
+                        value: "+1d10",
+                    }),
+                    optionalSkill({
+                        key: "bardic-inspiration",
+                        skillType: "all",
+                        value: "+1d10",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -165,27 +171,29 @@ function bardicInspirationD12(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.BardicInspirationD12.description"),
             img: "icons/skills/melee/unarmed-punch-fist.webp",
             duration: { value: SECONDS.IN_TEN_MINUTES, units: "seconds" },
-            changes: [
-                optionalLabel({
-                    key: "bardic-inspiration",
-                    label: "Bardic Inspiration",
-                }),
-                optionalAttack({
-                    key: "bardic-inspiration",
-                    attackType: "all",
-                    value: "+1d12",
-                }),
-                optionalSave({
-                    key: "bardic-inspiration",
-                    saveType: "all",
-                    value: "+1d12",
-                }),
-                optionalSkill({
-                    key: "bardic-inspiration",
-                    skillType: "all",
-                    value: "+1d12",
-                }),
-            ],
+            system: {
+                changes: [
+                    optionalLabel({
+                        key: "bardic-inspiration",
+                        label: "Bardic Inspiration",
+                    }),
+                    optionalAttack({
+                        key: "bardic-inspiration",
+                        attackType: "all",
+                        value: "+1d12",
+                    }),
+                    optionalSave({
+                        key: "bardic-inspiration",
+                        saveType: "all",
+                        value: "+1d12",
+                    }),
+                    optionalSkill({
+                        key: "bardic-inspiration",
+                        skillType: "all",
+                        value: "+1d12",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -197,43 +205,45 @@ function channelDivinitySacredWeapon(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.ChannelDivinitySacredWeapon.description"),
             img: "icons/weapons/swords/sword-gold-holy.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                attackBonus({
-                    actionType: "mwak",
-                    value: "+max(1, @abilities.cha.mod)",
-                }),
-                attackBonus({
-                    actionType: "rwak",
-                    value: "+max(1, @abilities.cha.mod)",
-                }),
-                tokenLight({
-                    attribute: "dim",
-                    value: "40",
-                }),
-                tokenLight({
-                    attribute: "bright",
-                    value: "20",
-                }),
-                tokenLight({
-                    attribute: "color",
-                    value: COLORS.WHITE,
-                }),
-                tokenLight({
-                    attribute: "alpha",
-                    value: "0.25",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "speed",
-                    value: "2",
-                }),
-                tokenLightAnimationAttribute({
-                    attribute: "intensity",
-                    value: "4",
-                }),
-                tokenLightAnimationType({
-                    type: "sunburst",
-                }),
-            ],
+            system: {
+                changes: [
+                    attackBonus({
+                        actionType: "mwak",
+                        value: "+max(1, @abilities.cha.mod)",
+                    }),
+                    attackBonus({
+                        actionType: "rwak",
+                        value: "+max(1, @abilities.cha.mod)",
+                    }),
+                    tokenLight({
+                        attribute: "dim",
+                        value: "40",
+                    }),
+                    tokenLight({
+                        attribute: "bright",
+                        value: "20",
+                    }),
+                    tokenLight({
+                        attribute: "color",
+                        value: COLORS.WHITE,
+                    }),
+                    tokenLight({
+                        attribute: "alpha",
+                        value: "0.25",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "speed",
+                        value: "2",
+                    }),
+                    tokenLightAnimationAttribute({
+                        attribute: "intensity",
+                        value: "4",
+                    }),
+                    tokenLightAnimationType({
+                        type: "sunburst",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -270,20 +280,22 @@ function kiEmptyBody(): PreCreate<ActiveEffectSource> {
             img: "icons/magic/perception/silhouette-stealth-shadow.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
             statuses: ["invisible"],
-            changes: [
-                addDamageResistance({ damageType: "bludgeoning" }),
-                addDamageResistance({ damageType: "piercing" }),
-                addDamageResistance({ damageType: "slashing" }),
-                addDamageResistance({ damageType: "acid" }),
-                addDamageResistance({ damageType: "cold" }),
-                addDamageResistance({ damageType: "fire" }),
-                addDamageResistance({ damageType: "lightning" }),
-                addDamageResistance({ damageType: "necrotic" }),
-                addDamageResistance({ damageType: "poison" }),
-                addDamageResistance({ damageType: "psychic" }),
-                addDamageResistance({ damageType: "radiant" }),
-                addDamageResistance({ damageType: "thunder" }),
-            ],
+            system: {
+                changes: [
+                    addDamageResistance({ damageType: "bludgeoning" }),
+                    addDamageResistance({ damageType: "piercing" }),
+                    addDamageResistance({ damageType: "slashing" }),
+                    addDamageResistance({ damageType: "acid" }),
+                    addDamageResistance({ damageType: "cold" }),
+                    addDamageResistance({ damageType: "fire" }),
+                    addDamageResistance({ damageType: "lightning" }),
+                    addDamageResistance({ damageType: "necrotic" }),
+                    addDamageResistance({ damageType: "poison" }),
+                    addDamageResistance({ damageType: "psychic" }),
+                    addDamageResistance({ damageType: "radiant" }),
+                    addDamageResistance({ damageType: "thunder" }),
+                ],
+            },
         },
     });
 }
@@ -295,7 +307,12 @@ function kiPatientDefense(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.KiPatientDefense.description"),
             img: "icons/magic/defensive/shield-barrier-glowing-blue.webp",
             flags: { dae: { specialDuration: ["turnStart"] } },
-            changes: [grantDisadvantageAttack({ attackType: "all" }), abilitySaveMode({ ability: "dex", value: "1" })],
+            system: {
+                changes: [
+                    grantDisadvantageAttack({ attackType: "all" }),
+                    abilitySaveMode({ ability: "dex", value: "1" }),
+                ],
+            },
         },
     });
 }
@@ -307,18 +324,20 @@ function rage(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Rage.description"),
             img: "icons/creatures/abilities/mouth-teeth-human.webp",
             duration: { value: SECONDS.IN_ONE_MINUTE, units: "seconds" },
-            changes: [
-                abilityCheckMode({ ability: "str", value: "1" }),
-                abilitySaveMode({ ability: "str", value: "1" }),
-                addDamageResistance({ damageType: "slashing" }),
-                addDamageResistance({ damageType: "piercing" }),
-                addDamageResistance({ damageType: "bludgeoning" }),
-                damageBonus({
-                    actionType: "mwak",
-                    value: "+ @scale.barbarian.rage-damage",
-                }),
-                tokenMagic({ value: "outline" }),
-            ],
+            system: {
+                changes: [
+                    abilityCheckMode({ ability: "str", value: "1" }),
+                    abilitySaveMode({ ability: "str", value: "1" }),
+                    addDamageResistance({ damageType: "slashing" }),
+                    addDamageResistance({ damageType: "piercing" }),
+                    addDamageResistance({ damageType: "bludgeoning" }),
+                    damageBonus({
+                        actionType: "mwak",
+                        value: "+ @scale.barbarian.rage-damage",
+                    }),
+                    tokenMagic({ value: "outline" }),
+                ],
+            },
         },
         isDynamic: true,
     });
@@ -332,7 +351,9 @@ function recklessAttack(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.RecklessAttack.description"),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
             flags: { dae: { specialDuration: ["turnStart"] } },
-            changes: [grantAdvantageAttack({ attackType: "all" })],
+            system: {
+                changes: [grantAdvantageAttack({ attackType: "all" })],
+            },
         },
         subEffectIds,
     });
@@ -345,7 +366,9 @@ function recklessAttackAdvantage(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.RecklessAttackAdvantageOnAttacks.description"),
             img: "icons/skills/melee/blade-tips-triple-bent-white.webp",
             duration: { value: 1, units: "turns" },
-            changes: [advantageAttack({ attackType: "mwak" })],
+            system: {
+                changes: [advantageAttack({ attackType: "mwak" })],
+            },
         },
         isViewable: false,
     });

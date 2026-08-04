@@ -202,17 +202,19 @@ function frightened(): PreCreate<ActiveEffectSource> {
             statuses: ["frightened"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Frightened.description"),
             img: "modules/dfreds-convenient-effects/images/frightened.svg",
-            changes: [
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                abilityCheckMode({ ability: "str", value: "-1" }),
-                abilityCheckMode({ ability: "dex", value: "-1" }),
-                abilityCheckMode({ ability: "con", value: "-1" }),
-                abilityCheckMode({ ability: "int", value: "-1" }),
-                abilityCheckMode({ ability: "wis", value: "-1" }),
-                abilityCheckMode({ ability: "cha", value: "-1" }),
-            ],
+            system: {
+                changes: [
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                    abilityCheckMode({ ability: "str", value: "-1" }),
+                    abilityCheckMode({ ability: "dex", value: "-1" }),
+                    abilityCheckMode({ ability: "con", value: "-1" }),
+                    abilityCheckMode({ ability: "int", value: "-1" }),
+                    abilityCheckMode({ ability: "wis", value: "-1" }),
+                    abilityCheckMode({ ability: "cha", value: "-1" }),
+                ],
+            },
         },
     });
 }
@@ -258,20 +260,22 @@ function paralyzed(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Paralyzed.description"),
             img: "modules/dfreds-convenient-effects/images/paralyzed.svg",
             statuses: ["paralyzed"],
-            changes: [
-                failAbilitySave({
-                    saveType: "str",
-                }),
-                failAbilitySave({
-                    saveType: "dex",
-                }),
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-                grantCriticalRange({
-                    range: "5",
-                }),
-            ],
+            system: {
+                changes: [
+                    failAbilitySave({
+                        saveType: "str",
+                    }),
+                    failAbilitySave({
+                        saveType: "dex",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                    grantCriticalRange({
+                        range: "5",
+                    }),
+                ],
+            },
         },
         subEffectIds,
     });
@@ -285,17 +289,19 @@ function petrified(): PreCreate<ActiveEffectSource> {
             statuses: ["petrified"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Petrified.description"),
             img: "modules/dfreds-convenient-effects/images/petrified.svg",
-            changes: [
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-                failAbilitySave({
-                    saveType: "str",
-                }),
-                failAbilitySave({
-                    saveType: "dex",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                    failAbilitySave({
+                        saveType: "str",
+                    }),
+                    failAbilitySave({
+                        saveType: "dex",
+                    }),
+                ],
+            },
         },
         subEffectIds,
     });
@@ -308,11 +314,13 @@ function poisoned(): PreCreate<ActiveEffectSource> {
             statuses: ["poisoned"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Poisoned.description"),
             img: "modules/dfreds-convenient-effects/images/poisoned.svg",
-            changes: [
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -324,23 +332,25 @@ function prone(): PreCreate<ActiveEffectSource> {
             statuses: ["prone"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Prone.description"),
             img: "modules/dfreds-convenient-effects/images/prone.svg",
-            changes: [
-                grantAdvantageAttack({
-                    attackType: "mwak",
-                }),
-                grantAdvantageAttack({
-                    attackType: "msak",
-                }),
-                grantDisadvantageAttack({
-                    attackType: "rwak",
-                }),
-                grantDisadvantageAttack({
-                    attackType: "rsak",
-                }),
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantAdvantageAttack({
+                        attackType: "mwak",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "msak",
+                    }),
+                    grantDisadvantageAttack({
+                        attackType: "rwak",
+                    }),
+                    grantDisadvantageAttack({
+                        attackType: "rsak",
+                    }),
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -352,14 +362,16 @@ function restrained(): PreCreate<ActiveEffectSource> {
             statuses: ["restrained"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Restrained.description"),
             img: "modules/dfreds-convenient-effects/images/restrained.svg",
-            changes: [
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -399,17 +411,19 @@ function stunned(): PreCreate<ActiveEffectSource> {
             statuses: ["stunned"],
             description: game.i18n.localize("ConvenientEffects.Dnd.Stunned.description"),
             img: "modules/dfreds-convenient-effects/images/stunned.svg",
-            changes: [
-                failAbilitySave({
-                    saveType: "str",
-                }),
-                failAbilitySave({
-                    saveType: "dex",
-                }),
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-            ],
+            system: {
+                changes: [
+                    failAbilitySave({
+                        saveType: "str",
+                    }),
+                    failAbilitySave({
+                        saveType: "dex",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                ],
+            },
         },
         subEffectIds,
     });
@@ -423,20 +437,22 @@ function unconscious(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.Unconscious.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Unconscious.description"),
             img: "icons/svg/unconscious.svg",
-            changes: [
-                failAbilitySave({
-                    saveType: "str",
-                }),
-                failAbilitySave({
-                    saveType: "dex",
-                }),
-                grantAdvantageAttack({
-                    attackType: "all",
-                }),
-                grantCriticalRange({
-                    range: "5",
-                }),
-            ],
+            system: {
+                changes: [
+                    failAbilitySave({
+                        saveType: "str",
+                    }),
+                    failAbilitySave({
+                        saveType: "dex",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "all",
+                    }),
+                    grantCriticalRange({
+                        range: "5",
+                    }),
+                ],
+            },
         },
         subEffectIds,
     });

@@ -1,5 +1,5 @@
 import { Flags } from "../utils/flags.ts";
-import { notEmpty } from "../utils/types.ts";
+import { effectSystem, notEmpty } from "../utils/types.ts";
 import { findAllIncrementEffectIds, findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
 import { getApi, isStackableDae } from "../utils/gets.ts";
@@ -123,8 +123,10 @@ class HandlebarHelpers {
     }
 
     #getAllChanges(effect: ActiveEffect<any>, nestedEffects: ActiveEffect<any>[]): DeepPartial<EffectChangeData>[] {
-        const effectChanges = (effect.changes ?? []) as DeepPartial<EffectChangeData>[];
-        const nestedChanges = nestedEffects.flatMap((nestedEffect) => nestedEffect.changes).filter(notEmpty);
+        const effectChanges = (effectSystem(effect).changes ?? []) as DeepPartial<EffectChangeData>[];
+        const nestedChanges = nestedEffects
+            .flatMap((nestedEffect) => effectSystem(nestedEffect).changes)
+            .filter(notEmpty);
 
         return [...effectChanges, ...nestedChanges];
     }

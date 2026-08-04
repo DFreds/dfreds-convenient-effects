@@ -89,7 +89,9 @@ function coverTotal(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.CoverTotal.description"),
             img: "modules/dfreds-convenient-effects/images/castle.svg",
             statuses: ["coverTotal"],
-            changes: [grantFailAttack({ attackType: "all" })],
+            system: {
+                changes: [grantFailAttack({ attackType: "all" })],
+            },
         },
     });
 }
@@ -124,7 +126,9 @@ function burrowing(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Burrowing.description"),
             img: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
             statuses: ["burrowing"],
-            changes: [tokenMovementAction({ value: "burrow" })],
+            system: {
+                changes: [tokenMovementAction({ value: "burrow" })],
+            },
         },
     });
 }
@@ -136,7 +140,9 @@ function flying(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Flying.description"),
             img: "systems/dnd5e/icons/svg/statuses/flying.svg",
             statuses: ["flying"],
-            changes: [tokenMovementAction({ value: "fly" })],
+            system: {
+                changes: [tokenMovementAction({ value: "fly" })],
+            },
         },
     });
 }
@@ -148,7 +154,9 @@ function hovering(): PreCreate<ActiveEffectSource> {
             description: game.i18n.localize("ConvenientEffects.Dnd.Hovering.description"),
             img: "systems/dnd5e/icons/svg/statuses/hovering.svg",
             statuses: ["hovering"],
-            changes: [movementHover({ value: true })],
+            system: {
+                changes: [movementHover({ value: true })],
+            },
         },
     });
 }
@@ -161,15 +169,17 @@ function dodge(): PreCreate<ActiveEffectSource> {
             img: "modules/dfreds-convenient-effects/images/dodging.svg",
             statuses: ["dodging"],
             flags: { dae: { specialDuration: ["turnStart"] } },
-            changes: [
-                grantDisadvantageAttack({
-                    attackType: "all",
-                }),
-                abilitySaveMode({ ability: "dex", value: "1" }),
-                tokenMagic({
-                    value: "Evade Stance",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantDisadvantageAttack({
+                        attackType: "all",
+                    }),
+                    abilitySaveMode({ ability: "dex", value: "1" }),
+                    tokenMagic({
+                        value: "Evade Stance",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -180,14 +190,16 @@ function flanked(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.Flanked.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Flanked.description"),
             img: "modules/dfreds-convenient-effects/images/encirclement.svg",
-            changes: [
-                grantAdvantageAttack({
-                    attackType: "mwak",
-                }),
-                grantAdvantageAttack({
-                    attackType: "msak",
-                }),
-            ],
+            system: {
+                changes: [
+                    grantAdvantageAttack({
+                        attackType: "mwak",
+                    }),
+                    grantAdvantageAttack({
+                        attackType: "msak",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -198,14 +210,16 @@ function flanking(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.Flanking.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Flanking.description"),
             img: "icons/svg/sword.svg",
-            changes: [
-                advantageAttack({
-                    attackType: "mwak",
-                }),
-                advantageAttack({
-                    attackType: "msak",
-                }),
-            ],
+            system: {
+                changes: [
+                    advantageAttack({
+                        attackType: "mwak",
+                    }),
+                    advantageAttack({
+                        attackType: "msak",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -216,16 +230,18 @@ function greatWeaponMaster(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.GreatWeaponMaster.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.GreatWeaponMaster.description"),
             img: "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
-            changes: [
-                attackBonus({
-                    actionType: "mwak",
-                    value: "-5",
-                }),
-                damageBonus({
-                    actionType: "mwak",
-                    value: "+10",
-                }),
-            ],
+            system: {
+                changes: [
+                    attackBonus({
+                        actionType: "mwak",
+                        value: "-5",
+                    }),
+                    damageBonus({
+                        actionType: "mwak",
+                        value: "+10",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -238,14 +254,16 @@ function heavilyEncumbered(): PreCreate<ActiveEffectSource> {
             img: "icons/svg/downgrade.svg",
             // The speed reduction comes from dnd5e's handling of the status
             statuses: ["heavilyEncumbered"],
-            changes: [
-                disadvantageAttack({
-                    attackType: "all",
-                }),
-                abilitySaveMode({ ability: "str", value: "-1" }),
-                abilitySaveMode({ ability: "dex", value: "-1" }),
-                abilitySaveMode({ ability: "con", value: "-1" }),
-            ],
+            system: {
+                changes: [
+                    disadvantageAttack({
+                        attackType: "all",
+                    }),
+                    abilitySaveMode({ ability: "str", value: "-1" }),
+                    abilitySaveMode({ ability: "dex", value: "-1" }),
+                    abilitySaveMode({ ability: "con", value: "-1" }),
+                ],
+            },
         },
     });
 }
@@ -261,7 +279,9 @@ function inspiration(): PreCreate<ActiveEffectSource> {
                     specialDuration: ["1Action", "isSave", "isCheck", "isSkill"],
                 },
             },
-            changes: [advantage()],
+            system: {
+                changes: [advantage()],
+            },
         },
     });
 }
@@ -272,14 +292,16 @@ function rangedDisadvantage(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.RangedDisadvantage.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.RangedDisadvantage.description"),
             img: "modules/dfreds-convenient-effects/images/broken-arrow.svg",
-            changes: [
-                disadvantageAttack({
-                    attackType: "rwak",
-                }),
-                disadvantageAttack({
-                    attackType: "rsak",
-                }),
-            ],
+            system: {
+                changes: [
+                    disadvantageAttack({
+                        attackType: "rwak",
+                    }),
+                    disadvantageAttack({
+                        attackType: "rsak",
+                    }),
+                ],
+            },
         },
     });
 }
@@ -316,16 +338,18 @@ function sharpshooter(): PreCreate<ActiveEffectSource> {
             name: game.i18n.localize("ConvenientEffects.Dnd.Sharpshooter.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Sharpshooter.description"),
             img: "icons/weapons/bows/shortbow-recurve-yellow.webp",
-            changes: [
-                attackBonus({
-                    actionType: "rwak",
-                    value: "-5",
-                }),
-                damageBonus({
-                    actionType: "rwak",
-                    value: "+10",
-                }),
-            ],
+            system: {
+                changes: [
+                    attackBonus({
+                        actionType: "rwak",
+                        value: "-5",
+                    }),
+                    damageBonus({
+                        actionType: "rwak",
+                        value: "+10",
+                    }),
+                ],
+            },
         },
     });
 }

@@ -6,6 +6,7 @@ import { addDamageResistance, addSize } from "./changes/traits.ts";
 import { multiplyTokenScale } from "./changes/token.ts";
 import { Flags } from "../../utils/flags.ts";
 import { findIncrementParentOf } from "../../utils/finds.ts";
+import { effectSystem } from "../../utils/types.ts";
 
 class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     override systemId: string = "dnd5e";
@@ -77,7 +78,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     }
 
     #getTempMaxHpIncrease(effect: PreCreate<ActiveEffectSource>): number {
-        return (effect.changes ?? [])
+        return (effectSystem(effect).changes ?? [])
             .filter((change) => change.key === "system.attributes.hp.tempmax")
             .reduce((total, change) => {
                 const value = Number(change.value);
@@ -188,14 +189,15 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     #addSizeChangeEffects(effect: PreCreate<ActiveEffectSource>, fromIndex: number, toIndex: number) {
         const toSize = SIZES_ORDERED[toIndex];
 
-        effect.changes = effect.changes ?? [];
-        effect.changes.push(addSize({ value: toSize }));
+        const system = effectSystem(effect);
+        system.changes = system.changes ?? [];
+        system.changes.push(addSize({ value: toSize }));
 
         // Scale to relative size we started with
         const scale = this.#drawnSizeOf(toSize) / this.#drawnSizeOf(SIZES_ORDERED[fromIndex]);
         if (scale === 1) return;
 
-        effect.changes.push(...multiplyTokenScale({ value: scale }));
+        system.changes.push(...multiplyTokenScale({ value: scale }));
     }
 
     #addRageEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
@@ -222,7 +224,8 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         );
 
         if (isTotemWarrior && hasBearTotemSpirit) {
-            effect.changes = effect.changes ?? [];
+            const system = effectSystem(effect);
+            system.changes = system.changes ?? [];
 
             const additionalDamageTypeResistances = [
                 "acid",
@@ -236,7 +239,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
                 "thunder",
             ] as const;
 
-            effect.changes.push(
+            system.changes.push(
                 ...additionalDamageTypeResistances.map((damageType) => addDamageResistance({ damageType })),
             );
         }
