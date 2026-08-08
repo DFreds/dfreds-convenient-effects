@@ -24,6 +24,27 @@
             "ToggleAppPopoutHint": "This will either open the Convenient Effects app popout if it is closed or close it if it is currently open."
         },
 
+        "Triggers": {
+            "EffectNameLabel": "Effect Name",
+            "EffectNameHint": "The name of the effect, exactly as it appears in the Convenient Effects app.",
+            "TargetUuidLabel": "Act On",
+            "TargetUuidHint": "Leave empty to use the actor the trigger is about. Drag an actor here to always use that one instead.",
+            "OverlayLabel": "As Overlay",
+            "OverlayHint": "Show the effect's icon across the whole token rather than in the corner.",
+            "AddEffect": {
+                "Label": "Add convenient effect",
+                "Description": "Puts one of your convenient effects onto the actor."
+            },
+            "RemoveEffect": {
+                "Label": "Remove convenient effect",
+                "Description": "Takes one of your convenient effects off the actor."
+            },
+            "ToggleEffect": {
+                "Label": "Toggle convenient effect",
+                "Description": "Adds the convenient effect if the actor does not have it, and removes it if they do."
+            }
+        },
+
         "SearchEffects": "Search Effects",
         "ViewBackups": "View Backups",
         "ShowFolder": "Show Folder",

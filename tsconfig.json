@@ -52,6 +52,7 @@
         "./types/statusEffects/index.d.ts",
         "./types/uiExtender/index.d.ts",
         "./types/migrations/index.d.ts",
+        "./types/triggers/index.d.ts",
         "./vite.config.ts"
     ],
     "watchOptions": {

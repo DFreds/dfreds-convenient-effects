@@ -25,14 +25,26 @@
                 "type": "module",
                 "compatibility": {
                     "verified": "2.4.0"
-                }
+                },
+                "reason": "Controls adding the convenient effects app to the sidebar"
             },
             {
                 "id": "lib-dfreds-migrations",
                 "type": "module",
                 "compatibility": {
                     "verified": "1.0.4"
-                }
+                },
+                "reason": "Handles migrating the convenient effects data when upgrading to a new version"
+            }
+        ],
+        "recommends": [
+            {
+                "id": "dfreds-triggers",
+                "type": "module",
+                "compatibility": {
+                    "verified": "1.0.1"
+                },
+                "reason": "Lets a trigger add, remove, or toggle a convenient effect on its own."
             }
         ]
     },

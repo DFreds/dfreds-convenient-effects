@@ -13,6 +13,7 @@ import { Ready } from "./ready.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
 import { Setup } from "./setup.ts";
 import { SocketlibReady } from "./socketlib.ready.ts";
+import { TriggersSetup } from "./triggers.setup.ts";
 import { UiExtenderInit } from "./uiExtender.init.ts";
 import { UpdateActiveEffect } from "./updateActiveEffect.ts";
 import { UpdateItem } from "./updateItem.ts";
@@ -28,6 +29,7 @@ const HooksCE = {
             UiExtenderInit,
             Setup,
             MigrationsSetup,
+            TriggersSetup,
             Ready,
             SocketlibReady,
             CreateItem,
