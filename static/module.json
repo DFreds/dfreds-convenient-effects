@@ -42,7 +42,7 @@
                 "id": "dfreds-triggers",
                 "type": "module",
                 "compatibility": {
-                    "verified": "1.0.1"
+                    "verified": "1.0.2"
                 },
                 "reason": "Lets a trigger add, remove, or toggle a convenient effect on its own."
             }
