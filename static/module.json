@@ -37,16 +37,7 @@
                 "reason": "Handles migrating the convenient effects data when upgrading to a new version"
             }
         ],
-        "recommends": [
-            {
-                "id": "dfreds-triggers",
-                "type": "module",
-                "compatibility": {
-                    "verified": "1.0.2"
-                },
-                "reason": "Lets a trigger add, remove, or toggle a convenient effect on its own."
-            }
-        ]
+        "recommends": []
     },
     "languages": [
         {
