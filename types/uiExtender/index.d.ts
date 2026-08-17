@@ -26,6 +26,12 @@ declare global {
          * @param input The directory input
          */
         registerDirectory(input: DirectoryInput): void;
+
+        /**
+         * Register a settings button
+         * @param input The settings button input
+         */
+        registerSettingsButton(input: SettingsButtonInput): void;
     }
 
     export interface SceneControlInput {
@@ -248,6 +254,34 @@ declare global {
          * @returns true if the directory should be added, false otherwise
          */
         predicate?: () => boolean;
+    }
+
+    export interface SettingsButtonInput {
+        /**
+         * The ID of the module registering
+         */
+        moduleId: string;
+
+        /**
+         * The text shown on the button. Can be a localization path.
+         */
+        name: string;
+
+        /**
+         * The button's Font Awesome icon class, such as "fa-solid fa-robot"
+         */
+        icon: string;
+
+        /**
+         * Whether the button is only shown to GM users
+         */
+        gmOnly?: boolean;
+
+        /**
+         * The application opened when the button is clicked. It is constructed
+         * with no arguments and rendered each time the button is clicked.
+         */
+        applicationClass: new (...args: any[]) => foundry.applications.api.ApplicationV2;
     }
 
     namespace Hooks {
