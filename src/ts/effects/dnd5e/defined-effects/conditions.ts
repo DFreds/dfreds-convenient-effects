@@ -27,12 +27,6 @@ function conditions(): ItemEffects {
             dead(),
             deafened(),
             exhaustion(),
-            exhaustion1(),
-            exhaustion2(),
-            exhaustion3(),
-            exhaustion4(),
-            exhaustion5(),
-            exhaustion6(),
             frightened(),
             grappled(),
             incapacitated(),
@@ -107,91 +101,12 @@ function deafened(): PreCreate<ActiveEffectSource> {
 }
 
 function exhaustion(): PreCreate<ActiveEffectSource> {
-    const incrementEffectIds = [
-        exhaustion1(),
-        exhaustion2(),
-        exhaustion3(),
-        exhaustion4(),
-        exhaustion5(),
-        exhaustion6(),
-    ]
-        .map((effect) => Flags.getCeEffectId(effect))
-        .filter(notEmpty);
-
     return createConvenientEffect({
         effect: {
             name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion.name"),
             description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion.description"),
             img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
         },
-        updatesActor: true,
-        incrementEffectIds,
-    });
-}
-
-function exhaustion1(): PreCreate<ActiveEffectSource> {
-    return createConvenientEffect({
-        effect: {
-            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.name"),
-            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion1.description"),
-            img: "modules/dfreds-convenient-effects/images/exhaustion1.svg",
-        },
-        updatesActor: true,
-    });
-}
-
-function exhaustion2(): PreCreate<ActiveEffectSource> {
-    return createConvenientEffect({
-        effect: {
-            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.name"),
-            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion2.description"),
-            img: "modules/dfreds-convenient-effects/images/exhaustion2.svg",
-        },
-        updatesActor: true,
-    });
-}
-
-function exhaustion3(): PreCreate<ActiveEffectSource> {
-    return createConvenientEffect({
-        effect: {
-            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.name"),
-            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion3.description"),
-            img: "modules/dfreds-convenient-effects/images/exhaustion3.svg",
-        },
-        updatesActor: true,
-    });
-}
-
-function exhaustion4(): PreCreate<ActiveEffectSource> {
-    return createConvenientEffect({
-        effect: {
-            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.name"),
-            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion4.description"),
-            img: "modules/dfreds-convenient-effects/images/exhaustion4.svg",
-        },
-        updatesActor: true,
-    });
-}
-
-function exhaustion5(): PreCreate<ActiveEffectSource> {
-    return createConvenientEffect({
-        effect: {
-            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.name"),
-            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion5.description"),
-            img: "modules/dfreds-convenient-effects/images/exhaustion5.svg",
-        },
-        updatesActor: true,
-    });
-}
-
-function exhaustion6(): PreCreate<ActiveEffectSource> {
-    return createConvenientEffect({
-        effect: {
-            name: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion6.name"),
-            description: game.i18n.localize("ConvenientEffects.Dnd.Exhaustion6.description"),
-            img: "icons/svg/skull.svg",
-        },
-        updatesActor: true,
     });
 }
 
@@ -476,12 +391,6 @@ export {
     dead,
     deafened,
     exhaustion,
-    exhaustion1,
-    exhaustion2,
-    exhaustion3,
-    exhaustion4,
-    exhaustion5,
-    exhaustion6,
     frightened,
     grappled,
     incapacitated,

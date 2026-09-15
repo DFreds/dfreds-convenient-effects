@@ -10,7 +10,7 @@ import {
     findFolders,
     findModuleById,
 } from "../../utils/finds.ts";
-import { getActorUuids, getApi, getItemType } from "../../utils/gets.ts";
+import { getActorUuids, getApi, getItemType, isEffectIncrementable } from "../../utils/gets.ts";
 import { Settings } from "../../settings.ts";
 import { MODULE_ID, MODULE_IDS } from "../../constants.ts";
 import { ContextMenuEntry } from "@client/applications/ux/context-menu.mjs";
@@ -286,8 +286,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
                     if (!ceEffect) return;
 
                     const statusEffectsModule = findModuleById(MODULE_IDS.STATUS_EFFECTS) as
-                        | StatusEffectsModule
-                        | undefined;
+                        StatusEffectsModule | undefined;
                     if (!statusEffectsModule?.active) return;
 
                     const statusEffectsApi = statusEffectsModule.api;
@@ -949,14 +948,8 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
 
         if (!effectId) return;
 
-        // Shift-click decrements increment chain parents; a plain click increments them
-        let direction: 1 | -1 = 1;
-        if (event.shiftKey) {
-            const effect = getApi().findEffect({ effectId });
-            if (effect && (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0) {
-                direction = -1;
-            }
-        }
+        // Shift-click decrements incrementable effects; the direction is ignored by all other effects
+        const direction: 1 | -1 = event.shiftKey ? -1 : 1;
 
         await getApi().toggleEffect({
             effectId,
@@ -1284,7 +1277,7 @@ class ConvenientEffectsV2 extends HandlebarsApplicationMixin(AbstractSidebarTab<
 
         if (!effect) return false;
 
-        return (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0;
+        return isEffectIncrementable(effect);
     }
 
     async #setFolderViewable(header: HTMLElement, value: boolean): Promise<void> {

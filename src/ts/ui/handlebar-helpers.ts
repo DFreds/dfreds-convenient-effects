@@ -2,7 +2,7 @@ import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
 import { findAllIncrementEffectIds, findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
-import { getApi, isStackableDae } from "../utils/gets.ts";
+import { getApi, isEffectIncrementable, isStackableDae } from "../utils/gets.ts";
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
 
 class HandlebarHelpers {
@@ -142,7 +142,7 @@ class HandlebarHelpers {
     }
 
     #getIncrementableIcon(effect: ActiveEffect<Item<null>>): string {
-        return (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0
+        return isEffectIncrementable(effect)
             ? `<i class='fas fa-plus-minus integration-icon' data-tooltip aria-label='${game.i18n.localize("ConvenientEffects.Incrementable")}'></i> `
             : "";
     }

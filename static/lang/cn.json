@@ -398,30 +398,6 @@
                 "name": "力竭",
                 "description": "点击使力竭等级+1；Shift+点击使其-1。点击某个等级可直接跳到该等级，点击当前等级可清除。系统会根据世界的规则版本自动应用相应减益。"
             },
-            "Exhaustion1": {
-                "name": "力竭 1",
-                "description": "力竭 1 级。系统会根据世界的规则版本自动应用相应减益。"
-            },
-            "Exhaustion2": {
-                "name": "力竭 2",
-                "description": "力竭 2 级。系统会根据世界的规则版本自动应用相应减益。"
-            },
-            "Exhaustion3": {
-                "name": "力竭 3",
-                "description": "力竭 3 级。系统会根据世界的规则版本自动应用相应减益。"
-            },
-            "Exhaustion4": {
-                "name": "力竭 4",
-                "description": "力竭 4 级。系统会根据世界的规则版本自动应用相应减益。"
-            },
-            "Exhaustion5": {
-                "name": "力竭 5",
-                "description": "力竭 5 级。系统会根据世界的规则版本自动应用相应减益。"
-            },
-            "Exhaustion6": {
-                "name": "力竭 6",
-                "description": "力竭 6 级。在新版规则中即为死亡。"
-            },
             "EyesOfTheEagle": {
                 "name": "鹰眼护目镜 Eyes of the Eagle",
                 "description": "感知检定时具有优势"

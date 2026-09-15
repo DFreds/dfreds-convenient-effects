@@ -95,9 +95,9 @@ declare global {
         origin?: ActiveEffectOrigin | null;
 
         /**
-         * For increment chain parents, the direction of the update (1 to
-         * increment, -1 to decrement). Ignored for other effects. Set to 1 by
-         * default.
+         * For increment chain parents and leveled statuses (such as exhaustion
+         * in dnd5e 6.0 or later), the direction of the update (1 to increment,
+         * -1 to decrement). Ignored for other effects. Set to 1 by default.
          */
         direction?: 1 | -1;
     }
@@ -137,9 +137,9 @@ declare global {
         origin?: ActiveEffectOrigin | null;
 
         /**
-         * For increment chain parents, the direction of the update (1 to
-         * increment, -1 to decrement). Ignored for other effects. Set to 1 by
-         * default.
+         * For increment chain parents and leveled statuses (such as exhaustion
+         * in dnd5e 6.0 or later), the direction of the update (1 to increment,
+         * -1 to decrement). Ignored for other effects. Set to 1 by default.
          */
         direction?: 1 | -1;
     }

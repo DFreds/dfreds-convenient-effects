@@ -418,31 +418,7 @@
             },
             "Exhaustion": {
                 "name": "Exhaustion",
-                "description": "Click to increase the exhaustion level by 1; shift + click to decrease it. Click a specific level to jump straight to it, or click the current level to clear it. The system applies the penalties automatically based on the world's rules version."
-            },
-            "Exhaustion1": {
-                "name": "Exhaustion 1",
-                "description": "Level 1 exhaustion. The system applies the penalties automatically based on the world's rules version."
-            },
-            "Exhaustion2": {
-                "name": "Exhaustion 2",
-                "description": "Level 2 exhaustion. The system applies the penalties automatically based on the world's rules version."
-            },
-            "Exhaustion3": {
-                "name": "Exhaustion 3",
-                "description": "Level 3 exhaustion. The system applies the penalties automatically based on the world's rules version."
-            },
-            "Exhaustion4": {
-                "name": "Exhaustion 4",
-                "description": "Level 4 exhaustion. The system applies the penalties automatically based on the world's rules version."
-            },
-            "Exhaustion5": {
-                "name": "Exhaustion 5",
-                "description": "Level 5 exhaustion. The system applies the penalties automatically based on the world's rules version."
-            },
-            "Exhaustion6": {
-                "name": "Exhaustion 6",
-                "description": "Level 6 exhaustion. In the modern rules this is death."
+                "description": "Click to add one level of exhaustion. Shift + click to remove one level. The system applies the penalties for each level automatically based on the world's rules version."
             },
             "EyesOfTheEagle": {
                 "name": "Eyes of the Eagle",

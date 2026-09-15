@@ -5,7 +5,6 @@ import { SECONDS, SIZES_ORDERED } from "../../constants.ts";
 import { addDamageResistance, addSize } from "./changes/traits.ts";
 import { multiplyTokenScale } from "./changes/token.ts";
 import { Flags } from "../../utils/flags.ts";
-import { findIncrementParentOf } from "../../utils/finds.ts";
 
 class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     override systemId: string = "dnd5e";
@@ -33,20 +32,7 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         }
     }
 
-    override async handleActorUpdates(
-        effect: PreCreate<ActiveEffectSource>,
-        actor: Actor<any>,
-        { direction = 1 }: { direction?: 1 | -1 },
-    ): Promise<void> {
-        const ceEffectId = Flags.getCeEffectId(effect);
-        if (!ceEffectId) return;
-
-        switch (ceEffectId) {
-            case this.#ceEffectIdForName("ConvenientEffects.Dnd.Exhaustion.name"):
-                await this.#handleExhaustionUpdate(effect, actor, { direction });
-                break;
-        }
-    }
+    override handleActorUpdates(): void {}
 
     override async handleEffectDeletion(effect: ActiveEffect<any>, actor: Actor<any>): Promise<void> {
         const ceEffectId = Flags.getCeEffectId(effect);
@@ -250,83 +236,6 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             effect.duration.value = null;
             effect.duration.units = null;
         }
-    }
-
-    async #handleExhaustionUpdate(
-        effect: PreCreate<ActiveEffectSource>,
-        actor: Actor<any>,
-        { direction }: { direction: 1 | -1 },
-    ): Promise<void> {
-        const ceEffectId = Flags.getCeEffectId(effect);
-        if (!ceEffectId) return;
-
-        const exhaustionId = this.#ceEffectIdForName("ConvenientEffects.Dnd.Exhaustion.name");
-        if (!exhaustionId) return;
-
-        const overlay = !!foundry.utils.getProperty(effect, "flags.core.overlay");
-
-        if (ceEffectId === exhaustionId) {
-            await this.#modifyExhaustion(actor, direction, overlay);
-            return;
-        }
-
-        const incrementParent = findIncrementParentOf(ceEffectId, { backup: false });
-        if (!incrementParent || Flags.getCeEffectId(incrementParent) !== exhaustionId) return;
-
-        const memberIds = Flags.getIncrementEffectIds(incrementParent) ?? [];
-        const memberIndex = memberIds.indexOf(ceEffectId);
-        if (memberIndex === -1) return;
-
-        await this.#jumpExhaustion(actor, memberIndex + 1, overlay);
-    }
-
-    async #modifyExhaustion(actor: Actor<any>, direction: 1 | -1, overlay: boolean): Promise<void> {
-        const maxLevel = ((CONFIG as any).DND5E?.conditionTypes?.exhaustion?.levels as number | undefined) ?? 6;
-        const currentLevel = (foundry.utils.getProperty(actor, "system.attributes.exhaustion") as number) ?? 0;
-        const newLevel = Math.min(Math.max(currentLevel + direction, 0), maxLevel);
-
-        if (newLevel === currentLevel) return;
-
-        await this.#updateExhaustionLevel(actor, newLevel, overlay);
-    }
-
-    async #jumpExhaustion(actor: Actor<any>, level: number, overlay: boolean): Promise<void> {
-        const maxLevel = ((CONFIG as any).DND5E?.conditionTypes?.exhaustion?.levels as number | undefined) ?? 6;
-        const currentLevel = (foundry.utils.getProperty(actor, "system.attributes.exhaustion") as number) ?? 0;
-        const targetLevel = Math.min(Math.max(level, 0), maxLevel);
-        const newLevel = currentLevel === targetLevel ? 0 : targetLevel;
-
-        if (newLevel === currentLevel) return;
-
-        await this.#updateExhaustionLevel(actor, newLevel, overlay);
-    }
-
-    async #updateExhaustionLevel(actor: Actor<any>, newLevel: number, overlay: boolean): Promise<void> {
-        if (!overlay || newLevel < 1) {
-            await actor.update({ "system.attributes.exhaustion": newLevel });
-            return;
-        }
-
-        const flagIfExhaustion = (candidate: ActiveEffect<any>): boolean => {
-            const isExhaustion = candidate.parent === actor && !!(candidate as any).statuses?.has("exhaustion");
-            if (isExhaustion) {
-                void candidate.update({ "flags.core.overlay": true });
-            }
-            return isExhaustion;
-        };
-
-        const hookId = Hooks.on("createActiveEffect", (candidate: unknown) => {
-            if (flagIfExhaustion(candidate as ActiveEffect<any>)) Hooks.off("createActiveEffect", hookId);
-        });
-
-        await actor.update({ "system.attributes.exhaustion": newLevel });
-
-        const existing = (actor.effects as any).find((e: ActiveEffect<any>) => (e as any).statuses?.has("exhaustion"));
-        if (existing && flagIfExhaustion(existing)) {
-            Hooks.off("createActiveEffect", hookId);
-        }
-
-        globalThis.setTimeout(() => Hooks.off("createActiveEffect", hookId), 2000);
     }
 }
 

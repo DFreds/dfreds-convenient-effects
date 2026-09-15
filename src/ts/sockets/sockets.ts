@@ -1,6 +1,6 @@
 import { findDocumentByUuid } from "../utils/finds.ts";
 import { log } from "../logger.ts";
-import { Mapping } from "../effects/mapping.ts";
+import { findLeveledEffectsHandler, Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
 import { MODULE_ID } from "../constants.ts";
 import { getApi, isStackableDae } from "../utils/gets.ts";
@@ -19,8 +19,8 @@ interface AddEffectMessageData {
     uuid: string;
 
     /**
-     * For increment chain parents, the direction of the update (1 to increment,
-     * -1 to decrement)
+     * For increment chain parents and leveled effects, the direction of the
+     * update (1 to increment, -1 to decrement)
      */
     direction?: 1 | -1;
 }
@@ -68,6 +68,18 @@ class Sockets {
         if (!document) return []; // This should already be checked for before the socket
 
         const systemDefinition = new Mapping().findSystemDefinitionForSystemId();
+
+        const leveledEffectsHandler = findLeveledEffectsHandler();
+        if (leveledEffectsHandler?.isLeveled(effectData)) {
+            if (document instanceof Actor) {
+                await leveledEffectsHandler.changeLevel(effectData, document, {
+                    levels: direction ?? 1,
+                    overlay: !!foundry.utils.getProperty(effectData, "flags.core.overlay"),
+                });
+                log(`Changed level of ${effectData.name} on ${document.name} - ${document.id}`);
+            }
+            return [];
+        }
 
         // Actor updater effects only modify the actor and never create an effect document.
         if (Flags.isUpdatesActor(effectData)) {
@@ -122,6 +134,16 @@ class Sockets {
         const document = await findDocumentByUuid(uuid);
 
         if (!document) return; // This should already be checked for before the socket
+
+        const leveledEffectsHandler = findLeveledEffectsHandler();
+        const definedEffect = getApi().findEffect({ effectId, effectName });
+        if (definedEffect && leveledEffectsHandler?.isLeveled(definedEffect)) {
+            if (document instanceof Actor) {
+                await leveledEffectsHandler.removeLevels(definedEffect.toObject(), document);
+                log(`Removed every level of ${definedEffect.name} from ${document.name} - ${document.id}`);
+            }
+            return;
+        }
 
         const effectToRemove = (document.effects as any).find((activeEffect: ActiveEffect<any>) => {
             const isConvenient = Flags.isConvenient(activeEffect);

@@ -398,30 +398,6 @@
                 "name": "Exaustão",
                 "description": "Clique para aumentar o nível de exaustão em 1; shift + clique para diminuí-lo. Clique em um nível específico para ir direto a ele, ou clique no nível atual para limpá-lo. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
             },
-            "Exhaustion1": {
-                "name": "Exaustão 1",
-                "description": "Exaustão nível 1. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
-            },
-            "Exhaustion2": {
-                "name": "Exaustão 2",
-                "description": "Exaustão nível 2. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
-            },
-            "Exhaustion3": {
-                "name": "Exaustão 3",
-                "description": "Exaustão nível 3. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
-            },
-            "Exhaustion4": {
-                "name": "Exaustão 4",
-                "description": "Exaustão nível 4. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
-            },
-            "Exhaustion5": {
-                "name": "Exaustão 5",
-                "description": "Exaustão nível 5. O sistema aplica as penalidades automaticamente com base na versão das regras do mundo."
-            },
-            "Exhaustion6": {
-                "name": "Exaustão 6",
-                "description": "Exaustão nível 6. Nas regras modernas, isso é a morte."
-            },
             "EyesOfTheEagle": {
                 "name": "Olhos da Águia",
                 "description": "Vantagem em testes de percepção"

@@ -398,30 +398,6 @@
                 "name": "Épuisement",
                 "description": "Cliquez pour augmenter le niveau d'épuisement de 1 ; maj + clic pour le diminuer. Cliquez sur un niveau précis pour y accéder directement, ou sur le niveau actuel pour l'effacer. Le système applique automatiquement les pénalités selon la version des règles du monde."
             },
-            "Exhaustion1": {
-                "name": "Épuisement 1",
-                "description": "Épuisement niveau 1. Le système applique automatiquement les pénalités selon la version des règles du monde."
-            },
-            "Exhaustion2": {
-                "name": "Épuisement 2",
-                "description": "Épuisement niveau 2. Le système applique automatiquement les pénalités selon la version des règles du monde."
-            },
-            "Exhaustion3": {
-                "name": "Épuisement 3",
-                "description": "Épuisement niveau 3. Le système applique automatiquement les pénalités selon la version des règles du monde."
-            },
-            "Exhaustion4": {
-                "name": "Épuisement 4",
-                "description": "Épuisement niveau 4. Le système applique automatiquement les pénalités selon la version des règles du monde."
-            },
-            "Exhaustion5": {
-                "name": "Épuisement 5",
-                "description": "Épuisement niveau 5. Le système applique automatiquement les pénalités selon la version des règles du monde."
-            },
-            "Exhaustion6": {
-                "name": "Épuisement 6",
-                "description": "Épuisement niveau 6. Dans les règles modernes, cela correspond à la mort."
-            },
             "EyesOfTheEagle": {
                 "name": "Yeux de l'aigle",
                 "description": "Avantage sur les jets de perception"

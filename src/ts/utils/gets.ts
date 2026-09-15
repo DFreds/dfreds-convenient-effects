@@ -1,6 +1,7 @@
 import { ActorUUID } from "@common/documents/_module.mjs";
 import { MODULE_ID } from "../constants.ts";
 import { Flags } from "./flags.ts";
+import { findLeveledEffectsHandler } from "../effects/mapping.ts";
 
 /**
  * Gets all UUIDs for selected or targeted tokens
@@ -57,6 +58,11 @@ function isStackableDae({ effectName, effect }: { effectName?: string; effect: A
     );
 }
 
+function isEffectIncrementable(effect: ActiveEffect<any>): boolean {
+    const numIncrementIds = Flags.getIncrementEffectIds(effect)?.length ?? 0;
+    return numIncrementIds > 0 || !!findLeveledEffectsHandler()?.isLeveled(effect);
+}
+
 // function effectsByActorMappings(): {
 //     actor: Actor<any>;
 //     effects: ActiveEffect<Actor<any>>;
@@ -78,4 +84,4 @@ function isStackableDae({ effectName, effect }: { effectName?: string; effect: A
 //         });
 // }
 
-export { getActorUuids, getItemType, getApi, isStackableDae };
+export { getActorUuids, getItemType, getApi, isStackableDae, isEffectIncrementable };

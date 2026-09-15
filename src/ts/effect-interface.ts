@@ -16,7 +16,7 @@ import { Sockets } from "./sockets/sockets.ts";
 import Document from "@common/abstract/document.mjs";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { MODULE_ID } from "./constants.ts";
-import { Mapping } from "./effects/mapping.ts";
+import { findLeveledEffectsHandler, Mapping } from "./effects/mapping.ts";
 
 class EffectInterfaceImpl implements EffectInterface {
     #settings: Settings;
@@ -62,6 +62,12 @@ class EffectInterfaceImpl implements EffectInterface {
     hasEffectApplied({ effectId, effectName, uuid }: IHasEffectApplied): boolean {
         const document = findDocumentByUuidSync(uuid);
 
+        const leveledEffectsHandler = findLeveledEffectsHandler();
+        const definedEffect = this.findEffect({ effectId, effectName });
+        if (definedEffect && leveledEffectsHandler?.isLeveled(definedEffect)) {
+            return document instanceof Actor && leveledEffectsHandler.isApplied(definedEffect, document);
+        }
+
         return (
             document?.effects?.some((effect) => {
                 const isConvenient = Flags.isConvenient(effect) ?? false;
@@ -105,7 +111,7 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         for (const uuid of documentUuids) {
-            if (Flags.isUpdatesActor(effectDataToSend)) {
+            if (Flags.isUpdatesActor(effectDataToSend) || findLeveledEffectsHandler()?.isLeveled(effectDataToSend)) {
                 await this.addEffect({
                     effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
                     effectName: effectDataToSend.name,
