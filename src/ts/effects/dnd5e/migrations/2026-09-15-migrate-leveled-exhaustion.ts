@@ -3,11 +3,18 @@ import { error, log } from "../../../logger.ts";
 import { findAllEffects } from "../../../utils/finds.ts";
 import { Flags } from "../../../utils/flags.ts";
 
+/**
+ * Whether the world is running dnd5e 6.0 or later, which added leveled conditions
+ */
+function isDnd5eWithLeveledConditions(): boolean {
+    return game.system.id === "dnd5e" && !foundry.utils.isNewerVersion("6.0.0", game.system.version);
+}
+
 const migration: MigrationType = {
     key: "2026-09-15-migrate-leveled-exhaustion",
     date: new Date("2026-09-15"),
     func: async (): Promise<boolean> => {
-        if (game.system.id !== "dnd5e") return true;
+        if (!isDnd5eWithLeveledConditions()) return true;
 
         log("Migrating exhaustion to a leveled status...");
 
@@ -62,4 +69,4 @@ const migration: MigrationType = {
     },
 };
 
-export { migration as migrateLeveledExhaustion };
+export { isDnd5eWithLeveledConditions, migration as migrateLeveledExhaustion };
