@@ -39,7 +39,6 @@ export default defineConfig(
             "@typescript-eslint/array-type": ["error", { default: "array" }],
             "@typescript-eslint/await-thenable": "error",
             "@typescript-eslint/ban-ts-comment": "error",
-            "@typescript-eslint/ban-types": "off",
             "@typescript-eslint/explicit-module-boundary-types": [
                 "error",
                 { allowHigherOrderFunctions: true },
@@ -66,10 +65,6 @@ export default defineConfig(
                 },
             ],
         },
-    },
-    {
-        files: ["tests/**/*"],
-        rules: { "global-require": "off" },
     },
     {
         files: ["**/*.json"],

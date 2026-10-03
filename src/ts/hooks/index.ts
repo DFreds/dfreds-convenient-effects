@@ -6,6 +6,7 @@ import { DeleteItem } from "./deleteItem.ts";
 import { DropActorSheetData } from "./dropActorSheetData.ts";
 import { GetHeaderControlsActiveEffectConfig } from "./getHeaderControlsActiveEffectConfig.ts";
 import { HotbarDrop } from "./hotbarDrop.ts";
+import { HotReload } from "./hot-reload.ts";
 import { Init } from "./init.ts";
 import { MigrationsSetup } from "./migrations.setup.ts";
 import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
@@ -25,6 +26,7 @@ interface Listener {
 const HooksCE = {
     listen(): void {
         const listeners: Listener[] = [
+            HotReload,
             Init,
             UiExtenderInit,
             Setup,

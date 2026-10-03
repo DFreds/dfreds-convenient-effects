@@ -7,15 +7,9 @@
 .vscode
 icons/\!dox/
 
-coverage
 dist/
 foundryconfig.json
 node_modules/
-package/
-packs-temp/
-json-assets/
-types/foundry/node_modules/
-types/foundry/package-lock.json
 
 # Dummy files for vite dev server
 /index.html

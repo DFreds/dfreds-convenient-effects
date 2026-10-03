@@ -26,12 +26,9 @@
         "allowImportingTsExtensions": true,
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
-        "sourceMap": true,
         "isolatedModules": true,
-        "outDir": "dist",
         "allowUnusedLabels": false,
         "allowUmdGlobalAccess": true,
-        "removeComments": false,
         "resolveJsonModule": true,
         "useDefineForClassFields": true,
         "noErrorTruncation": true,
@@ -40,12 +37,10 @@
             "@common/*": ["./node_modules/@dfreds/foundry-types/common/*"],
             "@client/*": ["./node_modules/@dfreds/foundry-types/client/*"]
         },
-        "types": ["jest", "jquery", "node"],
-        "typeRoots": ["./node_modules/@types"]
+        "types": ["jquery", "node", "vite/client"]
     },
     "include": [
         "./src/**/*",
-        "./tests/**/*.ts",
         "./types/convenientEffects/index.d.ts",
         "./types/libWrapper/index.d.ts",
         "./types/socketlib/index.d.ts",
