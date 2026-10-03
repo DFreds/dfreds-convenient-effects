@@ -30,8 +30,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.CE_EFFECT_ID) as string | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.CE_EFFECT_ID}`) as
-                | string
-                | undefined;
+                string | undefined;
         }
     }
 
@@ -44,8 +43,7 @@ class Flags {
             return document.getFlag(MODULE_ID, this.#KEYS.IS_BACKUP) as boolean | undefined;
         } else {
             return foundry.utils.getProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_BACKUP}`) as
-                | boolean
-                | undefined;
+                boolean | undefined;
         }
     }
 
@@ -62,8 +60,7 @@ class Flags {
             return item.getFlag(MODULE_ID, this.#KEYS.FOLDER_COLOR) as string | undefined;
         } else {
             return foundry.utils.getProperty(item, `flags.${MODULE_ID}.${this.#KEYS.FOLDER_COLOR}`) as
-                | string
-                | undefined;
+                string | undefined;
         }
     }
 
@@ -80,8 +77,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.NESTED_EFFECT_IDS) as string[] | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.NESTED_EFFECT_IDS}`) as
-                | string[]
-                | undefined;
+                string[] | undefined;
         }
     }
 
@@ -105,8 +101,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.SUB_EFFECT_IDS) as string[] | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.SUB_EFFECT_IDS}`) as
-                | string[]
-                | undefined;
+                string[] | undefined;
         }
     }
 
@@ -126,8 +121,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.OTHER_EFFECT_IDS) as string[] | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.OTHER_EFFECT_IDS}`) as
-                | string[]
-                | undefined;
+                string[] | undefined;
         }
     }
 
@@ -153,8 +147,7 @@ class Flags {
             return document.getFlag(MODULE_ID, this.#KEYS.IS_CONVENIENT) as boolean | undefined;
         } else {
             return foundry.utils.getProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_CONVENIENT}`) as
-                | boolean
-                | undefined;
+                boolean | undefined;
         }
     }
 
@@ -167,8 +160,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.IS_TEMPORARY) as boolean | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_TEMPORARY}`) as
-                | boolean
-                | undefined;
+                boolean | undefined;
         }
     }
 
@@ -181,8 +173,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.IS_DYNAMIC) as boolean | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.IS_DYNAMIC}`) as
-                | boolean
-                | undefined;
+                boolean | undefined;
         }
     }
 
@@ -195,8 +186,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.INCREMENT_EFFECT_IDS) as string[] | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.INCREMENT_EFFECT_IDS}`) as
-                | string[]
-                | undefined;
+                string[] | undefined;
         }
     }
 
@@ -220,8 +210,7 @@ class Flags {
             return effect.getFlag(MODULE_ID, this.#KEYS.UPDATES_ACTOR) as boolean | undefined;
         } else {
             return foundry.utils.getProperty(effect, `flags.${MODULE_ID}.${this.#KEYS.UPDATES_ACTOR}`) as
-                | boolean
-                | undefined;
+                boolean | undefined;
         }
     }
 
@@ -234,8 +223,7 @@ class Flags {
             return document.getFlag(MODULE_ID, this.#KEYS.IS_VIEWABLE) as boolean | undefined;
         } else {
             return foundry.utils.getProperty(document, `flags.${MODULE_ID}.${this.#KEYS.IS_VIEWABLE}`) as
-                | boolean
-                | undefined;
+                boolean | undefined;
         }
     }
 
@@ -249,8 +237,7 @@ class Flags {
 
     static getStackableDae(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string | undefined {
         return foundry.utils.getProperty(effect, `flags.${MODULE_IDS.DAE}.${this.#KEYS.STACKABLE}`) as
-            | string
-            | undefined;
+            string | undefined;
     }
 
     static setIsStatusEffect(document: PreCreate<ItemSource> | PreCreate<ActiveEffectSource>, value: boolean): boolean {

@@ -269,8 +269,7 @@ class ConvenientEffectConfigV2 extends (HandlebarsApplicationMixin(
 
     #currentIncrementOrder(form: HTMLFormElement): string[] {
         const multiSelect = form.querySelector('multi-select[name="incrementEffectIds"]') as
-            | (HTMLElement & { value?: string[] })
-            | null;
+            (HTMLElement & { value?: string[] }) | null;
         const selected = multiSelect?.value ? [...multiSelect.value] : [];
 
         const listIds = Array.from(form.querySelectorAll<HTMLElement>(".increment-order-item")).map(
