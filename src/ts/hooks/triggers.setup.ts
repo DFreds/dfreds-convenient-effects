@@ -1,6 +1,7 @@
 import type { DataField } from "@common/data/fields.mjs";
 import { MODULE_ID } from "../constants.ts";
 import { error } from "../logger.ts";
+import { getApi } from "../utils/gets.ts";
 import { Listener } from "./index.ts";
 
 const TriggersSetup: Listener = {
@@ -48,11 +49,6 @@ function resolveTargetUuid(config: Record<string, unknown>, context: TriggerCont
     return context.actor?.uuid ?? null;
 }
 
-function findApi(): EffectInterface | null {
-    const api = (game.modules.get(MODULE_ID) as unknown as ConvenientEffectsModule | undefined)?.api;
-    return api ?? null;
-}
-
 function resolveRun(
     config: Record<string, unknown>,
     context: TriggerContext,
@@ -61,7 +57,7 @@ function resolveRun(
     const effectName = (config.effectName as string)?.trim();
     if (!effectName) return null;
 
-    const api = findApi();
+    const api = getApi();
     if (!api) {
         error(`Cannot ${actionLabel} "${effectName}" because the effect interface is not ready yet`);
         return null;
