@@ -1,5 +1,5 @@
 import { ActiveEffectSource, BaseActiveEffect, ItemSource } from "@client/documents/_module.mjs";
-import { MODULE_ID, MODULE_IDS, SE_MODULE_ID } from "../constants.ts";
+import { MODULE_ID, MODULE_IDS } from "../constants.ts";
 
 class Flags {
     static #KEYS = {
@@ -241,8 +241,12 @@ class Flags {
     }
 
     static setIsStatusEffect(document: PreCreate<ItemSource> | PreCreate<ActiveEffectSource>, value: boolean): boolean {
-        if (document.flags?.[SE_MODULE_ID]) {
-            return foundry.utils.setProperty(document, `flags.${SE_MODULE_ID}.${this.#KEYS.IS_STATUS_EFFECT}`, value);
+        if (document.flags?.[MODULE_IDS.STATUS_EFFECTS]) {
+            return foundry.utils.setProperty(
+                document,
+                `flags.${MODULE_IDS.STATUS_EFFECTS}.${this.#KEYS.IS_STATUS_EFFECT}`,
+                value,
+            );
         }
         return false;
     }
