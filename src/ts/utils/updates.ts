@@ -1,108 +1,54 @@
 import { Flags } from "./flags.ts";
 
-function updateOldNestedIds(
-    allEffects: ActiveEffect<Item<null>>[],
-    oldCeEffectId: string | undefined,
-    newCeEffectId: string,
-): void {
-    updateOldCeEffectIds({
-        allEffects,
-        oldCeEffectId,
-        newCeEffectId,
-        flagGetter: (effect) => {
-            return Flags.getNestedEffectIds(effect);
-        },
-        flagSetter: async (effect, newIds) => {
-            await Flags.setNestedEffectIds(effect, newIds);
-        },
-    });
-}
-
-function updateOldSubIds(
-    allEffects: ActiveEffect<Item<null>>[],
-    oldCeEffectId: string | undefined,
-    newCeEffectId: string,
-): void {
-    updateOldCeEffectIds({
-        allEffects,
-        oldCeEffectId,
-        newCeEffectId,
-        flagGetter: (effect) => {
-            return Flags.getSubEffectIds(effect);
-        },
-        flagSetter: async (effect, newIds) => {
-            await Flags.setSubEffectIds(effect, newIds);
-        },
-    });
-}
-
-function updateOldOtherIds(
-    allEffects: ActiveEffect<Item<null>>[],
-    oldCeEffectId: string | undefined,
-    newCeEffectId: string,
-): void {
-    updateOldCeEffectIds({
-        allEffects,
-        oldCeEffectId,
-        newCeEffectId,
-        flagGetter: (effect) => {
-            return Flags.getOtherEffectIds(effect);
-        },
-        flagSetter: async (effect, newIds) => {
-            await Flags.setOtherEffectIds(effect, newIds);
-        },
-    });
-}
-
-function updateOldIncrementIds(
-    allEffects: ActiveEffect<Item<null>>[],
-    oldCeEffectId: string | undefined,
-    newCeEffectId: string,
-): void {
-    updateOldCeEffectIds({
-        allEffects,
-        oldCeEffectId,
-        newCeEffectId,
-        flagGetter: (effect) => {
-            return Flags.getIncrementEffectIds(effect);
-        },
-        flagSetter: async (effect, newIds) => {
-            await Flags.setIncrementEffectIds(effect, newIds);
-        },
-    });
-}
-
-function updateOldCeEffectIds({
-    allEffects,
-    oldCeEffectId,
-    newCeEffectId,
-    flagGetter,
-    flagSetter,
-}: {
-    allEffects: ActiveEffect<Item<null>>[];
-    oldCeEffectId: string | undefined;
-    newCeEffectId: string;
+interface CeEffectIdsFlag {
     flagGetter: (effect: ActiveEffect<any>) => string[] | undefined;
     flagSetter: (effect: ActiveEffect<any>, newIds: string[]) => Promise<any>;
-}): void {
-    allEffects
-        .filter((effect) => {
-            const ids = flagGetter(effect);
-
-            return oldCeEffectId && ids?.includes(oldCeEffectId);
-        })
-        .forEach(async (effectWithOldAsNested) => {
-            const ids = flagGetter(effectWithOldAsNested) ?? [];
-
-            const indexToReplace = ids?.findIndex((effectId) => effectId === oldCeEffectId);
-
-            if (indexToReplace !== -1) {
-                const updatedIds = [...ids];
-                updatedIds.splice(indexToReplace, 1, newCeEffectId);
-
-                await flagSetter(effectWithOldAsNested, updatedIds);
-            }
-        });
 }
 
-export { updateOldNestedIds, updateOldSubIds, updateOldOtherIds, updateOldIncrementIds };
+const CE_EFFECT_IDS_FLAGS: CeEffectIdsFlag[] = [
+    {
+        flagGetter: (effect) => Flags.getNestedEffectIds(effect),
+        flagSetter: (effect, newIds) => Flags.setNestedEffectIds(effect, newIds),
+    },
+    {
+        flagGetter: (effect) => Flags.getSubEffectIds(effect),
+        flagSetter: (effect, newIds) => Flags.setSubEffectIds(effect, newIds),
+    },
+    {
+        flagGetter: (effect) => Flags.getOtherEffectIds(effect),
+        flagSetter: (effect, newIds) => Flags.setOtherEffectIds(effect, newIds),
+    },
+    {
+        flagGetter: (effect) => Flags.getIncrementEffectIds(effect),
+        flagSetter: (effect, newIds) => Flags.setIncrementEffectIds(effect, newIds),
+    },
+];
+
+function updateOldCeEffectIds(
+    allEffects: ActiveEffect<Item<null>>[],
+    oldCeEffectId: string | undefined,
+    newCeEffectId: string,
+): void {
+    for (const { flagGetter, flagSetter } of CE_EFFECT_IDS_FLAGS) {
+        allEffects
+            .filter((effect) => {
+                const ids = flagGetter(effect);
+
+                return oldCeEffectId && ids?.includes(oldCeEffectId);
+            })
+            .forEach(async (effectWithOldAsNested) => {
+                const ids = flagGetter(effectWithOldAsNested) ?? [];
+
+                const indexToReplace = ids?.findIndex((effectId) => effectId === oldCeEffectId);
+
+                if (indexToReplace !== -1) {
+                    const updatedIds = [...ids];
+                    updatedIds.splice(indexToReplace, 1, newCeEffectId);
+
+                    await flagSetter(effectWithOldAsNested, updatedIds);
+                }
+            });
+    }
+}
+
+export { updateOldCeEffectIds };

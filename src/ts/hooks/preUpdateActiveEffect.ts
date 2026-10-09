@@ -1,7 +1,7 @@
 import { Flags } from "../utils/flags.ts";
 import { Listener } from "./index.ts";
 import { createCeEffectId } from "../utils/creates.ts";
-import { updateOldIncrementIds, updateOldNestedIds, updateOldOtherIds, updateOldSubIds } from "../utils/updates.ts";
+import { updateOldCeEffectIds } from "../utils/updates.ts";
 import { findAllEffects } from "../utils/finds.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
@@ -20,10 +20,7 @@ const PreUpdateActiveEffect: Listener = {
                 Flags.setCeEffectId(effectData, newCeEffectId);
 
                 const allEffects = findAllEffects({ backup: false });
-                updateOldNestedIds(allEffects, oldCeEffectId, newCeEffectId);
-                updateOldSubIds(allEffects, oldCeEffectId, newCeEffectId);
-                updateOldOtherIds(allEffects, oldCeEffectId, newCeEffectId);
-                updateOldIncrementIds(allEffects, oldCeEffectId, newCeEffectId);
+                updateOldCeEffectIds(allEffects, oldCeEffectId, newCeEffectId);
             }
         });
     },
