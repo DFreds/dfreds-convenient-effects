@@ -16,8 +16,17 @@ const migration: MigrationType = {
             const promises = [...backupItems, ...convenientItems].map(async (item) => {
                 if (item.type === "weapon") return;
 
-                item.clone({ type: "weapon" }, { save: true, keepId: true });
+                const source = item.toObject();
                 await item.delete();
+
+                const migrated = await Item.implementation
+                    .create({ ...source, type: "weapon" }, { keepId: true })
+                    .catch(() => undefined);
+
+                if (!migrated) {
+                    await Item.implementation.create(source, { keepId: true });
+                    throw new Error(`Failed to migrate ${source.name}. Restored the original.`);
+                }
             });
 
             await Promise.all(promises);
