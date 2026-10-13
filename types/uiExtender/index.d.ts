@@ -1,4 +1,5 @@
-export {};
+import type { BasePlaceableHUD } from "@client/applications/hud/_module.mjs";
+import type { AbstractSidebarTab } from "@client/applications/sidebar/_module.mjs";
 
 declare global {
     interface Window {
@@ -164,7 +165,7 @@ declare global {
          * @param data The data for the item with the HUD
          * @param hud The base placeable HUD instance
          */
-        onClick?: (event: JQuery.ClickEvent, button: JQuery, data: any, hud: BasePlaceableHUD<any>) => void;
+        onClick?: (event: JQuery.ClickEvent, button: JQuery, data: any, hud: BasePlaceableHUD) => void;
 
         /**
          * The right-click handler
@@ -174,7 +175,7 @@ declare global {
          * @param data The data for the item with the HUD
          * @param hud The base placeable HUD instance
          */
-        onRightClick?: (event: JQuery.ContextMenuEvent, button: JQuery, data: any, hud: BasePlaceableHUD<any>) => void;
+        onRightClick?: (event: JQuery.ContextMenuEvent, button: JQuery, data: any, hud: BasePlaceableHUD) => void;
 
         /**
          * The render complete handler
@@ -183,7 +184,7 @@ declare global {
          * @param html The HTML for the HUD
          * @param data The data for the HUD
          */
-        onRenderComplete?: (hud: BasePlaceableHUD<any>, html: JQuery, data: object) => void;
+        onRenderComplete?: (hud: BasePlaceableHUD, html: JQuery, data: object) => void;
     }
 
     export interface DirectoryInput {
