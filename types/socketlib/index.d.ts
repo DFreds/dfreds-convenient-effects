@@ -1,4 +1,4 @@
-import "@typed-foundry/foundry";
+export {};
 
 declare global {
     namespace globalThis {
@@ -7,7 +7,6 @@ declare global {
 
     export class Socketlib {
         modules: Map<string, SocketlibSocket>;
-        system: System;
         errors: {
             SocketlibError?: Error;
             SocketlibNoGMConnectedError?: Error;
@@ -20,29 +19,6 @@ declare global {
         registerModule(moduleName: string): SocketlibSocket;
 
         registerSystem(systemId: string): SocketlibSocket;
-    }
-
-    namespace Hooks {
-        type HookParamsSocketlibReady = HookParameters<
-            "socketlib.ready",
-            never
-        >;
-        /**
-         * Register a callback handler which should be triggered when a hook is triggered.
-         *
-         * @param hook The unique name of the hooked event
-         * @param fn   The callback function which should be triggered when the hook event occurs
-         */
-        function on(...args: HookParamsSocketlibReady): number;
-
-        /**
-         * Register a callback handler for an event which is only triggered once the first time the event occurs.
-         * After a "once" hook is triggered the hook is automatically removed.
-         *
-         * @param hook  The unique name of the hooked event
-         * @param fn    The callback function which should be triggered when the hook event occurs
-         */
-        function once(...args: HookParamsSocketlibReady): number;
     }
 
     export class SocketlibSocket {
