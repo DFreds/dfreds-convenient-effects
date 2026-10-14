@@ -7,7 +7,7 @@
 // A shim for the libWrapper library
 export let libWrapper: LibWrapper;
 
-export const VERSIONS = [1, 12, 2];
+export const VERSIONS = [1, 13, 0];
 export const TGT_SPLIT_RE = new RegExp(
     "([^.[]+|\\[('([^'\\\\]|\\\\.)+?'|\"([^\"\\\\]|\\\\.)+?\")\\])",
     "g",
@@ -38,6 +38,10 @@ Hooks.once("init", () => {
 
         static get OVERRIDE() {
             return "OVERRIDE";
+        }
+
+        static get LISTENER() {
+            return "LISTENER";
         }
 
         static register(
@@ -83,20 +87,30 @@ Hooks.once("init", () => {
                 );
 
             let original = null;
-            const wrapper =
+            const is_override =
                 // eslint-disable-next-line eqeqeq
-                chain ?? (type.toUpperCase?.() != "OVERRIDE" && type != 3)
-                    ? function (...args) {
-                          return fn.call(
-                              this,
-                              original.bind(this),
-                              ...bind,
-                              ...args,
-                          );
-                      }
-                    : function (...args) {
-                          return fn.call(this, ...bind, ...args);
-                      };
+                type == 3 || type.toUpperCase?.() == "OVERRIDE";
+            const is_listener =
+                // eslint-disable-next-line eqeqeq
+                type == 4 || type.toUpperCase?.() == "LISTENER";
+            const wrapper = is_listener
+                ? function (...args) {
+                      fn.call(this, ...bind, ...args);
+                      return original.call(this, ...args);
+                  }
+                : (chain ?? !is_override)
+                  ? function (...args) {
+                        return fn.call(
+                            this,
+                            original.bind(this),
+                            ...bind,
+                            ...args,
+                        );
+                    }
+                  : function (...args) {
+                        return fn.call(this, ...bind, ...args);
+                    };
+
             if (!is_setter) {
                 if (descriptor.value) {
                     original = descriptor.value;
@@ -182,16 +196,18 @@ Hooks.once("init", () => {
                 game.user.isGM &&
                 !game.settings.get(PACKAGE_ID, DONT_REMIND_AGAIN_KEY)
             ) {
-                new Dialog({
-                    title: FALLBACK_MESSAGE_TITLE,
+                new foundry.applications.api.DialogV2({
+                    window: { title: FALLBACK_MESSAGE_TITLE },
                     content: FALLBACK_MESSAGE,
-                    buttons: {
-                        ok: {
-                            icon: '<i class="fas fa-check"></i>',
+                    buttons: [
+                        {
+                            action: "ok",
+                            icon: "fa-solid fa-check",
                             label: "Understood",
                         },
-                        dont_remind: {
-                            icon: '<i class="fas fa-times"></i>',
+                        {
+                            action: "dont_remind",
+                            icon: "fa-solid fa-xmark",
                             label: "Don't remind me again",
                             callback: () =>
                                 game.settings.set(
@@ -200,8 +216,8 @@ Hooks.once("init", () => {
                                     true,
                                 ),
                         },
-                    },
-                }).render(true);
+                    ],
+                }).render({ force: true });
             }
         });
     }
