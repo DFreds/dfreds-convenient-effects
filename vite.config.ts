@@ -35,7 +35,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         fs.writeFileSync(`./styles/${MODULE_ID}.css`, `/** ${message} */\n`);
         fs.writeFileSync(
             `./${MODULE_ID}.mjs`,
-            `/** ${message} */\n\nwindow.global = window;\nimport "./src/ts/module.ts";\n`,
+            `/** ${message} */\n\nimport "./src/ts/module.ts";\n`,
         );
         fs.writeFileSync("./vendor.mjs", `/** ${message} */\n`);
     }
