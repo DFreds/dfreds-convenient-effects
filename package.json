@@ -14,8 +14,8 @@
         "link": "tsx ./build/link-foundry.ts",
         "lint": "npm run lint:ts && npm run prettier:scss",
         "lint:ts": "eslint ./src",
-        "prettier:scss": "prettier --check src/styles",
-        "lint:fix": "eslint ./src --fix && prettier --write src/styles"
+        "prettier:scss": "prettier --check --no-error-on-unmatched-pattern src/styles",
+        "lint:fix": "eslint ./src --fix && prettier --write --no-error-on-unmatched-pattern src/styles"
     },
     "author": "DFreds (https://github.com/DFreds)",
     "license": "MIT",
