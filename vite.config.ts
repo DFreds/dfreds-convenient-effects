@@ -122,7 +122,7 @@ function deleteLockFilePlugin(): Vite.Plugin {
         writeBundle(outputOptions) {
             const outDir = outputOptions.dir ?? "";
             const lockFile = path.resolve(outDir, `${MODULE_ID}.lock`);
-            fs.rmSync(lockFile);
+            fs.rmSync(lockFile, { force: true });
         },
     };
 }
