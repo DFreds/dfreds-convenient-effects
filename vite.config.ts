@@ -10,10 +10,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
     const buildMode = mode === "production" ? "production" : mode === "stage" ? "stage" : "development";
     const outDir = "dist";
 
-    const plugins = [
-        checker({ typescript: true }),
-        touchVendorMjsPlugin(outDir),
-    ];
+    const plugins = [checker({ typescript: true }), touchVendorMjsPlugin(outDir)];
 
     console.log(`Build mode: ${buildMode}`);
 
@@ -21,10 +18,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         plugins.push(...viteStaticCopy({ targets: [{ src: "README.md", dest: "." }] }));
         if (buildMode === "production") plugins.push(deleteLockFilePlugin());
     } else {
-        plugins.push(
-            handleHotUpdateForEnLang(outDir),
-            handleHotUpdateForHandlebars(outDir),
-        );
+        plugins.push(handleHotUpdateForEnLang(outDir), handleHotUpdateForHandlebars(outDir));
     }
 
     // Create dummy files for vite dev server
@@ -33,10 +27,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         fs.writeFileSync("./index.html", `<h1>${message}</h1>\n`);
         if (!fs.existsSync("./styles")) fs.mkdirSync("./styles");
         fs.writeFileSync(`./styles/${MODULE_ID}.css`, `/** ${message} */\n`);
-        fs.writeFileSync(
-            `./${MODULE_ID}.mjs`,
-            `/** ${message} */\n\nimport "./src/ts/module.ts";\n`,
-        );
+        fs.writeFileSync(`./${MODULE_ID}.mjs`, `/** ${message} */\n\nimport "./src/ts/module.ts";\n`);
         fs.writeFileSync("./vendor.mjs", `/** ${message} */\n`);
     }
 
@@ -55,10 +46,10 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
     const minify =
         buildMode === "production" || buildMode === "stage"
             ? {
-                compress: { keepNames: { class: true, function: true } },
-                mangle: false,
-                codegen: { removeWhitespace: true },
-            }
+                  compress: { keepNames: { class: true, function: true } },
+                  mangle: false,
+                  codegen: { removeWhitespace: true },
+              }
             : false;
 
     return {
@@ -114,7 +105,6 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         },
     };
 });
-
 
 function deleteLockFilePlugin(): Vite.Plugin {
     return {
