@@ -28,7 +28,9 @@ jobs:
 
       - name: Extract tag version number
         id: get_version
-        uses: battila7/get-version-action@v2
+        run: |
+          echo "version=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          echo "version-without-v=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
 
       - name: Substitute Manifest and Download Links For Versioned Ones
         id: sub_manifest_link_version
