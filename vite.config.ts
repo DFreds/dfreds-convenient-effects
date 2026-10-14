@@ -67,7 +67,6 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         define: {
             BUILD_MODE: JSON.stringify(buildMode),
         },
-        esbuild: { keepNames: true },
         resolve: { tsconfigPaths: true },
         build: {
             outDir,
