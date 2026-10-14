@@ -50,9 +50,6 @@ jobs:
         with:
           allowUpdates: true # Set this to false if you want to prevent updating existing releases
           artifacts: "./dist/module.json, ./dist/dfreds-convenient-effects.zip"
-          body: "${{ github.event.release.body }}"
           draft: true
           generateReleaseNotes: true
-          name: ${{ github.event.release.name }}
-          tag: ${{ github.event.release.tag_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
