@@ -25,7 +25,7 @@ class Keybindings {
 
                 const ceApp = convenientEffectsV2 as unknown as ConvenientEffectsV2;
                 if (ceApp.active) {
-                    foundry.ui.sidebar.toggleExpanded();
+                    ui.sidebar.toggleExpanded();
                 } else {
                     ceApp.activate();
                 }
