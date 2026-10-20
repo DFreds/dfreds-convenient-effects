@@ -5,6 +5,8 @@ import { createConvenientItem } from "../utils/creates.ts";
 import { Flags } from "../utils/flags.ts";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 import { MODULE_ID } from "../constants.ts";
+import type { NotificationOptions } from "@client/applications/ui/notifications.mjs";
+import { BackupConvenientEffectsV2 } from "../ui/ce-app/backup-convenient-effects-v2.ts";
 
 abstract class EffectDefinition {
     protected settings: Settings;
@@ -38,7 +40,15 @@ abstract class EffectDefinition {
             ui.notifications.info(game.i18n.localize("ConvenientEffects.FinishedInitializing"));
         } else if (this.settings.backupEffectsVersion !== this.version) {
             await getApi().resetBackupEffects();
-            ui.notifications.info(game.i18n.localize("ConvenientEffects.BackupsUpdated", { version: this.version }));
+            ui.notifications.info(game.i18n.localize("ConvenientEffects.BackupsUpdated", { version: this.version }), {
+                actions: [
+                    {
+                        label: game.i18n.localize("ConvenientEffects.ViewBackups"),
+                        icon: "fas fa-box-archive",
+                        callback: () => new BackupConvenientEffectsV2().render({ force: true }),
+                    },
+                ],
+            } as NotificationOptions);
         }
 
         migrations.addMigrations({

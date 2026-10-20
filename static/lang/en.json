@@ -66,6 +66,7 @@
         "ToggleStatusEffect": "Toggle Status Effect",
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
+        "ViewBackups": "View Backups",
         "BackupsUpdated": "The built-in Convenient Effects backups have been updated to version {version}. Open the backup view to see what's new.",
         "EffectsVersionLabel": "Version",
         "EffectsVersionTooltip": "The current version of the Convenient Effects definitions.",
