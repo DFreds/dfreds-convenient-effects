@@ -14,7 +14,7 @@ const Setup: Listener = {
                 MODULE_ID,
                 "ActiveEffect.prototype.isTemporary",
                 function (this: ActiveEffect<any>, wrapped: (...args: any) => boolean, ...args: any) {
-                    const result = wrapped(args) as boolean;
+                    const result = wrapped(...args);
                     return result || Flags.isTemporary(this);
                 },
             );
@@ -22,12 +22,11 @@ const Setup: Listener = {
             libWrapper.register(
                 MODULE_ID,
                 "Item.prototype.importFromJSON",
-                async function (this: Item<any>, wrapped: (...args: any) => void, ...args: any) {
+                async function (this: Item<any>, wrapped: (...args: any) => Promise<Item<any>>, ...args: any) {
                     // `this` is the item that will be replaced with data
                     // Only do our wrapper if importing into an existing convenient item
                     if (!Flags.isConvenient(this)) {
-                        wrapped(args);
-                        return;
+                        return wrapped(...args);
                     }
 
                     const [json] = args;
@@ -45,7 +44,7 @@ const Setup: Listener = {
                     });
 
                     const newJson = JSON.stringify(convenientItem, null, 2);
-                    wrapped([newJson]);
+                    return wrapped(newJson);
                 },
             );
         });
