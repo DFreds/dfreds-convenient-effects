@@ -303,8 +303,7 @@ class EffectInterfaceImpl implements EffectInterface {
         await migrations.clearAllRan({ moduleId: MODULE_ID });
 
         if (confirm) {
-            // @ts-expect-error Complains about failed to resolve module specifier
-            await SettingsConfig.reloadConfirm({ world: false });
+            await foundry.applications.settings.SettingsConfig.reloadConfirm({ world: false });
         }
     }
 
