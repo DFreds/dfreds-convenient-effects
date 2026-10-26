@@ -14,7 +14,10 @@
             "AppControlsPermissionHint": "Ceci définit le niveau d'autorisation minimum pour voir et appliquer des effets pratiques via l'application via le bouton sur les contrôles des jetons. La valeur Aucun désactive entièrement le bouton.",
 
             "CreateFoldersPermissionName": "Autorisation de créer des dossiers",
-            "CreateFoldersPermissionHint": "Ceci définit le niveau d'autorisation minimum pour créer de nouveaux dossiers d'effets dans l'application Practical Effects. La valeur Aucun désactive entièrement le bouton de création. Notez qu'un utilisateur doit également avoir l'autorisation de créer des éléments dans le cadre de Foundry pour que cela fonctionne. "
+            "CreateFoldersPermissionHint": "Ceci définit le niveau d'autorisation minimum pour créer de nouveaux dossiers d'effets dans l'application Practical Effects. La valeur Aucun désactive entièrement le bouton de création. Notez qu'un utilisateur doit également avoir l'autorisation de créer des éléments dans le cadre de Foundry pour que cela fonctionne. ",
+
+            "ApplyEffectsPermissionName": "Autorisation d'appliquer des effets",
+            "ApplyEffectsPermissionHint": "Ceci définit le niveau d'autorisation minimum pour ajouter ou retirer des Convenient Effects sur n'importe quel acteur, que ce soit via l'application, une macro ou un autre module. Les MJ peuvent toujours appliquer des effets."
         },
 
         "Keybinding": {
@@ -45,6 +48,7 @@
         "ToggleStatusEffect": "Basculer l'effet de statut",
         "ResetSystemEffects": "Réinitialiser les effets du système",
         "ResetSystemEffectsWarning": "Cela réinitialisera complètement les effets intégrés, annulant toutes les créations, suppressions ou modifications personnalisées effectuées.",
+        "ApplyEffectsNotAllowed": "Vous n'avez pas l'autorisation d'appliquer des Convenient Effects.",
         "BackupsUpdated": "Les sauvegardes intégrées des Effets Pratiques ont été mises à jour vers la version {version}. Ouvrez la vue de sauvegarde pour voir les nouveautés.",
         "EffectsVersionLabel": "Version",
         "EffectsVersionTooltip": "La version actuelle des définitions des Effets Pratiques.",

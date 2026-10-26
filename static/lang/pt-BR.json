@@ -14,7 +14,10 @@
             "AppControlsPermissionHint": "Isto define o nível mínimo de permissão para ver e aplicar Efeitos Convenientes através do aplicativo por meio do botão em controles de token. Definir isto como Nenhum desabilitará o botão completamente.",
 
             "CreateFoldersPermissionName": "Criar Permissão de Pastas",
-            "CreateFoldersPermissionHint": "Isto define o nível mínimo de permissão para criar novas pastas de efeitos no aplicativo Efeitos Convenientes. Definir isto como Nenhum(a) desabilitará o botão de criação completamente. Note que um usuário também deve ter a permissão nativa do Foundry para criar itens para que isto funcione."
+            "CreateFoldersPermissionHint": "Isto define o nível mínimo de permissão para criar novas pastas de efeitos no aplicativo Efeitos Convenientes. Definir isto como Nenhum(a) desabilitará o botão de criação completamente. Note que um usuário também deve ter a permissão nativa do Foundry para criar itens para que isto funcione.",
+
+            "ApplyEffectsPermissionName": "Permissão para Aplicar Efeitos",
+            "ApplyEffectsPermissionHint": "Isto define o nível mínimo de permissão para adicionar ou remover Efeitos Convenientes em qualquer ator, seja pelo aplicativo, por uma macro ou por outro módulo. Mestres do Jogo sempre podem aplicar efeitos."
         },
 
         "Keybinding": {
@@ -45,6 +48,7 @@
         "ToggleStatusEffect": "Alternar Efeito de Status",
         "ResetSystemEffects": "Redefinir Efeitos do Sistema",
         "ResetSystemEffectsWarning": "Isso redefinirá completamente os efeitos integrados, desfazendo quaisquer criações, exclusões ou edições personalizadas que foram feitas.",
+        "ApplyEffectsNotAllowed": "Você não tem permissão para aplicar Efeitos Convenientes.",
         "BackupsUpdated": "Os backups integrados dos Efeitos Convenientes foram atualizados para a versão {version}. Abra a visualização de backup para ver as novidades.",
         "EffectsVersionLabel": "Versão",
         "EffectsVersionTooltip": "A versão atual das definições dos Efeitos Convenientes.",

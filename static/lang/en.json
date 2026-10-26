@@ -14,7 +14,10 @@
             "AppControlsPermissionHint": "This defines the minimum permission level to see and apply Convenient Effects through the application via the button on token controls. Setting this to None will disable the button entirely.",
 
             "CreateFoldersPermissionName": "Create Folders Permission",
-            "CreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work."
+            "CreateFoldersPermissionHint": "This defines the minimum permission level to create new effect folders in the Convenient Effects application. Setting this to None will disable the create button entirely. Note that a user must also have the Foundry permission to create items in order for this to work.",
+
+            "ApplyEffectsPermissionName": "Apply Effects Permission",
+            "ApplyEffectsPermissionHint": "This defines the minimum permission level to add or remove Convenient Effects on any actor, whether through the application, a macro, or another module. Game Masters can always apply effects."
         },
 
         "Keybinding": {
@@ -66,6 +69,7 @@
         "ToggleStatusEffect": "Toggle Status Effect",
         "ResetSystemEffects": "Reset System Effects",
         "ResetSystemEffectsWarning": "This will completely reset to the built-in effects, undoing any custom creations, deletions, or edits that were made.",
+        "ApplyEffectsNotAllowed": "You do not have permission to apply Convenient Effects.",
         "ViewBackups": "View Backups",
         "BackupsUpdated": "The built-in Convenient Effects backups have been updated to version {version}. Open the backup view to see what's new.",
         "EffectsVersionLabel": "Version",

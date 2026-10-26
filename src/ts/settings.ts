@@ -6,6 +6,7 @@ class Settings {
     // Config keys
     #APP_CONTROLS_PERMISSION = "appControlsPermission";
     #CREATE_FOLDERS_PERMISSION = "createFoldersPermission";
+    #APPLY_EFFECTS_PERMISSION = "applyEffectsPermission";
 
     // Non-config keys
     #EXPANDED_FOLDERS = "expandedFolders";
@@ -32,6 +33,7 @@ class Settings {
     #registerConfigSettings(): void {
         this.#registerAppControlsPermission();
         this.#registerCreateFoldersPermission();
+        this.#registerApplyEffectsPermission();
     }
 
     #registerNonConfigSettings(): void {
@@ -65,6 +67,22 @@ class Settings {
             config: true,
             default: CONST.USER_ROLES.GAMEMASTER,
             choices: this.#USER_ROLES,
+            type: String,
+            requiresReload: false,
+        });
+    }
+
+    #registerApplyEffectsPermission(): void {
+        const rolesWithoutNone = Object.fromEntries(
+            Object.entries(this.#USER_ROLES).filter(([role]) => Number(role) <= CONST.USER_ROLES.GAMEMASTER),
+        );
+        game.settings.register(MODULE_ID, this.#APPLY_EFFECTS_PERMISSION, {
+            name: "ConvenientEffects.Setting.ApplyEffectsPermissionName",
+            hint: "ConvenientEffects.Setting.ApplyEffectsPermissionHint",
+            scope: "world",
+            config: true,
+            default: CONST.USER_ROLES.PLAYER,
+            choices: rolesWithoutNone,
             type: String,
             requiresReload: false,
         });
@@ -146,6 +164,10 @@ class Settings {
 
     get createFoldersPermission(): number {
         return game.settings.get(MODULE_ID, this.#CREATE_FOLDERS_PERMISSION) as unknown as number;
+    }
+
+    get applyEffectsPermission(): number {
+        return game.settings.get(MODULE_ID, this.#APPLY_EFFECTS_PERMISSION) as unknown as number;
     }
 
     /**

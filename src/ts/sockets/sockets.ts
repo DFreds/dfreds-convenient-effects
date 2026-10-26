@@ -1,9 +1,10 @@
 import { findDocumentByUuid } from "../utils/finds.ts";
-import { log } from "../logger.ts";
+import { error, log } from "../logger.ts";
 import { findLeveledEffectsHandler, Mapping } from "../effects/mapping.ts";
 import { Flags } from "../utils/flags.ts";
 import { MODULE_ID } from "../constants.ts";
 import { getApi, isStackableDae } from "../utils/gets.ts";
+import { Settings } from "../settings.ts";
 import Document from "@common/abstract/document.mjs";
 import { ActiveEffectSource } from "@client/documents/_module.mjs";
 
@@ -53,12 +54,36 @@ class Sockets {
 
     constructor() {
         this.#socket = socketlib.registerModule(MODULE_ID);
-        this.#socket.register("addEffect", this.#onAddEffect.bind(this));
-        this.#socket.register("removeEffect", this.#onRemoveEffect.bind(this));
+        const onAddEffect = this.#onAddEffect.bind(this);
+        const onRemoveEffect = this.#onRemoveEffect.bind(this);
+        const canApplyEffects = this.#canApplyEffects.bind(this);
+        this.#socket.register(
+            "addEffect",
+            async function (this: { socketdata: { userId: string } }, message: AddEffectMessageData) {
+                return canApplyEffects(this.socketdata.userId) ? onAddEffect(message) : [];
+            },
+        );
+        this.#socket.register(
+            "removeEffect",
+            async function (this: { socketdata: { userId: string } }, message: RemoveEffectMessageData) {
+                if (canApplyEffects(this.socketdata.userId)) await onRemoveEffect(message);
+            },
+        );
     }
 
     async emitAddEffect(message: AddEffectMessageData): Promise<Document[]> {
+        if (!this.#canApplyEffects(game.user.id, { warn: true })) return [];
         return this.#socket.executeAsGM("addEffect", message) as Promise<Document[]>;
+    }
+
+    #canApplyEffects(userId: string, { warn = false } = {}): boolean {
+        const user = game.users.get(userId);
+        const canApply = !!user && user.role >= new Settings().applyEffectsPermission;
+        if (!canApply) {
+            if (warn) ui.notifications.warn(game.i18n.localize("ConvenientEffects.ApplyEffectsNotAllowed"));
+            error(`User ${user?.name ?? userId} does not have permission to apply effects`);
+        }
+        return canApply;
     }
 
     async #onAddEffect({ effectData, uuid, direction }: AddEffectMessageData): Promise<Document[]> {
@@ -115,6 +140,7 @@ class Sockets {
     }
 
     async emitRemoveEffect(message: RemoveEffectMessageData): Promise<void> {
+        if (!this.#canApplyEffects(game.user.id, { warn: true })) return;
         return this.#socket.executeAsGM("removeEffect", message) as Promise<void>;
     }
 

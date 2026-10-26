@@ -14,7 +14,10 @@
             "AppControlsPermissionHint": "定义最低能使用Convenient Effects赋予Token效果的角色，将其设置为“无”将完全禁用该功能。",
 
             "CreateFoldersPermissionName": "创建文件夹权限",
-            "CreateFoldersPermissionHint": "定义最低能创建效果和文件夹的角色，将其设置为“无”将完全禁用该按钮。"
+            "CreateFoldersPermissionHint": "定义最低能创建效果和文件夹的角色，将其设置为“无”将完全禁用该按钮。",
+
+            "ApplyEffectsPermissionName": "应用效果权限",
+            "ApplyEffectsPermissionHint": "定义最低能在任意角色上添加或移除Convenient Effects效果的角色，无论是通过App、宏还是其他模组。游戏主持人始终可以应用效果。"
         },
 
         "Keybinding": {
@@ -45,6 +48,7 @@
         "ToggleStatusEffect": "切换状态效果",
         "ResetSystemEffects": "重置所有效果",
         "ResetSystemEffectsWarning": "这将完全重置为内置效果，删除任何（新增、编辑、删除）自定义的效果。",
+        "ApplyEffectsNotAllowed": "你没有应用Convenient Effects效果的权限。",
         "BackupsUpdated": "内置的便捷效果备份已更新到版本 {version}。打开备份界面查看更新内容。",
         "EffectsVersionLabel": "版本",
         "EffectsVersionTooltip": "当前便捷效果定义的版本。",
