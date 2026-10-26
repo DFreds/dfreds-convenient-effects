@@ -356,8 +356,7 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
                         backup: this.isBackup,
                     });
 
-                    // @ts-expect-error Not type defined
-                    new DocumentOwnershipConfig({
+                    new foundry.applications.apps.DocumentOwnershipConfig({
                         document: folder,
                         position: {
                             top: Math.min(folderHtml.offsetTop, window.innerHeight - 350),
