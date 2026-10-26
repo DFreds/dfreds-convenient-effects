@@ -84,7 +84,6 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     async #addDivineWordEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>): Promise<void> {
         // @ts-expect-error Attributes is defined
         const remainingHp = actor.system.attributes.hp.value;
-        const origin = effect._id as ActiveEffectOrigin;
 
         if (remainingHp <= 20) {
             await actor.update({
@@ -97,51 +96,31 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
             });
             effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.dead");
         } else if (remainingHp <= 30) {
-            await getApi().addEffect({
-                effectName: game.i18n.localize("ConvenientEffects.Dnd.Blinded.name"),
-                uuid: actor.uuid,
-                origin,
-            });
-            await getApi().addEffect({
-                effectName: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
-                uuid: actor.uuid,
-                origin,
-            });
-            await getApi().addEffect({
-                effectName: game.i18n.localize("ConvenientEffects.Dnd.Stunned.name"),
-                uuid: actor.uuid,
-                origin,
-            });
+            await this.#setDivineWordConditions(effect, ["Blinded", "Deafened", "Stunned"]);
             effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.stunned");
             effect.duration = effect.duration ?? {};
             effect.duration.value = SECONDS.IN_ONE_HOUR;
             effect.duration.units = "seconds";
         } else if (remainingHp <= 40) {
-            await getApi().addEffect({
-                effectName: game.i18n.localize("ConvenientEffects.Dnd.Blinded.name"),
-                uuid: actor.uuid,
-                origin,
-            });
-            await getApi().addEffect({
-                effectName: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
-                uuid: actor.uuid,
-                origin,
-            });
+            await this.#setDivineWordConditions(effect, ["Blinded", "Deafened"]);
             effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.blinded");
             effect.duration = effect.duration ?? {};
             effect.duration.value = SECONDS.IN_TEN_MINUTES;
             effect.duration.units = "seconds";
         } else if (remainingHp <= 50) {
-            await getApi().addEffect({
-                effectName: game.i18n.localize("ConvenientEffects.Dnd.Deafened.name"),
-                uuid: actor.uuid,
-                origin,
-            });
+            await this.#setDivineWordConditions(effect, ["Deafened"]);
             effect.description = game.i18n.localize("ConvenientEffects.Dnd.DivineWord.deafened");
             effect.duration = effect.duration ?? {};
             effect.duration.value = SECONDS.IN_ONE_MINUTE;
             effect.duration.units = "seconds";
         }
+    }
+
+    async #setDivineWordConditions(effect: PreCreate<ActiveEffectSource>, conditions: string[]): Promise<void> {
+        const subEffectIds = conditions
+            .map((condition) => this.#ceEffectIdForName(`ConvenientEffects.Dnd.${condition}.name`))
+            .filter((id): id is string => !!id);
+        await Flags.setSubEffectIds(effect, subEffectIds);
     }
 
     #addEnlargeEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
