@@ -89,13 +89,12 @@ class Sockets {
 
         const subEffectIds = Flags.getSubEffectIds(effectData);
         if (subEffectIds && subEffectIds.length > 0) {
-            // Apply all sub-effects with the original effect being the origin
             for (const subEffectId of subEffectIds) {
-                await getApi().addEffect({
-                    effectId: subEffectId,
-                    uuid,
-                    origin: createdEffects[0].id as ActiveEffectOrigin,
-                });
+                const subEffectData = getApi().findEffect({ effectId: subEffectId })?.toObject();
+                if (!subEffectData) continue;
+
+                Flags.setParentEffectId(subEffectData, createdEffects[0].id);
+                await getApi().addEffect({ effectData: subEffectData, uuid });
             }
         }
 

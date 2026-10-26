@@ -13,6 +13,7 @@ class Flags {
         SUB_EFFECT_IDS: "subEffectIds",
         OTHER_EFFECT_IDS: "otherEffectIds",
         INCREMENT_EFFECT_IDS: "incrementEffectIds",
+        PARENT_EFFECT_ID: "parentEffectId",
         FOLDER_COLOR: "folderColor",
 
         // DAE
@@ -83,6 +84,16 @@ class Flags {
         subEffectIds: string[],
     ): Promise<any> {
         return this.#set(effect, this.#KEYS.SUB_EFFECT_IDS, subEffectIds);
+    }
+
+    static getParentEffectId(
+        effect: ActiveEffect<any> | BaseActiveEffect<any> | PreCreate<ActiveEffectSource>,
+    ): string | undefined {
+        return this.#get(effect, this.#KEYS.PARENT_EFFECT_ID);
+    }
+
+    static setParentEffectId(effect: PreCreate<ActiveEffectSource>, parentEffectId: string): boolean {
+        return this.#setOnSource(effect, this.#KEYS.PARENT_EFFECT_ID, parentEffectId);
     }
 
     static getOtherEffectIds(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): string[] | undefined {

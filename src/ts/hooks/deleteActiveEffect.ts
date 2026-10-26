@@ -19,7 +19,11 @@ const DeleteActiveEffect: Listener = {
                 // Remove effects that were added due to this effect
                 const actor = effect.parent as Actor;
                 const effectIdsFromThisEffect = actor.effects
-                    .filter((effect) => effect.origin === activeEffect.id)
+                    .filter(
+                        (effect) =>
+                            Flags.getParentEffectId(effect) === activeEffect.id ||
+                            effect.getFlag("core", "originText") === activeEffect.id,
+                    )
                     .map((effect) => effect.id);
 
                 if (effectIdsFromThisEffect && effectIdsFromThisEffect.length > 0) {
