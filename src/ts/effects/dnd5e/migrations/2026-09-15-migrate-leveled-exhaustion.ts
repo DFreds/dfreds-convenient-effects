@@ -24,7 +24,9 @@ const migration: MigrationType = {
             // The old built-in exhaustion chain is the only effect that both updates the actor and has increment
             // members. Matching on that instead of the name keeps this working for translated effect IDs.
             const exhaustionParents = effects.filter(
-                (effect) => Flags.isUpdatesActor(effect) && (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0,
+                (effect) =>
+                    foundry.utils.getProperty(effect, `flags.${MODULE_ID}.updatesActor`) === true &&
+                    (Flags.getIncrementEffectIds(effect)?.length ?? 0) > 0,
             );
             const memberIds = new Set(exhaustionParents.flatMap((effect) => Flags.getIncrementEffectIds(effect) ?? []));
 
@@ -49,12 +51,7 @@ const migration: MigrationType = {
 
             const membersToDelete = effects.filter((effect) => {
                 const ceEffectId = Flags.getCeEffectId(effect);
-                return (
-                    !!ceEffectId &&
-                    memberIds.has(ceEffectId) &&
-                    !!Flags.isUpdatesActor(effect) &&
-                    !referencedIds.has(ceEffectId)
-                );
+                return !!ceEffectId && memberIds.has(ceEffectId) && !referencedIds.has(ceEffectId);
             });
 
             await Promise.all(membersToDelete.map((effect) => effect.delete()));

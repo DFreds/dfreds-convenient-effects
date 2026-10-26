@@ -77,8 +77,6 @@
             "ViewableHint": "Se marcado, esse efeito estará sempre visível no aplicativo.",
             "DynamicLabel": "Dinâmico",
             "DynamicHint": "Se marcado, este efeito terá efeitos dinâmicos aplicados com base nos dados do ator. Isso não pode ser alterado e é usado para casos de efeitos muito específicos.",
-            "UpdatesActorLabel": "Atualiza o Ator",
-            "UpdatesActorHint": "Se marcado, este efeito apenas atualiza os dados do ator e nunca adiciona um efeito a ele. Isso não pode ser alterado e é usado para casos de efeitos muito específicos.",
             "NestedEffectsLabel": "Efeitos Aninhados",
             "NestedEffectsHint": "Os efeitos aninhados que serão mostrados como opções quando o efeito for adicionado ou removido.",
             "SubEffectsLabel": "Subefeitos",

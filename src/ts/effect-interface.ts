@@ -111,7 +111,7 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         for (const uuid of documentUuids) {
-            if (Flags.isUpdatesActor(effectDataToSend) || findLeveledEffectsHandler()?.isLeveled(effectDataToSend)) {
+            if (findLeveledEffectsHandler()?.isLeveled(effectDataToSend)) {
                 await this.addEffect({
                     effectId: effectDataToSend._id ?? Flags.getCeEffectId(effectDataToSend),
                     effectName: effectDataToSend.name,
@@ -138,7 +138,7 @@ class EffectInterfaceImpl implements EffectInterface {
 
             // Generic increment member: jump to this level, or toggle it off if it is already applied
             const incrementParent = findIncrementParentOf(Flags.getCeEffectId(effectDataToSend), { backup: false });
-            if (incrementParent && !Flags.isUpdatesActor(incrementParent)) {
+            if (incrementParent) {
                 await this.#jumpIncrementMember({
                     parent: incrementParent,
                     memberData: effectDataToSend,
@@ -200,18 +200,16 @@ class EffectInterfaceImpl implements EffectInterface {
             return [];
         }
 
-        if (!Flags.isUpdatesActor(effectDataToSend)) {
-            const incrementEffectIds = Flags.getIncrementEffectIds(effectDataToSend);
-            if (incrementEffectIds && incrementEffectIds.length > 0) {
-                await this.#stepIncrementChain({
-                    parentData: effectDataToSend,
-                    uuid,
-                    direction,
-                    overlay,
-                    origin,
-                });
-                return [];
-            }
+        const incrementEffectIds = Flags.getIncrementEffectIds(effectDataToSend);
+        if (incrementEffectIds && incrementEffectIds.length > 0) {
+            await this.#stepIncrementChain({
+                parentData: effectDataToSend,
+                uuid,
+                direction,
+                overlay,
+                origin,
+            });
+            return [];
         }
 
         foundry.utils.setProperty(effectDataToSend, `flags.core.overlay`, overlay);

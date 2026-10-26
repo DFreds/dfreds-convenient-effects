@@ -81,17 +81,6 @@ class Sockets {
             return [];
         }
 
-        // Actor updater effects only modify the actor and never create an effect document.
-        if (Flags.isUpdatesActor(effectData)) {
-            if (document instanceof Actor) {
-                await systemDefinition?.dynamicEffectsHandler?.handleActorUpdates(effectData, document, {
-                    direction: direction ?? 1,
-                });
-                log(`Applied actor update for ${effectData.name} to ${document.name} - ${document.id}`);
-            }
-            return [];
-        }
-
         if (Flags.isDynamic(effectData) && document instanceof Actor) {
             await systemDefinition?.dynamicEffectsHandler?.handleDynamicEffects(effectData, document);
         }

@@ -99,8 +99,6 @@
             "ViewableHint": "If checked, this effect will always be shown in the application.",
             "DynamicLabel": "Dynamic",
             "DynamicHint": "If checked, this effect will have dynamic effects applied based on the actor data. This cannot be changed and is used for very specific effect cases.",
-            "UpdatesActorLabel": "Updates Actor",
-            "UpdatesActorHint": "If checked, this effect only updates the actor's data and never adds an effect to it. This cannot be changed and is used for very specific effect cases.",
             "NestedEffectsLabel": "Nested Effects",
             "NestedEffectsHint": "The nested effects that will be shown as options when the effect is added or removed.",
             "SubEffectsLabel": "Sub-Effects",

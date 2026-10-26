@@ -77,8 +77,6 @@
             "ViewableHint": "Si cette case est cochée, cet effet sera toujours affiché dans l'application.",
             "DynamicLabel": "Dynamique",
             "DynamicHint": "Si cette case est cochée, cet effet aura des effets dynamiques appliqués en fonction des données de l'acteur. ",
-            "UpdatesActorLabel": "Met à jour l'acteur",
-            "UpdatesActorHint": "Si cette case est cochée, cet effet met uniquement à jour les données de l'acteur et ne lui ajoute jamais d'effet. Cela ne peut pas être modifié et est utilisé pour des cas d'effets très spécifiques.",
             "NestedEffectsLabel": "Effets imbriqués",
             "NestedEffectsHint": "Les effets imbriqués qui seront affichés sous forme d'options lorsque l'effet est ajouté ou supprimé.",
             "SubEffectsLabel": "Sous-effets",

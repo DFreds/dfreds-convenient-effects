@@ -77,8 +77,6 @@
             "ViewableHint": "如果选中，此效果将始终在窗口中显示，否则将会隐藏",
             "DynamicLabel": "动态",
             "DynamicHint": "如果选中，此效果将基于角色数据应用动态效果，确定后无法更改，仅在非常特定的情况启用。",
-            "UpdatesActorLabel": "更新角色",
-            "UpdatesActorHint": "如果选中，此效果只会更新角色数据，而不会向其添加效果。此项无法更改，仅在非常特定的情况启用。",
             "NestedEffectsLabel": "嵌套效果",
             "NestedEffectsHint": "当效果被添加或移除时，将显示为选项的嵌套效果。（参考诗人激励Bardic Inspiration）",
             "SubEffectsLabel": "子效果",

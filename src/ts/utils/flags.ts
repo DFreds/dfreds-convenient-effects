@@ -9,7 +9,6 @@ class Flags {
         IS_TEMPORARY: "isTemporary",
         IS_DYNAMIC: "isDynamic",
         IS_VIEWABLE: "isViewable",
-        UPDATES_ACTOR: "updatesActor",
         NESTED_EFFECT_IDS: "nestedEffectIds",
         SUB_EFFECT_IDS: "subEffectIds",
         OTHER_EFFECT_IDS: "otherEffectIds",
@@ -136,14 +135,6 @@ class Flags {
         incrementEffectIds: string[],
     ): Promise<any> {
         return this.#set(effect, this.#KEYS.INCREMENT_EFFECT_IDS, incrementEffectIds);
-    }
-
-    static isUpdatesActor(effect: ActiveEffect<any> | PreCreate<ActiveEffectSource>): boolean | undefined {
-        return this.#get(effect, this.#KEYS.UPDATES_ACTOR);
-    }
-
-    static setUpdatesActor(effect: object, value: boolean): boolean {
-        return this.#setOnSource(effect, this.#KEYS.UPDATES_ACTOR, value);
     }
 
     static isViewable(document: ActiveEffect<any> | Item<null> | PreCreate<ActiveEffectSource>): boolean | undefined {

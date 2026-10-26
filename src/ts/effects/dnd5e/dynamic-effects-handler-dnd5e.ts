@@ -32,8 +32,6 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
         }
     }
 
-    override handleActorUpdates(): void {}
-
     override async handleEffectDeletion(effect: ActiveEffect<any>, actor: Actor<any>): Promise<void> {
         const ceEffectId = Flags.getCeEffectId(effect);
         if (!ceEffectId) return;

@@ -12,7 +12,6 @@ class HandlebarHelpers {
         this.#registerIsTemporary();
         this.#registerIsViewable();
         this.#registerIsDynamic();
-        this.#registerIsUpdatesActor();
         this.#registerGetFolderColor();
         this.#registerConvenientFolderIcons();
         this.#registerConvenientEffectIcons();
@@ -45,12 +44,6 @@ class HandlebarHelpers {
     #registerIsDynamic() {
         Handlebars.registerHelper("isDynamic", (effect: ActiveEffect<any>) => {
             return Flags.isDynamic(effect);
-        });
-    }
-
-    #registerIsUpdatesActor() {
-        Handlebars.registerHelper("isUpdatesActor", (effect: ActiveEffect<any>) => {
-            return Flags.isUpdatesActor(effect);
         });
     }
 
