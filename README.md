@@ -43,7 +43,8 @@
 - Adds a new application as a sidebar directory
 - Provides a repository to create and share easy-to-use toggleable active effects
 - Includes dozens of pre-built effects for the DND5e and SW5e systems
-- First-class support for popular modules, such as Midi-QoL, Times Up, DAE, Active Token Lighting, and Token Magic FX
+- First-class support for popular modules, such as Midi-QoL, Times Up, DAE, and Token Magic FX
+- Keybindings to open the app in the sidebar or in its own window
 - Extensive API for use in macros
 
 ![Convenient Effects](https://www.dfreds-modules.com/assets/images/convenient-effects-app-6dc7002b72d0faf3c1e972332ebdaf0b.png)
