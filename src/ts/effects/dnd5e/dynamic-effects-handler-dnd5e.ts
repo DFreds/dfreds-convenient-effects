@@ -163,7 +163,9 @@ class DynamicEffectsHandlerDnd5e extends DynamicEffectsHandler {
     }
 
     #addRageEffects(effect: PreCreate<ActiveEffectSource>, actor: Actor<any>) {
-        const barbarianClass = actor.items.find((item) => item.type === "class" && item.name === "Barbarian");
+        const barbarianClass = actor.items.find(
+            (item) => item.type === "class" && (item.system as any).identifier === "barbarian",
+        );
 
         if (!barbarianClass) {
             ui.notifications.warn(game.i18n.localize("ConvenientEffects.Dnd.Rage.notABarbarian"));
