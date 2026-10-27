@@ -20,7 +20,7 @@ const Ready: Listener = {
                 Hooks.callAll(`${MODULE_ID}.ready`);
                 renderApp();
             } catch (e: any) {
-                ui.notifications.error(`Something went wrong while initializing convenient effects`);
+                ui.notifications.error(game.i18n.localize("ConvenientEffects.InitializeFailed"));
                 error(`Error while initializing convenient effects: ${e}`);
             }
         });

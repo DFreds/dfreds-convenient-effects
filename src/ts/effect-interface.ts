@@ -96,7 +96,7 @@ class EffectInterfaceImpl implements EffectInterface {
         }
 
         if (documentUuids.length === 0) {
-            ui.notifications.warn(`Please select or target a token to toggle this effect`);
+            ui.notifications.warn(game.i18n.localize("ConvenientEffects.NoTokensToToggle"));
             return;
         }
 

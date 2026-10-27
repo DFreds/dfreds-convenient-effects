@@ -113,7 +113,7 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
 
                     const documentUuids = getActorUuids(this.settings.prioritizeTargets);
                     if (documentUuids.length === 0) {
-                        ui.notifications.warn(`Please select or target a token to add this effect`);
+                        ui.notifications.warn(game.i18n.localize("ConvenientEffects.NoTokensToAdd"));
                         return;
                     }
 
@@ -141,7 +141,7 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
 
                     const documentUuids = getActorUuids(this.settings.prioritizeTargets);
                     if (documentUuids.length === 0) {
-                        ui.notifications.warn(`Please select or target a token to remove this effect`);
+                        ui.notifications.warn(game.i18n.localize("ConvenientEffects.NoTokensToRemove"));
                         return;
                     }
 
