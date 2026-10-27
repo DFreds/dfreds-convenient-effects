@@ -1,6 +1,6 @@
 import { Flags } from "../utils/flags.ts";
 import { notEmpty } from "../utils/types.ts";
-import { findAllIncrementEffectIds, findAllNestedEffectIds, findModuleById } from "../utils/finds.ts";
+import { findModuleById } from "../utils/finds.ts";
 import { MODULE_IDS } from "../constants.ts";
 import { getApi, isEffectIncrementable, isStackableDae } from "../utils/gets.ts";
 import { EffectChangeData } from "@common/documents/active-effect.mjs";
@@ -70,49 +70,46 @@ class HandlebarHelpers {
     }
 
     #registerConvenientEffectIcons() {
-        Handlebars.registerHelper("convenientEffectIcons", (effect: ActiveEffect<any>) => {
-            let icons = "";
+        Handlebars.registerHelper(
+            "convenientEffectIcons",
+            (effect: ActiveEffect<any>, allNestedEffectIds: string[], allIncrementEffectIds: string[]) => {
+                let icons = "";
 
-            const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
-            const nestedEffects = nestedEffectIds
-                .map((id) => {
-                    return getApi().findEffect({ effectId: id });
-                })
-                .filter(notEmpty);
+                const nestedEffectIds = Flags.getNestedEffectIds(effect) ?? [];
+                const nestedEffects = nestedEffectIds
+                    .map((id) => {
+                        return getApi().findEffect({ effectId: id });
+                    })
+                    .filter(notEmpty);
 
-            const allChanges = this.#getAllChanges(effect, nestedEffects);
+                const allChanges = this.#getAllChanges(effect, nestedEffects);
 
-            icons += this.#getPassiveIcon(effect);
-            icons += this.#getHiddenIcon(effect);
-            icons += this.#getIncrementableIcon(effect);
-            icons += this.#getHasNestedEffectsIcon(nestedEffects);
-            icons += this.#getIsNestedEffectsIcon(
-                Flags.getCeEffectId(effect),
-                findAllNestedEffectIds({ backup: false }),
-            );
-            icons += this.#getIsIncrementEffectIcon(
-                Flags.getCeEffectId(effect),
-                findAllIncrementEffectIds({ backup: false }),
-            );
+                icons += this.#getPassiveIcon(effect);
+                icons += this.#getHiddenIcon(effect);
+                icons += this.#getIncrementableIcon(effect);
+                icons += this.#getHasNestedEffectsIcon(nestedEffects);
+                icons += this.#getIsNestedEffectsIcon(Flags.getCeEffectId(effect), allNestedEffectIds);
+                icons += this.#getIsIncrementEffectIcon(Flags.getCeEffectId(effect), allIncrementEffectIds);
 
-            if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
-                icons += this.#getStatusEffectsIcon(effect);
-            }
+                if (findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active) {
+                    icons += this.#getStatusEffectsIcon(effect);
+                }
 
-            if (findModuleById(MODULE_IDS.MIDI)?.active) {
-                icons += this.#getMidiIcon(allChanges);
-            }
+                if (findModuleById(MODULE_IDS.MIDI)?.active) {
+                    icons += this.#getMidiIcon(allChanges);
+                }
 
-            if (findModuleById(MODULE_IDS.DAE)?.active) {
-                icons += this.#getStackableDaeIcon(effect);
-            }
+                if (findModuleById(MODULE_IDS.DAE)?.active) {
+                    icons += this.#getStackableDaeIcon(effect);
+                }
 
-            if (findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active) {
-                icons += this.#getTokenMagicIcon(allChanges);
-            }
+                if (findModuleById(MODULE_IDS.TOKEN_MAGIC)?.active) {
+                    icons += this.#getTokenMagicIcon(allChanges);
+                }
 
-            return icons;
-        });
+                return icons;
+            },
+        );
     }
 
     #getAllChanges(effect: ActiveEffect<any>, nestedEffects: ActiveEffect<any>[]): DeepPartial<EffectChangeData>[] {

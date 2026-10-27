@@ -227,6 +227,8 @@ function ConvenientDirectoryMixin<
 
             Object.assign(context, {
                 folderData,
+                nestedEffectIds,
+                incrementEffectIds,
                 isBackup: this.isBackup,
                 entryPartial: ENTRY_PARTIAL,
                 folderPartial: FOLDER_PARTIAL,
