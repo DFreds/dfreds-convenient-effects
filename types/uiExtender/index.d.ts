@@ -113,7 +113,7 @@ declare global {
         reference?: string;
     }
 
-    export interface HudButtonInput {
+    export interface HudButtonBaseInput {
         /**
          * The ID of the module registering
          */
@@ -156,6 +156,16 @@ declare global {
          * @returns true if the button should be added, false otherwise
          */
         predicate?: (data: any) => boolean;
+    }
+
+    /**
+     * @deprecated Since 2.6.0. Set `nativeDom: true` and use {@link HudButtonNativeInput}. Removed in 3.0.0.
+     */
+    export interface HudButtonJQueryInput extends HudButtonBaseInput {
+        /**
+         * Pass jQuery objects to the handlers
+         */
+        nativeDom?: false;
 
         /**
          * The click handler
@@ -186,6 +196,44 @@ declare global {
          */
         onRenderComplete?: (hud: BasePlaceableHUD, html: JQuery, data: object) => void;
     }
+
+    export interface HudButtonNativeInput extends HudButtonBaseInput {
+        /**
+         * Pass native DOM elements and events to the handlers
+         */
+        nativeDom: true;
+
+        /**
+         * The click handler
+         *
+         * @param event The click event
+         * @param button The button element
+         * @param data The data for the item with the HUD
+         * @param hud The base placeable HUD instance
+         */
+        onClick?: (event: MouseEvent, button: HTMLButtonElement, data: any, hud: BasePlaceableHUD) => void;
+
+        /**
+         * The right-click handler
+         *
+         * @param event The context menu event
+         * @param button The button element
+         * @param data The data for the item with the HUD
+         * @param hud The base placeable HUD instance
+         */
+        onRightClick?: (event: MouseEvent, button: HTMLButtonElement, data: any, hud: BasePlaceableHUD) => void;
+
+        /**
+         * The render complete handler
+         *
+         * @param hud The base placeable HUD instance
+         * @param html The HTML for the HUD
+         * @param data The data for the HUD
+         */
+        onRenderComplete?: (hud: BasePlaceableHUD, html: HTMLElement, data: object) => void;
+    }
+
+    export type HudButtonInput = HudButtonNativeInput | HudButtonJQueryInput;
 
     export interface DirectoryInput {
         /**
