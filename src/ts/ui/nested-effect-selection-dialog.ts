@@ -16,10 +16,18 @@ async function getNestedEffectSelection(
         })
         .filter(notEmpty);
 
+    if (nestedEffects.length === 0) return undefined;
+
+    const choices = nestedEffects.map((nestedEffect) => ({
+        id: Flags.getCeEffectId(nestedEffect),
+        name: nestedEffect.name,
+    }));
+
     const content = await renderTemplate("modules/dfreds-convenient-effects/templates/nested-effects-dialog.hbs", {
         parentEffect: effectData,
         nestedEffects,
-        default: nestedEffects[0].name,
+        choices,
+        default: choices[0].id,
     });
 
     const choice = (await DialogV2.prompt({
@@ -47,7 +55,7 @@ async function getNestedEffectSelection(
         },
     })) as string | undefined;
 
-    return nestedEffects.find((nestedEffect) => nestedEffect.name === choice);
+    return nestedEffects.find((nestedEffect) => Flags.getCeEffectId(nestedEffect) === choice);
 }
 
 export { getNestedEffectSelection };
