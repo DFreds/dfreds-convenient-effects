@@ -12,19 +12,23 @@ import { findLeveledEffectsHandler } from "../effects/mapping.ts";
 function getActorUuids(isPrioritizeTargets: boolean): ActorUUID[] {
     if (isPrioritizeTargets && game.user.targets.size !== 0) {
         // Start with targets if prioritized
-        return Array.from(game.user.targets).map((target) => target.actor!.uuid);
+        return actorUuidsOf(Array.from(game.user.targets));
     } else if (canvas.tokens.controlled.length !== 0) {
         // Use controlled tokens if targets aren't prioritized
-        return canvas.tokens.controlled.map((token) => token.actor!.uuid);
+        return actorUuidsOf(canvas.tokens.controlled);
     } else if (game.user.targets.size !== 0) {
         // Use targets if not prioritized and no controlled tokens
-        return Array.from(game.user.targets).map((token) => token.actor!.uuid);
+        return actorUuidsOf(Array.from(game.user.targets));
     } else if (game.user.character) {
         // Use the default character for the user
         return [game.user.character.uuid as ActorUUID];
     } else {
         return [];
     }
+}
+
+function actorUuidsOf(tokens: { actor: Actor | null }[]): ActorUUID[] {
+    return tokens.flatMap((token) => (token.actor ? [token.actor.uuid] : []));
 }
 
 const PREFERRED_ITEM_TYPES: Record<string, string> = {
