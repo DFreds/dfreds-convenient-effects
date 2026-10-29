@@ -37,7 +37,13 @@
                 "reason": "Handles migrating the convenient effects data when upgrading to a new version"
             }
         ],
-        "recommends": []
+        "recommends": [
+            {
+                "id": "lib-wrapper",
+                "type": "module",
+                "reason": "Lets this module and other modules change the same core Foundry functions without conflicts. Without it, a built-in fallback is used."
+            }
+        ]
     },
     "languages": [
         {
