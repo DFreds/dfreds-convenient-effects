@@ -272,7 +272,8 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
 
                     if (!original) return;
 
-                    const clone = original.clone(
+                    // eslint-disable-next-line @typescript-eslint/await-thenable -- Document#clone is not typed to return a Promise when save is true
+                    const clone = await original.clone(
                         {
                             name: game.i18n.localize("DOCUMENT.CopyOf", {
                                 name: original._source.name,
