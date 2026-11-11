@@ -8,6 +8,7 @@ import { ConvenientFolderConfig } from "../ce-config/convenient-folder-config.ts
 import { createConvenientEffect } from "../../utils/creates.ts";
 import { Flags } from "../../utils/flags.ts";
 import { error } from "../../logger.ts";
+import { getNestedEffectSelection } from "../nested-effect-selection-dialog.ts";
 import { BackupConvenientEffectsV2 } from "./backup-convenient-effects-v2.ts";
 import { ConvenientDirectoryMixin } from "./convenient-directory-mixin.ts";
 
@@ -117,9 +118,21 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
                         return;
                     }
 
+                    let effectIdToAdd = effectId;
+                    const effect = getApi().findEffect({ effectId });
+                    if (effect && (Flags.getNestedEffectIds(effect)?.length ?? 0) > 0) {
+                        const chosen = await getNestedEffectSelection(effect.toObject());
+                        if (chosen === null) return;
+                        if (!chosen) {
+                            error("Cannot find effect to add");
+                            return;
+                        }
+                        effectIdToAdd = Flags.getCeEffectId(chosen) ?? "";
+                    }
+
                     const promises = documentUuids.map(async (uuid) => {
                         return getApi().addEffect({
-                            effectId,
+                            effectId: effectIdToAdd,
                             uuid,
                         });
                     });
