@@ -226,7 +226,7 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
                 label: "ConvenientEffects.ToggleStatusEffect",
                 icon: '<i class="fa-regular fa-person-rays"></i>',
                 visible: (_html: HTMLElement) => {
-                    return !!findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active;
+                    return !!findModuleById(MODULE_IDS.STATUS_EFFECTS)?.active && game.user.isGM;
                 },
                 onClick: async (_event: PointerEvent, target: HTMLElement) => {
                     const effectHtml = target.closest("[data-ce-effect-id]") as HTMLElement;
