@@ -105,6 +105,7 @@ class EffectInterfaceImpl implements EffectInterface {
             effectName,
         });
 
+        if (effectDataToSend === null) return;
         if (!effectDataToSend) {
             error("Cannot find effect to toggle");
             return;
@@ -189,6 +190,7 @@ class EffectInterfaceImpl implements EffectInterface {
             effectData,
         });
 
+        if (effectDataToSend === null) return [];
         if (!effectDataToSend) {
             error("Cannot find effect to add");
             return [];
@@ -233,6 +235,7 @@ class EffectInterfaceImpl implements EffectInterface {
             effectName,
         });
 
+        if (effectDataToSend === null) return;
         if (!effectDataToSend) {
             error("Cannot find effect to remove");
             return;
@@ -429,9 +432,9 @@ class EffectInterfaceImpl implements EffectInterface {
         effectId?: string | null;
         effectName?: string | null;
         effectData?: PreCreate<ActiveEffectSource>;
-    }): Promise<PreCreate<ActiveEffectSource> | undefined> {
+    }): Promise<PreCreate<ActiveEffectSource> | null | undefined> {
         const effect = this.findEffect({ effectId, effectName });
-        let effectDataToSend = effect?.toObject() ?? effectData;
+        let effectDataToSend: PreCreate<ActiveEffectSource> | null | undefined = effect?.toObject() ?? effectData;
 
         if (effectDataToSend) {
             const nestedEffectIds = Flags.getNestedEffectIds(effectDataToSend);

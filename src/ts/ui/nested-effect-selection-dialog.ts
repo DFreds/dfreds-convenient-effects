@@ -6,9 +6,15 @@ import { ActiveEffectSource } from "@common/documents/active-effect.mjs";
 const { DialogV2 } = foundry.applications.api;
 const { renderTemplate } = foundry.applications.handlebars;
 
+/**
+ * Asks the user which nested effect to use
+ *
+ * @param effectData - the parent effect data
+ * @returns the chosen nested effect, null if the user closed the dialog, or undefined if none of the nested effects exist
+ */
 async function getNestedEffectSelection(
     effectData: PreCreate<ActiveEffectSource>,
-): Promise<PreCreate<ActiveEffectSource> | undefined> {
+): Promise<PreCreate<ActiveEffectSource> | null | undefined> {
     const nestedEffectIds = Flags.getNestedEffectIds(effectData) ?? [];
     const nestedEffects = nestedEffectIds
         .map((id) => {
@@ -53,7 +59,8 @@ async function getNestedEffectSelection(
             },
             default: true,
         },
-    })) as string | undefined;
+    })) as string | null;
+    if (choice === null) return null;
 
     return nestedEffects.find((nestedEffect) => Flags.getCeEffectId(nestedEffect) === choice);
 }
