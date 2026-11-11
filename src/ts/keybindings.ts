@@ -1,5 +1,6 @@
 import { ConvenientEffectsV2 } from "./ui/ce-app/convenient-effects-v2.ts";
 import { MODULE_ID } from "./constants.ts";
+import { Settings } from "./settings.ts";
 
 class Keybindings {
     #TOGGLE_CONVENIENT_EFFECTS_APP = "toggleConvenientEffectsApp";
@@ -15,6 +16,8 @@ class Keybindings {
             name: "ConvenientEffects.Keybinding.ToggleAppName",
             hint: "ConvenientEffects.Keybinding.ToggleAppHint",
             onDown: async () => {
+                if (game.user.role < new Settings().appControlsPermission) return;
+
                 const applications = foundry.applications.instances;
 
                 const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName);
@@ -38,6 +41,8 @@ class Keybindings {
             name: "ConvenientEffects.Keybinding.ToggleAppPopoutName",
             hint: "ConvenientEffects.Keybinding.ToggleAppPopoutHint",
             onDown: async () => {
+                if (game.user.role < new Settings().appControlsPermission) return;
+
                 const applications = foundry.applications.instances;
 
                 const convenientEffectsV2 = applications.get(ConvenientEffectsV2.tabName);
