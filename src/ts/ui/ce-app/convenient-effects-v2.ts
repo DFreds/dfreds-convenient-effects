@@ -686,7 +686,8 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
 
         if (!effect) return {};
 
-        const dragData = Flags.getNestedEffectIds(effect)
+        const hasNestedEffects = (Flags.getNestedEffectIds(effect)?.length ?? 0) > 0;
+        const dragData = hasNestedEffects
             ? {
                   effectId: entryId,
               }
