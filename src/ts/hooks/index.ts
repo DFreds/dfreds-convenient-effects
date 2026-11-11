@@ -9,6 +9,7 @@ import { HotbarDrop } from "./hotbarDrop.ts";
 import { HotReload } from "./hot-reload.ts";
 import { Init } from "./init.ts";
 import { MigrationsSetup } from "./migrations.setup.ts";
+import { PreCreateActiveEffect } from "./preCreateActiveEffect.ts";
 import { PreUpdateActiveEffect } from "./preUpdateActiveEffect.ts";
 import { Ready } from "./ready.ts";
 import { RenderItemDirectory } from "./renderItemDirectory.ts";
@@ -37,6 +38,7 @@ const HooksCE = {
             CreateItem,
             UpdateItem,
             DeleteItem,
+            PreCreateActiveEffect,
             CreateActiveEffect,
             PreUpdateActiveEffect,
             UpdateActiveEffect,
