@@ -81,7 +81,7 @@ class BackupConvenientEffectsV2 extends ConvenientDirectoryMixin(ApplicationV2) 
             window: {
                 title: game.i18n.localize("ConvenientEffects.ResetSystemEffects"),
             },
-            content: `<strong>${game.i18n.localize("AreYouSure")}</strong><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
+            content: `<strong>${game.i18n.localize("COMMON.AreYouSure")}</strong><p>${game.i18n.localize("ConvenientEffects.ResetSystemEffectsWarning")}</p>`,
         });
 
         if (!proceed) return;
