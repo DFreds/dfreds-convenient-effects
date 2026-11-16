@@ -24,7 +24,7 @@
                 "id": "lib-dfreds-ui-extender",
                 "type": "module",
                 "compatibility": {
-                    "verified": "2.4.0"
+                    "verified": "2.6.1"
                 },
                 "reason": "Controls adding the convenient effects app to the sidebar"
             },
