@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
 type AbilityType = "str" | "dex" | "con" | "int" | "wis" | "cha";
 
@@ -10,7 +10,7 @@ function addAbility({
     ability: AbilityType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.value`,
         type: "add",
@@ -27,7 +27,7 @@ function downgradeAbility({
     ability: AbilityType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.value`,
         type: "downgrade",
@@ -44,7 +44,7 @@ function upgradeAbility({
     ability: AbilityType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.value`,
         type: "upgrade",
@@ -61,7 +61,7 @@ function abilitySaveBonus({
     ability: "str" | "dex" | "con" | "int" | "wis" | "cha";
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.bonuses.save`,
         type: "add",
@@ -78,7 +78,7 @@ function abilityCheckMode({
     ability: AbilityType;
     value: "-1" | "0" | "1";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.check.roll.mode`,
         type: "add",
@@ -95,7 +95,7 @@ function abilitySaveMode({
     ability: AbilityType;
     value: "-1" | "0" | "1";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.save.roll.mode`,
         type: "add",
@@ -112,7 +112,7 @@ function abilitySaveMax({
     ability: AbilityType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.abilities.${ability}.save.roll.max`,
         type: "add",

@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
 type SkillType =
     | "acr"
@@ -28,7 +28,7 @@ function skillCheckBonus({
     skillType: SkillType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.skills.${skillType}.bonuses.check`,
         type: "add",
@@ -45,7 +45,7 @@ function skillCheckMode({
     skillType: SkillType;
     value: "-1" | "0" | "1";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.skills.${skillType}.roll.mode`,
         type: "add",
@@ -62,7 +62,7 @@ function skillPassiveBonus({
     skillType: SkillType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.skills.${skillType}.bonuses.passive`,
         type: "add",
@@ -80,7 +80,7 @@ function skillProficiency({
     skillType: SkillType;
     value: "0" | "0.5" | "1" | "2";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.skills.${skillType}.value`,
         type: "upgrade",
@@ -97,7 +97,7 @@ function toolCheckBonus({
     toolType: string;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.tools.${toolType}.bonuses.check`,
         type: "add",
@@ -114,7 +114,7 @@ function toolCheckMode({
     toolType: string;
     value: "-1" | "0" | "1";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.tools.${toolType}.roll.mode`,
         type: "add",
@@ -131,7 +131,7 @@ function toolProficiency({
     toolType: string;
     value: "0" | "0.5" | "1" | "2";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.tools.${toolType}.value`,
         type: "upgrade",

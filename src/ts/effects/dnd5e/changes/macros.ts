@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
 function tokenMagic({
     value,
@@ -25,7 +25,7 @@ function tokenMagic({
         | "shockwave"
         | "bevel";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: "macro.tokenMagic",
         type: "custom",

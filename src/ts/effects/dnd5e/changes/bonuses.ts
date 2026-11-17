@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
 type ActionType = "mwak" | "rwak" | "msak" | "rsak";
 
@@ -14,7 +14,7 @@ function attackBonus({
     actionType: ActionType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.bonuses.${actionType}.attack`,
         type: "add",
@@ -31,7 +31,7 @@ function damageBonus({
     actionType: ActionType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.bonuses.${actionType}.damage`,
         type: "add",
@@ -48,7 +48,7 @@ function attackBonuses({
     actionTypes: readonly ActionType[];
     value: string;
     priority?: number;
-}): Partial<EffectChangeData>[] {
+}): Partial<EffectChangeSource>[] {
     return actionTypes.map((actionType) => attackBonus({ actionType, value, priority }));
 }
 
@@ -60,11 +60,11 @@ function damageBonuses({
     actionTypes: readonly ActionType[];
     value: string;
     priority?: number;
-}): Partial<EffectChangeData>[] {
+}): Partial<EffectChangeSource>[] {
     return actionTypes.map((actionType) => damageBonus({ actionType, value, priority }));
 }
 
-function spellDcBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function spellDcBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: `system.bonuses.spell.dc`,
         type: "add",
@@ -73,7 +73,7 @@ function spellDcBonus({ value, priority }: { value: string; priority?: number })
     };
 }
 
-function checkBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function checkBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: `system.bonuses.abilities.check`,
         type: "add",
@@ -82,7 +82,7 @@ function checkBonus({ value, priority }: { value: string; priority?: number }): 
     };
 }
 
-function saveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function saveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: `system.bonuses.abilities.save`,
         type: "add",
@@ -91,7 +91,7 @@ function saveBonus({ value, priority }: { value: string; priority?: number }): P
     };
 }
 
-function skillBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function skillBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: `system.bonuses.abilities.skill`,
         type: "add",

@@ -1,6 +1,6 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
-function advantage(): Partial<EffectChangeData> {
+function advantage(): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.advantage.all`,
         type: "custom",
@@ -8,7 +8,7 @@ function advantage(): Partial<EffectChangeData> {
     };
 }
 
-function disadvantage(): Partial<EffectChangeData> {
+function disadvantage(): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.disadvantage.all`,
         type: "custom",
@@ -20,7 +20,7 @@ function advantageAttack({
     attackType,
 }: {
     attackType: "all" | "mwak" | "msak" | "rwak" | "rsak";
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.advantage.attack.${attackType}`,
         type: "custom",
@@ -32,7 +32,7 @@ function disadvantageAttack({
     attackType,
 }: {
     attackType: "all" | "mwak" | "msak" | "rwak" | "rsak" | "str" | "dex";
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.disadvantage.attack.${attackType}`,
         type: "custom",
@@ -44,7 +44,7 @@ function grantAdvantageAttack({
     attackType,
 }: {
     attackType: "all" | "mwak" | "msak" | "rwak" | "rsak";
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.grants.advantage.attack.${attackType}`,
         type: "custom",
@@ -56,7 +56,7 @@ function grantDisadvantageAttack({
     attackType,
 }: {
     attackType: "all" | "mwak" | "msak" | "rwak" | "rsak";
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.grants.disadvantage.attack.${attackType}`,
         type: "custom",
@@ -68,7 +68,7 @@ function failAbilitySave({
     saveType,
 }: {
     saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.fail.ability.save.${saveType}`,
         type: "custom",
@@ -76,7 +76,7 @@ function failAbilitySave({
     };
 }
 
-function grantCriticalRange({ range }: { range: string }): Partial<EffectChangeData> {
+function grantCriticalRange({ range }: { range: string }): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.grants.critical.range`,
         type: "override",
@@ -84,7 +84,7 @@ function grantCriticalRange({ range }: { range: string }): Partial<EffectChangeD
     };
 }
 
-function grantFailAttack({ attackType }: { attackType: "all" }): Partial<EffectChangeData> {
+function grantFailAttack({ attackType }: { attackType: "all" }): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.grants.attack.fail.${attackType}`,
         type: "custom",
@@ -92,7 +92,7 @@ function grantFailAttack({ attackType }: { attackType: "all" }): Partial<EffectC
     };
 }
 
-function optionalLabel({ key, label }: { key: string; label: string }): Partial<EffectChangeData> {
+function optionalLabel({ key, label }: { key: string; label: string }): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.optional.${key}.label`,
         type: "override",
@@ -108,7 +108,7 @@ function optionalAttack({
     key: string;
     attackType: "all" | "mwak" | "msak" | "rwak" | "rsak";
     value: string;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.optional.${key}.attack.${attackType}`,
         type: "override",
@@ -124,7 +124,7 @@ function optionalSave({
     key: string;
     saveType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
     value: string;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.optional.${key}.save.${saveType}`,
         type: "override",
@@ -140,7 +140,7 @@ function optionalAbilityCheck({
     key: string;
     abilityCheckType: "all" | "str" | "dex" | "con" | "int" | "wis" | "cha";
     value: string;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.optional.${key}.check.${abilityCheckType}`,
         type: "override",
@@ -156,7 +156,7 @@ function optionalSkill({
     key: string;
     skillType: "all";
     value: string;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.optional.${key}.skill.${skillType}`,
         type: "override",
@@ -164,7 +164,7 @@ function optionalSkill({
     };
 }
 
-function magicResistanceSaves(): Partial<EffectChangeData> {
+function magicResistanceSaves(): Partial<EffectChangeSource> {
     return {
         key: `flags.midi-qol.magicResistance.save.all`,
         type: "custom",

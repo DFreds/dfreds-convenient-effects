@@ -23,7 +23,7 @@
         "node": ">=24.14.1"
     },
     "devDependencies": {
-        "@dfreds/foundry-types": "^14.365.2",
+        "@dfreds/foundry-types": "^14.370.0",
         "@eslint/js": "^10.0.1",
         "@eslint/json": "^1.2.0",
         "@foundryvtt/foundryvtt-cli": "^3.0.3",

@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
 function tokenLight({
     attribute,
@@ -8,7 +8,7 @@ function tokenLight({
     attribute: "angle" | "dim" | "bright" | "color" | "alpha";
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `token.light.${attribute}`,
         type: "override",
@@ -25,7 +25,7 @@ function tokenLightAnimationAttribute({
     attribute: "speed" | "intensity";
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `token.light.animation.${attribute}`,
         type: "override",
@@ -63,7 +63,7 @@ function tokenLightAnimationType({
         | "starlight"
         | "smokepatch";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `token.light.animation.type`,
         type: "override",
@@ -80,7 +80,7 @@ function tokenSight({
     attribute: "range" | "visionMode" | "saturation";
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `token.sight.${attribute}`,
         type: "override",
@@ -99,7 +99,7 @@ function tokenTexture({
     value: string | number;
     type?: "override" | "multiply";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `token.texture.${attribute}`,
         type,
@@ -108,14 +108,14 @@ function tokenTexture({
     };
 }
 
-function multiplyTokenScale({ value, priority }: { value: number; priority?: number }): Partial<EffectChangeData>[] {
+function multiplyTokenScale({ value, priority }: { value: number; priority?: number }): Partial<EffectChangeSource>[] {
     return [
         tokenTexture({ attribute: "scaleX", value, type: "multiply", priority }),
         tokenTexture({ attribute: "scaleY", value, type: "multiply", priority }),
     ];
 }
 
-function tokenAlpha({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function tokenAlpha({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "token.alpha",
         type: "override",
@@ -130,7 +130,7 @@ function tokenMovementAction({
 }: {
     value: "blink" | "burrow" | "climb" | "crawl" | "displace" | "fly" | "jump" | "swim" | "walk";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: "token.movementAction",
         type: "override",
@@ -149,7 +149,7 @@ function tokenDetectionMode({
     range: number;
     enabled?: boolean;
     priority?: number;
-}): Partial<EffectChangeData>[] {
+}): Partial<EffectChangeSource>[] {
     return [
         {
             key: `token.detectionModes.${id}.range`,

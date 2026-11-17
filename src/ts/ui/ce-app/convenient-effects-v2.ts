@@ -285,7 +285,6 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
 
                     if (!original) return;
 
-                    // eslint-disable-next-line @typescript-eslint/await-thenable -- Document#clone is not typed to return a Promise when save is true
                     const clone = await original.clone(
                         {
                             name: game.i18n.localize("DOCUMENT.CopyOf", {
@@ -579,7 +578,6 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
         const isHiddenEffects = this.settings.showHiddenEffects;
         buttonHtml.setAttribute("aria-pressed", isHiddenEffects.toString());
 
-        // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });
     }
 
@@ -596,7 +594,6 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
         const isChildEffects = this.settings.showChildEffects;
         buttonHtml.setAttribute("aria-pressed", isChildEffects.toString());
 
-        // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });
     }
 
@@ -613,7 +610,6 @@ class ConvenientEffectsV2 extends ConvenientDirectoryMixin(AbstractSidebarTab) {
         const isPrioritizeTargets = this.settings.prioritizeTargets;
         buttonHtml.setAttribute("aria-pressed", isPrioritizeTargets.toString());
 
-        // @ts-expect-error Parts are available here
         this.render({ parts: ["header", "directory"] });
     }
 

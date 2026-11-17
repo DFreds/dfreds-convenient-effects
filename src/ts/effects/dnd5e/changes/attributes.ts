@@ -1,6 +1,6 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
-function acMin({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function acMin({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.ac.min",
         type: "upgrade",
@@ -9,7 +9,7 @@ function acMin({ value, priority }: { value: string; priority?: number }): Parti
     };
 }
 
-function acBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function acBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.ac.bonus",
         type: "add",
@@ -18,7 +18,7 @@ function acBonus({ value, priority }: { value: string; priority?: number }): Par
     };
 }
 
-function acCalc({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function acCalc({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.ac.calc",
         type: "override",
@@ -27,7 +27,7 @@ function acCalc({ value, priority }: { value: string; priority?: number }): Part
     };
 }
 
-function acCover({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function acCover({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.ac.cover",
         type: "add",
@@ -36,7 +36,7 @@ function acCover({ value, priority }: { value: string; priority?: number }): Par
     };
 }
 
-function acFormula({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function acFormula({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.ac.formula",
         type: "override",
@@ -55,7 +55,7 @@ function addSense({
     sense: SenseType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.senses.ranges.${sense}`,
         type: "add",
@@ -72,7 +72,7 @@ function upgradeSense({
     sense: SenseType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.senses.ranges.${sense}`,
         type: "upgrade",
@@ -81,19 +81,19 @@ function upgradeSense({
     };
 }
 
-function addDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function addDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return addSense({ sense: "darkvision", value, priority });
 }
 
-function upgradeDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function upgradeDarkvision({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return upgradeSense({ sense: "darkvision", value, priority });
 }
 
-function upgradeTrueSight({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function upgradeTrueSight({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return upgradeSense({ sense: "truesight", value, priority });
 }
 
-function tempMaxHp({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function tempMaxHp({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.hp.tempmax",
         type: "add",
@@ -110,7 +110,7 @@ function hpBonus({
     bonusType: "level" | "overall";
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.hp.bonuses.${bonusType}`,
         type: "add",
@@ -119,7 +119,7 @@ function hpBonus({
     };
 }
 
-function acFlat({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function acFlat({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.ac.flat",
         type: "override",
@@ -136,7 +136,7 @@ const MOVEMENT_TYPES = ["burrow", "climb", "fly", "swim", "walk"] as const;
 
 type MovementType = (typeof MOVEMENT_TYPES)[number];
 
-function movementBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function movementBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.movement.bonus",
         type: "add",
@@ -153,7 +153,7 @@ function movementOverride({
     movementType: MovementType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.movement.${movementType}`,
         type: "override",
@@ -170,7 +170,7 @@ function movementMultiply({
     movementType: MovementType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.movement.${movementType}`,
         type: "multiply",
@@ -187,7 +187,7 @@ function upgradeMovement({
     movementType: MovementType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.movement.${movementType}`,
         type: "upgrade",
@@ -196,7 +196,7 @@ function upgradeMovement({
     };
 }
 
-function movementHover({ value, priority }: { value: boolean; priority?: number }): Partial<EffectChangeData> {
+function movementHover({ value, priority }: { value: boolean; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.movement.hover",
         type: "override",
@@ -211,7 +211,7 @@ function ignoreDifficultTerrain({
 }: {
     movementType: MovementType;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.movement.ignoredDifficultTerrain",
         type: "add",
@@ -220,7 +220,7 @@ function ignoreDifficultTerrain({
     };
 }
 
-function multiplyEncumbrance({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function multiplyEncumbrance({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.encumbrance.multipliers.overall",
         type: "multiply",
@@ -235,7 +235,7 @@ function initiativeMode({
 }: {
     value: "-1" | "0" | "1";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.init.roll.mode`,
         type: "add",
@@ -250,7 +250,7 @@ function concentrationMode({
 }: {
     value: "-1" | "0" | "1";
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.concentration.roll.mode`,
         type: "add",
@@ -259,7 +259,7 @@ function concentrationMode({
     };
 }
 
-function deathMode({ value, priority }: { value: "-1" | "0" | "1"; priority?: number }): Partial<EffectChangeData> {
+function deathMode({ value, priority }: { value: "-1" | "0" | "1"; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: `system.attributes.death.roll.mode`,
         type: "add",
@@ -268,7 +268,13 @@ function deathMode({ value, priority }: { value: "-1" | "0" | "1"; priority?: nu
     };
 }
 
-function concentrationSaveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function concentrationSaveBonus({
+    value,
+    priority,
+}: {
+    value: string;
+    priority?: number;
+}): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.concentration.bonuses.save",
         type: "add",
@@ -277,7 +283,7 @@ function concentrationSaveBonus({ value, priority }: { value: string; priority?:
     };
 }
 
-function deathSaveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeData> {
+function deathSaveBonus({ value, priority }: { value: string; priority?: number }): Partial<EffectChangeSource> {
     return {
         key: "system.attributes.death.bonuses.save",
         type: "add",

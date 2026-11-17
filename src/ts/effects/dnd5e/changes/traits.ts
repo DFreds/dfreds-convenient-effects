@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@common/documents/active-effect.mjs";
+import { EffectChangeSource } from "./effect-change-source.ts";
 
 const ALL = "ALL";
 
@@ -45,7 +45,7 @@ type ConditionType =
     | "transformed"
     | "unconscious";
 
-function addConditionImmunity({ condition }: { condition: ConditionType }): Partial<EffectChangeData> {
+function addConditionImmunity({ condition }: { condition: ConditionType }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.ci.value",
         type: "add",
@@ -53,7 +53,7 @@ function addConditionImmunity({ condition }: { condition: ConditionType }): Part
     };
 }
 
-function addDamageImmunity({ damageType }: { damageType: DamageType }): Partial<EffectChangeData> {
+function addDamageImmunity({ damageType }: { damageType: DamageType }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.di.value",
         type: "add",
@@ -61,7 +61,7 @@ function addDamageImmunity({ damageType }: { damageType: DamageType }): Partial<
     };
 }
 
-function addAllDamageImmunity(): Partial<EffectChangeData> {
+function addAllDamageImmunity(): Partial<EffectChangeSource> {
     return {
         key: "system.traits.di.value",
         type: "add",
@@ -69,7 +69,7 @@ function addAllDamageImmunity(): Partial<EffectChangeData> {
     };
 }
 
-function addDamageResistance({ damageType }: { damageType: DamageType }): Partial<EffectChangeData> {
+function addDamageResistance({ damageType }: { damageType: DamageType }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.dr.value",
         type: "add",
@@ -77,7 +77,7 @@ function addDamageResistance({ damageType }: { damageType: DamageType }): Partia
     };
 }
 
-function addAllDamageResistance(): Partial<EffectChangeData> {
+function addAllDamageResistance(): Partial<EffectChangeSource> {
     return {
         key: "system.traits.dr.value",
         type: "add",
@@ -85,7 +85,7 @@ function addAllDamageResistance(): Partial<EffectChangeData> {
     };
 }
 
-function addDamageBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial<EffectChangeData> {
+function addDamageBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.dr.bypasses",
         type: "add",
@@ -93,7 +93,7 @@ function addDamageBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial
     };
 }
 
-function addDamageVulnerability({ damageType }: { damageType: DamageType }): Partial<EffectChangeData> {
+function addDamageVulnerability({ damageType }: { damageType: DamageType }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.dv.value",
         type: "add",
@@ -101,7 +101,7 @@ function addDamageVulnerability({ damageType }: { damageType: DamageType }): Par
     };
 }
 
-function addAllDamageVulnerability(): Partial<EffectChangeData> {
+function addAllDamageVulnerability(): Partial<EffectChangeSource> {
     return {
         key: "system.traits.dv.value",
         type: "add",
@@ -109,7 +109,7 @@ function addAllDamageVulnerability(): Partial<EffectChangeData> {
     };
 }
 
-function addLanguage({ language }: { language: string }): Partial<EffectChangeData> {
+function addLanguage({ language }: { language: string }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.languages.value",
         type: "add",
@@ -117,7 +117,7 @@ function addLanguage({ language }: { language: string }): Partial<EffectChangeDa
     };
 }
 
-function addAllLanguages(): Partial<EffectChangeData> {
+function addAllLanguages(): Partial<EffectChangeSource> {
     return {
         key: "system.traits.languages.value",
         type: "add",
@@ -125,7 +125,7 @@ function addAllLanguages(): Partial<EffectChangeData> {
     };
 }
 
-function addWeaponProficiency({ weapon }: { weapon: string }): Partial<EffectChangeData> {
+function addWeaponProficiency({ weapon }: { weapon: string }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.weaponProf.value",
         type: "add",
@@ -133,7 +133,7 @@ function addWeaponProficiency({ weapon }: { weapon: string }): Partial<EffectCha
     };
 }
 
-function addWeaponMastery({ weapon }: { weapon: string }): Partial<EffectChangeData> {
+function addWeaponMastery({ weapon }: { weapon: string }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.weaponProf.mastery.value",
         type: "add",
@@ -141,7 +141,7 @@ function addWeaponMastery({ weapon }: { weapon: string }): Partial<EffectChangeD
     };
 }
 
-function addArmorProficiency({ armor }: { armor: "lgt" | "med" | "hvy" | "shl" }): Partial<EffectChangeData> {
+function addArmorProficiency({ armor }: { armor: "lgt" | "med" | "hvy" | "shl" }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.armorProf.value",
         type: "add",
@@ -157,7 +157,7 @@ function damageModification({
     damageType: DamageType;
     value: string;
     priority?: number;
-}): Partial<EffectChangeData> {
+}): Partial<EffectChangeSource> {
     return {
         key: `system.traits.dm.amount.${damageType}`,
         type: "add",
@@ -166,7 +166,7 @@ function damageModification({
     };
 }
 
-function damageModificationBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial<EffectChangeData> {
+function damageModificationBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.dm.bypasses",
         type: "add",
@@ -174,7 +174,7 @@ function damageModificationBypass({ bypass }: { bypass: "ada" | "mgc" | "sil" })
     };
 }
 
-function addSize({ value }: { value: string }): Partial<EffectChangeData> {
+function addSize({ value }: { value: string }): Partial<EffectChangeSource> {
     return {
         key: "system.traits.size",
         type: "override",
